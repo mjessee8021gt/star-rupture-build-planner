@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://c2uwua6eva0gs"]
+
+[ext_resource type="Script" uid="uid://cmy1thrc38yvq" path="res://Scripts/main.gd" id="1_kln2b"]
+[ext_resource type="PackedScene" uid="uid://dvfbce7bhnsbd" path="res://Scenes/GridMap.tscn" id="1_r150o"]
+[ext_resource type="Script" uid="uid://cssd864lah4hf" path="res://Scripts/CameraControls.gd" id="3_rgh2o"]
+[ext_resource type="Texture2D" uid="uid://bpgiktvpebx6e" path="res://Assets/SRBP_TOOLBOX.png" id="4_rgh2o"]
+[ext_resource type="Script" uid="uid://ddx74ounb8bc7" path="res://Scripts/Toolbox.gd" id="5_pbw6q"]
+[ext_resource type="Script" uid="uid://cwao0e766iwdd" path="res://Scripts/buildManager.gd" id="6_v1gob"]
+
+[node name="Main" type="Node2D" unique_id=1429791362]
+script = ExtResource("1_kln2b")
+
+[node name="TileMapLayer" parent="." unique_id=1244418290 instance=ExtResource("1_r150o")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=958064929]
+script = ExtResource("3_rgh2o")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D" unique_id=958093744]
+
+[node name="MenuButton" type="MenuButton" parent="Camera2D/CanvasLayer" unique_id=431646375 node_paths=PackedStringArray("BuildManager")]
+offset_left = 25.0
+offset_top = 34.0
+offset_right = 97.0
+offset_bottom = 106.0
+icon = ExtResource("4_rgh2o")
+script = ExtResource("5_pbw6q")
+BuildManager = NodePath("../../../BuildManager")
+
+[node name="BuildManager" type="Node2D" parent="." unique_id=695504288]
+script = ExtResource("6_v1gob")

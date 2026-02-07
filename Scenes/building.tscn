@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bolj7qbegrtij"]
+
+[node name="Building" type="TextureRect" unique_id=1995956708]
+
+[node name="Interact" type="Button" parent="." unique_id=1756901286]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

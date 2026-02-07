@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://d00bpjrh5sw6k"]
+
+[ext_resource type="Script" uid="uid://dgoq3khcm21rc" path="res://Scripts/Smelter.gd" id="1_q6clw"]
+[ext_resource type="Texture2D" uid="uid://qwwrxvfqjgub" path="res://Assets/SRBP_3x4_BLDG.png" id="2_2buoc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
+size = Vector2(96, 128)
+
+[node name="Smelter" type="Node2D" unique_id=1728206745]
+script = ExtResource("1_q6clw")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1163650788]
+texture = ExtResource("2_2buoc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128283645]
+shape = SubResource("RectangleShape2D_gbqis")
+
+[node name="TitleLabel" type="Label" parent="." unique_id=904579435]
+offset_left = -35.0
+offset_top = -57.0
+offset_right = 35.0
+offset_bottom = -34.0
+text = "SMELTER"
+
+[node name="PlacementArea" type="Area2D" parent="." unique_id=911391560]
