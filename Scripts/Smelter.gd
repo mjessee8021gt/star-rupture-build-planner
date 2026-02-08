@@ -9,6 +9,7 @@ var footprint := Vector2i(3,4)
 
 @export var heat := 3
 @export var power := -5
+
 var input1_is_connected := false
 var input1_is_pressed := false
 var output1_is_connected := false
