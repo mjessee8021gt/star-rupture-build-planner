@@ -6,6 +6,15 @@
 [ext_resource type="Texture2D" uid="uid://bpgiktvpebx6e" path="res://Assets/SRBP_TOOLBOX.png" id="4_rgh2o"]
 [ext_resource type="Script" uid="uid://ddx74ounb8bc7" path="res://Scripts/Toolbox.gd" id="5_pbw6q"]
 [ext_resource type="Script" uid="uid://cwao0e766iwdd" path="res://Scripts/buildManager.gd" id="6_v1gob"]
+[ext_resource type="Texture2D" uid="uid://bixocxjthy7cb" path="res://Assets/SRBP_Heat Icon.png" id="6_vy5pj"]
+[ext_resource type="Texture2D" uid="uid://b0q6pkjakr41b" path="res://Assets/SRBP_Power Icon.png" id="7_bmxlf"]
+[ext_resource type="Script" uid="uid://c1gaut8hcyg0c" path="res://Scripts/path_manager.gd" id="7_jw32o"]
+
+[sub_resource type="Curve2D" id="Curve2D_jw32o"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1.58, 21.705, 0, 0, 0, 0, 34.475, -13.075)
+}
+point_count = 2
 
 [node name="Main" type="Node2D" unique_id=1429791362]
 script = ExtResource("1_kln2b")
@@ -26,5 +35,48 @@ icon = ExtResource("4_rgh2o")
 script = ExtResource("5_pbw6q")
 BuildManager = NodePath("../../../BuildManager")
 
+[node name="Panel" type="Panel" parent="Camera2D/CanvasLayer" unique_id=1180101363]
+offset_left = 977.0
+offset_top = 1.0
+offset_right = 1152.0
+offset_bottom = 33.0
+
+[node name="HeatIcon" type="Sprite2D" parent="Camera2D/CanvasLayer/Panel" unique_id=1228076443]
+position = Vector2(16.5, 15)
+scale = Vector2(0.484375, 0.46875)
+texture = ExtResource("6_vy5pj")
+
+[node name="PowerIcon" type="Sprite2D" parent="Camera2D/CanvasLayer/Panel" unique_id=1711027906]
+position = Vector2(105.999985, 17)
+scale = Vector2(0.4765623, 0.4375)
+texture = ExtResource("7_bmxlf")
+
+[node name="HeatLabel" type="Label" parent="Camera2D/CanvasLayer/Panel" unique_id=197643977]
+layout_mode = 0
+offset_left = 38.0
+offset_right = 84.0
+offset_bottom = 29.0
+theme_override_font_sizes/font_size = 21
+text = "0000"
+horizontal_alignment = 2
+
+[node name="PowerLabel" type="Label" parent="Camera2D/CanvasLayer/Panel" unique_id=1482456259]
+layout_mode = 0
+offset_left = 123.0
+offset_top = 1.0
+offset_right = 171.0
+offset_bottom = 31.0
+theme_override_font_sizes/font_size = 21
+text = "0000"
+horizontal_alignment = 2
+
 [node name="BuildManager" type="Node2D" parent="." unique_id=695504288]
 script = ExtResource("6_v1gob")
+
+[node name="PathManager" type="Node2D" parent="." unique_id=1207476002]
+script = ExtResource("7_jw32o")
+
+[node name="buildings" type="Node2D" parent="." unique_id=1655476447]
+
+[node name="Path2D" type="Path2D" parent="." unique_id=102389188]
+curve = SubResource("Curve2D_jw32o")

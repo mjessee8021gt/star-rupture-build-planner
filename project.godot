@@ -15,6 +15,10 @@ run/main_scene="uid://c2uwua6eva0gs"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+BuildingRegistry="*uid://cjymhecftjmou"
+
 [input]
 
 "Zoom Out"={

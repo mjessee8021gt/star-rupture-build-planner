@@ -34,11 +34,13 @@ func _ready() -> void:
 	
 	var processingMenu = PopupMenu.new()
 	processingMenu.name = "Processing"
-	processingMenu.add_item("Smelter", ProcessingItem.SMELTER)
+	processingMenu.add_item("Smelter")
+	var idx = processingMenu.item_count -1
+	processingMenu.set_item_metadata(idx, &"smelter")
 	processingMenu.add_item("Furnace")
 	processingMenu.add_item("Mega Press")
 	processingMenu.add_item("Compounder")
-	processingMenu.id_pressed.connect(_on_build_selected)
+	processingMenu.id_pressed.connect(_on_build_selected.bind(processingMenu))
 	print("Menu Item Selected...")
 	
 	var powerMenu = PopupMenu.new()
@@ -97,9 +99,12 @@ func _ready() -> void:
 	popup.add_submenu_item("Transport", transportMenu.name)
 
 
-func _on_build_selected(id: int) -> void:
-	print("Menu Item Selected: ", id)
-	if build_scenes.has(id):
+func _on_build_selected(id: int, menu:PopupMenu) -> void:
+	var idx := menu.get_item_index(id)
+	var key := menu.get_item_metadata(idx) as StringName
+	
+	var scene := BuildingRegistry.get_scene(key)
+	if scene:
 		print("Submitting build reuqest...")
 		build_requested.emit(build_scenes[id])
 	else:

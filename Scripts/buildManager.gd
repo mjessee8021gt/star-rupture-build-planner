@@ -51,10 +51,13 @@ func confirm_build() -> void:
 	real.global_position = ghost_instance.global_position
 	if ghost_instance.footprint == Vector2i(4,4):
 		real.flip_footprint()
-	get_parent().add_child(real)
+	$"../buildings".add_child(real)
 	
 	occupy_cells(footprint)
+	$"../Camera2D/CanvasLayer/Panel/HeatLabel".text = str(int($"../Camera2D/CanvasLayer/Panel/HeatLabel".text) + real.heat)
+	$"../Camera2D/CanvasLayer/Panel/PowerLabel".text = str(int($"../Camera2D/CanvasLayer/Panel/PowerLabel".text) + real.power)
 	cancel_build()
+	$"../PathManager"._update_building_list()
 	
 func cancel_build() -> void:
 	if ghost_instance:
