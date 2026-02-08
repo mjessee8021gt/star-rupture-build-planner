@@ -49,6 +49,8 @@ func confirm_build() -> void:
 	
 	var real := current_scene.instantiate()
 	real.global_position = ghost_instance.global_position
+	if ghost_instance.footprint == Vector2i(4,4):
+		real.flip_footprint()
 	get_parent().add_child(real)
 	
 	occupy_cells(footprint)
