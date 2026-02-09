@@ -115,5 +115,5 @@ func populate_recipe_dropdown() -> void:
 	
 	for recipe in available_recipes:
 		recipe_dropdown.add_item(recipe.display_name)
-	for recipevariant in available_alternative_recipes:
-		purity_dropdown.add_item(recipevariant.display_name)
+		for recipeVariant in recipe:
+			purity_dropdown.add_item((recipeVariant.display_name))
