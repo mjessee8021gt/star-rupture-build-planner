@@ -2,6 +2,7 @@ extends MenuButton
 
 signal build_requested(scene: PackedScene)
 @export var BuildManager : Node2D
+var Idx
 
 enum ExtractionItem {ORE_EXCAVATOR, HELIUM_3_EXTRACTOR, SULFUR_EXTRACTOR}
 enum ProcessingItem {SMELTER, FURNACE, MEGA_PRESS, COMPOUNDER}
@@ -23,9 +24,11 @@ func _ready() -> void:
 	var extractionMenu = PopupMenu.new()
 	extractionMenu.name = "Extraction"
 	extractionMenu.add_item("Ore Excavator")
+	extractionMenu.set_item_metadata(extractionMenu.item_count-1, &"ore_excavator")
 	extractionMenu.add_item("Helium-3 Extractor")
 	extractionMenu.add_item("Sulfur Extractor")
-	extractionMenu.id_pressed.connect(_on_build_selected)
+	extractionMenu.id_pressed.connect(_on_build_selected.bind(extractionMenu))
+	print("Extraction Menu Item Selected...")
 	
 	var craftingMenu = PopupMenu.new()
 	craftingMenu.name = "Crafting"
@@ -35,13 +38,12 @@ func _ready() -> void:
 	var processingMenu = PopupMenu.new()
 	processingMenu.name = "Processing"
 	processingMenu.add_item("Smelter")
-	var idx = processingMenu.item_count -1
-	processingMenu.set_item_metadata(idx, &"smelter")
+	processingMenu.set_item_metadata(processingMenu.item_count-1, &"smelter")
 	processingMenu.add_item("Furnace")
 	processingMenu.add_item("Mega Press")
 	processingMenu.add_item("Compounder")
 	processingMenu.id_pressed.connect(_on_build_selected.bind(processingMenu))
-	print("Menu Item Selected...")
+	print("Processing Menu Item Selected...")
 	
 	var powerMenu = PopupMenu.new()
 	powerMenu.name = "Power"
@@ -103,10 +105,10 @@ func _on_build_selected(id: int, menu:PopupMenu) -> void:
 	var idx := menu.get_item_index(id)
 	var key := menu.get_item_metadata(idx) as StringName
 	
-	var scene := BuildingRegistry.get_scene(key)
+	var scene = BuildingRegistry.get_scene(key)
 	if scene:
 		print("Submitting build reuqest...")
-		build_requested.emit(build_scenes[id])
+		build_requested.emit(scene)
 	else:
-		push_warning("No scene mapped for menu ID %s" % id)
+		push_warning("No registered for key: %s" % key)
 		return

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="RecipeVariant" format=3 uid="uid://g4axe3xgx3jy"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_8nqmb"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="2_fnfoc"]
+[ext_resource type="Resource" uid="uid://bnb10ls6kocfg" path="res://Recipes/Item Stacks/Calcium_ore_2_def.tres" id="2_iiq1r"]
+
+[resource]
+script = ExtResource("2_fnfoc")
+id = &"normal_calcium"
+display_name = "Normal"
+outputs = Array[ExtResource("1_8nqmb")]([ExtResource("2_iiq1r")])
+metadata/_custom_type_script = "uid://cvtli7c3bbfbl"

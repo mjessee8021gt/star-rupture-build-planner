@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cw4jqpasqkjad"]
 
-[ext_resource type="Script" uid="uid://dgoq3khcm21rc" path="res://Scripts/Smelter.gd" id="1_7hisn"]
+[ext_resource type="Script" uid="uid://dgoq3khcm21rc" path="res://Buildings/Smelter.gd" id="1_7hisn"]
 [ext_resource type="Texture2D" uid="uid://qwwrxvfqjgub" path="res://Assets/SRBP_3x4_BLDG.png" id="1_gbqis"]
 [ext_resource type="Texture2D" uid="uid://grouobxe87tu" path="res://Assets/SRBP_4x4_BLDG.png" id="3_gbqis"]
 [ext_resource type="Texture2D" uid="uid://ilmbegsn2c7" path="res://Assets/SRBP_Oval.png" id="4_uf4xf"]

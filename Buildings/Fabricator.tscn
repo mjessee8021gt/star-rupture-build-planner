@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d00bpjrh5sw6k"]
 
-[ext_resource type="Script" uid="uid://dgoq3khcm21rc" path="res://Scripts/Smelter.gd" id="1_q6clw"]
+[ext_resource type="Script" uid="uid://dgoq3khcm21rc" path="res://Buildings/Smelter.gd" id="1_q6clw"]
 [ext_resource type="Texture2D" uid="uid://qwwrxvfqjgub" path="res://Assets/SRBP_3x4_BLDG.png" id="2_2buoc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]

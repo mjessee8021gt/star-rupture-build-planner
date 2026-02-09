@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://cfnlsaempefmy"]
+
+[ext_resource type="Script" uid="uid://jbi1ct5t37ov" path="res://Buildings/OreExcavator.gd" id="1_m443x"]
+[ext_resource type="Texture2D" uid="uid://qwwrxvfqjgub" path="res://Assets/SRBP_3x4_BLDG.png" id="2_i1qbh"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_veacw"]
+[ext_resource type="Resource" uid="uid://d6ixs121qoye" path="res://Recipes/mine_Calcium_impure.tres" id="3_rhfiq"]
+[ext_resource type="Texture2D" uid="uid://ilmbegsn2c7" path="res://Assets/SRBP_Oval.png" id="3_veacw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
+size = Vector2(96, 128)
+
+[node name="OreExcavator" type="Node2D" unique_id=1728206745]
+script = ExtResource("1_m443x")
+available_recipes = Array[ExtResource("2_veacw")]([ExtResource("3_rhfiq")])
+
+[node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
+texture = ExtResource("2_i1qbh")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128283645]
+position = Vector2(48, 64)
+shape = SubResource("RectangleShape2D_gbqis")
+
+[node name="TitleLabel" type="Label" parent="." unique_id=904579435]
+offset_left = 2.0
+offset_top = 46.0
+offset_right = 95.0
+offset_bottom = 71.0
+text = "EXCAVATOR"
+horizontal_alignment = 1
+
+[node name="PlacementArea" type="Area2D" parent="." unique_id=911391560]
+
+[node name="Ports" type="Node2D" parent="." unique_id=1067444767]
+
+[node name="Output 1" type="Button" parent="Ports" unique_id=1122308628]
+self_modulate = Color(1, 1, 1, 0.49803922)
+offset_left = 31.0
+offset_right = 103.0
+offset_bottom = 40.0
+scale = Vector2(0.5, 0.5)
+icon = ExtResource("3_veacw")
+
+[node name="Recipe" type="OptionButton" parent="." unique_id=1551064749]
+offset_left = 2.0
+offset_top = 76.0
+offset_right = 95.0
+offset_bottom = 96.0
+
+[node name="Purity" type="OptionButton" parent="." unique_id=383133586]
+offset_left = 2.0
+offset_top = 101.0
+offset_right = 95.0
+offset_bottom = 121.0
+
+[connection signal="mouse_entered" from="Ports/Output 1" to="." method="_on_output_1_mouse_entered"]
+[connection signal="mouse_exited" from="Ports/Output 1" to="." method="_on_output_1_mouse_exited"]
+[connection signal="pressed" from="Ports/Output 1" to="." method="_on_output_1_pressed"]

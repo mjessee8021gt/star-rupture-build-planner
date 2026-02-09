@@ -3,10 +3,15 @@
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="1_26frj"]
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_tpw58"]
 [ext_resource type="Resource" uid="uid://ct1drcq7s2r3p" path="res://Recipes/Item Stacks/Calcium_ore_1_def.tres" id="2_ltnaq"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="4_i55yo"]
+[ext_resource type="Resource" uid="uid://br7h264cv542u" path="res://Recipes/Recipe Variants/calclium_impure.tres" id="5_tahi1"]
+[ext_resource type="Resource" uid="uid://g4axe3xgx3jy" path="res://Recipes/Recipe Variants/calcium_normal.tres" id="6_8pxdw"]
+[ext_resource type="Resource" uid="uid://dd7vw2smat8r8" path="res://Recipes/Recipe Variants/calcium_pure.tres" id="7_373q4"]
 
 [resource]
 script = ExtResource("1_26frj")
 id = &"calcium_ore_impure"
 display_name = "Calcium Ore (impure)"
 outputs = Array[ExtResource("1_tpw58")]([ExtResource("2_ltnaq")])
+variants = Array[ExtResource("4_i55yo")]([ExtResource("5_tahi1"), ExtResource("6_8pxdw"), ExtResource("7_373q4")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

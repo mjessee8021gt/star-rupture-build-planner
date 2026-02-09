@@ -9,3 +9,4 @@ var craft_time: float
 #Item_id > Ammount
 @export var inputs : Array[ItemStack] = []
 @export var outputs : Array[ItemStack] = []
+@export var variants : Array[RecipeVariant] = []
