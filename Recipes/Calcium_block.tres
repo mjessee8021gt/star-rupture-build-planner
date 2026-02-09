@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://7pge5tl0fdlt"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_l85kw"]
+[ext_resource type="Resource" uid="uid://ct1drcq7s2r3p" path="res://Recipes/Item Stacks/Calcium_ore_1_def.tres" id="2_vcsge"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="3_nch1h"]
+[ext_resource type="Resource" uid="uid://dl2wim2l8edi1" path="res://Recipes/Item Stacks/Calcium_block_1_def.tres" id="3_rqyq6"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="4_i0t8q"]
+
+[resource]
+script = ExtResource("3_nch1h")
+id = &"calcium_block"
+display_name = "Calcium Block"
+inputs = Array[ExtResource("1_l85kw")]([ExtResource("2_vcsge")])
+outputs = Array[ExtResource("1_l85kw")]([ExtResource("3_rqyq6")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

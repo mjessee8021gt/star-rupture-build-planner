@@ -2,18 +2,23 @@ extends Node2D
 
 @export var tileMap : TileMap
 var footprint := Vector2i(3,4)
+@export var footprint_primary := Vector2i(3,4)
+@export var footprint_alt := Vector2i(4,4)
 @export var anchor := Vector2i.ZERO
 @onready var placement_area: Area2D = $PlacementArea
+
 @onready var recipe_dropdown: OptionButton = $Recipe
 @onready var purity_dropdown: OptionButton = $Purity
 @onready var output_text : Label = $outputBox/outputText
+@onready var input_text : Label = $inputBox/inputText
 
 @export var heat := 3
 @export var power := -5
 
 @export var available_recipes: Array[Recipe] = []
-@export var available_alternative_recipes: Array[RecipeVariant] = []
 
+var input1_is_connected := false
+var input1_is_pressed := false
 var output1_is_connected := false
 var output1_is_pressed := false
 var other_button_pressed := false
@@ -23,6 +28,7 @@ signal port_drag_updated(building: Node2D, port_name: String, port_global_pos: V
 signal port_drag_ended(building: Node2D, port_name: String, port_global_pos: Vector2)
 
 @onready var output_port := $"Ports/Output 1"
+@onready var input_port := $"Ports/Input 1"
 
 var _dragging_port := ""
 var _dragging := false
@@ -32,9 +38,10 @@ var drag_offset := Vector2.ZERO
 
 func _ready() -> void:
 	$"Ports/Output 1".modulate = Color(1,0,0,0.5)
+	$"Ports/Input 1".modulate = Color(0,1,0,0.5)
 	output_port.pressed.connect(func(): _start_port_drag("output"))
+	input_port.pressed.connect(func(): _start_port_drag("input"))
 	add_to_group("buildings")
-	populate_recipe_dropdown()
 
 func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int):
 	if event is InputEventMouseButton:
@@ -42,6 +49,13 @@ func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int):
 			dragging = event.pressed
 			if(dragging):
 				drag_offset = global_position - get_global_mouse_position()
+		elif event.button_index == KEY_CTRL:
+			if $PrimarySprite.visible == true:
+				$PrimarySprite.visible = false
+				$AlternateSprite.visible = true
+			else:
+				$PrimarySprite.visible = true
+				$AlternateSprite.visible = false
 
 func _process(delta: float):
 	if dragging:
@@ -66,6 +80,42 @@ func get_footprint_cells(anchor_cell: Vector2i, footprint_size: Vector2i, anchor
 			cells.append(top_left + Vector2i(x, y))
 			
 	return cells
+	
+func flip_footprint() -> void:
+	if $PrimarySprite.visible == true:
+		$PrimarySprite.visible = false
+		$AlternateSprite.visible = true
+		$CollisionShape2D.disabled = true
+		$CollisionShapeAlt.disabled = false
+		$TitleLabel.position.x = 27.5
+		footprint = footprint_alt
+	else:
+		$PrimarySprite.visible = true
+		$CollisionShape2D.disabled = false
+		$AlternateSprite.visible = false
+		$CollisionShapeAlt.disabled = true
+		$TitleLabel.position.x = 14
+		footprint = footprint_primary
+		
+func _on_input_1_mouse_entered() -> void:
+	if not input1_is_pressed:
+		$"Ports/Input 1".modulate = Color(0,1,0,0.75)
+
+func _on_input_1_mouse_exited() -> void:
+	if not input1_is_pressed:
+		$"Ports/Input 1".modulate = Color(0,1,0,0.5)
+
+
+func _on_input_1_pressed() -> void:
+	if not input1_is_pressed:
+		if not other_button_pressed:
+			$"Ports/Input 1".modulate = Color(0,1,0,1.0)
+			input1_is_pressed = true
+			other_button_pressed = true
+	else:
+		$"Ports/Input 1".modulate = Color(0,1,0,0.5)
+		input1_is_pressed = false
+		other_button_pressed = false
 
 func _on_output_1_mouse_entered() -> void:
 	if not output1_is_pressed:
@@ -101,6 +151,8 @@ func _get_port_global_pos(port_name: String) -> Vector2:
 	match port_name:
 		"output":
 			return output_port.global_position + output_port.size * 0.5
+		"input":
+			return input_port.global_position + input_port.size * 0.5
 		_:
 			return global_position
 
@@ -109,42 +161,3 @@ func _unhandled_input(event: InputEvent) -> void:
 		_dragging = false
 		emit_signal("port_drag_ended", self, _dragging_port, get_global_mouse_position())
 		_dragging_port = ""
-
-func populate_recipe_dropdown() -> void:
-	recipe_dropdown.clear()
-	
-	for i in available_recipes.size():
-		var recipe := available_recipes[i]
-		recipe_dropdown.add_item(recipe.display_name)
-		#we need to store which recipe we're referring to above
-		recipe_dropdown.set_item_metadata(i, recipe)
-		
-	#now we're selecting the first recipe by defualt and populating the purity list
-	if available_recipes.size() > 0:
-		recipe_dropdown.select(0)
-		_populate_purity_for_recipe(available_recipes[0])
-		
-func _populate_purity_for_recipe(recipe: Recipe) -> void:
-	purity_dropdown.clear()
-	
-	for i in recipe.variants.size():
-		var variant := recipe.variants[i]
-		purity_dropdown.add_item(variant.display_name)
-		purity_dropdown.set_item_metadata(i, variant)
-		
-	if recipe.variants.size() > 0:
-		purity_dropdown.select(0)
-		_update_output_text_from_variant(recipe.variants[0])
-		
-func _on_recipe_item_selected(index: int) -> void:
-	var recipe := recipe_dropdown.get_item_metadata(index) as Recipe
-	if recipe:
-		_populate_purity_for_recipe(recipe)
-
-func _on_purity_item_selected(index: int) -> void:
-	var variant := purity_dropdown.get_item_metadata(index)as RecipeVariant
-	if variant:
-		_update_output_text_from_variant(variant)
-		
-func _update_output_text_from_variant(variant: RecipeVariant) -> void:
-	output_text.text = str(variant.output_qty)

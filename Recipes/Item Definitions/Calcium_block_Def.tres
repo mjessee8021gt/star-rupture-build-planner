@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemDefinition" format=3 uid="uid://cm56v2il4qr2e"]
+
+[ext_resource type="Script" uid="uid://lj867ah2nl68" path="res://Resources/ItemDefinition.gd" id="1_gipm1"]
+
+[resource]
+resource_name = "calcium"
+script = ExtResource("1_gipm1")
+id = &"calcium_block"
+display_name = "Calcium block"
+metadata/_custom_type_script = "uid://lj867ah2nl68"

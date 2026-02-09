@@ -1,9 +1,10 @@
 [gd_resource type="Resource" script_class="ItemDefinition" format=3 uid="uid://wvvw41rrhii2"]
 
-[ext_resource type="Script" uid="uid://lj867ah2nl68" path="res://Resources/ItemDefinition.gd" id="1_4cswy"]
+[ext_resource type="Script" uid="uid://lj867ah2nl68" path="res://Resources/ItemDefinition.gd" id="1_0n1bh"]
 
 [resource]
-script = ExtResource("1_4cswy")
+resource_name = "calcium"
+script = ExtResource("1_0n1bh")
 id = &"calcium_ore"
 display_name = "Calcium Ore"
 metadata/_custom_type_script = "uid://lj867ah2nl68"

@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_s6yhn")
 item = ExtResource("1_aretu")
-qty = 240
+qty = 1
 grade = &"pure"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"
