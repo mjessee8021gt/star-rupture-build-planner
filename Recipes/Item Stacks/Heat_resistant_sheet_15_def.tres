@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://bclvmmnopwy0s"]
+
+[ext_resource type="Resource" uid="uid://d0ury25sv120y" path="res://Recipes/Item Definitions/Heat_resistant_sheet_Def.tres" id="1_hptqo"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_8v0d2"]
+
+[resource]
+script = ExtResource("2_8v0d2")
+item = ExtResource("1_hptqo")
+qty = 15
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

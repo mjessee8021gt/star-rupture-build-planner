@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemDefinition" format=3 uid="uid://b8hwny1l82qcg"]
+
+[ext_resource type="Script" uid="uid://lj867ah2nl68" path="res://Resources/ItemDefinition.gd" id="1_uc175"]
+
+[resource]
+script = ExtResource("1_uc175")
+id = &"synthetic_silicon"
+display_name = "Synthetic Silicon"
+metadata/_custom_type_script = "uid://lj867ah2nl68"

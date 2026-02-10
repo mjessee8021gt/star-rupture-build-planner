@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemDefinition" format=3 uid="uid://sp7kdp0la6va"]
+
+[ext_resource type="Script" uid="uid://lj867ah2nl68" path="res://Resources/ItemDefinition.gd" id="1_kfc62"]
+
+[resource]
+script = ExtResource("1_kfc62")
+id = &"supermagnet"
+display_name = "Supermagnet"
+metadata/_custom_type_script = "uid://lj867ah2nl68"

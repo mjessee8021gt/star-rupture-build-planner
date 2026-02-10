@@ -3,7 +3,8 @@ extends Node
 class_name BuildRegistry
 const BUILDINGS := {
 	&"smelter": preload("res://Buildings/smelter.tscn"),
-	&"ore_excavator": preload("res://Buildings/OreExcavator.tscn")
+	&"ore_excavator": preload("res://Buildings/OreExcavator.tscn"),
+	&"fabricator": preload("res://Buildings/Fabricator.tscn")
 }
 
 

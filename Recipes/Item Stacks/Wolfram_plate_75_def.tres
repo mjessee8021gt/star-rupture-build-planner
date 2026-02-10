@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://ce7qbjub1pbji"]
+
+[ext_resource type="Resource" uid="uid://coadxn33jhrhl" path="res://Recipes/Item Definitions/Wolfram_Plate_Def.tres" id="1_pht7x"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_p2d7i"]
+
+[resource]
+script = ExtResource("2_p2d7i")
+item = ExtResource("1_pht7x")
+qty = 75
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

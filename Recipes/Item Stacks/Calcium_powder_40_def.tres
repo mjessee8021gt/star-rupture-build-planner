@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://cyollm00if8ti"]
+
+[ext_resource type="Resource" uid="uid://b6nr5v2kinq5w" path="res://Recipes/Item Definitions/Calcium_powder_Def.tres" id="1_igssv"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_eva4l"]
+
+[resource]
+script = ExtResource("2_eva4l")
+item = ExtResource("1_igssv")
+qty = 40
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

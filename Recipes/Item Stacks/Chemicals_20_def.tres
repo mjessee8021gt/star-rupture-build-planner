@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://bnpc85srb8qlm"]
+
+[ext_resource type="Resource" uid="uid://case1g1bxcvxx" path="res://Recipes/Item Definitions/Chemicals_Def.tres" id="1_ia0td"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_o7b3u"]
+
+[resource]
+script = ExtResource("2_o7b3u")
+item = ExtResource("1_ia0td")
+qty = 20
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

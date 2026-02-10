@@ -33,7 +33,9 @@ func _ready() -> void:
 	var craftingMenu = PopupMenu.new()
 	craftingMenu.name = "Crafting"
 	craftingMenu.add_item("Fabricator")
+	craftingMenu.set_item_metadata(craftingMenu.item_count-1, &"fabricator")
 	craftingMenu.add_item("Assembler")
+	craftingMenu.id_pressed.connect(_on_build_selected.bind(craftingMenu))
 	
 	var processingMenu = PopupMenu.new()
 	processingMenu.name = "Processing"

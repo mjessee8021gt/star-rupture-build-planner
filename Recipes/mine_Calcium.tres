@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://d6ixs121qoye"]
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_c5xoj"]
-[ext_resource type="Resource" uid="uid://ct1drcq7s2r3p" path="res://Recipes/Item Stacks/Calcium_ore_1_def.tres" id="2_5a4eg"]
+[ext_resource type="Resource" uid="uid://ct1drcq7s2r3p" path="res://Recipes/Item Stacks/Calcium_ore_60_def.tres" id="2_5a4eg"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="3_16cpo"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="4_vsl46"]
 [ext_resource type="Resource" uid="uid://br7h264cv542u" path="res://Recipes/Recipe Variants/calclium_impure.tres" id="5_4eop1"]

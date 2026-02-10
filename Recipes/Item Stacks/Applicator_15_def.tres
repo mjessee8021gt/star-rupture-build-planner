@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://cnrm51o43rysp"]
+
+[ext_resource type="Resource" uid="uid://ctsmpykdvltmm" path="res://Recipes/Item Definitions/Applicator_Def.tres" id="1_qp4bg"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_1drvd"]
+
+[resource]
+script = ExtResource("2_1drvd")
+item = ExtResource("1_qp4bg")
+qty = 15
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

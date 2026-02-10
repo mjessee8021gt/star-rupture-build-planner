@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemDefinition" format=3 uid="uid://dha80nm8rvh2f"]
+
+[ext_resource type="Script" uid="uid://lj867ah2nl68" path="res://Resources/ItemDefinition.gd" id="1_c8u07"]
+
+[resource]
+script = ExtResource("1_c8u07")
+id = &"glass"
+display_name = "Glass"
+metadata/_custom_type_script = "uid://lj867ah2nl68"

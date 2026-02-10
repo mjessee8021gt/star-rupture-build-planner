@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://du8hjrk6axouc"]
+
+[ext_resource type="Resource" uid="uid://b66ve5nl6f5h3" path="res://Recipes/Item Definitions/Wolfram_powder_Def.tres" id="1_byx8q"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_igc45"]
+
+[resource]
+script = ExtResource("2_igc45")
+item = ExtResource("1_byx8q")
+qty = 40
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

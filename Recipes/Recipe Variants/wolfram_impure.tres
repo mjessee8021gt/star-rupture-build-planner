@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="RecipeVariant" format=3 uid="uid://pbdw0ydfnnsh"]
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_crmyi"]
-[ext_resource type="Resource" uid="uid://qe6vhjsgiaor" path="res://Recipes/Item Stacks/Wolfram_ore_1_def.tres" id="2_crmyi"]
+[ext_resource type="Resource" uid="uid://qe6vhjsgiaor" path="res://Recipes/Item Stacks/Wolfram_ore_60_def.tres" id="2_crmyi"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_1dx2l"]
 
 [resource]

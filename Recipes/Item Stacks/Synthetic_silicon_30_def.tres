@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://j16v0jncps6t"]
+
+[ext_resource type="Resource" uid="uid://b8hwny1l82qcg" path="res://Recipes/Item Definitions/Synthetic_silicon_Def.tres" id="1_p3yb0"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_jvale"]
+
+[resource]
+script = ExtResource("2_jvale")
+item = ExtResource("1_p3yb0")
+qty = 60
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

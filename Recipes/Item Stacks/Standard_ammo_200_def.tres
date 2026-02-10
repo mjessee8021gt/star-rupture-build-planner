@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://dti303mnei8o0"]
+
+[ext_resource type="Resource" uid="uid://76say3vaf88h" path="res://Recipes/Item Definitions/Standard_ammo_Def.tres" id="1_wfet5"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_50h5g"]
+
+[resource]
+script = ExtResource("2_50h5g")
+item = ExtResource("1_wfet5")
+qty = 200
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

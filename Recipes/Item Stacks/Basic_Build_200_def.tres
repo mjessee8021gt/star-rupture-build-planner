@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://cy7x5ao02fae"]
+
+[ext_resource type="Resource" uid="uid://cnifg2l66q4ip" path="res://Recipes/Item Definitions/Basic_Building_Materials_Def.tres" id="1_b5vae"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_l6hma"]
+
+[resource]
+script = ExtResource("2_l6hma")
+item = ExtResource("1_b5vae")
+qty = 200
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

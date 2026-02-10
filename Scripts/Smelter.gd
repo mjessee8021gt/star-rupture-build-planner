@@ -10,7 +10,9 @@ var footprint := Vector2i(3,4)
 @onready var recipe_dropdown: OptionButton = $Recipe
 @onready var purity_dropdown: OptionButton = $Purity
 @onready var output_text : Label = $outputBox/outputText
-@onready var input_text : Label = $inputBox/inputText
+@onready var input_text : Label = $InputBox/inputText
+@onready var output_box : ColorRect = $outputBox
+@onready var input_box : ColorRect = $InputBox
 
 @export var heat := 3
 @export var power := -5
@@ -19,6 +21,8 @@ var footprint := Vector2i(3,4)
 
 var input1_is_connected := false
 var input1_is_pressed := false
+var input2_is_connected := false
+var input2_is_pressed := false
 var output1_is_connected := false
 var output1_is_pressed := false
 var other_button_pressed := false
@@ -42,6 +46,7 @@ func _ready() -> void:
 	output_port.pressed.connect(func(): _start_port_drag("output"))
 	input_port.pressed.connect(func(): _start_port_drag("input"))
 	add_to_group("buildings")
+	populate_recipe_dropdown()
 
 func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int):
 	if event is InputEventMouseButton:
@@ -161,3 +166,24 @@ func _unhandled_input(event: InputEvent) -> void:
 		_dragging = false
 		emit_signal("port_drag_ended", self, _dragging_port, get_global_mouse_position())
 		_dragging_port = ""
+		
+func populate_recipe_dropdown() -> void:
+	recipe_dropdown.clear()
+	
+	for i in available_recipes.size():
+		var recipe := available_recipes[i]
+		recipe_dropdown.add_item(recipe.display_name)
+		#we need to store which recipe we're referring to above
+		recipe_dropdown.set_item_metadata(i, recipe)
+		
+	#now we're selecting the first recipe by defualt and populating the purity list
+	if available_recipes.size() > 0:
+		recipe_dropdown.select(0)
+
+func _on_recipe_item_selected(index: int) -> void:
+	var recipe := recipe_dropdown.get_item_metadata(index) as Recipe
+	if recipe:
+		output_text.text = str(recipe.outputs[0].qty)
+		output_box.tooltip_text = str(recipe.outputs[0].item.display_name)
+		input_text.text = str(recipe.inputs[0].qty)
+		input_box.tooltip_text = str(recipe.inputs[0].item.display_name)

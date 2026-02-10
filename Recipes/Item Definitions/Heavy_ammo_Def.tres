@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemDefinition" format=3 uid="uid://c82trji8wo6iv"]
+
+[ext_resource type="Script" uid="uid://lj867ah2nl68" path="res://Resources/ItemDefinition.gd" id="1_b4qxe"]
+
+[resource]
+script = ExtResource("1_b4qxe")
+id = &"heavy_ammo"
+display_name = "Heavy Ammo"
+metadata/_custom_type_script = "uid://lj867ah2nl68"

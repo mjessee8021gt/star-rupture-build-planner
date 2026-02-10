@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemDefinition" format=3 uid="uid://crj2g66twmm3r"]
+
+[ext_resource type="Script" uid="uid://lj867ah2nl68" path="res://Resources/ItemDefinition.gd" id="1_jt2uu"]
+
+[resource]
+script = ExtResource("1_jt2uu")
+id = &"helium-3"
+display_name = "Helium-3"
+metadata/_custom_type_script = "uid://lj867ah2nl68"

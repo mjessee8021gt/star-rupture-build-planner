@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://byenniuhrw66j"]
+
+[ext_resource type="Resource" uid="uid://deqpy7u6sgoh4" path="res://Recipes/Item Definitions/Intermediate_building_materials_Def.tres" id="1_j6b07"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_6m2pr"]
+
+[resource]
+script = ExtResource("2_6m2pr")
+item = ExtResource("1_j6b07")
+qty = 250
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

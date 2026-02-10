@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://bf28rbq5u1u8q"]
+
+[ext_resource type="Resource" uid="uid://c82trji8wo6iv" path="res://Recipes/Item Definitions/Heavy_ammo_Def.tres" id="1_8pt70"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_orec6"]
+
+[resource]
+script = ExtResource("2_orec6")
+item = ExtResource("1_8pt70")
+qty = 150
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

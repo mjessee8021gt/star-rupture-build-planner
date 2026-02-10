@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://i450qxqs15yv"]
+
+[ext_resource type="Resource" uid="uid://dknl1fs66yku2" path="res://Recipes/Item Definitions/Ceramics_Def.tres" id="1_syx2f"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_ca47t"]
+
+[resource]
+script = ExtResource("2_ca47t")
+item = ExtResource("1_syx2f")
+qty = 60
+metadata/_custom_type_script = "uid://fx4756jwfgbl"
