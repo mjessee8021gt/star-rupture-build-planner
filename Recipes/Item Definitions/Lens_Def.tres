@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemDefinition" format=3 uid="uid://dsek5garrxx4w"]
+
+[ext_resource type="Script" uid="uid://lj867ah2nl68" path="res://Resources/ItemDefinition.gd" id="1_l2702"]
+
+[resource]
+script = ExtResource("1_l2702")
+id = &"lens"
+display_name = "Lens"
+metadata/_custom_type_script = "uid://lj867ah2nl68"

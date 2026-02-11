@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://bhaqbv0yp1oun"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_76gna"]
+[ext_resource type="Resource" uid="uid://b2rqpshnnt2d5" path="res://Recipes/Item Stacks/Wolfram_ore_30_def.tres" id="2_eamva"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_ss2a6"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_dle0q"]
+[ext_resource type="Resource" uid="uid://7cistji8j01p" path="res://Recipes/Item Stacks/Titanium_ore_30_def.tres" id="3_m75pj"]
+[ext_resource type="Resource" uid="uid://d1b2a6xdxkyoe" path="res://Recipes/Item Stacks/Basic_Build_300_def.tres" id="4_oj4tk"]
+
+[resource]
+script = ExtResource("2_ss2a6")
+id = &"basic_building_materials"
+display_name = "Basic Build Mats"
+inputs = Array[ExtResource("1_76gna")]([ExtResource("2_eamva"), ExtResource("3_m75pj")])
+outputs = Array[ExtResource("1_76gna")]([ExtResource("4_oj4tk")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://ysymjklknymv"]
+
+[ext_resource type="Resource" uid="uid://dsek5garrxx4w" path="res://Recipes/Item Definitions/Lens_Def.tres" id="1_pc66v"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_cdu2w"]
+
+[resource]
+script = ExtResource("2_cdu2w")
+item = ExtResource("1_pc66v")
+qty = 12
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

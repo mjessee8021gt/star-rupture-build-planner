@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://c7lhgy3lelxcw"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_daymd"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_3xrfq"]
+[ext_resource type="Resource" uid="uid://cljavq2bjbcs8" path="res://Recipes/Item Stacks/Titanium_rod_20_def.tres" id="2_21rce"]
+[ext_resource type="Resource" uid="uid://x4itvpf6kpri" path="res://Recipes/Item Stacks/Wolfram_wire_20_def.tres" id="3_3dij2"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_o87ic"]
+[ext_resource type="Resource" uid="uid://bp3us067jlnnw" path="res://Recipes/Item Stacks/Rotor_10_def.tres" id="4_w05by"]
+
+[resource]
+script = ExtResource("2_3xrfq")
+id = &"rotor"
+display_name = "Rotor"
+inputs = Array[ExtResource("1_daymd")]([ExtResource("2_21rce"), ExtResource("3_3dij2")])
+outputs = Array[ExtResource("1_daymd")]([ExtResource("4_w05by")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

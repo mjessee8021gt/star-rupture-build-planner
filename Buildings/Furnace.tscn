@@ -1,23 +1,23 @@
-[gd_scene format=3 uid="uid://d00bpjrh5sw6k"]
+[gd_scene format=3 uid="uid://bh70vnmi5yy33"]
 
-[ext_resource type="Script" uid="uid://dbs5hfkys8a3c" path="res://Buildings/Fabricator.gd" id="1_563xu"]
-[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_d6koq"]
-[ext_resource type="Resource" uid="uid://d18djk1gxnglo" path="res://Recipes/Titanium_rod.tres" id="3_kxm6t"]
-[ext_resource type="Resource" uid="uid://do2uq7v7felwj" path="res://Recipes/Titanium_sheet.tres" id="4_nhxvb"]
-[ext_resource type="Resource" uid="uid://cww6ylj7i0ehh" path="res://Recipes/Titanium_beam.tres" id="5_68agd"]
-[ext_resource type="Texture2D" uid="uid://qpt8mgvgh8ii" path="res://Assets/SRBP_3x3_BLDG.png" id="6_563xu"]
-[ext_resource type="Resource" uid="uid://bhi7fb0mnjc32" path="res://Recipes/Wolfram_plate.tres" id="6_cd0o3"]
-[ext_resource type="Resource" uid="uid://s3kc6mkd3goq" path="res://Recipes/Wolfram_wire.tres" id="7_lavtn"]
-[ext_resource type="Texture2D" uid="uid://grouobxe87tu" path="res://Assets/SRBP_4x4_BLDG.png" id="7_trxst"]
-[ext_resource type="Texture2D" uid="uid://ilmbegsn2c7" path="res://Assets/SRBP_Oval.png" id="8_2dmew"]
-[ext_resource type="Resource" uid="uid://bq05m5kfssqq0" path="res://Recipes/Tube.tres" id="8_dgwtc"]
-[ext_resource type="Resource" uid="uid://deusm6el3e55" path="res://Recipes/Stator.tres" id="9_1dd5x"]
-[ext_resource type="Resource" uid="uid://c7lhgy3lelxcw" path="res://Recipes/Rotor.tres" id="10_47kw3"]
-[ext_resource type="Resource" uid="uid://cdu55ckunlv2i" path="res://Recipes/Stabilizer.tres" id="11_igp7r"]
-[ext_resource type="Resource" uid="uid://bcnioljv0bmy5" path="res://Recipes/Calcite_sheet.tres" id="12_q1ghm"]
-[ext_resource type="Resource" uid="uid://db7oghfdpodmj" path="res://Recipes/Applicator.tres" id="13_hllad"]
-[ext_resource type="Resource" uid="uid://bhaqbv0yp1oun" path="res://Recipes/Basic_building_materials.tres" id="14_ocqxr"]
-[ext_resource type="Resource" uid="uid://dow8hsj6coner" path="res://Recipes/Pistol_ammo.tres" id="15_x3jwo"]
+[ext_resource type="Script" uid="uid://dbs5hfkys8a3c" path="res://Buildings/Fabricator.gd" id="1_a2cv4"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_u3fyf"]
+[ext_resource type="Resource" uid="uid://d18djk1gxnglo" path="res://Recipes/Titanium_rod.tres" id="3_o0iyx"]
+[ext_resource type="Resource" uid="uid://do2uq7v7felwj" path="res://Recipes/Titanium_sheet.tres" id="4_dkke5"]
+[ext_resource type="Resource" uid="uid://cww6ylj7i0ehh" path="res://Recipes/Titanium_beam.tres" id="5_wcpt0"]
+[ext_resource type="Resource" uid="uid://bhi7fb0mnjc32" path="res://Recipes/Wolfram_plate.tres" id="6_ou50j"]
+[ext_resource type="Resource" uid="uid://s3kc6mkd3goq" path="res://Recipes/Wolfram_wire.tres" id="7_sn8a3"]
+[ext_resource type="Resource" uid="uid://bq05m5kfssqq0" path="res://Recipes/Tube.tres" id="8_k6fgg"]
+[ext_resource type="Resource" uid="uid://deusm6el3e55" path="res://Recipes/Stator.tres" id="9_ngkt1"]
+[ext_resource type="Resource" uid="uid://c7lhgy3lelxcw" path="res://Recipes/Rotor.tres" id="10_m5eqo"]
+[ext_resource type="Resource" uid="uid://cdu55ckunlv2i" path="res://Recipes/Stabilizer.tres" id="11_sov4o"]
+[ext_resource type="Resource" uid="uid://bcnioljv0bmy5" path="res://Recipes/Calcite_sheet.tres" id="12_mvvlw"]
+[ext_resource type="Resource" uid="uid://db7oghfdpodmj" path="res://Recipes/Applicator.tres" id="13_v33qo"]
+[ext_resource type="Resource" uid="uid://bhaqbv0yp1oun" path="res://Recipes/Basic_building_materials.tres" id="14_dhwv3"]
+[ext_resource type="Resource" uid="uid://dow8hsj6coner" path="res://Recipes/Pistol_ammo.tres" id="15_7ehng"]
+[ext_resource type="Texture2D" uid="uid://qpt8mgvgh8ii" path="res://Assets/SRBP_3x3_BLDG.png" id="16_ow8s3"]
+[ext_resource type="Texture2D" uid="uid://grouobxe87tu" path="res://Assets/SRBP_4x4_BLDG.png" id="17_kdjnc"]
+[ext_resource type="Texture2D" uid="uid://ilmbegsn2c7" path="res://Assets/SRBP_Oval.png" id="18_gkjec"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
 size = Vector2(96, 96)
@@ -26,18 +26,18 @@ size = Vector2(96, 96)
 size = Vector2(128, 128)
 
 [node name="Fabricator" type="Node2D" unique_id=1728206745]
-script = ExtResource("1_563xu")
+script = ExtResource("1_a2cv4")
 footprint_primary = Vector2i(3, 4)
-available_recipes = Array[ExtResource("2_d6koq")]([ExtResource("3_kxm6t"), ExtResource("4_nhxvb"), ExtResource("5_68agd"), ExtResource("6_cd0o3"), ExtResource("7_lavtn"), ExtResource("8_dgwtc"), ExtResource("9_1dd5x"), ExtResource("10_47kw3"), ExtResource("11_igp7r"), ExtResource("12_q1ghm"), ExtResource("13_hllad"), ExtResource("14_ocqxr"), ExtResource("15_x3jwo")])
+available_recipes = Array[ExtResource("2_u3fyf")]([ExtResource("3_o0iyx"), ExtResource("4_dkke5"), ExtResource("5_wcpt0"), ExtResource("6_ou50j"), ExtResource("7_sn8a3"), ExtResource("8_k6fgg"), ExtResource("9_ngkt1"), ExtResource("10_m5eqo"), ExtResource("11_sov4o"), ExtResource("12_mvvlw"), ExtResource("13_v33qo"), ExtResource("14_dhwv3"), ExtResource("15_7ehng")])
 metadata/_edit_vertical_guides_ = [63.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
-texture = ExtResource("6_563xu")
+texture = ExtResource("16_ow8s3")
 centered = false
 
 [node name="AlternateSprite" type="Sprite2D" parent="." unique_id=1619536158]
 visible = false
-texture = ExtResource("7_trxst")
+texture = ExtResource("17_kdjnc")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128283645]
@@ -71,7 +71,7 @@ offset_top = 2.0
 offset_right = 109.0
 offset_bottom = 42.0
 scale = Vector2(0.5, 0.5)
-icon = ExtResource("8_2dmew")
+icon = ExtResource("18_gkjec")
 
 [node name="Input 1" type="Button" parent="Ports" unique_id=1958701130]
 self_modulate = Color(1, 1, 1, 0.49803922)
@@ -80,7 +80,7 @@ offset_top = 75.0
 offset_right = 130.0
 offset_bottom = 115.0
 scale = Vector2(0.5, 0.5)
-icon = ExtResource("8_2dmew")
+icon = ExtResource("18_gkjec")
 
 [node name="Input 2" type="Button" parent="Ports" unique_id=1025542919]
 self_modulate = Color(1, 1, 1, 0.49803922)
@@ -89,7 +89,7 @@ offset_top = 75.0
 offset_right = 73.0
 offset_bottom = 115.0
 scale = Vector2(0.5, 0.5)
-icon = ExtResource("8_2dmew")
+icon = ExtResource("18_gkjec")
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
 offset_left = 1.0

@@ -213,7 +213,9 @@ func _on_recipe_item_selected(index: int) -> void:
 		output_box.tooltip_text = str(recipe.outputs[0].item.display_name)
 		input_1_text.text = str(recipe.inputs[0].qty)
 		input_1_box.tooltip_text = str(recipe.inputs[0].item.display_name)
-		if recipe.inputs[1] != null:
+		if recipe.inputs.size() == 1:
+			return
+		else:
 			input_2_text.text = str(recipe.inputs[1].qty)
 			input_2_box.tooltip_text = str(recipe.inputs[1].item.display_name)
 

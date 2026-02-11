@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://s3kc6mkd3goq"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_s11k8"]
+[ext_resource type="Resource" uid="uid://c8y7dof164txv" path="res://Recipes/Item Stacks/Wolfram_bar_15_def.tres" id="2_87jda"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_ybuc3"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_87jda"]
+[ext_resource type="Resource" uid="uid://bukoc5otm1msq" path="res://Recipes/Item Stacks/Wolfram_wire_30_def.tres" id="3_gqtja"]
+
+[resource]
+script = ExtResource("2_ybuc3")
+id = &"wolfram_wire"
+display_name = "Wolfram Wire"
+inputs = Array[ExtResource("1_s11k8")]([ExtResource("2_87jda")])
+outputs = Array[ExtResource("1_s11k8")]([ExtResource("3_gqtja")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

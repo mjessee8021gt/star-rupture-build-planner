@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://cor4oynkdk0is"]
+
+[ext_resource type="Resource" uid="uid://dvptrsbuko3ua" path="res://Recipes/Item Definitions/Nano_fibre_Def.tres" id="1_5qu5o"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_s5ww6"]
+
+[resource]
+script = ExtResource("2_s5ww6")
+item = ExtResource("1_5qu5o")
+qty = 12
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

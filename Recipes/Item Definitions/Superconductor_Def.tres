@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemDefinition" format=3 uid="uid://b1156dtee6aem"]
+
+[ext_resource type="Script" uid="uid://lj867ah2nl68" path="res://Resources/ItemDefinition.gd" id="1_8el5t"]
+
+[resource]
+script = ExtResource("1_8el5t")
+id = &"superconductor"
+display_name = "Superconductor"
+metadata/_custom_type_script = "uid://lj867ah2nl68"

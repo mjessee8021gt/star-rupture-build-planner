@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://bcnioljv0bmy5"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_jji1w"]
+[ext_resource type="Resource" uid="uid://wea0cpu3uoqo" path="res://Recipes/Item Stacks/Calcium_block_30_def.tres" id="2_03fuf"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_ehmde"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_03fuf"]
+[ext_resource type="Resource" uid="uid://b4oo86iua2yg1" path="res://Recipes/Item Stacks/Calcite_sheet_60_def.tres" id="3_m65p3"]
+
+[resource]
+script = ExtResource("2_ehmde")
+id = &"calcite_sheet"
+display_name = "Calcite Sheet"
+inputs = Array[ExtResource("1_jji1w")]([ExtResource("2_03fuf")])
+outputs = Array[ExtResource("1_jji1w")]([ExtResource("3_m65p3")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

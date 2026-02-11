@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://cww6ylj7i0ehh"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_3mbcj"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_4ksua"]
+[ext_resource type="Resource" uid="uid://d4mycefpk23to" path="res://Recipes/Item Stacks/Titanium_bar_20_def.tres" id="2_qwq3g"]
+[ext_resource type="Resource" uid="uid://dspkhw71weab2" path="res://Recipes/Item Stacks/Titanium_beam_20_def.tres" id="3_h7rtd"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_qwq3g"]
+
+[resource]
+script = ExtResource("2_4ksua")
+id = &"titanium_beam"
+display_name = "Titanium Beam"
+inputs = Array[ExtResource("1_3mbcj")]([ExtResource("2_qwq3g")])
+outputs = Array[ExtResource("1_3mbcj")]([ExtResource("3_h7rtd")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

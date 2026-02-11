@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemDefinition" format=3 uid="uid://c10jdc6dkef3w"]
+
+[ext_resource type="Script" uid="uid://lj867ah2nl68" path="res://Resources/ItemDefinition.gd" id="1_fpkni"]
+
+[resource]
+script = ExtResource("1_fpkni")
+id = &"resonator"
+display_name = "Resonator"
+metadata/_custom_type_script = "uid://lj867ah2nl68"

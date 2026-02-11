@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://bq05m5kfssqq0"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_0fdgp"]
+[ext_resource type="Resource" uid="uid://w0hpnliu5r2g" path="res://Recipes/Item Stacks/Titanium_rod_30_def.tres" id="2_2gygj"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_n0vtj"]
+[ext_resource type="Resource" uid="uid://nqeq866fjt58" path="res://Recipes/Item Stacks/Titanium_sheet_30_def.tres" id="3_2fix0"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_b4203"]
+[ext_resource type="Resource" uid="uid://cnivorw14vwl" path="res://Recipes/Item Stacks/Tube_60_def.tres" id="4_4a3ad"]
+
+[resource]
+script = ExtResource("2_n0vtj")
+id = &"tube"
+display_name = "Tube"
+inputs = Array[ExtResource("1_0fdgp")]([ExtResource("2_2gygj"), ExtResource("3_2fix0")])
+outputs = Array[ExtResource("1_0fdgp")]([ExtResource("4_4a3ad")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

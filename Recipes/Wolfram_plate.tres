@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://bhi7fb0mnjc32"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_2ksjw"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_8dnae"]
+[ext_resource type="Resource" uid="uid://dliqah4n131nw" path="res://Recipes/Item Stacks/Wolfram_bar_60_def.tres" id="2_grswv"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_grswv"]
+[ext_resource type="Resource" uid="uid://i0as4t54cvh8" path="res://Recipes/Item Stacks/Wolfram_plate_60_def.tres" id="3_gscov"]
+
+[resource]
+script = ExtResource("2_8dnae")
+id = &"wolfram_plate"
+display_name = "Wolfram Plate"
+inputs = Array[ExtResource("1_2ksjw")]([ExtResource("2_grswv")])
+outputs = Array[ExtResource("1_2ksjw")]([ExtResource("3_gscov")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

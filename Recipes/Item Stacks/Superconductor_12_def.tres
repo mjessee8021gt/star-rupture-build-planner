@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://fas148cttbpp"]
+
+[ext_resource type="Resource" uid="uid://b1156dtee6aem" path="res://Recipes/Item Definitions/Superconductor_Def.tres" id="1_for18"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_q02ue"]
+
+[resource]
+script = ExtResource("2_q02ue")
+item = ExtResource("1_for18")
+qty = 12
+metadata/_custom_type_script = "uid://fx4756jwfgbl"
