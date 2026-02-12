@@ -2,8 +2,16 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_jysgk"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_dlgk5"]
+[ext_resource type="Resource" uid="uid://bsp3syebj5b1s" path="res://Recipes/Item Stacks/Sulpheric_acid_75_def.tres" id="2_uhvon"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_ba5qp"]
+[ext_resource type="Resource" uid="uid://c0rmnq8cciewb" path="res://Recipes/Item Stacks/Synthetic_silicon_15_def.tres" id="3_yvbli"]
+[ext_resource type="Resource" uid="uid://cnrm51o43rysp" path="res://Recipes/Item Stacks/Applicator_15_def.tres" id="4_hjjvv"]
+[ext_resource type="Resource" uid="uid://cdavxivl3d00" path="res://Recipes/Item Stacks/Hardening_agent_30_def.tres" id="5_3ce7k"]
 
 [resource]
 script = ExtResource("2_dlgk5")
+id = &"hardening_agent"
+display_name = "Hardening Agent"
+inputs = Array[ExtResource("1_jysgk")]([ExtResource("2_uhvon"), ExtResource("3_yvbli"), ExtResource("4_hjjvv")])
+outputs = Array[ExtResource("1_jysgk")]([ExtResource("5_3ce7k")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

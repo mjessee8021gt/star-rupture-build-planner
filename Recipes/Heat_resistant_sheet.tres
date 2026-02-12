@@ -1,9 +1,17 @@
 [gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://qg8p6hfj8nl1"]
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_h0i3u"]
+[ext_resource type="Resource" uid="uid://bap7iihibv7fb" path="res://Recipes/Item Stacks/Wolfram_plate_15_def.tres" id="2_5wf67"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_psdg8"]
+[ext_resource type="Resource" uid="uid://nqeq866fjt58" path="res://Recipes/Item Stacks/Titanium_sheet_30_def.tres" id="3_3v7b2"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_75d78"]
+[ext_resource type="Resource" uid="uid://b8n0808hfi8tj" path="res://Recipes/Item Stacks/Glass_15_def.tres" id="4_5wf67"]
+[ext_resource type="Resource" uid="uid://bclvmmnopwy0s" path="res://Recipes/Item Stacks/Heat_resistant_sheet_15_def.tres" id="5_si2u4"]
 
 [resource]
 script = ExtResource("2_psdg8")
+id = &"heat_resistant_sheet"
+display_name = "Heat Resistant Sheet"
+inputs = Array[ExtResource("1_h0i3u")]([ExtResource("2_5wf67"), ExtResource("3_3v7b2"), ExtResource("4_5wf67")])
+outputs = Array[ExtResource("1_h0i3u")]([ExtResource("5_si2u4")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

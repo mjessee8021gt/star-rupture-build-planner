@@ -2,8 +2,16 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_ctnq0"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_1nhwp"]
+[ext_resource type="Resource" uid="uid://cubmyxdgodf6d" path="res://Recipes/Item Stacks/Synthetic_silicon_24_def.tres" id="2_6pcan"]
+[ext_resource type="Resource" uid="uid://b2au4suqf156a" path="res://Recipes/Item Stacks/Stator_12_def.tres" id="3_mx6e0"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_ow16j"]
+[ext_resource type="Resource" uid="uid://cm1j5kym4tvyj" path="res://Recipes/Item Stacks/Inductor_12_def.tres" id="4_mwee5"]
+[ext_resource type="Resource" uid="uid://c2in04m2kw4k1" path="res://Recipes/Item Stacks/Electronics_12_def.tres" id="5_r6sei"]
 
 [resource]
 script = ExtResource("2_1nhwp")
+id = &"electronics"
+display_name = "Electronics"
+inputs = Array[ExtResource("1_ctnq0")]([ExtResource("2_6pcan"), ExtResource("3_mx6e0"), ExtResource("4_mwee5")])
+outputs = Array[ExtResource("1_ctnq0")]([ExtResource("5_r6sei")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

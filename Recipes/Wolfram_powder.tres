@@ -2,8 +2,14 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_apqo0"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_btn8g"]
+[ext_resource type="Resource" uid="uid://nu7i4g2ahpnf" path="res://Recipes/Item Stacks/Wolfram_bar_30_def.tres" id="2_vxfgy"]
+[ext_resource type="Resource" uid="uid://bhyy3pi8wcb7w" path="res://Recipes/Item Stacks/Wolfram_powder_90_def.tres" id="3_330nf"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_vxfgy"]
 
 [resource]
 script = ExtResource("2_btn8g")
+id = &"wolfram_powder"
+display_name = "Wolfram Powder"
+inputs = Array[ExtResource("1_apqo0")]([ExtResource("2_vxfgy")])
+outputs = Array[ExtResource("1_apqo0")]([ExtResource("3_330nf")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

@@ -1,9 +1,16 @@
 [gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://bbdpit4o7qmsk"]
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_b75k5"]
+[ext_resource type="Resource" uid="uid://p3fqkusm0wy2" path="res://Recipes/Item Stacks/Helium-3_20_def.tres" id="2_a0ipx"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_w1tup"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_l512j"]
+[ext_resource type="Resource" uid="uid://cyollm00if8ti" path="res://Recipes/Item Stacks/Calcium_powder_40_def.tres" id="3_ud0k7"]
+[ext_resource type="Resource" uid="uid://cvcxyvf4veu1o" path="res://Recipes/Item Stacks/Glass_20_def.tres" id="4_fwbjw"]
 
 [resource]
 script = ExtResource("2_w1tup")
+id = &"glass"
+display_name = "Glass"
+inputs = Array[ExtResource("1_b75k5")]([ExtResource("2_a0ipx"), ExtResource("3_ud0k7")])
+outputs = Array[ExtResource("1_b75k5")]([ExtResource("4_fwbjw")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

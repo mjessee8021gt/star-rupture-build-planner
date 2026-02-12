@@ -2,8 +2,16 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_kh4ry"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_7vdkg"]
+[ext_resource type="Resource" uid="uid://c8rfij60kmjet" path="res://Recipes/Item Stacks/Helium-3_30_def.tres" id="2_rrpd5"]
+[ext_resource type="Resource" uid="uid://i450qxqs15yv" path="res://Recipes/Item Stacks/Ceramics_60_def.tres" id="3_gprd7"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_lffy4"]
+[ext_resource type="Resource" uid="uid://d4cjngilxosma" path="res://Recipes/Item Stacks/Calcium_powder_60_def.tres" id="4_2n452"]
+[ext_resource type="Resource" uid="uid://dvo1nbwmbhh4b" path="res://Recipes/Item Stacks/Synthetic_silicon_60_def.tres" id="5_60p4l"]
 
 [resource]
 script = ExtResource("2_7vdkg")
+id = &"synthetic_silicon"
+display_name = "Synthetic Silicon"
+inputs = Array[ExtResource("1_kh4ry")]([ExtResource("2_rrpd5"), ExtResource("3_gprd7"), ExtResource("4_2n452")])
+outputs = Array[ExtResource("1_kh4ry")]([ExtResource("5_60p4l")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

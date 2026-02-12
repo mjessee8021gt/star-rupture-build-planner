@@ -1,9 +1,16 @@
 [gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://oqna0imhy8e4"]
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_cnpfo"]
+[ext_resource type="Resource" uid="uid://cxwe0qkpxlr83" path="res://Recipes/Item Stacks/Titanium_beam_30_def.tres" id="2_h7nln"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_wskye"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_gpnvw"]
+[ext_resource type="Resource" uid="uid://bm7p243wemwmh" path="res://Recipes/Item Stacks/Titanium_sheet_60_def.tres" id="3_nmyqu"]
+[ext_resource type="Resource" uid="uid://dvl4dunwrp5l0" path="res://Recipes/Item Stacks/Titanium_housing_30_def.tres" id="4_nhr3x"]
 
 [resource]
 script = ExtResource("2_wskye")
+id = &"titanium_housing"
+display_name = "Titanium Housing"
+inputs = Array[ExtResource("1_cnpfo")]([ExtResource("2_h7nln"), ExtResource("3_nmyqu")])
+outputs = Array[ExtResource("1_cnpfo")]([ExtResource("4_nhr3x")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

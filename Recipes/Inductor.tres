@@ -2,8 +2,16 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_6e6go"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_mhe42"]
+[ext_resource type="Resource" uid="uid://bp1cbbqar0f2w" path="res://Recipes/Item Stacks/Tube_40_def.tres" id="2_r5a1x"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_aitle"]
+[ext_resource type="Resource" uid="uid://x4itvpf6kpri" path="res://Recipes/Item Stacks/Wolfram_wire_20_def.tres" id="3_tp7bk"]
+[ext_resource type="Resource" uid="uid://dpaw7ni76cpnt" path="res://Recipes/Item Stacks/Ceramics_40_def.tres" id="4_ayn4g"]
+[ext_resource type="Resource" uid="uid://depywb6ba776v" path="res://Recipes/Item Stacks/Inductor_20_def.tres" id="5_8be1i"]
 
 [resource]
 script = ExtResource("2_mhe42")
+id = &"inductor"
+display_name = "Inductor"
+inputs = Array[ExtResource("1_6e6go")]([ExtResource("2_r5a1x"), ExtResource("3_tp7bk"), ExtResource("4_ayn4g")])
+outputs = Array[ExtResource("1_6e6go")]([ExtResource("5_8be1i")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

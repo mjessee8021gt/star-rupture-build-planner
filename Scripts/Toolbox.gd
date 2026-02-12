@@ -42,6 +42,7 @@ func _ready() -> void:
 	processingMenu.add_item("Smelter")
 	processingMenu.set_item_metadata(processingMenu.item_count-1, &"smelter")
 	processingMenu.add_item("Furnace")
+	processingMenu.set_item_metadata(processingMenu.item_count-1, &"furnace")
 	processingMenu.add_item("Mega Press")
 	processingMenu.add_item("Compounder")
 	processingMenu.id_pressed.connect(_on_build_selected.bind(processingMenu))

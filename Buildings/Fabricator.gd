@@ -207,6 +207,13 @@ func populate_recipe_dropdown() -> void:
 		recipe_dropdown.select(0)
 
 func _on_recipe_item_selected(index: int) -> void:
+	output_text.text = ""
+	input_1_text.text = ""
+	input_2_text.text = ""
+	output_box.tooltip_text = ""
+	input_1_box.tooltip_text = "Unused"
+	input_2_box.tooltip_text = "Unused"
+	
 	var recipe := recipe_dropdown.get_item_metadata(index) as Recipe
 	if recipe:
 		output_text.text = str(recipe.outputs[0].qty)

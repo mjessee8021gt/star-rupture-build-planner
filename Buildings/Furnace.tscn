@@ -1,38 +1,37 @@
 [gd_scene format=3 uid="uid://bh70vnmi5yy33"]
 
-[ext_resource type="Script" uid="uid://dbs5hfkys8a3c" path="res://Buildings/Fabricator.gd" id="1_a2cv4"]
+[ext_resource type="Script" uid="uid://cuh0tcqy2ku68" path="res://Buildings/Furnace.gd" id="1_a2cv4"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_u3fyf"]
-[ext_resource type="Resource" uid="uid://d18djk1gxnglo" path="res://Recipes/Titanium_rod.tres" id="3_o0iyx"]
-[ext_resource type="Resource" uid="uid://do2uq7v7felwj" path="res://Recipes/Titanium_sheet.tres" id="4_dkke5"]
-[ext_resource type="Resource" uid="uid://cww6ylj7i0ehh" path="res://Recipes/Titanium_beam.tres" id="5_wcpt0"]
-[ext_resource type="Resource" uid="uid://bhi7fb0mnjc32" path="res://Recipes/Wolfram_plate.tres" id="6_ou50j"]
-[ext_resource type="Resource" uid="uid://s3kc6mkd3goq" path="res://Recipes/Wolfram_wire.tres" id="7_sn8a3"]
-[ext_resource type="Resource" uid="uid://bq05m5kfssqq0" path="res://Recipes/Tube.tres" id="8_k6fgg"]
-[ext_resource type="Resource" uid="uid://deusm6el3e55" path="res://Recipes/Stator.tres" id="9_ngkt1"]
-[ext_resource type="Resource" uid="uid://c7lhgy3lelxcw" path="res://Recipes/Rotor.tres" id="10_m5eqo"]
-[ext_resource type="Resource" uid="uid://cdu55ckunlv2i" path="res://Recipes/Stabilizer.tres" id="11_sov4o"]
-[ext_resource type="Resource" uid="uid://bcnioljv0bmy5" path="res://Recipes/Calcite_sheet.tres" id="12_mvvlw"]
-[ext_resource type="Resource" uid="uid://db7oghfdpodmj" path="res://Recipes/Applicator.tres" id="13_v33qo"]
-[ext_resource type="Resource" uid="uid://bhaqbv0yp1oun" path="res://Recipes/Basic_building_materials.tres" id="14_dhwv3"]
-[ext_resource type="Resource" uid="uid://dow8hsj6coner" path="res://Recipes/Pistol_ammo.tres" id="15_7ehng"]
-[ext_resource type="Texture2D" uid="uid://qpt8mgvgh8ii" path="res://Assets/SRBP_3x3_BLDG.png" id="16_ow8s3"]
+[ext_resource type="Resource" uid="uid://dci71xdo3rg31" path="res://Recipes/Calcium_powder.tres" id="3_l2jlo"]
+[ext_resource type="Resource" uid="uid://bd5npx5570loq" path="res://Recipes/Ceramics.tres" id="4_a2cv4"]
+[ext_resource type="Resource" uid="uid://bens7k5sjog37" path="res://Recipes/Chemicals.tres" id="5_u3fyf"]
+[ext_resource type="Resource" uid="uid://bifbyj6q5ko1v" path="res://Recipes/Electronics.tres" id="6_o0iyx"]
+[ext_resource type="Resource" uid="uid://bbdpit4o7qmsk" path="res://Recipes/Glass.tres" id="7_dkke5"]
+[ext_resource type="Resource" uid="uid://c1my1p2jpswiu" path="res://Recipes/Hardening_agent.tres" id="8_wcpt0"]
+[ext_resource type="Resource" uid="uid://qg8p6hfj8nl1" path="res://Recipes/Heat_resistant_sheet.tres" id="9_ou50j"]
+[ext_resource type="Resource" uid="uid://bsf5opdbdf673" path="res://Recipes/Inductor.tres" id="10_sn8a3"]
+[ext_resource type="Resource" uid="uid://c4yhx1qmql6hj" path="res://Recipes/Supermagnet.tres" id="11_k6fgg"]
+[ext_resource type="Resource" uid="uid://bbayven6k6srd" path="res://Recipes/Synthetic Silicon.tres" id="12_ngkt1"]
+[ext_resource type="Resource" uid="uid://oqna0imhy8e4" path="res://Recipes/Titanium housing.tres" id="13_m5eqo"]
+[ext_resource type="Resource" uid="uid://bjc2p2md5xs62" path="res://Recipes/Wolfram_powder.tres" id="14_sov4o"]
+[ext_resource type="Texture2D" uid="uid://qwwrxvfqjgub" path="res://Assets/SRBP_3x4_BLDG.png" id="16_a2cv4"]
 [ext_resource type="Texture2D" uid="uid://grouobxe87tu" path="res://Assets/SRBP_4x4_BLDG.png" id="17_kdjnc"]
 [ext_resource type="Texture2D" uid="uid://ilmbegsn2c7" path="res://Assets/SRBP_Oval.png" id="18_gkjec"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
-size = Vector2(96, 96)
+size = Vector2(96, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uf4xf"]
 size = Vector2(128, 128)
 
-[node name="Fabricator" type="Node2D" unique_id=1728206745]
+[node name="Furnace" type="Node2D" unique_id=1728206745]
 script = ExtResource("1_a2cv4")
 footprint_primary = Vector2i(3, 4)
-available_recipes = Array[ExtResource("2_u3fyf")]([ExtResource("3_o0iyx"), ExtResource("4_dkke5"), ExtResource("5_wcpt0"), ExtResource("6_ou50j"), ExtResource("7_sn8a3"), ExtResource("8_k6fgg"), ExtResource("9_ngkt1"), ExtResource("10_m5eqo"), ExtResource("11_sov4o"), ExtResource("12_mvvlw"), ExtResource("13_v33qo"), ExtResource("14_dhwv3"), ExtResource("15_7ehng")])
-metadata/_edit_vertical_guides_ = [63.0]
+available_recipes = Array[ExtResource("2_u3fyf")]([ExtResource("3_l2jlo"), ExtResource("4_a2cv4"), ExtResource("5_u3fyf"), ExtResource("6_o0iyx"), ExtResource("7_dkke5"), ExtResource("8_wcpt0"), ExtResource("9_ou50j"), ExtResource("10_sn8a3"), ExtResource("11_k6fgg"), ExtResource("12_ngkt1"), ExtResource("13_m5eqo"), ExtResource("14_sov4o")])
+metadata/_edit_vertical_guides_ = [63.0, 48.0, 64.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
-texture = ExtResource("16_ow8s3")
+texture = ExtResource("16_a2cv4")
 centered = false
 
 [node name="AlternateSprite" type="Sprite2D" parent="." unique_id=1619536158]
@@ -41,7 +40,7 @@ texture = ExtResource("17_kdjnc")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128283645]
-position = Vector2(48, 48)
+position = Vector2(48, 64)
 shape = SubResource("RectangleShape2D_gbqis")
 
 [node name="CollisionShapeAlt" type="CollisionShape2D" parent="." unique_id=1184700770]
@@ -52,11 +51,12 @@ disabled = true
 
 [node name="TitleLabel" type="Label" parent="." unique_id=904579435]
 offset_left = 5.0
-offset_top = 21.0
+offset_top = 43.0
 offset_right = 92.0
-offset_bottom = 41.0
+offset_bottom = 63.0
 theme_override_font_sizes/font_size = 14
-text = "FABRICATOR"
+text = "FURNACE"
+horizontal_alignment = 1
 
 [node name="PlacementArea" type="Area2D" parent="." unique_id=911391560]
 
@@ -66,68 +66,77 @@ text = "FABRICATOR"
 
 [node name="Output 1" type="Button" parent="Ports" unique_id=1122308628]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 37.0
-offset_top = 2.0
-offset_right = 109.0
-offset_bottom = 42.0
-scale = Vector2(0.5, 0.5)
+offset_left = 33.0
+offset_top = 1.0
+offset_right = 105.0
+offset_bottom = 41.0
+scale = Vector2(0.42, 0.42)
 icon = ExtResource("18_gkjec")
 
 [node name="Input 1" type="Button" parent="Ports" unique_id=1958701130]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 58.0
-offset_top = 75.0
-offset_right = 130.0
-offset_bottom = 115.0
-scale = Vector2(0.5, 0.5)
+offset_left = 65.0
+offset_top = 110.0
+offset_right = 137.0
+offset_bottom = 150.0
+scale = Vector2(0.42, 0.42)
 icon = ExtResource("18_gkjec")
 
 [node name="Input 2" type="Button" parent="Ports" unique_id=1025542919]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 1.0
-offset_top = 75.0
+offset_left = 0.99999994
+offset_top = 110.00001
 offset_right = 73.0
-offset_bottom = 115.0
-scale = Vector2(0.5, 0.5)
+offset_bottom = 150.0
+scale = Vector2(0.42, 0.42)
+icon = ExtResource("18_gkjec")
+
+[node name="Input 3" type="Button" parent="Ports" unique_id=1275495196]
+self_modulate = Color(1, 1, 1, 0.49803922)
+offset_left = 33.0
+offset_top = 110.0
+offset_right = 105.0
+offset_bottom = 150.0
+scale = Vector2(0.42, 0.42)
 icon = ExtResource("18_gkjec")
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
 offset_left = 1.0
-offset_top = 39.0
+offset_top = 65.0
 offset_right = 95.0
-offset_bottom = 59.0
+offset_bottom = 85.0
 theme_override_font_sizes/font_size = 10
 
 [node name="outputBox" type="ColorRect" parent="." unique_id=1419396623]
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 37.0
-offset_bottom = 21.0
+offset_left = 33.0
+offset_top = 19.0
+offset_right = 62.0
+offset_bottom = 38.0
 color = Color(0, 0.64705884, 0.25490198, 0.57254905)
 
 [node name="outputText" type="Label" parent="outputBox" unique_id=1040759306]
 layout_mode = 0
-offset_left = -1.0
-offset_top = -2.0
-offset_right = 36.0
-offset_bottom = 21.0
+offset_left = -3.0
+offset_top = -4.0
+offset_right = 34.0
+offset_bottom = 19.0
 theme_override_colors/font_color = Color(0, 0.24313726, 0, 1)
 text = "000"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Input1Box" type="ColorRect" parent="." unique_id=1573327625]
-offset_left = 59.0
-offset_top = 60.0
-offset_right = 94.0
-offset_bottom = 79.0
+offset_left = 65.0
+offset_top = 91.0
+offset_right = 95.0
+offset_bottom = 110.0
 color = Color(0, 0.64705884, 0.25490198, 0.57254905)
 
 [node name="input1Text" type="Label" parent="Input1Box" unique_id=1651637159]
 layout_mode = 0
-offset_left = -1.0
+offset_left = -4.0
 offset_top = -2.0
-offset_right = 37.0
+offset_right = 34.0
 offset_bottom = 21.0
 theme_override_colors/font_color = Color(0, 0.24313726, 0, 1)
 text = "000"
@@ -135,17 +144,35 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Input2Box" type="ColorRect" parent="." unique_id=232719543]
-offset_left = 2.0
-offset_top = 60.0
-offset_right = 37.0
-offset_bottom = 79.0
+offset_left = 1.0
+offset_top = 91.0
+offset_right = 31.0
+offset_bottom = 110.0
 color = Color(0, 0.64705884, 0.25490198, 0.57254905)
 
 [node name="input2Text" type="Label" parent="Input2Box" unique_id=332826267]
 layout_mode = 0
-offset_left = -1.0
+offset_left = -4.0
 offset_top = -2.0
-offset_right = 37.0
+offset_right = 34.0
+offset_bottom = 21.0
+theme_override_colors/font_color = Color(0, 0.24313726, 0, 1)
+text = "000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Input3Box" type="ColorRect" parent="." unique_id=1711166632]
+offset_left = 33.0
+offset_top = 91.0
+offset_right = 63.0
+offset_bottom = 110.0
+color = Color(0, 0.64705884, 0.25490198, 0.57254905)
+
+[node name="input3Text" type="Label" parent="Input3Box" unique_id=844869573]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -2.0
+offset_right = 35.0
 offset_bottom = 21.0
 theme_override_colors/font_color = Color(0, 0.24313726, 0, 1)
 text = "000"
@@ -161,4 +188,7 @@ vertical_alignment = 1
 [connection signal="mouse_entered" from="Ports/Input 2" to="." method="_on_input_2_mouse_entered"]
 [connection signal="mouse_exited" from="Ports/Input 2" to="." method="_on_input_2_mouse_exited"]
 [connection signal="pressed" from="Ports/Input 2" to="." method="_on_input_2_pressed"]
+[connection signal="mouse_entered" from="Ports/Input 3" to="." method="_on_input_3_mouse_entered"]
+[connection signal="mouse_exited" from="Ports/Input 3" to="." method="_on_input_3_mouse_exited"]
+[connection signal="pressed" from="Ports/Input 3" to="." method="_on_input_3_pressed"]
 [connection signal="item_selected" from="Recipe" to="." method="_on_recipe_item_selected"]
