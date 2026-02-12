@@ -2,8 +2,17 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_ln1sd"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_t1oar"]
+[ext_resource type="Resource" uid="uid://bap7iihibv7fb" path="res://Recipes/Item Stacks/Wolfram_plate_15_def.tres" id="2_wpdo8"]
+[ext_resource type="Resource" uid="uid://cqyirkvkkeof5" path="res://Recipes/Item Stacks/Supermagnet_15_def.tres" id="3_dsxdu"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_pgjop"]
+[ext_resource type="Resource" uid="uid://c08gafnt4qfit" path="res://Recipes/Item Stacks/Pressurized_helium_15_def.tres" id="4_m5mnm"]
+[ext_resource type="Resource" uid="uid://qjt1hv0xy4qk" path="res://Recipes/Item Stacks/Inductor_15_def.tres" id="5_ysojv"]
+[ext_resource type="Resource" uid="uid://bxrco0bi0ns2" path="res://Recipes/Item Stacks/Electromagnetic_coil_15_def.tres" id="6_dyylu"]
 
 [resource]
 script = ExtResource("2_t1oar")
+id = &"electromagnetic_coil"
+display_name = "Electromagnetic Coil"
+inputs = Array[ExtResource("1_ln1sd")]([ExtResource("2_wpdo8"), ExtResource("3_dsxdu"), ExtResource("4_m5mnm"), ExtResource("5_ysojv")])
+outputs = Array[ExtResource("1_ln1sd")]([ExtResource("6_dyylu")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

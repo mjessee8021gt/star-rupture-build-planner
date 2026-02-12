@@ -1,9 +1,18 @@
 [gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://cbrjb43o0imhn"]
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_qvp8o"]
+[ext_resource type="Resource" uid="uid://w0hpnliu5r2g" path="res://Recipes/Item Stacks/Titanium_rod_30_def.tres" id="2_iehna"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_mmxwh"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_0dvtq"]
+[ext_resource type="Resource" uid="uid://b1pw2s2k2gi4j" path="res://Recipes/Item Stacks/Heat_resistant_sheet_30_def.tres" id="3_nbuls"]
+[ext_resource type="Resource" uid="uid://8djms15a28fj" path="res://Recipes/Item Stacks/Stabilizer_15_def.tres" id="4_cu6i7"]
+[ext_resource type="Resource" uid="uid://bap7iihibv7fb" path="res://Recipes/Item Stacks/Wolfram_plate_15_def.tres" id="5_d0gnp"]
+[ext_resource type="Resource" uid="uid://s88h4vlye6dh" path="res://Recipes/Item Stacks/Impeller_15_def.tres" id="6_wnbtj"]
 
 [resource]
 script = ExtResource("2_mmxwh")
+id = &"impeller"
+display_name = "Impeller"
+inputs = Array[ExtResource("1_qvp8o")]([ExtResource("2_iehna"), ExtResource("3_nbuls"), ExtResource("4_cu6i7"), ExtResource("5_d0gnp")])
+outputs = Array[ExtResource("1_qvp8o")]([ExtResource("6_wnbtj")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"
