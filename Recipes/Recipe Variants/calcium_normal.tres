@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_8nqmb"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="2_fnfoc"]
-[ext_resource type="Resource" uid="uid://dl2wim2l8edi1" path="res://Recipes/Item Stacks/Calcium_block_60_def.tres" id="2_iiq1r"]
+[ext_resource type="Resource" uid="uid://cl0a6xw45hg0b" path="res://Recipes/Item Stacks/Calcium_ore_120_def.tres" id="2_iiq1r"]
 
 [resource]
 script = ExtResource("2_fnfoc")

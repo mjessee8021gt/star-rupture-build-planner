@@ -2,6 +2,7 @@ extends Node2D
 
 @export var tileMap : TileMap
 var footprint := Vector2i(3,4)
+var _selected_variant : RecipeVariant = null
 @export var anchor := Vector2i.ZERO
 @onready var placement_area: Area2D = $PlacementArea
 @onready var recipe_dropdown: OptionButton = $Recipe
@@ -143,8 +144,19 @@ func _on_recipe_item_selected(index: int) -> void:
 
 func _on_purity_item_selected(index: int) -> void:
 	var variant := purity_dropdown.get_item_metadata(index)as RecipeVariant
-	if variant:
-		_update_output_text_from_variant(variant)
+	
+	if not variant:
+		return
+		
+	if variant == _selected_variant:
+		return
+	
+	_selected_variant = variant
+	_update_output_text_from_variant(variant)
+	ProdLedger.add_source(get_instance_id(),get_production_deltas(variant))
 		
 func _update_output_text_from_variant(variant: RecipeVariant) -> void:
 	output_text.text = str(variant.output_qty)
+	
+func get_production_deltas(variant: RecipeVariant) -> Dictionary:
+	return variant.get_deltas()

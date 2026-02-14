@@ -10,3 +10,19 @@ var craft_time: float
 @export var inputs : Array[ItemStack] = []
 @export var outputs : Array[ItemStack] = []
 @export var variants : Array[RecipeVariant] = []
+
+func get_deltas() -> Dictionary:
+	var deltas : Dictionary = {}
+	
+	for s in inputs:
+		if s == null:
+			continue
+		var key: StringName = s.id
+		deltas[key] = float(deltas.get(key, 0.0)) - float(s.qty)
+		
+	for s in outputs:
+		if s == null:
+			continue
+		var key: StringName = s.id
+		deltas[key] = float(deltas.get(key, 0.0)) + float(s.qty)
+	return deltas

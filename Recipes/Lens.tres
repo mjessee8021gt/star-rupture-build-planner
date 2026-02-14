@@ -1,9 +1,17 @@
 [gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://buienv7dio767"]
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_wx80y"]
+[ext_resource type="Resource" uid="uid://dbqs43uxatbha" path="res://Recipes/Item Stacks/Glass_50_def.tres" id="2_136dx"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_nfn4r"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_8venl"]
+[ext_resource type="Resource" uid="uid://qqx4bxg2qo3f" path="res://Recipes/Item Stacks/Hardening_agent_40_def.tres" id="3_qlws0"]
+[ext_resource type="Resource" uid="uid://dcoo073n0k0t8" path="res://Recipes/Item Stacks/Synthetic_Resin_40_def.tres" id="4_f37nm"]
+[ext_resource type="Resource" uid="uid://cdcn7dksrbaqn" path="res://Recipes/Item Stacks/Lens_5_def.tres" id="5_cqvnw"]
 
 [resource]
 script = ExtResource("2_nfn4r")
+id = &"lens"
+display_name = "Lens"
+inputs = Array[ExtResource("1_wx80y")]([ExtResource("2_136dx"), ExtResource("3_qlws0"), ExtResource("4_f37nm")])
+outputs = Array[ExtResource("1_wx80y")]([ExtResource("5_cqvnw")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

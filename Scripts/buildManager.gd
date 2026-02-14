@@ -3,7 +3,7 @@ extends Node2D
 var current_scene: PackedScene
 var ghost_instance: Node2D
 var ghost_area: Area2D
-var occupied_cells := {}
+var occupied_cells : Dictionary = {} #Verctor2i -> Node(Building)
 var is_building := false
 @export var canBuildColor := Color(0,1,0, 0.5)
 @export var cannotbuildColor := Color(1,0,0,0.5)
@@ -53,12 +53,20 @@ func confirm_build() -> void:
 		real.flip_footprint()
 	$"../buildings".add_child(real)
 	
-	occupy_cells(footprint)
+	occupy_cells(footprint, real)
 	$"../Camera2D/CanvasLayer/Panel/HeatLabel".text = str(int($"../Camera2D/CanvasLayer/Panel/HeatLabel".text) + real.heat)
 	$"../Camera2D/CanvasLayer/Panel/PowerLabel".text = str(int($"../Camera2D/CanvasLayer/Panel/PowerLabel".text) + real.power)
 	cancel_build()
 	$"../PathManager"._update_building_list()
 	
+func free_cells_for_building(building: Node) -> void:
+	var anchor_cell := world_to_cell(building.global_position)
+	var cells = building.get_footprint_cells(anchor_cell, building.footprint, building.anchor)
+	for cell in cells:
+		#only clear cells that still point to the identified building
+		if occupied_cells.get(cell) == building:
+			occupied_cells.erase(cell)
+
 func cancel_build() -> void:
 	if ghost_instance:
 		ghost_instance.queue_free()
@@ -67,6 +75,28 @@ func cancel_build() -> void:
 	ghost_instance = null
 	is_building = false
 	
+func try_remove_building_under_mouse() -> bool:
+	var mouse_pos := get_global_mouse_position()
+	var cell := world_to_cell(mouse_pos)
+	var building := get_building_at_cells(cell)
+	if building == null:
+		return false
+	
+	#Update the global heat and power consumption.
+	$"../Camera2D/CanvasLayer/Panel/HeatLabel".text = str(int($"../Camera2D/CanvasLayer/Panel/HeatLabel".text) - building.heat)
+	$"../Camera2D/CanvasLayer/Panel/PowerLabel".text = str(int($"../Camera2D/CanvasLayer/Panel/PowerLabel".text) - building.power)
+	
+	#free grid occupancy
+	free_cells_for_building(building)
+	
+	#remove from scene
+	building.queue_free()
+	
+	#refresh any dependent systems
+	$"../PathManager"._update_building_list()
+	
+	return true
+
 func snap_to_grid(pos: Vector2) -> Vector2:
 	return (pos/tile_size).floor() * tile_size
 	
@@ -76,24 +106,32 @@ func world_to_cell(pos: Vector2) -> Vector2i:
 func cell_to_world(cell: Vector2i) -> Vector2:
 	return Vector2(cell * tile_size)
 	
-func occupy_cells(cells: Array[Vector2i]) -> void:
+func occupy_cells(cells: Array[Vector2i], Building: Node) -> void:
 	for cell in cells:
-			occupied_cells[cell] = true
+			occupied_cells[cell] = Building
 
 func is_cell_free(cell: Vector2i) -> bool:
 	return not occupied_cells.has(cell)
+	
+func get_building_at_cells(cell: Vector2i) -> Node:
+	return occupied_cells.get(cell, null)
 
 func _process(_delta: float) -> void:
-	if not is_building:
-		return
-	
 	if Input.is_action_just_pressed("Alternate"):
 		ghost_instance.flip_footprint()
 	if Input.is_action_just_pressed("Rotate"):
 		ghost_instance.rotate(deg_to_rad(90.0))
 	if Input.is_action_just_pressed("Build Cancel"):
-		cancel_build()
+		if is_building:
+			cancel_build()
+		else:
+			try_remove_building_under_mouse()
+		return
 	
+	
+	if not is_building:
+		return
+		
 	var mouse_pos := get_global_mouse_position()
 	var anchor_cell = world_to_cell(mouse_pos)
 	var top_left_cell = anchor_cell - ghost_instance.anchor

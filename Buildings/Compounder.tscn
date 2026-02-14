@@ -1,61 +1,54 @@
 [gd_scene format=3 uid="uid://cqh0pf26qe302"]
 
-[ext_resource type="Script" uid="uid://cuh0tcqy2ku68" path="res://Buildings/Furnace.gd" id="1_vmyps"]
+[ext_resource type="Script" uid="uid://bgdc5fyqdilut" path="res://Buildings/Compounder.gd" id="1_n8472"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_6v4mf"]
-[ext_resource type="Resource" uid="uid://dci71xdo3rg31" path="res://Recipes/Calcium_powder.tres" id="3_7rjnt"]
-[ext_resource type="Resource" uid="uid://bd5npx5570loq" path="res://Recipes/Ceramics.tres" id="4_eeuiw"]
-[ext_resource type="Resource" uid="uid://bens7k5sjog37" path="res://Recipes/Chemicals.tres" id="5_sjnt7"]
-[ext_resource type="Resource" uid="uid://bifbyj6q5ko1v" path="res://Recipes/Electronics.tres" id="6_dnl3l"]
-[ext_resource type="Resource" uid="uid://bbdpit4o7qmsk" path="res://Recipes/Glass.tres" id="7_xbor2"]
-[ext_resource type="Resource" uid="uid://c1my1p2jpswiu" path="res://Recipes/Hardening_agent.tres" id="8_8oxc5"]
-[ext_resource type="Resource" uid="uid://qg8p6hfj8nl1" path="res://Recipes/Heat_resistant_sheet.tres" id="9_iqetp"]
-[ext_resource type="Resource" uid="uid://bsf5opdbdf673" path="res://Recipes/Inductor.tres" id="10_7ukw8"]
-[ext_resource type="Resource" uid="uid://c4yhx1qmql6hj" path="res://Recipes/Supermagnet.tres" id="11_4jfj7"]
-[ext_resource type="Resource" uid="uid://bbayven6k6srd" path="res://Recipes/Synthetic Silicon.tres" id="12_t1gwr"]
-[ext_resource type="Resource" uid="uid://oqna0imhy8e4" path="res://Recipes/Titanium housing.tres" id="13_kj074"]
-[ext_resource type="Resource" uid="uid://bjc2p2md5xs62" path="res://Recipes/Wolfram_powder.tres" id="14_gia55"]
-[ext_resource type="Texture2D" uid="uid://qwwrxvfqjgub" path="res://Assets/SRBP_3x4_BLDG.png" id="15_6el3w"]
-[ext_resource type="Texture2D" uid="uid://grouobxe87tu" path="res://Assets/SRBP_4x4_BLDG.png" id="16_il1sv"]
+[ext_resource type="Resource" uid="uid://vh0mef83f0fq" path="res://Recipes/Ion Injector.tres" id="3_n8472"]
+[ext_resource type="Resource" uid="uid://buienv7dio767" path="res://Recipes/Lens.tres" id="4_wrwtp"]
+[ext_resource type="Resource" uid="uid://du7jjotq5e67x" path="res://Recipes/Liquid_helium.tres" id="5_gh8q4"]
+[ext_resource type="Resource" uid="uid://djqxq1reiv2ra" path="res://Recipes/Nano_fibre.tres" id="6_n22x6"]
+[ext_resource type="Resource" uid="uid://c020d7653ktna" path="res://Recipes/Superconductor.tres" id="7_kxkh6"]
+[ext_resource type="Resource" uid="uid://dv5yt7tce8sok" path="res://Recipes/Synthetic_resin.tres" id="8_dtdv0"]
+[ext_resource type="Texture2D" uid="uid://dckm1irx4k8o3" path="res://Assets/SRBP_6x6_BLDG.png" id="9_n8472"]
+[ext_resource type="Texture2D" uid="uid://cmwoe1nqgmtr6" path="res://Assets/SRBP_7x7_BLDG.png" id="10_wrwtp"]
 [ext_resource type="Texture2D" uid="uid://ilmbegsn2c7" path="res://Assets/SRBP_Oval.png" id="17_28hxc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
-size = Vector2(96, 128)
+size = Vector2(192, 192)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uf4xf"]
-size = Vector2(128, 128)
+size = Vector2(224, 224)
 
 [node name="Compounder" type="Node2D" unique_id=1728206745]
-script = ExtResource("1_vmyps")
-footprint_primary = Vector2i(3, 4)
-available_recipes = Array[ExtResource("2_6v4mf")]([ExtResource("3_7rjnt"), ExtResource("4_eeuiw"), ExtResource("5_sjnt7"), ExtResource("6_dnl3l"), ExtResource("7_xbor2"), ExtResource("8_8oxc5"), ExtResource("9_iqetp"), ExtResource("10_7ukw8"), ExtResource("11_4jfj7"), ExtResource("12_t1gwr"), ExtResource("13_kj074"), ExtResource("14_gia55")])
-metadata/_edit_vertical_guides_ = [63.0, 48.0, 64.0]
+script = ExtResource("1_n8472")
+available_recipes = Array[ExtResource("2_6v4mf")]([ExtResource("3_n8472"), ExtResource("4_wrwtp"), ExtResource("5_gh8q4"), ExtResource("6_n22x6"), ExtResource("7_kxkh6"), ExtResource("8_dtdv0")])
+metadata/_edit_vertical_guides_ = [63.0, 48.0, 64.0, 96.0, 112.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
-texture = ExtResource("15_6el3w")
+texture = ExtResource("9_n8472")
 centered = false
 
 [node name="AlternateSprite" type="Sprite2D" parent="." unique_id=1619536158]
 visible = false
-texture = ExtResource("16_il1sv")
+texture = ExtResource("10_wrwtp")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128283645]
-position = Vector2(48, 64)
+position = Vector2(96, 96)
 shape = SubResource("RectangleShape2D_gbqis")
 
 [node name="CollisionShapeAlt" type="CollisionShape2D" parent="." unique_id=1184700770]
 visible = false
-position = Vector2(64, 64)
+position = Vector2(112, 112)
 shape = SubResource("RectangleShape2D_uf4xf")
 disabled = true
 
 [node name="TitleLabel" type="Label" parent="." unique_id=904579435]
-offset_left = 5.0
-offset_top = 43.0
-offset_right = 92.0
-offset_bottom = 63.0
+offset_left = 46.0
+offset_top = 64.0
+offset_right = 147.0
+offset_bottom = 84.0
 theme_override_font_sizes/font_size = 14
-text = "FURNACE"
+text = "COMPOUNDER"
 horizontal_alignment = 1
 
 [node name="PlacementArea" type="Area2D" parent="." unique_id=911391560]
@@ -66,70 +59,70 @@ horizontal_alignment = 1
 
 [node name="Output 1" type="Button" parent="Ports" unique_id=1122308628]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 33.0
+offset_left = 81.0
 offset_top = 1.0
-offset_right = 105.0
+offset_right = 153.0
 offset_bottom = 41.0
 scale = Vector2(0.42, 0.42)
 icon = ExtResource("17_28hxc")
 
 [node name="Input 1" type="Button" parent="Ports" unique_id=1958701130]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 65.0
-offset_top = 110.0
-offset_right = 137.0
-offset_bottom = 150.0
+offset_left = 1.0
+offset_top = 174.0
+offset_right = 73.0
+offset_bottom = 214.0
 scale = Vector2(0.42, 0.42)
 icon = ExtResource("17_28hxc")
 
 [node name="Input 2" type="Button" parent="Ports" unique_id=1025542919]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 0.99999994
-offset_top = 110.00001
-offset_right = 73.0
-offset_bottom = 150.0
+offset_left = 81.0
+offset_top = 174.0
+offset_right = 153.0
+offset_bottom = 214.0
 scale = Vector2(0.42, 0.42)
 icon = ExtResource("17_28hxc")
 
 [node name="Input 3" type="Button" parent="Ports" unique_id=1275495196]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 33.0
-offset_top = 110.0
-offset_right = 105.0
-offset_bottom = 150.0
+offset_left = 161.0
+offset_top = 174.0
+offset_right = 233.0
+offset_bottom = 214.0
 scale = Vector2(0.42, 0.42)
 icon = ExtResource("17_28hxc")
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
-offset_left = 1.0
-offset_top = 65.0
-offset_right = 95.0
-offset_bottom = 85.0
+offset_left = 49.0
+offset_top = 101.0
+offset_right = 143.0
+offset_bottom = 121.0
 theme_override_font_sizes/font_size = 10
 
 [node name="outputBox" type="ColorRect" parent="." unique_id=1419396623]
-offset_left = 33.0
-offset_top = 19.0
-offset_right = 62.0
-offset_bottom = 38.0
+offset_left = 82.0
+offset_top = 18.0
+offset_right = 111.0
+offset_bottom = 37.0
 color = Color(0, 0.64705884, 0.25490198, 0.57254905)
 
 [node name="outputText" type="Label" parent="outputBox" unique_id=1040759306]
 layout_mode = 0
 offset_left = -3.0
-offset_top = -4.0
+offset_top = -3.0
 offset_right = 34.0
-offset_bottom = 19.0
+offset_bottom = 20.0
 theme_override_colors/font_color = Color(0, 0.24313726, 0, 1)
 text = "000"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Input1Box" type="ColorRect" parent="." unique_id=1573327625]
-offset_left = 65.0
-offset_top = 91.0
-offset_right = 95.0
-offset_bottom = 110.0
+offset_left = 1.0
+offset_top = 154.0
+offset_right = 31.0
+offset_bottom = 173.0
 color = Color(0, 0.64705884, 0.25490198, 0.57254905)
 
 [node name="input1Text" type="Label" parent="Input1Box" unique_id=1651637159]
@@ -144,10 +137,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Input2Box" type="ColorRect" parent="." unique_id=232719543]
-offset_left = 1.0
-offset_top = 91.0
-offset_right = 31.0
-offset_bottom = 110.0
+offset_left = 81.0
+offset_top = 154.0
+offset_right = 111.0
+offset_bottom = 173.0
 color = Color(0, 0.64705884, 0.25490198, 0.57254905)
 
 [node name="input2Text" type="Label" parent="Input2Box" unique_id=332826267]
@@ -162,18 +155,18 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Input3Box" type="ColorRect" parent="." unique_id=1711166632]
-offset_left = 33.0
-offset_top = 91.0
-offset_right = 63.0
-offset_bottom = 110.0
+offset_left = 161.0
+offset_top = 154.0
+offset_right = 191.0
+offset_bottom = 173.0
 color = Color(0, 0.64705884, 0.25490198, 0.57254905)
 
 [node name="input3Text" type="Label" parent="Input3Box" unique_id=844869573]
 layout_mode = 0
-offset_left = -3.0
-offset_top = -2.0
-offset_right = 35.0
-offset_bottom = 21.0
+offset_left = -4.0
+offset_top = -3.0
+offset_right = 34.0
+offset_bottom = 20.0
 theme_override_colors/font_color = Color(0, 0.24313726, 0, 1)
 text = "000"
 horizontal_alignment = 1
