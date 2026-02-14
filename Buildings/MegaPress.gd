@@ -2,9 +2,9 @@ extends Node2D
 
 @export var tileMap : TileMap
 @export var is_alternate := false
-var footprint := Vector2i(3,3)
-@export var footprint_primary := Vector2i(3,3)
-@export var footprint_alt := Vector2i(4,4)
+var footprint := Vector2i(4,5)
+@export var footprint_primary := Vector2i(4,5)
+@export var footprint_alt := Vector2i(5,6)
 @export var anchor := Vector2i.ZERO
 @onready var placement_area: Area2D = $PlacementArea
 
@@ -13,13 +13,15 @@ var footprint := Vector2i(3,3)
 @onready var input_1_text : Label = $Input1Box/input1Text
 @onready var input_2_text : Label = $Input2Box/input2Text
 @onready var input_3_text : Label = $Input3Box/input3Text
+@onready var input_4_text : Label = $Input4Box/input4Text
 @onready var output_box : ColorRect = $outputBox
 @onready var input_1_box : ColorRect = $Input1Box
 @onready var input_2_box : ColorRect = $Input2Box
 @onready var input_3_box : ColorRect = $Input3Box
+@onready var input_4_box : ColorRect = $Input4Box
 
-@export var heat := 8
-@export var power := -20
+@export var heat := 15
+@export var power := -30
 
 @export var available_recipes: Array[Recipe] = []
 
@@ -29,6 +31,8 @@ var input2_is_pressed := false
 var input2_is_connected := false
 var input3_is_pressed := false
 var input3_is_connected := false
+var input4_is_connected := false
+var input4_is_pressed := false
 var output1_is_connected := false
 var output1_is_pressed := false
 var other_button_pressed := false
@@ -41,6 +45,7 @@ signal port_drag_ended(building: Node2D, port_name: String, port_global_pos: Vec
 @onready var input_port := $"Ports/Input 1"
 @onready var input_2_port := $"Ports/Input 2"
 @onready var input_3_port := $"Ports/Input 3"
+@onready var input_4_port := $"Ports/Input 4"
 
 var _dragging_port := ""
 var _dragging := false
@@ -53,10 +58,12 @@ func _ready() -> void:
 	$"Ports/Input 1".modulate = Color(0,1,0,0.5)
 	$"Ports/Input 2".modulate = Color(0,1,0,0.5)
 	$"Ports/Input 3".modulate = Color(0,1,0,0.5)
+	$"Ports/Input 4".modulate = Color(0,1,0,0.5)
 	output_port.pressed.connect(func(): _start_port_drag("output"))
 	input_port.pressed.connect(func(): _start_port_drag("input1"))
 	input_2_port.pressed.connect(func(): _start_port_drag("input2"))
 	input_3_port.pressed.connect(func(): _start_port_drag("input3"))
+	input_4_port.pressed.connect(func(): _start_port_drag("input4"))
 	add_to_group("buildings")
 	populate_recipe_dropdown()
 
@@ -104,20 +111,23 @@ func flip_footprint() -> void:
 		$AlternateSprite.visible = true
 		$CollisionShape2D.disabled = true
 		$CollisionShapeAlt.disabled = false
-		$TitleLabel.position = Vector2(21, 43)
-		$"Ports/Output 1".position = Vector2(49,1)
-		$"Ports/Input 1".position = Vector2(97,110)
-		$"Ports/Input 2".position = Vector2(1, 110)
-		$"Ports/Input 3".position = Vector2(49, 110)
-		$Recipe.position = Vector2(17,65)
-		$outputBox.position = Vector2(50, 19)
+		$TitleLabel.position = Vector2(36, 55)
+		$"Ports/Output 1".position = Vector2(65,1)
+		$"Ports/Input 1".position = Vector2(1,174)
+		$"Ports/Input 2".position = Vector2(43, 174)
+		$"Ports/Input 3".position = Vector2(86, 174)
+		$"Ports/Input 4".position = Vector2(129, 174)
+		$Recipe.position = Vector2(17,80)
+		$outputBox.position = Vector2(65, 19)
 		$outputBox/outputText.position = Vector2(-3, -3)
-		$Input1Box.position = Vector2(97, 91)
-		$Input1Box/input1Text.position = Vector2(-3, -3)
-		$Input2Box.position = Vector2(1, 91)
-		$Input2Box/input2Text.position = Vector2(-3, -3)
-		$Input3Box.position = Vector2(49, 91)
-		$Input3Box/input3Text.position = Vector2(-3, -3)
+		$Input1Box.position = Vector2(1, 154)
+		$Input1Box/input1Text.position = Vector2(-4, -2)
+		$Input2Box.position = Vector2(43, 154)
+		$Input2Box/input2Text.position = Vector2(-4, -2)
+		$Input3Box.position = Vector2(86, 154)
+		$Input3Box/input3Text.position = Vector2(-4, -2)
+		$Input4Box.position = Vector2(129, 154)
+		$Input4Box/input4Text.position = Vector2(-4, -2)
 		footprint = footprint_alt
 		is_alternate = true
 	else:
@@ -125,20 +135,23 @@ func flip_footprint() -> void:
 		$CollisionShape2D.disabled = false
 		$AlternateSprite.visible = false
 		$CollisionShapeAlt.disabled = true
-		$TitleLabel.position = Vector2(5, 43)
-		$"Ports/Output 1".position = Vector2(33, 1)
-		$"Ports/Input 1".position = Vector2(65, 110)
-		$"Ports/Input 2".position = Vector2(1, 110)
-		$"Ports/Input 3".position = Vector2(33, 110)
-		$Recipe.position = Vector2(1, 65)
-		$outputBox.position = Vector2(33, 19)
+		$TitleLabel.position = Vector2(21, 55)
+		$"Ports/Output 1".position = Vector2(49, 1)
+		$"Ports/Input 1".position = Vector2(1, 142)
+		$"Ports/Input 2".position = Vector2(33, 142)
+		$"Ports/Input 3".position = Vector2(65, 142)
+		$"Ports/Input 4".position = Vector2(97, 142)
+		$Recipe.position = Vector2(1, 78)
+		$outputBox.position = Vector2(49, 19)
 		$outputBox/outputText.position = Vector2(-3, -3)
-		$Input1Box.position = Vector2(65, 91)
-		$Input1Box/input1Text.position = Vector2(-3, -3)
-		$Input2Box.position = Vector2(1,91)
-		$Input2Box/input2Text.position = Vector2(-3, -3)
-		$Input3Box.position = Vector2(33, 91)
-		$Input3Box/input3Text.position = Vector2(-3, -3)
+		$Input1Box.position = Vector2(1, 122)
+		$Input1Box/input1Text.position = Vector2(-4, -2)
+		$Input2Box.position = Vector2(33,122)
+		$Input2Box/input2Text.position = Vector2(-4, -2)
+		$Input3Box.position = Vector2(65, 122)
+		$Input3Box/input3Text.position = Vector2(-4, -2)
+		$Input4Box.position = Vector2(97, 122)
+		$Input4Box/input4Text.position = Vector2(-4, -2)
 		footprint = footprint_primary
 		is_alternate = false
 		
@@ -202,6 +215,8 @@ func _get_port_global_pos(port_name: String) -> Vector2:
 			return input_2_port.global_position + input_2_port.size * 0.5
 		"input3":
 			return input_3_port.global_position + input_3_port.size * 0.5
+		"input4":
+			return input_4_port.global_position + input_4_port.size & 0.5
 		_:
 			return global_position
 
@@ -229,10 +244,12 @@ func _on_recipe_item_selected(index: int) -> void:
 	input_1_text.text = ""
 	input_2_text.text = ""
 	input_3_text.text = ""
+	input_4_text.text = ""
 	output_box.tooltip_text = ""
 	input_1_box.tooltip_text = "Unused"
 	input_2_box.tooltip_text = "Unused"
 	input_3_box.tooltip_text = "Unused"
+	input_4_box.tooltip_text = "Unused"
 	var recipe := recipe_dropdown.get_item_metadata(index) as Recipe
 	if recipe:
 		output_text.text = str(recipe.outputs[0].qty)
@@ -251,6 +268,13 @@ func _on_recipe_item_selected(index: int) -> void:
 			input_3_text.text = str(recipe.inputs[2].qty)
 			input_3_box.tooltip_text = str(recipe.inputs[2].item.display_name)
 			return
+		elif recipe.inputs.size() == 4:
+			input_2_text.text = str(recipe.inputs[1].qty)
+			input_2_box.tooltip_text = str(recipe.inputs[1].item.display_name)
+			input_3_text.text = str(recipe.inputs[2].qty)
+			input_3_box.tooltip_text = str(recipe.inputs[2].item.display_name)
+			input_4_text.text = str(recipe.inputs[3].qty)
+			input_4_box.tooltip_text = str(recipe.inputs[3].item.display_name)
 
 
 func _on_input_2_pressed() -> void:
@@ -287,3 +311,21 @@ func _on_input_3_mouse_entered() -> void:
 func _on_input_3_mouse_exited() -> void:
 	if not input3_is_pressed:
 		$"Ports/Input 3".modulate = Color(0, 1, 0, 0.5)
+
+
+func _on_input_4_pressed() -> void:
+	if not input4_is_pressed:
+		if not other_button_pressed:
+			$"Ports/Input 4".modulate = Color(0,1,0,1.0)
+			input4_is_pressed = true
+			other_button_pressed = true
+
+
+func _on_input_4_mouse_entered() -> void:
+	if not input4_is_pressed:
+		$"Ports/Input 4".modulate = Color(0, 1, 0, 0.75)
+
+
+func _on_input_4_mouse_exited() -> void:
+	if not input4_is_pressed:
+		$"Ports/Input 4".modulate = Color(0, 1, 0, 0.5)

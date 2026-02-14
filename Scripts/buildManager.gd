@@ -49,7 +49,7 @@ func confirm_build() -> void:
 	
 	var real := current_scene.instantiate()
 	real.global_position = ghost_instance.global_position
-	if ghost_instance.footprint == Vector2i(4,4):
+	if ghost_instance.is_alternate == true:
 		real.flip_footprint()
 	$"../buildings".add_child(real)
 	

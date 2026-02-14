@@ -1,0 +1,222 @@
+[gd_scene format=3 uid="uid://jbb2ak10wxvw"]
+
+[ext_resource type="Script" uid="uid://kv0d1chkft4i" path="res://Buildings/MegaPress.gd" id="1_oc300"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_omxsb"]
+[ext_resource type="Resource" uid="uid://d0sdic63qwigq" path="res://Recipes/Battery.tres" id="3_facf6"]
+[ext_resource type="Resource" uid="uid://bm5tce02dibfx" path="res://Recipes/Electromagnetic_coil.tres" id="4_omxsb"]
+[ext_resource type="Resource" uid="uid://blnkss8ny4461" path="res://Recipes/Heavy_ammo.tres" id="5_hurqg"]
+[ext_resource type="Resource" uid="uid://cbrjb43o0imhn" path="res://Recipes/Impeller.tres" id="6_4e8em"]
+[ext_resource type="Resource" uid="uid://bhu3n0sbfkiga" path="res://Recipes/Intermediate_building_materials.tres" id="7_nyaiv"]
+[ext_resource type="Resource" uid="uid://cayj85qaw4vr1" path="res://Recipes/Nozzle.tres" id="8_x2mdb"]
+[ext_resource type="Resource" uid="uid://du010csmip8ol" path="res://Recipes/Pump.tres" id="9_8hkdk"]
+[ext_resource type="Resource" uid="uid://hpa8npqtht2k" path="res://Recipes/Shotgun_ammo.tres" id="10_hqy5a"]
+[ext_resource type="Resource" uid="uid://dqe75s0ad60oo" path="res://Recipes/Standard_ammo.tres" id="11_jcftm"]
+[ext_resource type="Resource" uid="uid://d2fbwjoy35ta7" path="res://Recipes/Turbine.tres" id="12_txqpt"]
+[ext_resource type="Resource" uid="uid://ofj320xbtcjl" path="res://Recipes/Valve.tres" id="13_w5apf"]
+[ext_resource type="Texture2D" uid="uid://ca0431w33u4jt" path="res://Assets/SRBP_4x5_BLDG.png" id="14_oc300"]
+[ext_resource type="Texture2D" uid="uid://ckf3jbuufrs6i" path="res://Assets/SRBP_5x6_BLDG.png" id="15_oc300"]
+[ext_resource type="Texture2D" uid="uid://ilmbegsn2c7" path="res://Assets/SRBP_Oval.png" id="17_ef2ad"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
+size = Vector2(128, 160)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uf4xf"]
+size = Vector2(160, 192)
+
+[node name="Mega Press" type="Node2D" unique_id=1728206745]
+script = ExtResource("1_oc300")
+available_recipes = Array[ExtResource("2_omxsb")]([ExtResource("3_facf6"), ExtResource("4_omxsb"), ExtResource("5_hurqg"), ExtResource("6_4e8em"), ExtResource("7_nyaiv"), ExtResource("8_x2mdb"), ExtResource("9_8hkdk"), ExtResource("10_hqy5a"), ExtResource("11_jcftm"), ExtResource("12_txqpt"), ExtResource("13_w5apf")])
+metadata/_edit_vertical_guides_ = [63.0, 48.0, 64.0, 80.0, -24.0]
+
+[node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
+texture = ExtResource("14_oc300")
+centered = false
+
+[node name="AlternateSprite" type="Sprite2D" parent="." unique_id=1619536158]
+visible = false
+texture = ExtResource("15_oc300")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128283645]
+position = Vector2(64, 80)
+shape = SubResource("RectangleShape2D_gbqis")
+
+[node name="CollisionShapeAlt" type="CollisionShape2D" parent="." unique_id=1184700770]
+visible = false
+position = Vector2(80, 96)
+shape = SubResource("RectangleShape2D_uf4xf")
+disabled = true
+
+[node name="TitleLabel" type="Label" parent="." unique_id=904579435]
+offset_left = 21.0
+offset_top = 55.0
+offset_right = 108.0
+offset_bottom = 75.0
+theme_override_font_sizes/font_size = 14
+text = "MEGA PRESS"
+horizontal_alignment = 1
+
+[node name="PlacementArea" type="Area2D" parent="." unique_id=911391560]
+
+[node name="PlacementAreaAlt" type="Area2D" parent="." unique_id=445836450]
+
+[node name="Ports" type="Node2D" parent="." unique_id=1067444767]
+
+[node name="Output 1" type="Button" parent="Ports" unique_id=1122308628]
+self_modulate = Color(1, 1, 1, 0.49803922)
+offset_left = 49.0
+offset_top = 1.0
+offset_right = 121.0
+offset_bottom = 41.0
+scale = Vector2(0.42, 0.42)
+icon = ExtResource("17_ef2ad")
+
+[node name="Input 1" type="Button" parent="Ports" unique_id=1958701130]
+self_modulate = Color(1, 1, 1, 0.49803922)
+offset_left = 1.0
+offset_top = 142.0
+offset_right = 73.0
+offset_bottom = 182.0
+scale = Vector2(0.42, 0.42)
+icon = ExtResource("17_ef2ad")
+
+[node name="Input 2" type="Button" parent="Ports" unique_id=1025542919]
+self_modulate = Color(1, 1, 1, 0.49803922)
+offset_left = 33.0
+offset_top = 142.0
+offset_right = 105.0
+offset_bottom = 182.0
+scale = Vector2(0.42, 0.42)
+icon = ExtResource("17_ef2ad")
+
+[node name="Input 3" type="Button" parent="Ports" unique_id=1275495196]
+self_modulate = Color(1, 1, 1, 0.49803922)
+offset_left = 65.0
+offset_top = 142.0
+offset_right = 137.0
+offset_bottom = 182.0
+scale = Vector2(0.42, 0.42)
+icon = ExtResource("17_ef2ad")
+
+[node name="Input 4" type="Button" parent="Ports" unique_id=1866691078]
+self_modulate = Color(1, 1, 1, 0.49803922)
+offset_left = 97.0
+offset_top = 142.0
+offset_right = 169.0
+offset_bottom = 182.0
+scale = Vector2(0.42, 0.42)
+icon = ExtResource("17_ef2ad")
+
+[node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
+offset_left = 1.0
+offset_top = 78.0
+offset_right = 95.0
+offset_bottom = 98.0
+theme_override_font_sizes/font_size = 10
+
+[node name="outputBox" type="ColorRect" parent="." unique_id=1419396623]
+offset_left = 49.0
+offset_top = 19.0
+offset_right = 79.0
+offset_bottom = 38.0
+color = Color(0, 0.64705884, 0.25490198, 0.57254905)
+
+[node name="outputText" type="Label" parent="outputBox" unique_id=1040759306]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -3.0
+offset_right = 34.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0, 0.24313726, 0, 1)
+text = "000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Input1Box" type="ColorRect" parent="." unique_id=1573327625]
+offset_left = 1.0
+offset_top = 122.0
+offset_right = 31.0
+offset_bottom = 141.0
+color = Color(0, 0.64705884, 0.25490198, 0.57254905)
+
+[node name="input1Text" type="Label" parent="Input1Box" unique_id=1651637159]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -2.0
+offset_right = 34.0
+offset_bottom = 21.0
+theme_override_colors/font_color = Color(0, 0.24313726, 0, 1)
+text = "000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Input2Box" type="ColorRect" parent="." unique_id=232719543]
+offset_left = 33.0
+offset_top = 122.0
+offset_right = 63.0
+offset_bottom = 141.0
+color = Color(0, 0.64705884, 0.25490198, 0.57254905)
+
+[node name="input2Text" type="Label" parent="Input2Box" unique_id=332826267]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -2.0
+offset_right = 34.0
+offset_bottom = 21.0
+theme_override_colors/font_color = Color(0, 0.24313726, 0, 1)
+text = "000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Input3Box" type="ColorRect" parent="." unique_id=1711166632]
+offset_left = 65.0
+offset_top = 122.0
+offset_right = 95.0
+offset_bottom = 141.0
+color = Color(0, 0.64705884, 0.25490198, 0.57254905)
+
+[node name="input3Text" type="Label" parent="Input3Box" unique_id=844869573]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -2.0
+offset_right = 34.0
+offset_bottom = 21.0
+theme_override_colors/font_color = Color(0, 0.24313726, 0, 1)
+text = "000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Input4Box" type="ColorRect" parent="." unique_id=1695541487]
+offset_left = 97.0
+offset_top = 122.0
+offset_right = 127.0
+offset_bottom = 141.0
+color = Color(0, 0.64705884, 0.25490198, 0.57254905)
+
+[node name="input4Text" type="Label" parent="Input4Box" unique_id=652255700]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -2.0
+offset_right = 34.0
+offset_bottom = 21.0
+theme_override_colors/font_color = Color(0, 0.24313726, 0, 1)
+text = "000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="mouse_entered" from="Ports/Output 1" to="." method="_on_output_1_mouse_entered"]
+[connection signal="mouse_exited" from="Ports/Output 1" to="." method="_on_output_1_mouse_exited"]
+[connection signal="pressed" from="Ports/Output 1" to="." method="_on_output_1_pressed"]
+[connection signal="mouse_entered" from="Ports/Input 1" to="." method="_on_input_1_mouse_entered"]
+[connection signal="mouse_exited" from="Ports/Input 1" to="." method="_on_input_1_mouse_exited"]
+[connection signal="pressed" from="Ports/Input 1" to="." method="_on_input_1_pressed"]
+[connection signal="mouse_entered" from="Ports/Input 2" to="." method="_on_input_2_mouse_entered"]
+[connection signal="mouse_exited" from="Ports/Input 2" to="." method="_on_input_2_mouse_exited"]
+[connection signal="pressed" from="Ports/Input 2" to="." method="_on_input_2_pressed"]
+[connection signal="mouse_entered" from="Ports/Input 3" to="." method="_on_input_3_mouse_entered"]
+[connection signal="mouse_exited" from="Ports/Input 3" to="." method="_on_input_3_mouse_exited"]
+[connection signal="pressed" from="Ports/Input 3" to="." method="_on_input_3_pressed"]
+[connection signal="mouse_entered" from="Ports/Input 4" to="." method="_on_input_4_mouse_entered"]
+[connection signal="mouse_exited" from="Ports/Input 4" to="." method="_on_input_4_mouse_exited"]
+[connection signal="pressed" from="Ports/Input 4" to="." method="_on_input_4_pressed"]
+[connection signal="item_selected" from="Recipe" to="." method="_on_recipe_item_selected"]

@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var tileMap : TileMap
+@export var is_alternate := false
 var footprint := Vector2i(3,3)
 @export var footprint_primary := Vector2i(3,3)
 @export var footprint_alt := Vector2i(4,4)
@@ -108,6 +109,7 @@ func flip_footprint() -> void:
 		$Input2Box.position = Vector2(1, 89)
 		$Input2Box/input2Text.position = Vector2(-1, -2)
 		footprint = footprint_alt
+		is_alternate = true
 	else:
 		$PrimarySprite.visible = true
 		$CollisionShape2D.disabled = false
@@ -125,6 +127,7 @@ func flip_footprint() -> void:
 		$Input2Box.position = Vector2(1,60)
 		$Input2Box/input2Text.position = Vector2(-1, -2)
 		footprint = footprint_primary
+		is_alternate = false
 		
 func _on_input_1_mouse_entered() -> void:
 	if not input1_is_pressed:

@@ -5,7 +5,9 @@ const BUILDINGS := {
 	&"smelter": preload("res://Buildings/smelter.tscn"),
 	&"ore_excavator": preload("res://Buildings/OreExcavator.tscn"),
 	&"fabricator": preload("res://Buildings/Fabricator.tscn"),
-	&"furnace": preload("res://Buildings/Furnace.tscn")
+	&"furnace": preload("res://Buildings/Furnace.tscn"),
+	&"mega_press": preload("res://Buildings/MegaPress.tscn"),
+	&"assembler": preload("res://Buildings/Assembler.tscn")
 }
 
 
