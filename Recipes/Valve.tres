@@ -1,9 +1,18 @@
 [gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://ofj320xbtcjl"]
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_becpp"]
+[ext_resource type="Resource" uid="uid://bjitisjd8youe" path="res://Recipes/Item Stacks/Titanium_housing_6_def.tres" id="2_j02hs"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_xci6t"]
+[ext_resource type="Resource" uid="uid://n5y11bbbf86d" path="res://Recipes/Item Stacks/Titanium_beam_18_def.tres" id="3_f5iux"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_ou1l1"]
+[ext_resource type="Resource" uid="uid://6jxv8tw5sqf2" path="res://Recipes/Item Stacks/Titanium_rod_12_def.tres" id="4_wtcn0"]
+[ext_resource type="Resource" uid="uid://d2yy3g6n37tln" path="res://Recipes/Item Stacks/Nozzle_6_def.tres" id="5_0lw5m"]
+[ext_resource type="Resource" uid="uid://hgma1g1rt2kl" path="res://Recipes/Item Stacks/Valve_6_def.tres" id="6_t6ywc"]
 
 [resource]
 script = ExtResource("2_xci6t")
+id = &"valve"
+display_name = "Valve"
+inputs = Array[ExtResource("1_becpp")]([ExtResource("2_j02hs"), ExtResource("3_f5iux"), ExtResource("4_wtcn0"), ExtResource("5_0lw5m")])
+outputs = Array[ExtResource("1_becpp")]([ExtResource("6_t6ywc")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

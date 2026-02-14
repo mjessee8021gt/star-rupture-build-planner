@@ -1,9 +1,18 @@
 [gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://d2fbwjoy35ta7"]
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_6ru74"]
+[ext_resource type="Resource" uid="uid://cg6ai1ycai2tf" path="res://Recipes/Item Stacks/Sulpheric_acid_20_def.tres" id="2_c8w3a"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_j5t6b"]
+[ext_resource type="Resource" uid="uid://cvtf0cjtqc7u1" path="res://Recipes/Item Stacks/Stator_10_def.tres" id="3_qwqxt"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_ymajt"]
+[ext_resource type="Resource" uid="uid://dbb4ixp7xr0qh" path="res://Recipes/Item Stacks/Rotor_20_def.tres" id="4_l7rgc"]
+[ext_resource type="Resource" uid="uid://bce8u5wcxvth5" path="res://Recipes/Item Stacks/Impeller_10_def.tres" id="5_6ptwi"]
+[ext_resource type="Resource" uid="uid://detsci64vcn6t" path="res://Recipes/Item Stacks/Turbine_10_def.tres" id="6_jh78l"]
 
 [resource]
 script = ExtResource("2_j5t6b")
+id = &"turbine"
+display_name = "Turbine"
+inputs = Array[ExtResource("1_6ru74")]([ExtResource("2_c8w3a"), ExtResource("3_qwqxt"), ExtResource("4_l7rgc"), ExtResource("5_6ptwi")])
+outputs = Array[ExtResource("1_6ru74")]([ExtResource("6_jh78l")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

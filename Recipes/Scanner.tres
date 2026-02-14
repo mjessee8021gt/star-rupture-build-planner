@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://bdbuxc406wwsc"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_h5d0w"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_31rp7"]
+[ext_resource type="Resource" uid="uid://ccagv30ugfvp" path="res://Recipes/Item Stacks/Stabilizer_72_def.tres" id="2_e37lj"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_2l37x"]
+[ext_resource type="Resource" uid="uid://ysymjklknymv" path="res://Recipes/Item Stacks/Lens_12_def.tres" id="3_o1uyh"]
+[ext_resource type="Resource" uid="uid://dfr8ytf6gboog" path="res://Recipes/Item Stacks/Generator_12_def.tres" id="4_l07b4"]
+[ext_resource type="Resource" uid="uid://b1ba6new6jitg" path="res://Recipes/Item Stacks/Scanner_6_def.tres" id="5_ajkwb"]
+
+[resource]
+script = ExtResource("2_31rp7")
+id = &"scanner"
+display_name = "Scanner"
+inputs = Array[ExtResource("1_h5d0w")]([ExtResource("2_e37lj"), ExtResource("3_o1uyh"), ExtResource("4_l07b4")])
+outputs = Array[ExtResource("1_h5d0w")]([ExtResource("5_ajkwb")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

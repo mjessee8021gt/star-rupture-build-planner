@@ -2,8 +2,15 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_1w500"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_27pry"]
+[ext_resource type="Resource" uid="uid://cy7x5ao02fae" path="res://Recipes/Item Stacks/Basic_Build_200_def.tres" id="2_vnm2m"]
+[ext_resource type="Resource" uid="uid://d4cjngilxosma" path="res://Recipes/Item Stacks/Calcium_powder_60_def.tres" id="3_7uyol"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_jc1dh"]
+[ext_resource type="Resource" uid="uid://x26lghtmqo05" path="res://Recipes/Item Stacks/Shotgun_ammo_150_def.tres" id="4_sv17l"]
 
 [resource]
 script = ExtResource("2_27pry")
+id = &"shotgun_ammo"
+display_name = "Shotgun Ammo"
+inputs = Array[ExtResource("1_1w500")]([ExtResource("2_vnm2m"), ExtResource("3_7uyol")])
+outputs = Array[ExtResource("1_1w500")]([ExtResource("4_sv17l")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

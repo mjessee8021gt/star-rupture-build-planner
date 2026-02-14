@@ -2,8 +2,16 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_dtuvj"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_4b6fy"]
+[ext_resource type="Resource" uid="uid://cvtf0cjtqc7u1" path="res://Recipes/Item Stacks/Stator_10_def.tres" id="2_nugwj"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_eho7f"]
+[ext_resource type="Resource" uid="uid://jtm4yp1w86sp" path="res://Recipes/Item Stacks/Electronics_20_def.tres" id="3_knoud"]
+[ext_resource type="Resource" uid="uid://me0cu138to4b" path="res://Recipes/Item Stacks/Battery_20_def.tres" id="4_jphoa"]
+[ext_resource type="Resource" uid="uid://dn3bban3nb4h5" path="res://Recipes/Item Stacks/Accumulator_10_def.tres" id="5_dgaoq"]
 
 [resource]
 script = ExtResource("2_4b6fy")
+id = &"accumulator"
+display_name = "Accumulator"
+inputs = Array[ExtResource("1_dtuvj")]([ExtResource("2_nugwj"), ExtResource("3_knoud"), ExtResource("4_jphoa")])
+outputs = Array[ExtResource("1_dtuvj")]([ExtResource("5_dgaoq")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

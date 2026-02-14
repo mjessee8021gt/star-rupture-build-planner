@@ -2,8 +2,16 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_jejqk"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_1jp0g"]
+[ext_resource type="Resource" uid="uid://b2oetv31gbxxc" path="res://Recipes/Item Stacks/Heat_resistant_sheet_24_def.tres" id="2_f4lwg"]
+[ext_resource type="Resource" uid="uid://t2r50ufh15wk" path="res://Recipes/Item Stacks/Helium-3_12_def.tres" id="3_5ss3n"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_eba8u"]
+[ext_resource type="Resource" uid="uid://cah24h885x33r" path="res://Recipes/Item Stacks/Stabilizer_24_def.tres" id="4_lejy1"]
+[ext_resource type="Resource" uid="uid://owpkhmx1h8xx" path="res://Recipes/Item Stacks/Nozzle_12_def.tres" id="5_1bact"]
 
 [resource]
 script = ExtResource("2_1jp0g")
+id = &"nozzle"
+display_name = "Nozzle"
+inputs = Array[ExtResource("1_jejqk")]([ExtResource("2_f4lwg"), ExtResource("3_5ss3n"), ExtResource("4_lejy1")])
+outputs = Array[ExtResource("1_jejqk")]([ExtResource("5_1bact")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

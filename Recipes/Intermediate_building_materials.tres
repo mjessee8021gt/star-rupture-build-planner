@@ -2,8 +2,17 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_8ymre"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_1g03m"]
+[ext_resource type="Resource" uid="uid://cym3ye52tw3hm" path="res://Recipes/Item Stacks/Basic_Build_400_def.tres" id="2_nflx5"]
+[ext_resource type="Resource" uid="uid://depywb6ba776v" path="res://Recipes/Item Stacks/Inductor_20_def.tres" id="3_hxw2d"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_tjvsh"]
+[ext_resource type="Resource" uid="uid://cvcxyvf4veu1o" path="res://Recipes/Item Stacks/Glass_20_def.tres" id="4_anpxd"]
+[ext_resource type="Resource" uid="uid://dd6h6tgbcka3u" path="res://Recipes/Item Stacks/Titanium_housing_20_def.tres" id="5_pvj26"]
+[ext_resource type="Resource" uid="uid://byenniuhrw66j" path="res://Recipes/Item Stacks/Intermediate_building_Material_250_def.tres" id="6_u7o4i"]
 
 [resource]
 script = ExtResource("2_1g03m")
+id = &"intermediate_building_materials"
+display_name = "Intermed Build Mats"
+inputs = Array[ExtResource("1_8ymre")]([ExtResource("2_nflx5"), ExtResource("3_hxw2d"), ExtResource("4_anpxd"), ExtResource("5_pvj26")])
+outputs = Array[ExtResource("1_8ymre")]([ExtResource("6_u7o4i")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

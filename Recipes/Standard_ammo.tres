@@ -2,8 +2,15 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_x3kkr"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_kuemy"]
+[ext_resource type="Resource" uid="uid://du8hjrk6axouc" path="res://Recipes/Item Stacks/Wolfram_powder_40_def.tres" id="2_pw40p"]
+[ext_resource type="Resource" uid="uid://u7w0vi6jgnj3" path="res://Recipes/Item Stacks/Basic_Build_180_def.tres" id="3_8nbbj"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_crtoj"]
+[ext_resource type="Resource" uid="uid://dti303mnei8o0" path="res://Recipes/Item Stacks/Standard_ammo_200_def.tres" id="4_6diub"]
 
 [resource]
 script = ExtResource("2_kuemy")
+id = &"standard_ammo"
+display_name = "Standard Ammo"
+inputs = Array[ExtResource("1_x3kkr")]([ExtResource("2_pw40p"), ExtResource("3_8nbbj")])
+outputs = Array[ExtResource("1_x3kkr")]([ExtResource("4_6diub")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

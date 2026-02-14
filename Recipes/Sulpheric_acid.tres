@@ -2,8 +2,15 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_4jggs"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_2trs3"]
+[ext_resource type="Resource" uid="uid://bgv80ya8600bd" path="res://Recipes/Item Stacks/Sulphur_ore_240_def.tres" id="2_u4tq0"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_q31p6"]
+[ext_resource type="Resource" uid="uid://tgdf38lwlv2c" path="res://Recipes/Item Stacks/Chemicals_120_def.tres" id="3_xx8c5"]
+[ext_resource type="Resource" uid="uid://b7x6wqoe1kxo2" path="res://Recipes/Item Stacks/Sulpheric_acid_120_def.tres" id="4_iuqru"]
 
 [resource]
 script = ExtResource("2_2trs3")
+id = &"sulpheric_acid"
+display_name = "Sulpheric Acid"
+inputs = Array[ExtResource("1_4jggs")]([ExtResource("2_u4tq0"), ExtResource("3_xx8c5")])
+outputs = Array[ExtResource("1_4jggs")]([ExtResource("4_iuqru")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

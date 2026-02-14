@@ -1,9 +1,16 @@
 [gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://d2acnnfks1pf"]
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_d3ika"]
+[ext_resource type="Resource" uid="uid://dhqjdmito548k" path="res://Recipes/Item Stacks/Sulphur_ore_30_def.tres" id="2_f8wta"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_uuyxk"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_3n7uk"]
+[ext_resource type="Resource" uid="uid://c8rfij60kmjet" path="res://Recipes/Item Stacks/Helium-3_30_def.tres" id="3_xu7k6"]
+[ext_resource type="Resource" uid="uid://utvcwv7cts81" path="res://Recipes/Item Stacks/Pressurized_helium_30_def.tres" id="4_dt52m"]
 
 [resource]
 script = ExtResource("2_uuyxk")
+id = &"pressurized_helium"
+display_name = "Pressurized Helium"
+inputs = Array[ExtResource("1_d3ika")]([ExtResource("2_f8wta"), ExtResource("3_xu7k6")])
+outputs = Array[ExtResource("1_d3ika")]([ExtResource("4_dt52m")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"
