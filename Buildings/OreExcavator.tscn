@@ -19,6 +19,10 @@ available_recipes = Array[ExtResource("2_veacw")]([ExtResource("3_rhfiq"), ExtRe
 texture = ExtResource("2_i1qbh")
 centered = false
 
+[node name="AlternateSprite" type="Sprite2D" parent="." unique_id=1769053566]
+texture = ExtResource("2_i1qbh")
+centered = false
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128283645]
 position = Vector2(48, 64)
 shape = SubResource("RectangleShape2D_gbqis")

@@ -1,7 +1,10 @@
 extends Node2D
 
 @export var tileMap : TileMap
+@export var is_alternate := false
 var footprint := Vector2i(3,4)
+@export var footprint_primary := Vector2i(3,4)
+@export var footprint_alt := Vector2i(3,4)
 var _selected_variant : RecipeVariant = null
 @export var anchor := Vector2i.ZERO
 @onready var placement_area: Area2D = $PlacementArea
@@ -160,3 +163,6 @@ func _update_output_text_from_variant(variant: RecipeVariant) -> void:
 	
 func get_production_deltas(variant: RecipeVariant) -> Dictionary:
 	return variant.get_deltas()
+	
+func _exit_tree() -> void:
+	ProdLedger.remove_source(get_instance_id())

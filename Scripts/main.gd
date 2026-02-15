@@ -13,3 +13,7 @@ func _process(delta: float) -> void:
 		$Camera2D.zoomOut()
 	elif (Input.is_action_just_released("Zoom In")):
 		$Camera2D.ZoomIn()
+
+
+func _on_prod_menu_pressed() -> void:
+	$Camera2D/CanvasLayer/ProdMenu/ProdPanel.visible = not $Camera2D/CanvasLayer/ProdMenu/ProdPanel.visible

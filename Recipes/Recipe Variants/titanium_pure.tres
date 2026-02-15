@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="RecipeVariant" format=3 uid="uid://crcvg73ia0hlc"]
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_8w4mf"]
-[ext_resource type="Resource" uid="uid://cywvauwwrf2ut" path="res://Recipes/Item Stacks/Titanium_ore_60_def.tres" id="2_8w4mf"]
+[ext_resource type="Resource" uid="uid://bhuhj8br4rrvl" path="res://Recipes/Item Stacks/Titanium_ore_240_def.tres" id="2_8w4mf"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_2jjif"]
 
 [resource]

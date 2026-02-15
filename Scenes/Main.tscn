@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://bixocxjthy7cb" path="res://Assets/SRBP_Heat Icon.png" id="6_vy5pj"]
 [ext_resource type="Texture2D" uid="uid://b0q6pkjakr41b" path="res://Assets/SRBP_Power Icon.png" id="7_bmxlf"]
 [ext_resource type="Script" uid="uid://c1gaut8hcyg0c" path="res://Scripts/path_manager.gd" id="7_jw32o"]
+[ext_resource type="Texture2D" uid="uid://bd7brbyjru5ea" path="res://Assets/SRBP_Stats_icon.png" id="8_bmxlf"]
+[ext_resource type="Script" uid="uid://brffdis28ou82" path="res://Scripts/prod_panel.gd" id="9_4kpch"]
 
 [sub_resource type="Curve2D" id="Curve2D_jw32o"]
 _data = {
@@ -70,6 +72,32 @@ theme_override_font_sizes/font_size = 21
 text = "0000"
 horizontal_alignment = 2
 
+[node name="ProdMenu" type="MenuButton" parent="Camera2D/CanvasLayer" unique_id=537098699]
+offset_left = 1083.0
+offset_top = 41.0
+offset_right = 1219.0
+offset_bottom = 177.0
+scale = Vector2(0.5, 0.5)
+icon = ExtResource("8_bmxlf")
+
+[node name="ProdPanel" type="PanelContainer" parent="Camera2D/CanvasLayer/ProdMenu" unique_id=1865534537]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = -268.0
+offset_top = 138.0
+offset_right = 130.0
+offset_bottom = 1194.0
+script = ExtResource("9_4kpch")
+
+[node name="MarginContainer" type="MarginContainer" parent="Camera2D/CanvasLayer/ProdMenu/ProdPanel" unique_id=308655820]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Camera2D/CanvasLayer/ProdMenu/ProdPanel" unique_id=209524709]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Camera2D/CanvasLayer/ProdMenu/ProdPanel/ScrollContainer" unique_id=1328382313]
+layout_mode = 2
+
 [node name="BuildManager" type="Node2D" parent="." unique_id=695504288]
 script = ExtResource("6_v1gob")
 
@@ -80,3 +108,5 @@ script = ExtResource("7_jw32o")
 
 [node name="Path2D" type="Path2D" parent="." unique_id=102389188]
 curve = SubResource("Curve2D_jw32o")
+
+[connection signal="pressed" from="Camera2D/CanvasLayer/ProdMenu" to="." method="_on_prod_menu_pressed"]

@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://bh0gg4oufe8px"]
+
+[ext_resource type="Script" uid="uid://g80qoo0g055j" path="res://Scenes/resource_row.gd" id="1_4g0wp"]
+[ext_resource type="Texture2D" uid="uid://cnn6vxsw63oxw" path="res://Assets/SRBP_Production_frame.png" id="1_v1aeq"]
+
+[node name="ResourceRow" type="HBoxContainer" unique_id=1682107029]
+script = ExtResource("1_4g0wp")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1306078749]
+layout_mode = 2
+texture = ExtResource("1_v1aeq")
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect" unique_id=405141529]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 63.0
+offset_bottom = 63.0
+
+[node name="ResourceName" type="Label" parent="TextureRect" unique_id=1985649756]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 395.0
+offset_bottom = 28.0
+theme_override_font_sizes/font_size = 16
+text = "RESOURCE NAME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GrossProd" type="Label" parent="TextureRect" unique_id=365580352]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 32.0
+offset_right = 197.0
+offset_bottom = 59.0
+theme_override_font_sizes/font_size = 16
+text = "GROSS PROD / MIN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NetProd" type="Label" parent="TextureRect" unique_id=430586226]
+layout_mode = 0
+offset_left = 201.0
+offset_top = 32.0
+offset_right = 395.0
+offset_bottom = 59.0
+theme_override_font_sizes/font_size = 16
+text = "NET PROD / MIN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GrossRateLabel" type="Label" parent="TextureRect" unique_id=1901405904]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 63.0
+offset_right = 197.0
+offset_bottom = 96.0
+text = "9999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NetRateLabel" type="Label" parent="TextureRect" unique_id=1983576588]
+layout_mode = 0
+offset_left = 201.0
+offset_top = 63.0
+offset_right = 395.0
+offset_bottom = 96.0
+text = "9999"
+horizontal_alignment = 1
+vertical_alignment = 1
