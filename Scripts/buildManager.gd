@@ -10,6 +10,25 @@ var is_building := false
 @export var tile_size := 32
 
 
+# --- helpers ---
+func _get_prod_ledger() -> Node:
+	# Autoload is expected to be named "ProdLedger" (per prod_panel.gd),
+	# but we also fall back to "ProductionLedger" to be safe.
+	var root := get_tree().root
+	if root == null:
+		return null
+	if root.has_node("ProdLedger"):
+		return root.get_node("ProdLedger")
+	if root.has_node("ProductionLedger"):
+		return root.get_node("ProductionLedger")
+	return null
+
+func _get_prod_source_id(building: Node) -> int:
+	# Prefer explicit metadata if you set it from the building when registering production.
+	if building != null and building.has_meta("prod_source_id"):
+		return int(building.get_meta("prod_source_id"))
+	return building.get_instance_id()
+
 #entry point to the build manager for the MenuButton
 func start_build(scene: PackedScene) -> void:
 	print("We are now starting the build preview in the build manager")
@@ -81,20 +100,30 @@ func try_remove_building_under_mouse() -> bool:
 	var building := get_building_at_cells(cell)
 	if building == null:
 		return false
-	
-	#Update the global heat and power consumption.
+
+	# 1) Production deltas: remove this building's contribution from the ledger
+	var ledger := _get_prod_ledger()
+	if ledger != null and ledger.has_method("remove_source"):
+		ledger.remove_source(_get_prod_source_id(building))
+
+	# 2) Remove any paths that reference this building
+	var pm := $"../PathManager"
+	if pm != null and pm.has_method("remove_paths_for_building"):
+		pm.remove_paths_for_building(building)
+
+	# Update the global heat and power consumption.
 	$"../Camera2D/CanvasLayer/Panel/HeatLabel".text = str(int($"../Camera2D/CanvasLayer/Panel/HeatLabel".text) - building.heat)
 	$"../Camera2D/CanvasLayer/Panel/PowerLabel".text = str(int($"../Camera2D/CanvasLayer/Panel/PowerLabel".text) - building.power)
-	
-	#free grid occupancy
+
+	# Free grid occupancy
 	free_cells_for_building(building)
-	
-	#remove from scene
+
+	# Remove from scene
 	building.queue_free()
-	
-	#refresh any dependent systems
+
+	# Refresh any dependent systems
 	$"../PathManager"._update_building_list()
-	
+
 	return true
 
 func snap_to_grid(pos: Vector2) -> Vector2:
