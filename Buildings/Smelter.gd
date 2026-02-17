@@ -4,6 +4,7 @@ extends Node2D
 var footprint := Vector2i(3,4)
 @export var footprint_primary := Vector2i(3,4)
 @export var footprint_alt := Vector2i(4,4)
+@export var is_alternate := false
 @export var anchor := Vector2i.ZERO
 @onready var placement_area: Area2D = $PlacementArea
 
@@ -81,6 +82,7 @@ func flip_footprint() -> void:
 		$CollisionShape2D.disabled = true
 		$CollisionShapeAlt.disabled = false
 		$TitleLabel.position.x = 27.5
+		is_alternate = true
 		footprint = footprint_alt
 	else:
 		$PrimarySprite.visible = true
@@ -88,6 +90,7 @@ func flip_footprint() -> void:
 		$AlternateSprite.visible = false
 		$CollisionShapeAlt.disabled = true
 		$TitleLabel.position.x = 14
+		is_alternate = false
 		footprint = footprint_primary
 		
 func _on_input_1_mouse_entered() -> void:

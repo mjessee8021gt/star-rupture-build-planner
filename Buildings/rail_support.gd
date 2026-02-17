@@ -4,6 +4,7 @@ extends Node2D
 var footprint := Vector2i(1, 1)
 @export var footprint_primary := Vector2i(1, 1)
 @export var footprint_alt := Vector2i(2, 2)
+@export var is_alternate := false
 @export var anchor := Vector2i.ZERO
 @onready var placement_area: Area2D = $PlacementArea
 
@@ -80,14 +81,18 @@ func flip_footprint() -> void:
 		$AlternateSprite.visible = true
 		$CollisionShape2D.disabled = true
 		$CollisionShapeAlt.disabled = false
-		$TitleLabel.position.x = 27.5
+		$"Ports/Universal 1".position = Vector2(19, 1)
+		$"Ports/Universal 2".position = Vector2(19, 49)
+		is_alternate = true
 		footprint = footprint_alt
 	else:
 		$PrimarySprite.visible = true
 		$CollisionShape2D.disabled = false
 		$AlternateSprite.visible = false
 		$CollisionShapeAlt.disabled = true
-		$TitleLabel.position.x = 14
+		$"Ports/Universal 1".position = Vector2(3, 1)
+		$"Ports/Universal 2".position = Vector2(3, 16)
+		is_alternate = false
 		footprint = footprint_primary
 		
 func _on_universal_2_mouse_entered() -> void:
@@ -106,7 +111,7 @@ func _on_universal_2_pressed() -> void:
 			universal2_is_pressed = true
 			other_button_pressed = true
 	else:
-		$"Ports/Input 1".modulate = Color(0.5, 0.5, 0.5, 0.5)
+		$"Ports/Universal 2".modulate = Color(0.5, 0.5, 0.5, 0.5)
 		universal2_is_pressed = false
 		other_button_pressed = false
 
@@ -142,10 +147,10 @@ func cancel_port_drag() -> void:
 	
 func _get_port_global_pos(port_name: String) -> Vector2:
 	match port_name:
-		"output":
-			return output_port.global_position + output_port.size * 0.5
-		"input":
-			return input_port.global_position + input_port.size * 0.5
+		"universal 1":
+			return u_port1.global_position + u_port1.size * 0.5
+		"universal 2":
+			return u_port2.global_position + u_port2.size * 0.5
 		_:
 			return global_position
 
