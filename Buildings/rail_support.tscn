@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dw0ipoytk60ei"]
+[gd_scene format=3 uid="uid://dp0glriuhsjvt"]
 
 [ext_resource type="Script" uid="uid://81alx81suptm" path="res://Scripts/Smelter.gd" id="1_w584o"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_cjtlg"]
@@ -46,20 +46,20 @@ disabled = true
 
 [node name="Universal 1" type="Button" parent="Ports" unique_id=1122308628]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 21.0
-offset_top = 1.0
-offset_right = 93.0
+offset_left = 19.000004
+offset_top = 1.0000001
+offset_right = 91.0
 offset_bottom = 41.0
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.36, 0.36)
 icon = ExtResource("8_8edi5")
 
 [node name="Universal 2" type="Button" parent="Ports" unique_id=1958701130]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 21.0
-offset_top = 51.0
-offset_right = 93.0
-offset_bottom = 91.0
-scale = Vector2(0.3, 0.3)
+offset_left = 19.000004
+offset_top = 49.000004
+offset_right = 91.0
+offset_bottom = 89.0
+scale = Vector2(0.36, 0.36)
 icon = ExtResource("8_8edi5")
 
 [connection signal="mouse_entered" from="Ports/Universal 1" to="." method="_on_output_1_mouse_entered"]

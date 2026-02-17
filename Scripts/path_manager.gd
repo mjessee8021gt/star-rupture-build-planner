@@ -8,11 +8,34 @@ var _current_line: Line2D
 var _from_building: Node2D
 var _from_port: String
 var _from_port_path := NodePath("Ports/Output 1")
-const TARGET_INPUTS := [NodePath("Ports/Input 1"), NodePath("Ports/Input 2"),NodePath("Ports/Input 3"),NodePath("Ports/Input 4")]
-
+const INPUT_PORTS := [NodePath("Ports/Input 1"), NodePath("Ports/Input 2"),NodePath("Ports/Input 3"),NodePath("Ports/Input 4")]
+const UNIVERSAL_PREFIX := "Universal"
 
 func _ready() -> void:
 	_update_building_list()
+	
+func _is_universal_port_name(port_name: String) -> bool:
+	return port_name.begins_with(UNIVERSAL_PREFIX)
+
+func _is_valid_origin_port_name(port_name : String) -> bool:
+	return port_name == "Output 1" or _is_universal_port_name(port_name)
+	
+func _get_universal_port_paths(building: Node2D) -> Array[NodePath]:
+	var paths: Array[NodePath] = []
+	var ports:= building.get_node_or_null("Ports")
+	if ports == null:
+		return paths
+		
+	for child in ports.get_children():
+		if child != null and child.name.begins_with(UNIVERSAL_PREFIX):
+			paths.append(NodePath("Ports/$s" % child.name))
+	return paths
+
+func _get_destination_port_paths(building: Node2D) -> Array[NodePath]:
+	var paths: Array[NodePath] = []
+	paths.append_array(INPUT_PORTS)
+	paths.append_array(_get_universal_port_paths(building))
+	return paths
 
 func _update_building_list():
 	# Connect to all buildings in a group (guard against duplicate connections)
@@ -28,8 +51,12 @@ func _on_port_start(building:Node2D, port_name: String, start_pos: Vector2) -> v
 	if _current_curve != null:
 		_on_port_end(building, port_name, start_pos)
 		return
+		
+	if not _is_valid_origin_port_name(port_name):
+		return
 	
 	_from_building = building
+	_from_port_path = NodePath("Ports/%s" % port_name)
 	var from_pos = _get_port_center(_from_building, _from_port_path)
 	if from_pos == null:
 		push_warning("Origin building missing Ports/Output 1: %s" %_from_building.name)
@@ -37,7 +64,6 @@ func _on_port_start(building:Node2D, port_name: String, start_pos: Vector2) -> v
 	
 	_current_path = Path2D.new()
 	_current_curve = Curve2D.new()
-	
 	add_child(_current_path)
 	
 	var a := _current_path.to_local(from_pos)
@@ -146,14 +172,22 @@ func _find_target_port(mouse_pos: Vector2) -> Dictionary:
 		if b == _from_building:
 			continue #this is mission critical. The program should never be targeting the origin building as the target building
 		
-		for input_path in TARGET_INPUTS:
-			var btn := b.get_node_or_null(input_path)
+		var candidate_paths := _get_destination_port_paths(b)
+		
+		for port_path in candidate_paths:
+			var btn := b.get_node_or_null(port_path)
 			if btn == null:
 				continue
 				
-			var pos: Vector2 = btn.global_position + btn.size * 0.5
+			var pos: Vector2
+			if btn is Control:
+				pos = (btn as Control).get_global_rect().get_center()
+			else:
+				pos = btn.global_position
+			
 			if mouse_pos.distance_to(pos) < 18:
-				return {"building": b, "input_path": input_path, "pos": pos}
+				return {"building": b, "input_path": port_path, "pos": pos}
+					
 	return{}
 
 
