@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://dw0ipoytk60ei"]
+
+[ext_resource type="Script" uid="uid://81alx81suptm" path="res://Scripts/Smelter.gd" id="1_w584o"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_cjtlg"]
+[ext_resource type="Resource" uid="uid://7pge5tl0fdlt" path="res://Recipes/Calcium_block.tres" id="3_pcdah"]
+[ext_resource type="Resource" uid="uid://dyy41nbehgytu" path="res://Recipes/Titanium_bar.tres" id="4_0c560"]
+[ext_resource type="Resource" uid="uid://bnyf8aou0r7cx" path="res://Recipes/Wolfram_bar.tres" id="5_cc8x4"]
+[ext_resource type="Texture2D" uid="uid://dxtb7jdbv68vj" path="res://Assets/SRBP_Rail_Support_Straight.png" id="6_w584o"]
+[ext_resource type="Texture2D" uid="uid://c63apwprkee4h" path="res://Assets/SRBP_Rail_Support_2x2.png" id="7_cjtlg"]
+[ext_resource type="Texture2D" uid="uid://ilmbegsn2c7" path="res://Assets/SRBP_Oval.png" id="8_8edi5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uf4xf"]
+size = Vector2(64, 64)
+
+[node name="Rail Support" type="Node2D" unique_id=1728206745]
+script = ExtResource("1_w584o")
+available_recipes = Array[ExtResource("2_cjtlg")]([ExtResource("3_pcdah"), ExtResource("4_0c560"), ExtResource("5_cc8x4")])
+metadata/_edit_vertical_guides_ = [32.0]
+
+[node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
+texture = ExtResource("6_w584o")
+centered = false
+
+[node name="AlternateSprite" type="Sprite2D" parent="." unique_id=1619536158]
+texture = ExtResource("7_cjtlg")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128283645]
+visible = false
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_gbqis")
+
+[node name="CollisionShapeAlt" type="CollisionShape2D" parent="." unique_id=1184700770]
+position = Vector2(32, 32)
+shape = SubResource("RectangleShape2D_uf4xf")
+disabled = true
+
+[node name="PlacementArea" type="Area2D" parent="." unique_id=911391560]
+
+[node name="PlacementAreaAlt" type="Area2D" parent="." unique_id=445836450]
+
+[node name="Ports" type="Node2D" parent="." unique_id=1067444767]
+
+[node name="Universal 1" type="Button" parent="Ports" unique_id=1122308628]
+self_modulate = Color(1, 1, 1, 0.49803922)
+offset_left = 21.0
+offset_top = 1.0
+offset_right = 93.0
+offset_bottom = 41.0
+scale = Vector2(0.3, 0.3)
+icon = ExtResource("8_8edi5")
+
+[node name="Universal 2" type="Button" parent="Ports" unique_id=1958701130]
+self_modulate = Color(1, 1, 1, 0.49803922)
+offset_left = 21.0
+offset_top = 51.0
+offset_right = 93.0
+offset_bottom = 91.0
+scale = Vector2(0.3, 0.3)
+icon = ExtResource("8_8edi5")
+
+[connection signal="mouse_entered" from="Ports/Universal 1" to="." method="_on_output_1_mouse_entered"]
+[connection signal="mouse_exited" from="Ports/Universal 1" to="." method="_on_output_1_mouse_exited"]
+[connection signal="pressed" from="Ports/Universal 1" to="." method="_on_output_1_pressed"]
+[connection signal="mouse_entered" from="Ports/Universal 2" to="." method="_on_input_1_mouse_entered"]
+[connection signal="mouse_exited" from="Ports/Universal 2" to="." method="_on_input_1_mouse_exited"]
+[connection signal="pressed" from="Ports/Universal 2" to="." method="_on_input_1_pressed"]
