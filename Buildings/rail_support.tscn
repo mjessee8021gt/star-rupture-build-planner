@@ -1,10 +1,6 @@
 [gd_scene format=3 uid="uid://dp0glriuhsjvt"]
 
-[ext_resource type="Script" uid="uid://81alx81suptm" path="res://Scripts/Smelter.gd" id="1_w584o"]
-[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_cjtlg"]
-[ext_resource type="Resource" uid="uid://7pge5tl0fdlt" path="res://Recipes/Calcium_block.tres" id="3_pcdah"]
-[ext_resource type="Resource" uid="uid://dyy41nbehgytu" path="res://Recipes/Titanium_bar.tres" id="4_0c560"]
-[ext_resource type="Resource" uid="uid://bnyf8aou0r7cx" path="res://Recipes/Wolfram_bar.tres" id="5_cc8x4"]
+[ext_resource type="Script" uid="uid://cjhw7stvkrs6b" path="res://Buildings/rail_support.gd" id="1_kxssu"]
 [ext_resource type="Texture2D" uid="uid://dxtb7jdbv68vj" path="res://Assets/SRBP_Rail_Support_Straight.png" id="6_w584o"]
 [ext_resource type="Texture2D" uid="uid://c63apwprkee4h" path="res://Assets/SRBP_Rail_Support_2x2.png" id="7_cjtlg"]
 [ext_resource type="Texture2D" uid="uid://ilmbegsn2c7" path="res://Assets/SRBP_Oval.png" id="8_8edi5"]
@@ -16,8 +12,12 @@ size = Vector2(32, 32)
 size = Vector2(64, 64)
 
 [node name="Rail Support" type="Node2D" unique_id=1728206745]
-script = ExtResource("1_w584o")
-available_recipes = Array[ExtResource("2_cjtlg")]([ExtResource("3_pcdah"), ExtResource("4_0c560"), ExtResource("5_cc8x4")])
+script = ExtResource("1_kxssu")
+footprint_primary = null
+footprint_alt = null
+anchor = null
+heat = null
+power = null
 metadata/_edit_vertical_guides_ = [32.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
@@ -62,9 +62,9 @@ offset_bottom = 89.0
 scale = Vector2(0.36, 0.36)
 icon = ExtResource("8_8edi5")
 
-[connection signal="mouse_entered" from="Ports/Universal 1" to="." method="_on_output_1_mouse_entered"]
-[connection signal="mouse_exited" from="Ports/Universal 1" to="." method="_on_output_1_mouse_exited"]
-[connection signal="pressed" from="Ports/Universal 1" to="." method="_on_output_1_pressed"]
-[connection signal="mouse_entered" from="Ports/Universal 2" to="." method="_on_input_1_mouse_entered"]
-[connection signal="mouse_exited" from="Ports/Universal 2" to="." method="_on_input_1_mouse_exited"]
-[connection signal="pressed" from="Ports/Universal 2" to="." method="_on_input_1_pressed"]
+[connection signal="mouse_entered" from="Ports/Universal 1" to="." method="_on_universal_1_mouse_entered"]
+[connection signal="mouse_exited" from="Ports/Universal 1" to="." method="_on_universal_1_mouse_exited"]
+[connection signal="pressed" from="Ports/Universal 1" to="." method="_on_universal_1_pressed"]
+[connection signal="mouse_entered" from="Ports/Universal 2" to="." method="_on_universal_2_mouse_entered"]
+[connection signal="mouse_exited" from="Ports/Universal 2" to="." method="_on_universal_2_mouse_exited"]
+[connection signal="pressed" from="Ports/Universal 2" to="." method="_on_universal_2_pressed"]
