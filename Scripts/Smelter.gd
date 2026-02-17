@@ -190,3 +190,7 @@ func _on_recipe_item_selected(index: int) -> void:
 		output_box.tooltip_text = str(recipe.outputs[0].item.display_name)
 		input_text.text = str(recipe.inputs[0].qty)
 		input_box.tooltip_text = str(recipe.inputs[0].item.display_name)
+		ProdLedger.add_source(get_instance_id(),get_production_deltas(recipe))
+		
+func get_production_deltas(recipe: Recipe) -> Dictionary:
+	return recipe.get_deltas()

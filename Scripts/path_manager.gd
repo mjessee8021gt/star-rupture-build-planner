@@ -37,10 +37,15 @@ func _on_port_start(building:Node2D, port_name: String, start_pos: Vector2) -> v
 	
 	_current_path = Path2D.new()
 	_current_curve = Curve2D.new()
-	_current_curve.add_point(start_pos)
-	_current_curve.add_point(get_global_mouse_position())
-	_current_path.curve = _current_curve
+	
 	add_child(_current_path)
+	
+	var a := _current_path.to_local(from_pos)
+	var b := _current_path.to_local(get_global_mouse_position())
+	
+	_current_curve.add_point(a)
+	_current_curve.add_point(b)
+	_current_path.curve = _current_curve
 	
 	_current_line = Line2D.new()
 	_current_line.width = 5.0
@@ -57,10 +62,10 @@ func _refresh_preview_line() -> void:
 	_current_line.points = baked
 	
 func _on_port_update(building: Node2D, port_name: String, mouse_pos: Vector2) -> void:
-	if _current_curve == null:
+	if _current_curve == null or _current_path == null:
 		return
 		
-	_current_curve.set_point_position(1, mouse_pos)
+	_current_curve.set_point_position(1, _current_path.to_local(mouse_pos))
 	_refresh_preview_line()
 	
 func _on_port_end(building: Node2D, port_name: String, mouse_pos: Vector2) -> void:
@@ -77,7 +82,7 @@ func _on_port_end(building: Node2D, port_name: String, mouse_pos: Vector2) -> vo
 	
 	var to_building:Node2D = target["building"]
 	var to_input_path: NodePath = target["input_path"]
-	var to_pos: Vector2 = target["pos"]
+	var to_pos = _get_port_center(to_building, to_input_path)
 	var from_pos = _get_port_center(_from_building, _from_port_path)
 	
 	if from_pos == null:
@@ -169,4 +174,8 @@ func _get_port_center(building: Node, port_path : NodePath) -> Variant:
 	if btn == null:
 		return null
 	#control node center
-	return btn.global_position + btn.size * 0.5
+	
+	if btn is Control:
+		return(btn as Control).get_global_rect().get_center()
+		
+	return btn.global_position
