@@ -66,12 +66,18 @@ func _unhandled_input(event: InputEvent) -> void:
 			cancel_build()
 		return
 		
-	if event.is_action_pressed("Move Build"):
-		var b := get_building_under_mouse()
-		if b != null:
-			_start_drag_building(b)
-		else:
+	if not Input.is_action_pressed("Move Build"):
+		return
+	if _mouse_is_over_control():
+		return
+		
+	var b = get_building_under_mouse()
+	if b != null:
+		_start_drag_building(b)
+	else:
+		if is_dragging_building:
 			_finish_drag_building()
+	
 
 func confirm_build() -> void:
 	var anchor_cell := world_to_cell(ghost_instance.global_position)
@@ -187,10 +193,10 @@ func _finish_drag_building() -> void:
 	else:
 		dragged_building.global_position = drag_original_position
 		occupy_cells(drag_original_cells, dragged_building)
-		
-	dragged_building.modulate.a = 1.0
 	
-	var pm := $"PathManager"
+	dragged_building.modulate = Color(1, 1, 1, 1)	
+	
+	var pm := $"../PathManager"
 	if pm != null and pm.has_method("update_path_for_building"):
 		pm.update_path_for_building(dragged_building)
 	
@@ -200,8 +206,11 @@ func _finish_drag_building() -> void:
 	drag_original_cells = []
 	drag_last_cells = []
 	drag_last_valid = false
-
-
+	
+func _mouse_is_over_control() -> bool:
+	var hovered = get_viewport().gui_get_hovered_control()
+	return hovered != null and hovered.is_in_group("port_button")
+	
 func _process(_delta: float) -> void:
 	if is_dragging_building and dragged_building != null:
 		var mouse_pos := get_global_mouse_position() + drag_mouse_offset
@@ -221,9 +230,9 @@ func _process(_delta: float) -> void:
 			dragged_building.modulate = cannotbuildColor
 			dragged_building.modulate.a = 1.0
 			
-		var pm := $"PathManager"
+		var pm := get_node_or_null("../PathManager")
 		if pm != null and pm.has_method("update_paths_for_building"):
-			pm.update_path_for_building(dragged_building)
+			pm.update_paths_for_building(dragged_building)
 		
 		return 
 	

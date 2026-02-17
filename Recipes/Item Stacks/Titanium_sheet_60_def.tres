@@ -7,4 +7,5 @@
 script = ExtResource("2_xy8xo")
 item = ExtResource("1_dj2c2")
 qty = 60
+id = &"titanium_sheet"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

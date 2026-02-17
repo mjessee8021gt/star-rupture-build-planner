@@ -235,6 +235,7 @@ func _on_recipe_item_selected(index: int) -> void:
 	input_3_box.tooltip_text = "Unused"
 	var recipe := recipe_dropdown.get_item_metadata(index) as Recipe
 	if recipe:
+		ProdLedger.add_source(get_instance_id(),get_production_deltas(recipe))
 		output_text.text = str(recipe.outputs[0].qty)
 		output_box.tooltip_text = str(recipe.outputs[0].item.display_name)
 		input_1_text.text = str(recipe.inputs[0].qty)
@@ -287,3 +288,6 @@ func _on_input_3_mouse_entered() -> void:
 func _on_input_3_mouse_exited() -> void:
 	if not input3_is_pressed:
 		$"Ports/Input 3".modulate = Color(0, 1, 0, 0.5)
+		
+func get_production_deltas(recipe: Recipe) -> Dictionary:
+	return recipe.get_deltas()

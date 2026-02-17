@@ -8,7 +8,8 @@ const BUILDINGS := {
 	&"furnace": preload("res://Buildings/Furnace.tscn"),
 	&"mega_press": preload("res://Buildings/MegaPress.tscn"),
 	&"assembler": preload("res://Buildings/Assembler.tscn"),
-	&"compounder": preload("res://Buildings/Compounder.tscn")
+	&"compounder": preload("res://Buildings/Compounder.tscn"),
+	&"refinery": preload("res://Buildings/Refinery.tscn")
 }
 
 

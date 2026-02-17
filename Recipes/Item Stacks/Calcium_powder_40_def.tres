@@ -7,4 +7,5 @@
 script = ExtResource("2_eva4l")
 item = ExtResource("1_igssv")
 qty = 40
+id = &"calcium_powder"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

@@ -7,4 +7,5 @@
 script = ExtResource("2_4cy2i")
 item = ExtResource("1_57c8e")
 qty = 30
+id = &"heat_resistant_sheet"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

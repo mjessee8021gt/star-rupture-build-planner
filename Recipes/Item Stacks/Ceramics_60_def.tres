@@ -7,4 +7,5 @@
 script = ExtResource("2_ca47t")
 item = ExtResource("1_syx2f")
 qty = 60
+id = &"ceramics"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

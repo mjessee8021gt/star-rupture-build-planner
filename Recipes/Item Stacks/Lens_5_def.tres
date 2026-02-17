@@ -7,4 +7,5 @@
 script = ExtResource("2_6c2pk")
 item = ExtResource("1_8jl0r")
 qty = 5
+id = &"lens"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

@@ -7,4 +7,5 @@
 script = ExtResource("2_q02ue")
 item = ExtResource("1_for18")
 qty = 12
+id = &"superconductor"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

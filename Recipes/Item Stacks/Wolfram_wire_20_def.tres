@@ -7,4 +7,5 @@
 script = ExtResource("2_eu7kh")
 item = ExtResource("1_30wf3")
 qty = 20
+id = &"wolfram_wire"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

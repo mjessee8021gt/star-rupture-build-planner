@@ -38,9 +38,9 @@ script = ExtResource("5_pbw6q")
 BuildManager = NodePath("../../../BuildManager")
 
 [node name="Panel" type="Panel" parent="Camera2D/CanvasLayer" unique_id=1180101363]
-offset_left = 977.0
+offset_left = 1104.0
 offset_top = 1.0
-offset_right = 1152.0
+offset_right = 1279.0
 offset_bottom = 33.0
 
 [node name="HeatIcon" type="Sprite2D" parent="Camera2D/CanvasLayer/Panel" unique_id=1228076443]
@@ -73,10 +73,10 @@ text = "0000"
 horizontal_alignment = 2
 
 [node name="ProdMenu" type="MenuButton" parent="Camera2D/CanvasLayer" unique_id=537098699]
-offset_left = 1083.0
-offset_top = 41.0
-offset_right = 1219.0
-offset_bottom = 177.0
+offset_left = 1208.0
+offset_top = 35.0
+offset_right = 1344.0
+offset_bottom = 171.0
 scale = Vector2(0.5, 0.5)
 icon = ExtResource("8_bmxlf")
 

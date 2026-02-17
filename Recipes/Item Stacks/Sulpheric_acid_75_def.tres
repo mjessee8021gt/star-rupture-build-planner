@@ -7,4 +7,5 @@
 script = ExtResource("2_71r7q")
 item = ExtResource("1_a7ink")
 qty = 75
+id = &"sulferic_acid"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"
