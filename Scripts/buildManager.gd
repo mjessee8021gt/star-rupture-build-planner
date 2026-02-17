@@ -9,6 +9,14 @@ var is_building := false
 @export var cannotbuildColor := Color(1,0,0,0.5)
 @export var tile_size := 32
 
+var is_dragging_building := false
+var dragged_building : Node2D = null
+var drag_mouse_offset := Vector2.ZERO
+var drag_original_position := Vector2.ZERO
+var drag_original_cells : Array[Vector2i] = []
+var drag_last_cells : Array[Vector2i] = []
+var drag_last_valid := false
+
 
 # --- helpers ---
 func _get_prod_ledger() -> Node:
@@ -51,13 +59,19 @@ func can_place_at(cells: Array[Vector2i]) -> bool:
 	return true
 	
 func _unhandled_input(event: InputEvent) -> void:
-	if not is_building:
+	if is_building:
+		if event.is_action_pressed("Build Confirm"):
+			confirm_build()
+		elif event.is_action_pressed("Build Cancel"):
+			cancel_build()
 		return
-	
-	if event.is_action_pressed("Build Confirm"):
-		confirm_build()
-	elif event.is_action_pressed("Build Cancel"):
-		cancel_build()
+		
+	if event.is_action_pressed("Move Build"):
+		var b := get_building_under_mouse()
+		if b != null:
+			_start_drag_building(b)
+		else:
+			_finish_drag_building()
 
 func confirm_build() -> void:
 	var anchor_cell := world_to_cell(ghost_instance.global_position)
@@ -144,8 +158,75 @@ func is_cell_free(cell: Vector2i) -> bool:
 	
 func get_building_at_cells(cell: Vector2i) -> Node:
 	return occupied_cells.get(cell, null)
+	
+func get_building_under_mouse() -> Node2D:
+	var mouse_pos := get_global_mouse_position()
+	var cell := world_to_cell(mouse_pos)
+	return get_building_at_cells(cell)
+
+func _start_drag_building(building: Node2D) -> void:
+	if building == null:
+		return
+		
+	is_dragging_building = true
+	dragged_building = building
+	drag_mouse_offset = building.global_position - get_global_mouse_position()
+	drag_original_position = building.global_position
+	
+	#We are recording and freeing the current cell occupancy of the building so the building can move through itself
+	var anchor_cell = world_to_cell(building.global_position)
+	drag_original_cells = building.get_footprint_cells(anchor_cell, building.footprint, building.anchor)
+	free_cells_for_building(building)
+	
+func _finish_drag_building() -> void:
+	if not is_dragging_building or  dragged_building == null:
+		return
+	
+	if drag_last_valid:
+		occupy_cells(drag_last_cells, dragged_building)
+	else:
+		dragged_building.global_position = drag_original_position
+		occupy_cells(drag_original_cells, dragged_building)
+		
+	dragged_building.modulate.a = 1.0
+	
+	var pm := $"PathManager"
+	if pm != null and pm.has_method("update_path_for_building"):
+		pm.update_path_for_building(dragged_building)
+	
+	#drag state cleanup
+	is_dragging_building = false
+	dragged_building = null
+	drag_original_cells = []
+	drag_last_cells = []
+	drag_last_valid = false
+
 
 func _process(_delta: float) -> void:
+	if is_dragging_building and dragged_building != null:
+		var mouse_pos := get_global_mouse_position() + drag_mouse_offset
+		var anchor_cell := world_to_cell(mouse_pos)
+		var top_left_cell = anchor_cell - dragged_building.anchor
+		var new_pos := cell_to_world(top_left_cell)
+		dragged_building.global_position = new_pos
+		
+		var footprint = dragged_building.get_footprint_cells(anchor_cell, dragged_building.footprint, dragged_building.anchor)
+		drag_last_cells = footprint
+		drag_last_valid = can_place_at(footprint)
+		
+		if drag_last_valid:
+			dragged_building.modulate = canBuildColor
+			dragged_building.modulate.a = 1.0
+		else:
+			dragged_building.modulate = cannotbuildColor
+			dragged_building.modulate.a = 1.0
+			
+		var pm := $"PathManager"
+		if pm != null and pm.has_method("update_paths_for_building"):
+			pm.update_path_for_building(dragged_building)
+		
+		return 
+	
 	if Input.is_action_just_pressed("Alternate"):
 		ghost_instance.flip_footprint()
 	if Input.is_action_just_pressed("Rotate"):

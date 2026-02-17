@@ -179,3 +179,62 @@ func _get_port_center(building: Node, port_path : NodePath) -> Variant:
 		return(btn as Control).get_global_rect().get_center()
 		
 	return btn.global_position
+	
+func update_paths_for_building(building: Node2D) -> void:
+	#if we relocate an already built building we need to redraw the line with it
+	for child in get_children():
+		if not (child is Path2D):
+			continue
+
+		if not child.has_meta("from_building") or not child.has_meta("to_building"):
+			continue
+
+		var from_b: Node2D = child.get_meta("from_building")
+		var to_b: Node2D = child.get_meta("to_building")
+
+		if from_b != building and to_b != building:
+			continue
+
+		var from_port: NodePath = child.get_meta("from_port") if child.has_meta("from_port") else NodePath("")
+		var to_port: NodePath = child.get_meta("to_port") if child.has_meta("to_port") else NodePath("")
+
+		if from_port == NodePath("") or to_port == NodePath(""):
+			continue
+			
+		var from_pos = _get_port_center(from_b, from_port)
+		var to_pos = _get_port_center(to_b, to_port)
+		
+		if from_pos == null or to_pos == null:
+			continue
+			
+		#we also need to ensure that the curve exists
+		if child.curve == null:
+			child.curve = Curve2D.new()
+			
+		var curve = child.curve
+		curve.bake_interval = 6.0
+		
+		var a = child.to_local(from_pos)
+		var b = child.to_local(to_pos)
+		
+		if curve.point_count != 2:
+			curve.clear_points()
+			curve.add_point(a)
+			curve.add_point(b)
+			
+		curve.set_point_position(0, a)
+		curve.set_point_position(1, b)
+		
+		var delta = b - a
+		var bend_dir := Vector2(0, -1)
+		var handle_len = clamp(delta.length() * 0.35, 40.0, 220.0)
+		curve.set_point_out(0, bend_dir * handle_len)
+		curve.set_point_in(1, -bend_dir * handle_len)
+		
+		var line :Line2D = null
+		for c in child.get_children():
+			if c is Line2D:
+				line = c
+				break
+		if line != null:
+			line.points = curve.get_baked_points()
