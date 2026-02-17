@@ -5,6 +5,7 @@ var footprint := Vector2i(3,4)
 @export var footprint_primary := Vector2i(3,4)
 @export var footprint_alt := Vector2i(4,4)
 @export var is_alternate := false
+@export var rotatedTick := 0
 @export var anchor := Vector2i.ZERO
 @onready var placement_area: Area2D = $PlacementArea
 

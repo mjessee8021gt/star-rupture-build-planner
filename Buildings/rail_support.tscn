@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dp0glriuhsjvt"]
+[gd_scene format=3 uid="uid://dw0ipoytk60ei"]
 
 [ext_resource type="Script" uid="uid://cjhw7stvkrs6b" path="res://Buildings/rail_support.gd" id="1_kxssu"]
 [ext_resource type="Texture2D" uid="uid://dxtb7jdbv68vj" path="res://Assets/SRBP_Rail_Support_Straight.png" id="6_w584o"]
@@ -42,20 +42,20 @@ disabled = true
 
 [node name="Universal 1" type="Button" parent="Ports" unique_id=1122308628]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 3.0000014
+offset_left = 5.0000014
 offset_top = 1.0000001
-offset_right = 75.0
+offset_right = 77.0
 offset_bottom = 41.0
-scale = Vector2(0.36, 0.36)
+scale = Vector2(0.32, 0.32)
 icon = ExtResource("8_8edi5")
 
 [node name="Universal 2" type="Button" parent="Ports" unique_id=1958701130]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 3.0000014
-offset_top = 15.999998
-offset_right = 75.0
-offset_bottom = 56.0
-scale = Vector2(0.36, 0.36)
+offset_left = 5.0000014
+offset_top = 18.0
+offset_right = 77.0
+offset_bottom = 58.0
+scale = Vector2(0.32, 0.32)
 icon = ExtResource("8_8edi5")
 
 [connection signal="mouse_entered" from="Ports/Universal 1" to="." method="_on_universal_1_mouse_entered"]

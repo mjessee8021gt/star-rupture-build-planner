@@ -20,6 +20,9 @@ func _is_universal_port_name(port_name: String) -> bool:
 func _is_valid_origin_port_name(port_name : String) -> bool:
 	return port_name == "Output 1" or _is_universal_port_name(port_name)
 	
+func _is_valid_destination_port_name(port_name: String) -> bool:
+	return port_name.begins_with("Input") or _is_universal_port_name(port_name)
+	
 func _get_universal_port_paths(building: Node2D) -> Array[NodePath]:
 	var paths: Array[NodePath] = []
 	var ports:= building.get_node_or_null("Ports")
@@ -28,7 +31,7 @@ func _get_universal_port_paths(building: Node2D) -> Array[NodePath]:
 		
 	for child in ports.get_children():
 		if child != null and child.name.begins_with(UNIVERSAL_PREFIX):
-			paths.append(NodePath("Ports/$s" % child.name))
+			paths.append(NodePath("Ports/%s" % child.name))
 	return paths
 
 func _get_destination_port_paths(building: Node2D) -> Array[NodePath]:
@@ -100,22 +103,35 @@ func _on_port_end(building: Node2D, port_name: String, mouse_pos: Vector2) -> vo
 	
 	if _current_curve == null:
 		return
+	
+	print(str(_is_valid_destination_port_name(port_name)))
+	if building != _from_building and _is_valid_destination_port_name(port_name):
+		var to_building : Node2D = building
+		var to_port_path := NodePath("Ports/%s" % port_name)
 		
-	var target = _find_target_port(mouse_pos)
+		var to_pos = _get_port_center(to_building, to_port_path)
+		var from_pos = _get_port_center(_from_building, _from_port_path)
+	
+		if from_pos == null or to_pos == null:
+			_cleanup_preview()
+			return
+		
+		_finalize_path(_from_building, _from_port_path, from_pos, to_building, to_port_path, to_pos)
+		return
+	var target := _find_target_port(mouse_pos)
 	if target.is_empty():
 		_cleanup_preview()
 		return
+	var to_building2: Node2D = target["building"]
+	var to_port_path2: NodePath = target["input_path"]
+	var to_pos2 = _get_port_center(to_building2, to_port_path2)
+	var from_pos2 = _get_port_center(_from_building, _from_port_path)
 	
-	var to_building:Node2D = target["building"]
-	var to_input_path: NodePath = target["input_path"]
-	var to_pos = _get_port_center(to_building, to_input_path)
-	var from_pos = _get_port_center(_from_building, _from_port_path)
-	
-	if from_pos == null:
+	if from_pos2 == null or to_pos2 == null:
 		_cleanup_preview()
 		return
-		
-	_finalize_path(_from_building, _from_port_path, from_pos, to_building, to_input_path, to_pos)
+	
+	_finalize_path(_from_building, _from_port_path, from_pos2, to_building2, to_port_path2,to_pos2)
 	
 func _finalize_path(from_b: Node2D, from_port: NodePath, from_pos: Vector2, to_b: Node2D, to_port: NodePath, to_pos: Vector2) -> void:
 	#Establishing path containers
@@ -184,6 +200,9 @@ func _find_target_port(mouse_pos: Vector2) -> Dictionary:
 				pos = (btn as Control).get_global_rect().get_center()
 			else:
 				pos = btn.global_position
+			
+			print(str(btn.name))
+			print(str(mouse_pos.distance_to(pos)))
 			
 			if mouse_pos.distance_to(pos) < 18:
 				return {"building": b, "input_path": port_path, "pos": pos}

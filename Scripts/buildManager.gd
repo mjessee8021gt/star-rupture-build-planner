@@ -90,6 +90,8 @@ func confirm_build() -> void:
 	real.global_position = ghost_instance.global_position
 	if ghost_instance.is_alternate == true:
 		real.flip_footprint()
+	if ghost_instance.rotatedTick > 0:
+		real.rotate(deg_to_rad(90.0 * ghost_instance.rotatedTick))
 	$"../buildings".add_child(real)
 	
 	occupy_cells(footprint, real)
@@ -240,6 +242,10 @@ func _process(_delta: float) -> void:
 		ghost_instance.flip_footprint()
 	if Input.is_action_just_pressed("Rotate"):
 		ghost_instance.rotate(deg_to_rad(90.0))
+		if ghost_instance.rotatedTick < 3:
+			ghost_instance.rotatedTick += 1
+		elif ghost_instance.rotatedTick == 3:
+			ghost_instance.rotatedTick = 0
 	if Input.is_action_just_pressed("Build Cancel"):
 		if is_building:
 			cancel_build()

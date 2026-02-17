@@ -2,6 +2,7 @@ extends Node2D
 
 @export var tileMap : TileMap
 @export var is_alternate := false
+@export var rotatedTick := 0
 var footprint := Vector2i(3,4)
 @export var footprint_primary := Vector2i(3,4)
 @export var footprint_alt := Vector2i(3,4)
@@ -36,7 +37,7 @@ var drag_offset := Vector2.ZERO
 
 func _ready() -> void:
 	$"Ports/Output 1".modulate = Color(1,0,0,0.5)
-	output_port.pressed.connect(func(): _start_port_drag("output"))
+	output_port.pressed.connect(func(): _start_port_drag("Output 1"))
 	add_to_group("buildings")
 	populate_recipe_dropdown()
 

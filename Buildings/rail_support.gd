@@ -5,11 +5,12 @@ var footprint := Vector2i(1, 1)
 @export var footprint_primary := Vector2i(1, 1)
 @export var footprint_alt := Vector2i(2, 2)
 @export var is_alternate := false
+@export var rotatedTick := 0
 @export var anchor := Vector2i.ZERO
 @onready var placement_area: Area2D = $PlacementArea
 
-@export var heat := 3
-@export var power := -5
+@export var heat := 0
+@export var power := 0
 
 var universal2_is_connected := false
 var universal2_is_pressed := false
@@ -33,8 +34,8 @@ var drag_offset := Vector2.ZERO
 func _ready() -> void:
 	$"Ports/Universal 1".modulate = Color(.5,.5,.5,0.5)
 	$"Ports/Universal 2".modulate = Color(0.5, 0.5, 0.5, 0.5)
-	u_port1.pressed.connect(func(): _start_port_drag("universal 1"))
-	u_port2.pressed.connect(func(): _start_port_drag("universal 2"))
+	u_port1.pressed.connect(func(): _start_port_drag("Universal 1"))
+	u_port2.pressed.connect(func(): _start_port_drag("Universal 2"))
 	add_to_group("buildings")
 
 func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int):
