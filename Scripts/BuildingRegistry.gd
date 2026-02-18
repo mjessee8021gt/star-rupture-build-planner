@@ -10,7 +10,9 @@ const BUILDINGS := {
 	&"assembler": preload("res://Buildings/Assembler.tscn"),
 	&"compounder": preload("res://Buildings/Compounder.tscn"),
 	&"refinery": preload("res://Buildings/Refinery.tscn"),
-	&"rail_support": preload("res://Buildings/rail_support.tscn")
+	&"rail_support": preload("res://Buildings/rail_support.tscn"),
+	&"rail_connector": preload("res://Buildings/rail_connector.tscn"),
+	&"rail_modulator_3": preload("res://Buildings/rail_modulator_3.tscn")
 }
 
 

@@ -62,14 +62,13 @@ func _ready() -> void:
 	
 	var railMenu = PopupMenu.new()
 	railMenu.name = "Rails"
-	railMenu.add_item("Rail Mk1")
-	railMenu.add_item("Rail Mk2")
-	railMenu.add_item("Rail Mk3")
 	railMenu.add_item("Rail Connector")
+	railMenu.set_item_metadata(railMenu.item_count-1, &"rail_connector")
 	railMenu.add_item("Rail Support")
 	railMenu.set_item_metadata(railMenu.item_count-1, &"rail_support")
 	railMenu.add_item("Multirail 3")
 	railMenu.add_item("Rail Modulator 3")
+	railMenu.set_item_metadata(railMenu.item_count-1, &"rail_modulator_3")
 	railMenu.add_item("Multirail 5")
 	railMenu.add_item("Rail Modulator 5")
 	railMenu.id_pressed.connect(_on_build_selected.bind(railMenu))
