@@ -44,8 +44,8 @@ func _ready() -> void:
 	$"Ports/Universal 4".modulate = Color(0.5, 0.5, 0.5, 0.5)
 	u_port1.pressed.connect(func(): _start_port_drag("Universal 1"))
 	u_port2.pressed.connect(func(): _start_port_drag("Universal 2"))
-	u_port2.pressed.connect(func(): _start_port_drag("Universal 3"))
-	u_port2.pressed.connect(func(): _start_port_drag("Universal 4"))
+	u_port3.pressed.connect(func(): _start_port_drag("Universal 3"))
+	u_port4.pressed.connect(func(): _start_port_drag("Universal 4"))
 	add_to_group("buildings")
 
 func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int):

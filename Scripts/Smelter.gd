@@ -45,8 +45,8 @@ var drag_offset := Vector2.ZERO
 func _ready() -> void:
 	$"Ports/Output 1".modulate = Color(1,0,0,0.5)
 	$"Ports/Input 1".modulate = Color(0,1,0,0.5)
-	output_port.pressed.connect(func(): _start_port_drag("output"))
-	input_port.pressed.connect(func(): _start_port_drag("input"))
+	output_port.pressed.connect(func(): _start_port_drag("Output 1"))
+	input_port.pressed.connect(func(): _start_port_drag("Input 1"))
 	add_to_group("buildings")
 	populate_recipe_dropdown()
 
@@ -158,9 +158,9 @@ func cancel_port_drag() -> void:
 	
 func _get_port_global_pos(port_name: String) -> Vector2:
 	match port_name:
-		"output":
+		"Output":
 			return output_port.global_position + output_port.size * 0.5
-		"input":
+		"Input":
 			return input_port.global_position + input_port.size * 0.5
 		_:
 			return global_position

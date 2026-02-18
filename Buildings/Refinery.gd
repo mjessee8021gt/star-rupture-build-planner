@@ -48,9 +48,9 @@ func _ready() -> void:
 	$"Ports/Output 1".modulate = Color(1,0,0,0.5)
 	$"Ports/Input 1".modulate = Color(0,1,0,0.5)
 	$"Ports/Input 2".modulate = Color(0,1,0,0.5)
-	output_port.pressed.connect(func(): _start_port_drag("output"))
-	input_port.pressed.connect(func(): _start_port_drag("input1"))
-	input_2_port.pressed.connect(func(): _start_port_drag("input2"))
+	output_port.pressed.connect(func(): _start_port_drag("Output 1"))
+	input_port.pressed.connect(func(): _start_port_drag("Input 1"))
+	input_2_port.pressed.connect(func(): _start_port_drag("Input 2"))
 	add_to_group("buildings")
 	populate_recipe_dropdown()
 
