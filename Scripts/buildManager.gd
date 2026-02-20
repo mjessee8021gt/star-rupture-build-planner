@@ -31,6 +31,24 @@ func _get_prod_ledger() -> Node:
 		return root.get_node("ProductionLedger")
 	return null
 
+func _set_buttons_disabled_recuirsive(node: Node, disabled: bool) -> void:
+	if node is Button:
+		(node as Button).disabled = disabled
+	
+	for child in node.get_children():
+		_set_buttons_disabled_recuirsive(child, disabled)
+
+func _disable_ports_on_ghost(disabled: bool) -> void:
+	if ghost_instance == null:
+		return
+		
+	var ports := ghost_instance.get_node_or_null("Ports")
+	if ports != null:
+		_set_buttons_disabled_recuirsive(ports, disabled)
+
+func is_build_mode_active() -> bool:
+	return is_building
+
 func _get_prod_source_id(building: Node) -> int:
 	# Prefer explicit metadata if you set it from the building when registering production.
 	if building != null and building.has_meta("prod_source_id"):
@@ -98,7 +116,6 @@ func confirm_build() -> void:
 	$"../Camera2D/CanvasLayer/Panel/HeatLabel".text = str(int($"../Camera2D/CanvasLayer/Panel/HeatLabel".text) + real.heat)
 	$"../Camera2D/CanvasLayer/Panel/PowerLabel".text = str(int($"../Camera2D/CanvasLayer/Panel/PowerLabel".text) + real.power)
 	cancel_build()
-	$"../PathManager"._update_building_list()
 	
 func free_cells_for_building(building: Node) -> void:
 	var anchor_cell := world_to_cell(building.global_position)
@@ -142,9 +159,6 @@ func try_remove_building_under_mouse() -> bool:
 
 	# Remove from scene
 	building.queue_free()
-
-	# Refresh any dependent systems
-	$"../PathManager"._update_building_list()
 
 	return true
 
@@ -199,7 +213,7 @@ func _finish_drag_building() -> void:
 	dragged_building.modulate = Color(1, 1, 1, 1)	
 	
 	var pm := $"../PathManager"
-	if pm != null and pm.has_method("update_path_for_building"):
+	if pm != null and pm.has_method("update_paths_for_building"):
 		pm.update_path_for_building(dragged_building)
 	
 	#drag state cleanup

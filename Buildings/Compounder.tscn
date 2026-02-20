@@ -65,6 +65,7 @@ offset_right = 153.0
 offset_bottom = 41.0
 scale = Vector2(0.42, 0.42)
 icon = ExtResource("17_28hxc")
+metadata/normal = Vector2(0, -1)
 
 [node name="Input 1" type="Button" parent="Ports" unique_id=1958701130 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
@@ -74,6 +75,7 @@ offset_right = 73.0
 offset_bottom = 214.0
 scale = Vector2(0.42, 0.42)
 icon = ExtResource("17_28hxc")
+metadata/normal = Vector2(0, 1)
 
 [node name="Input 2" type="Button" parent="Ports" unique_id=1025542919 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
@@ -83,6 +85,7 @@ offset_right = 153.0
 offset_bottom = 214.0
 scale = Vector2(0.42, 0.42)
 icon = ExtResource("17_28hxc")
+metadata/normal = Vector2(0, 1)
 
 [node name="Input 3" type="Button" parent="Ports" unique_id=1275495196 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
@@ -92,6 +95,7 @@ offset_right = 233.0
 offset_bottom = 214.0
 scale = Vector2(0.42, 0.42)
 icon = ExtResource("17_28hxc")
+metadata/normal = Vector2(0, 1)
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
 offset_left = 49.0

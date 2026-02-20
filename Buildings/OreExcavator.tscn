@@ -11,7 +11,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
 size = Vector2(96, 128)
 
-[node name="OreExcavator" type="Node2D" unique_id=1728206745]
+[node name="OreExcavator" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_m443x")
 available_recipes = Array[ExtResource("2_veacw")]([ExtResource("3_rhfiq"), ExtResource("4_dkway"), ExtResource("5_43axb")])
 
@@ -39,13 +39,14 @@ horizontal_alignment = 1
 
 [node name="Ports" type="Node2D" parent="." unique_id=1067444767]
 
-[node name="Output 1" type="Button" parent="Ports" unique_id=1122308628]
+[node name="Output 1" type="Button" parent="Ports" unique_id=1122308628 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
 offset_left = 31.0
 offset_right = 103.0
 offset_bottom = 40.0
 scale = Vector2(0.5, 0.5)
 icon = ExtResource("3_veacw")
+metadata/normal = Vector2(0, -1)
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=1551064749]
 offset_left = 2.0

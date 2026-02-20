@@ -133,6 +133,39 @@ func _on_port_end(building: Node2D, port_name: String, mouse_pos: Vector2) -> vo
 	
 	_finalize_path(_from_building, _from_port_path, from_pos2, to_building2, to_port_path2,to_pos2)
 	
+func _beautiful_two_point_curves(curve: Curve2D, a: Vector2, b: Vector2) -> void:
+	if curve.point_count != 2:
+		curve.clear_points()
+		curve.add_point(a)
+		curve.add_point(b)
+	else:
+			curve.set_point_position(0, a)
+			curve.set_point_position(1, b)
+	
+	var delta := b - a
+	var dist := delta.length()
+	if dist < 0.001:
+		curve.set_point_out(0, Vector2.ZERO)
+		curve.set_point_in(1, Vector2.ZERO)
+		return
+	var dir := delta / dist
+	var perp := Vector2(-dir.y, dir.x)
+	var handle_len = clamp(dist * 0.45, 50.0, 260.0)
+	var bow = clamp(dist * 0.12, 0.0, 80.0)
+	var bow_sign := 1.0
+	if abs(delta.x) >= abs(delta.y):
+		#more horizontally relative
+		bow_sign = -1.0 if b.y < a.y else 1.0
+	else:
+		#more vertically relative
+		bow_sign = -1.0 if b.y < a.y else 1.0
+		
+	var out_handle = dir * handle_len + perp * bow * bow_sign
+	var in_handle = -dir * handle_len + perp * bow * bow_sign
+	
+	curve.set_point_out(0, out_handle)
+	curve.set_point_in(1, in_handle)
+
 func _finalize_path(from_b: Node2D, from_port: NodePath, from_pos: Vector2, to_b: Node2D, to_port: NodePath, to_pos: Vector2) -> void:
 	#Establishing path containers
 	var path := Path2D.new()
@@ -147,15 +180,10 @@ func _finalize_path(from_b: Node2D, from_port: NodePath, from_pos: Vector2, to_b
 	#Create a curve in local space of the Path2D we've already established
 	var curve := Curve2D.new()
 	curve.bake_interval = 6.0 #a smaller number will make a smoother line
-	
 	var a := path.to_local(from_pos)
 	var b := path.to_local(to_pos)
 	
-	var delta := b - a
-	var bend_dir := Vector2(0, -1) #bend "up"
-	var handle_len = clamp(delta.length() * 0.35, 40.0, 220.0)
-	curve.add_point(a, Vector2.ZERO, bend_dir * handle_len)
-	curve.add_point(b, -bend_dir * handle_len, Vector2.ZERO)
+	_beautiful_two_point_curves(curve, a, b)
 	
 	path.curve = curve
 	
@@ -270,19 +298,7 @@ func update_paths_for_building(building: Node2D) -> void:
 		var a = child.to_local(from_pos)
 		var b = child.to_local(to_pos)
 		
-		if curve.point_count != 2:
-			curve.clear_points()
-			curve.add_point(a)
-			curve.add_point(b)
-			
-		curve.set_point_position(0, a)
-		curve.set_point_position(1, b)
-		
-		var delta = b - a
-		var bend_dir := Vector2(0, -1)
-		var handle_len = clamp(delta.length() * 0.35, 40.0, 220.0)
-		curve.set_point_out(0, bend_dir * handle_len)
-		curve.set_point_in(1, -bend_dir * handle_len)
+		_beautiful_two_point_curves(curve, a, b)
 		
 		var line :Line2D = null
 		for c in child.get_children():

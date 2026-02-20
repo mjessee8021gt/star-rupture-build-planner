@@ -27,7 +27,8 @@ window/size/viewport_height=720
 
 [global_group]
 
-port_button=""
+port_button="container for all connection points in the planner"
+buildings="container for all buildings in the planner"
 
 [input]
 

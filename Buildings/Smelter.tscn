@@ -15,7 +15,7 @@ size = Vector2(96, 128)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uf4xf"]
 size = Vector2(128, 128)
 
-[node name="Smelter" type="Node2D" unique_id=1728206745]
+[node name="Smelter" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_7hisn")
 available_recipes = Array[ExtResource("2_3rles")]([ExtResource("3_yt2l3"), ExtResource("4_e8x7b"), ExtResource("5_356qw")])
 
@@ -51,15 +51,16 @@ text = "SMELTER"
 
 [node name="Ports" type="Node2D" parent="." unique_id=1067444767]
 
-[node name="Output 1" type="Button" parent="Ports" unique_id=1122308628]
+[node name="Output 1" type="Button" parent="Ports" unique_id=1122308628 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
 offset_left = 31.0
 offset_right = 103.0
 offset_bottom = 40.0
 scale = Vector2(0.5, 0.5)
 icon = ExtResource("4_uf4xf")
+metadata/normal = Vector2(0, -1)
 
-[node name="Input 1" type="Button" parent="Ports" unique_id=1958701130]
+[node name="Input 1" type="Button" parent="Ports" unique_id=1958701130 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
 offset_left = 30.0
 offset_top = 108.0
@@ -67,6 +68,7 @@ offset_right = 102.0
 offset_bottom = 148.0
 scale = Vector2(0.5, 0.5)
 icon = ExtResource("4_uf4xf")
+metadata/normal = Vector2(0, 1)
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
 offset_left = 1.0

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dc4xe17p8usq0"]
 
-[ext_resource type="Script" uid="uid://dbs5hfkys8a3c" path="res://Buildings/Fabricator.gd" id="1_lt3md"]
+[ext_resource type="Script" uid="uid://pgf603leuvb" path="res://Buildings/Refinery.gd" id="1_k1xno"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_13a1u"]
 [ext_resource type="Resource" uid="uid://d2acnnfks1pf" path="res://Recipes/Pressurized_helium.tres" id="3_k1xno"]
 [ext_resource type="Resource" uid="uid://ol82gygr5cgr" path="res://Recipes/Sulpheric_acid.tres" id="4_uo3ni"]
@@ -14,11 +14,10 @@ size = Vector2(192, 192)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uf4xf"]
 size = Vector2(224, 224)
 
-[node name="Refinery" type="Node2D" unique_id=1728206745]
-script = ExtResource("1_lt3md")
+[node name="Refinery" type="Node2D" unique_id=1728206745 groups=["buildings"]]
+script = ExtResource("1_k1xno")
 footprint_primary = Vector2i(3, 4)
-heat = 60
-power = -40
+footprint_alt = Vector2i(4, 4)
 available_recipes = Array[ExtResource("2_13a1u")]([ExtResource("3_k1xno"), ExtResource("4_uo3ni")])
 metadata/_edit_vertical_guides_ = [63.0, 96.0, 112.0]
 
@@ -55,7 +54,7 @@ text = "REFINERY"
 
 [node name="Ports" type="Node2D" parent="." unique_id=1067444767]
 
-[node name="Output 1" type="Button" parent="Ports" unique_id=1122308628]
+[node name="Output 1" type="Button" parent="Ports" unique_id=1122308628 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
 offset_left = 78.0
 offset_top = 1.0
@@ -63,8 +62,9 @@ offset_right = 150.0
 offset_bottom = 41.0
 scale = Vector2(0.5, 0.5)
 icon = ExtResource("18_pfrlw")
+metadata/normal = Vector2(0, -1)
 
-[node name="Input 1" type="Button" parent="Ports" unique_id=1958701130]
+[node name="Input 1" type="Button" parent="Ports" unique_id=1958701130 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
 offset_left = 1.0
 offset_top = 171.0
@@ -72,8 +72,9 @@ offset_right = 73.0
 offset_bottom = 211.0
 scale = Vector2(0.5, 0.5)
 icon = ExtResource("18_pfrlw")
+metadata/normal = Vector2(0, 1)
 
-[node name="Input 2" type="Button" parent="Ports" unique_id=1025542919]
+[node name="Input 2" type="Button" parent="Ports" unique_id=1025542919 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
 offset_left = 155.0
 offset_top = 171.0
@@ -81,6 +82,7 @@ offset_right = 227.0
 offset_bottom = 211.0
 scale = Vector2(0.5, 0.5)
 icon = ExtResource("18_pfrlw")
+metadata/normal = Vector2(0, 1)
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
 offset_left = 49.0

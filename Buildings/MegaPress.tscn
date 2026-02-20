@@ -23,7 +23,7 @@ size = Vector2(128, 160)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uf4xf"]
 size = Vector2(160, 192)
 
-[node name="Mega Press" type="Node2D" unique_id=1728206745]
+[node name="Mega Press" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_oc300")
 available_recipes = Array[ExtResource("2_omxsb")]([ExtResource("3_facf6"), ExtResource("4_omxsb"), ExtResource("5_hurqg"), ExtResource("6_4e8em"), ExtResource("7_nyaiv"), ExtResource("8_x2mdb"), ExtResource("9_8hkdk"), ExtResource("10_hqy5a"), ExtResource("11_jcftm"), ExtResource("12_txqpt"), ExtResource("13_w5apf")])
 metadata/_edit_vertical_guides_ = [63.0, 48.0, 64.0, 80.0, -24.0]
@@ -62,7 +62,7 @@ horizontal_alignment = 1
 
 [node name="Ports" type="Node2D" parent="." unique_id=1067444767]
 
-[node name="Output 1" type="Button" parent="Ports" unique_id=1122308628]
+[node name="Output 1" type="Button" parent="Ports" unique_id=1122308628 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
 offset_left = 49.0
 offset_top = 1.0
@@ -70,8 +70,9 @@ offset_right = 121.0
 offset_bottom = 41.0
 scale = Vector2(0.42, 0.42)
 icon = ExtResource("17_ef2ad")
+metadata/normal = Vector2(0, -1)
 
-[node name="Input 1" type="Button" parent="Ports" unique_id=1958701130]
+[node name="Input 1" type="Button" parent="Ports" unique_id=1958701130 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
 offset_left = 1.0
 offset_top = 142.0
@@ -79,8 +80,9 @@ offset_right = 73.0
 offset_bottom = 182.0
 scale = Vector2(0.42, 0.42)
 icon = ExtResource("17_ef2ad")
+metadata/normal = Vector2(0, 1)
 
-[node name="Input 2" type="Button" parent="Ports" unique_id=1025542919]
+[node name="Input 2" type="Button" parent="Ports" unique_id=1025542919 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
 offset_left = 33.0
 offset_top = 142.0
@@ -88,8 +90,9 @@ offset_right = 105.0
 offset_bottom = 182.0
 scale = Vector2(0.42, 0.42)
 icon = ExtResource("17_ef2ad")
+metadata/normal = Vector2(0, 1)
 
-[node name="Input 3" type="Button" parent="Ports" unique_id=1275495196]
+[node name="Input 3" type="Button" parent="Ports" unique_id=1275495196 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
 offset_left = 65.0
 offset_top = 142.0
@@ -97,8 +100,9 @@ offset_right = 137.0
 offset_bottom = 182.0
 scale = Vector2(0.42, 0.42)
 icon = ExtResource("17_ef2ad")
+metadata/normal = Vector2(0, 1)
 
-[node name="Input 4" type="Button" parent="Ports" unique_id=1866691078]
+[node name="Input 4" type="Button" parent="Ports" unique_id=1866691078 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
 offset_left = 97.0
 offset_top = 142.0
@@ -106,6 +110,7 @@ offset_right = 169.0
 offset_bottom = 182.0
 scale = Vector2(0.42, 0.42)
 icon = ExtResource("17_ef2ad")
+metadata/normal = Vector2(0, 1)
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
 offset_left = 1.0

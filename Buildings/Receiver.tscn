@@ -1,0 +1,99 @@
+[gd_scene format=3 uid="uid://bc4dmw6o36sor"]
+
+[ext_resource type="Script" uid="uid://dtdubjvusc2q5" path="res://Buildings/Receiver.gd" id="1_vgmvo"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_2qpsu"]
+[ext_resource type="Resource" uid="uid://d2acnnfks1pf" path="res://Recipes/Pressurized_helium.tres" id="3_roq06"]
+[ext_resource type="Resource" uid="uid://ol82gygr5cgr" path="res://Recipes/Sulpheric_acid.tres" id="4_57olk"]
+[ext_resource type="Texture2D" uid="uid://grouobxe87tu" path="res://Assets/SRBP_4x4_BLDG.png" id="5_vgmvo"]
+[ext_resource type="Texture2D" uid="uid://bodskb20g6htb" path="res://Assets/SRBP_5x4_BLDG.png" id="6_vgmvo"]
+[ext_resource type="Texture2D" uid="uid://ilmbegsn2c7" path="res://Assets/SRBP_Oval.png" id="7_s8jfm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uf4xf"]
+size = Vector2(160, 128)
+
+[node name="Receiver" type="Node2D" unique_id=1728206745 groups=["buildings"]]
+script = ExtResource("1_vgmvo")
+is_alternate = null
+rotatedTick = null
+footprint_primary = Vector2i(3, 4)
+footprint_alt = Vector2i(4, 4)
+anchor = null
+heat = null
+power = null
+available_recipes = Array[ExtResource("2_2qpsu")]([ExtResource("3_roq06"), ExtResource("4_57olk")])
+metadata/_edit_vertical_guides_ = [63.0, 96.0, 112.0, 80.0]
+
+[node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
+texture = ExtResource("5_vgmvo")
+centered = false
+
+[node name="AlternateSprite" type="Sprite2D" parent="." unique_id=1619536158]
+visible = false
+texture = ExtResource("6_vgmvo")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128283645]
+position = Vector2(64, 64)
+shape = SubResource("RectangleShape2D_gbqis")
+
+[node name="CollisionShapeAlt" type="CollisionShape2D" parent="." unique_id=1184700770]
+visible = false
+position = Vector2(80, 64)
+shape = SubResource("RectangleShape2D_uf4xf")
+disabled = true
+
+[node name="TitleLabel" type="Label" parent="." unique_id=904579435]
+offset_left = 32.0
+offset_top = 6.0
+offset_right = 97.0
+offset_bottom = 26.0
+theme_override_font_sizes/font_size = 14
+text = "RECEIVER"
+
+[node name="PlacementArea" type="Area2D" parent="." unique_id=911391560]
+
+[node name="PlacementAreaAlt" type="Area2D" parent="." unique_id=445836450]
+
+[node name="Ports" type="Control" parent="." unique_id=604002389]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Output 1" type="Button" parent="Ports" unique_id=1958701130 groups=["port_button"]]
+self_modulate = Color(1, 1, 1, 0.49803922)
+layout_mode = 0
+offset_left = 1.0
+offset_top = 61.0
+offset_right = 73.0
+offset_bottom = 101.0
+scale = Vector2(0.5, 0.5)
+icon = ExtResource("7_s8jfm")
+metadata/normal = Vector2(0, 1)
+
+[node name="Output 2" type="Button" parent="Ports" unique_id=1025542919 groups=["port_button"]]
+self_modulate = Color(1, 1, 1, 0.49803922)
+layout_mode = 0
+offset_left = 91.0
+offset_top = 61.0
+offset_right = 163.0
+offset_bottom = 101.0
+scale = Vector2(0.5, 0.5)
+icon = ExtResource("7_s8jfm")
+metadata/normal = Vector2(0, 1)
+
+[node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
+offset_left = 16.0
+offset_top = 28.0
+offset_right = 110.0
+offset_bottom = 48.0
+theme_override_font_sizes/font_size = 10
+
+[connection signal="mouse_entered" from="Ports/Output 1" to="." method="_on_input_1_mouse_entered"]
+[connection signal="mouse_exited" from="Ports/Output 1" to="." method="_on_input_1_mouse_exited"]
+[connection signal="pressed" from="Ports/Output 1" to="." method="_on_input_1_pressed"]
+[connection signal="mouse_entered" from="Ports/Output 2" to="." method="_on_input_2_mouse_entered"]
+[connection signal="mouse_exited" from="Ports/Output 2" to="." method="_on_input_2_mouse_exited"]
+[connection signal="pressed" from="Ports/Output 2" to="." method="_on_input_2_pressed"]
+[connection signal="item_selected" from="Recipe" to="." method="_on_recipe_item_selected"]

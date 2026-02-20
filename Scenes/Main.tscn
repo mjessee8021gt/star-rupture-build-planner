@@ -8,15 +8,9 @@
 [ext_resource type="Script" uid="uid://cwao0e766iwdd" path="res://Scripts/buildManager.gd" id="6_v1gob"]
 [ext_resource type="Texture2D" uid="uid://bixocxjthy7cb" path="res://Assets/SRBP_Heat Icon.png" id="6_vy5pj"]
 [ext_resource type="Texture2D" uid="uid://b0q6pkjakr41b" path="res://Assets/SRBP_Power Icon.png" id="7_bmxlf"]
-[ext_resource type="Script" uid="uid://c1gaut8hcyg0c" path="res://Scripts/path_manager.gd" id="7_jw32o"]
 [ext_resource type="Texture2D" uid="uid://bd7brbyjru5ea" path="res://Assets/SRBP_Stats_icon.png" id="8_bmxlf"]
 [ext_resource type="Script" uid="uid://brffdis28ou82" path="res://Scripts/prod_panel.gd" id="9_4kpch"]
-
-[sub_resource type="Curve2D" id="Curve2D_jw32o"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 1.58, 21.705, 0, 0, 0, 0, 34.475, -13.075)
-}
-point_count = 2
+[ext_resource type="Script" uid="uid://cmadeq2twnxwf" path="res://Scripts/path_manager_manhattan_universal_clean.gd" id="11_4kpch"]
 
 [node name="Main" type="Node2D" unique_id=1429791362]
 script = ExtResource("1_kln2b")
@@ -102,11 +96,8 @@ layout_mode = 2
 script = ExtResource("6_v1gob")
 
 [node name="PathManager" type="Node2D" parent="." unique_id=1207476002]
-script = ExtResource("7_jw32o")
+script = ExtResource("11_4kpch")
 
 [node name="buildings" type="Node2D" parent="." unique_id=1655476447]
-
-[node name="Path2D" type="Path2D" parent="." unique_id=102389188]
-curve = SubResource("Curve2D_jw32o")
 
 [connection signal="pressed" from="Camera2D/CanvasLayer/ProdMenu" to="." method="_on_prod_menu_pressed"]
