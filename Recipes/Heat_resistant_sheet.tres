@@ -10,7 +10,7 @@
 
 [resource]
 script = ExtResource("2_psdg8")
-id = &"heat_resistant_sheet"
+id = &"Heat Resistant Sheet"
 display_name = "Heat Resistant Sheet"
 inputs = Array[ExtResource("1_h0i3u")]([ExtResource("2_5wf67"), ExtResource("3_3v7b2"), ExtResource("4_5wf67")])
 outputs = Array[ExtResource("1_h0i3u")]([ExtResource("5_si2u4")])

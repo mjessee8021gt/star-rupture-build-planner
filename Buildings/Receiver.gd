@@ -91,7 +91,7 @@ func flip_footprint() -> void:
 		$TitleLabel.position = Vector2(48, 6)
 		$"Ports/Output 1".position = Vector2(1, 61)
 		$"Ports/Output 2".position = Vector2(123, 61)
-		$Recipe.position = Vector2(33, 28)
+		$Recipe.position = Vector2(13, 28)
 		footprint = footprint_alt
 		is_alternate = true
 	else:
@@ -102,7 +102,7 @@ func flip_footprint() -> void:
 		$TitleLabel.position = Vector2(31, 6)
 		$"Ports/Output 1".position = Vector2(1, 61)
 		$"Ports/Output 2".position = Vector2(91, 61)
-		$Recipe.position = Vector2(16, 28)
+		$Recipe.position = Vector2(0, 28)
 		footprint = footprint_primary
 		is_alternate = false
 
@@ -138,12 +138,10 @@ func cancel_port_drag() -> void:
 	
 func _get_port_global_pos(port_name: String) -> Vector2:
 	match port_name:
-		"output":
-			return output_port.global_position + output_port.size * 0.5
-		"input1":
-			return input_port.global_position + input_port.size * 0.5
-		"input2":
-			return input_2_port.global_position + input_port.size * 0.5
+		"Output 1":
+			return output1_port.global_position + output1_port.size * 0.5
+		"Output 2":
+			return output2_port.global_position + output2_port.size * 0.5
 		_:
 			return global_position
 
@@ -165,23 +163,27 @@ func populate_recipe_dropdown() -> void:
 	#now we're selecting the first recipe by defualt and populating the purity list
 	if available_recipes.size() > 0:
 		recipe_dropdown.select(0)
-
-func _on_input_2_pressed() -> void:
-	if not input2_is_pressed:
-		if not other_button_pressed:
-			$"Ports/Input 2".modulate = Color(0,1,0,1.0)
-			input2_is_pressed = true
-			other_button_pressed = true
-
-
-func _on_input_2_mouse_entered() -> void:
-	if not input2_is_pressed:
-		$"Ports/Input 2".modulate = Color(0,1,0,0.75)
-
-
-func _on_input_2_mouse_exited() -> void:
-	if not input2_is_pressed:
-		$"Ports/Input 2".modulate = Color(0,1,0,0.5)
 		
-func get_production_deltas(recipe: Recipe) -> Dictionary:
-	return recipe.get_deltas()
+
+
+func _on_output_2_pressed() -> void:
+	if not output2_is_pressed:
+		if not other_button_pressed:
+			$"Ports/Output 2".modulate = Color(1,0,0,1.0)
+			output1_is_pressed = true
+			other_button_pressed = true
+	else:
+		$"Ports/Output 2".modulate = Color(1,0,0,0.5)
+		output2_is_pressed = false
+		other_button_pressed = false
+		
+
+
+func _on_output_2_mouse_entered() -> void:
+	if not output2_is_pressed:
+		$"Ports/Output 2".modulate = Color(1,0,0,0.75)
+
+
+func _on_output_2_mouse_exited() -> void:
+	if not output2_is_pressed:
+		$"Ports/Output 2".modulate = Color(1,0,0,0.5)

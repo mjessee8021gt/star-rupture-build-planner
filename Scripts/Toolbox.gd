@@ -78,8 +78,12 @@ func _ready() -> void:
 	shipmentMenu.name = "Shipment"
 	shipmentMenu.add_item("Orbital Cargo Launcher")
 	shipmentMenu.add_item("Cargo Dispatcher")
+	shipmentMenu.set_item_metadata(shipmentMenu.item_count-1, &"dispatcher")
 	shipmentMenu.add_item("Cargo Receiver")
+	shipmentMenu.set_item_metadata(shipmentMenu.item_count-1, &"receiver")
 	shipmentMenu.add_item("Teleporter")
+	shipmentMenu.id_pressed.connect(_on_build_selected.bind(shipmentMenu))
+	print("Shipment Menu Item Selected.")
 	
 	var storageMenu = PopupMenu.new()
 	storageMenu.name = "Storage"

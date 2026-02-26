@@ -9,7 +9,7 @@
 
 [resource]
 script = ExtResource("2_3m8sw")
-id = &"nano_fibre"
+id = &"Nano Fibre"
 display_name = "Nano Fibre"
 inputs = Array[ExtResource("1_1e18y")]([ExtResource("2_qypr4"), ExtResource("3_7eoe2")])
 outputs = Array[ExtResource("1_1e18y")]([ExtResource("4_m4yr0")])

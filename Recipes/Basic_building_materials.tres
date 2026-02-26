@@ -9,7 +9,7 @@
 
 [resource]
 script = ExtResource("2_ss2a6")
-id = &"basic_building_materials"
+id = &"Basic Building Materials"
 display_name = "Basic Build Mats"
 inputs = Array[ExtResource("1_76gna")]([ExtResource("2_eamva"), ExtResource("3_m75pj")])
 outputs = Array[ExtResource("1_76gna")]([ExtResource("4_oj4tk")])

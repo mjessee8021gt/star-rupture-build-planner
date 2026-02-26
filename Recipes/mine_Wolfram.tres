@@ -10,7 +10,7 @@
 
 [resource]
 script = ExtResource("3_q2bct")
-id = &"wolfram_ore"
+id = &"Wolfram Ore"
 display_name = "Wolfram Ore"
 outputs = Array[ExtResource("1_camg2")]([ExtResource("2_camg2")])
 variants = Array[ExtResource("4_w1xrf")]([ExtResource("5_s3f6v"), ExtResource("6_q2bct"), ExtResource("7_w1xrf")])

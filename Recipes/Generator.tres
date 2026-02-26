@@ -10,7 +10,7 @@
 
 [resource]
 script = ExtResource("2_vu3g7")
-id = &"generator"
+id = &"Generator"
 display_name = "Generator"
 inputs = Array[ExtResource("1_fbs50")]([ExtResource("2_lqb7j"), ExtResource("3_toxb4"), ExtResource("4_joook")])
 outputs = Array[ExtResource("1_fbs50")]([ExtResource("5_blpix")])

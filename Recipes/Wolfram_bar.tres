@@ -8,7 +8,7 @@
 
 [resource]
 script = ExtResource("3_csthl")
-id = &"wolfram_bar"
+id = &"Wolfram Bar"
 display_name = "Wolfram Bar"
 inputs = Array[ExtResource("1_6ujra")]([ExtResource("2_xota2")])
 outputs = Array[ExtResource("1_6ujra")]([ExtResource("3_2d5d7")])

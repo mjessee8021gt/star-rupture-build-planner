@@ -11,7 +11,7 @@
 
 [resource]
 script = ExtResource("2_t1oar")
-id = &"electromagnetic_coil"
+id = &"Electromagnetic Coil"
 display_name = "Electromagnetic Coil"
 inputs = Array[ExtResource("1_ln1sd")]([ExtResource("2_wpdo8"), ExtResource("3_dsxdu"), ExtResource("4_m5mnm"), ExtResource("5_ysojv")])
 outputs = Array[ExtResource("1_ln1sd")]([ExtResource("6_dyylu")])

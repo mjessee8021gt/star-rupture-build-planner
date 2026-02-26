@@ -1,29 +1,30 @@
 extends Node2D
 
 @export var tileMap : TileMap
-var footprint := Vector2i(3,4)
-@export var footprint_primary := Vector2i(3,4)
-@export var footprint_alt := Vector2i(4,4)
 @export var is_alternate := false
 @export var rotatedTick := 0
+var footprint := Vector2i(6, 6)
+@export var footprint_primary := Vector2i(6,6)
+@export var footprint_alt := Vector2i(7,7)
 @export var anchor := Vector2i.ZERO
 @onready var placement_area: Area2D = $PlacementArea
 
-@export var heat := 3
-@export var power := -5
+@onready var recipe_dropdown: OptionButton = $Recipe
+
+@export var heat := 60
+@export var power := -40
+
+@export var available_recipes: Array[Recipe] = []
 
 var input1_is_connected := false
 var input1_is_pressed := false
-var output1_is_connected := false
-var output1_is_pressed := false
 var other_button_pressed := false
 
 signal port_drag_started(building: Node2D, port_name: String, port_global_pos: Vector2)
 signal port_drag_updated(building: Node2D, port_name: String, port_global_pos: Vector2)
 signal port_drag_ended(building: Node2D, port_name: String, port_global_pos: Vector2)
 
-@onready var output_port := $"Ports/Output 1"
-@onready var input_port := $"Ports/Input 1"
+@onready var input1_port := $"Ports/Input 1"
 
 var _dragging_port := ""
 var _dragging := false
@@ -32,11 +33,11 @@ var dragging := false
 var drag_offset := Vector2.ZERO
 
 func _ready() -> void:
-	$"Ports/Output 1".modulate = Color(1,0,0,0.5)
 	$"Ports/Input 1".modulate = Color(0,1,0,0.5)
-	output_port.pressed.connect(func(): _start_port_drag("output"))
-	input_port.pressed.connect(func(): _start_port_drag("input"))
+	
+	input1_port.pressed.connect(func(): _start_port_drag("Input 1"))
 	add_to_group("buildings")
+	populate_recipe_dropdown()
 
 func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int):
 	if event is InputEventMouseButton:
@@ -82,56 +83,21 @@ func flip_footprint() -> void:
 		$AlternateSprite.visible = true
 		$CollisionShape2D.disabled = true
 		$CollisionShapeAlt.disabled = false
-		$TitleLabel.position.x = 27.5
-		is_alternate = true
+		$TitleLabel.position = Vector2(38, 6)
+		$"Ports/Input 1".position = Vector2(62, 107)
+		$Recipe.position = Vector2(13, 46)
 		footprint = footprint_alt
+		is_alternate = true
 	else:
 		$PrimarySprite.visible = true
 		$CollisionShape2D.disabled = false
 		$AlternateSprite.visible = false
 		$CollisionShapeAlt.disabled = true
-		$TitleLabel.position.x = 14
-		is_alternate = false
+		$TitleLabel.position = Vector2(21, 6)
+		$"Ports/Input 1".position = Vector2(45, 107)
+		$Recipe.position = Vector2(0, 46)
 		footprint = footprint_primary
-		
-func _on_input_1_mouse_entered() -> void:
-	if not input1_is_pressed:
-		$"Ports/Input 1".modulate = Color(0,1,0,0.75)
-
-func _on_input_1_mouse_exited() -> void:
-	if not input1_is_pressed:
-		$"Ports/Input 1".modulate = Color(0,1,0,0.5)
-
-
-func _on_input_1_pressed() -> void:
-	if not input1_is_pressed:
-		if not other_button_pressed:
-			$"Ports/Input 1".modulate = Color(0,1,0,1.0)
-			input1_is_pressed = true
-			other_button_pressed = true
-	else:
-		$"Ports/Input 1".modulate = Color(0,1,0,0.5)
-		input1_is_pressed = false
-		other_button_pressed = false
-
-func _on_output_1_mouse_entered() -> void:
-	if not output1_is_pressed:
-		$"Ports/Output 1".modulate = Color(1,0,0,0.75)
-
-func _on_output_1_mouse_exited() -> void:
-	if not output1_is_pressed:
-		$"Ports/Output 1".modulate = Color(1,0,0,0.5)
-
-func _on_output_1_pressed() -> void:
-	if not output1_is_pressed:
-		if not other_button_pressed:
-			$"Ports/Output 1".modulate = Color(1,0,0,1.0)
-			output1_is_pressed = true
-			other_button_pressed = true
-	else:
-		$"Ports/Output 1".modulate = Color(1,0,0,0.5)
-		output1_is_pressed = false
-		other_button_pressed = false
+		is_alternate = false
 		
 func _start_port_drag(port_name: String) -> void:	
 	_dragging = true
@@ -146,10 +112,8 @@ func cancel_port_drag() -> void:
 	
 func _get_port_global_pos(port_name: String) -> Vector2:
 	match port_name:
-		"output":
-			return output_port.global_position + output_port.size * 0.5
-		"input":
-			return input_port.global_position + input_port.size * 0.5
+		"Input 1":
+			return input1_port.global_position + input1_port.size * 0.5
 		_:
 			return global_position
 
@@ -158,3 +122,39 @@ func _unhandled_input(event: InputEvent) -> void:
 		_dragging = false
 		emit_signal("port_drag_ended", self, _dragging_port, get_global_mouse_position())
 		_dragging_port = ""
+		
+func populate_recipe_dropdown() -> void:
+	recipe_dropdown.clear()
+	
+	for i in available_recipes.size():
+		var recipe := available_recipes[i]
+		recipe_dropdown.add_item(recipe.display_name)
+		#we need to store which recipe we're referring to above
+		recipe_dropdown.set_item_metadata(i, recipe)
+		
+	#now we're selecting the first recipe by defualt and populating the purity list
+	if available_recipes.size() > 0:
+		recipe_dropdown.select(0)
+		
+
+
+func _on_input_1_pressed() -> void:
+	if not input1_is_pressed:
+		if not other_button_pressed:
+			$"Ports/Input 1".modulate = Color(0,1,0,1.0)
+			input1_is_pressed = true
+			other_button_pressed = true
+	else:
+		$"Ports/Input 1".modulate = Color(0,1,0,0.5)
+		input1_is_pressed = false
+		other_button_pressed = false
+
+
+func _on_input_1_mouse_entered() -> void:
+	if not input1_is_pressed:
+		$"Ports/Input 1".modulate = Color(0,1,0,0.75)
+
+
+func _on_input_1_mouse_exited() -> void:
+	if not input1_is_pressed:
+		$"Ports/Input 1".modulate = Color(0,1,0,0.5)

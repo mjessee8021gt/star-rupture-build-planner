@@ -10,7 +10,7 @@
 
 [resource]
 script = ExtResource("2_2cief")
-id = &"laser_emitter"
+id = &"Laser Emitter"
 display_name = "Laser Emitter"
 inputs = Array[ExtResource("1_0vr16")]([ExtResource("2_nd4pa"), ExtResource("3_ivus2"), ExtResource("4_ubqjf")])
 outputs = Array[ExtResource("1_0vr16")]([ExtResource("5_nbl28")])

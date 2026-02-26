@@ -11,7 +11,7 @@
 
 [resource]
 script = ExtResource("2_vuf2f")
-id = &"pressure_tank"
+id = &"Pressure Tank"
 display_name = "Pressure Tank"
 inputs = Array[ExtResource("1_go2ex")]([ExtResource("2_25oqg"), ExtResource("3_e4uvv"), ExtResource("4_howas"), ExtResource("5_vng87")])
 outputs = Array[ExtResource("1_go2ex")]([ExtResource("6_cedex")])

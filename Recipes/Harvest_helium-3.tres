@@ -2,8 +2,12 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_opioy"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_earde"]
+[ext_resource type="Resource" uid="uid://c5h8ebvchm6rj" path="res://Recipes/Item Stacks/Helium-3_240_def.tres" id="2_vmpux"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_vmpux"]
 
 [resource]
 script = ExtResource("2_earde")
+id = &"Helium-3"
+display_name = "Helium-3"
+outputs = Array[ExtResource("1_opioy")]([ExtResource("2_vmpux")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

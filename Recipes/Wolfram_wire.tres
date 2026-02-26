@@ -8,7 +8,7 @@
 
 [resource]
 script = ExtResource("2_ybuc3")
-id = &"wolfram_wire"
+id = &"Wolfram Wire"
 display_name = "Wolfram Wire"
 inputs = Array[ExtResource("1_s11k8")]([ExtResource("2_87jda")])
 outputs = Array[ExtResource("1_s11k8")]([ExtResource("3_gqtja")])

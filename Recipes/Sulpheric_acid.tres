@@ -9,7 +9,7 @@
 
 [resource]
 script = ExtResource("2_2trs3")
-id = &"sulpheric_acid"
+id = &"Sulpheric Acid"
 display_name = "Sulpheric Acid"
 inputs = Array[ExtResource("1_4jggs")]([ExtResource("2_u4tq0"), ExtResource("3_xx8c5")])
 outputs = Array[ExtResource("1_4jggs")]([ExtResource("4_iuqru")])

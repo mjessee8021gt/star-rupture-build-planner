@@ -10,7 +10,7 @@
 
 [resource]
 script = ExtResource("2_mhe42")
-id = &"inductor"
+id = &"Inductor"
 display_name = "Inductor"
 inputs = Array[ExtResource("1_6e6go")]([ExtResource("2_r5a1x"), ExtResource("3_tp7bk"), ExtResource("4_ayn4g")])
 outputs = Array[ExtResource("1_6e6go")]([ExtResource("5_8be1i")])

@@ -10,7 +10,7 @@
 
 [resource]
 script = ExtResource("2_dlgk5")
-id = &"hardening_agent"
+id = &"Hardening Agent"
 display_name = "Hardening Agent"
 inputs = Array[ExtResource("1_jysgk")]([ExtResource("2_uhvon"), ExtResource("3_yvbli"), ExtResource("4_hjjvv")])
 outputs = Array[ExtResource("1_jysgk")]([ExtResource("5_3ce7k")])

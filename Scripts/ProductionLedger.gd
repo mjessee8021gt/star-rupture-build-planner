@@ -9,7 +9,10 @@ var net_totals: Dictionary = {} #key: StringName, Value: Float
 #track per-building contributions so removal of buildings is easy and debuggable
 var by_source: Dictionary = {} # source_id -> {resource_key: delta}
 
-func add_source(source_id: int, deltas: Dictionary) -> void:
+func add_source(source_id: int, source: Object, deltas: Dictionary) -> void:
+	if source == null or not source.has_method("get_production_deltas"):
+		return
+	
 	# deltas: {&"titanium_ore": -30, &"titanium_bar": +30}
 	if by_source.has(source_id):
 		remove_source(source_id)

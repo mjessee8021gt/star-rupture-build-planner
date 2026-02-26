@@ -11,7 +11,7 @@
 
 [resource]
 script = ExtResource("2_ggkha")
-id = &"condenser"
+id = &"Condenser"
 display_name = "Condenser"
 inputs = Array[ExtResource("1_taea0")]([ExtResource("2_lw2n5"), ExtResource("3_0qkt7"), ExtResource("4_qyvn3"), ExtResource("5_cyfrk")])
 outputs = Array[ExtResource("1_taea0")]([ExtResource("6_86uqr")])

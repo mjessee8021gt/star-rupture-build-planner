@@ -8,7 +8,7 @@
 
 [resource]
 script = ExtResource("2_g7kb3")
-id = &"calcium_powder"
+id = &"Calcium Powder"
 display_name = "Calcium Powder"
 inputs = Array[ExtResource("1_kwplt")]([ExtResource("2_mqeqk")])
 outputs = Array[ExtResource("1_kwplt")]([ExtResource("3_fr8ud")])

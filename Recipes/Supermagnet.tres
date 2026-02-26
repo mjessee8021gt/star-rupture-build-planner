@@ -10,7 +10,7 @@
 
 [resource]
 script = ExtResource("2_i0wnl")
-id = &"supermagnet"
+id = &"Supermagnet"
 display_name = "Supermagnet"
 inputs = Array[ExtResource("1_3hd42")]([ExtResource("2_6nd1a"), ExtResource("3_v5ns8"), ExtResource("4_gue8w")])
 outputs = Array[ExtResource("1_3hd42")]([ExtResource("5_u7y58")])

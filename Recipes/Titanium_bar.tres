@@ -8,7 +8,7 @@
 
 [resource]
 script = ExtResource("3_5r0oo")
-id = &"titanium_bar"
+id = &"Titanium Bar"
 display_name = "Titanium Bar"
 inputs = Array[ExtResource("1_oec6e")]([ExtResource("2_oqhyi")])
 outputs = Array[ExtResource("1_oec6e")]([ExtResource("3_ur2ua")])

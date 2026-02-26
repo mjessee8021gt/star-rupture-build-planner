@@ -177,7 +177,7 @@ func _on_purity_item_selected(index: int) -> void:
 	
 	_selected_variant = variant
 	_update_output_text_from_variant(variant)
-	ProdLedger.add_source(get_instance_id(),get_production_deltas(variant))
+	ProdLedger.add_source(get_instance_id(),self ,get_production_deltas(variant))
 		
 func _update_output_text_from_variant(variant: RecipeVariant) -> void:
 	output_text.text = str(variant.output_qty)

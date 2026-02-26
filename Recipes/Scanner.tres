@@ -10,7 +10,7 @@
 
 [resource]
 script = ExtResource("2_31rp7")
-id = &"scanner"
+id = &"Scanner"
 display_name = "Scanner"
 inputs = Array[ExtResource("1_h5d0w")]([ExtResource("2_e37lj"), ExtResource("3_o1uyh"), ExtResource("4_l07b4")])
 outputs = Array[ExtResource("1_h5d0w")]([ExtResource("5_ajkwb")])

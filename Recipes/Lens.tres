@@ -10,7 +10,7 @@
 
 [resource]
 script = ExtResource("2_nfn4r")
-id = &"lens"
+id = &"Lens"
 display_name = "Lens"
 inputs = Array[ExtResource("1_wx80y")]([ExtResource("2_136dx"), ExtResource("3_qlws0"), ExtResource("4_f37nm")])
 outputs = Array[ExtResource("1_wx80y")]([ExtResource("5_cqvnw")])

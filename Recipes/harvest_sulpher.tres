@@ -2,8 +2,12 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_ej0ba"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_bj24t"]
+[ext_resource type="Resource" uid="uid://bgv80ya8600bd" path="res://Recipes/Item Stacks/Sulphur_ore_240_def.tres" id="2_m4460"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_m4460"]
 
 [resource]
 script = ExtResource("2_bj24t")
+id = &"Sulphur Ore"
+display_name = "Sulphur Ore"
+outputs = Array[ExtResource("1_ej0ba")]([ExtResource("2_m4460")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

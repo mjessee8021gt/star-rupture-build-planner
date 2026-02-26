@@ -11,7 +11,7 @@
 
 [resource]
 script = ExtResource("2_mmxwh")
-id = &"impeller"
+id = &"Impeller"
 display_name = "Impeller"
 inputs = Array[ExtResource("1_qvp8o")]([ExtResource("2_iehna"), ExtResource("3_nbuls"), ExtResource("4_cu6i7"), ExtResource("5_d0gnp")])
 outputs = Array[ExtResource("1_qvp8o")]([ExtResource("6_wnbtj")])

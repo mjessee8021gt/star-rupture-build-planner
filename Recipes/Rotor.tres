@@ -9,7 +9,7 @@
 
 [resource]
 script = ExtResource("2_3xrfq")
-id = &"rotor"
+id = &"Rotor"
 display_name = "Rotor"
 inputs = Array[ExtResource("1_daymd")]([ExtResource("2_21rce"), ExtResource("3_3dij2")])
 outputs = Array[ExtResource("1_daymd")]([ExtResource("4_w05by")])

@@ -10,7 +10,7 @@
 
 [resource]
 script = ExtResource("3_ly0he")
-id = &"titanium_ore"
+id = &"Titanium Ore"
 display_name = "Titanium Ore"
 outputs = Array[ExtResource("1_48luu")]([ExtResource("2_48luu")])
 variants = Array[ExtResource("4_ju02q")]([ExtResource("5_48luu"), ExtResource("6_pxhts"), ExtResource("7_ly0he")])

@@ -8,7 +8,7 @@
 
 [resource]
 script = ExtResource("2_btn8g")
-id = &"wolfram_powder"
+id = &"Wolfram Powder"
 display_name = "Wolfram Powder"
 inputs = Array[ExtResource("1_apqo0")]([ExtResource("2_vxfgy")])
 outputs = Array[ExtResource("1_apqo0")]([ExtResource("3_330nf")])

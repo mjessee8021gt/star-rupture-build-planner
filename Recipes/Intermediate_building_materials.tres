@@ -11,7 +11,7 @@
 
 [resource]
 script = ExtResource("2_1g03m")
-id = &"intermediate_building_materials"
+id = &"Intermediate Building Materials"
 display_name = "Intermed Build Mats"
 inputs = Array[ExtResource("1_8ymre")]([ExtResource("2_nflx5"), ExtResource("3_hxw2d"), ExtResource("4_anpxd"), ExtResource("5_pvj26")])
 outputs = Array[ExtResource("1_8ymre")]([ExtResource("6_u7o4i")])

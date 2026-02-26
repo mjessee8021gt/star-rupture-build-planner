@@ -10,7 +10,7 @@
 
 [resource]
 script = ExtResource("2_7vdkg")
-id = &"synthetic_silicon"
+id = &"Synthetic Silicon"
 display_name = "Synthetic Silicon"
 inputs = Array[ExtResource("1_kh4ry")]([ExtResource("2_rrpd5"), ExtResource("3_gprd7"), ExtResource("4_2n452")])
 outputs = Array[ExtResource("1_kh4ry")]([ExtResource("5_60p4l")])

@@ -10,7 +10,7 @@
 
 [resource]
 script = ExtResource("3_16cpo")
-id = &"calcium_ore"
+id = &"Calcium Ore"
 display_name = "Calcium Ore"
 outputs = Array[ExtResource("1_c5xoj")]([ExtResource("2_5a4eg")])
 variants = Array[ExtResource("4_vsl46")]([ExtResource("5_4eop1"), ExtResource("6_6v00b"), ExtResource("7_wfr8p")])

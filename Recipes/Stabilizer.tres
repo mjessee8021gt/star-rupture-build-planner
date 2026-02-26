@@ -9,7 +9,7 @@
 
 [resource]
 script = ExtResource("2_ouxvq")
-id = &"stabilizer"
+id = &"Stabilizer"
 display_name = "Stabilizer"
 inputs = Array[ExtResource("1_uhnxv")]([ExtResource("2_rcmau"), ExtResource("3_1qd3v")])
 outputs = Array[ExtResource("1_uhnxv")]([ExtResource("4_8rvqp")])

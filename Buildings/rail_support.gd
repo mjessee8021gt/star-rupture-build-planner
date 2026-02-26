@@ -148,15 +148,20 @@ func cancel_port_drag() -> void:
 	
 func _get_port_global_pos(port_name: String) -> Vector2:
 	match port_name:
-		"universal 1":
-			return u_port1.global_position + u_port1.size * 0.5
-		"universal 2":
-			return u_port2.global_position + u_port2.size * 0.5
+		"Universal 1":
+			return u_port1.get_global_rect().get_center()
+		"Universal 2":
+			return u_port2.get_global_rect().get_center()
 		_:
 			return global_position
 
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if _dragging and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
 		_dragging = false
-		emit_signal("port_drag_ended", self, _dragging_port, get_global_mouse_position())
+		
+		#we need to use the center of the button here for ther final endpoint
+		print("UNHANDLED INPUT FROM BUILDING: " + str(_dragging_port))
+		var p := _get_port_global_pos(_dragging_port)
+		emit_signal("port_drag_ended", self, _dragging_port, p)
+		
 		_dragging_port = ""

@@ -11,7 +11,7 @@
 
 [resource]
 script = ExtResource("2_sqo0o")
-id = &"pump"
+id = &"Pump"
 display_name = "Pump"
 inputs = Array[ExtResource("1_ck7jf")]([ExtResource("2_3uvrr"), ExtResource("3_12fbo"), ExtResource("4_6omf2"), ExtResource("5_q6qet")])
 outputs = Array[ExtResource("1_ck7jf")]([ExtResource("6_787l6")])

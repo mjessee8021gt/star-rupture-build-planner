@@ -9,7 +9,7 @@
 
 [resource]
 script = ExtResource("2_td4d6")
-id = &"liquid_helium"
+id = &"Liquid Helium"
 display_name = "Liquid Helium"
 inputs = Array[ExtResource("1_duxjn")]([ExtResource("2_6ywmq"), ExtResource("3_r5uyi")])
 outputs = Array[ExtResource("1_duxjn")]([ExtResource("4_0lhkv")])

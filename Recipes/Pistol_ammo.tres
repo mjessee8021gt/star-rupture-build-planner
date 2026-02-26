@@ -8,7 +8,7 @@
 
 [resource]
 script = ExtResource("2_s35nw")
-id = &"pistol_ammo"
+id = &"Pistol Ammo"
 display_name = "Pistol Ammo"
 inputs = Array[ExtResource("1_kbsoy")]([ExtResource("2_c40ym")])
 outputs = Array[ExtResource("1_kbsoy")]([ExtResource("3_kvkiv")])

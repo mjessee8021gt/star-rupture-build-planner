@@ -10,7 +10,7 @@
 
 [resource]
 script = ExtResource("2_4b6fy")
-id = &"accumulator"
+id = &"Accumulator"
 display_name = "Accumulator"
 inputs = Array[ExtResource("1_dtuvj")]([ExtResource("2_nugwj"), ExtResource("3_knoud"), ExtResource("4_jphoa")])
 outputs = Array[ExtResource("1_dtuvj")]([ExtResource("5_dgaoq")])

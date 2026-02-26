@@ -8,7 +8,7 @@
 
 [resource]
 script = ExtResource("2_ehmde")
-id = &"calcite_sheet"
+id = &"Calcite Sheet"
 display_name = "Calcite Sheet"
 inputs = Array[ExtResource("1_jji1w")]([ExtResource("2_03fuf")])
 outputs = Array[ExtResource("1_jji1w")]([ExtResource("3_m65p3")])

@@ -10,7 +10,7 @@
 
 [resource]
 script = ExtResource("2_lhldj")
-id = &"ion_injector"
+id = &"Ion Injector"
 display_name = "Ion Injector"
 inputs = Array[ExtResource("1_nyj2k")]([ExtResource("2_8u74w"), ExtResource("3_bp7vk"), ExtResource("4_0lutb")])
 outputs = Array[ExtResource("1_nyj2k")]([ExtResource("5_xjs8n")])

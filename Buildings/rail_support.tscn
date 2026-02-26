@@ -38,10 +38,13 @@ disabled = true
 
 [node name="PlacementAreaAlt" type="Area2D" parent="." unique_id=445836450]
 
-[node name="Ports" type="Node2D" parent="." unique_id=1067444767]
+[node name="Ports" type="Control" parent="." unique_id=1600385270]
+layout_mode = 3
+anchors_preset = 0
 
 [node name="Universal 1" type="Button" parent="Ports" unique_id=1122308628 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
+layout_mode = 0
 offset_left = 5.0000014
 offset_top = 1.0000001
 offset_right = 77.0
@@ -52,6 +55,7 @@ metadata/normal = Vector2(0, -1)
 
 [node name="Universal 2" type="Button" parent="Ports" unique_id=1958701130 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
+layout_mode = 0
 offset_left = 5.0000014
 offset_top = 18.0
 offset_right = 77.0

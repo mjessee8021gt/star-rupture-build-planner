@@ -8,7 +8,7 @@
 
 [resource]
 script = ExtResource("2_8dnae")
-id = &"wolfram_plate"
+id = &"Wolfram Plate"
 display_name = "Wolfram Plate"
 inputs = Array[ExtResource("1_2ksjw")]([ExtResource("2_grswv")])
 outputs = Array[ExtResource("1_2ksjw")]([ExtResource("3_gscov")])

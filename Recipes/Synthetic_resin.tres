@@ -10,7 +10,7 @@
 
 [resource]
 script = ExtResource("2_1g8pw")
-id = &"synthetic_resin"
+id = &"Synthetic Resin"
 display_name = "Synthetic Resin"
 inputs = Array[ExtResource("1_wdish")]([ExtResource("2_qlcwa"), ExtResource("3_qfusi"), ExtResource("4_i2s7v")])
 outputs = Array[ExtResource("1_wdish")]([ExtResource("5_wsadu")])

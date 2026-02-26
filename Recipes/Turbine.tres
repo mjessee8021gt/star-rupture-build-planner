@@ -11,7 +11,7 @@
 
 [resource]
 script = ExtResource("2_j5t6b")
-id = &"turbine"
+id = &"Turbine"
 display_name = "Turbine"
 inputs = Array[ExtResource("1_6ru74")]([ExtResource("2_c8w3a"), ExtResource("3_qwqxt"), ExtResource("4_l7rgc"), ExtResource("5_6ptwi")])
 outputs = Array[ExtResource("1_6ru74")]([ExtResource("6_jh78l")])
