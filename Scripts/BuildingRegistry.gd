@@ -14,7 +14,10 @@ const BUILDINGS := {
 	&"rail_connector": preload("res://Buildings/rail_connector.tscn"),
 	&"rail_modulator_3": preload("res://Buildings/rail_modulator_3.tscn"),
 	&"receiver":preload("res://Buildings/Receiver.tscn"),
-	&"dispatcher": preload("res://Buildings/Dispatcher.tscn")
+	&"dispatcher": preload("res://Buildings/Dispatcher.tscn"),
+	&"helium_extractor": preload("res://Buildings/Helium Extractor.tscn"),
+	&"sulfur_extractor": preload("res://Buildings/Sulfur Extractor.tscn"),
+	&"solar_v1": preload("res://Buildings/Solar V1.tscn")
 }
 
 

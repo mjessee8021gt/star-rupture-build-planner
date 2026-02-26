@@ -13,6 +13,7 @@ size = Vector2(64, 64)
 
 [node name="Rail Support" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_kxssu")
+id = &"rail_support"
 metadata/_edit_vertical_guides_ = [32.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]

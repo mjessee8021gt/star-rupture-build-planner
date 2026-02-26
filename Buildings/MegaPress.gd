@@ -3,6 +3,7 @@ extends Node2D
 @export var tileMap : TileMap
 @export var is_alternate := false
 @export var rotatedTick := 0
+@export var id : StringName
 var footprint := Vector2i(4,5)
 @export var footprint_primary := Vector2i(4,5)
 @export var footprint_alt := Vector2i(5,6)

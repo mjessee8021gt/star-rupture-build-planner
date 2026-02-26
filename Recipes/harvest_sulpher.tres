@@ -7,7 +7,7 @@
 
 [resource]
 script = ExtResource("2_bj24t")
-id = &"Sulphur Ore"
+id = &"Sulfur Ore"
 display_name = "Sulphur Ore"
 outputs = Array[ExtResource("1_ej0ba")]([ExtResource("2_m4460")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

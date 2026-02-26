@@ -17,6 +17,7 @@ size = Vector2(128, 128)
 
 [node name="Smelter" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_7hisn")
+id = &"smelter"
 available_recipes = Array[ExtResource("2_3rles")]([ExtResource("3_yt2l3"), ExtResource("4_e8x7b"), ExtResource("5_356qw")])
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]

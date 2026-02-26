@@ -25,6 +25,7 @@ size = Vector2(160, 192)
 
 [node name="Mega Press" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_oc300")
+id = &"megapress"
 available_recipes = Array[ExtResource("2_omxsb")]([ExtResource("3_facf6"), ExtResource("4_omxsb"), ExtResource("5_hurqg"), ExtResource("6_4e8em"), ExtResource("7_nyaiv"), ExtResource("8_x2mdb"), ExtResource("9_8hkdk"), ExtResource("10_hqy5a"), ExtResource("11_jcftm"), ExtResource("12_txqpt"), ExtResource("13_w5apf")])
 metadata/_edit_vertical_guides_ = [63.0, 48.0, 64.0, 80.0, -24.0]
 

@@ -20,6 +20,7 @@ size = Vector2(224, 224)
 
 [node name="Compounder" type="Node2D" unique_id=1728206745]
 script = ExtResource("1_n8472")
+id = &"compounder"
 available_recipes = Array[ExtResource("2_6v4mf")]([ExtResource("3_n8472"), ExtResource("4_wrwtp"), ExtResource("5_gh8q4"), ExtResource("6_n22x6"), ExtResource("7_kxkh6"), ExtResource("8_dtdv0")])
 metadata/_edit_vertical_guides_ = [63.0, 48.0, 64.0, 96.0, 112.0]
 

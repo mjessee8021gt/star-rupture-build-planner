@@ -6,6 +6,7 @@ var footprint := Vector2i(1, 1)
 @export var footprint_alt := Vector2i(2, 2)
 @export var is_alternate := false
 @export var rotatedTick := 0
+@export var id : StringName
 @export var anchor := Vector2i.ZERO
 @onready var placement_area: Area2D = $PlacementArea
 

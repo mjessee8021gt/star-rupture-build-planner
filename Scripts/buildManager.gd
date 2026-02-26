@@ -113,8 +113,12 @@ func confirm_build() -> void:
 	$"../buildings".add_child(real)
 	
 	occupy_cells(footprint, real)
+	
 	$"../Camera2D/CanvasLayer/Panel/HeatLabel".text = str(int($"../Camera2D/CanvasLayer/Panel/HeatLabel".text) + real.heat)
 	$"../Camera2D/CanvasLayer/Panel/PowerLabel".text = str(int($"../Camera2D/CanvasLayer/Panel/PowerLabel".text) + real.power)
+	
+	if real.id == &"helium_extractor" or real.id == &"sulfur_extractor":
+		ProdLedger.add_source(real.get_instance_id(), real,real.get_production_deltas(real.recipe))
 	cancel_build()
 	
 func free_cells_for_building(building: Node) -> void:

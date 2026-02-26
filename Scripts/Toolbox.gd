@@ -26,7 +26,9 @@ func _ready() -> void:
 	extractionMenu.add_item("Ore Excavator")
 	extractionMenu.set_item_metadata(extractionMenu.item_count-1, &"ore_excavator")
 	extractionMenu.add_item("Helium-3 Extractor")
+	extractionMenu.set_item_metadata(extractionMenu.item_count-1, &"helium_extractor")
 	extractionMenu.add_item("Sulfur Extractor")
+	extractionMenu.set_item_metadata(extractionMenu.item_count-1, &"sulfur_extractor")
 	extractionMenu.id_pressed.connect(_on_build_selected.bind(extractionMenu))
 	print("Extraction Menu Item Selected...")
 	
@@ -56,9 +58,12 @@ func _ready() -> void:
 	var powerMenu = PopupMenu.new()
 	powerMenu.name = "Power"
 	powerMenu.add_item("Solar Mk1")
+	powerMenu.set_item_metadata(powerMenu.item_count-1, &"solar_v1")
 	powerMenu.add_item("Wind Mk1")
 	powerMenu.add_item("Solar Mk2")
 	powerMenu.add_item("Wind Mk2")
+	powerMenu.id_pressed.connect(_on_build_selected.bind(powerMenu))
+	print("Power Menu Item Selected...")
 	
 	var railMenu = PopupMenu.new()
 	railMenu.name = "Rails"
@@ -72,7 +77,7 @@ func _ready() -> void:
 	railMenu.add_item("Multirail 5")
 	railMenu.add_item("Rail Modulator 5")
 	railMenu.id_pressed.connect(_on_build_selected.bind(railMenu))
-	print("Rail Menu Item Selected.")
+	print("Rail Menu Item Selected...")
 	
 	var shipmentMenu = PopupMenu.new()
 	shipmentMenu.name = "Shipment"
@@ -83,7 +88,7 @@ func _ready() -> void:
 	shipmentMenu.set_item_metadata(shipmentMenu.item_count-1, &"receiver")
 	shipmentMenu.add_item("Teleporter")
 	shipmentMenu.id_pressed.connect(_on_build_selected.bind(shipmentMenu))
-	print("Shipment Menu Item Selected.")
+	print("Shipment Menu Item Selected...")
 	
 	var storageMenu = PopupMenu.new()
 	storageMenu.name = "Storage"

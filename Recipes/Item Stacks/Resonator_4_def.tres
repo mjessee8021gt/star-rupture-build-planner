@@ -7,5 +7,5 @@
 script = ExtResource("2_iitv2")
 item = ExtResource("1_ec8f1")
 qty = 4
-id = &"resonator"
+id = &"Resonator"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

@@ -26,6 +26,7 @@ size = Vector2(128, 128)
 
 [node name="Furnace" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_a2cv4")
+id = &"furnace"
 footprint_primary = Vector2i(3, 4)
 available_recipes = Array[ExtResource("2_u3fyf")]([ExtResource("3_l2jlo"), ExtResource("4_a2cv4"), ExtResource("5_u3fyf"), ExtResource("6_o0iyx"), ExtResource("7_dkke5"), ExtResource("8_wcpt0"), ExtResource("9_ou50j"), ExtResource("10_sn8a3"), ExtResource("11_k6fgg"), ExtResource("12_ngkt1"), ExtResource("13_m5eqo"), ExtResource("14_sov4o")])
 metadata/_edit_vertical_guides_ = [63.0, 48.0, 64.0]

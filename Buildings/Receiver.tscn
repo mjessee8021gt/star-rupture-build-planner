@@ -74,6 +74,7 @@ size = Vector2(160, 128)
 
 [node name="Receiver" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_vgmvo")
+id = &"receiver"
 footprint_primary = Vector2i(4, 4)
 footprint_alt = Vector2i(5, 4)
 heat = 40

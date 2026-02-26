@@ -7,5 +7,5 @@
 script = ExtResource("2_jsx8w")
 item = ExtResource("1_m21oy")
 qty = 10
-id = &"laser_emitter"
+id = &"Laser Emitter"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"
