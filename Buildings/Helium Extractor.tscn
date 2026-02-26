@@ -14,8 +14,6 @@ size = Vector2(128, 128)
 [node name="Helium Extractor" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_lri10")
 id = &"helium_extractor"
-footprint_primary = Vector2i(4, 4)
-footprint_alt = Vector2i(4, 4)
 recipe = ExtResource("22_t8n67")
 power = -15
 metadata/_edit_vertical_guides_ = [63.0, 96.0, 112.0, 80.0]

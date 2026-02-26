@@ -60,8 +60,11 @@ func _ready() -> void:
 	powerMenu.add_item("Solar Mk1")
 	powerMenu.set_item_metadata(powerMenu.item_count-1, &"solar_v1")
 	powerMenu.add_item("Wind Mk1")
+	powerMenu.set_item_metadata(powerMenu.item_count-1, &"wind_v1")
 	powerMenu.add_item("Solar Mk2")
+	powerMenu.set_item_metadata(powerMenu.item_count-1, &"solar_v2")
 	powerMenu.add_item("Wind Mk2")
+	powerMenu.set_item_metadata(powerMenu.item_count-1, &"wind_v2")
 	powerMenu.id_pressed.connect(_on_build_selected.bind(powerMenu))
 	print("Power Menu Item Selected...")
 	

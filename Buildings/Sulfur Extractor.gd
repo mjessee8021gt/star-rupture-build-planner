@@ -4,9 +4,9 @@ extends Node2D
 @export var is_alternate := false
 @export var rotatedTick := 0
 @export var id : StringName
-var footprint := Vector2i(6, 6)
-@export var footprint_primary := Vector2i(6,6)
-@export var footprint_alt := Vector2i(7,7)
+var footprint := Vector2i(4, 4)
+@export var footprint_primary := Vector2i(4, 4)
+@export var footprint_alt := Vector2i(4, 4)
 @export var anchor := Vector2i.ZERO
 @onready var placement_area: Area2D = $PlacementArea
 
