@@ -90,7 +90,7 @@ func _on_build_selected(id: int) -> void:
 		$"../Debug Panel/DebugFeed".text = "Menu item missing metadata (no build key). idx=%d id=%d" % [idx, id]
 		return
 
-	var scene_value: Variant = BuildingRegistry.get_scene(key)
+	var scene_value: Variant = BuildRegistry.get_scene(key)
 	$"../Debug Panel/DebugFeed".text = "lookup(" + String(key) + "): " + str(scene_value)
 
 	
@@ -100,7 +100,7 @@ func _on_build_selected(id: int) -> void:
 		$"../Debug Panel/DebugFeed".text = "Submitting build request for:" + str(key)
 		
 		if BuildManager and BuildManager.has_method("start_build"):
-			BuildManager.call_deferred("Start_build", scene)
+			BuildManager.call_deferred("start_build", scene)
 			$"../Debug Panel/DebugFeed".text = "Dispatch: direct BuildManager.start_build(" + str(key) + ")"
 		else:
 			build_requested.emit(scene)
