@@ -71,41 +71,41 @@ func _ready() -> void:
 	add_entry.call("Storage Depot Mk2", &"storage_depot_mk2")
 	add_entry.call("Multistorage", &"multistorage")
 	add_entry.call("Expandable Storage", &"expandable_storage")
-
+	$"../Debug Panel/DebugFeed".text = $"../Debug Panel/DebugFeed".text + "\n" + "Toolbox Menu initialized."
 
 func _on_build_selected(id: int) -> void:
-	$"../Debug Panel/DebugFeed".text = "_on_build_selected function triggered"
+	$"../Debug Panel/DebugFeed".text = $"../Debug Panel/DebugFeed".text + "\n" + "_on_build_selected function triggered"
 	var popup: PopupMenu = get_popup()
 
 	# Convert pressed item id -> index, then read metadata for the scene key
 	var idx := popup.get_item_index(id)
-	$"../Debug Panel/DebugFeed".text = str(idx)
+	$"../Debug Panel/DebugFeed".text = $"../Debug Panel/DebugFeed".text + "\n" + str(idx)
 	if idx < 0:
 		return
 
 	var key := popup.get_item_metadata(idx) as StringName
-	$"../Debug Panel/DebugFeed".text = str(key)
+	$"../Debug Panel/DebugFeed".text = $"../Debug Panel/DebugFeed".text + "\n" + str(key)
 	if key == &"":
 		push_warning("Menu item missing metadata (no build key). idx=%d id=%d" % [idx, id])
-		$"../Debug Panel/DebugFeed".text = "Menu item missing metadata (no build key). idx=%d id=%d" % [idx, id]
+		$"../Debug Panel/DebugFeed".text = $"../Debug Panel/DebugFeed".text + "\n" + "Menu item missing metadata (no build key). idx=%d id=%d" % [idx, id]
 		return
 
 	var scene_value: Variant = BuildRegistry.get_scene(key)
-	$"../Debug Panel/DebugFeed".text = "lookup(" + String(key) + "): " + str(scene_value)
+	$"../Debug Panel/DebugFeed".text = $"../Debug Panel/DebugFeed".text + "\n" + "lookup(" + String(key) + "): " + str(scene_value)
 
 	
 	if scene_value is PackedScene:
 		var scene := scene_value as PackedScene
 		print("Submitting build request for:", key)
-		$"../Debug Panel/DebugFeed".text = "Submitting build request for:" + str(key)
+		$"../Debug Panel/DebugFeed".text = $"../Debug Panel/DebugFeed".text + "\n" + "Submitting build request for:" + str(key)
 		
 		if BuildManager and BuildManager.has_method("start_build"):
 			BuildManager.call_deferred("start_build", scene)
-			$"../Debug Panel/DebugFeed".text = "Dispatch: direct BuildManager.start_build(" + str(key) + ")"
+			$"../Debug Panel/DebugFeed".text = $"../Debug Panel/DebugFeed".text + "\n" + "Dispatch: direct BuildManager.start_build(" + str(key) + ")"
 		else:
 			build_requested.emit(scene)
-			$"../Debug Panel/DebugFeed".text = "Dispatch: build_requested.emit (" + str(key) + ")"
+			$"../Debug Panel/DebugFeed".text = $"../Debug Panel/DebugFeed".text + "\n" + "Dispatch: build_requested.emit (" + str(key) + ")"
 	else:
 		var msg := "No PackedScene registered for key: %s (value=%s)" %[String(key), str(scene_value)]
 		push_warning(msg)
-		$"../Debug Panel/DebugFeed".text = msg
+		$"../Debug Panel/DebugFeed".text = $"../Debug Panel/DebugFeed".text + "\n" + msg

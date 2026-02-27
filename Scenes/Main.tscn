@@ -98,16 +98,16 @@ visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -299.0
+offset_left = -412.0
 offset_top = 5.0
-offset_right = 301.0
-offset_bottom = 45.0
+offset_right = 418.0
+offset_bottom = 708.0
 grow_horizontal = 2
 
 [node name="DebugFeed" type="Label" parent="Camera2D/CanvasLayer/Debug Panel" unique_id=305992419]
 layout_mode = 0
-offset_right = 600.0
-offset_bottom = 39.0
+offset_right = 825.0
+offset_bottom = 698.0
 
 [node name="BuildManager" type="Node2D" parent="." unique_id=695504288]
 script = ExtResource("6_v1gob")

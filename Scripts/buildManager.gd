@@ -3,6 +3,7 @@ extends Node2D
 var current_scene: PackedScene
 var ghost_instance: Node2D
 var ghost_area: Area2D
+@onready var debug_feed : Label = $"../Camera2D/CanvasLayer/Debug Panel/DebugFeed"
 var occupied_cells : Dictionary = {} #Verctor2i -> Node(Building)
 var is_building := false
 @export var canBuildColor := Color(0,1,0, 0.5)
@@ -58,7 +59,7 @@ func _get_prod_source_id(building: Node) -> int:
 #entry point to the build manager for the MenuButton
 func start_build(scene: PackedScene) -> void:
 	print("We are now starting the build preview in the build manager")
-	$"../Camera2D/CanvasLayer/Debug Panel/DebugFeed".text = "We are now starting the build preview in the build manager"
+	$"../Camera2D/CanvasLayer/Debug Panel/DebugFeed".text = $"../Camera2D/CanvasLayer/Debug Panel/DebugFeed".text + "\n" + "We are now starting the build preview in the build manager"
 	cancel_build()
 	
 	current_scene = scene
