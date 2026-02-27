@@ -31,6 +31,7 @@ Guard rails (BuildManager integration)
 @export var port_stub_len := 36.0      # pixels the path extends straight out of a port
 @export var corner_radius := 16.0      # pixels
 @export var arc_segments := 6          # per rounded corner (higher = smoother)
+@export var min_stub_len := 8.0
 
 # BuildManager path gating
 @export var build_manager_path: NodePath = NodePath("../BuildManager")
@@ -152,7 +153,7 @@ func _get_port_center(building: Node, port_path: NodePath) -> Variant:
 		# Push the endpoint outward to the rim of the button
 		var normal := _get_port_normal(building, port_path)
 		var r = min(c.size.x, c.size.y) * 0.5
-		return center - normal * r
+		return center - (0.5 * normal) * r
 
 	if n is Node2D:
 		return (n as Node2D).global_position
@@ -209,6 +210,54 @@ func _build_manhattan_polyline(a: Vector2, b: Vector2) -> Array[Vector2]:
 	var c := _choose_corner(a, b)
 	return [a, c, b]
 
+func _adaptive_stub_length(from_pos: Vector2, to_pos: Vector2) -> float:
+	# Keep the stubs visually strong for long routes, but shrink them when buildings are close.
+	var dist := from_pos.distance_to(to_pos)
+	return clamp(dist * 0.22, min_stub_len, port_stub_len)
+
+
+func _sanitize_polyline(points: Array[Vector2]) -> Array[Vector2]:
+	if points.size() <= 2:
+		return points
+
+	var out: Array[Vector2] = []
+	for p in points:
+		if out.is_empty() or out[out.size() - 1].distance_to(p) > 0.5:
+			out.append(p)
+
+	if out.size() <= 2:
+		return out
+
+	var simplified: Array[Vector2] = [out[0]]
+	for i in range(1, out.size() - 1):
+		var prev := simplified[simplified.size() - 1]
+		var cur := out[i]
+		var nxt := out[i + 1]
+		var d1 := (cur - prev)
+		var d2 := (nxt - cur)
+
+		if d1.length() < 0.5:
+			continue
+		if d2.length() < 0.5:
+			continue
+
+		d1 = d1.normalized()
+		d2 = d2.normalized()
+
+		# Drop middle point when segments are collinear.
+		if abs(d1.dot(d2)) > 0.999:
+			continue
+
+		simplified.append(cur)
+
+	simplified.append(out[out.size() - 1])
+	return simplified
+
+
+func _dominant_axis_normal(delta: Vector2) -> Vector2:
+	if abs(delta.x) >= abs(delta.y):
+		return Vector2.RIGHT if delta.x >= 0.0 else Vector2.LEFT
+	return Vector2.DOWN if delta.y >= 0.0 else Vector2.UP
 
 func _wrap_pi(x: float) -> float:
 	while x <= -PI:
@@ -296,16 +345,18 @@ func _route_points_local(
 		from_b: Node2D, from_port: NodePath, from_pos_g: Vector2,
 		to_b: Node2D, to_port: NodePath, to_pos_g: Vector2
 	) -> PackedVector2Array:
+	return _route_points_local_with_normals(container, from_pos_g, _get_port_normal(from_b, from_port), to_pos_g, _get_port_normal(to_b, to_port))
+	
+func _route_points_local_with_normals(container: Node2D,from_pos_g: Vector2, from_n: Vector2,to_pos_g: Vector2, to_n: Vector2) -> PackedVector2Array:
 	# Build a "rational" Manhattan path:
 	# start -> start_stub -> orthogonal route -> end_stub -> end
-	var from_n := _get_port_normal(from_b, from_port)
-	var to_n := _get_port_normal(to_b, to_port)
+	var stub_len := _adaptive_stub_length(from_pos_g, to_pos_g)
 
 	# Global stub endpoints
 	var a := from_pos_g
-	var a2 := from_pos_g + from_n * port_stub_len
+	var a2 := from_pos_g + from_n * stub_len
 	var b := to_pos_g
-	var b2 := to_pos_g + to_n * port_stub_len
+	var b2 := to_pos_g + to_n * stub_len
 
 	# Orthogonal between stubs
 	var mid_poly := _build_manhattan_polyline(a2, b2) # Array[Vector2] (global)
@@ -321,11 +372,13 @@ func _route_points_local(
 	if poly_g[poly_g.size() - 1] != b2:
 		poly_g.append(b2)
 	poly_g.append(b)
+	poly_g = _sanitize_polyline(poly_g)
 
 	# Convert to local space for the container and round corners in local space
 	var poly_l: Array[Vector2] = []
 	for p in poly_g:
 		poly_l.append(container.to_local(p))
+	poly_l = _sanitize_polyline(poly_l)
 
 	return _round_polyline(poly_l, corner_radius, arc_segments)
 
@@ -380,17 +433,9 @@ func _refresh_preview(mouse_pos: Vector2) -> void:
 		_cleanup_preview()
 		return
 
-	# Preview has no "to building", so we fake normals by using the origin normal and mouse direction.
-	# Route to mouse using a temporary end port normal inferred from direction.
-	var temp_to_pos: Vector2 = mouse_pos
-	var temp_to_building := _from_building
-	var temp_to_port := _from_port_path
+	var to_normal := _dominant_axis_normal(from_pos - mouse_pos)
 
-	_preview_line.points = _route_points_local(
-		_preview_container,
-		_from_building, _from_port_path, from_pos,
-		temp_to_building, temp_to_port, temp_to_pos
-	)
+	_preview_line.points = _route_points_local_with_normals(_preview_container, from_pos, _get_port_normal(_from_building, _from_port_path), mouse_pos, to_normal)
 
 
 func _on_port_end(building: Node2D, port_name: String, mouse_pos: Vector2) -> void:

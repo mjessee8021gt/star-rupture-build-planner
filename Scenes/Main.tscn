@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b0q6pkjakr41b" path="res://Assets/SRBP_Power Icon.png" id="7_bmxlf"]
 [ext_resource type="Texture2D" uid="uid://bd7brbyjru5ea" path="res://Assets/SRBP_Stats_icon.png" id="8_bmxlf"]
 [ext_resource type="Script" uid="uid://brffdis28ou82" path="res://Scripts/prod_panel.gd" id="9_4kpch"]
-[ext_resource type="Script" uid="uid://cbjy40gjtcbvj" path="res://Scripts/path_manager_Rev4.gd" id="11_4kpch"]
+[ext_resource type="Script" uid="uid://c1gaut8hcyg0c" path="res://Scripts/path_manager.gd" id="11_4kpch"]
 
 [node name="Main" type="Node2D" unique_id=1429791362]
 script = ExtResource("1_kln2b")
