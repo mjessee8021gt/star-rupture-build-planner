@@ -156,7 +156,7 @@ func _get_port_global_pos(port_name: String) -> Vector2:
 		_:
 			return global_position
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if _dragging and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
 		_dragging = false
 		
