@@ -2,7 +2,7 @@ extends Node
 #BUildingRegistry holds the enumaeration for all buildings in the tool. This ensures enumeration IDs remain constant through the entire program.
 class_name BuildRegistry
 const BUILDINGS := {
-	&"smelter": preload("res://Buildings/smelter.tscn"),
+	&"smelter": preload("res://Buildings/Smelter.tscn"),
 	&"ore_excavator": preload("res://Buildings/OreExcavator.tscn"),
 	&"fabricator": preload("res://Buildings/Fabricator.tscn"),
 	&"furnace": preload("res://Buildings/Furnace.tscn"),
