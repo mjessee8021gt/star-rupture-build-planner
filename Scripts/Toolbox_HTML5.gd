@@ -6,14 +6,10 @@ signal build_requested(scene: PackedScene)
 
 
 func _ready() -> void:
-	if BuildManager:
-		build_requested.connect(BuildManager.start_build)
-	if BuildManager and BuildManager.has_method("start_build"):
-		if not build_requested.is_connected(BuildManager.start_build):
-			build_requested.connect(BuildManager.start_build)
-	else:
-		push_error("BuildManager not assigned in inspector.")
-		$"../Debug Panel/DebugFeed".text = "BuildManager not assigned in inspector."
+	var start_build_callable := Callable(BuildManager, "start_build")
+	if not build_requested.is_connected(start_build_callable):
+		build_requested.connect(start_build_callable)
+
 
 	var popup: PopupMenu = get_popup()
 	popup.clear()
@@ -96,10 +92,15 @@ func _on_build_selected(id: int) -> void:
 
 	var scene: PackedScene = BuildingRegistry.get_scene(key)
 	$"../Debug Panel/DebugFeed".text = str(scene)
+	
 	if scene:
 		print("Submitting build request for:", key)
 		$"../Debug Panel/DebugFeed".text = "Submitting build request for:" + str(key)
-		build_requested.emit(scene)
+		
+		if BuildManager and BuildManager.has_method("start_build"):
+			BuildManager.call_deferred("Start_build", scene)
+		else:
+			build_requested.emit(scene)
 	else:
 		push_warning("No building registered for key: %s" % String(key))
 		$"../Debug Panel/DebugFeed".text = "No building registered for key: %s" % String(key)
