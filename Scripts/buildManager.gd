@@ -58,6 +58,7 @@ func _get_prod_source_id(building: Node) -> int:
 #entry point to the build manager for the MenuButton
 func start_build(scene: PackedScene) -> void:
 	print("We are now starting the build preview in the build manager")
+	$"../Camera2D/CanvasLayer/Debug Panel/DebugFeed".text = "We are now starting the build preview in the build manager"
 	cancel_build()
 	
 	current_scene = scene
@@ -98,6 +99,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 
 func confirm_build() -> void:
+	$"../Camera2D/CanvasLayer/Debug Panel/DebugFeed".text = "We are now confirming the build..."
 	var anchor_cell := world_to_cell(ghost_instance.global_position)
 	var footprint = ghost_instance.get_footprint_cells(anchor_cell, ghost_instance.footprint, ghost_instance.anchor)
 	

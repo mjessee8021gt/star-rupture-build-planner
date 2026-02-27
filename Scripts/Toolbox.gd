@@ -31,6 +31,7 @@ func _ready() -> void:
 	extractionMenu.set_item_metadata(extractionMenu.item_count-1, &"sulfur_extractor")
 	extractionMenu.id_pressed.connect(_on_build_selected.bind(extractionMenu))
 	print("Extraction Menu Item Selected...")
+	$"../Debug Panel/DebugFeed".text = "Extraction Menu Item Selected..."
 	
 	var craftingMenu = PopupMenu.new()
 	craftingMenu.name = "Crafting"
@@ -115,6 +116,11 @@ func _ready() -> void:
 	popup.add_child(processingMenu)
 	popup.add_child(powerMenu)
 	popup.add_child(transportMenu)
+	popup.add_item("Smelter (TEST)", 999)
+	popup.id_pressed.connect(func(id): 
+		if id == 999:
+			$"../Debug Panel/DebugFeed".text = "ROOT TEST CLICK WORKED"
+	)
 
 	popup.add_submenu_item("Extraction", extractionMenu.name)
 	popup.add_submenu_item("Crafting", craftingMenu.name)
@@ -130,7 +136,9 @@ func _on_build_selected(id: int, menu:PopupMenu) -> void:
 	var scene = BuildingRegistry.get_scene(key)
 	if scene:
 		print("Submitting build reuqest...")
+		$"../Debug Panel/DebugFeed".text = "Submitting build reuqest..."
 		build_requested.emit(scene)
 	else:
 		push_warning("No registered for key: %s" % key)
+		$"../Debug Panel/DebugFeed".text = "No registered for key: %s" % key
 		return

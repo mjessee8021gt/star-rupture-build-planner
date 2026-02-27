@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dvfbce7bhnsbd" path="res://Scenes/GridMap.tscn" id="1_r150o"]
 [ext_resource type="Script" uid="uid://cssd864lah4hf" path="res://Scripts/CameraControls.gd" id="3_rgh2o"]
 [ext_resource type="Texture2D" uid="uid://bpgiktvpebx6e" path="res://Assets/SRBP_TOOLBOX.png" id="4_rgh2o"]
-[ext_resource type="Script" uid="uid://ddx74ounb8bc7" path="res://Scripts/Toolbox.gd" id="5_pbw6q"]
+[ext_resource type="Script" uid="uid://bqo1td4xpuhji" path="res://Scripts/Toolbox_HTML5.gd" id="5_4kpch"]
 [ext_resource type="Script" uid="uid://cwao0e766iwdd" path="res://Scripts/buildManager.gd" id="6_v1gob"]
 [ext_resource type="Texture2D" uid="uid://bixocxjthy7cb" path="res://Assets/SRBP_Heat Icon.png" id="6_vy5pj"]
 [ext_resource type="Texture2D" uid="uid://b0q6pkjakr41b" path="res://Assets/SRBP_Power Icon.png" id="7_bmxlf"]
@@ -24,11 +24,11 @@ script = ExtResource("3_rgh2o")
 
 [node name="MenuButton" type="MenuButton" parent="Camera2D/CanvasLayer" unique_id=431646375 node_paths=PackedStringArray("BuildManager")]
 offset_left = 25.0
-offset_top = 34.0
+offset_top = 25.0
 offset_right = 97.0
-offset_bottom = 106.0
+offset_bottom = 97.0
 icon = ExtResource("4_rgh2o")
-script = ExtResource("5_pbw6q")
+script = ExtResource("5_4kpch")
 BuildManager = NodePath("../../../BuildManager")
 
 [node name="Panel" type="Panel" parent="Camera2D/CanvasLayer" unique_id=1180101363]
@@ -75,6 +75,7 @@ scale = Vector2(0.5, 0.5)
 icon = ExtResource("8_bmxlf")
 
 [node name="ProdPanel" type="PanelContainer" parent="Camera2D/CanvasLayer/ProdMenu" unique_id=1865534537]
+visible = false
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_left = -268.0
@@ -91,6 +92,21 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Camera2D/CanvasLayer/ProdMenu/ProdPanel/ScrollContainer" unique_id=1328382313]
 layout_mode = 2
+
+[node name="Debug Panel" type="Panel" parent="Camera2D/CanvasLayer" unique_id=1044732433]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -299.0
+offset_top = 5.0
+offset_right = 301.0
+offset_bottom = 45.0
+grow_horizontal = 2
+
+[node name="DebugFeed" type="Label" parent="Camera2D/CanvasLayer/Debug Panel" unique_id=305992419]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 39.0
 
 [node name="BuildManager" type="Node2D" parent="." unique_id=695504288]
 script = ExtResource("6_v1gob")

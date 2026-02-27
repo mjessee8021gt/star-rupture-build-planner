@@ -5,6 +5,9 @@ extends Node2D
 func _ready() -> void:
 	$Camera2D/CanvasLayer/Panel/HeatLabel.text = "0"
 	$Camera2D/CanvasLayer/Panel/PowerLabel.text = "0"
+	$Camera2D/CanvasLayer/MenuButton.position = Vector2 (15, 15)
+	$Camera2D/CanvasLayer/Panel.position = Vector2 (get_viewport().size.x - 180, 5)
+	$Camera2D/CanvasLayer/ProdMenu.position = Vector2 (get_viewport().size.x - 75, 42)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
