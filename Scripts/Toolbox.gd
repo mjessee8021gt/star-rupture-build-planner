@@ -15,8 +15,9 @@ enum ProcessingItem {SMELTER, FURNACE, MEGA_PRESS, COMPOUNDER}
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 
-	if BuildManager:
-		build_requested.connect(BuildManager.start_build)
+	if BuildManager and BuildManager.has_method("start_build"):
+		if not build_requested.is_connected(BuildManager.start_build):
+			build_requested.connect(BuildManager.start_build)
 	else:
 		push_error("BuildManager not assigned in inspector.")
 
@@ -129,8 +130,11 @@ func _on_build_selected(id: int, menu:PopupMenu) -> void:
 	
 	var scene = BuildingRegistry.get_scene(key)
 	if scene:
-		print("Submitting build reuqest...")
-		build_requested.emit(scene)
+		print("Submitting build request for: ", key)
+		if BuildManager and BuildManager.has_method("start_build"):
+			BuildManager.call_deferred("start_build", scene)
+		else:
+			build_requested.emit(scene)
 	else:
-		push_warning("No registered for key: %s" % key)
+		push_warning("No building registered for key: %s" % key)
 		return
