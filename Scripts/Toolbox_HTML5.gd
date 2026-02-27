@@ -90,17 +90,22 @@ func _on_build_selected(id: int) -> void:
 		$"../Debug Panel/DebugFeed".text = "Menu item missing metadata (no build key). idx=%d id=%d" % [idx, id]
 		return
 
-	var scene: PackedScene = BuildingRegistry.get_scene(key)
-	$"../Debug Panel/DebugFeed".text = str(scene)
+	var scene_value: Variant = BuildingRegistry.get_scene(key)
+	$"../Debug Panel/DebugFeed".text = "lookup(" + String(key) + "): " + str(scene_value)
+
 	
-	if scene:
+	if scene_value is PackedScene:
+		var scene := scene_value as PackedScene
 		print("Submitting build request for:", key)
 		$"../Debug Panel/DebugFeed".text = "Submitting build request for:" + str(key)
 		
 		if BuildManager and BuildManager.has_method("start_build"):
 			BuildManager.call_deferred("Start_build", scene)
+			$"../Debug Panel/DebugFeed".text = "Dispatch: direct BuildManager.start_build(" + str(key) + ")"
 		else:
 			build_requested.emit(scene)
+			$"../Debug Panel/DebugFeed".text = "Dispatch: build_requested.emit (" + str(key) + ")"
 	else:
-		push_warning("No building registered for key: %s" % String(key))
-		$"../Debug Panel/DebugFeed".text = "No building registered for key: %s" % String(key)
+		var msg := "No PackedScene registered for key: %s (value=%s)" %[String(key), str(scene_value)]
+		push_warning(msg)
+		$"../Debug Panel/DebugFeed".text = msg

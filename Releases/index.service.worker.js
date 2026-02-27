@@ -4,7 +4,7 @@
 // Incrementing CACHE_VERSION will kick off the install event and force
 // previously cached resources to be updated from the network.
 /** @type {string} */
-const CACHE_VERSION = '1772202613|110494419616';
+const CACHE_VERSION = '1772203728|111609323873';
 /** @type {string} */
 const CACHE_PREFIX = 'StarRupture Buil-sw-cache-';
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;

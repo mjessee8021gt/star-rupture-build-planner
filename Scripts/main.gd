@@ -16,6 +16,11 @@ func _process(delta: float) -> void:
 		$Camera2D.zoomOut()
 	elif (Input.is_action_just_released("Zoom In")):
 		$Camera2D.ZoomIn()
+	elif (Input.is_action_just_released("Show Debug Feed")):
+		if $"Camera2D/CanvasLayer/Debug Panel".visible == false:
+			$"Camera2D/CanvasLayer/Debug Panel".visible = true
+		else:
+			$"Camera2D/CanvasLayer/Debug Panel".visible = false
 
 
 func _on_prod_menu_pressed() -> void:

@@ -116,11 +116,6 @@ func _ready() -> void:
 	popup.add_child(processingMenu)
 	popup.add_child(powerMenu)
 	popup.add_child(transportMenu)
-	popup.add_item("Smelter (TEST)", 999)
-	popup.id_pressed.connect(func(id): 
-		if id == 999:
-			$"../Debug Panel/DebugFeed".text = "ROOT TEST CLICK WORKED"
-	)
 
 	popup.add_submenu_item("Extraction", extractionMenu.name)
 	popup.add_submenu_item("Crafting", craftingMenu.name)
