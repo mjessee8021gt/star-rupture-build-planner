@@ -2,20 +2,29 @@ extends Node2D
 
 class_name Building
 
+##------OnReady variables------##
+@onready var placement_area: Area2D = $PlacementArea
+
+##------Exported Variables-----##
 @export var tileMap: TileMap
 @export var is_alternate := false
 @export var rotatedTick := 0
 @export var id: StringName
 @export var anchor := Vector2i.ZERO
-@onready var placement_area: Area2D = $PlacementArea
 
+##-----------Signals-----------##
 signal port_drag_started(building: Node2D, port_name: String, port_global_pos: Vector2)
 signal port_drag_updated(building: Node2D, port_name: String, port_global_pos: Vector2)
 signal port_drag_ended(building: Node2D, port_name: String, port_global_pos: Vector2)
 
+##-------String Variables------##
 var _dragging_port := ""
+
+##------Boolean Variables------##
 var _dragging := false
 var dragging := false
+
+##------Vector2 Variables------##
 var drag_offset := Vector2.ZERO
 
 func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int):

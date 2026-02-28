@@ -23,6 +23,5 @@ const BUILDINGS := {
 	&"wind_v2": preload("res://Buildings/Wind V2.tscn")
 }
 
-
 static func get_scene(key: StringName) -> PackedScene:
 	return BUILDINGS.get(key, null)

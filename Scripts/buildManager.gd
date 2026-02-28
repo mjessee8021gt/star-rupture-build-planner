@@ -1,35 +1,45 @@
 extends Node2D
 
+
+##------OnReady variables------##
+@onready var debug_feed : Label = $"../Camera2D/CanvasLayer/Debug Panel/DebugFeed"
+
+##------Object Variables-------##
 var current_scene: PackedScene
 var ghost_instance: Node2D
+var dragged_building : Node2D = null
 var ghost_area: Area2D
-@onready var debug_feed : Label = $"../Camera2D/CanvasLayer/Debug Panel/DebugFeed"
-var occupied_cells : Dictionary = {} #Verctor2i -> Node(Building)
+
+##------Boolean Variables------##
 var is_building := false
+var is_dragging_building := false
+var drag_last_valid := false
+
+##------Exported Variables-----##
 @export var canBuildColor := Color(0,1,0, 0.5)
 @export var cannotbuildColor := Color(1,0,0,0.5)
 @export var tile_size := 32
 
-var is_dragging_building := false
-var dragged_building : Node2D = null
+##------Vector2 Variables------##
 var drag_mouse_offset := Vector2.ZERO
 var drag_original_position := Vector2.ZERO
 var drag_original_cells : Array[Vector2i] = []
 var drag_last_cells : Array[Vector2i] = []
-var drag_last_valid := false
+var occupied_cells : Dictionary = {} #Verctor2i -> Node(Building)
+
 
 
 # --- helpers ---
 func _get_prod_ledger() -> Node:
 	# Autoload is expected to be named "ProdLedger" (per prod_panel.gd),
 	# but we also fall back to "ProductionLedger" to be safe.
-	var root := get_tree().root
-	if root == null:
+	var tree_root := get_tree().root
+	if tree_root == null:
 		return null
-	if root.has_node("ProdLedger"):
-		return root.get_node("ProdLedger")
-	if root.has_node("ProductionLedger"):
-		return root.get_node("ProductionLedger")
+	if tree_root.has_node("ProdLedger"):
+		return tree_root.get_node("ProdLedger")
+	if tree_root.has_node("ProductionLedger"):
+		return tree_root.get_node("ProductionLedger")
 	return null
 
 func _set_buttons_disabled_recuirsive(node: Node, disabled: bool) -> void:
@@ -79,6 +89,8 @@ func can_place_at(cells: Array[Vector2i]) -> bool:
 	return true
 	
 func _unhandled_input(event: InputEvent) -> void:
+	var building = get_building_under_mouse()
+	
 	if is_building:
 		if event.is_action_pressed("Build Confirm"):
 			confirm_build()
@@ -91,37 +103,36 @@ func _unhandled_input(event: InputEvent) -> void:
 	if _mouse_is_over_control():
 		return
 		
-	var b = get_building_under_mouse()
-	if b != null:
-		_start_drag_building(b)
+	if building != null:
+		_start_drag_building(building)
 	else:
 		if is_dragging_building:
 			_finish_drag_building()
 	
 
 func confirm_build() -> void:
-	$"../Camera2D/CanvasLayer/Debug Panel/DebugFeed".text = "We are now confirming the build..."
+	$"../Camera2D/CanvasLayer/Debug Panel/DebugFeed".text = $"../Camera2D/CanvasLayer/Debug Panel/DebugFeed".text + "\n" + "We are now confirming the build..."
 	var anchor_cell := world_to_cell(ghost_instance.global_position)
 	var footprint = ghost_instance.get_footprint_cells(anchor_cell, ghost_instance.footprint, ghost_instance.anchor)
+	var real_building := current_scene.instantiate()
 	
 	if not can_place_at(footprint):
 		return
 	
-	var real := current_scene.instantiate()
-	real.global_position = ghost_instance.global_position
+	real_building.global_position = ghost_instance.global_position
 	if ghost_instance.is_alternate == true:
-		real.flip_footprint()
+		real_building.flip_footprint()
 	if ghost_instance.rotatedTick > 0:
-		real.rotate(deg_to_rad(90.0 * ghost_instance.rotatedTick))
-	$"../buildings".add_child(real)
+		real_building.rotate(deg_to_rad(90.0 * ghost_instance.rotatedTick))
+	$"../buildings".add_child(real_building)
 	
-	occupy_cells(footprint, real)
+	occupy_cells(footprint, real_building)
 	
-	$"../Camera2D/CanvasLayer/Panel/HeatLabel".text = str(int($"../Camera2D/CanvasLayer/Panel/HeatLabel".text) + real.heat)
-	$"../Camera2D/CanvasLayer/Panel/PowerLabel".text = str(int($"../Camera2D/CanvasLayer/Panel/PowerLabel".text) + real.power)
+	$"../Camera2D/CanvasLayer/Panel/HeatLabel".text = str(int($"../Camera2D/CanvasLayer/Panel/HeatLabel".text) + real_building.heat)
+	$"../Camera2D/CanvasLayer/Panel/PowerLabel".text = str(int($"../Camera2D/CanvasLayer/Panel/PowerLabel".text) + real_building.power)
 	
-	if real.id == &"helium_extractor" or real.id == &"sulfur_extractor":
-		ProdLedger.add_source(real.get_instance_id(), real,real.get_production_deltas(real.recipe))
+	if real_building.id == &"helium_extractor" or real_building.id == &"sulfur_extractor":
+		ProdLedger.add_source(real_building.get_instance_id(), real_building,real_building.get_production_deltas(real_building.recipe))
 	cancel_build()
 	
 func free_cells_for_building(building: Node) -> void:
@@ -144,13 +155,13 @@ func try_remove_building_under_mouse() -> bool:
 	var mouse_pos := get_global_mouse_position()
 	var cell := world_to_cell(mouse_pos)
 	var building := get_building_at_cells(cell)
+	var build_ledger := _get_prod_ledger()
 	if building == null:
 		return false
 
 	# 1) Production deltas: remove this building's contribution from the ledger
-	var ledger := _get_prod_ledger()
-	if ledger != null and ledger.has_method("remove_source"):
-		ledger.remove_source(_get_prod_source_id(building))
+	if build_ledger != null and build_ledger.has_method("remove_source"):
+		build_ledger.remove_source(_get_prod_source_id(building))
 
 	# 2) Remove any paths that reference this building
 	var pm := $"../PathManager"
@@ -194,6 +205,8 @@ func get_building_under_mouse() -> Node2D:
 	return get_building_at_cells(cell)
 
 func _start_drag_building(building: Node2D) -> void:
+	var anchor_cell = world_to_cell(building.global_position)
+	
 	if building == null:
 		return
 		
@@ -203,11 +216,11 @@ func _start_drag_building(building: Node2D) -> void:
 	drag_original_position = building.global_position
 	
 	#We are recording and freeing the current cell occupancy of the building so the building can move through itself
-	var anchor_cell = world_to_cell(building.global_position)
 	drag_original_cells = building.get_footprint_cells(anchor_cell, building.footprint, building.anchor)
 	free_cells_for_building(building)
 	
 func _finish_drag_building() -> void:
+	var path_manager := $"../PathManager"
 	if not is_dragging_building or  dragged_building == null:
 		return
 	
@@ -219,9 +232,9 @@ func _finish_drag_building() -> void:
 	
 	dragged_building.modulate = Color(1, 1, 1, 1)	
 	
-	var pm := $"../PathManager"
-	if pm != null and pm.has_method("update_paths_for_building"):
-		pm.update_path_for_building(dragged_building)
+	
+	if path_manager != null and path_manager.has_method("update_paths_for_building"):
+		path_manager.update_path_for_building(dragged_building)
 	
 	#drag state cleanup
 	is_dragging_building = false
@@ -231,20 +244,27 @@ func _finish_drag_building() -> void:
 	drag_last_valid = false
 	
 func _mouse_is_over_control() -> bool:
-	var hovered = get_viewport().gui_get_hovered_control()
-	return hovered != null and hovered.is_in_group("port_button")
+	var hoveredControl = get_viewport().gui_get_hovered_control()
+	return hoveredControl != null and hoveredControl.is_in_group("port_button")
 	
 func _process(_delta: float) -> void:
+	var mouse_pos
+	var anchor_cell = world_to_cell(mouse_pos)
+	var path_manager := get_node_or_null("../PathManager")
+	var building_footprint
+	var new_pos
+	var top_left_cell
+	var valid_placement
+	
 	if is_dragging_building and dragged_building != null:
-		var mouse_pos := get_global_mouse_position() + drag_mouse_offset
-		var anchor_cell := world_to_cell(mouse_pos)
-		var top_left_cell = anchor_cell - dragged_building.anchor
-		var new_pos := cell_to_world(top_left_cell)
-		dragged_building.global_position = new_pos
+		mouse_pos = get_global_mouse_position() + drag_mouse_offset
+		top_left_cell = anchor_cell - dragged_building.anchor
+		new_pos = cell_to_world(top_left_cell)
+		building_footprint = dragged_building.get_footprint_cells(anchor_cell, dragged_building.footprint, dragged_building.anchor)
 		
-		var footprint = dragged_building.get_footprint_cells(anchor_cell, dragged_building.footprint, dragged_building.anchor)
-		drag_last_cells = footprint
-		drag_last_valid = can_place_at(footprint)
+		dragged_building.global_position = new_pos
+		drag_last_cells = building_footprint
+		drag_last_valid = can_place_at(building_footprint)
 		
 		if drag_last_valid:
 			dragged_building.modulate = canBuildColor
@@ -253,10 +273,8 @@ func _process(_delta: float) -> void:
 			dragged_building.modulate = cannotbuildColor
 			dragged_building.modulate.a = 1.0
 			
-		var pm := get_node_or_null("../PathManager")
-		if pm != null and pm.has_method("update_paths_for_building"):
-			pm.update_paths_for_building(dragged_building)
-		
+		if path_manager != null and path_manager.has_method("update_paths_for_building"):
+			path_manager.update_paths_for_building(dragged_building)
 		return 
 	
 	if Input.is_action_just_pressed("Alternate"):
@@ -274,20 +292,18 @@ func _process(_delta: float) -> void:
 			try_remove_building_under_mouse()
 		return
 	
-	
 	if not is_building:
 		return
 		
-	var mouse_pos := get_global_mouse_position()
-	var anchor_cell = world_to_cell(mouse_pos)
-	var top_left_cell = anchor_cell - ghost_instance.anchor
+	mouse_pos = get_global_mouse_position()
+	top_left_cell = anchor_cell - ghost_instance.anchor
 	print("The recorded footprint of the ghost instance is: %s, %s" %[ghost_instance.footprint.x, ghost_instance.footprint.y])
-	var footprint = ghost_instance.get_footprint_cells(anchor_cell, ghost_instance.footprint, ghost_instance.anchor)
-	var valid = can_place_at(footprint)
+	building_footprint = ghost_instance.get_footprint_cells(anchor_cell, ghost_instance.footprint, ghost_instance.anchor)
+	valid_placement = can_place_at(building_footprint)
 	
 	ghost_instance.global_position = cell_to_world(top_left_cell)
 	
-	if valid == false:
+	if valid_placement == false:
 		ghost_instance.modulate = cannotbuildColor
 	else:
 		ghost_instance.modulate = canBuildColor
