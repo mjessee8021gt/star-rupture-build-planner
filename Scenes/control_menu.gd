@@ -15,6 +15,7 @@ var rect := get_global_rect()
 
 func _ready() -> void:
 	pressed.connect(_on_pressed)
+	popup.hide()
 
 func _on_pressed() -> void:
 	if popup.visible:
