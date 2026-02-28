@@ -123,13 +123,17 @@ popup_path = NodePath("../PopupPanel")
 list_path = NodePath("../PopupPanel/MarginContainer/ScrollContainer/VBoxContainer")
 
 [node name="PopupPanel" type="PopupPanel" parent="Camera2D/CanvasLayer" unique_id=1072106267]
-size = Vector2i(750, 250)
+oversampling_override = 1.0
+title = "Controls"
+position = Vector2i(51, 463)
+size = Vector2i(275, 200)
+visible = true
 
 [node name="MarginContainer" type="MarginContainer" parent="Camera2D/CanvasLayer/PopupPanel" unique_id=1945906527]
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 746.0
-offset_bottom = 246.0
+offset_right = 271.0
+offset_bottom = 196.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Camera2D/CanvasLayer/PopupPanel/MarginContainer" unique_id=90211902]
 layout_mode = 2

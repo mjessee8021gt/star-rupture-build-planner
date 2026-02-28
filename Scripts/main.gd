@@ -30,6 +30,7 @@ func Adjust_ui_for_resolution() -> void:
 	$Camera2D/CanvasLayer/MenuButton.position = Vector2 (15, 15)
 	$Camera2D/CanvasLayer/Panel.position = Vector2 (get_viewport().size.x - 180, 5)
 	$Camera2D/CanvasLayer/ProdMenu.position = Vector2 (get_viewport().size.x - 75, 42)
+	$Camera2D/CanvasLayer/ControlMenu.position = Vector2(15, get_viewport().size.y -50)
 	
 func _on_viewport_size_changed() -> void:
 	Adjust_ui_for_resolution()

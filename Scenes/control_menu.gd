@@ -2,7 +2,7 @@ extends MenuButton
 
 @export var popup_path: NodePath   # Drag your PopupPanel here in inspector
 @export var list_path: NodePath    # Drag the VBoxContainer (ActionsList) here
-@export var hide_prefixes: Array[String] = ["ui_"]
+@export var hide_prefixes: Array[String] = ["ui_", "Show"]
 @export var show_only_prefixes: Array[String] = [] # empty = show all
 
 @onready var popup: PopupPanel = get_node(popup_path)
@@ -23,7 +23,7 @@ func _on_pressed() -> void:
 func _position_popup() -> void:
 	# Position just below the button
 	var rect := get_global_rect()
-	popup.position = Vector2i(rect.position.x, rect.position.y + rect.size.y)
+	popup.position = Vector2i(rect.position.x + 50, rect.position.y - (4.45 * rect.size.y))
 
 func _refresh_list() -> void:
 	# Clear previous rows
@@ -50,10 +50,15 @@ func _refresh_list() -> void:
 				continue
 		
 		#HIDE filter
-		for prefix in hide_prefixes:
-			if a.begins_with(prefix):
-				continue
+		if _starts_with_any_prefix(a, hide_prefixes):
+			continue
 		list_vbox.add_child(_make_row(String(action_name), binding_text))
+		
+func _starts_with_any_prefix(value: String, prefixes: Array[String]) -> bool:
+	for prefix in prefixes:
+		if value.begins_with(prefix):
+			return true
+	return false
 
 func _make_row(action_name: String, bindings: String) -> Control:
 	var row := HBoxContainer.new()
