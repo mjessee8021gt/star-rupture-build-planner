@@ -57,10 +57,11 @@ metadata/normal = Vector2(0, -1)
 [node name="Universal 2" type="Button" parent="Ports" unique_id=1958701130 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
 layout_mode = 0
-offset_left = 5.0000014
-offset_top = 18.0
-offset_right = 77.0
-offset_bottom = 58.0
+offset_left = 28.0
+offset_top = 31.0
+offset_right = 100.0
+offset_bottom = 71.0
+rotation = 3.1415927
 scale = Vector2(0.32, 0.32)
 icon = ExtResource("8_8edi5")
 metadata/normal = Vector2(0, 1)

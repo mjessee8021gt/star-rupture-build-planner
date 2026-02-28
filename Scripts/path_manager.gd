@@ -152,8 +152,16 @@ func _get_port_center(building: Node, port_path: NodePath) -> Variant:
 
 		# Push the endpoint outward to the rim of the button
 		var normal := _get_port_normal(building, port_path)
+		var left_normal_offset := Vector2(0.0, -17.0)
+		var right_normal_offset := Vector2(0.0, 5.0)
 		var r = min(c.size.x, c.size.y) * 0.5
-		return center - (0.5 * normal) * r
+		if normal.is_equal_approx(Vector2.LEFT):
+			var left_aligned_normals = center + normal * r
+			print("PORT %s NORMALS: %s... CALCULATED AS %s + %s * %s" %[n, left_aligned_normals, center, normal, r])
+			return center +(0.5 * normal) * r + left_normal_offset
+		var right_aligned_normals = center - (0.5 * normal) * r
+		print("PORT %s NORMALS: %s... CALCULATED AS %s - (0.5 * %s) * %s" %[n,right_aligned_normals, center, normal, r])
+		return center - (0.5 * normal) * r + right_normal_offset
 
 	if n is Node2D:
 		return (n as Node2D).global_position
@@ -172,7 +180,9 @@ func _get_port_normal(building: Node2D, port_path: NodePath) -> Vector2:
 		var v = n.get_meta("normal")
 		if v is Vector2:
 			var vv: Vector2 = v
+			var vv_rotated = vv.rotated(building.global_rotation).normalized()
 			if vv.length() > 0.001:
+				print("PORT %s ROTATION: %s" %[n, vv_rotated])
 				return vv.rotated(building.global_rotation).normalized()
 
 	# Fallback: infer from port position relative to building center (global_position).
