@@ -1,7 +1,9 @@
 extends MenuButton
 
 signal build_requested(scene: PackedScene)
+
 @export var BuildManager : Node2D
+
 var Idx
 
 enum ExtractionItem {ORE_EXCAVATOR, HELIUM_3_EXTRACTOR, SULFUR_EXTRACTOR}
@@ -10,8 +12,6 @@ enum ProcessingItem {SMELTER, FURNACE, MEGA_PRESS, COMPOUNDER}
 @onready var build_scenes := {
 	ProcessingItem.SMELTER:preload("res://Buildings/Smelter.tscn")
 }
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 
@@ -122,7 +122,6 @@ func _ready() -> void:
 	popup.add_submenu_item("Processing", processingMenu.name)
 	popup.add_submenu_item("Power", powerMenu.name)
 	popup.add_submenu_item("Transport", transportMenu.name)
-
 
 func _on_build_selected(id: int, menu:PopupMenu) -> void:
 	var idx := menu.get_item_index(id)

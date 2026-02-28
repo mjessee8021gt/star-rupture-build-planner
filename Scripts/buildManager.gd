@@ -249,7 +249,7 @@ func _mouse_is_over_control() -> bool:
 	
 func _process(_delta: float) -> void:
 	var mouse_pos
-	var anchor_cell = world_to_cell(mouse_pos)
+	var anchor_cell
 	var path_manager := get_node_or_null("../PathManager")
 	var building_footprint
 	var new_pos
@@ -258,6 +258,7 @@ func _process(_delta: float) -> void:
 	
 	if is_dragging_building and dragged_building != null:
 		mouse_pos = get_global_mouse_position() + drag_mouse_offset
+		anchor_cell = world_to_cell(mouse_pos)
 		top_left_cell = anchor_cell - dragged_building.anchor
 		new_pos = cell_to_world(top_left_cell)
 		building_footprint = dragged_building.get_footprint_cells(anchor_cell, dragged_building.footprint, dragged_building.anchor)
@@ -296,6 +297,7 @@ func _process(_delta: float) -> void:
 		return
 		
 	mouse_pos = get_global_mouse_position()
+	anchor_cell = world_to_cell(mouse_pos)
 	top_left_cell = anchor_cell - ghost_instance.anchor
 	print("The recorded footprint of the ghost instance is: %s, %s" %[ghost_instance.footprint.x, ghost_instance.footprint.y])
 	building_footprint = ghost_instance.get_footprint_cells(anchor_cell, ghost_instance.footprint, ghost_instance.anchor)

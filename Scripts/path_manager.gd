@@ -1,26 +1,4 @@
 extends Node2D
-"""
-Manhattan (orthogonal) routing with rounded corners + port "stubs" so lines
-leave/arrive perpendicular to the building face (a "rational angle").
-
-Also supports Universal* ports as BOTH origin and destination.
-
-Rules
-- Origin port:
-  - If drag started on a port whose name begins with "Universal", that exact port is the origin.
-  - Otherwise origin defaults to Ports/Output 1.
-- Destination port:
-  - Clicked port if it is "Input 1".."Input 4" OR begins with "Universal".
-- Preview: red/transparent. Final: green/opaque.
-- Finalized paths are stored as Path2D children with a Line2D child and endpoint metadata:
-  from_building, from_port, to_building, to_port
-
-Guard rails (BuildManager integration)
-- If BuildManager indicates build/ghost mode is active, PathManager ignores start/update/end
-  and cleans up any preview.
-"""
-
-@export var endpoints_group := "buildings"
 
 # Styling
 @export var preview_color := Color(1, 0, 0, 0.5)
@@ -35,6 +13,7 @@ Guard rails (BuildManager integration)
 
 # BuildManager path gating
 @export var build_manager_path: NodePath = NodePath("../BuildManager")
+@export var endpoints_group := "buildings"
 
 # Default origin port node path
 const DEFAULT_FROM_PORT_PATH := NodePath("Ports/Output 1")
@@ -92,11 +71,7 @@ func _connect_to_building(b: Node) -> void:
 	if not b.port_drag_ended.is_connected(_on_port_end):
 		b.port_drag_ended.connect(_on_port_end)
 
-
-# -------------------------------------------------------------------
 # Guard rails
-# -------------------------------------------------------------------
-
 func _can_start_paths() -> bool:
 	# If BuildManager exists and exposes a build-mode predicate, block while building/ghosting.
 	if _build_manager == null:
@@ -112,11 +87,7 @@ func _can_start_paths() -> bool:
 
 	return true
 
-
-# -------------------------------------------------------------------
 # Port helpers
-# -------------------------------------------------------------------
-
 func _is_universal_port_name(port_name: String) -> bool:
 	return port_name.begins_with("Universal")
 
@@ -142,32 +113,32 @@ func _resolve_origin_port_path(start_port_name: String) -> NodePath:
 
 
 func _get_port_center(building: Node, port_path: NodePath) -> Variant:
-	var n := building.get_node_or_null(port_path)
-	if n == null:
+	var target_button := building.get_node_or_null(port_path)
+	if target_button == null:
 		return null
 
-	if n is Control:
-		var c := n as Control
-		var center := c.get_global_rect().get_center()
+	if target_button is Control:
+		var button_control := target_button as Control
+		var center := button_control.get_global_rect().get_center()
 
 		# Push the endpoint outward to the rim of the button
 		var normal := _get_port_normal(building, port_path)
 		var left_normal_offset := Vector2(0.0, -17.0)
 		var right_normal_offset := Vector2(0.0, 5.0)
-		var r = min(c.size.x, c.size.y) * 0.5
+		var minimum_radius = min(button_control.size.x, button_control.size.y) * 0.5
 		if normal.is_equal_approx(Vector2.LEFT):
-			var left_aligned_normals = center + normal * r
-			print("PORT %s NORMALS: %s... CALCULATED AS %s + %s * %s" %[n, left_aligned_normals, center, normal, r])
-			return center +(0.5 * normal) * r + left_normal_offset
-		var right_aligned_normals = center - (0.5 * normal) * r
-		print("PORT %s NORMALS: %s... CALCULATED AS %s - (0.5 * %s) * %s" %[n,right_aligned_normals, center, normal, r])
-		return center - (0.5 * normal) * r + right_normal_offset
+			var left_aligned_normals = center + normal * minimum_radius
+			print("PORT %s NORMALS: %s... CALCULATED AS %s + %s * %s" %[target_button, left_aligned_normals, center, normal, minimum_radius])
+			return center +(0.5 * normal) * minimum_radius + left_normal_offset
+		var right_aligned_normals = center - (0.5 * normal) * minimum_radius
+		print("PORT %s NORMALS: %s... CALCULATED AS %s - (0.5 * %s) * %s" %[target_button,right_aligned_normals, center, normal, minimum_radius])
+		return center - (0.5 * normal) * minimum_radius + right_normal_offset
 
-	if n is Node2D:
-		return (n as Node2D).global_position
+	if target_button is Node2D:
+		return (target_button as Node2D).global_position
 
-	if "global_position" in n:
-		return n.global_position
+	if "global_position" in target_button:
+		return target_button.global_position
 
 	return null
 
@@ -175,42 +146,38 @@ func _get_port_center(building: Node, port_path: NodePath) -> Variant:
 func _get_port_normal(building: Node2D, port_path: NodePath) -> Vector2:
 	# Preferred: explicit metadata on the port Control:
 	#   normal = Vector2.LEFT / RIGHT / UP / DOWN
-	var n := building.get_node_or_null(port_path)
-	if n != null and n.has_meta("normal"):
-		var v = n.get_meta("normal")
-		if v is Vector2:
-			var vv: Vector2 = v
-			var vv_rotated = vv.rotated(building.global_rotation).normalized()
-			if vv.length() > 0.001:
-				print("PORT %s ROTATION: %s" %[n, vv_rotated])
-				return vv.rotated(building.global_rotation).normalized()
+	var target_button := building.get_node_or_null(port_path)
+	if target_button != null and target_button.has_meta("normal"):
+		var normal_standard = target_button.get_meta("normal")
+		if normal_standard is Vector2:
+			var normal_rotated: Vector2 = normal_standard
+			var normal_rotated_display = normal_rotated.rotated(building.global_rotation).normalized()
+			if normal_rotated.length() > 0.001:
+				print("PORT %s ROTATION: %s" %[target_button, normal_rotated_display])
+				return normal_rotated.rotated(building.global_rotation).normalized()
 
 	# Fallback: infer from port position relative to building center (global_position).
-	var center := building.global_position
-	var p = _get_port_center(building, port_path)
-	if p == null:
+	var building_center := building.global_position
+	var port_center = _get_port_center(building, port_path)
+	if port_center == null:
 		return Vector2.RIGHT
 
-	var delta: Vector2 = (p as Vector2) - center
-	if abs(delta.x) >= abs(delta.y):
-		return Vector2.RIGHT if delta.x > 0.0 else Vector2.LEFT
+	var port_delta: Vector2 = (port_center as Vector2) - building_center
+	if abs(port_delta.x) >= abs(port_delta.y):
+		return Vector2.RIGHT if port_delta.x > 0.0 else Vector2.LEFT
 	else:
-		return Vector2.DOWN if delta.y > 0.0 else Vector2.UP
+		return Vector2.DOWN if port_delta.y > 0.0 else Vector2.UP
 
-
-# -------------------------------------------------------------------
 # Manhattan routing with stubs + rounded corners
-# -------------------------------------------------------------------
-
 func _choose_corner(a: Vector2, b: Vector2) -> Vector2:
 	# Two L-shape options
-	var c1 := Vector2(b.x, a.y)
-	var c2 := Vector2(a.x, b.y)
+	var corner_option_one := Vector2(b.x, a.y) #Long-Short
+	var corner_option_two := Vector2(a.x, b.y) #Short-Long
 
 	# Choose the option that keeps both legs "reasonably long" (avoids tiny first/last leg artifacts)
-	var s1 = min(a.distance_to(c1), c1.distance_to(b))
-	var s2 = min(a.distance_to(c2), c2.distance_to(b))
-	return c1 if s1 >= s2 else c2
+	var segment_length_one = min(a.distance_to(corner_option_one), corner_option_one.distance_to(b))
+	var segment_length_two = min(a.distance_to(corner_option_two), corner_option_two.distance_to(b))
+	return corner_option_one if segment_length_one >= segment_length_two else corner_option_two
 
 
 func _build_manhattan_polyline(a: Vector2, b: Vector2) -> Array[Vector2]:
@@ -231,34 +198,34 @@ func _sanitize_polyline(points: Array[Vector2]) -> Array[Vector2]:
 		return points
 
 	var out: Array[Vector2] = []
-	for p in points:
-		if out.is_empty() or out[out.size() - 1].distance_to(p) > 0.5:
-			out.append(p)
+	for point in points:
+		if out.is_empty() or out[out.size() - 1].distance_to(point) > 0.5:
+			out.append(point)
 
 	if out.size() <= 2:
 		return out
 
 	var simplified: Array[Vector2] = [out[0]]
 	for i in range(1, out.size() - 1):
-		var prev := simplified[simplified.size() - 1]
-		var cur := out[i]
-		var nxt := out[i + 1]
-		var d1 := (cur - prev)
-		var d2 := (nxt - cur)
+		var previous := simplified[simplified.size() - 1]
+		var current := out[i]
+		var next := out[i + 1]
+		var length_delta_one := (current - previous)
+		var length_delta_two := (next - current)
 
-		if d1.length() < 0.5:
+		if length_delta_one.length() < 0.5:
 			continue
-		if d2.length() < 0.5:
+		if length_delta_two.length() < 0.5:
 			continue
 
-		d1 = d1.normalized()
-		d2 = d2.normalized()
+		length_delta_one = length_delta_one.normalized()
+		length_delta_two = length_delta_two.normalized()
 
 		# Drop middle point when segments are collinear.
-		if abs(d1.dot(d2)) > 0.999:
+		if abs(length_delta_one.dot(length_delta_two)) > 0.999:
 			continue
 
-		simplified.append(cur)
+		simplified.append(current)
 
 	simplified.append(out[out.size() - 1])
 	return simplified
@@ -289,44 +256,44 @@ func _round_polyline(points: Array[Vector2], radius: float, segments: int) -> Pa
 		if i == points.size() - 2:
 			out.append(points[i])
 			continue
-		var prev := points[i - 1]
-		var cur := points[i]
-		var nxt := points[i + 1]
+		var previous := points[i - 1]
+		var current := points[i]
+		var next := points[i + 1]
 
-		var v1 := (cur - prev)
-		var v2 := (nxt - cur)
-		var len1 := v1.length()
-		var len2 := v2.length()
-		if len1 < 0.001 or len2 < 0.001:
+		var v1 := (current - previous)
+		var v2 := (next - current)
+		var length_one := v1.length()
+		var length_two := v2.length()
+		if length_one < 0.001 or length_two < 0.001:
 			continue
 
-		var d1 := v1 / len1
-		var d2 := v2 / len2
+		var delta_one := v1 / length_one
+		var delta_two := v2 / length_two
 
 		# Only round if we actually turn 90 degrees (orthogonal)
-		if abs(d1.dot(d2)) > 0.001:
-			out.append(cur)
+		if abs(delta_one.dot(delta_two)) > 0.001:
+			out.append(current)
 			continue
 
 		# Clamp radius so it fits in both segments
-		var r = min(radius, (min(len1, len2) * 0.5) - 0.5)
+		var r = min(radius, (min(length_one, length_two) * 0.5) - 0.5)
 		if r <= 0.0:
-			out.append(cur)
+			out.append(current)
 			continue
 
 		# Tangent points on each segment
-		var p1 = cur - d1 * r
-		var p2 = cur + d2 * r
+		var p1 = current - delta_one * r
+		var p2 = current + delta_two * r
 		out.append(p1)
 
 		# Arc center for axis-aligned 90° turn
-		var center = cur - d1 * r + d2 * r
+		var center = current - delta_one * r + delta_two * r
 
 		var a1 := atan2(p1.y - center.y, p1.x - center.x)
 		var a2 := atan2(p2.y - center.y, p2.x - center.x)
 
 		# Determine direction (left turn = CCW, right turn = CW)
-		var cross := d1.x * d2.y - d1.y * d2.x
+		var cross := delta_one.x * delta_two.y - delta_one.y * delta_two.x
 		var ccw := cross > 0.0
 
 		# Normalize angles so we step the short 90° way
@@ -341,8 +308,8 @@ func _round_polyline(points: Array[Vector2], radius: float, segments: int) -> Pa
 		# Sample arc (skip endpoints; we already added p1 and will add p2)
 		for s in range(1, segments):
 			var t := float(s) / float(segments)
-			var ang := a1 + delta * t
-			out.append(center + Vector2(cos(ang), sin(ang)) * r)
+			var angle := a1 + delta * t
+			out.append(center + Vector2(cos(angle), sin(angle)) * r)
 
 		out.append(p2)
 
@@ -350,23 +317,19 @@ func _round_polyline(points: Array[Vector2], radius: float, segments: int) -> Pa
 	return out
 
 
-func _route_points_local(
-		container: Node2D,
-		from_b: Node2D, from_port: NodePath, from_pos_g: Vector2,
-		to_b: Node2D, to_port: NodePath, to_pos_g: Vector2
-	) -> PackedVector2Array:
+func _route_points_local(container: Node2D, from_b: Node2D, from_port: NodePath, from_pos_g: Vector2, to_b: Node2D, to_port: NodePath, to_pos_g: Vector2) -> PackedVector2Array:
 	return _route_points_local_with_normals(container, from_pos_g, _get_port_normal(from_b, from_port), to_pos_g, _get_port_normal(to_b, to_port))
 	
 func _route_points_local_with_normals(container: Node2D,from_pos_g: Vector2, from_n: Vector2,to_pos_g: Vector2, to_n: Vector2) -> PackedVector2Array:
 	# Build a "rational" Manhattan path:
 	# start -> start_stub -> orthogonal route -> end_stub -> end
-	var stub_len := _adaptive_stub_length(from_pos_g, to_pos_g)
+	var stub_length := _adaptive_stub_length(from_pos_g, to_pos_g)
 
 	# Global stub endpoints
 	var a := from_pos_g
-	var a2 := from_pos_g + from_n * stub_len
+	var a2 := from_pos_g + from_n * stub_length
 	var b := to_pos_g
-	var b2 := to_pos_g + to_n * stub_len
+	var b2 := to_pos_g + to_n * stub_length
 
 	# Orthogonal between stubs
 	var mid_poly := _build_manhattan_polyline(a2, b2) # Array[Vector2] (global)
@@ -375,10 +338,10 @@ func _route_points_local_with_normals(container: Node2D,from_pos_g: Vector2, fro
 	var poly_g: Array[Vector2] = []
 	poly_g.append(a)
 	poly_g.append(a2)
-	for p in mid_poly:
+	for point in mid_poly:
 		# avoid duplicates when aligned
-		if poly_g.size() == 0 or poly_g[poly_g.size() - 1] != p:
-			poly_g.append(p)
+		if poly_g.size() == 0 or poly_g[poly_g.size() - 1] != point:
+			poly_g.append(point)
 	if poly_g[poly_g.size() - 1] != b2:
 		poly_g.append(b2)
 	poly_g.append(b)
@@ -386,17 +349,13 @@ func _route_points_local_with_normals(container: Node2D,from_pos_g: Vector2, fro
 
 	# Convert to local space for the container and round corners in local space
 	var poly_l: Array[Vector2] = []
-	for p in poly_g:
-		poly_l.append(container.to_local(p))
+	for point in poly_g:
+		poly_l.append(container.to_local(point))
 	poly_l = _sanitize_polyline(poly_l)
 
 	return _round_polyline(poly_l, corner_radius, arc_segments)
 
-
-# -------------------------------------------------------------------
 # Preview / finalize lifecycle
-# -------------------------------------------------------------------
-
 func _on_port_start(building: Node2D, port_name: String, _start_pos: Vector2) -> void:
 	# Start only once; if already drawing, treat as end.
 	if _preview_container != null:
@@ -477,8 +436,8 @@ func _on_port_end(building: Node2D, port_name: String, mouse_pos: Vector2) -> vo
 
 
 func _finalize_path(from_b: Node2D, from_port: NodePath, from_pos: Vector2, to_b: Node2D, to_port: NodePath, to_pos: Vector2) -> void:
-
 	var path := Path2D.new()
+	var line := Line2D.new()
 	add_child(path)
 
 	# Metadata for later deletion / rebake
@@ -487,7 +446,6 @@ func _finalize_path(from_b: Node2D, from_port: NodePath, from_pos: Vector2, to_b
 	path.set_meta("to_building", to_b)
 	path.set_meta("to_port", to_port)
 
-	var line := Line2D.new()
 	line.name = "Line"
 	line.width = line_width
 	line.antialiased = true
@@ -504,7 +462,6 @@ func _finalize_path(from_b: Node2D, from_port: NodePath, from_pos: Vector2, to_b
 
 	_cleanup_preview()
 
-
 func _cleanup_preview() -> void:
 	if _preview_container != null and is_instance_valid(_preview_container):
 		_preview_container.queue_free()
@@ -513,11 +470,7 @@ func _cleanup_preview() -> void:
 	_from_building = null
 	_from_port_path = DEFAULT_FROM_PORT_PATH
 
-
-# -------------------------------------------------------------------
 # Updating existing paths when buildings move / are deleted
-# -------------------------------------------------------------------
-
 func update_paths_for_building(building: Node2D) -> void:
 	for child in get_children():
 		if not (child is Path2D):
@@ -527,16 +480,16 @@ func update_paths_for_building(building: Node2D) -> void:
 		if not path.has_meta("from_building") or not path.has_meta("to_building"):
 			continue
 
-		var from_b: Node2D = path.get_meta("from_building")
-		var to_b: Node2D = path.get_meta("to_building")
-		if from_b != building and to_b != building:
+		var from_building: Node2D = path.get_meta("from_building")
+		var to_building: Node2D = path.get_meta("to_building")
+		if from_building != building and to_building != building:
 			continue
 
 		var from_port: NodePath = path.get_meta("from_port")
 		var to_port: NodePath = path.get_meta("to_port")
 
-		var from_pos = _get_port_center(from_b, from_port)
-		var to_pos = _get_port_center(to_b, to_port)
+		var from_pos = _get_port_center(from_building, from_port)
+		var to_pos = _get_port_center(to_building, to_port)
 		if from_pos == null or to_pos == null:
 			continue
 
@@ -547,9 +500,9 @@ func update_paths_for_building(building: Node2D) -> void:
 					line = c
 					break
 		if line != null:
-			line.points = _route_points_local(path, from_b, from_port, from_pos, to_b, to_port, to_pos)
+			line.points = _route_points_local(path, from_building, from_port, from_pos, to_building, to_port, to_pos)
 
-
+#Upon deletion of a building, clean up the paths stemming from or to it.
 func remove_paths_for_building(building: Node2D) -> void:
 	var to_delete: Array[Node] = []
 	for child in get_children():

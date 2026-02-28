@@ -1,6 +1,5 @@
 extends Node2D
 
-@export var smelter : PackedScene
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$Camera2D/CanvasLayer/Panel/HeatLabel.text = "0"
@@ -8,8 +7,6 @@ func _ready() -> void:
 	get_viewport().size_changed.connect(_on_viewport_size_changed)
 	Adjust_ui_for_resolution()
 	
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if(Input.is_action_just_released("Zoom Out")):
@@ -21,7 +18,6 @@ func _process(delta: float) -> void:
 			$"Camera2D/CanvasLayer/Debug Panel".visible = true
 		else:
 			$"Camera2D/CanvasLayer/Debug Panel".visible = false
-
 
 func _on_prod_menu_pressed() -> void:
 	$Camera2D/CanvasLayer/ProdMenu/ProdPanel.visible = not $Camera2D/CanvasLayer/ProdMenu/ProdPanel.visible

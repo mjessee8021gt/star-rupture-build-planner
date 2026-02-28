@@ -9,7 +9,6 @@ func _debug(message: String) -> void:
 	if feed:
 		feed.text = feed.text + "\n" + message
 
-
 func _get_building_registry() -> Node:
 	var registry := get_node_or_null("/root/BuildingRegistry")
 	if registry == null:
@@ -35,7 +34,6 @@ func _ready() -> void:
 		push_error("BuildManager not assigned in inspector.")
 		_debug("BuildManager not assigned in inspector.")
 
-
 	var popup: PopupMenu = get_popup()
 	popup.clear()
 
@@ -52,9 +50,7 @@ func _ready() -> void:
 	var add_cat := func(title: String) -> void:
 		popup.add_separator(title)
 
-	# =========================
 	# Categories + Items
-	# =========================
 
 	add_cat.call("Extraction")
 	add_entry.call("Ore Excavator", &"ore_excavator")
@@ -121,7 +117,6 @@ func _on_build_selected(id: int) -> void:
 
 	var scene_value: Variant = registry.call("get_scene", key)
 	_debug("lookup(" + String(key) + "): " + str(scene_value))
-
 	
 	if scene_value is PackedScene:
 		var scene := scene_value as PackedScene
