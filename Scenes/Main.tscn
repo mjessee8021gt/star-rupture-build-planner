@@ -10,7 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://b0q6pkjakr41b" path="res://Assets/SRBP_Power Icon.png" id="7_bmxlf"]
 [ext_resource type="Texture2D" uid="uid://bd7brbyjru5ea" path="res://Assets/SRBP_Stats_icon.png" id="8_bmxlf"]
 [ext_resource type="Script" uid="uid://brffdis28ou82" path="res://Scripts/prod_panel.gd" id="9_4kpch"]
+[ext_resource type="Texture2D" uid="uid://d2y1jxj184hie" path="res://Assets/SRBP_Controls.png" id="10_grg3l"]
 [ext_resource type="Script" uid="uid://c1gaut8hcyg0c" path="res://Scripts/path_manager.gd" id="11_4kpch"]
+[ext_resource type="Script" uid="uid://de7lx8hb5y0o" path="res://Scenes/control_menu.gd" id="11_frkhe"]
 
 [node name="Main" type="Node2D" unique_id=1429791362]
 script = ExtResource("1_kln2b")
@@ -108,6 +110,32 @@ grow_horizontal = 2
 layout_mode = 0
 offset_right = 825.0
 offset_bottom = 698.0
+
+[node name="ControlMenu" type="MenuButton" parent="Camera2D/CanvasLayer" unique_id=1955834739]
+offset_left = 15.0
+offset_top = 628.0
+offset_right = 87.0
+offset_bottom = 700.0
+scale = Vector2(0.5, 0.5)
+icon = ExtResource("10_grg3l")
+script = ExtResource("11_frkhe")
+popup_path = NodePath("../PopupPanel")
+list_path = NodePath("../PopupPanel/MarginContainer/ScrollContainer/VBoxContainer")
+
+[node name="PopupPanel" type="PopupPanel" parent="Camera2D/CanvasLayer" unique_id=1072106267]
+size = Vector2i(750, 250)
+
+[node name="MarginContainer" type="MarginContainer" parent="Camera2D/CanvasLayer/PopupPanel" unique_id=1945906527]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 746.0
+offset_bottom = 246.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Camera2D/CanvasLayer/PopupPanel/MarginContainer" unique_id=90211902]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Camera2D/CanvasLayer/PopupPanel/MarginContainer/ScrollContainer" unique_id=1900633321]
+layout_mode = 2
 
 [node name="BuildManager" type="Node2D" parent="." unique_id=695504288]
 script = ExtResource("6_v1gob")
