@@ -1,8 +1,10 @@
 extends Building
 
-var footprint := Vector2i(4,5)
 @export var footprint_primary := Vector2i(4,5)
 @export var footprint_alt := Vector2i(5,6)
+@export var heat := 15
+@export var power := -30
+@export var available_recipes: Array[Recipe] = []
 
 @onready var recipe_dropdown: OptionButton = $Recipe
 @onready var output_text : Label = $outputBox/outputText
@@ -15,11 +17,11 @@ var footprint := Vector2i(4,5)
 @onready var input_2_box : ColorRect = $Input2Box
 @onready var input_3_box : ColorRect = $Input3Box
 @onready var input_4_box : ColorRect = $Input4Box
-
-@export var heat := 15
-@export var power := -30
-
-@export var available_recipes: Array[Recipe] = []
+@onready var output_port := $"Ports/Output 1"
+@onready var input_port := $"Ports/Input 1"
+@onready var input_2_port := $"Ports/Input 2"
+@onready var input_3_port := $"Ports/Input 3"
+@onready var input_4_port := $"Ports/Input 4"
 
 var input1_is_connected := false
 var input1_is_pressed := false
@@ -32,12 +34,7 @@ var input4_is_pressed := false
 var output1_is_connected := false
 var output1_is_pressed := false
 var other_button_pressed := false
-
-@onready var output_port := $"Ports/Output 1"
-@onready var input_port := $"Ports/Input 1"
-@onready var input_2_port := $"Ports/Input 2"
-@onready var input_3_port := $"Ports/Input 3"
-@onready var input_4_port := $"Ports/Input 4"
+var footprint := Vector2i(4,5)
 
 func _ready() -> void:
 	$"Ports/Output 1".modulate = Color(1,0,0,0.5)

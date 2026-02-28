@@ -1,15 +1,13 @@
 extends Building
 
-var footprint := Vector2i(3, 3)
 @export var footprint_primary := Vector2i(3, 3)
 @export var footprint_alt := Vector2i(3, 3)
-
 @export var recipe : Recipe
-
 @export var heat := 250
 @export var power := 1000
-
 @export var available_recipes: Array[Recipe] = []
+
+var footprint := Vector2i(3, 3)
 
 func _ready() -> void:
 	add_to_group("buildings")

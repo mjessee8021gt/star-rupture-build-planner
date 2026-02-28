@@ -1,24 +1,22 @@
 extends Building
 
-var footprint := Vector2i(3,4)
 @export var footprint_primary := Vector2i(3,4)
 @export var footprint_alt := Vector2i(3,4)
-var _selected_variant : RecipeVariant = null
+@export var heat := 3
+@export var power := -5
+@export var available_recipes: Array[Recipe] = []
+@export var available_alternative_recipes: Array[RecipeVariant] = []
+
 @onready var recipe_dropdown: OptionButton = $Recipe
 @onready var purity_dropdown: OptionButton = $Purity
 @onready var output_text : Label = $outputBox/outputText
-
-@export var heat := 3
-@export var power := -5
-
-@export var available_recipes: Array[Recipe] = []
-@export var available_alternative_recipes: Array[RecipeVariant] = []
+@onready var output_port := $"Ports/Output 1"
 
 var output1_is_connected := false
 var output1_is_pressed := false
 var other_button_pressed := false
-
-@onready var output_port := $"Ports/Output 1"
+var footprint := Vector2i(3,4)
+var _selected_variant : RecipeVariant = null
 
 func _ready() -> void:
 	$"Ports/Output 1".modulate = Color(1,0,0,0.5)

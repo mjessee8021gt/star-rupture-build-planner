@@ -1,11 +1,14 @@
 extends Building
 
-var footprint := Vector2i(1, 1)
 @export var footprint_primary := Vector2i(1, 1)
 @export var footprint_alt := Vector2i(2, 2)
-
 @export var heat := 0
 @export var power := 0
+
+@onready var u_port1 := $"Ports/Universal 1"
+@onready var u_port2 := $"Ports/Universal 2"
+@onready var u_port3 := $"Ports/Universal 3"
+@onready var u_port4 := $"Ports/Universal 4"
 
 var universal2_is_connected := false
 var universal2_is_pressed := false
@@ -16,11 +19,7 @@ var universal3_is_pressed := false
 var universal4_is_connecterd := false
 var universal4_is_pressed := false
 var other_button_pressed := false
-
-@onready var u_port1 := $"Ports/Universal 1"
-@onready var u_port2 := $"Ports/Universal 2"
-@onready var u_port3 := $"Ports/Universal 3"
-@onready var u_port4 := $"Ports/Universal 4"
+var footprint := Vector2i(1, 1)
 
 func _ready() -> void:
 	$"Ports/Universal 1".modulate = Color(.5,.5,.5,0.5)
