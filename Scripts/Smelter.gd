@@ -7,7 +7,6 @@ extends Building
 @export var available_recipes: Array[Recipe] = []
 
 @onready var recipe_dropdown: OptionButton = $Recipe
-@onready var purity_dropdown: OptionButton = $Purity
 @onready var output_text : Label = $outputBox/outputText
 @onready var input_text : Label = $InputBox/inputText
 @onready var output_box : ColorRect = $outputBox
