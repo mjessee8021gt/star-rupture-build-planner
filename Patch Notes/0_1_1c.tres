@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PatchNote" format=3 uid="uid://83qoxdq03x2y"]
+
+[ext_resource type="Script" uid="uid://b6tmiam3vo7cr" path="res://Resources/PatchNote.gd" id="1_p15bt"]
+
+[resource]
+script = ExtResource("1_p15bt")
+patch_version = &"0.1.1c"
+patch_notes = "New Features:\\n- Added control menu to display control mappings to the end users\\n- resolution scaling has been added\\n\\nBug Fixes\\n-Codebase refactored from end-to-end for efficiency"
+known_issues = "Known Issues:\\n-Rail pathing is not as clean as i'd like it to be.\\n-Control mappings are not accessible to the user anywhere\\n-The following buildings are presently not added to the game:\\n     -Transportation-Rails\\n          -Multirail 3\\n          -Multirail 5\\n          -Rail Modulator 5\\n     -Transportation-Shipment\\n          -Orbital Cargo Launcher\\n          -Teleporter\\n     -Transportation-Storage\\n          -All Buildings"
+metadata/_custom_type_script = "uid://b6tmiam3vo7cr"
