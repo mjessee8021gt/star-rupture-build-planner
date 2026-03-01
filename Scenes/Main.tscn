@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://d2y1jxj184hie" path="res://Assets/SRBP_Controls.png" id="10_grg3l"]
 [ext_resource type="Script" uid="uid://c1gaut8hcyg0c" path="res://Scripts/path_manager.gd" id="11_4kpch"]
 [ext_resource type="Script" uid="uid://de7lx8hb5y0o" path="res://Scenes/control_menu.gd" id="11_frkhe"]
+[ext_resource type="Texture2D" uid="uid://b0o4ul02ammwi" path="res://Assets/SRBP_Info_Button.png" id="12_1p5hy"]
 
 [node name="Main" type="Node2D" unique_id=1429791362]
 script = ExtResource("1_kln2b")
@@ -140,6 +141,18 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Camera2D/CanvasLayer/PopupPanel/MarginContainer/ScrollContainer" unique_id=1900633321]
 layout_mode = 2
+
+[node name="Patch Notes" type="MenuButton" parent="Camera2D/CanvasLayer" unique_id=1991974272]
+offset_left = 14.0
+offset_top = 588.0
+offset_right = 86.0
+offset_bottom = 660.0
+scale = Vector2(0.5, 0.5)
+icon = ExtResource("12_1p5hy")
+
+[node name="PatchNotesPanel" type="PopupPanel" parent="Camera2D/CanvasLayer" unique_id=1804496669]
+position = Vector2i(51, 463)
+size = Vector2i(300, 500)
 
 [node name="BuildManager" type="Node2D" parent="." unique_id=695504288]
 script = ExtResource("6_v1gob")
