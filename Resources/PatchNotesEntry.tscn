@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://c8t0wuou8x04o"]
+
+[node name="PatchNotesEntry" type="PanelContainer" unique_id=554194498]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=632093563]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1793442634]
+layout_mode = 2
+
+[node name="Version" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1454652648]
+layout_mode = 2
+
+[node name="Notes" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=1963109107]
+layout_mode = 2
+fit_content = true
+scroll_active = false
+autowrap_mode = 2
+
+[node name="Issues" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=528324351]
+layout_mode = 2
+fit_content = true
+scroll_active = false
+autowrap_mode = 2

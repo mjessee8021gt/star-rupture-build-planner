@@ -14,6 +14,8 @@
 [ext_resource type="Script" uid="uid://c1gaut8hcyg0c" path="res://Scripts/path_manager.gd" id="11_4kpch"]
 [ext_resource type="Script" uid="uid://de7lx8hb5y0o" path="res://Scenes/control_menu.gd" id="11_frkhe"]
 [ext_resource type="Texture2D" uid="uid://b0o4ul02ammwi" path="res://Assets/SRBP_Info_Button.png" id="12_1p5hy"]
+[ext_resource type="Script" uid="uid://ctcvj2tgfppa1" path="res://Scripts/patch_notes.gd" id="13_erwvk"]
+[ext_resource type="PackedScene" uid="uid://7jyji8msm5gx" path="res://Scenes/patchNotesPanel.tscn" id="14_erwvk"]
 
 [node name="Main" type="Node2D" unique_id=1429791362]
 script = ExtResource("1_kln2b")
@@ -148,11 +150,10 @@ offset_top = 588.0
 offset_right = 86.0
 offset_bottom = 660.0
 scale = Vector2(0.5, 0.5)
+keep_pressed_outside = true
 icon = ExtResource("12_1p5hy")
-
-[node name="PatchNotesPanel" type="PopupPanel" parent="Camera2D/CanvasLayer" unique_id=1804496669]
-position = Vector2i(51, 463)
-size = Vector2i(300, 500)
+script = ExtResource("13_erwvk")
+panel_scene = ExtResource("14_erwvk")
 
 [node name="BuildManager" type="Node2D" parent="." unique_id=695504288]
 script = ExtResource("6_v1gob")
