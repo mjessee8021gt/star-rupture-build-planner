@@ -5,5 +5,5 @@
 [resource]
 script = ExtResource("1_0qann")
 patch_version = &"v0.1.2"
-patch_notes = "New Features:\n-Patch Notes Screen has been added.\n-Color Scheme across all assets has been redone to soften design language while still being readable.\n-Multirail 3 has been added, tested and verified.\n\nBug Fixes:\n-Fixed layout issues with the following buildings\n     -Smelter\n     -Rail Support\n     -Rail Modulator 3"
+patch_notes = "New Features:\n-Patch Notes Screen has been added.\n-Color Scheme across all assets has been redone to soften design language while still being readable.\n-Multirail 3 has been added, tested and verified.\n\nBug Fixes:\n-Fixed layout issues with the following buildings\n     -Smelter\n     -Rail Support\n     -Rail Modulator 3\n\n Miscellaneous:\n-Further clean-up of program assets to remove more unused assets. This should lend to better performance.\n "
 metadata/_custom_type_script = "uid://b6tmiam3vo7cr"
