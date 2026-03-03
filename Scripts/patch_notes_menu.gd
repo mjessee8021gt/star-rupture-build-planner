@@ -33,23 +33,30 @@ func _add_entry(patchNote: PatchNote) -> void:
 		push_warning("PatchNotesPanel: version_label is not set.")
 		return
 	version_label.text = "Version " + str(patchNote.patch_version)
+	print(version_label.text)
 	
 	var notes_rtl := entry.get_node("MarginContainer/VBoxContainer/Notes") as RichTextLabel
 	if notes_rtl == null:
 		push_warning("PatchNotesPanel: notes_rtl is not set.")
 		return
 	notes_rtl.bbcode_enabled = false
-	notes_rtl.text = "Patch Notes:\n" + (patchNote.patch_notes if patchNote.patch_notes != null else "")
+	var unformatted_notes := patchNote.patch_notes
+	var formatted_notes = unformatted_notes.replace("\\n", "\n")
+	notes_rtl.text = "Patch Notes:\n" + (formatted_notes if formatted_notes != null else "")
+	print(notes_rtl.text)
 	
 	var issues_rtl := entry.get_node("MarginContainer/VBoxContainer/Issues") as RichTextLabel
 	if issues_rtl == null:
 		push_warning("PatchNotesPanel: issues_rtl is not set.")
 		return
 	issues_rtl.bbcode_enabled = false
-	issues_rtl.text = "Known Issuees:\n" + (patchNote.known_issues if patchNote.known_issues != null else "")
+	issues_rtl.text = "Known Issues:\n" + (patchNote.known_issues if patchNote.known_issues != null else "")
+	print(issues_rtl.text)
+	
+	entry.visible = true
 	
 func _clear_list() -> void:
-	for child in get_children():
+	for child in list.get_children():
 		child.queue_free()
 
 func _load_patchnote_resources(dir_path: String) -> Array[PatchNote]:
@@ -65,6 +72,7 @@ func _load_patchnote_resources(dir_path: String) -> Array[PatchNote]:
 	var directory := DirAccess.open(dir_path)
 	if directory == null:
 		push_warning("PatchNotesPanel: Could not open directory: " + dir_path)
+		return out
 		
 	directory.list_dir_begin()
 	while true:

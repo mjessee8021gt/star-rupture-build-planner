@@ -15,15 +15,20 @@ layout_mode = 2
 
 [node name="Version" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1454652648]
 layout_mode = 2
+text = "This is a test"
 
 [node name="Notes" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=1963109107]
 layout_mode = 2
+text = "
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris convallis, sem nec faucibus facilisis, massa erat semper nibh, ut dictum quam turpis in quam. Duis semper orci at ex imperdiet varius. Pellentesque pulvinar nibh ac aliquet posuere. Etiam efficitur eros in lacus vulputate, ut venenatis justo porttitor. Quisque pellentesque tempus enim, eu dapibus nibh volutpat et. Sed viverra id ipsum in vestibulum. Aliquam erat volutpat. Aliquam nunc ante, dapibus vitae ultrices in, iaculis quis elit. Curabitur sit amet commodo quam, non semper diam."
 fit_content = true
 scroll_active = false
 autowrap_mode = 2
 
 [node name="Issues" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=528324351]
 layout_mode = 2
+text = "
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris convallis, sem nec faucibus facilisis, massa erat semper nibh, ut dictum quam turpis in quam. Duis semper orci at ex imperdiet varius. Pellentesque pulvinar nibh ac aliquet posuere. Etiam efficitur eros in lacus vulputate, ut venenatis justo porttitor. Quisque pellentesque tempus enim, eu dapibus nibh volutpat et. Sed viverra id ipsum in vestibulum. Aliquam erat volutpat. Aliquam nunc ante, dapibus vitae ultrices in, iaculis quis elit. Curabitur sit amet commodo quam, non semper diam."
 fit_content = true
 scroll_active = false
 autowrap_mode = 2
