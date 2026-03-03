@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PatchNote" format=3 uid="uid://c1tstgpukd065"]
+
+[ext_resource type="Script" uid="uid://b6tmiam3vo7cr" path="res://Resources/PatchNote.gd" id="1_bqlvo"]
+
+[resource]
+script = ExtResource("1_bqlvo")
+patch_version = &"v0.1.0"
+patch_notes = "Initial Release to HTML5"
+known_issues = "-Rail pathing is not as clean as i'd like it to be.\\n-Control mappings are not accessible to the user anywhere\\n-The following buildings are presently not added to the game:\\n     -Transportation-Rails\\n          -Multirail 3\\n          -Multirail 5\\n          -Rail Modulator 5\\n     -Transportation-Shipment\\n          -Orbital Cargo Launcher\\n          -Teleporter\\n     -Transportation-Storage\\n          -All Buildings"
+metadata/_custom_type_script = "uid://b6tmiam3vo7cr"
