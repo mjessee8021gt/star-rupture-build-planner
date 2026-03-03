@@ -22,17 +22,29 @@ func _add_entry(patchNote: PatchNote) -> void:
 	if entry_scene == null:
 		push_warning("PatchNotesPanel: entry_scene is not set.")
 		return
-	var entry := entry_scene.instantiate()
+	var entry := entry_scene.instantiate() as Control
+	if entry == null:
+		push_warning("PatchNotesPanel: entry_scene is not set.")
+		return
 	list.add_child(entry)
 	
-	var version_label := entry.get_node("Version") as Label
+	var version_label := entry.get_node_or_null("MarginContainer/VBoxContainer/Version") as Label
+	if version_label == null:
+		push_warning("PatchNotesPanel: version_label is not set.")
+		return
 	version_label.text = "Version " + str(patchNote.patch_version)
 	
-	var notes_rtl := entry.get_node("Notes") as RichTextLabel
+	var notes_rtl := entry.get_node("MarginContainer/VBoxContainer/Notes") as RichTextLabel
+	if notes_rtl == null:
+		push_warning("PatchNotesPanel: notes_rtl is not set.")
+		return
 	notes_rtl.bbcode_enabled = false
 	notes_rtl.text = "Patch Notes:\n" + (patchNote.patch_notes if patchNote.patch_notes != null else "")
 	
-	var issues_rtl := entry.get_node("Issues") as RichTextLabel
+	var issues_rtl := entry.get_node("MarginContainer/VBoxContainer/Issues") as RichTextLabel
+	if issues_rtl == null:
+		push_warning("PatchNotesPanel: issues_rtl is not set.")
+		return
 	issues_rtl.bbcode_enabled = false
 	issues_rtl.text = "Known Issuees:\n" + (patchNote.known_issues if patchNote.known_issues != null else "")
 	
