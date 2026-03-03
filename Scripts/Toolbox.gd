@@ -76,6 +76,7 @@ func _ready() -> void:
 	railMenu.add_item("Rail Support")
 	railMenu.set_item_metadata(railMenu.item_count-1, &"rail_support")
 	railMenu.add_item("Multirail 3")
+	railMenu.set_item_metadata(railMenu.item_count-1, &"multirail_3")
 	railMenu.add_item("Rail Modulator 3")
 	railMenu.set_item_metadata(railMenu.item_count-1, &"rail_modulator_3")
 	railMenu.add_item("Multirail 5")

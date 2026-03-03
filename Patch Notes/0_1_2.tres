@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PatchNote" format=3 uid="uid://bjy3m5hjfeyuj"]
+
+[ext_resource type="Script" uid="uid://b6tmiam3vo7cr" path="res://Resources/PatchNote.gd" id="1_0qann"]
+
+[resource]
+script = ExtResource("1_0qann")
+patch_version = &"v0.1.2"
+patch_notes = "New Features:\n-Patch Notes Screen has been added.\n-Color Scheme across all assets has been redone to soften design language while still being readable.\n-Multirail 3 has been added, tested and verified.\n\nBug Fixes:\n-Fixed layout issues with the following buildings\n     -Smelter\n     -Rail Support\n     -Rail Modulator 3"
+metadata/_custom_type_script = "uid://b6tmiam3vo7cr"

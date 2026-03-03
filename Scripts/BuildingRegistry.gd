@@ -20,7 +20,8 @@ const BUILDINGS := {
 	&"solar_v1": preload("res://Buildings/Solar V1.tscn"),
 	&"wind_v1": preload("res://Buildings/Wind V1.tscn"),
 	&"solar_v2": preload("res://Buildings/Solar V2.tscn"),
-	&"wind_v2": preload("res://Buildings/Wind V2.tscn")
+	&"wind_v2": preload("res://Buildings/Wind V2.tscn"),
+	&"multirail_3": preload("res://Buildings/Multirail_3.tscn")
 }
 
 static func get_scene(key: StringName) -> PackedScene:

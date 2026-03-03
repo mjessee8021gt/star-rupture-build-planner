@@ -9,6 +9,8 @@ extends Building
 @onready var u_port2 := $"Ports/Universal 2"
 @onready var u_port3 := $"Ports/Universal 3"
 @onready var u_port4 := $"Ports/Universal 4"
+@onready var u_port5 := $"Ports/Universal 5"
+@onready var u_port6 := $"Ports/Universal 6"
 
 var universal2_is_connected := false
 var universal2_is_pressed := false
@@ -18,6 +20,10 @@ var universal3_is_connected := false
 var universal3_is_pressed := false
 var universal4_is_connecterd := false
 var universal4_is_pressed := false
+var universal5_is_connecterd := false
+var universal5_is_pressed := false
+var universal6_is_connecterd := false
+var universal6_is_pressed := false
 var other_button_pressed := false
 var footprint := Vector2i(1, 1)
 
@@ -30,6 +36,9 @@ func _ready() -> void:
 	u_port2.pressed.connect(func(): _start_port_drag("Universal 2"))
 	u_port3.pressed.connect(func(): _start_port_drag("Universal 3"))
 	u_port4.pressed.connect(func(): _start_port_drag("Universal 4"))
+	u_port5.pressed.connect(func(): _start_port_drag("Universal 5"))
+	u_port6.pressed.connect(func(): _start_port_drag("Universal 6"))
+	
 	add_to_group("buildings")
 
 func flip_footprint() -> void:
@@ -38,14 +47,18 @@ func flip_footprint() -> void:
 		$AlternateSprite.visible = true
 		$CollisionShape2D.disabled = true
 		$CollisionShapeAlt.disabled = false
-		$"Ports/Universal 1".position = Vector2(23, 1)
-		$"Ports/Universal 1".rotation_degrees = 0
-		$"Ports/Universal 2".position = Vector2(44, 1)
-		$"Ports/Universal 2".rotation_degrees = 0
-		$"Ports/Universal 3".position = Vector2(41, 63)
-		$"Ports/Universal 3".rotation_degrees = 180
-		$"Ports/Universal 4".position = Vector2(1, 1)
-		$"Ports/Universal 4".rotation_degrees = 0
+		$"Ports/Universal 1".position = Vector2(21, 1)
+		$"Ports/Universal 1".rotation_degrees = 90
+		$"Ports/Universal 2".position = Vector2(37, 1)
+		$"Ports/Universal 2".rotation_degrees = 90
+		$"Ports/Universal 3".position = Vector2(53, 1)
+		$"Ports/Universal 3".rotation_degrees = 90
+		$"Ports/Universal 4".position = Vector2(21, 45)
+		$"Ports/Universal 4".rotation_degrees = 90
+		$"Ports/Universal 5".position = Vector2(37, 45)
+		$"Ports/Universal 5".rotation_degrees = 90
+		$"Ports/Universal 6".position = Vector2(53, 45)
+		$"Ports/Universal 6".rotation_degrees = 90
 		is_alternate = true
 		footprint = footprint_alt
 	else:
@@ -53,14 +66,18 @@ func flip_footprint() -> void:
 		$CollisionShape2D.disabled = false
 		$AlternateSprite.visible = false
 		$CollisionShapeAlt.disabled = true
-		$"Ports/Universal 1".position = Vector2(11, 17)
-		$"Ports/Universal 1".rotation_degrees = 270
-		$"Ports/Universal 2".position = Vector2(32, -2)
+		$"Ports/Universal 1".position = Vector2(10, -3)
+		$"Ports/Universal 1".rotation_degrees = 90
+		$"Ports/Universal 2".position = Vector2(21, -3)
 		$"Ports/Universal 2".rotation_degrees = 90
-		$"Ports/Universal 3".position = Vector2(26, 32)
-		$"Ports/Universal 3".rotation_degrees = 180
-		$"Ports/Universal 4".position = Vector2(0, 17)
-		$"Ports/Universal 4".rotation_degrees = 270
+		$"Ports/Universal 3".position = Vector2(32, -3)
+		$"Ports/Universal 3".rotation_degrees = 90
+		$"Ports/Universal 4".position = Vector2(10, 17)
+		$"Ports/Universal 4".rotation_degrees = 90
+		$"Ports/Universal 5".position = Vector2(21, 17)
+		$"Ports/Universal 5".rotation_degrees = 90
+		$"Ports/Universal 6".position = Vector2(32, 17)
+		$"Ports/Universal 6".rotation_degrees = 90
 		is_alternate = false
 		footprint = footprint_primary
 		
@@ -123,6 +140,10 @@ func _get_port_global_pos(port_name: String) -> Vector2:
 			return u_port3.global_position + u_port3.size * 0.5
 		"universal 4":
 			return u_port4.global_position + u_port4.size * 0.5
+		"universal 5":
+			return u_port5.global_position + u_port5.size * 0.5
+		"universal 6":
+			return u_port6.global_position + u_port6.size * 0.5
 		_:
 			return global_position
 
@@ -135,11 +156,11 @@ func _unhandled_input(event: InputEvent) -> void:
 func _on_universal_3_pressed() -> void:
 	if not universal3_is_pressed:
 		if not other_button_pressed:
-			$"Ports/Universal 1".modulate = Color(0.5, 0.5, 0.5, 1)
+			$"Ports/Universal 3".modulate = Color(0.5, 0.5, 0.5, 1)
 			universal3_is_pressed = true
 			other_button_pressed = true
 	else:
-		$"Ports/Universal 1".modulate = Color(0.5, 0.5, 0.5, 0.5)
+		$"Ports/Universal 3".modulate = Color(0.5, 0.5, 0.5, 0.5)
 		universal3_is_pressed = false
 		other_button_pressed = false
 
@@ -154,11 +175,11 @@ func _on_universal_3_mouse_exited() -> void:
 func _on_universal_4_pressed() -> void:
 	if not universal4_is_pressed:
 		if not other_button_pressed:
-			$"Ports/Universal 1".modulate = Color(0.5, 0.5, 0.5, 1)
+			$"Ports/Universal41".modulate = Color(0.5, 0.5, 0.5, 1)
 			universal4_is_pressed = true
 			other_button_pressed = true
 	else:
-		$"Ports/Universal 1".modulate = Color(0.5, 0.5, 0.5, 0.5)
+		$"Ports/Universal 4".modulate = Color(0.5, 0.5, 0.5, 0.5)
 		universal4_is_pressed = false
 		other_button_pressed = false
 
@@ -169,3 +190,47 @@ func _on_universal_4_mouse_entered() -> void:
 func _on_universal_4_mouse_exited() -> void:
 	if not universal4_is_pressed:
 		$"Ports/Universal 4".modulate = Color(0.5, 0.5, 0.5, 0.5)
+
+
+func _on_universal_5_pressed() -> void:
+	if not universal5_is_pressed:
+		if not other_button_pressed:
+			$"Ports/Universal 5".modulate = Color(0.5, 0.5, 0.5, 1)
+			universal5_is_pressed = true
+			other_button_pressed = true
+	else:
+		$"Ports/Universal 5".modulate = Color(0.5, 0.5, 0.5, 0.5)
+		universal5_is_pressed = false
+		other_button_pressed = false
+
+
+func _on_universal_5_mouse_entered() -> void:
+	if not universal5_is_pressed:
+		$"Ports/Universal 5".modulate = Color(0.5, 0.5, 0.5, 0.75)
+
+
+func _on_universal_5_mouse_exited() -> void:
+	if not universal5_is_pressed:
+		$"Ports/Universal 5".modulate = Color(0.5, 0.5, 0.5, 0.5)
+
+
+func _on_universal_6_pressed() -> void:
+	if not universal6_is_pressed:
+		if not other_button_pressed:
+			$"Ports/Universal 6".modulate = Color(0.5, 0.5, 0.5, 1)
+			universal6_is_pressed = true
+			other_button_pressed = true
+	else:
+		$"Ports/Universal 6".modulate = Color(0.5, 0.5, 0.5, 0.5)
+		universal6_is_pressed = false
+		other_button_pressed = false
+
+
+func _on_universal_6_mouse_entered() -> void:
+	if not universal6_is_pressed:
+		$"Ports/Universal 6".modulate = Color(0.5, 0.5, 0.5, 0.75)
+
+
+func _on_universal_6_mouse_exited() -> void:
+	if not universal6_is_pressed:
+		$"Ports/Universal 6".modulate = Color(0.5, 0.5, 0.5, 0.5)

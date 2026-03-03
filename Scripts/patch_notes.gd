@@ -16,15 +16,17 @@ func _toggle_panel() -> void:
 
 		_panel = panel_scene.instantiate() as PopupPanel
 		get_tree().root.add_child(_panel)
-
-		# If your panel script exposes refresh(), call it when opening.
-		if _panel.has_method("refresh"):
-			_panel.call("refresh")
-
+		
+		_panel.hide()
+	
 	if _panel.visible:
 		_panel.hide()
 	else:
-		# Popup centered-ish; you can also position it near the button.
-		_panel.popup_centered(Vector2i(900, 650))
-		if _panel.has_method("refresh"):
-			_panel.call("refresh")
+		call_deferred("_open_panel")
+
+func _open_panel() -> void:
+	if _panel == null:
+		return
+	_panel.popup_centered(Vector2i(900, 650))
+	if _panel.has_method("refresh"):
+		_panel.call("refresh")
