@@ -10,16 +10,16 @@
 [ext_resource type="Resource" uid="uid://bnyf8aou0r7cx" path="res://Recipes/Wolfram_bar.tres" id="5_356qw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
-size = Vector2(96, 128)
+size = Vector2(192, 256)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uf4xf"]
-size = Vector2(128, 128)
+size = Vector2(256, 256)
 
 [node name="Smelter" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_7hisn")
 available_recipes = Array[ExtResource("2_3rles")]([ExtResource("3_yt2l3"), ExtResource("4_e8x7b"), ExtResource("5_356qw")])
 id = &"smelter"
-metadata/_edit_vertical_guides_ = [64.0]
+metadata/_edit_vertical_guides_ = [64.0, 96.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
 texture = ExtResource("1_gbqis")
@@ -31,58 +31,64 @@ texture = ExtResource("3_gbqis")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128283645]
-position = Vector2(48, 64)
+position = Vector2(96, 128)
 shape = SubResource("RectangleShape2D_gbqis")
 
 [node name="CollisionShapeAlt" type="CollisionShape2D" parent="." unique_id=1184700770]
 visible = false
-position = Vector2(64, 64)
+position = Vector2(128, 128)
 shape = SubResource("RectangleShape2D_uf4xf")
 disabled = true
 
 [node name="TitleLabel" type="Label" parent="." unique_id=904579435]
-offset_left = 15.0
-offset_top = 42.0
-offset_right = 85.0
-offset_bottom = 65.0
+offset_left = 42.0
+offset_top = 45.0
+offset_right = 150.0
+offset_bottom = 80.0
+theme_override_font_sizes/font_size = 25
 text = "SMELTER"
 
 [node name="PlacementArea" type="Area2D" parent="." unique_id=911391560]
 
 [node name="PlacementAreaAlt" type="Area2D" parent="." unique_id=445836450]
 
-[node name="Ports" type="Node2D" parent="." unique_id=1067444767]
+[node name="Ports" type="Control" parent="." unique_id=896279038]
+layout_mode = 3
+anchors_preset = 0
 
 [node name="Output 1" type="Button" parent="Ports" unique_id=1122308628 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 31.0
-offset_right = 103.0
-offset_bottom = 40.0
+layout_mode = 0
+offset_left = 78.0
+offset_top = 1.0
+offset_right = 150.0
+offset_bottom = 41.0
 scale = Vector2(0.5, 0.5)
 icon = ExtResource("4_uf4xf")
 metadata/normal = Vector2(0, -1)
 
 [node name="Input 1" type="Button" parent="Ports" unique_id=1958701130 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 31.0
-offset_top = 108.0
-offset_right = 103.0
-offset_bottom = 148.0
+layout_mode = 0
+offset_left = 77.0
+offset_top = 235.0
+offset_right = 149.0
+offset_bottom = 275.0
 scale = Vector2(0.5, 0.5)
 icon = ExtResource("4_uf4xf")
 metadata/normal = Vector2(0, 1)
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
-offset_left = 1.0
-offset_top = 63.0
-offset_right = 95.0
-offset_bottom = 83.0
-theme_override_font_sizes/font_size = 10
+offset_left = 32.0
+offset_top = 79.0
+offset_right = 126.0
+offset_bottom = 99.0
+theme_override_font_sizes/font_size = 16
 
 [node name="outputBox" type="ColorRect" parent="." unique_id=1419396623]
-offset_left = 30.0
+offset_left = 77.0
 offset_top = 21.0
-offset_right = 68.0
+offset_right = 115.0
 offset_bottom = 44.0
 color = Color(0, 0.64705884, 0.25490198, 0.57254905)
 
@@ -96,10 +102,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="InputBox" type="ColorRect" parent="." unique_id=1573327625]
-offset_left = 30.0
-offset_top = 85.0
-offset_right = 68.0
-offset_bottom = 108.0
+offset_left = 77.0
+offset_top = 211.0
+offset_right = 115.0
+offset_bottom = 234.0
 color = Color(0, 0.64705884, 0.25490198, 0.57254905)
 
 [node name="inputText" type="Label" parent="InputBox" unique_id=1651637159]

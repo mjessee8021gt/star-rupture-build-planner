@@ -6,12 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://ilmbegsn2c7" path="res://Assets/SRBP_Oval.png" id="4_ow0wi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
-size = Vector2(32, 32)
+size = Vector2(64, 65)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uf4xf"]
-size = Vector2(64, 64)
+size = Vector2(128, 128)
 
-[node name="Rail Modulator 3" type="Node2D" unique_id=1728206745 groups=["buildings"]]
+[node name="Rail Modulator 4" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_nw8k3")
 id = &"rail_mod_3"
 metadata/_edit_vertical_guides_ = [32.0]
@@ -26,12 +26,12 @@ texture = ExtResource("3_nw8k3")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128283645]
-position = Vector2(16, 16)
+position = Vector2(32, 31.5)
 shape = SubResource("RectangleShape2D_gbqis")
 
 [node name="CollisionShapeAlt" type="CollisionShape2D" parent="." unique_id=1184700770]
 visible = false
-position = Vector2(32, 32)
+position = Vector2(64, 64)
 shape = SubResource("RectangleShape2D_uf4xf")
 disabled = true
 
@@ -43,44 +43,45 @@ disabled = true
 
 [node name="Universal 1" type="Button" parent="Ports" unique_id=1122308628 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 11.0
-offset_top = 17.0
-offset_right = 83.0
-offset_bottom = 57.0
-rotation = 4.712389
-scale = Vector2(0.26, 0.26)
+offset_left = 20.0
+offset_top = 1.0
+offset_right = 92.0
+offset_bottom = 41.0
+rotation = 1.5707964
+scale = Vector2(0.32, 0.32)
 icon = ExtResource("4_ow0wi")
 metadata/normal = Vector2(0, -1)
 
 [node name="Universal 2" type="Button" parent="Ports" unique_id=1958701130 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 32.0
-offset_top = -2.0000002
-offset_right = 104.0
-offset_bottom = 38.0
+offset_left = 38.0
+offset_top = 1.0
+offset_right = 110.0
+offset_bottom = 41.0
 rotation = 1.5707964
-scale = Vector2(0.26, 0.26)
+scale = Vector2(0.32, 0.32)
 icon = ExtResource("4_ow0wi")
 metadata/normal = Vector2(0, -1)
 
 [node name="Universal 3" type="Button" parent="Ports" unique_id=294998889 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 26.0
-offset_top = 32.0
-offset_right = 98.0
-offset_bottom = 72.0
-rotation = 3.1415927
-scale = Vector2(0.26, 0.26)
+offset_left = 56.0
+offset_top = 0.99999994
+offset_right = 128.0
+offset_bottom = 41.000004
+rotation = 1.5707964
+scale = Vector2(0.32, 0.32)
 icon = ExtResource("4_ow0wi")
 metadata/normal = Vector2(0, 1)
 
 [node name="Universal 4" type="Button" parent="Ports" unique_id=742351239 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_top = 17.0
-offset_right = 72.0
-offset_bottom = 57.0
-rotation = 4.712389
-scale = Vector2(0.26, 0.26)
+offset_left = 37.999996
+offset_top = 39.999996
+offset_right = 110.0
+offset_bottom = 80.0
+rotation = 1.5707964
+scale = Vector2(0.32, 0.32)
 icon = ExtResource("4_ow0wi")
 metadata/normal = Vector2(0, -1)
 

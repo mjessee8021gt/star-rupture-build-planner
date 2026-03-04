@@ -3,6 +3,7 @@ extends Node2D
 
 ##------OnReady variables------##
 @onready var debug_feed : Label = $"../Camera2D/CanvasLayer/Debug Panel/DebugFeed"
+@onready var tile_map_layer: TileMapLayer = $"../TileMapLayer"
 
 ##------Object Variables-------##
 var current_scene: PackedScene
@@ -27,7 +28,9 @@ var drag_original_cells : Array[Vector2i] = []
 var drag_last_cells : Array[Vector2i] = []
 var occupied_cells : Dictionary = {} #Verctor2i -> Node(Building)
 
-
+func _ready() -> void:
+	if tile_map_layer != null and tile_map_layer.tile_set != null:
+		tile_size = tile_map_layer.tile_set.tile_size.x
 
 # --- helpers ---
 func _get_prod_ledger() -> Node:
@@ -181,12 +184,18 @@ func try_remove_building_under_mouse() -> bool:
 	return true
 
 func snap_to_grid(pos: Vector2) -> Vector2:
-	return (pos/tile_size).floor() * tile_size
+	return cell_to_world(world_to_cell(pos))
 	
 func world_to_cell(pos: Vector2) -> Vector2i:
-	return Vector2i(pos / tile_size)
+	if tile_map_layer != null:
+		return tile_map_layer.local_to_map(tile_map_layer.to_local(pos))
+	return Vector2i(floor(pos.x / tile_size), floor(pos.y /tile_size))
 	
 func cell_to_world(cell: Vector2i) -> Vector2:
+	if tile_map_layer != null:
+		var center_local := tile_map_layer.map_to_local(cell)
+		var half_tile := Vector2(tile_size, tile_size) *0.5
+		return tile_map_layer.to_global(center_local - half_tile)
 	return Vector2(cell * tile_size)
 	
 func occupy_cells(cells: Array[Vector2i], Building: Node) -> void:

@@ -31,7 +31,6 @@ sources/0 = SubResource("TileSetAtlasSource_346fj")
 script = ExtResource("1_kln2b")
 
 [node name="TileMapLayer" parent="." unique_id=1244418290 instance=ExtResource("1_r150o")]
-position = Vector2(-72, 536)
 tile_set = SubResource("TileSet_erwvk")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=958064929]

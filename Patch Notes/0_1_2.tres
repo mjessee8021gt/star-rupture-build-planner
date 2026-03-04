@@ -15,6 +15,8 @@ Bug Fixes:
      -Smelter
      -Rail Support
      -Rail Modulator 3
+     -Fabricator
+-Increased the grid size from 32x32 pixels to 64x64 pixels. The reduced performance of this move was outweighed by the fact that there simply wasn't enough pixels per tile in a 32x32 grid to create the Multirail 5 and rail Modulator 5 work. This move has allowed us to make those systems work as well as fix some issues with layout on other buildings.
 
  Miscellaneous:
 -Further clean-up of program assets to remove more unused assets. This should lend to better performance.

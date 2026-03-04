@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://qpt8mgvgh8ii" path="res://Assets/SRBP_3x3_BLDG.png" id="2_3djyx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
-size = Vector2(96, 96)
+size = Vector2(192, 192)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uf4xf"]
-size = Vector2(96, 96)
+size = Vector2(192, 192)
 
 [node name="Solar V2" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_3djyx")
@@ -24,30 +24,30 @@ texture = ExtResource("2_3djyx")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128283645]
-position = Vector2(48, 48)
+position = Vector2(96, 96)
 shape = SubResource("RectangleShape2D_gbqis")
 
 [node name="CollisionShapeAlt" type="CollisionShape2D" parent="." unique_id=1184700770]
 visible = false
-position = Vector2(48, 48)
+position = Vector2(96, 96)
 shape = SubResource("RectangleShape2D_uf4xf")
 disabled = true
 
 [node name="TitleLabel" type="Label" parent="." unique_id=904579435]
-offset_left = 24.0
+offset_left = 56.0
 offset_top = 1.0
-offset_right = 71.0
-offset_bottom = 44.0
-theme_override_font_sizes/font_size = 14
+offset_right = 136.0
+offset_bottom = 74.0
+theme_override_font_sizes/font_size = 25
 text = "SOLAR
 V2"
 horizontal_alignment = 1
 
 [node name="outputBox" type="ColorRect" parent="." unique_id=1954160661]
-offset_left = 27.0
-offset_top = 61.0
-offset_right = 64.0
-offset_bottom = 80.0
+offset_left = 78.0
+offset_top = 87.0
+offset_right = 115.0
+offset_bottom = 106.0
 color = Color(0, 0.64705884, 0.25490198, 0.57254905)
 
 [node name="outputText" type="Label" parent="outputBox" unique_id=1028321769]

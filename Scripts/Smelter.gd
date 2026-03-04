@@ -38,12 +38,12 @@ func flip_footprint() -> void:
 		$AlternateSprite.visible = true
 		$CollisionShape2D.disabled = true
 		$CollisionShapeAlt.disabled = false
-		$TitleLabel.position = Vector2(29, 42)
-		$"Ports/Output 1".position = Vector2(46, 0)
-		$"Ports/Input 1".position = Vector2(46, 108)
-		$Recipe.position = Vector2(15, 63)
-		$outputBox.position = Vector2(45, 21)
-		$InputBox.position = Vector2(45, 85)
+		$TitleLabel.position = Vector2(74, 45)
+		$"Ports/Output 1".position = Vector2(110, 1)
+		$"Ports/Input 1".position = Vector2(109, 235)
+		$Recipe.position = Vector2(64, 79)
+		$outputBox.position = Vector2(110, 21)
+		$InputBox.position = Vector2(109, 211)
 		footprint = footprint_alt
 		is_alternate = true
 	else:
@@ -51,12 +51,12 @@ func flip_footprint() -> void:
 		$CollisionShape2D.disabled = false
 		$AlternateSprite.visible = false
 		$CollisionShapeAlt.disabled = true
-		$TitleLabel.position = Vector2(15, 42)
-		$"Ports/Output 1".position = Vector2(31, 0)
-		$"Ports/Input 1".position = Vector2(31, 108)
-		$Recipe.position = Vector2(1, 63)
-		$outputBox.position = Vector2(30, 21)
-		$InputBox.position = Vector2(29, 85)
+		$TitleLabel.position = Vector2(42,45)
+		$"Ports/Output 1".position = Vector2(78, 1)
+		$"Ports/Input 1".position = Vector2(78, 235)
+		$Recipe.position = Vector2(32, 79)
+		$outputBox.position = Vector2(78, 21)
+		$InputBox.position = Vector2(78, 211)
 		footprint = footprint_primary
 		is_alternate = false
 		

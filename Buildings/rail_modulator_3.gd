@@ -38,14 +38,14 @@ func flip_footprint() -> void:
 		$AlternateSprite.visible = true
 		$CollisionShape2D.disabled = true
 		$CollisionShapeAlt.disabled = false
-		$"Ports/Universal 1".position = Vector2(23, 1)
-		$"Ports/Universal 1".rotation_degrees = 0
-		$"Ports/Universal 2".position = Vector2(44, 1)
-		$"Ports/Universal 2".rotation_degrees = 0
-		$"Ports/Universal 3".position = Vector2(41, 63)
-		$"Ports/Universal 3".rotation_degrees = 180
-		$"Ports/Universal 4".position = Vector2(1, 1)
-		$"Ports/Universal 4".rotation_degrees = 0
+		$"Ports/Universal 1".position = Vector2(46, 1)
+		$"Ports/Universal 1".rotation_degrees = 90
+		$"Ports/Universal 2".position = Vector2(70, 1)
+		$"Ports/Universal 2".rotation_degrees = 90
+		$"Ports/Universal 3".position = Vector2(94, 1)
+		$"Ports/Universal 3".rotation_degrees = 90
+		$"Ports/Universal 4".position = Vector2(70, 104)
+		$"Ports/Universal 4".rotation_degrees = 90
 		is_alternate = true
 		footprint = footprint_alt
 	else:
@@ -53,14 +53,14 @@ func flip_footprint() -> void:
 		$CollisionShape2D.disabled = false
 		$AlternateSprite.visible = false
 		$CollisionShapeAlt.disabled = true
-		$"Ports/Universal 1".position = Vector2(11, 17)
-		$"Ports/Universal 1".rotation_degrees = 270
-		$"Ports/Universal 2".position = Vector2(32, -2)
+		$"Ports/Universal 1".position = Vector2(20, 1)
+		$"Ports/Universal 1".rotation_degrees = 90
+		$"Ports/Universal 2".position = Vector2(38, 1)
 		$"Ports/Universal 2".rotation_degrees = 90
-		$"Ports/Universal 3".position = Vector2(26, 32)
-		$"Ports/Universal 3".rotation_degrees = 180
-		$"Ports/Universal 4".position = Vector2(0, 17)
-		$"Ports/Universal 4".rotation_degrees = 270
+		$"Ports/Universal 3".position = Vector2(56, 1)
+		$"Ports/Universal 3".rotation_degrees = 90
+		$"Ports/Universal 4".position = Vector2(38, 40)
+		$"Ports/Universal 4".rotation_degrees = 90
 		is_alternate = false
 		footprint = footprint_primary
 		
