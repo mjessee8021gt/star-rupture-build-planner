@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b70fmtealv4ct"
-path="res://.godot/imported/SRBP_Rail _junct.png-1bec6546bf0f1f086fe13f6ae69aba74.ctex"
+uid="uid://ddukv3yqhsjqi"
+path="res://.godot/imported/SRBP_Rail_junct.png-6365cfff60ec4bd07dea7491c8bcc85a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/SRBP_Rail _junct.png"
-dest_files=["res://.godot/imported/SRBP_Rail _junct.png-1bec6546bf0f1f086fe13f6ae69aba74.ctex"]
+source_file="res://Assets/SRBP_Rail_junct.png"
+dest_files=["res://.godot/imported/SRBP_Rail_junct.png-6365cfff60ec4bd07dea7491c8bcc85a.ctex"]
 
 [params]
 

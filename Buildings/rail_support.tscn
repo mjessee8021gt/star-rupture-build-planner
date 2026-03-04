@@ -6,15 +6,15 @@
 [ext_resource type="Texture2D" uid="uid://ilmbegsn2c7" path="res://Assets/SRBP_Oval.png" id="8_8edi5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
-size = Vector2(32, 32)
+size = Vector2(64, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uf4xf"]
-size = Vector2(64, 64)
+size = Vector2(128, 128)
 
 [node name="Rail Support" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_kxssu")
 id = &"rail_support"
-metadata/_edit_vertical_guides_ = [32.0]
+metadata/_edit_vertical_guides_ = [32.0, 64.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
 texture = ExtResource("6_w584o")
@@ -26,12 +26,12 @@ texture = ExtResource("7_cjtlg")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128283645]
-position = Vector2(16, 16)
+position = Vector2(32, 32)
 shape = SubResource("RectangleShape2D_gbqis")
 
 [node name="CollisionShapeAlt" type="CollisionShape2D" parent="." unique_id=1184700770]
 visible = false
-position = Vector2(32, 32)
+position = Vector2(64, 64)
 shape = SubResource("RectangleShape2D_uf4xf")
 disabled = true
 
@@ -46,9 +46,9 @@ anchors_preset = 0
 [node name="Universal 1" type="Button" parent="Ports" unique_id=1122308628 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
 layout_mode = 0
-offset_left = 5.0000014
+offset_left = 20.000002
 offset_top = 1.0000001
-offset_right = 77.0
+offset_right = 92.0
 offset_bottom = 41.0
 scale = Vector2(0.32, 0.32)
 icon = ExtResource("8_8edi5")
@@ -57,10 +57,10 @@ metadata/normal = Vector2(0, -1)
 [node name="Universal 2" type="Button" parent="Ports" unique_id=1958701130 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
 layout_mode = 0
-offset_left = 28.0
-offset_top = 31.0
-offset_right = 100.0
-offset_bottom = 71.0
+offset_left = 43.99999
+offset_top = 62.999996
+offset_right = 116.0
+offset_bottom = 103.0
 rotation = 3.1415927
 scale = Vector2(0.32, 0.32)
 icon = ExtResource("8_8edi5")

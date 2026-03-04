@@ -13,8 +13,8 @@ size = Vector2(96, 128)
 
 [node name="OreExcavator" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_m443x")
-id = &"excavator"
 available_recipes = Array[ExtResource("2_veacw")]([ExtResource("3_rhfiq"), ExtResource("4_dkway"), ExtResource("5_43axb")])
+id = &"excavator"
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
 texture = ExtResource("2_i1qbh")
