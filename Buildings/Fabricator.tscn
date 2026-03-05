@@ -20,17 +20,17 @@
 [ext_resource type="Resource" uid="uid://dow8hsj6coner" path="res://Recipes/Pistol_ammo.tres" id="15_x3jwo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
-size = Vector2(96, 96)
+size = Vector2(192, 192)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uf4xf"]
-size = Vector2(128, 128)
+size = Vector2(256, 256)
 
 [node name="Fabricator" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_563xu")
-id = &"fabricator"
 footprint_primary = Vector2i(3, 4)
 available_recipes = Array[ExtResource("2_d6koq")]([ExtResource("3_kxm6t"), ExtResource("4_nhxvb"), ExtResource("5_68agd"), ExtResource("6_cd0o3"), ExtResource("7_lavtn"), ExtResource("8_dgwtc"), ExtResource("9_1dd5x"), ExtResource("10_47kw3"), ExtResource("11_igp7r"), ExtResource("12_q1ghm"), ExtResource("13_hllad"), ExtResource("14_ocqxr"), ExtResource("15_x3jwo")])
-metadata/_edit_vertical_guides_ = [63.0]
+id = &"fabricator"
+metadata/_edit_vertical_guides_ = [63.0, 96.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
 texture = ExtResource("6_563xu")
@@ -42,21 +42,21 @@ texture = ExtResource("7_trxst")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128283645]
-position = Vector2(48, 48)
+position = Vector2(96, 96)
 shape = SubResource("RectangleShape2D_gbqis")
 
 [node name="CollisionShapeAlt" type="CollisionShape2D" parent="." unique_id=1184700770]
 visible = false
-position = Vector2(64, 64)
+position = Vector2(128, 128)
 shape = SubResource("RectangleShape2D_uf4xf")
 disabled = true
 
 [node name="TitleLabel" type="Label" parent="." unique_id=904579435]
-offset_left = 5.0
-offset_top = 21.0
-offset_right = 92.0
-offset_bottom = 41.0
-theme_override_font_sizes/font_size = 14
+offset_left = 20.0
+offset_top = 57.0
+offset_right = 172.0
+offset_bottom = 92.0
+theme_override_font_sizes/font_size = 25
 text = "FABRICATOR"
 
 [node name="PlacementArea" type="Area2D" parent="." unique_id=911391560]
@@ -67,46 +67,46 @@ text = "FABRICATOR"
 
 [node name="Output 1" type="Button" parent="Ports" unique_id=1122308628 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 37.0
-offset_top = 2.0
-offset_right = 109.0
-offset_bottom = 42.0
+offset_left = 78.0
+offset_top = 1.0
+offset_right = 150.0
+offset_bottom = 41.0
 scale = Vector2(0.5, 0.5)
 icon = ExtResource("8_2dmew")
 metadata/normal = Vector2(0, -1)
 
 [node name="Input 1" type="Button" parent="Ports" unique_id=1958701130 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 58.0
-offset_top = 75.0
-offset_right = 130.0
-offset_bottom = 115.0
+offset_left = 1.0
+offset_top = 171.0
+offset_right = 73.0
+offset_bottom = 211.0
 scale = Vector2(0.5, 0.5)
 icon = ExtResource("8_2dmew")
 metadata/normal = Vector2(0, 1)
 
 [node name="Input 2" type="Button" parent="Ports" unique_id=1025542919 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 1.0
-offset_top = 75.0
-offset_right = 73.0
-offset_bottom = 115.0
+offset_left = 155.0
+offset_top = 171.0
+offset_right = 227.0
+offset_bottom = 211.0
 scale = Vector2(0.5, 0.5)
 icon = ExtResource("8_2dmew")
 metadata/normal = Vector2(0, 1)
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
-offset_left = 1.0
-offset_top = 39.0
-offset_right = 95.0
-offset_bottom = 59.0
-theme_override_font_sizes/font_size = 10
+offset_left = 16.0
+offset_top = 105.0
+offset_right = 110.0
+offset_bottom = 125.0
+theme_override_font_sizes/font_size = 16
 
 [node name="outputBox" type="ColorRect" parent="." unique_id=1419396623]
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 37.0
-offset_bottom = 21.0
+offset_left = 78.0
+offset_top = 22.0
+offset_right = 113.0
+offset_bottom = 41.0
 color = Color(0, 0.64705884, 0.25490198, 0.57254905)
 
 [node name="outputText" type="Label" parent="outputBox" unique_id=1040759306]
@@ -121,10 +121,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Input1Box" type="ColorRect" parent="." unique_id=1573327625]
-offset_left = 59.0
-offset_top = 60.0
-offset_right = 94.0
-offset_bottom = 79.0
+offset_left = 1.0
+offset_top = 151.0
+offset_right = 36.0
+offset_bottom = 170.0
 color = Color(0, 0.64705884, 0.25490198, 0.57254905)
 
 [node name="input1Text" type="Label" parent="Input1Box" unique_id=1651637159]
@@ -139,10 +139,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Input2Box" type="ColorRect" parent="." unique_id=232719543]
-offset_left = 2.0
-offset_top = 60.0
-offset_right = 37.0
-offset_bottom = 79.0
+offset_left = 155.0
+offset_top = 151.0
+offset_right = 190.0
+offset_bottom = 170.0
 color = Color(0, 0.64705884, 0.25490198, 0.57254905)
 
 [node name="input2Text" type="Label" parent="Input2Box" unique_id=332826267]

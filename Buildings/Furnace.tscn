@@ -19,16 +19,16 @@
 [ext_resource type="Texture2D" uid="uid://ilmbegsn2c7" path="res://Assets/SRBP_Oval.png" id="18_gkjec"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
-size = Vector2(96, 128)
+size = Vector2(192, 256)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uf4xf"]
-size = Vector2(128, 128)
+size = Vector2(256, 256)
 
 [node name="Furnace" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_a2cv4")
-id = &"furnace"
 available_recipes = Array[ExtResource("2_u3fyf")]([ExtResource("3_l2jlo"), ExtResource("4_a2cv4"), ExtResource("5_u3fyf"), ExtResource("6_o0iyx"), ExtResource("7_dkke5"), ExtResource("8_wcpt0"), ExtResource("9_ou50j"), ExtResource("10_sn8a3"), ExtResource("11_k6fgg"), ExtResource("12_ngkt1"), ExtResource("13_m5eqo"), ExtResource("14_sov4o")])
-metadata/_edit_vertical_guides_ = [63.0, 48.0, 64.0]
+id = &"furnace"
+metadata/_edit_vertical_guides_ = [63.0, 48.0, 64.0, 96.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
 texture = ExtResource("16_a2cv4")
@@ -40,21 +40,21 @@ texture = ExtResource("17_kdjnc")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128283645]
-position = Vector2(48, 64)
+position = Vector2(96, 128)
 shape = SubResource("RectangleShape2D_gbqis")
 
 [node name="CollisionShapeAlt" type="CollisionShape2D" parent="." unique_id=1184700770]
 visible = false
-position = Vector2(64, 64)
+position = Vector2(128, 128)
 shape = SubResource("RectangleShape2D_uf4xf")
 disabled = true
 
 [node name="TitleLabel" type="Label" parent="." unique_id=904579435]
-offset_left = 5.0
-offset_top = 43.0
-offset_right = 92.0
-offset_bottom = 63.0
-theme_override_font_sizes/font_size = 14
+offset_left = 39.000004
+offset_top = 68.0
+offset_right = 153.0
+offset_bottom = 103.0
+theme_override_font_sizes/font_size = 25
 text = "FURNACE"
 horizontal_alignment = 1
 
@@ -66,9 +66,9 @@ horizontal_alignment = 1
 
 [node name="Output 1" type="Button" parent="Ports" unique_id=1122308628 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 33.0
+offset_left = 81.00001
 offset_top = 1.0
-offset_right = 105.0
+offset_right = 153.0
 offset_bottom = 41.0
 scale = Vector2(0.42, 0.42)
 icon = ExtResource("18_gkjec")
@@ -76,45 +76,45 @@ metadata/normal = Vector2(0, -1)
 
 [node name="Input 1" type="Button" parent="Ports" unique_id=1958701130 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 65.0
-offset_top = 110.0
-offset_right = 137.0
-offset_bottom = 150.0
+offset_left = 1.0000156
+offset_top = 238.00002
+offset_right = 73.000015
+offset_bottom = 278.0
 scale = Vector2(0.42, 0.42)
 icon = ExtResource("18_gkjec")
 metadata/normal = Vector2(0, 1)
 
 [node name="Input 2" type="Button" parent="Ports" unique_id=1025542919 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 0.99999994
-offset_top = 110.00001
-offset_right = 73.0
-offset_bottom = 150.0
+offset_left = 80.999985
+offset_top = 238.00002
+offset_right = 153.0
+offset_bottom = 278.0
 scale = Vector2(0.42, 0.42)
 icon = ExtResource("18_gkjec")
 metadata/normal = Vector2(0, 1)
 
 [node name="Input 3" type="Button" parent="Ports" unique_id=1275495196 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 33.0
-offset_top = 110.0
-offset_right = 105.0
-offset_bottom = 150.0
+offset_left = 161.00002
+offset_top = 238.00002
+offset_right = 233.00002
+offset_bottom = 278.0
 scale = Vector2(0.42, 0.42)
 icon = ExtResource("18_gkjec")
 metadata/normal = Vector2(0, 1)
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
-offset_left = 1.0
-offset_top = 65.0
-offset_right = 95.0
-offset_bottom = 85.0
+offset_left = 27.0
+offset_top = 118.0
+offset_right = 121.0
+offset_bottom = 138.0
 theme_override_font_sizes/font_size = 10
 
 [node name="outputBox" type="ColorRect" parent="." unique_id=1419396623]
-offset_left = 33.0
+offset_left = 81.0
 offset_top = 19.0
-offset_right = 62.0
+offset_right = 110.0
 offset_bottom = 38.0
 color = Color(0, 0.64705884, 0.25490198, 0.57254905)
 
@@ -130,10 +130,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Input1Box" type="ColorRect" parent="." unique_id=1573327625]
-offset_left = 65.0
-offset_top = 91.0
-offset_right = 95.0
-offset_bottom = 110.0
+offset_left = 1.0
+offset_top = 219.0
+offset_right = 31.0
+offset_bottom = 238.0
 color = Color(0, 0.64705884, 0.25490198, 0.57254905)
 
 [node name="input1Text" type="Label" parent="Input1Box" unique_id=1651637159]
@@ -148,10 +148,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Input2Box" type="ColorRect" parent="." unique_id=232719543]
-offset_left = 1.0
-offset_top = 91.0
-offset_right = 31.0
-offset_bottom = 110.0
+offset_left = 81.00001
+offset_top = 219.0
+offset_right = 111.0
+offset_bottom = 238.0
 color = Color(0, 0.64705884, 0.25490198, 0.57254905)
 
 [node name="input2Text" type="Label" parent="Input2Box" unique_id=332826267]
@@ -166,10 +166,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Input3Box" type="ColorRect" parent="." unique_id=1711166632]
-offset_left = 33.0
-offset_top = 91.0
-offset_right = 63.0
-offset_bottom = 110.0
+offset_left = 161.0
+offset_top = 219.0
+offset_right = 191.0
+offset_bottom = 238.0
 color = Color(0, 0.64705884, 0.25490198, 0.57254905)
 
 [node name="input3Text" type="Label" parent="Input3Box" unique_id=844869573]

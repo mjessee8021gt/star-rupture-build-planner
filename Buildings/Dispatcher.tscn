@@ -67,19 +67,17 @@
 [ext_resource type="Texture2D" uid="uid://ilmbegsn2c7" path="res://Assets/SRBP_Oval.png" id="65_dqov1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
-size = Vector2(128, 128)
+size = Vector2(256, 256)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uf4xf"]
-size = Vector2(160, 128)
+size = Vector2(320, 256)
 
 [node name="Dispatcher" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_tvri3")
-id = &"dispatcher"
-footprint_primary = Vector2i(4, 4)
-footprint_alt = Vector2i(5, 4)
 heat = 40
 available_recipes = Array[ExtResource("2_2v8ij")]([ExtResource("3_l6pii"), ExtResource("4_s3wfi"), ExtResource("5_8p7kp"), ExtResource("6_1p48b"), ExtResource("7_svh1v"), ExtResource("8_2c1e0"), ExtResource("9_kvlgn"), ExtResource("10_cljkg"), ExtResource("11_706ob"), ExtResource("12_2inaw"), ExtResource("13_3ksgg"), ExtResource("14_gl5dj"), ExtResource("15_qq28o"), ExtResource("16_0wle7"), ExtResource("17_dfiy0"), ExtResource("18_xrxdb"), ExtResource("19_5f1r4"), ExtResource("20_kc4s7"), ExtResource("21_3kj2l"), ExtResource("22_3u3di"), ExtResource("23_xsxug"), ExtResource("24_mwa1v"), ExtResource("25_gjl2r"), ExtResource("26_g6q8u"), ExtResource("27_ab4lt"), ExtResource("28_iw72s"), ExtResource("29_eq053"), ExtResource("30_pat46"), ExtResource("31_vj4a0"), ExtResource("32_dw71t"), ExtResource("33_7boro"), ExtResource("34_vth3c"), ExtResource("35_ry3m2"), ExtResource("36_l2ucw"), ExtResource("37_2ntv1"), ExtResource("38_fs3ob"), ExtResource("39_aiaq4"), ExtResource("40_w8uxl"), ExtResource("41_7v1ws"), ExtResource("42_248ox"), ExtResource("43_ipdsm"), ExtResource("44_q818r"), ExtResource("45_nfxrm"), ExtResource("46_oa67k"), ExtResource("47_6tv22"), ExtResource("48_7ojxx"), ExtResource("49_qpcot"), ExtResource("50_u4dja"), ExtResource("51_cfha3"), ExtResource("52_801pf"), ExtResource("53_h7tsp"), ExtResource("54_2njf1"), ExtResource("55_5a2j0"), ExtResource("56_ah5i3"), ExtResource("57_ytke5"), ExtResource("58_dbhao"), ExtResource("59_ujqeb"), ExtResource("60_tkha3"), ExtResource("61_0io3h"), ExtResource("62_htk52")])
-metadata/_edit_vertical_guides_ = [63.0, 96.0, 112.0, 80.0]
+id = &"dispatcher"
+metadata/_edit_vertical_guides_ = [63.0, 96.0, 112.0, 80.0, 128.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
 texture = ExtResource("63_ru2o7")
@@ -91,21 +89,21 @@ texture = ExtResource("64_3ukn5")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128283645]
-position = Vector2(64, 64)
+position = Vector2(128, 128)
 shape = SubResource("RectangleShape2D_gbqis")
 
 [node name="CollisionShapeAlt" type="CollisionShape2D" parent="." unique_id=1184700770]
 visible = false
-position = Vector2(80, 64)
+position = Vector2(160, 128)
 shape = SubResource("RectangleShape2D_uf4xf")
 disabled = true
 
 [node name="TitleLabel" type="Label" parent="." unique_id=904579435]
-offset_left = 21.0
+offset_left = 53.0
 offset_top = 6.0
-offset_right = 106.0
-offset_bottom = 26.0
-theme_override_font_sizes/font_size = 14
+offset_right = 203.0
+offset_bottom = 41.0
+theme_override_font_sizes/font_size = 25
 text = "DISPATCHER"
 
 [node name="PlacementArea" type="Area2D" parent="." unique_id=911391560]
@@ -119,19 +117,20 @@ anchors_preset = 0
 [node name="Input 1" type="Button" parent="Ports" unique_id=1958701130 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
 layout_mode = 0
-offset_left = 45.0
-offset_top = 107.0
-offset_right = 117.0
-offset_bottom = 147.0
+offset_left = 110.0
+offset_top = 235.0
+offset_right = 182.0
+offset_bottom = 275.0
 scale = Vector2(0.5, 0.5)
 icon = ExtResource("65_dqov1")
 metadata/normal = Vector2(0, 1)
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
-offset_top = 46.0
-offset_right = 94.0
-offset_bottom = 66.0
-theme_override_font_sizes/font_size = 10
+offset_left = 29.0
+offset_top = 73.0
+offset_right = 123.0
+offset_bottom = 93.0
+theme_override_font_sizes/font_size = 16
 
 [connection signal="mouse_entered" from="Ports/Input 1" to="." method="_on_input_1_mouse_entered"]
 [connection signal="mouse_exited" from="Ports/Input 1" to="." method="_on_input_1_mouse_exited"]
