@@ -15,17 +15,17 @@
 [ext_resource type="Texture2D" uid="uid://ilmbegsn2c7" path="res://Assets/SRBP_Oval.png" id="16_gbtw0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
-size = Vector2(96, 192)
+size = Vector2(192, 384)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uf4xf"]
 size = Vector2(192, 192)
 
 [node name="Assembler" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_escni")
-id = &"assembler"
 heat = 150
 power = -60
 available_recipes = Array[ExtResource("2_ueiug")]([ExtResource("3_md1ix"), ExtResource("4_6fqcw"), ExtResource("5_w2ivq"), ExtResource("6_ueiug"), ExtResource("7_alc6w"), ExtResource("8_qa0va"), ExtResource("9_tjlp1"), ExtResource("10_glqjf")])
+id = &"assembler"
 metadata/_edit_vertical_guides_ = [63.0, 48.0, 64.0, 80.0, -24.0, 96.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
@@ -38,7 +38,7 @@ texture = ExtResource("12_md1ix")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128283645]
-position = Vector2(48, 96)
+position = Vector2(96, 192)
 shape = SubResource("RectangleShape2D_gbqis")
 
 [node name="CollisionShapeAlt" type="CollisionShape2D" parent="." unique_id=1184700770]
