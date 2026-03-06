@@ -80,7 +80,9 @@ func _ready() -> void:
 	railMenu.add_item("Rail Modulator 3")
 	railMenu.set_item_metadata(railMenu.item_count-1, &"rail_modulator_3")
 	railMenu.add_item("Multirail 5")
+	railMenu.set_item_metadata(railMenu.item_count-1, &"multirail_5")
 	railMenu.add_item("Rail Modulator 5")
+	railMenu.set_item_metadata(railMenu.item_count-1, &"rail_modulator_5")
 	railMenu.id_pressed.connect(_on_build_selected.bind(railMenu))
 	print("Rail Menu Item Selected...")
 	
