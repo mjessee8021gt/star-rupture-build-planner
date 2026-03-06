@@ -24,7 +24,9 @@ const BUILDINGS := {
 	&"multirail_3": preload("res://Buildings/Multirail_3.tscn"),
 	&"multirail_5": preload("res://Buildings/Multirail_5.tscn"),
 	&"rail_modulator_5": preload("res://Buildings/rail_modulator_5.tscn"),
-	&"orbital_launcher": preload("res://Buildings/Orbital_launcher.tscn")
+	&"orbital_launcher": preload("res://Buildings/Orbital_launcher.tscn"),
+	&"storage_v1": preload("res://Buildings/Storage_v1.tscn"),
+	&"storage_v2": preload("res://Buildings/Storage_v2.tscn")
 }
 
 static func get_scene(key: StringName) -> PackedScene:

@@ -101,9 +101,12 @@ func _ready() -> void:
 	var storageMenu = PopupMenu.new()
 	storageMenu.name = "Storage"
 	storageMenu.add_item("Storage Depot Mk1")
+	storageMenu.set_item_metadata(storageMenu.item_count-1, &"storage_v1")
 	storageMenu.add_item("Storage Depot Mk2")
+	storageMenu.set_item_metadata(storageMenu.item_count-1, &"storage_v2")
 	storageMenu.add_item("Multistorage")
 	storageMenu.add_item("Expandable Storage")
+	storageMenu.id_pressed.connect(_on_build_selected.bind(storageMenu))
 	
 	var transportMenu = PopupMenu.new()
 	transportMenu.name = "Transport"
