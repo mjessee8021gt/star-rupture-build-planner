@@ -89,6 +89,7 @@ func _ready() -> void:
 	var shipmentMenu = PopupMenu.new()
 	shipmentMenu.name = "Shipment"
 	shipmentMenu.add_item("Orbital Cargo Launcher")
+	shipmentMenu.set_item_metadata(shipmentMenu.item_count-1, &"orbital_launcher")
 	shipmentMenu.add_item("Cargo Dispatcher")
 	shipmentMenu.set_item_metadata(shipmentMenu.item_count-1, &"dispatcher")
 	shipmentMenu.add_item("Cargo Receiver")
