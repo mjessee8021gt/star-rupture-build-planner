@@ -19,7 +19,7 @@ var drag_last_valid := false
 ##------Exported Variables-----##
 @export var canBuildColor := Color(0,1,0, 0.5)
 @export var cannotbuildColor := Color(1,0,0,0.5)
-@export var tile_size := 32
+@export var tile_size := 64
 
 ##------Vector2 Variables------##
 var drag_mouse_offset := Vector2.ZERO
@@ -99,40 +99,31 @@ func can_place_at(cells: Array[Vector2i]) -> bool:
 			return false
 	return true
 	
+func get_rotated_footprint(building: Node) -> Vector2i:
+	var footprint: Vector2i = building.footprint
+	var rotation_steps := 0
+	
+	if "rotatedTick" in building:
+		rotation_steps = int(building.rotatedTick) %4
+	
+	return footprint
+	
+func get_building_anchor(building: Node) -> Vector2i:
+	var rotated_footprint := get_rotated_footprint(building)
+	return Vector2i(int(floor(rotated_footprint.x / 2.0)), int(floor(rotated_footprint.y/2.0)))
+	
+func get_building_anchor_cell(building: Node2D) -> Vector2i:
+	var top_left_cell := world_to_cell(building.global_position)
+	return top_left_cell + get_building_anchor(building)
+	
 func get_building_cells(building: Node, anchor_cell: Vector2i) -> Array[Vector2i]:
 	var cells: Array[Vector2i] = []
-	var offsets: Array[Vector2i] = []
 	var footprint: Vector2i = building.footprint
 	var top_left = anchor_cell - building.anchor
-	var rotation_steps := 0
-
-	if "rotatedTick" in building:
-		rotation_steps = int(building.rotatedTick) % 4
 
 	for y in footprint.y:
 		for x in footprint.x:
-			var offset := Vector2i(x, y)
-			match rotation_steps:
-				1:
-					offset = Vector2i(-y, x)
-				2:
-					offset = Vector2i(-x, -y)
-				3:
-					offset = Vector2i(y, -x)
-			offsets.append(offset)
-
-	if offsets.is_empty():
-		return cells
-
-	var min_x := offsets[0].x
-	var min_y := offsets[0].y
-	for offset in offsets:
-		min_x = mini(min_x, offset.x)
-		min_y = mini(min_y, offset.y)
-
-	for offset in offsets:
-		var normalized := Vector2i(offset.x - min_x, offset.y - min_y)
-		cells.append(top_left + normalized)
+			cells.append(top_left + Vector2i(x, y))
 
 	return cells
 
@@ -160,7 +151,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func confirm_build(multi_build_held : bool = false) -> void:
 	$"../Camera2D/CanvasLayer/Debug Panel/DebugFeed".text = $"../Camera2D/CanvasLayer/Debug Panel/DebugFeed".text + "\n" + "We are now confirming the build..."
-	var anchor_cell := world_to_cell(ghost_instance.global_position)
+	var anchor_cell := get_building_anchor_cell(ghost_instance)
 	var footprint = get_building_cells(ghost_instance,anchor_cell)
 	var real_building := current_scene.instantiate()
 	
@@ -186,7 +177,7 @@ func confirm_build(multi_build_held : bool = false) -> void:
 		cancel_build()
 	
 func free_cells_for_building(building: Node) -> void:
-	var anchor_cell := world_to_cell(building.global_position)
+	var anchor_cell := get_building_anchor_cell(building)
 	var cells = get_building_cells(building, anchor_cell)
 	for cell in cells:
 		#only clear cells that still point to the identified building
@@ -236,12 +227,12 @@ func snap_to_grid(pos: Vector2) -> Vector2:
 func world_to_cell(pos: Vector2) -> Vector2i:
 	if tile_map_layer != null:
 		return tile_map_layer.local_to_map(tile_map_layer.to_local(pos))
-	return Vector2i(floor(pos.x / tile_size), floor(pos.y /tile_size))
+	return Vector2i(floor(pos.x / tile_size), floor(pos.y / tile_size))
 	
 func cell_to_world(cell: Vector2i) -> Vector2:
 	if tile_map_layer != null:
 		var center_local := tile_map_layer.map_to_local(cell)
-		var half_tile := Vector2(tile_size, tile_size) *0.5
+		var half_tile := Vector2(tile_size, tile_size) * 0.5
 		return tile_map_layer.to_global(center_local - half_tile)
 	return Vector2(cell * tile_size)
 	
@@ -261,7 +252,7 @@ func get_building_under_mouse() -> Node2D:
 	return get_building_at_cells(cell)
 
 func _start_drag_building(building: Node2D) -> void:
-	var anchor_cell = world_to_cell(building.global_position)
+	var anchor_cell = get_building_anchor_cell(building)
 	
 	if building == null:
 		return
@@ -315,7 +306,7 @@ func _process(_delta: float) -> void:
 	if is_dragging_building and dragged_building != null:
 		mouse_pos = get_global_mouse_position() + drag_mouse_offset
 		anchor_cell = world_to_cell(mouse_pos)
-		top_left_cell = anchor_cell - dragged_building.anchor
+		top_left_cell = anchor_cell - get_building_anchor(dragged_building)
 		new_pos = cell_to_world(top_left_cell)
 		building_footprint = get_building_cells(dragged_building, anchor_cell)
 		
@@ -354,7 +345,7 @@ func _process(_delta: float) -> void:
 		
 	mouse_pos = get_global_mouse_position()
 	anchor_cell = world_to_cell(mouse_pos)
-	top_left_cell = anchor_cell - ghost_instance.anchor
+	top_left_cell = anchor_cell - get_building_anchor(ghost_instance)
 	print("The recorded footprint of the ghost instance is: %s, %s" %[ghost_instance.footprint.x, ghost_instance.footprint.y])
 	building_footprint = get_building_cells(ghost_instance, anchor_cell)
 	valid_placement = can_place_at(building_footprint)

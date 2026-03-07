@@ -10,6 +10,6 @@ patch_notes = "New Features:
 -Color Scheme across all assets has been redone to soften design language while still being readable.
 -Multirail 3, Multirail 5, Rail Modulator 5, Storage V1, and Storage V2 have been added, tested and verified.
 -Added a new multi-build feature that allows you to build multiple of the same building more efficiently."
-known_issues = "-Rail pathing still needs some TLC.ff
+known_issues = "-Rail pathing still needs some TLC.
 
 "
