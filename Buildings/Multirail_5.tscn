@@ -83,7 +83,7 @@ offset_bottom = 41.0
 rotation = 1.5707964
 scale = Vector2(0.32, 0.32)
 icon = ExtResource("4_eg3kd")
-metadata/normal = Vector2(0, 1)
+metadata/normal = Vector2(0, -1)
 
 [node name="Universal 5" type="Button" parent="Ports" unique_id=2065945564 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
@@ -94,7 +94,7 @@ offset_bottom = 41.000004
 rotation = 1.5707964
 scale = Vector2(0.32, 0.32)
 icon = ExtResource("4_eg3kd")
-metadata/normal = Vector2(0, 1)
+metadata/normal = Vector2(0, -1)
 
 [node name="Universal 6" type="Button" parent="Ports" unique_id=1038443055 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)

@@ -63,7 +63,7 @@ offset_right = 150.0
 offset_bottom = 41.0
 scale = Vector2(0.5, 0.5)
 icon = ExtResource("4_g6tfw")
-metadata/normal = Vector2(0, 1)
+metadata/normal = Vector2(0, -1)
 
 [node name="Universal 2" type="Button" parent="Ports" unique_id=1311329771 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
@@ -75,7 +75,7 @@ offset_bottom = 118.0
 rotation = 1.5707964
 scale = Vector2(0.5, 0.5)
 icon = ExtResource("4_g6tfw")
-metadata/normal = Vector2(0, 1)
+metadata/normal = Vector2(1, 0)
 
 [node name="Universal 3" type="Button" parent="Ports" unique_id=1672675426 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
@@ -98,7 +98,7 @@ offset_bottom = 118.0
 rotation = 1.5707964
 scale = Vector2(0.5, 0.5)
 icon = ExtResource("4_g6tfw")
-metadata/normal = Vector2(0, 1)
+metadata/normal = Vector2(-1, 0)
 
 [connection signal="mouse_entered" from="Ports/Universal 1" to="." method="_on_universal_1_mouse_entered"]
 [connection signal="mouse_exited" from="Ports/Universal 1" to="." method="_on_universal_1_mouse_exited"]

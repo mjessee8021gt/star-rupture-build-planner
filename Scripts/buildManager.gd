@@ -28,6 +28,9 @@ var drag_original_cells : Array[Vector2i] = []
 var drag_last_cells : Array[Vector2i] = []
 var occupied_cells : Dictionary = {} #Verctor2i -> Node(Building)
 
+##------Constant Variables-----##
+const MULTI_BUILD_ACTION := &"Multi-build"
+
 func _ready() -> void:
 	if tile_map_layer != null and tile_map_layer.tile_set != null:
 		tile_size = tile_map_layer.tile_set.tile_size.x
@@ -62,6 +65,11 @@ func _disable_ports_on_ghost(disabled: bool) -> void:
 
 func is_build_mode_active() -> bool:
 	return is_building
+	
+func _is_multi_build_active() -> bool:
+	if not InputMap.has_action(MULTI_BUILD_ACTION):
+		return false
+	return Input.is_action_pressed(MULTI_BUILD_ACTION)
 
 func _get_prod_source_id(building: Node) -> int:
 	# Prefer explicit metadata if you set it from the building when registering production.
@@ -96,7 +104,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if is_building:
 		if event.is_action_pressed("Build Confirm"):
-			confirm_build()
+			confirm_build(_is_multi_build_active())
 		elif event.is_action_pressed("Build Cancel"):
 			cancel_build()
 		return
@@ -113,7 +121,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			_finish_drag_building()
 	
 
-func confirm_build() -> void:
+func confirm_build(multi_build_held : bool = false) -> void:
 	$"../Camera2D/CanvasLayer/Debug Panel/DebugFeed".text = $"../Camera2D/CanvasLayer/Debug Panel/DebugFeed".text + "\n" + "We are now confirming the build..."
 	var anchor_cell := world_to_cell(ghost_instance.global_position)
 	var footprint = ghost_instance.get_footprint_cells(anchor_cell, ghost_instance.footprint, ghost_instance.anchor)
@@ -136,7 +144,9 @@ func confirm_build() -> void:
 	
 	if real_building.id == &"helium_extractor" or real_building.id == &"sulfur_extractor":
 		ProdLedger.add_source(real_building.get_instance_id(), real_building,real_building.get_production_deltas(real_building.recipe))
-	cancel_build()
+		
+	if _is_multi_build_active() == false:
+		cancel_build()
 	
 func free_cells_for_building(building: Node) -> void:
 	var anchor_cell := world_to_cell(building.global_position)
@@ -287,9 +297,9 @@ func _process(_delta: float) -> void:
 			path_manager.update_paths_for_building(dragged_building)
 		return 
 	
-	if Input.is_action_just_pressed("Alternate"):
+	if is_building and ghost_instance != null and Input.is_action_just_pressed("Alternate"):
 		ghost_instance.flip_footprint()
-	if Input.is_action_just_pressed("Rotate"):
+	if is_building and ghost_instance != null and  Input.is_action_just_pressed("Rotate"):
 		ghost_instance.rotate(deg_to_rad(90.0))
 		if ghost_instance.rotatedTick < 3:
 			ghost_instance.rotatedTick += 1

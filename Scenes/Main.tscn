@@ -171,9 +171,9 @@ script = ExtResource("6_v1gob")
 
 [node name="PathManager" type="Node2D" parent="." unique_id=1207476002]
 script = ExtResource("11_4kpch")
-port_stub_len = 28.0
 corner_radius = 10.0
 arc_segments = 5
+min_stub_len = 100.0
 
 [node name="buildings" type="Node2D" parent="." unique_id=1655476447]
 
