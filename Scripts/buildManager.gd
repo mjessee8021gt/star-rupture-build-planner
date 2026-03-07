@@ -99,6 +99,43 @@ func can_place_at(cells: Array[Vector2i]) -> bool:
 			return false
 	return true
 	
+func get_building_cells(building: Node, anchor_cell: Vector2i) -> Array[Vector2i]:
+	var cells: Array[Vector2i] = []
+	var offsets: Array[Vector2i] = []
+	var footprint: Vector2i = building.footprint
+	var top_left = anchor_cell - building.anchor
+	var rotation_steps := 0
+
+	if "rotatedTick" in building:
+		rotation_steps = int(building.rotatedTick) % 4
+
+	for y in footprint.y:
+		for x in footprint.x:
+			var offset := Vector2i(x, y)
+			match rotation_steps:
+				1:
+					offset = Vector2i(-y, x)
+				2:
+					offset = Vector2i(-x, -y)
+				3:
+					offset = Vector2i(y, -x)
+			offsets.append(offset)
+
+	if offsets.is_empty():
+		return cells
+
+	var min_x := offsets[0].x
+	var min_y := offsets[0].y
+	for offset in offsets:
+		min_x = mini(min_x, offset.x)
+		min_y = mini(min_y, offset.y)
+
+	for offset in offsets:
+		var normalized := Vector2i(offset.x - min_x, offset.y - min_y)
+		cells.append(top_left + normalized)
+
+	return cells
+
 func _unhandled_input(event: InputEvent) -> void:
 	var building = get_building_under_mouse()
 	
@@ -124,7 +161,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func confirm_build(multi_build_held : bool = false) -> void:
 	$"../Camera2D/CanvasLayer/Debug Panel/DebugFeed".text = $"../Camera2D/CanvasLayer/Debug Panel/DebugFeed".text + "\n" + "We are now confirming the build..."
 	var anchor_cell := world_to_cell(ghost_instance.global_position)
-	var footprint = ghost_instance.get_footprint_cells(anchor_cell, ghost_instance.footprint, ghost_instance.anchor)
+	var footprint = get_building_cells(ghost_instance,anchor_cell)
 	var real_building := current_scene.instantiate()
 	
 	if not can_place_at(footprint):
@@ -150,7 +187,7 @@ func confirm_build(multi_build_held : bool = false) -> void:
 	
 func free_cells_for_building(building: Node) -> void:
 	var anchor_cell := world_to_cell(building.global_position)
-	var cells = building.get_footprint_cells(anchor_cell, building.footprint, building.anchor)
+	var cells = get_building_cells(building, anchor_cell)
 	for cell in cells:
 		#only clear cells that still point to the identified building
 		if occupied_cells.get(cell) == building:
@@ -235,7 +272,7 @@ func _start_drag_building(building: Node2D) -> void:
 	drag_original_position = building.global_position
 	
 	#We are recording and freeing the current cell occupancy of the building so the building can move through itself
-	drag_original_cells = building.get_footprint_cells(anchor_cell, building.footprint, building.anchor)
+	drag_original_cells = get_building_cells(building, anchor_cell)
 	free_cells_for_building(building)
 	
 func _finish_drag_building() -> void:
@@ -280,7 +317,7 @@ func _process(_delta: float) -> void:
 		anchor_cell = world_to_cell(mouse_pos)
 		top_left_cell = anchor_cell - dragged_building.anchor
 		new_pos = cell_to_world(top_left_cell)
-		building_footprint = dragged_building.get_footprint_cells(anchor_cell, dragged_building.footprint, dragged_building.anchor)
+		building_footprint = get_building_cells(dragged_building, anchor_cell)
 		
 		dragged_building.global_position = new_pos
 		drag_last_cells = building_footprint
@@ -319,7 +356,7 @@ func _process(_delta: float) -> void:
 	anchor_cell = world_to_cell(mouse_pos)
 	top_left_cell = anchor_cell - ghost_instance.anchor
 	print("The recorded footprint of the ghost instance is: %s, %s" %[ghost_instance.footprint.x, ghost_instance.footprint.y])
-	building_footprint = ghost_instance.get_footprint_cells(anchor_cell, ghost_instance.footprint, ghost_instance.anchor)
+	building_footprint = get_building_cells(ghost_instance, anchor_cell)
 	valid_placement = can_place_at(building_footprint)
 	
 	ghost_instance.global_position = cell_to_world(top_left_cell)

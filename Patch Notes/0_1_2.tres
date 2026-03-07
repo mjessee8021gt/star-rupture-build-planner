@@ -8,17 +8,8 @@ patch_version = &"v0.1.2"
 patch_notes = "New Features:
 -Patch Notes Screen has been added.
 -Color Scheme across all assets has been redone to soften design language while still being readable.
--Multirail 3 has been added, tested and verified.
+-Multirail 3, Multirail 5, Rail Modulator 5, Storage V1, and Storage V2 have been added, tested and verified.
+-Added a new multi-build feature that allows you to build multiple of the same building more efficiently."
+known_issues = "-Rail pathing still needs some TLC.ff
 
-Bug Fixes:
--Fixed layout issues with the following buildings
-     -Smelter
-     -Rail Support
-     -Rail Modulator 3
-     -Fabricator
--Increased the grid size from 32x32 pixels to 64x64 pixels. The reduced performance of this move was outweighed by the fact that there simply wasn't enough pixels per tile in a 32x32 grid to create the Multirail 5 and rail Modulator 5 work. This move has allowed us to make those systems work as well as fix some issues with layout on other buildings.
-
- Miscellaneous:
--Further clean-up of program assets to remove more unused assets. This should lend to better performance.
- "
-metadata/_custom_type_script = "uid://b6tmiam3vo7cr"
+"

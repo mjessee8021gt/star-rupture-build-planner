@@ -23,5 +23,7 @@ known_issues = "-Rail pathing is not as clean as i'd like it to be.
           -Orbital Cargo Launcher
           -Teleporter
      -Transportation-Storage
-          -All Buildings"
+          -All Buildings
+
+"
 metadata/_custom_type_script = "uid://b6tmiam3vo7cr"
