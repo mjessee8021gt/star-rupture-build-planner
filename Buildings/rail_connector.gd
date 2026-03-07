@@ -28,8 +28,8 @@ func _ready() -> void:
 	$"Ports/Universal 4".modulate = Color(0.5, 0.5, 0.5, 0.5)
 	u_port1.pressed.connect(func(): _start_port_drag("Universal 1"))
 	u_port2.pressed.connect(func(): _start_port_drag("Universal 2"))
-	u_port2.pressed.connect(func(): _start_port_drag("Universal 3"))
-	u_port2.pressed.connect(func(): _start_port_drag("Universal 4"))
+	u_port3.pressed.connect(func(): _start_port_drag("Universal 3"))
+	u_port4.pressed.connect(func(): _start_port_drag("Universal 4"))
 	add_to_group("buildings")
 
 func flip_footprint() -> void:
@@ -46,6 +46,7 @@ func flip_footprint() -> void:
 		$"Ports/Universal 3".scale = Vector2(0.32, 0.32)
 		$"Ports/Universal 4".position = Vector2(1, 75)
 		$"Ports/Universal 4".scale = Vector2(0.32, 0.32)
+		$Ports.position = Vector2(-64, -64)
 		is_alternate = true
 		footprint = footprint_alt
 	else:
@@ -61,6 +62,7 @@ func flip_footprint() -> void:
 		$"Ports/Universal 3".scale = Vector2(0.32, 0.32)
 		$"Ports/Universal 4".position = Vector2(1, 44)
 		$"Ports/Universal 4".scale = Vector2(0.32, 0.32)
+		$Ports.position = Vector2(-32, -32)
 		is_alternate = false
 		footprint = footprint_primary
 		
@@ -115,13 +117,13 @@ func cancel_port_drag() -> void:
 	
 func _get_port_global_pos(port_name: String) -> Vector2:
 	match port_name:
-		"universal 1":
+		"Universal 1":
 			return u_port1.global_position + u_port1.size * 0.5
-		"universal 2":
+		"Universal 2":
 			return u_port2.global_position + u_port2.size * 0.5
-		"universal 3":
+		"Universal 3":
 			return u_port3.global_position + u_port3.size * 0.5
-		"universal 4":
+		"Universal 4":
 			return u_port4.global_position + u_port4.size * 0.5
 		_:
 			return global_position
@@ -135,11 +137,11 @@ func _unhandled_input(event: InputEvent) -> void:
 func _on_universal_3_pressed() -> void:
 	if not universal3_is_pressed:
 		if not other_button_pressed:
-			$"Ports/Universal 1".modulate = Color(0.5, 0.5, 0.5, 1)
+			$"Ports/Universal 3".modulate = Color(0.5, 0.5, 0.5, 1)
 			universal3_is_pressed = true
 			other_button_pressed = true
 	else:
-		$"Ports/Universal 1".modulate = Color(0.5, 0.5, 0.5, 0.5)
+		$"Ports/Universal 3".modulate = Color(0.5, 0.5, 0.5, 0.5)
 		universal3_is_pressed = false
 		other_button_pressed = false
 
@@ -154,11 +156,11 @@ func _on_universal_3_mouse_exited() -> void:
 func _on_universal_4_pressed() -> void:
 	if not universal4_is_pressed:
 		if not other_button_pressed:
-			$"Ports/Universal 1".modulate = Color(0.5, 0.5, 0.5, 1)
+			$"Ports/Universal 4".modulate = Color(0.5, 0.5, 0.5, 1)
 			universal4_is_pressed = true
 			other_button_pressed = true
 	else:
-		$"Ports/Universal 1".modulate = Color(0.5, 0.5, 0.5, 0.5)
+		$"Ports/Universal 4".modulate = Color(0.5, 0.5, 0.5, 0.5)
 		universal4_is_pressed = false
 		other_button_pressed = false
 

@@ -77,6 +77,36 @@ func _get_prod_source_id(building: Node) -> int:
 		return int(building.get_meta("prod_source_id"))
 	return building.get_instance_id()
 
+func _get_building_footprint_offset(building: Node) -> Vector2:
+	if building == null:
+		return Vector2.ZERO
+
+	var footprint_value = building.get("footprint")
+	if footprint_value is Vector2i:
+		return Vector2(footprint_value) * (float(tile_size) * 0.5)
+
+	return Vector2.ZERO
+
+func _anchor_cell_from_building_position(building: Node, building_pos: Vector2) -> Vector2i:
+	var anchor := Vector2i.ZERO
+	var anchor_value = building.get("anchor")
+	if anchor_value is Vector2i:
+		anchor = anchor_value
+
+	var top_left_world := building_pos - _get_building_footprint_offset(building)
+	var top_left_cell := world_to_cell(top_left_world)
+	return top_left_cell + anchor
+
+func _position_from_anchor_cell(building: Node, anchor_cell: Vector2i) -> Vector2:
+	var anchor := Vector2i.ZERO
+	var anchor_value = building.get("anchor")
+	if anchor_value is Vector2i:
+		anchor = anchor_value
+
+	var top_left_cell := anchor_cell - anchor
+	var top_left_world := cell_to_world(top_left_cell)
+	return top_left_world + _get_building_footprint_offset(building)
+
 #entry point to the build manager for the MenuButton
 func start_build(scene: PackedScene) -> void:
 	print("We are now starting the build preview in the build manager")
@@ -151,7 +181,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func confirm_build(multi_build_held : bool = false) -> void:
 	$"../Camera2D/CanvasLayer/Debug Panel/DebugFeed".text = $"../Camera2D/CanvasLayer/Debug Panel/DebugFeed".text + "\n" + "We are now confirming the build..."
-	var anchor_cell := get_building_anchor_cell(ghost_instance)
+	var anchor_cell := _anchor_cell_from_building_position(ghost_instance, ghost_instance.global_position)
 	var footprint = get_building_cells(ghost_instance,anchor_cell)
 	var real_building := current_scene.instantiate()
 	
@@ -177,7 +207,7 @@ func confirm_build(multi_build_held : bool = false) -> void:
 		cancel_build()
 	
 func free_cells_for_building(building: Node) -> void:
-	var anchor_cell := get_building_anchor_cell(building)
+	var anchor_cell := _anchor_cell_from_building_position(building, building.global_position)
 	var cells = get_building_cells(building, anchor_cell)
 	for cell in cells:
 		#only clear cells that still point to the identified building
@@ -252,7 +282,7 @@ func get_building_under_mouse() -> Node2D:
 	return get_building_at_cells(cell)
 
 func _start_drag_building(building: Node2D) -> void:
-	var anchor_cell = get_building_anchor_cell(building)
+	var anchor_cell = _anchor_cell_from_building_position(building, building.global_position)
 	
 	if building == null:
 		return
@@ -307,7 +337,7 @@ func _process(_delta: float) -> void:
 		mouse_pos = get_global_mouse_position() + drag_mouse_offset
 		anchor_cell = world_to_cell(mouse_pos)
 		top_left_cell = anchor_cell - get_building_anchor(dragged_building)
-		new_pos = cell_to_world(top_left_cell)
+		new_pos = _position_from_anchor_cell(dragged_building, anchor_cell)
 		building_footprint = get_building_cells(dragged_building, anchor_cell)
 		
 		dragged_building.global_position = new_pos
@@ -350,7 +380,7 @@ func _process(_delta: float) -> void:
 	building_footprint = get_building_cells(ghost_instance, anchor_cell)
 	valid_placement = can_place_at(building_footprint)
 	
-	ghost_instance.global_position = cell_to_world(top_left_cell)
+	ghost_instance.global_position = _position_from_anchor_cell(ghost_instance, anchor_cell)
 	
 	if valid_placement == false:
 		ghost_instance.modulate = cannotbuildColor

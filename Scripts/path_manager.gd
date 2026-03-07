@@ -123,8 +123,8 @@ func _get_port_center(building: Node, port_path: NodePath) -> Variant:
 
 		# Push the endpoint outward to the rim of the button
 		var normal := _get_port_normal(building, port_path)
-		var left_normal_offset := Vector2(-5.0, -17.0)
-		var right_normal_offset := Vector2(0.0, 0.0)
+		var left_normal_offset := Vector2(-5.0, -7.0)
+		var right_normal_offset := Vector2(-5.0, 0.0)
 		var minimum_radius = min(button_control.size.x, button_control.size.y) * 0.5
 		if normal.is_equal_approx(Vector2.LEFT):
 			var left_aligned_normals = center + normal * minimum_radius
