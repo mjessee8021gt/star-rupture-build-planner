@@ -25,29 +25,29 @@ id = &"compounder"
 metadata/_edit_vertical_guides_ = [63.0, 48.0, 64.0, 96.0, 112.0, 192.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
+position = Vector2(-192, -192)
 texture = ExtResource("9_n8472")
 centered = false
 
 [node name="AlternateSprite" type="Sprite2D" parent="." unique_id=1619536158]
 visible = false
+position = Vector2(-224, -224)
 texture = ExtResource("10_wrwtp")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128283645]
-position = Vector2(192, 192.5)
 shape = SubResource("RectangleShape2D_gbqis")
 
 [node name="CollisionShapeAlt" type="CollisionShape2D" parent="." unique_id=1184700770]
 visible = false
-position = Vector2(224, 224)
 shape = SubResource("RectangleShape2D_uf4xf")
 disabled = true
 
 [node name="TitleLabel" type="Label" parent="." unique_id=904579435]
-offset_left = 102.0
-offset_top = 86.0
-offset_right = 282.0
-offset_bottom = 121.0
+offset_left = -89.999985
+offset_top = -106.0
+offset_right = 90.000015
+offset_bottom = -71.0
 theme_override_font_sizes/font_size = 25
 text = "COMPOUNDER"
 horizontal_alignment = 1
@@ -57,59 +57,64 @@ horizontal_alignment = 1
 [node name="PlacementAreaAlt" type="Area2D" parent="." unique_id=445836450]
 
 [node name="Ports" type="Node2D" parent="." unique_id=1067444767]
+position = Vector2(-192, -192)
 
 [node name="Output 1" type="Button" parent="Ports" unique_id=1122308628 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 176.00003
+offset_left = 199.99997
 offset_top = 1.0
-offset_right = 248.00003
+offset_right = 271.99997
 offset_bottom = 41.0
+rotation = 1.5707964
 scale = Vector2(0.42, 0.42)
 icon = ExtResource("17_28hxc")
 metadata/normal = Vector2(0, -1)
 
 [node name="Input 1" type="Button" parent="Ports" unique_id=1958701130 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 0.99999344
-offset_top = 367.00003
-offset_right = 73.00001
-offset_bottom = 407.00003
+offset_left = 169.99997
+offset_top = 353.00003
+offset_right = 241.99998
+offset_bottom = 393.00003
+rotation = 1.5707964
 scale = Vector2(0.42, 0.42)
 icon = ExtResource("17_28hxc")
 metadata/normal = Vector2(0, 1)
 
 [node name="Input 2" type="Button" parent="Ports" unique_id=1025542919 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 177.00002
-offset_top = 367.00003
-offset_right = 249.00002
-offset_bottom = 407.00003
+offset_left = 200.99997
+offset_top = 353.00003
+offset_right = 272.99997
+offset_bottom = 393.00003
+rotation = 1.5707964
 scale = Vector2(0.42, 0.42)
 icon = ExtResource("17_28hxc")
 metadata/normal = Vector2(0, 1)
 
 [node name="Input 3" type="Button" parent="Ports" unique_id=1275495196 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 353.00003
-offset_top = 367.00003
-offset_right = 425.00003
-offset_bottom = 407.00003
+offset_left = 231.99997
+offset_top = 353.00003
+offset_right = 303.99997
+offset_bottom = 393.00003
+rotation = 1.5707964
 scale = Vector2(0.42, 0.42)
 icon = ExtResource("17_28hxc")
 metadata/normal = Vector2(0, 1)
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
-offset_left = 112.0
-offset_top = 160.0
-offset_right = 206.0
-offset_bottom = 180.0
+offset_left = -79.999985
+offset_top = -32.0
+offset_right = 14.000015
+offset_bottom = -12.0
 theme_override_font_sizes/font_size = 16
 
 [node name="outputBox" type="ColorRect" parent="." unique_id=1419396623]
-offset_left = 177.00002
-offset_top = 18.0
-offset_right = 206.00002
-offset_bottom = 37.0
+offset_left = -14.999985
+offset_top = -160.0
+offset_right = 14.000015
+offset_bottom = -141.0
 color = Color(0, 0.64705884, 0.25490198, 0.57254905)
 
 [node name="outputText" type="Label" parent="outputBox" unique_id=1040759306]
@@ -124,10 +129,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Input1Box" type="ColorRect" parent="." unique_id=1573327625]
-offset_left = 1.0000079
-offset_top = 347.0
-offset_right = 31.000008
-offset_bottom = 366.0
+offset_left = -45.999985
+offset_top = 141.0
+offset_right = -15.999985
+offset_bottom = 160.0
 color = Color(0, 0.64705884, 0.25490198, 0.57254905)
 
 [node name="input1Text" type="Label" parent="Input1Box" unique_id=1651637159]
@@ -142,10 +147,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Input2Box" type="ColorRect" parent="." unique_id=232719543]
-offset_left = 177.0
-offset_top = 347.0
-offset_right = 207.0
-offset_bottom = 366.0
+offset_left = -15.0
+offset_top = 141.0
+offset_right = 15.0
+offset_bottom = 160.0
 color = Color(0, 0.64705884, 0.25490198, 0.57254905)
 
 [node name="input2Text" type="Label" parent="Input2Box" unique_id=332826267]
@@ -160,10 +165,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Input3Box" type="ColorRect" parent="." unique_id=1711166632]
-offset_left = 353.0
-offset_top = 347.0
-offset_right = 383.0
-offset_bottom = 366.0
+offset_left = 16.0
+offset_top = 141.0
+offset_right = 46.0
+offset_bottom = 160.0
 color = Color(0, 0.64705884, 0.25490198, 0.57254905)
 
 [node name="input3Text" type="Label" parent="Input3Box" unique_id=844869573]

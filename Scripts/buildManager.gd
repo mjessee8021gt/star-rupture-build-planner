@@ -81,9 +81,9 @@ func _get_building_footprint_offset(building: Node) -> Vector2:
 	if building == null:
 		return Vector2.ZERO
 
-	var footprint_value = building.get("footprint")
-	if footprint_value is Vector2i:
-		return Vector2(footprint_value) * (float(tile_size) * 0.5)
+	var footprint = get_rotated_footprint(building)
+	if footprint != Vector2i.ZERO:
+		return Vector2(footprint) * (float(tile_size) * 0.5)
 
 	return Vector2.ZERO
 
@@ -130,11 +130,19 @@ func can_place_at(cells: Array[Vector2i]) -> bool:
 	return true
 	
 func get_rotated_footprint(building: Node) -> Vector2i:
-	var footprint: Vector2i = building.footprint
+	if building == null:
+		return Vector2i.ZERO
+	var footprint = building.get("footprint")
+	if not (footprint is Vector2i):
+		return Vector2i.ZERO
+		
 	var rotation_steps := 0
 	
 	if "rotatedTick" in building:
 		rotation_steps = int(building.rotatedTick) %4
+		
+	if rotation_steps %2 == 1:
+		return Vector2i(footprint.y, footprint.x)
 	
 	return footprint
 	
@@ -148,7 +156,7 @@ func get_building_anchor_cell(building: Node2D) -> Vector2i:
 	
 func get_building_cells(building: Node, anchor_cell: Vector2i) -> Array[Vector2i]:
 	var cells: Array[Vector2i] = []
-	var footprint: Vector2i = building.footprint
+	var footprint:= get_rotated_footprint(building)
 	var top_left = anchor_cell - building.anchor
 
 	for y in footprint.y:
