@@ -140,14 +140,14 @@ list_path = NodePath("../PopupPanel/MarginContainer/ScrollContainer/VBoxContaine
 oversampling_override = 1.0
 title = "Controls"
 position = Vector2i(51, 463)
-size = Vector2i(275, 225)
+size = Vector2i(300, 250)
 visible = true
 
 [node name="MarginContainer" type="MarginContainer" parent="Camera2D/CanvasLayer/PopupPanel" unique_id=1945906527]
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 271.0
-offset_bottom = 221.0
+offset_right = 296.0
+offset_bottom = 246.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Camera2D/CanvasLayer/PopupPanel/MarginContainer" unique_id=90211902]
 layout_mode = 2
@@ -171,7 +171,7 @@ script = ExtResource("6_v1gob")
 
 [node name="PathManager" type="Node2D" parent="." unique_id=1207476002]
 script = ExtResource("11_4kpch")
-port_stub_len = 30.0
+port_stub_len = 40.0
 corner_radius = 10.0
 arc_segments = 5
 min_stub_len = 100.0
