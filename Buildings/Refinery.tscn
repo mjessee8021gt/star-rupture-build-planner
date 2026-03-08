@@ -38,6 +38,7 @@ shape = SubResource("RectangleShape2D_gbqis")
 
 [node name="CollisionShapeAlt" type="CollisionShape2D" parent="." unique_id=1184700770]
 visible = false
+position = Vector2(32, 32)
 shape = SubResource("RectangleShape2D_uf4xf")
 disabled = true
 
