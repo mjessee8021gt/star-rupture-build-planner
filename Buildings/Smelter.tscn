@@ -42,9 +42,9 @@ disabled = true
 
 [node name="TitleLabel" type="Label" parent="." unique_id=904579435]
 offset_left = -54.0
-offset_top = -83.0
+offset_top = -57.0
 offset_right = 54.0
-offset_bottom = -48.0
+offset_bottom = -22.0
 theme_override_font_sizes/font_size = 25
 text = "SMELTER"
 
@@ -63,10 +63,11 @@ offset_bottom = -128.0
 [node name="Output 1" type="Button" parent="Ports" unique_id=1122308628 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
 layout_mode = 0
-offset_left = 78.0
+offset_left = 106.000015
 offset_top = 1.0
-offset_right = 150.0
+offset_right = 178.00002
 offset_bottom = 41.0
+rotation = 1.5707964
 scale = Vector2(0.5, 0.5)
 icon = ExtResource("4_uf4xf")
 metadata/normal = Vector2(0, -1)
@@ -74,26 +75,27 @@ metadata/normal = Vector2(0, -1)
 [node name="Input 1" type="Button" parent="Ports" unique_id=1958701130 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
 layout_mode = 0
-offset_left = 77.0
-offset_top = 235.0
-offset_right = 149.0
-offset_bottom = 275.0
+offset_left = 105.0
+offset_top = 219.0
+offset_right = 177.0
+offset_bottom = 259.0
+rotation = 1.5707964
 scale = Vector2(0.5, 0.5)
 icon = ExtResource("4_uf4xf")
 metadata/normal = Vector2(0, 1)
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
 offset_left = -64.0
-offset_top = -49.0
+offset_top = -23.0
 offset_right = 30.0
-offset_bottom = -29.0
+offset_bottom = -3.0
 theme_override_font_sizes/font_size = 16
 
 [node name="outputBox" type="ColorRect" parent="." unique_id=1419396623]
 offset_left = -19.0
-offset_top = -107.0
+offset_top = -90.0
 offset_right = 19.0
-offset_bottom = -84.0
+offset_bottom = -67.0
 color = Color(0, 0.64705884, 0.25490198, 0.57254905)
 
 [node name="outputText" type="Label" parent="outputBox" unique_id=1040759306]
@@ -107,9 +109,9 @@ vertical_alignment = 1
 
 [node name="InputBox" type="ColorRect" parent="." unique_id=1573327625]
 offset_left = -19.0
-offset_top = 83.0
+offset_top = 67.0
 offset_right = 19.0
-offset_bottom = 106.0
+offset_bottom = 90.0
 color = Color(0, 0.64705884, 0.25490198, 0.57254905)
 
 [node name="inputText" type="Label" parent="InputBox" unique_id=1651637159]

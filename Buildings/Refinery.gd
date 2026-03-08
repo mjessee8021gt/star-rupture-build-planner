@@ -44,12 +44,12 @@ func flip_footprint() -> void:
 		$AlternateSprite.visible = true
 		$CollisionShape2D.disabled = true
 		$CollisionShapeAlt.disabled = false
-		$"Ports/Output 1".position = Vector2(174, -31)
-		$"Ports/Input 1".position = Vector2(155, 395)
-		$"Ports/Input 2".position = Vector2(193, 395)
-		$outputBox.position = Vector2(-17, -201)
-		$Input1Box.position = Vector2(-37, 184)
-		$Input2Box.position = Vector2(1, 184)
+		$"Ports/Output 1".position = Vector2(202, -31)
+		$"Ports/Input 1".position = Vector2(189, 379)
+		$"Ports/Input 2".position = Vector2(215, 379)
+		$outputBox.position = Vector2(-17, -186)
+		$Input1Box.position = Vector2(-36, 167)
+		$Input2Box.position = Vector2(1, 167)
 		footprint = footprint_alt
 		is_alternate = true
 	else:
@@ -57,12 +57,12 @@ func flip_footprint() -> void:
 		$CollisionShape2D.disabled = false
 		$AlternateSprite.visible = false
 		$CollisionShapeAlt.disabled = true
-		$"Ports/Output 1".position = Vector2(174, 1)
-		$"Ports/Input 1".position = Vector2(155, 363)
-		$"Ports/Input 2".position = Vector2(193, 363)
-		$outputBox.position = Vector2(-17, -169)
-		$Input1Box.position = Vector2(-37, 152)
-		$Input2Box.position = Vector2(1, 152)
+		$"Ports/Output 1".position = Vector2(202, 1)
+		$"Ports/Input 1".position = Vector2(189, 347)
+		$"Ports/Input 2".position = Vector2(215, 347)
+		$outputBox.position = Vector2(-17, -154)
+		$Input1Box.position = Vector2(-36, 135)
+		$Input2Box.position = Vector2(1, 135)
 		footprint = footprint_primary
 		is_alternate = false
 		
