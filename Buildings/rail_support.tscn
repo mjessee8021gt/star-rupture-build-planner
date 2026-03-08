@@ -17,21 +17,21 @@ id = &"rail_support"
 metadata/_edit_vertical_guides_ = [32.0, 64.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
+position = Vector2(-32, -32)
 texture = ExtResource("6_w584o")
 centered = false
 
 [node name="AlternateSprite" type="Sprite2D" parent="." unique_id=1619536158]
 visible = false
+position = Vector2(-64, -64)
 texture = ExtResource("7_cjtlg")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128283645]
-position = Vector2(32, 32)
 shape = SubResource("RectangleShape2D_gbqis")
 
 [node name="CollisionShapeAlt" type="CollisionShape2D" parent="." unique_id=1184700770]
 visible = false
-position = Vector2(64, 64)
 shape = SubResource("RectangleShape2D_uf4xf")
 disabled = true
 
@@ -42,6 +42,10 @@ disabled = true
 [node name="Ports" type="Control" parent="." unique_id=1600385270]
 layout_mode = 3
 anchors_preset = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = -32.0
+offset_bottom = -32.0
 
 [node name="Universal 1" type="Button" parent="Ports" unique_id=1122308628 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)

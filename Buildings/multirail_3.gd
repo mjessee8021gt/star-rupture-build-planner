@@ -49,18 +49,13 @@ func flip_footprint() -> void:
 		$AlternateSprite.visible = true
 		$CollisionShape2D.disabled = true
 		$CollisionShapeAlt.disabled = false
+		$Ports.position = Vector2(-64, -64)
 		$"Ports/Universal 1".position = Vector2(38, 1)
-		$"Ports/Universal 1".rotation_degrees = 90
 		$"Ports/Universal 2".position = Vector2(70, 1)
-		$"Ports/Universal 2".rotation_degrees = 90
 		$"Ports/Universal 3".position = Vector2(102, 1)
-		$"Ports/Universal 3".rotation_degrees = 90
 		$"Ports/Universal 4".position = Vector2(38, 104)
-		$"Ports/Universal 4".rotation_degrees = 90
 		$"Ports/Universal 5".position = Vector2(70, 104)
-		$"Ports/Universal 5".rotation_degrees = 90
 		$"Ports/Universal 6".position = Vector2(102, 104)
-		$"Ports/Universal 6".rotation_degrees = 90
 		is_alternate = true
 		footprint = footprint_alt
 	else:
@@ -68,18 +63,13 @@ func flip_footprint() -> void:
 		$CollisionShape2D.disabled = false
 		$AlternateSprite.visible = false
 		$CollisionShapeAlt.disabled = true
+		$Ports.position = Vector2(-32, -32)
 		$"Ports/Universal 1".position = Vector2(22, 1)
-		$"Ports/Universal 1".rotation_degrees = 90
 		$"Ports/Universal 2".position = Vector2(38, 1)
-		$"Ports/Universal 2".rotation_degrees = 90
 		$"Ports/Universal 3".position = Vector2(54, 1)
-		$"Ports/Universal 3".rotation_degrees = 90
 		$"Ports/Universal 4".position = Vector2(22, 40)
-		$"Ports/Universal 4".rotation_degrees = 90
 		$"Ports/Universal 5".position = Vector2(38, 40)
-		$"Ports/Universal 5".rotation_degrees = 90
 		$"Ports/Universal 6".position = Vector2(54, 40)
-		$"Ports/Universal 6".rotation_degrees = 90
 		is_alternate = false
 		footprint = footprint_primary
 		
@@ -177,7 +167,7 @@ func _on_universal_3_mouse_exited() -> void:
 func _on_universal_4_pressed() -> void:
 	if not universal4_is_pressed:
 		if not other_button_pressed:
-			$"Ports/Universal41".modulate = Color(0.5, 0.5, 0.5, 1)
+			$"Ports/Universal 4".modulate = Color(0.5, 0.5, 0.5, 1)
 			universal4_is_pressed = true
 			other_button_pressed = true
 	else:

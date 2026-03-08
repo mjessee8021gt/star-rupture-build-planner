@@ -49,6 +49,8 @@ func _ready() -> void:
 	input_4_port.pressed.connect(func(): _start_port_drag("Input 4"))
 	add_to_group("buildings")
 	populate_recipe_dropdown()
+	$Recipe.text = ""
+	$Recipe.select(-1)
 
 func flip_footprint() -> void:
 	if $PrimarySprite.visible == true:
@@ -56,18 +58,16 @@ func flip_footprint() -> void:
 		$AlternateSprite.visible = true
 		$CollisionShape2D.disabled = true
 		$CollisionShapeAlt.disabled = false
-		$TitleLabel.position = Vector2(84, 86)
-		$"Ports/Output 1".position = Vector2(145, 1)
-		$"Ports/Input 1".position = Vector2(1,366)
-		$"Ports/Input 2".position = Vector2(88, 366)
-		$"Ports/Input 3".position = Vector2(186, 366)
-		$"Ports/Input 4".position = Vector2(288, 366)
-		$Recipe.position = Vector2(62, 150)
-		$outputBox.position = Vector2(145, 19)
-		$Input1Box.position = Vector2(1, 346)
-		$Input2Box.position = Vector2(88, 346)
-		$Input3Box.position = Vector2(186, 346)
-		$Input4Box.position = Vector2(288, 346)
+		$"Ports/Output 1".position = Vector2(136, -31)
+		$"Ports/Input 1".position = Vector2(96,321)
+		$"Ports/Input 2".position = Vector2(123, 321)
+		$"Ports/Input 3".position = Vector2(150, 321)
+		$"Ports/Input 4".position = Vector2(177, 321)
+		$outputBox.position = Vector2(-15, -160)
+		$Input1Box.position = Vector2(-62, 141)
+		$Input2Box.position = Vector2(-31, 141)
+		$Input3Box.position = Vector2(1, 141)
+		$Input4Box.position = Vector2(32, 141)
 		footprint = footprint_alt
 		is_alternate = true
 	else:
@@ -75,18 +75,16 @@ func flip_footprint() -> void:
 		$CollisionShape2D.disabled = false
 		$AlternateSprite.visible = false
 		$CollisionShapeAlt.disabled = true
-		$TitleLabel.position = Vector2(52, 86)
-		$"Ports/Output 1".position = Vector2(113, 1)
-		$"Ports/Input 1".position = Vector2(1, 302)
-		$"Ports/Input 2".position = Vector2(70, 302)
-		$"Ports/Input 3".position = Vector2(152, 302)
-		$"Ports/Input 4".position = Vector2(225, 302)
-		$Recipe.position = Vector2(30, 150)
-		$outputBox.position = Vector2(113, 19)
-		$Input1Box.position = Vector2(1, 282)
-		$Input2Box.position = Vector2(70,282)
-		$Input3Box.position = Vector2(152, 282)
-		$Input4Box.position = Vector2(225, 282)
+		$"Ports/Output 1".position = Vector2(136, 1)
+		$"Ports/Input 1".position = Vector2(96, 289)
+		$"Ports/Input 2".position = Vector2(123, 289)
+		$"Ports/Input 3".position = Vector2(150, 289)
+		$"Ports/Input 4".position = Vector2(177, 289)
+		$outputBox.position = Vector2(-15, -128)
+		$Input1Box.position = Vector2(-62, 109)
+		$Input2Box.position = Vector2(-31, 109)
+		$Input3Box.position = Vector2(1, 109)
+		$Input4Box.position = Vector2(32, 109)
 		footprint = footprint_primary
 		is_alternate = false
 		

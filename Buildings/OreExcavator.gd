@@ -23,6 +23,13 @@ func _ready() -> void:
 	add_to_group("buildings")
 	_connect_port_buttons()
 	populate_recipe_dropdown()
+	$Recipe.text = ""
+	$Purity.text = ""
+	$Recipe.select(-1)
+	$Purity.select(-1)
+
+func flip_footprint() -> void:
+	return
 
 func _on_output_1_mouse_entered() -> void:
 	if not output1_is_pressed:
@@ -117,6 +124,8 @@ func _on_recipe_item_selected(index: int) -> void:
 	var recipe := recipe_dropdown.get_item_metadata(index) as Recipe
 	if recipe:
 		_populate_purity_for_recipe(recipe)
+		$Purity.text = ""
+		$Purity.select(-1)
 
 func _on_purity_item_selected(index: int) -> void:
 	var variant := purity_dropdown.get_item_metadata(index)as RecipeVariant

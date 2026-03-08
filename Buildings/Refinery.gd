@@ -35,6 +35,8 @@ func _ready() -> void:
 	input_2_port.pressed.connect(func(): _start_port_drag("Input 2"))
 	add_to_group("buildings")
 	populate_recipe_dropdown()
+	$Recipe.text = ""
+	$Recipe.select(-1)
 
 func flip_footprint() -> void:
 	if $PrimarySprite.visible == true:
@@ -42,17 +44,12 @@ func flip_footprint() -> void:
 		$AlternateSprite.visible = true
 		$CollisionShape2D.disabled = true
 		$CollisionShapeAlt.disabled = false
-		$TitleLabel.position = Vector2(167, 69)
-		$"Ports/Output 1".position = Vector2(206, 1)
-		$"Ports/Input 1".position = Vector2(1,427)
-		$"Ports/Input 2".position = Vector2(411, 427)
-		$Recipe.position = Vector2(160, 118)
-		$outputBox.position = Vector2(207, 23)
-		$outputBox/outputText.position = Vector2(-1, -2)
-		$Input1Box.position = Vector2(1, 408)
-		$Input1Box/input1Text.position = Vector2(-1, -2)
-		$Input2Box.position = Vector2(411, 408)
-		$Input2Box/input2Text.position = Vector2(-1, -2)
+		$"Ports/Output 1".position = Vector2(174, -31)
+		$"Ports/Input 1".position = Vector2(155, 395)
+		$"Ports/Input 2".position = Vector2(193, 395)
+		$outputBox.position = Vector2(-17, -201)
+		$Input1Box.position = Vector2(-37, 184)
+		$Input2Box.position = Vector2(1, 184)
 		footprint = footprint_alt
 		is_alternate = true
 	else:
@@ -60,17 +57,12 @@ func flip_footprint() -> void:
 		$CollisionShape2D.disabled = false
 		$AlternateSprite.visible = false
 		$CollisionShapeAlt.disabled = true
-		$TitleLabel.position = Vector2(135, 69)
 		$"Ports/Output 1".position = Vector2(174, 1)
-		$"Ports/Input 1".position = Vector2(1, 363)
-		$"Ports/Input 2".position = Vector2(347, 363)
-		$Recipe.position = Vector2(128, 118)
-		$outputBox.position = Vector2(175, 23)
-		$outputBox/outputText.position = Vector2(-1, -2)
-		$Input1Box.position = Vector2(1, 344)
-		$Input1Box/input1Text.position = Vector2(-1, -2)
-		$Input2Box.position = Vector2(347, 344)
-		$Input2Box/input2Text.position = Vector2(-1, -2)
+		$"Ports/Input 1".position = Vector2(155, 363)
+		$"Ports/Input 2".position = Vector2(193, 363)
+		$outputBox.position = Vector2(-17, -169)
+		$Input1Box.position = Vector2(-37, 152)
+		$Input2Box.position = Vector2(1, 152)
 		footprint = footprint_primary
 		is_alternate = false
 		
@@ -125,11 +117,11 @@ func cancel_port_drag() -> void:
 	
 func _get_port_global_pos(port_name: String) -> Vector2:
 	match port_name:
-		"output":
+		"Output 1":
 			return output_port.global_position + output_port.size * 0.5
-		"input1":
+		"Input 1":
 			return input_port.global_position + input_port.size * 0.5
-		"input2":
+		"Input 2":
 			return input_2_port.global_position + input_port.size * 0.5
 		_:
 			return global_position

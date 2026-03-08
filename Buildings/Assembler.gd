@@ -49,6 +49,8 @@ func _ready() -> void:
 	input_4_port.pressed.connect(func(): _start_port_drag("Input 4"))
 	add_to_group("buildings")
 	populate_recipe_dropdown()
+	$Recipe.text = ""
+	$Recipe.select(-1)
 	
 func flip_footprint() -> void:
 	if $PrimarySprite.visible == true:

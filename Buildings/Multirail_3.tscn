@@ -17,21 +17,21 @@ id = &"rail_mod_3"
 metadata/_edit_vertical_guides_ = [32.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
+position = Vector2(-32, -32)
 texture = ExtResource("2_bo2nt")
 centered = false
 
 [node name="AlternateSprite" type="Sprite2D" parent="." unique_id=1619536158]
 visible = false
+position = Vector2(-64, -64)
 texture = ExtResource("3_u7evp")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128283645]
-position = Vector2(32, 32)
 shape = SubResource("RectangleShape2D_gbqis")
 
 [node name="CollisionShapeAlt" type="CollisionShape2D" parent="." unique_id=1184700770]
 visible = false
-position = Vector2(64, 64)
 shape = SubResource("RectangleShape2D_uf4xf")
 disabled = true
 
@@ -40,6 +40,7 @@ disabled = true
 [node name="PlacementAreaAlt" type="Area2D" parent="." unique_id=445836450]
 
 [node name="Ports" type="Node2D" parent="." unique_id=1067444767]
+position = Vector2(-32, -32)
 
 [node name="Universal 1" type="Button" parent="Ports" unique_id=1122308628 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)

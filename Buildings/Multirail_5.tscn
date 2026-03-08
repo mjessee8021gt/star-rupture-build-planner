@@ -17,21 +17,21 @@ id = &"multirail_5"
 metadata/_edit_vertical_guides_ = [32.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
+position = Vector2(-32, -32)
 texture = ExtResource("2_kqxye")
 centered = false
 
 [node name="AlternateSprite" type="Sprite2D" parent="." unique_id=1619536158]
 visible = false
+position = Vector2(-64, -64)
 texture = ExtResource("3_amr17")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128283645]
-position = Vector2(32, 32)
 shape = SubResource("RectangleShape2D_gbqis")
 
 [node name="CollisionShapeAlt" type="CollisionShape2D" parent="." unique_id=1184700770]
 visible = false
-position = Vector2(64, 64)
 shape = SubResource("RectangleShape2D_uf4xf")
 disabled = true
 
@@ -40,114 +40,115 @@ disabled = true
 [node name="PlacementAreaAlt" type="Area2D" parent="." unique_id=445836450]
 
 [node name="Ports" type="Node2D" parent="." unique_id=1067444767]
+position = Vector2(-32, -32)
 
 [node name="Universal 1" type="Button" parent="Ports" unique_id=1122308628 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 13.0
+offset_left = 12.0
 offset_top = 1.0
-offset_right = 85.0
+offset_right = 84.0
 offset_bottom = 41.0
 rotation = 1.5707964
-scale = Vector2(0.32, 0.32)
+scale = Vector2(0.3, 0.3)
 icon = ExtResource("4_eg3kd")
 metadata/normal = Vector2(0, -1)
 
 [node name="Universal 2" type="Button" parent="Ports" unique_id=1958701130 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 26.0
+offset_left = 25.0
 offset_top = 1.0
-offset_right = 98.0
+offset_right = 97.0
 offset_bottom = 41.0
 rotation = 1.5707964
-scale = Vector2(0.32, 0.32)
+scale = Vector2(0.3, 0.3)
 icon = ExtResource("4_eg3kd")
 metadata/normal = Vector2(0, -1)
 
 [node name="Universal 3" type="Button" parent="Ports" unique_id=294998889 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 39.0
+offset_left = 38.0
 offset_top = 1.0
-offset_right = 111.0
+offset_right = 110.0
 offset_bottom = 41.0
 rotation = 1.5707964
-scale = Vector2(0.32, 0.32)
+scale = Vector2(0.3, 0.3)
 icon = ExtResource("4_eg3kd")
 metadata/normal = Vector2(0, -1)
 
 [node name="Universal 4" type="Button" parent="Ports" unique_id=742351239 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 52.0
+offset_left = 51.0
 offset_top = 1.0
-offset_right = 124.0
+offset_right = 123.0
 offset_bottom = 41.0
 rotation = 1.5707964
-scale = Vector2(0.32, 0.32)
+scale = Vector2(0.3, 0.3)
 icon = ExtResource("4_eg3kd")
 metadata/normal = Vector2(0, -1)
 
 [node name="Universal 5" type="Button" parent="Ports" unique_id=2065945564 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 65.0
+offset_left = 64.0
 offset_top = 1.0
-offset_right = 137.0
+offset_right = 136.0
 offset_bottom = 41.000004
 rotation = 1.5707964
-scale = Vector2(0.32, 0.32)
+scale = Vector2(0.3, 0.3)
 icon = ExtResource("4_eg3kd")
 metadata/normal = Vector2(0, -1)
 
 [node name="Universal 6" type="Button" parent="Ports" unique_id=1038443055 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 13.0
-offset_top = 40.0
-offset_right = 85.0
-offset_bottom = 80.0
+offset_left = 12.0
+offset_top = 42.0
+offset_right = 84.0
+offset_bottom = 82.0
 rotation = 1.5707964
-scale = Vector2(0.32, 0.32)
+scale = Vector2(0.3, 0.3)
 icon = ExtResource("4_eg3kd")
 metadata/normal = Vector2(0, 1)
 
 [node name="Universal 7" type="Button" parent="Ports" unique_id=576474705 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 26.0
-offset_top = 40.0
-offset_right = 98.0
-offset_bottom = 80.0
+offset_left = 25.0
+offset_top = 42.0
+offset_right = 97.0
+offset_bottom = 82.0
 rotation = 1.5707964
-scale = Vector2(0.32, 0.32)
+scale = Vector2(0.3, 0.3)
 icon = ExtResource("4_eg3kd")
 metadata/normal = Vector2(0, 1)
 
 [node name="Universal 8" type="Button" parent="Ports" unique_id=312061506 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 39.0
-offset_top = 40.0
-offset_right = 111.0
-offset_bottom = 80.0
+offset_left = 38.0
+offset_top = 42.0
+offset_right = 110.0
+offset_bottom = 82.0
 rotation = 1.5707964
-scale = Vector2(0.32, 0.32)
+scale = Vector2(0.3, 0.3)
 icon = ExtResource("4_eg3kd")
 metadata/normal = Vector2(0, 1)
 
 [node name="Universal 9" type="Button" parent="Ports" unique_id=1068524713 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 52.0
-offset_top = 40.0
-offset_right = 124.0
-offset_bottom = 80.0
+offset_left = 51.0
+offset_top = 42.0
+offset_right = 123.0
+offset_bottom = 82.0
 rotation = 1.5707964
-scale = Vector2(0.32, 0.32)
+scale = Vector2(0.3, 0.3)
 icon = ExtResource("4_eg3kd")
 metadata/normal = Vector2(0, 1)
 
 [node name="Universal 10" type="Button" parent="Ports" unique_id=1825963006 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 65.0
-offset_top = 40.0
-offset_right = 137.0
-offset_bottom = 80.0
+offset_left = 64.0
+offset_top = 42.0
+offset_right = 136.0
+offset_bottom = 82.0
 rotation = 1.5707964
-scale = Vector2(0.32, 0.32)
+scale = Vector2(0.3, 0.3)
 icon = ExtResource("4_eg3kd")
 metadata/normal = Vector2(0, 1)
 

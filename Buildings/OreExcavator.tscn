@@ -18,24 +18,24 @@ id = &"excavator"
 metadata/_edit_vertical_guides_ = [96.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
-visible = false
+position = Vector2(-96, -128)
 texture = ExtResource("2_i1qbh")
 centered = false
 
 [node name="AlternateSprite" type="Sprite2D" parent="." unique_id=1769053566]
+visible = false
+position = Vector2(-96, -128)
 texture = ExtResource("2_i1qbh")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128283645]
-visible = false
-position = Vector2(96, 128)
 shape = SubResource("RectangleShape2D_gbqis")
 
 [node name="TitleLabel" type="Label" parent="." unique_id=904579435]
-offset_left = 24.0
-offset_top = 81.0
-offset_right = 168.0
-offset_bottom = 116.0
+offset_left = -72.0
+offset_top = -47.0
+offset_right = 72.0
+offset_bottom = -12.0
 theme_override_font_sizes/font_size = 25
 text = "EXCAVATOR"
 horizontal_alignment = 1
@@ -43,6 +43,7 @@ horizontal_alignment = 1
 [node name="PlacementArea" type="Area2D" parent="." unique_id=911391560]
 
 [node name="Ports" type="Node2D" parent="." unique_id=1067444767]
+position = Vector2(-96, -128)
 
 [node name="Output 1" type="Button" parent="Ports" unique_id=1122308628 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
@@ -55,24 +56,24 @@ icon = ExtResource("3_veacw")
 metadata/normal = Vector2(0, -1)
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=1551064749]
-offset_left = 29.0
-offset_top = 163.0
-offset_right = 122.0
-offset_bottom = 183.0
+offset_left = -67.0
+offset_top = 35.0
+offset_right = 26.0
+offset_bottom = 55.0
 theme_override_font_sizes/font_size = 16
 
 [node name="Purity" type="OptionButton" parent="." unique_id=383133586]
-offset_left = 48.0
-offset_top = 194.0
-offset_right = 141.0
-offset_bottom = 214.0
+offset_left = -48.0
+offset_top = 66.0
+offset_right = 45.0
+offset_bottom = 86.0
 theme_override_font_sizes/font_size = 16
 
 [node name="outputBox" type="ColorRect" parent="." unique_id=14120101]
-offset_left = 77.0
-offset_top = 22.0
-offset_right = 115.0
-offset_bottom = 51.0
+offset_left = -19.0
+offset_top = -106.0
+offset_right = 19.0
+offset_bottom = -77.0
 color = Color(0, 0.64705884, 0.25490198, 0.57254905)
 
 [node name="outputText" type="Label" parent="outputBox" unique_id=820058783]

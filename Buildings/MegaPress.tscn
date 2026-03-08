@@ -30,29 +30,29 @@ id = &"megapress"
 metadata/_edit_vertical_guides_ = [63.0, 48.0, 64.0, 80.0, -24.0, 128.0, 192.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
+position = Vector2(-128, -160)
 texture = ExtResource("14_oc300")
 centered = false
 
 [node name="AlternateSprite" type="Sprite2D" parent="." unique_id=1619536158]
 visible = false
+position = Vector2(-160, -192)
 texture = ExtResource("15_oc300")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128283645]
-position = Vector2(128, 160)
 shape = SubResource("RectangleShape2D_gbqis")
 
 [node name="CollisionShapeAlt" type="CollisionShape2D" parent="." unique_id=1184700770]
 visible = false
-position = Vector2(160, 192)
 shape = SubResource("RectangleShape2D_uf4xf")
 disabled = true
 
 [node name="TitleLabel" type="Label" parent="." unique_id=904579435]
-offset_left = 52.000015
-offset_top = 86.0
-offset_right = 203.00002
-offset_bottom = 121.0
+offset_left = -75.999985
+offset_top = -74.0
+offset_right = 75.000015
+offset_bottom = -39.0
 theme_override_font_sizes/font_size = 25
 text = "MEGA PRESS"
 horizontal_alignment = 1
@@ -62,69 +62,75 @@ horizontal_alignment = 1
 [node name="PlacementAreaAlt" type="Area2D" parent="." unique_id=445836450]
 
 [node name="Ports" type="Node2D" parent="." unique_id=1067444767]
+position = Vector2(-128, -160)
 
 [node name="Output 1" type="Button" parent="Ports" unique_id=1122308628 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 113.000015
+offset_left = 136.00003
 offset_top = 1.0
-offset_right = 185.00003
+offset_right = 208.00005
 offset_bottom = 41.0
+rotation = 1.5707964
 scale = Vector2(0.42, 0.42)
 icon = ExtResource("17_ef2ad")
 metadata/normal = Vector2(0, -1)
 
 [node name="Input 1" type="Button" parent="Ports" unique_id=1958701130 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 0.9999925
-offset_top = 302.00003
-offset_right = 73.00001
-offset_bottom = 342.00003
+offset_left = 96.0
+offset_top = 289.0
+offset_right = 168.00002
+offset_bottom = 329.0
+rotation = 1.5707964
 scale = Vector2(0.42, 0.42)
 icon = ExtResource("17_ef2ad")
 metadata/normal = Vector2(0, 1)
 
 [node name="Input 2" type="Button" parent="Ports" unique_id=1025542919 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 70.000015
-offset_top = 302.00003
-offset_right = 142.00003
-offset_bottom = 342.00003
+offset_left = 123.00003
+offset_top = 289.0
+offset_right = 195.00005
+offset_bottom = 329.0
+rotation = 1.5707964
 scale = Vector2(0.42, 0.42)
 icon = ExtResource("17_ef2ad")
 metadata/normal = Vector2(0, 1)
 
 [node name="Input 3" type="Button" parent="Ports" unique_id=1275495196 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 152.00002
-offset_top = 302.00003
-offset_right = 224.00002
-offset_bottom = 342.00003
+offset_left = 149.99997
+offset_top = 289.0
+offset_right = 221.99997
+offset_bottom = 329.0
+rotation = 1.5707964
 scale = Vector2(0.42, 0.42)
 icon = ExtResource("17_ef2ad")
 metadata/normal = Vector2(0, 1)
 
 [node name="Input 4" type="Button" parent="Ports" unique_id=1866691078 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 225.00002
-offset_top = 302.00003
-offset_right = 297.0
-offset_bottom = 342.00003
+offset_left = 176.99997
+offset_top = 289.0
+offset_right = 248.99997
+offset_bottom = 329.0
+rotation = 1.5707964
 scale = Vector2(0.42, 0.42)
 icon = ExtResource("17_ef2ad")
 metadata/normal = Vector2(0, 1)
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
-offset_left = 30.0
-offset_top = 150.0
-offset_right = 123.999985
-offset_bottom = 170.0
+offset_left = -98.0
+offset_top = -10.0
+offset_right = -4.0000153
+offset_bottom = 10.0
 theme_override_font_sizes/font_size = 16
 
 [node name="outputBox" type="ColorRect" parent="." unique_id=1419396623]
-offset_left = 113.00001
-offset_top = 19.0
-offset_right = 143.0
-offset_bottom = 38.0
+offset_left = -15.0
+offset_top = -128.0
+offset_right = 14.999992
+offset_bottom = -109.0
 color = Color(0, 0.64705884, 0.25490198, 0.57254905)
 
 [node name="outputText" type="Label" parent="outputBox" unique_id=1040759306]
@@ -139,10 +145,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Input1Box" type="ColorRect" parent="." unique_id=1573327625]
-offset_left = 1.0000076
-offset_top = 282.0
-offset_right = 31.000008
-offset_bottom = 301.0
+offset_left = -61.999992
+offset_top = 109.0
+offset_right = -31.999992
+offset_bottom = 128.0
 color = Color(0, 0.64705884, 0.25490198, 0.57254905)
 
 [node name="input1Text" type="Label" parent="Input1Box" unique_id=1651637159]
@@ -157,10 +163,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Input2Box" type="ColorRect" parent="." unique_id=232719543]
-offset_left = 70.00001
-offset_top = 282.0
-offset_right = 100.00001
-offset_bottom = 301.0
+offset_left = -30.999992
+offset_top = 109.0
+offset_right = -0.9999924
+offset_bottom = 128.0
 color = Color(0, 0.64705884, 0.25490198, 0.57254905)
 
 [node name="input2Text" type="Label" parent="Input2Box" unique_id=332826267]
@@ -175,10 +181,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Input3Box" type="ColorRect" parent="." unique_id=1711166632]
-offset_left = 152.0
-offset_top = 282.0
-offset_right = 182.0
-offset_bottom = 301.0
+offset_left = 1.0
+offset_top = 109.0
+offset_right = 31.0
+offset_bottom = 128.0
 color = Color(0, 0.64705884, 0.25490198, 0.57254905)
 
 [node name="input3Text" type="Label" parent="Input3Box" unique_id=844869573]
@@ -193,10 +199,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Input4Box" type="ColorRect" parent="." unique_id=1695541487]
-offset_left = 225.0
-offset_top = 282.0
-offset_right = 255.0
-offset_bottom = 301.0
+offset_left = 32.0
+offset_top = 109.0
+offset_right = 62.0
+offset_bottom = 128.0
 color = Color(0, 0.64705884, 0.25490198, 0.57254905)
 
 [node name="input4Text" type="Label" parent="Input4Box" unique_id=652255700]

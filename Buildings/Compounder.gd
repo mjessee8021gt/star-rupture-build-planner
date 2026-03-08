@@ -42,6 +42,8 @@ func _ready() -> void:
 	input_3_port.pressed.connect(func(): _start_port_drag("Input 3"))
 	add_to_group("buildings")
 	populate_recipe_dropdown()
+	$Recipe.text = ""
+	$Recipe.select(-1)
 
 func flip_footprint() -> void:
 	if $PrimarySprite.visible == true:
@@ -49,12 +51,10 @@ func flip_footprint() -> void:
 		$AlternateSprite.visible = true
 		$CollisionShape2D.disabled = true
 		$CollisionShapeAlt.disabled = false
-		$TitleLabel.position = Vector2(-90, -106)
 		$"Ports/Output 1".position = Vector2(200, -31)
 		$"Ports/Input 1".position = Vector2(170, 385)
 		$"Ports/Input 2".position = Vector2(201, 385)
 		$"Ports/Input 3".position = Vector2(232, 385)
-		$Recipe.position = Vector2(-80, -32)
 		$outputBox.position = Vector2(-15, -192)
 		$Input1Box.position = Vector2(-46, 173)
 		$Input2Box.position = Vector2(-15, 173)
@@ -66,12 +66,10 @@ func flip_footprint() -> void:
 		$CollisionShape2D.disabled = false
 		$AlternateSprite.visible = false
 		$CollisionShapeAlt.disabled = true
-		$TitleLabel.position = Vector2(-90, -106)
 		$"Ports/Output 1".position = Vector2(200, 1)
 		$"Ports/Input 1".position = Vector2(170, 352)
 		$"Ports/Input 2".position = Vector2(201, 352)
 		$"Ports/Input 3".position = Vector2(232, 352)
-		$Recipe.position = Vector2(-80, -32)
 		$outputBox.position = Vector2(-15, -160)
 		$Input1Box.position = Vector2(-46, 140)
 		$Input2Box.position = Vector2(-15, 140)
@@ -130,13 +128,13 @@ func cancel_port_drag() -> void:
 	
 func _get_port_global_pos(port_name: String) -> Vector2:
 	match port_name:
-		"output":
+		"Output 1":
 			return output_port.global_position + output_port.size * 0.5
-		"input1":
+		"Input 1":
 			return input_port.global_position + input_port.size * 0.5
-		"input2":
+		"Input 2":
 			return input_2_port.global_position + input_2_port.size * 0.5
-		"input3":
+		"Input 3":
 			return input_3_port.global_position + input_3_port.size * 0.5
 		_:
 			return global_position

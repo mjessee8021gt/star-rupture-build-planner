@@ -42,6 +42,8 @@ func _ready() -> void:
 	input_3_port.pressed.connect(func(): _start_port_drag("Input 3"))
 	add_to_group("buildings")
 	populate_recipe_dropdown()
+	$Recipe.text = ""
+	$Recipe.select(-1)
 
 func flip_footprint() -> void:
 	if $PrimarySprite.visible == true:
@@ -49,16 +51,6 @@ func flip_footprint() -> void:
 		$AlternateSprite.visible = true
 		$CollisionShape2D.disabled = true
 		$CollisionShapeAlt.disabled = false
-		$TitleLabel.position = Vector2(71, 68)
-		$"Ports/Output 1".position = Vector2(113,1)
-		$"Ports/Input 1".position = Vector2(1, 238)
-		$"Ports/Input 2".position = Vector2(113, 238)
-		$"Ports/Input 3".position = Vector2(225, 238)
-		$Recipe.position = Vector2(59, 118)
-		$outputBox.position = Vector2(113, 19)
-		$Input1Box.position = Vector2(1, 219)
-		$Input2Box.position = Vector2(113, 219)
-		$Input3Box.position = Vector2(223, 219)
 		footprint = footprint_alt
 		is_alternate = true
 	else:
@@ -66,16 +58,6 @@ func flip_footprint() -> void:
 		$CollisionShape2D.disabled = false
 		$AlternateSprite.visible = false
 		$CollisionShapeAlt.disabled = true
-		$TitleLabel.position = Vector2(39, 68)
-		$"Ports/Output 1".position = Vector2(81, 1)
-		$"Ports/Input 1".position = Vector2(1,238)
-		$"Ports/Input 2".position = Vector2(81, 238)
-		$"Ports/Input 3".position = Vector2(161, 238)
-		$Recipe.position = Vector2(27, 118)
-		$outputBox.position = Vector2(81, 19)
-		$Input1Box.position = Vector2(1, 219)
-		$Input2Box.position = Vector2(81, 219)
-		$Input3Box.position = Vector2(161, 219)
 		footprint = footprint_primary
 		is_alternate = false
 		
