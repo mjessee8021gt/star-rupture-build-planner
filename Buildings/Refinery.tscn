@@ -16,8 +16,6 @@ size = Vector2(448, 448)
 
 [node name="Refinery" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_k1xno")
-footprint_primary = Vector2i(3, 4)
-footprint_alt = Vector2i(4, 4)
 available_recipes = Array[ExtResource("2_13a1u")]([ExtResource("3_k1xno"), ExtResource("4_uo3ni")])
 id = &"refinery"
 metadata/_edit_vertical_guides_ = [63.0, 96.0, 112.0, 192.0, 224.0]
@@ -38,7 +36,6 @@ shape = SubResource("RectangleShape2D_gbqis")
 
 [node name="CollisionShapeAlt" type="CollisionShape2D" parent="." unique_id=1184700770]
 visible = false
-position = Vector2(32, 32)
 shape = SubResource("RectangleShape2D_uf4xf")
 disabled = true
 

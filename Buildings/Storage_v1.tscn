@@ -13,35 +13,34 @@ size = Vector2(192, 192)
 
 [node name="Storage V1" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_upofk")
-heat = 40
 id = &"dispatcher"
 metadata/_edit_vertical_guides_ = [63.0, 96.0, 112.0, 80.0, 128.0]
 metadata/_edit_horizontal_guides_ = [64.0, 96.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
+position = Vector2(-64, -64)
 texture = ExtResource("2_wuo4g")
 centered = false
 
 [node name="AlternateSprite" type="Sprite2D" parent="." unique_id=1619536158]
 visible = false
+position = Vector2(-96, -96)
 texture = ExtResource("3_5mek6")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128283645]
-position = Vector2(64, 64)
 shape = SubResource("RectangleShape2D_gbqis")
 
 [node name="CollisionShapeAlt" type="CollisionShape2D" parent="." unique_id=1184700770]
 visible = false
-position = Vector2(96, 96)
 shape = SubResource("RectangleShape2D_uf4xf")
 disabled = true
 
 [node name="TitleLabel" type="Label" parent="." unique_id=904579435]
-offset_left = 18.0
-offset_top = 22.0
-offset_right = 108.0
-offset_bottom = 81.0
+offset_left = -46.0
+offset_top = -42.0
+offset_right = 44.0
+offset_bottom = 17.0
 theme_override_font_sizes/font_size = 20
 text = "STORAGE
 V1"
@@ -54,6 +53,10 @@ horizontal_alignment = 1
 [node name="Ports" type="Control" parent="." unique_id=604002389]
 layout_mode = 3
 anchors_preset = 0
+offset_left = -64.0
+offset_top = -64.0
+offset_right = -64.0
+offset_bottom = -64.0
 
 [node name="Universal 1" type="Button" parent="Ports" unique_id=1958701130 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)

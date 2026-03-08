@@ -18,39 +18,39 @@ id = &"sulfur_extractor"
 metadata/_edit_vertical_guides_ = [63.0, 96.0, 112.0, 80.0, 128.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
+position = Vector2(-128, -128)
 texture = ExtResource("3_2git2")
 centered = false
 
 [node name="AlternateSprite" type="Sprite2D" parent="." unique_id=1619536158]
 visible = false
+position = Vector2(-128, -128)
 texture = ExtResource("3_2git2")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128283645]
-position = Vector2(128, 128)
 shape = SubResource("RectangleShape2D_gbqis")
 
 [node name="CollisionShapeAlt" type="CollisionShape2D" parent="." unique_id=1184700770]
 visible = false
-position = Vector2(128, 128)
 shape = SubResource("RectangleShape2D_uf4xf")
 disabled = true
 
 [node name="TitleLabel" type="Label" parent="." unique_id=904579435]
-offset_left = 57.0
-offset_top = 72.0
-offset_right = 199.0
-offset_bottom = 145.0
+offset_left = -71.0
+offset_top = -56.0
+offset_right = 71.0
+offset_bottom = 17.0
 theme_override_font_sizes/font_size = 25
 text = "SULFUR
 EXTRACTOR"
 horizontal_alignment = 1
 
 [node name="outputBox" type="ColorRect" parent="." unique_id=1954160661]
-offset_left = 111.0
-offset_top = 22.0
-offset_right = 146.0
-offset_bottom = 41.0
+offset_left = -17.0
+offset_top = -106.0
+offset_right = 18.0
+offset_bottom = -87.0
 color = Color(0, 0.64705884, 0.25490198, 0.57254905)
 
 [node name="outputText" type="Label" parent="outputBox" unique_id=1028321769]
@@ -71,6 +71,10 @@ vertical_alignment = 1
 [node name="Ports" type="Control" parent="." unique_id=604002389]
 layout_mode = 3
 anchors_preset = 0
+offset_left = -128.0
+offset_top = -128.0
+offset_right = -128.0
+offset_bottom = -128.0
 
 [node name="Output 1" type="Button" parent="Ports" unique_id=1958701130 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
@@ -81,7 +85,7 @@ offset_right = 182.0
 offset_bottom = 41.0
 scale = Vector2(0.5, 0.5)
 icon = ExtResource("4_ou2i2")
-metadata/normal = Vector2(0, 1)
+metadata/normal = Vector2(0, -1)
 
 [connection signal="mouse_entered" from="Ports/Output 1" to="." method="_on_output_1_mouse_entered"]
 [connection signal="mouse_exited" from="Ports/Output 1" to="." method="_on_output_1_mouse_exited"]

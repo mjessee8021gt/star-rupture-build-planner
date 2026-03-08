@@ -39,7 +39,7 @@ func flip_footprint() -> void:
 		$AlternateSprite.visible = true
 		$CollisionShape2D.disabled = true
 		$CollisionShapeAlt.disabled = false
-		$TitleLabel.position = Vector2(83, 99)
+		$Ports.position = Vector2(-128, -128)
 		$"Ports/Universal 1".position = Vector2(110, 1)
 		$"Ports/Universal 2".position = Vector2(254, 110)
 		$"Ports/Universal 3".position = Vector2(111, 235)
@@ -51,7 +51,7 @@ func flip_footprint() -> void:
 		$CollisionShape2D.disabled = false
 		$AlternateSprite.visible = false
 		$CollisionShapeAlt.disabled = true
-		$TitleLabel.position = Vector2(51, 67)
+		$Ports.position = Vector2(-96, -96)
 		$"Ports/Universal 1".position = Vector2(78, 1)
 		$"Ports/Universal 2".position = Vector2(191, 78)
 		$"Ports/Universal 3".position = Vector2(78, 171)
