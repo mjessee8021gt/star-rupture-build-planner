@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="PatchNote" format=3 uid="uid://b276rduyh62od"]
+
+[ext_resource type="Script" uid="uid://b6tmiam3vo7cr" path="res://Resources/PatchNote.gd" id="1_tplq0"]
+
+[resource]
+script = ExtResource("1_tplq0")
+patch_version = &"v0.1.3"
+patch_notes = "Bug Fixes:
+-Fixed the rotation on buildings so they rotate from the center of the building as opposed to the top left corner.
+-Fixed some collision syntax errors on the Multirail 3 and 5 that prevented some ports from being used or connected to other buildings.
+-Fixed the drop downs on all buildings so they appear blank at the time of placement. This was preventing users from being able to select the default value as a production option on first try.
+-Refined building logic to reduce code. This should result in small but tangible performance gains through efficiency.
+-Performed full QA on ALL buildings within the system to verify that all building functions perform as desired.
+-All building rail nodes are now adjusted to be vertically aligned where appropriate to save on space and make rail connections easier.
+-Fixed an issue where gross and net resource production were identical and resources would vanish from the production panel even if buildings should still be producing.Gross and net are now distinct and tracked separately as they should be.
+
+"
+known_issues = "-Rail pathing is still just not where i want it to be. The next patch will include a completely rebuilt path manager to try and address this.
+
+"

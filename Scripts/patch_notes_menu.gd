@@ -61,35 +61,27 @@ func _clear_list() -> void:
 
 func _load_patchnote_resources(dir_path: String) -> Array[PatchNote]:
 	var out: Array[PatchNote] = []
-	if not DirAccess.dir_exists_absolute(dir_path):
-		var directory_access := DirAccess.open(dir_path)
-		if directory_access == null:
-			push_warning("PatchNotesPanel: Cound not open directory: " + dir_path)
-			return out
-	else:
-		pass
-	
-	var directory := DirAccess.open(dir_path)
+	var normalized_dir := dir_path.trim_suffix("/")
+	var directory := DirAccess.open(normalized_dir)
 	if directory == null:
-		push_warning("PatchNotesPanel: Could not open directory: " + dir_path)
+		push_warning("PatchNotesPanel: Could not open directory: " + normalized_dir)
 		return out
 		
-	directory.list_dir_begin()
-	while true:
-		var frame := directory.get_next()
-		if frame.is_empty():
-			break
-		if directory.current_is_dir():
+	var files := directory.get_files()
+	if files.is_empty():
+		push_warning("PatchNotesPanel: No files found in directory: " + normalized_dir + ". If this happens in HTML5 exports, ensure patch note resources are included in export filters.")
+		return out
+	files.sort()
+	for file_name in files:
+		if not (file_name.ends_with(".tres") or file_name.ends_with(".res")):
 			continue
 			
-		if not (frame.ends_with(".tres") or frame.ends_with(".res")):
-			continue
-			
-		var path := dir_path.path_join(frame)
+		var path := normalized_dir.path_join(file_name)
 		var res := ResourceLoader.load(path)
 		if res is PatchNote:
 			out.append(res)
-	directory.list_dir_end()
+		else:
+			push_warning("PatchNotesPanel: Resource at " + path + " is not a PatchNote Resource.")
 	
 	return out
 	

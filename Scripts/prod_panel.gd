@@ -14,24 +14,36 @@ func _ready() -> void:
 
 	var ledger := get_node("/root/ProdLedger")
 	ledger.totals_changed.connect(_on_totals_changed)
-	_on_totals_changed(ledger.net_totals)
+	_on_totals_changed(ledger.net_totals, ledger.gross_totals, ledger.gross_negative_totals)
 
-func _on_totals_changed(net_totals: Dictionary) -> void:
-	# Remove rows that are no longer present (or are effectively zero)
+func _on_totals_changed(net_totals: Dictionary, gross_totals: Dictionary, gross_negative_totals: Dictionary) -> void:
+	# Remove rows that have a gross production of zero.
 	var existing_keys := rows.keys()
 	for key in existing_keys:
-		var still_present := net_totals.has(key) and not is_equal_approx(float(net_totals[key]), 0.0)
-		if not still_present:
+		var gross_positive_rate := float(gross_totals.get(key, 0.0))
+		var gross_negative_rate := float(gross_negative_totals.get(key, 0.0))
+		if is_equal_approx(gross_positive_rate, 0.0) and is_equal_approx(gross_negative_rate, 0.0):
 			var row_to_remove = rows[key]
 			if is_instance_valid(row_to_remove):
 				row_to_remove.queue_free()
 			rows.erase(key)
 
 	# Add/update rows for present totals
-	for key in net_totals.keys():
-		var rate := float(net_totals[key])
-		if is_equal_approx(rate, 0.0):
+	var display_keys: Dictionary = {}
+	for key in gross_totals.keys():
+		display_keys[key] = true
+	for key in gross_negative_totals.keys():
+		display_keys[key] = true
+		
+	for key in display_keys.keys():
+		var gross_positive := float(gross_totals.get(key, 0.0))
+		var gross_negative := float(gross_negative_totals.get(key, 0.0))
+		var gross_rate := gross_positive - gross_negative
+		
+		if is_equal_approx(gross_rate, 0.0):
 			continue
+
+		var net_rate := float(net_totals.get(key, 0.0))
 
 		var row
 		if not rows.has(key) or not is_instance_valid(rows[key]):
@@ -44,13 +56,13 @@ func _on_totals_changed(net_totals: Dictionary) -> void:
 
 		# Try a couple common APIs so ResourceRow can evolve without breaking this panel.
 		if row.has_method("set_rate"):
-			row.set_rate(rate)
+			row.set_rate(net_rate)
 		elif row.has_method("set_label_values"):
 			# Convention: (resource_name, produced, consumed) OR (resource_name, in, out)
-			# We pass the signed rate in both slots so your ResourceRow can decide how to display it.
-			row.set_label_values(str(key), rate, rate)
+			# Pass gross and net separately so both labels can reflect true values.
+			row.set_label_values(str(key), gross_rate, net_rate)
 		elif row.has_method("set_value"):
-			row.set_value(rate)
+			row.set_value(net_rate)
 
 	_sort_rows()
 
