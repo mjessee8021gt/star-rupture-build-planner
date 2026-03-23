@@ -139,7 +139,7 @@ list_path = NodePath("../PopupPanel/MarginContainer/ScrollContainer/VBoxContaine
 [node name="PopupPanel" type="PopupPanel" parent="Camera2D/CanvasLayer" unique_id=1072106267]
 oversampling_override = 1.0
 title = "Controls"
-position = Vector2i(51, 463)
+position = Vector2i(51, 234)
 size = Vector2i(300, 250)
 visible = true
 

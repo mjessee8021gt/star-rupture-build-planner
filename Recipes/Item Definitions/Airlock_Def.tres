@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemDefinition" format=3 uid="uid://ca23jm2ae275w"]
+
+[ext_resource type="Script" uid="uid://lj867ah2nl68" path="res://Resources/ItemDefinition.gd" id="1_toc73"]
+
+[resource]
+script = ExtResource("1_toc73")
+id = &"airlock"
+display_name = "Airlock"
+metadata/_custom_type_script = "uid://lj867ah2nl68"

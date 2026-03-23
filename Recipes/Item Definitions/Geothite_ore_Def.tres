@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemDefinition" format=3 uid="uid://dm5ksorcp73y3"]
+
+[ext_resource type="Script" uid="uid://lj867ah2nl68" path="res://Resources/ItemDefinition.gd" id="1_t7fob"]
+
+[resource]
+script = ExtResource("1_t7fob")
+id = &"geothite_ore"
+display_name = "Geothite Ore"
+metadata/_custom_type_script = "uid://lj867ah2nl68"

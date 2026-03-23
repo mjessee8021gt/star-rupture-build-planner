@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemDefinition" format=3 uid="uid://debdml6fnf3f8"]
+
+[ext_resource type="Script" uid="uid://lj867ah2nl68" path="res://Resources/ItemDefinition.gd" id="1_6balg"]
+
+[resource]
+script = ExtResource("1_6balg")
+id = &"quantum_tranquilizer"
+display_name = "Quantum Tranquilizer"
+metadata/_custom_type_script = "uid://lj867ah2nl68"

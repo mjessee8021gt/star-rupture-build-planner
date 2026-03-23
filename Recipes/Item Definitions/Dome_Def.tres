@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemDefinition" format=3 uid="uid://bcn6jb0uredrl"]
+
+[ext_resource type="Script" uid="uid://lj867ah2nl68" path="res://Resources/ItemDefinition.gd" id="1_wfi64"]
+
+[resource]
+script = ExtResource("1_wfi64")
+id = &"dome"
+display_name = "Dome"
+metadata/_custom_type_script = "uid://lj867ah2nl68"
