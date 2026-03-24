@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://cidkpdxk8707u"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_khy50"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_5mepv"]
+[ext_resource type="Resource" uid="uid://c2in04m2kw4k1" path="res://Recipes/Item Stacks/Electronics_12_def.tres" id="2_iadib"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_4sgqk"]
+[ext_resource type="Resource" uid="uid://bx66plang6fy5" path="res://Recipes/Item Stacks/Epoxy_8_def.tres" id="3_loef6"]
+[ext_resource type="Resource" uid="uid://cjl6jo1yq5hg5" path="res://Recipes/Item Stacks/Pressure_Tank_4_def.tres" id="4_foem7"]
+[ext_resource type="Resource" uid="uid://c05swr4ygp1yo" path="res://Recipes/Item Stacks/Scafolding_4_def.tres" id="5_b62m6"]
+[ext_resource type="Resource" uid="uid://cksewjxexhd6o" path="res://Recipes/Item Stacks/Airlock_4_def.tres" id="6_4vfol"]
+
+[resource]
+script = ExtResource("2_5mepv")
+id = &"Airlock"
+display_name = "Airlock"
+inputs = Array[ExtResource("1_khy50")]([ExtResource("2_iadib"), ExtResource("3_loef6"), ExtResource("4_foem7"), ExtResource("5_b62m6")])
+outputs = Array[ExtResource("1_khy50")]([ExtResource("6_4vfol")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

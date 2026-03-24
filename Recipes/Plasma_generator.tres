@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://2kre3qp2ndlo"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_14n5y"]
+[ext_resource type="Resource" uid="uid://jxvcy4un0b7n" path="res://Recipes/Item Stacks/Generator_8_def.tres" id="2_2xw4q"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_b3y2e"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_0by41"]
+[ext_resource type="Resource" uid="uid://d1s57h7c0ac4j" path="res://Recipes/Item Stacks/Ion Injector_4_def.tres" id="3_movsi"]
+[ext_resource type="Resource" uid="uid://s2yrrn7a1p1r" path="res://Recipes/Item Stacks/Laser_Emitter_4_def.tres" id="4_5gm07"]
+[ext_resource type="Resource" uid="uid://lrel23qu0rh8" path="res://Recipes/Item Stacks/Reinforced_Housing_8_def.tres" id="5_e4hod"]
+[ext_resource type="Resource" uid="uid://dyu2wv0or3avl" path="res://Recipes/Item Stacks/Plasma_generator_4_def.tres" id="6_xe2xc"]
+
+[resource]
+script = ExtResource("2_b3y2e")
+id = &"Plasma Generator"
+display_name = "Plasma Generator"
+inputs = Array[ExtResource("1_14n5y")]([ExtResource("2_2xw4q"), ExtResource("3_movsi"), ExtResource("4_5gm07"), ExtResource("5_e4hod")])
+outputs = Array[ExtResource("1_14n5y")]([ExtResource("6_xe2xc")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

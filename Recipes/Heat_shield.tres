@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://50c1febnkx6c"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_dmwa8"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_bogyj"]
+[ext_resource type="Resource" uid="uid://dtojr4uw8x6xf" path="res://Recipes/Item Stacks/Aerogel_10_def.tres" id="2_e4kp4"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_pcdsw"]
+[ext_resource type="Resource" uid="uid://bmh8m6l4e2nmo" path="res://Recipes/Item Stacks/Ceramics_15_def.tres" id="3_tsc3m"]
+[ext_resource type="Resource" uid="uid://dbqn71pebbhdn" path="res://Recipes/Item Stacks/Epoxy_15_def.tres" id="4_7gdl0"]
+[ext_resource type="Resource" uid="uid://dc5ms1nb647fc" path="res://Recipes/Item Stacks/Titanoferrite_Ingot_10_Def.tres" id="5_q57vw"]
+[ext_resource type="Resource" uid="uid://b3gjidfq08rck" path="res://Recipes/Item Stacks/Heat_Shield_10_def.tres" id="6_3vf2m"]
+
+[resource]
+script = ExtResource("2_bogyj")
+id = &"Heat Shield"
+display_name = "Heat Shield"
+inputs = Array[ExtResource("1_dmwa8")]([ExtResource("2_e4kp4"), ExtResource("3_tsc3m"), ExtResource("4_7gdl0"), ExtResource("5_q57vw")])
+outputs = Array[ExtResource("1_dmwa8")]([ExtResource("6_3vf2m")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

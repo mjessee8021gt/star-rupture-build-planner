@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://hloy06wmvn1t"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_2aet0"]
+[ext_resource type="Resource" uid="uid://df53asruimag6" path="res://Recipes/Item Stacks/Basic_Fuel_12_def.tres" id="2_188b0"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_ut1ot"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_4l3ig"]
+[ext_resource type="Resource" uid="uid://oxeeeq8gw8rg" path="res://Recipes/Item Stacks/Liquid_helium_12_def.tres" id="3_abrvp"]
+[ext_resource type="Resource" uid="uid://begp6q1q01s5i" path="res://Recipes/Item Stacks/Plastic_8_def.tres" id="4_7201p"]
+[ext_resource type="Resource" uid="uid://djrgru32oc8s" path="res://Recipes/Item Stacks/Sulpheric_acid_12_def.tres" id="5_uxhet"]
+[ext_resource type="Resource" uid="uid://bk1bwcetl85o8" path="res://Recipes/Item Stacks/Rocket_Fuel_8_def.tres" id="6_435hd"]
+
+[resource]
+script = ExtResource("2_ut1ot")
+id = &"Rocket Fuel"
+display_name = "Rocket Fuel"
+inputs = Array[ExtResource("1_2aet0")]([ExtResource("2_188b0"), ExtResource("3_abrvp"), ExtResource("4_7201p"), ExtResource("5_uxhet")])
+outputs = Array[ExtResource("1_2aet0")]([ExtResource("6_435hd")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://d02lha7n5n0hx"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_fi2eo"]
+[ext_resource type="Resource" uid="uid://cor4oynkdk0is" path="res://Recipes/Item Stacks/Nano_Fibre_12_def.tres" id="2_70q2a"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_pwhkn"]
+[ext_resource type="Resource" uid="uid://ckfk61feogpnp" path="res://Recipes/Item Stacks/RNA_Stabilizer_12_def.tres" id="3_cooe1"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_xostm"]
+[ext_resource type="Resource" uid="uid://dq8acl4iao78x" path="res://Recipes/Item Stacks/Substance_FHS-135-493_6_def.tres" id="4_cuta5"]
+[ext_resource type="Resource" uid="uid://86r11m2k5ig2" path="res://Recipes/Item Stacks/Synthetic_Protein_6_def.tres" id="5_npn7m"]
+[ext_resource type="Resource" uid="uid://dyfm5oorgh4c1" path="res://Recipes/Item Stacks/Biofilament_12_def.tres" id="6_fxa3i"]
+
+[resource]
+script = ExtResource("2_pwhkn")
+id = &"Biofilament"
+display_name = "Biofilament"
+inputs = Array[ExtResource("1_fi2eo")]([ExtResource("2_70q2a"), ExtResource("3_cooe1"), ExtResource("4_cuta5"), ExtResource("5_npn7m")])
+outputs = Array[ExtResource("1_fi2eo")]([ExtResource("6_fxa3i")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

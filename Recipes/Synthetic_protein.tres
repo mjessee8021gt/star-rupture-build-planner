@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://3cvsl2mfbvwm"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_sf5l8"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_8bulh"]
+[ext_resource type="Resource" uid="uid://qu06ru7418y1" path="res://Recipes/Item Stacks/Nano_Fibre_18_def.tres" id="2_q0v7k"]
+[ext_resource type="Resource" uid="uid://cjm42lkbm6go8" path="res://Recipes/Item Stacks/Organic_Compound_12_def.tres" id="3_7of54"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_j61ck"]
+[ext_resource type="Resource" uid="uid://bxsn5jtmk12k6" path="res://Recipes/Item Stacks/Plastic_6_def.tres" id="4_3akan"]
+[ext_resource type="Resource" uid="uid://dwrwod4rj23je" path="res://Recipes/Item Stacks/Sulpheric_acid_18_def.tres" id="5_v5b25"]
+[ext_resource type="Resource" uid="uid://cbq5yykpagf80" path="res://Recipes/Item Stacks/Synthetic_Protein_12_def.tres" id="6_76iyb"]
+
+[resource]
+script = ExtResource("2_8bulh")
+id = &"Synthetic Protein"
+display_name = "Synthetic Protein"
+inputs = Array[ExtResource("1_sf5l8")]([ExtResource("2_q0v7k"), ExtResource("3_7of54"), ExtResource("4_3akan"), ExtResource("5_v5b25")])
+outputs = Array[ExtResource("1_sf5l8")]([ExtResource("6_76iyb")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

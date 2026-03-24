@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://c0d1j3qyhigsn"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_vyw3u"]
+[ext_resource type="Resource" uid="uid://dtvvwtmbn1f3a" path="res://Recipes/Item Stacks/Biofilament_6_def.tres" id="2_b7mgd"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_vehtt"]
+[ext_resource type="Resource" uid="uid://vmu5vhkrikhk" path="res://Recipes/Item Stacks/Epoxy_6_def.tres" id="3_fr6hv"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_xh5tv"]
+[ext_resource type="Resource" uid="uid://surxuyeaqs5h" path="res://Recipes/Item Stacks/Nozzle_3_def.tres" id="4_xgb7p"]
+[ext_resource type="Resource" uid="uid://cccsegi4i684s" path="res://Recipes/Item Stacks/Scanner_3_def.tres" id="5_ccy7a"]
+[ext_resource type="Resource" uid="uid://g47vffssp4i0" path="res://Recipes/Item Stacks/Bioprinter_3_def.tres" id="6_q3vqo"]
+
+[resource]
+script = ExtResource("2_vehtt")
+id = &"Bioprinter"
+display_name = "Bioprinter"
+inputs = Array[ExtResource("1_vyw3u")]([ExtResource("2_b7mgd"), ExtResource("3_fr6hv"), ExtResource("4_xgb7p"), ExtResource("5_ccy7a")])
+outputs = Array[ExtResource("1_vyw3u")]([ExtResource("6_q3vqo")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

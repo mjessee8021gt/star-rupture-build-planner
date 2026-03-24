@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://hp23tfctrro0"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_ab46t"]
+[ext_resource type="Resource" uid="uid://i7plq4upmwvq" path="res://Recipes/Item Stacks/Aerogel_8_def.tres" id="2_fq2en"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_u71ny"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_dqlrg"]
+[ext_resource type="Resource" uid="uid://cco3dincsfq33" path="res://Recipes/Item Stacks/Electromagnet_8_def.tres" id="3_wod7x"]
+[ext_resource type="Resource" uid="uid://b8gfb2mhjyi4m" path="res://Recipes/Item Stacks/Plastic_4_def.tres" id="4_668d7"]
+[ext_resource type="Resource" uid="uid://cmsqf05blo6yy" path="res://Recipes/Item Stacks/Superconductor_4_def.tres" id="5_bf5qa"]
+[ext_resource type="Resource" uid="uid://bckojquicix1d" path="res://Recipes/Item Stacks/RTSC_4_def.tres" id="6_eafgy"]
+
+[resource]
+script = ExtResource("2_u71ny")
+id = &"RTSC"
+display_name = "RTSC"
+inputs = Array[ExtResource("1_ab46t")]([ExtResource("2_fq2en"), ExtResource("3_wod7x"), ExtResource("4_668d7"), ExtResource("5_bf5qa")])
+outputs = Array[ExtResource("1_ab46t")]([ExtResource("6_eafgy")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

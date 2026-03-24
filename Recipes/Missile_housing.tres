@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://chg1tc13dl6d1"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_5vunt"]
+[ext_resource type="Resource" uid="uid://drpawyqhbhexf" path="res://Recipes/Item Stacks/Nozzle_8_def.tres" id="2_74n8w"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_nj2kr"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_7nmtc"]
+[ext_resource type="Resource" uid="uid://cjl6jo1yq5hg5" path="res://Recipes/Item Stacks/Pressure_Tank_4_def.tres" id="3_616a6"]
+[ext_resource type="Resource" uid="uid://cf55prniaf3k0" path="res://Recipes/Item Stacks/Reinforced_Housing_4_def.tres" id="4_8vwdj"]
+[ext_resource type="Resource" uid="uid://njnlstyh5xlf" path="res://Recipes/Item Stacks/Valve_8_def.tres" id="5_nt7pm"]
+[ext_resource type="Resource" uid="uid://c1sag3jj7hyjw" path="res://Recipes/Item Stacks/Missile_Housing_4_def.tres" id="6_b7cfo"]
+
+[resource]
+script = ExtResource("2_nj2kr")
+id = &"Missile Housing"
+display_name = "Missile Housing"
+inputs = Array[ExtResource("1_5vunt")]([ExtResource("2_74n8w"), ExtResource("3_616a6"), ExtResource("4_8vwdj"), ExtResource("5_nt7pm")])
+outputs = Array[ExtResource("1_5vunt")]([ExtResource("6_b7cfo")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

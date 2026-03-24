@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_fvhii")
 item = ExtResource("1_r0n5f")
-qty = 10
+qty = 12
 id = &"Organic Compound"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://cte7oih6hhwa0"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_hhn4u"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_0lark"]
+[ext_resource type="Resource" uid="uid://bfd2s2rh1rtxm" path="res://Recipes/Item Stacks/Condenser_4_def.tres" id="2_byjd4"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_acrlm"]
+[ext_resource type="Resource" uid="uid://cjh2udot857md" path="res://Recipes/Item Stacks/Electromagnet_4_def.tres" id="3_wrvle"]
+[ext_resource type="Resource" uid="uid://d1s57h7c0ac4j" path="res://Recipes/Item Stacks/Ion Injector_4_def.tres" id="4_wcdbl"]
+[ext_resource type="Resource" uid="uid://lrel23qu0rh8" path="res://Recipes/Item Stacks/Reinforced_Housing_8_def.tres" id="5_l3lb0"]
+[ext_resource type="Resource" uid="uid://duu623hj58uqc" path="res://Recipes/Item Stacks/Cyclotrone_4_def.tres" id="6_uu1pl"]
+
+[resource]
+script = ExtResource("2_0lark")
+id = &"Cyclotrone"
+display_name = "Cyclotrone"
+inputs = Array[ExtResource("1_hhn4u")]([ExtResource("2_byjd4"), ExtResource("3_wrvle"), ExtResource("4_wcdbl"), ExtResource("5_l3lb0")])
+outputs = Array[ExtResource("1_hhn4u")]([ExtResource("6_uu1pl")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

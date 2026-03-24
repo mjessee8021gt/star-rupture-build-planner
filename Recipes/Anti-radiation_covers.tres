@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://bxfobckjcm5se"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_xo2u0"]
+[ext_resource type="Resource" uid="uid://bx66plang6fy5" path="res://Recipes/Item Stacks/Epoxy_8_def.tres" id="2_7jfdf"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_207cl"]
+[ext_resource type="Resource" uid="uid://b8gfb2mhjyi4m" path="res://Recipes/Item Stacks/Plastic_4_def.tres" id="3_3vkks"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_554n1"]
+[ext_resource type="Resource" uid="uid://ru16wshmf5ry" path="res://Recipes/Item Stacks/Reinforced_Frame_4_def.tres" id="4_n12tu"]
+[ext_resource type="Resource" uid="uid://lrel23qu0rh8" path="res://Recipes/Item Stacks/Reinforced_Housing_8_def.tres" id="5_oem5q"]
+[ext_resource type="Resource" uid="uid://betjtoe3vpwd" path="res://Recipes/Item Stacks/Anti-radiation_Covers_8_def.tres" id="6_vl3jy"]
+
+[resource]
+script = ExtResource("2_207cl")
+id = &"Anti-Radiation Covers"
+display_name = "Anti-Radiation Covers"
+inputs = Array[ExtResource("1_xo2u0")]([ExtResource("2_7jfdf"), ExtResource("3_3vkks"), ExtResource("4_n12tu"), ExtResource("5_oem5q")])
+outputs = Array[ExtResource("1_xo2u0")]([ExtResource("6_vl3jy")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"
