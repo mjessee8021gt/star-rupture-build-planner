@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://dxhgl8isc0vxs"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_nwbk2"]
+[ext_resource type="Resource" uid="uid://tun8gjbqqrlm" path="res://Recipes/Item Definitions/Control_system_Def.tres" id="1_offf3"]
+
+[resource]
+script = ExtResource("1_nwbk2")
+item = ExtResource("1_offf3")
+qty = 4
+id = &"Control Systems"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://duu623hj58uqc"]
+
+[ext_resource type="Resource" uid="uid://bnp54fgy3myuy" path="res://Recipes/Item Definitions/Cyclotrone_Def.tres" id="1_pqyjt"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_uc40i"]
+
+[resource]
+script = ExtResource("1_uc40i")
+item = ExtResource("1_pqyjt")
+qty = 4
+id = &"Cyclotrone"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

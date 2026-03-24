@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://by1w1nwqi6ukt"]
+
+[ext_resource type="Resource" uid="uid://dha80nm8rvh2f" path="res://Recipes/Item Definitions/Glass_Def.tres" id="1_fpda6"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_i6kdu"]
+
+[resource]
+script = ExtResource("2_i6kdu")
+item = ExtResource("1_fpda6")
+qty = 18
+id = &"Glass"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://i7plq4upmwvq"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_k2bwk"]
+[ext_resource type="Resource" uid="uid://d0fwducu676xx" path="res://Recipes/Item Definitions/Aerogel_Def.tres" id="1_ydv67"]
+
+[resource]
+script = ExtResource("1_k2bwk")
+item = ExtResource("1_ydv67")
+qty = 8
+id = &"Aerogel"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

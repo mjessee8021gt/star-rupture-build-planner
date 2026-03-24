@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://3ad4n2f84f74"]
+
+[ext_resource type="Resource" uid="uid://bcn6jb0uredrl" path="res://Recipes/Item Definitions/Dome_Def.tres" id="1_3828g"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_tfwwb"]
+
+[resource]
+script = ExtResource("1_tfwwb")
+item = ExtResource("1_3828g")
+qty = 6
+id = &"Dome"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

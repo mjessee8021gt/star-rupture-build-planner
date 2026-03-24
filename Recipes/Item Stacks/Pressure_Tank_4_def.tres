@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://cjl6jo1yq5hg5"]
+
+[ext_resource type="Resource" uid="uid://dn1me0jlrs7rm" path="res://Recipes/Item Definitions/Pressure_tank_Def.tres" id="1_vlbog"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_cv1nc"]
+
+[resource]
+script = ExtResource("2_cv1nc")
+item = ExtResource("1_vlbog")
+qty = 4
+id = &"Presure Tank"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

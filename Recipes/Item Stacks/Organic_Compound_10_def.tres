@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://br3d0ymfem6nw"]
+
+[ext_resource type="Resource" uid="uid://c8ldsnlwpy1my" path="res://Recipes/Item Definitions/Organic_compound_Def.tres" id="1_nab7p"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_n26fq"]
+
+[resource]
+script = ExtResource("2_n26fq")
+item = ExtResource("1_nab7p")
+qty = 10
+id = &"Organic Compound"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

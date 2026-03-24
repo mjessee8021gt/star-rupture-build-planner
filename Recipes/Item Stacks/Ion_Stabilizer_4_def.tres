@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://c7nfpmoailrlp"]
+
+[ext_resource type="Resource" uid="uid://beu22btkh7e1k" path="res://Recipes/Item Definitions/Ion_stabilizer_Def.tres" id="1_gksnl"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_ngpk1"]
+
+[resource]
+script = ExtResource("1_ngpk1")
+item = ExtResource("1_gksnl")
+qty = 4
+id = &"Ion Stabilizer"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://dejgotpg6f7on"]
+
+[ext_resource type="Resource" uid="uid://1yerjf64ekjt" path="res://Recipes/Item Definitions/RTSC_generator_Def.tres" id="1_ifkbk"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_qv1bm"]
+
+[resource]
+script = ExtResource("1_qv1bm")
+item = ExtResource("1_ifkbk")
+qty = 3
+id = &"RTSC Generator"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

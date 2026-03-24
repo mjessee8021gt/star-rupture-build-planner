@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://debdnncg2ubbc"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_8xy36"]
+[ext_resource type="Resource" uid="uid://em4j0lhwtvb4" path="res://Recipes/Item Definitions/Crude_oil_def.tres" id="1_n3bhg"]
+
+[resource]
+script = ExtResource("1_8xy36")
+item = ExtResource("1_n3bhg")
+qty = 180
+id = &"Crude Oil"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

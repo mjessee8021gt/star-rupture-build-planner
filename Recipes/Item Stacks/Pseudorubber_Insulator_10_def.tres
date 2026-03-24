@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://df6nlrogubcgm"]
+
+[ext_resource type="Resource" uid="uid://bn8xk38p7fxqd" path="res://Recipes/Item Definitions/Pseudorubber_insulator_Def.tres" id="1_eunt5"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_kengq"]
+
+[resource]
+script = ExtResource("1_kengq")
+item = ExtResource("1_eunt5")
+qty = 10
+id = &"Pseudorubber Insulator"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

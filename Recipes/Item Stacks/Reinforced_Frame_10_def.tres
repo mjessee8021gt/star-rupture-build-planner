@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://5b367qisoi1c"]
+
+[ext_resource type="Resource" uid="uid://tcw1juh50qhw" path="res://Recipes/Item Definitions/Reinforced_frame_Def.tres" id="1_dhm6r"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_41txt"]
+
+[resource]
+script = ExtResource("2_41txt")
+item = ExtResource("1_dhm6r")
+qty = 10
+id = &"Reinforced Frame"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

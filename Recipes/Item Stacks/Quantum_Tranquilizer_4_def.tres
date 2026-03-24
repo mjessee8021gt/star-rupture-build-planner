@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://dusgw1nb2kx01"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_5h0cb"]
+[ext_resource type="Resource" uid="uid://debdml6fnf3f8" path="res://Recipes/Item Definitions/Quantum_tranquilizer_Def.tres" id="1_8ik8q"]
+
+[resource]
+script = ExtResource("1_5h0cb")
+item = ExtResource("1_8ik8q")
+qty = 4
+id = &"Quantum Tranquilizer"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

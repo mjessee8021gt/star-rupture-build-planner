@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://bsw0g7jw8gg8p"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_5r2dy"]
+[ext_resource type="Resource" uid="uid://q1wgl5bol0ae" path="res://Recipes/Item Definitions/Synthetic_dna_Def.tres" id="1_wytwu"]
+
+[resource]
+script = ExtResource("1_5r2dy")
+item = ExtResource("1_wytwu")
+qty = 4
+id = &"Synthetic DNA"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

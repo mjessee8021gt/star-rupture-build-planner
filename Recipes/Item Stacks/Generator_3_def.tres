@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://bsk2dh0tjdfcf"]
+
+[ext_resource type="Resource" uid="uid://cpaxo27vdhl1j" path="res://Recipes/Item Definitions/Generator_Def.tres" id="1_u4j0o"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_7xqes"]
+
+[resource]
+script = ExtResource("2_7xqes")
+item = ExtResource("1_u4j0o")
+qty = 3
+id = &"Generator"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

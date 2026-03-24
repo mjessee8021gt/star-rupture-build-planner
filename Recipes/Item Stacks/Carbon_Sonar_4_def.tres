@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://bb4axek70wlp7"]
+
+[ext_resource type="Resource" uid="uid://qtym78qc5c30" path="res://Recipes/Item Definitions/Carbon_sonar_Def.tres" id="1_3xhex"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_7fdkq"]
+
+[resource]
+script = ExtResource("1_7fdkq")
+item = ExtResource("1_3xhex")
+qty = 4
+id = &"Carbon Sonar"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

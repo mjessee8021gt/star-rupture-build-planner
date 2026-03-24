@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://dyu2wv0or3avl"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_8e4kt"]
+[ext_resource type="Resource" uid="uid://qpfn57toaxhb" path="res://Recipes/Item Definitions/Plasma_generator_Def.tres" id="1_8hvxc"]
+
+[resource]
+script = ExtResource("1_8e4kt")
+item = ExtResource("1_8hvxc")
+qty = 4
+id = &"Plasma Generator"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

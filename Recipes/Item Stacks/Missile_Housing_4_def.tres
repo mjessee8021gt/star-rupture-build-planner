@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://c1sag3jj7hyjw"]
+
+[ext_resource type="Resource" uid="uid://bhpx8fsrq8gcc" path="res://Recipes/Item Definitions/Missile_housing_Def.tres" id="1_0vqp5"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_2ht83"]
+
+[resource]
+script = ExtResource("1_2ht83")
+item = ExtResource("1_0vqp5")
+qty = 4
+id = &"Missile Housing"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

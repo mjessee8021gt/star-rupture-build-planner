@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://dtvvwtmbn1f3a"]
+
+[ext_resource type="Resource" uid="uid://cgdcyiavm4tdu" path="res://Recipes/Item Definitions/Biofilament_Def.tres" id="1_qufg4"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_82myd"]
+
+[resource]
+script = ExtResource("2_82myd")
+item = ExtResource("1_qufg4")
+qty = 6
+id = &"Biofilament"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

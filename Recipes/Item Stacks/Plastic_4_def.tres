@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://b8gfb2mhjyi4m"]
+
+[ext_resource type="Resource" uid="uid://bmwm0h8t1q1um" path="res://Recipes/Item Definitions/Plastic_Def.tres" id="1_at6iq"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_j2fkr"]
+
+[resource]
+script = ExtResource("1_j2fkr")
+item = ExtResource("1_at6iq")
+qty = 4
+id = &"Plastic"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

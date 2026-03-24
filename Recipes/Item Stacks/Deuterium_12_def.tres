@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://dft1auhuufl0i"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_74odl"]
+[ext_resource type="Resource" uid="uid://cw6cc1o3br7jh" path="res://Recipes/Item Definitions/Deuterium_Def.tres" id="1_cb5qs"]
+
+[resource]
+script = ExtResource("1_74odl")
+item = ExtResource("1_cb5qs")
+qty = 12
+id = &"Deuterium"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

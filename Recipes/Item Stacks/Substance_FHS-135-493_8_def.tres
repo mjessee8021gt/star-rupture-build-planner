@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://dtb47t1kwyj27"]
+
+[ext_resource type="Resource" uid="uid://iece1hv77l20" path="res://Recipes/Item Definitions/Substance_FHS-135-493_Def.tres" id="1_r72ge"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_8iynt"]
+
+[resource]
+script = ExtResource("2_8iynt")
+item = ExtResource("1_r72ge")
+qty = 8
+id = &"Substance #FHS-135-493"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

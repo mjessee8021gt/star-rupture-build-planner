@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://86r11m2k5ig2"]
+
+[ext_resource type="Resource" uid="uid://bdx4srcn5edf1" path="res://Recipes/Item Definitions/Synthetic_protein_Def.tres" id="1_njxq6"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_5u4ua"]
+
+[resource]
+script = ExtResource("2_5u4ua")
+item = ExtResource("1_njxq6")
+qty = 6
+id = &"Synthetic Protein"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"
