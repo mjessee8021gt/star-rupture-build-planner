@@ -2,8 +2,17 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_0xxqk"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_0un0p"]
+[ext_resource type="Resource" uid="uid://cgmbfceoh65r2" path="res://Recipes/Item Stacks/Heat_resistant_sheet_12_def.tres" id="2_hxliu"]
+[ext_resource type="Resource" uid="uid://begp6q1q01s5i" path="res://Recipes/Item Stacks/Plastic_8_def.tres" id="3_gh7n2"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_t4qrp"]
+[ext_resource type="Resource" uid="uid://ru16wshmf5ry" path="res://Recipes/Item Stacks/Reinforced_Frame_4_def.tres" id="4_v1awy"]
+[ext_resource type="Resource" uid="uid://lrel23qu0rh8" path="res://Recipes/Item Stacks/Reinforced_Housing_8_def.tres" id="5_5tptj"]
+[ext_resource type="Resource" uid="uid://hx01qu3xnwgc" path="res://Recipes/Item Stacks/Satellite_Body_4_def.tres" id="6_7qebn"]
 
 [resource]
 script = ExtResource("2_0un0p")
+id = &"Satellite Body"
+display_name = "Satellite Body"
+inputs = Array[ExtResource("1_0xxqk")]([ExtResource("2_hxliu"), ExtResource("3_gh7n2"), ExtResource("4_v1awy"), ExtResource("5_5tptj")])
+outputs = Array[ExtResource("1_0xxqk")]([ExtResource("6_7qebn")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

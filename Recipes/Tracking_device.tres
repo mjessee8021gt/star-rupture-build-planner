@@ -1,9 +1,18 @@
 [gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://cgoowr4ritprv"]
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_6gx0o"]
+[ext_resource type="Resource" uid="uid://l3luv80hnv58" path="res://Recipes/Item Stacks/Carbon_Sonar_3_def.tres" id="2_ecwxn"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_vgc4y"]
+[ext_resource type="Resource" uid="uid://cc6p88i0bhgah" path="res://Recipes/Item Stacks/Laser_Emitter_3_def.tres" id="3_su266"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_u2286"]
+[ext_resource type="Resource" uid="uid://4d64kxpe18to" path="res://Recipes/Item Stacks/Lens_6_def.tres" id="4_bh1o2"]
+[ext_resource type="Resource" uid="uid://c2em1gewfvxqt" path="res://Recipes/Item Stacks/Quantum_Tranquilizer_3_def.tres" id="5_h56l6"]
+[ext_resource type="Resource" uid="uid://bv5ddacaev71n" path="res://Recipes/Item Stacks/Tracking_Device_3_def.tres" id="6_ldpfl"]
 
 [resource]
 script = ExtResource("2_vgc4y")
+id = &"Tracking Device"
+display_name = "Tracking Device"
+inputs = Array[ExtResource("1_6gx0o")]([ExtResource("2_ecwxn"), ExtResource("3_su266"), ExtResource("4_bh1o2"), ExtResource("5_h56l6")])
+outputs = Array[ExtResource("1_6gx0o")]([ExtResource("6_ldpfl")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

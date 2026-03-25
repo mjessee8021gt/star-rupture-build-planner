@@ -2,8 +2,17 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_k1dk4"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_dueo2"]
+[ext_resource type="Resource" uid="uid://c2ow6m3pbyub4" path="res://Recipes/Item Stacks/Electromagnetic_coil_6_def.tres" id="2_yxi1s"]
+[ext_resource type="Resource" uid="uid://bsk2dh0tjdfcf" path="res://Recipes/Item Stacks/Generator_3_def.tres" id="3_eir0h"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_s6un6"]
+[ext_resource type="Resource" uid="uid://bymgg0flsvmn7" path="res://Recipes/Item Stacks/Pseudorubber_Insulator_6_def.tres" id="4_ag0kf"]
+[ext_resource type="Resource" uid="uid://bxr04bwsqfusk" path="res://Recipes/Item Stacks/RTSC_3_def.tres" id="5_pn20f"]
+[ext_resource type="Resource" uid="uid://dejgotpg6f7on" path="res://Recipes/Item Stacks/RTSC_Generator_3_def.tres" id="6_4lehe"]
 
 [resource]
 script = ExtResource("2_dueo2")
+id = &"RTSC Generator"
+display_name = "RTSC Generator"
+inputs = Array[ExtResource("1_k1dk4")]([ExtResource("2_yxi1s"), ExtResource("3_eir0h"), ExtResource("4_ag0kf"), ExtResource("5_pn20f")])
+outputs = Array[ExtResource("1_k1dk4")]([ExtResource("6_4lehe")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

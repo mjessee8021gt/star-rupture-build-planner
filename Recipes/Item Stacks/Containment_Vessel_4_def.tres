@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://dct2lj4p6arfx"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_mjdea"]
+[ext_resource type="Resource" uid="uid://brs6xodl8lr0s" path="res://Recipes/Item Definitions/Containment_vessel_def.tres" id="1_rv1s7"]
+
+[resource]
+script = ExtResource("1_mjdea")
+item = ExtResource("1_rv1s7")
+qty = 4
+id = &"Containment Vessel"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

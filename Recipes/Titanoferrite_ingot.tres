@@ -2,8 +2,15 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_6d42c"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_75l2i"]
+[ext_resource type="Resource" uid="uid://bjwo145p50hbf" path="res://Recipes/Item Stacks/Geothite_Ore_120.tres" id="2_skdb4"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_ed0p4"]
+[ext_resource type="Resource" uid="uid://cq3xhslrp5lqm" path="res://Recipes/Item Stacks/Titanium_bar_120_def.tres" id="3_gq30s"]
+[ext_resource type="Resource" uid="uid://bjfit06maj0tf" path="res://Recipes/Item Stacks/Titanoferrite_Ingot_120_Def.tres" id="4_53wg5"]
 
 [resource]
 script = ExtResource("2_75l2i")
+id = &"Titanoferrite Ingot"
+display_name = "Titanoferrite Ingot"
+inputs = Array[ExtResource("1_6d42c")]([ExtResource("2_skdb4"), ExtResource("3_gq30s")])
+outputs = Array[ExtResource("1_6d42c")]([ExtResource("4_53wg5")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

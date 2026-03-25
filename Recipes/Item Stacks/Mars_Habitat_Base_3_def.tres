@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://c1itovadm7mrf"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_f0abe"]
+[ext_resource type="Resource" uid="uid://clt6t30p3jq2y" path="res://Recipes/Item Definitions/Mars_habitat_base_def.tres" id="1_ulnwu"]
+
+[resource]
+script = ExtResource("1_f0abe")
+item = ExtResource("1_ulnwu")
+qty = 3
+id = &"Mars Habitat Base"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

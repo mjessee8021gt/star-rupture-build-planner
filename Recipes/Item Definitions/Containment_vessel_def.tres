@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemDefinition" format=3 uid="uid://brs6xodl8lr0s"]
+
+[ext_resource type="Script" uid="uid://lj867ah2nl68" path="res://Resources/ItemDefinition.gd" id="1_af28k"]
+
+[resource]
+script = ExtResource("1_af28k")
+id = &"containment_vessel"
+display_name = "Containment Vessel"
+metadata/_custom_type_script = "uid://lj867ah2nl68"

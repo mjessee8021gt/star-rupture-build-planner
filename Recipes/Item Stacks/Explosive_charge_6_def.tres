@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://cigbs2ugwut6y"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_1tbqp"]
+[ext_resource type="Resource" uid="uid://c0tghrq2tt5gb" path="res://Recipes/Item Definitions/Explosive_charge_def.tres" id="1_mpljt"]
+
+[resource]
+script = ExtResource("1_1tbqp")
+item = ExtResource("1_mpljt")
+qty = 6
+id = &"Explosive Charge"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

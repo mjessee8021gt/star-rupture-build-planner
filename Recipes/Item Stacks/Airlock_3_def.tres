@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://cr0wes4g8bfys"]
+
+[ext_resource type="Resource" uid="uid://ca23jm2ae275w" path="res://Recipes/Item Definitions/Airlock_Def.tres" id="1_v80w3"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_2dbxe"]
+
+[resource]
+script = ExtResource("2_2dbxe")
+item = ExtResource("1_v80w3")
+qty = 3
+id = &"Airlock"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"
