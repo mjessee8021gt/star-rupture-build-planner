@@ -1,9 +1,19 @@
 [gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://c8khlc1gepek4"]
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_vmi38"]
+[ext_resource type="Resource" uid="uid://up7gsfoxoilw" path="res://Recipes/Item Stacks/Anti-radiation_Covers_4_def.tres" id="2_7xywx"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_cm1xw"]
+[ext_resource type="Resource" uid="uid://cu0j627bapexx" path="res://Recipes/Item Stacks/Epoxy_12_def.tres" id="3_npm0a"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_p5enk"]
+[ext_resource type="Resource" uid="uid://cjl6jo1yq5hg5" path="res://Recipes/Item Stacks/Pressure_Tank_4_def.tres" id="4_vpq5w"]
+[ext_resource type="Resource" uid="uid://limgeodiw0pu" path="res://Recipes/Item Stacks/Pseudorubber_Insulator_8_def.tres" id="5_ijjkn"]
+[ext_resource type="Resource" uid="uid://lrel23qu0rh8" path="res://Recipes/Item Stacks/Reinforced_Housing_8_def.tres" id="6_2xcep"]
+[ext_resource type="Resource" uid="uid://dct2lj4p6arfx" path="res://Recipes/Item Stacks/Containment_Vessel_4_def.tres" id="7_4q12r"]
 
 [resource]
 script = ExtResource("2_cm1xw")
+id = &"Containment Vessel"
+display_name = "Containment Vessel"
+inputs = Array[ExtResource("1_vmi38")]([ExtResource("2_7xywx"), ExtResource("3_npm0a"), ExtResource("4_vpq5w"), ExtResource("5_ijjkn"), ExtResource("6_2xcep")])
+outputs = Array[ExtResource("1_vmi38")]([ExtResource("7_4q12r")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

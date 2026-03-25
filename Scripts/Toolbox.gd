@@ -95,6 +95,7 @@ func _ready() -> void:
 	shipmentMenu.add_item("Cargo Receiver")
 	shipmentMenu.set_item_metadata(shipmentMenu.item_count-1, &"receiver")
 	shipmentMenu.add_item("Teleporter")
+	shipmentMenu.set_item_metadata(shipmentMenu.item_count-1, &"teleporter")
 	shipmentMenu.id_pressed.connect(_on_build_selected.bind(shipmentMenu))
 	print("Shipment Menu Item Selected...")
 	
@@ -107,6 +108,19 @@ func _ready() -> void:
 	storageMenu.add_item("Multistorage")
 	storageMenu.add_item("Expandable Storage")
 	storageMenu.id_pressed.connect(_on_build_selected.bind(storageMenu))
+	
+	var habitatMenu = PopupMenu.new()
+	habitatMenu.add_item("Base Core")
+	habitatMenu.set_item_metadata(habitatMenu.item_count-1, &"base_core")
+	habitatMenu.add_item("Base Core Amplifier V1")
+	habitatMenu.set_item_metadata(habitatMenu.item_count-1, &"base_core_amplifier_v1")
+	habitatMenu.add_item("Base Core Amplifier V2")
+	habitatMenu.set_item_metadata(habitatMenu.item_count-1, &"base_core_amplifier_v2")
+	habitatMenu.add_item("Habitat")
+	habitatMenu.set_item_metadata(habitatMenu.item_count-1, &"habitat")
+	habitatMenu.add_item("Large Habitat")
+	habitatMenu.set_item_metadata(habitatMenu.item_count-1, &"large_habitat")
+	habitatMenu.id_pressed.connect(_on_build_selected.bind(habitatMenu))
 	
 	var transportMenu = PopupMenu.new()
 	transportMenu.name = "Transport"
@@ -123,12 +137,14 @@ func _ready() -> void:
 	popup.add_child(processingMenu)
 	popup.add_child(powerMenu)
 	popup.add_child(transportMenu)
+	popup.add_child(habitatMenu)
 
 	popup.add_submenu_item("Extraction", extractionMenu.name)
 	popup.add_submenu_item("Crafting", craftingMenu.name)
 	popup.add_submenu_item("Processing", processingMenu.name)
 	popup.add_submenu_item("Power", powerMenu.name)
 	popup.add_submenu_item("Transport", transportMenu.name)
+	popup.add_submenu_item("Habitat", habitatMenu.name)
 
 func _on_build_selected(id: int, menu:PopupMenu) -> void:
 	var idx := menu.get_item_index(id)

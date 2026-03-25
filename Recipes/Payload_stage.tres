@@ -1,9 +1,19 @@
 [gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://b0gp7xjyimgep"]
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_1pyw6"]
+[ext_resource type="Resource" uid="uid://cgw083rjo3i2f" path="res://Recipes/Item Stacks/Heat_Shield_9_def.tres" id="2_uvros"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_wth0y"]
+[ext_resource type="Resource" uid="uid://boeriwy3sjnm4" path="res://Recipes/Item Stacks/Ion_Thrusters_6_def.tres" id="3_1ep6t"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_i2cdn"]
+[ext_resource type="Resource" uid="uid://c41tagmaftltg" path="res://Recipes/Item Stacks/Nano_Fibre_6_def.tres" id="4_b8evw"]
+[ext_resource type="Resource" uid="uid://dc3t5t4ndtw6c" path="res://Recipes/Item Stacks/Onboard_Instruments_3_def.tres" id="5_x1hhn"]
+[ext_resource type="Resource" uid="uid://catg71x3d7u20" path="res://Recipes/Item Stacks/Reinforced_Housing_6_def.tres" id="6_mvkao"]
+[ext_resource type="Resource" uid="uid://cvxm6524u58fv" path="res://Recipes/Item Stacks/Payload_Stage_3_def.tres" id="7_hv8kw"]
 
 [resource]
 script = ExtResource("2_wth0y")
+id = &"Payload Stage"
+display_name = "Payload Stage"
+inputs = Array[ExtResource("1_1pyw6")]([ExtResource("2_uvros"), ExtResource("3_1ep6t"), ExtResource("4_b8evw"), ExtResource("5_x1hhn"), ExtResource("6_mvkao")])
+outputs = Array[ExtResource("1_1pyw6")]([ExtResource("7_hv8kw")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

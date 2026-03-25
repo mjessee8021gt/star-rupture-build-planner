@@ -2,8 +2,18 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_crqqf"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_2fxk8"]
+[ext_resource type="Resource" uid="uid://cigbs2ugwut6y" path="res://Recipes/Item Stacks/Explosive_charge_6_def.tres" id="2_wf8y1"]
+[ext_resource type="Resource" uid="uid://b1oxx0pom56n0" path="res://Recipes/Item Stacks/Ion Injector_3_def.tres" id="3_aq34c"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_lji71"]
+[ext_resource type="Resource" uid="uid://diewh1kvvhdyc" path="res://Recipes/Item Stacks/Ion_Stabilizer_3_def.tres" id="4_kxy5d"]
+[ext_resource type="Resource" uid="uid://catg71x3d7u20" path="res://Recipes/Item Stacks/Reinforced_Housing_6_def.tres" id="5_j1bl5"]
+[ext_resource type="Resource" uid="uid://d05ait2sti4ll" path="res://Recipes/Item Stacks/Resonator_9_def.tres" id="6_t7v1e"]
+[ext_resource type="Resource" uid="uid://13deegupd7x3" path="res://Recipes/Item Stacks/Ion_Bomb_3_def.tres" id="7_k0f1k"]
 
 [resource]
 script = ExtResource("2_2fxk8")
+id = &"Ion bomb"
+display_name = "Ion Bomb"
+inputs = Array[ExtResource("1_crqqf")]([ExtResource("2_wf8y1"), ExtResource("3_aq34c"), ExtResource("4_kxy5d"), ExtResource("5_j1bl5"), ExtResource("6_t7v1e")])
+outputs = Array[ExtResource("1_crqqf")]([ExtResource("7_k0f1k")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

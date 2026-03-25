@@ -1,7 +1,11 @@
 [gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://ddxdpse7uhcbs"]
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_j5e4j"]
+[ext_resource type="Resource" uid="uid://bm66os3q4dtuj" path="res://Recipes/Item Definitions/Propulsion_stage_def.tres" id="1_mtx6p"]
 
 [resource]
 script = ExtResource("1_j5e4j")
+item = ExtResource("1_mtx6p")
+qty = 3
+id = &"Propulsion Stage"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

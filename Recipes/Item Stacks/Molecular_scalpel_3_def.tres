@@ -1,7 +1,11 @@
 [gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://bmrjb0alsfw3a"]
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_4dwht"]
+[ext_resource type="Resource" uid="uid://bkjhf4c726o7j" path="res://Recipes/Item Definitions/Molecular_scalpel.tres" id="1_63j2u"]
 
 [resource]
 script = ExtResource("1_4dwht")
+item = ExtResource("1_63j2u")
+qty = 3
+id = &"Molecular Scalpel"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

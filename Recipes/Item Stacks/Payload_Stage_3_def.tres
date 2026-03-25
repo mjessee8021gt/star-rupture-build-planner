@@ -1,7 +1,11 @@
 [gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://cvxm6524u58fv"]
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_fhv03"]
+[ext_resource type="Resource" uid="uid://bj452yl2k54o2" path="res://Recipes/Item Definitions/Payload_stage_def.tres" id="1_tovf7"]
 
 [resource]
 script = ExtResource("1_fhv03")
+item = ExtResource("1_tovf7")
+qty = 3
+id = &"Payload Stage"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

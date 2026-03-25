@@ -2,8 +2,17 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_yqk40"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_hpwas"]
+[ext_resource type="Resource" uid="uid://c2in04m2kw4k1" path="res://Recipes/Item Stacks/Electronics_12_def.tres" id="2_urp5x"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_luaev"]
+[ext_resource type="Resource" uid="uid://bwfpx3unigmnh" path="res://Recipes/Item Stacks/Resonator_4_def.tres" id="3_vwhh7"]
+[ext_resource type="Resource" uid="uid://cf55prniaf3k0" path="res://Recipes/Item Stacks/Reinforced_Housing_4_def.tres" id="4_jj60y"]
+[ext_resource type="Resource" uid="uid://difhewn14cgad" path="res://Recipes/Item Stacks/Stabilizer_8_def.tres" id="5_k2pc3"]
+[ext_resource type="Resource" uid="uid://bqowt42hsi0hg" path="res://Recipes/Item Stacks/Onboard_Instruments_4_def.tres" id="6_xsp35"]
 
 [resource]
 script = ExtResource("2_hpwas")
+id = &"Onboard Instruments"
+display_name = "Onboard Instruments"
+inputs = Array[ExtResource("1_yqk40")]([ExtResource("2_urp5x"), ExtResource("3_vwhh7"), ExtResource("4_jj60y"), ExtResource("5_k2pc3")])
+outputs = Array[ExtResource("1_yqk40")]([ExtResource("6_xsp35")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

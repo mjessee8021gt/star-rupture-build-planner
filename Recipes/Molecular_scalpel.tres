@@ -2,8 +2,18 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_4yrvb"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_0u28h"]
+[ext_resource type="Resource" uid="uid://4d64kxpe18to" path="res://Recipes/Item Stacks/Lens_6_def.tres" id="2_2aqgm"]
+[ext_resource type="Resource" uid="uid://c5a2hpgvqv4p0" path="res://Recipes/Item Stacks/Nanosyringe_6_def.tres" id="3_l3sfu"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_wj2g4"]
+[ext_resource type="Resource" uid="uid://d3sok5h1q0nmy" path="res://Recipes/Item Stacks/Plastic_12_def.tres" id="4_ik60s"]
+[ext_resource type="Resource" uid="uid://bpojld85eup5v" path="res://Recipes/Item Stacks/RNA_Stabilizer_3_def.tres" id="5_w806s"]
+[ext_resource type="Resource" uid="uid://cccsegi4i684s" path="res://Recipes/Item Stacks/Scanner_3_def.tres" id="6_ga8g5"]
+[ext_resource type="Resource" uid="uid://bmrjb0alsfw3a" path="res://Recipes/Item Stacks/Molecular_scalpel_3_def.tres" id="7_s6scr"]
 
 [resource]
 script = ExtResource("2_0u28h")
+id = &"Molecular Scalpel"
+display_name = "Molecular Scalpel"
+inputs = Array[ExtResource("1_4yrvb")]([ExtResource("2_2aqgm"), ExtResource("3_l3sfu"), ExtResource("4_ik60s"), ExtResource("5_w806s"), ExtResource("6_ga8g5")])
+outputs = Array[ExtResource("1_4yrvb")]([ExtResource("7_s6scr")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"
