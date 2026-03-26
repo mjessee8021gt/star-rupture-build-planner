@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://bphuv4q05q6cf"]
+
+[ext_resource type="Script" uid="uid://b0mimh8hotnki" path="res://Buildings/Core Amplifier v2.gd" id="1_i2ad1"]
+[ext_resource type="Texture2D" uid="uid://grouobxe87tu" path="res://Assets/SRBP_4x4_BLDG.png" id="2_i2ad1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
+size = Vector2(256, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uf4xf"]
+size = Vector2(256, 256)
+
+[node name="Core Amplifier v2" type="Node2D" unique_id=1728206745 groups=["buildings"]]
+script = ExtResource("1_i2ad1")
+id = &"habitat"
+metadata/_edit_vertical_guides_ = [63.0, 96.0, 112.0, 80.0]
+
+[node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
+position = Vector2(-128, -128)
+texture = ExtResource("2_i2ad1")
+centered = false
+
+[node name="AlternateSprite" type="Sprite2D" parent="." unique_id=1619536158]
+visible = false
+position = Vector2(-128, -128)
+texture = ExtResource("2_i2ad1")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128283645]
+shape = SubResource("RectangleShape2D_gbqis")
+
+[node name="CollisionShapeAlt" type="CollisionShape2D" parent="." unique_id=1184700770]
+visible = false
+shape = SubResource("RectangleShape2D_uf4xf")
+disabled = true
+
+[node name="TitleLabel" type="Label" parent="." unique_id=904579435]
+offset_left = -75.0
+offset_top = -36.0
+offset_right = 76.0
+offset_bottom = -1.0
+theme_override_font_sizes/font_size = 25
+text = "CORE AMP
+V2"
+horizontal_alignment = 1
+
+[node name="PlacementArea" type="Area2D" parent="." unique_id=911391560]
+
+[node name="PlacementAreaAlt" type="Area2D" parent="." unique_id=445836450]
