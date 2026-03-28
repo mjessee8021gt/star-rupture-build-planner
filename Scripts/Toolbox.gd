@@ -45,6 +45,8 @@ func _ready() -> void:
 	craftingMenu.set_item_metadata(craftingMenu.item_count-1, &"fabricator")
 	craftingMenu.add_item("Assembler")
 	craftingMenu.set_item_metadata(craftingMenu.item_count-1, &"assembler")
+	craftingMenu.add_item("Constructorizer")
+	craftingMenu.set_item_metadata(craftingMenu.item_count-1, &"constructorizer")
 	craftingMenu.id_pressed.connect(_on_build_selected.bind(craftingMenu))
 	
 	var processingMenu = PopupMenu.new()
@@ -59,7 +61,7 @@ func _ready() -> void:
 	processingMenu.set_item_metadata(processingMenu.item_count-1, &"compounder")
 	processingMenu.add_item("Refinery")
 	processingMenu.set_item_metadata(processingMenu.item_count-1, &"refinery")
-	processingMenu.add_item("Pyroforge")
+	processingMenu.add_item("Pyro Forge")
 	processingMenu.set_item_metadata(processingMenu.item_count-1, &"pyro_forge")
 	processingMenu.id_pressed.connect(_on_build_selected.bind(processingMenu))
 	print("Processing Menu Item Selected...")

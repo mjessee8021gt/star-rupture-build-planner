@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_6e6go"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_mhe42"]
-[ext_resource type="Resource" uid="uid://bp1cbbqar0f2w" path="res://Recipes/Item Stacks/Tube_40_def.tres" id="2_r5a1x"]
+[ext_resource type="Resource" uid="uid://ln80ycemhxvh" path="res://Recipes/Item Stacks/Tube_30_def.tres" id="2_r5a1x"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_aitle"]
-[ext_resource type="Resource" uid="uid://x4itvpf6kpri" path="res://Recipes/Item Stacks/Wolfram_wire_20_def.tres" id="3_tp7bk"]
-[ext_resource type="Resource" uid="uid://dpaw7ni76cpnt" path="res://Recipes/Item Stacks/Ceramics_40_def.tres" id="4_ayn4g"]
-[ext_resource type="Resource" uid="uid://depywb6ba776v" path="res://Recipes/Item Stacks/Inductor_20_def.tres" id="5_8be1i"]
+[ext_resource type="Resource" uid="uid://cnalxbif1fhch" path="res://Recipes/Item Stacks/Wolfram_wire_15_def.tres" id="3_tp7bk"]
+[ext_resource type="Resource" uid="uid://b8cw6u3hcpqcp" path="res://Recipes/Item Stacks/Ceramics_30_def.tres" id="4_ayn4g"]
+[ext_resource type="Resource" uid="uid://c3wigrc1xsulv" path="res://Recipes/Item Stacks/Inductor_30_def.tres" id="5_8be1i"]
 
 [resource]
 script = ExtResource("2_mhe42")
