@@ -59,6 +59,8 @@ func _ready() -> void:
 	processingMenu.set_item_metadata(processingMenu.item_count-1, &"mega_press")
 	processingMenu.add_item("Compounder")
 	processingMenu.set_item_metadata(processingMenu.item_count-1, &"compounder")
+	processingMenu.add_item("Pressurizer")
+	processingMenu.set_item_metadata(processingMenu.item_count-1, &"pressurizer")
 	processingMenu.add_item("Refinery")
 	processingMenu.set_item_metadata(processingMenu.item_count-1, &"refinery")
 	processingMenu.add_item("Pyro Forge")

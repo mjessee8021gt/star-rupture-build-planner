@@ -10,8 +10,13 @@
 [ext_resource type="Resource" uid="uid://bw0tp80ndefay" path="res://Recipes/pressure_tank.tres" id="8_qa0va"]
 [ext_resource type="Resource" uid="uid://cryw6iu71sfb0" path="res://Recipes/Resonator.tres" id="9_tjlp1"]
 [ext_resource type="Resource" uid="uid://bdbuxc406wwsc" path="res://Recipes/Scanner.tres" id="10_glqjf"]
+[ext_resource type="Resource" uid="uid://cx4lxig6r8tny" path="res://Recipes/Uberfilament.tres" id="11_alc6w"]
 [ext_resource type="Texture2D" uid="uid://dy4jf651nmiwp" path="res://Assets/SRBP_3x6_BLDG.png" id="11_escni"]
 [ext_resource type="Texture2D" uid="uid://dckm1irx4k8o3" path="res://Assets/SRBP_6x6_BLDG.png" id="12_md1ix"]
+[ext_resource type="Resource" uid="uid://hxl3ygjst65n" path="res://Recipes/Onboard_instruments.tres" id="12_qa0va"]
+[ext_resource type="Resource" uid="uid://dnjc3ur3jdwya" path="res://Recipes/Explosive_charge.tres" id="13_tjlp1"]
+[ext_resource type="Resource" uid="uid://3w52s3slrct4" path="res://Recipes/Pseudorubber_insulator.tres" id="14_glqjf"]
+[ext_resource type="Resource" uid="uid://y2o8fhyj1sgy" path="res://Recipes/Plastic_dust.tres" id="15_j1hit"]
 [ext_resource type="Texture2D" uid="uid://ilmbegsn2c7" path="res://Assets/SRBP_Oval.png" id="16_gbtw0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
@@ -24,7 +29,7 @@ size = Vector2(384, 384)
 script = ExtResource("1_escni")
 heat = 150
 power = -60
-available_recipes = Array[ExtResource("2_ueiug")]([ExtResource("3_md1ix"), ExtResource("4_6fqcw"), ExtResource("5_w2ivq"), ExtResource("6_ueiug"), ExtResource("7_alc6w"), ExtResource("8_qa0va"), ExtResource("9_tjlp1"), ExtResource("10_glqjf")])
+available_recipes = Array[ExtResource("2_ueiug")]([ExtResource("3_md1ix"), ExtResource("4_6fqcw"), ExtResource("5_w2ivq"), ExtResource("6_ueiug"), ExtResource("7_alc6w"), ExtResource("8_qa0va"), ExtResource("9_tjlp1"), ExtResource("10_glqjf"), ExtResource("11_alc6w"), ExtResource("12_qa0va"), ExtResource("13_tjlp1"), ExtResource("14_glqjf"), ExtResource("15_j1hit")])
 id = &"assembler"
 metadata/_edit_vertical_guides_ = [63.0, 48.0, 64.0, 80.0, -24.0, 96.0, 192.0]
 

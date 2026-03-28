@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://mv5r7s5b2nvh"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_bl3ye"]
+[ext_resource type="Resource" uid="uid://b1otlku5o3v3f" path="res://Recipes/Item Stacks/Calcium_powder_30_def.tres" id="2_omr5t"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_qsymn"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_30bf7"]
+[ext_resource type="Resource" uid="uid://5butspmf2e78" path="res://Recipes/Item Stacks/Geothite_Ingot_30.tres" id="3_boxdj"]
+[ext_resource type="Resource" uid="uid://utvcwv7cts81" path="res://Recipes/Item Stacks/Pressurized_helium_30_def.tres" id="4_5ywd8"]
+[ext_resource type="Resource" uid="uid://c8iikrmu8qfvy" path="res://Recipes/Item Stacks/Geothite_Powder_120_def.tres" id="5_oq1i5"]
+
+[resource]
+script = ExtResource("2_qsymn")
+id = &"Geothite Powder"
+display_name = "Geothite Powder"
+inputs = Array[ExtResource("1_bl3ye")]([ExtResource("2_omr5t"), ExtResource("3_boxdj"), ExtResource("4_5ywd8")])
+outputs = Array[ExtResource("1_bl3ye")]([ExtResource("5_oq1i5")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

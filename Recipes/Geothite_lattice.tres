@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://rwh1ni4p7phe"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_g1oim"]
+[ext_resource type="Resource" uid="uid://c74kpql366p7c" path="res://Recipes/Item Stacks/Wolfram_steel_ingot_40_def.tres" id="2_ts3h2"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_u3cnq"]
+[ext_resource type="Resource" uid="uid://eagrambu7uv6" path="res://Recipes/Item Stacks/Geothite_lattice_40_def.tres" id="2_vag4t"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_vag4t"]
+[ext_resource type="Resource" uid="uid://cq5a8atvtnx6m" path="res://Recipes/Item Stacks/Titanoferrite_Ingot_40_Def.tres" id="3_xevis"]
+[ext_resource type="Resource" uid="uid://ykht72m7efm1" path="res://Recipes/Item Stacks/Geothite_Ingot_40.tres" id="4_vw63w"]
+
+[resource]
+script = ExtResource("2_u3cnq")
+id = &"Geothite Lattice"
+display_name = "Geothite Lattice"
+inputs = Array[ExtResource("1_g1oim")]([ExtResource("2_ts3h2"), ExtResource("3_xevis"), ExtResource("4_vw63w")])
+outputs = Array[ExtResource("1_g1oim")]([ExtResource("2_vag4t")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemDefinition" format=3 uid="uid://fib8dsxqf47g"]
+
+[ext_resource type="Script" uid="uid://lj867ah2nl68" path="res://Resources/ItemDefinition.gd" id="1_b44e5"]
+
+[resource]
+script = ExtResource("1_b44e5")
+id = &"geothite_lattice"
+display_name = "Geothite Lattice"
+metadata/_custom_type_script = "uid://lj867ah2nl68"

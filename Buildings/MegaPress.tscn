@@ -14,8 +14,13 @@
 [ext_resource type="Resource" uid="uid://d2fbwjoy35ta7" path="res://Recipes/Turbine.tres" id="12_txqpt"]
 [ext_resource type="Resource" uid="uid://ofj320xbtcjl" path="res://Recipes/Valve.tres" id="13_w5apf"]
 [ext_resource type="Texture2D" uid="uid://ca0431w33u4jt" path="res://Assets/SRBP_4x5_BLDG.png" id="14_oc300"]
+[ext_resource type="Resource" uid="uid://ce31hq8jrenvr" path="res://Recipes/Reinforced_frame.tres" id="14_omxsb"]
+[ext_resource type="Resource" path="res://Recipes/Reinforced_housing.tres" id="15_hurqg"]
 [ext_resource type="Texture2D" uid="uid://ckf3jbuufrs6i" path="res://Assets/SRBP_5x6_BLDG.png" id="15_oc300"]
+[ext_resource type="Resource" uid="uid://rwh1ni4p7phe" path="res://Recipes/Geothite_lattice.tres" id="16_nyaiv"]
 [ext_resource type="Texture2D" uid="uid://ilmbegsn2c7" path="res://Assets/SRBP_Oval.png" id="17_ef2ad"]
+[ext_resource type="Resource" uid="uid://50c1febnkx6c" path="res://Recipes/Heat_shield.tres" id="17_x2mdb"]
+[ext_resource type="Resource" uid="uid://c3l25q8aqemu7" path="res://Recipes/Ion_stabilizer.tres" id="18_8hkdk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
 size = Vector2(256, 320)
@@ -25,7 +30,7 @@ size = Vector2(320, 384)
 
 [node name="Mega Press" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_oc300")
-available_recipes = Array[ExtResource("2_omxsb")]([ExtResource("3_facf6"), ExtResource("4_omxsb"), ExtResource("5_hurqg"), ExtResource("6_4e8em"), ExtResource("7_nyaiv"), ExtResource("8_x2mdb"), ExtResource("9_8hkdk"), ExtResource("10_hqy5a"), ExtResource("11_jcftm"), ExtResource("12_txqpt"), ExtResource("13_w5apf")])
+available_recipes = Array[ExtResource("2_omxsb")]([ExtResource("3_facf6"), ExtResource("4_omxsb"), ExtResource("5_hurqg"), ExtResource("6_4e8em"), ExtResource("7_nyaiv"), ExtResource("8_x2mdb"), ExtResource("9_8hkdk"), ExtResource("10_hqy5a"), ExtResource("11_jcftm"), ExtResource("12_txqpt"), ExtResource("13_w5apf"), ExtResource("14_omxsb"), ExtResource("15_hurqg"), ExtResource("16_nyaiv"), ExtResource("17_x2mdb"), ExtResource("18_8hkdk")])
 id = &"megapress"
 metadata/_edit_vertical_guides_ = [63.0, 48.0, 64.0, 80.0, -24.0, 128.0, 192.0]
 

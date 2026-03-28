@@ -8,8 +8,16 @@
 [ext_resource type="Resource" uid="uid://djqxq1reiv2ra" path="res://Recipes/Nano_fibre.tres" id="6_n22x6"]
 [ext_resource type="Resource" uid="uid://c020d7653ktna" path="res://Recipes/Superconductor.tres" id="7_kxkh6"]
 [ext_resource type="Resource" uid="uid://dv5yt7tce8sok" path="res://Recipes/Synthetic_resin.tres" id="8_dtdv0"]
+[ext_resource type="Resource" uid="uid://mv5r7s5b2nvh" path="res://Recipes/Geothite_powder.tres" id="9_7rjnt"]
 [ext_resource type="Texture2D" uid="uid://dckm1irx4k8o3" path="res://Assets/SRBP_6x6_BLDG.png" id="9_n8472"]
+[ext_resource type="Resource" uid="uid://qfxaeo3tiyix" path="res://Recipes/Epoxy.tres" id="10_eeuiw"]
 [ext_resource type="Texture2D" uid="uid://cmwoe1nqgmtr6" path="res://Assets/SRBP_7x7_BLDG.png" id="10_wrwtp"]
+[ext_resource type="Resource" uid="uid://cx12l7etk2144" path="res://Recipes/Substance_FHS-135-493.tres" id="11_sjnt7"]
+[ext_resource type="Resource" uid="uid://ctl3w36kfkq2u" path="res://Recipes/Plastic.tres" id="12_dnl3l"]
+[ext_resource type="Resource" uid="uid://4oteybuej7nj" path="res://Recipes/Basic_fuel.tres" id="13_xbor2"]
+[ext_resource type="Resource" uid="uid://ga6as808731t" path="res://Recipes/Organic_compound.tres" id="14_8oxc5"]
+[ext_resource type="Resource" uid="uid://20rutftfrtk" path="res://Recipes/Aerogel.tres" id="15_iqetp"]
+[ext_resource type="Resource" uid="uid://3cvsl2mfbvwm" path="res://Recipes/Synthetic_protein.tres" id="16_7ukw8"]
 [ext_resource type="Texture2D" uid="uid://ilmbegsn2c7" path="res://Assets/SRBP_Oval.png" id="17_28hxc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
@@ -20,7 +28,7 @@ size = Vector2(448, 448)
 
 [node name="Compounder" type="Node2D" unique_id=1728206745]
 script = ExtResource("1_n8472")
-available_recipes = Array[ExtResource("2_6v4mf")]([ExtResource("3_n8472"), ExtResource("4_wrwtp"), ExtResource("5_gh8q4"), ExtResource("6_n22x6"), ExtResource("7_kxkh6"), ExtResource("8_dtdv0")])
+available_recipes = Array[ExtResource("2_6v4mf")]([ExtResource("3_n8472"), ExtResource("4_wrwtp"), ExtResource("5_gh8q4"), ExtResource("6_n22x6"), ExtResource("7_kxkh6"), ExtResource("8_dtdv0"), ExtResource("9_7rjnt"), ExtResource("10_eeuiw"), ExtResource("11_sjnt7"), ExtResource("12_dnl3l"), ExtResource("13_xbor2"), ExtResource("14_8oxc5"), ExtResource("15_iqetp"), ExtResource("16_7ukw8")])
 id = &"compounder"
 metadata/_edit_vertical_guides_ = [63.0, 48.0, 64.0, 96.0, 112.0, 192.0]
 

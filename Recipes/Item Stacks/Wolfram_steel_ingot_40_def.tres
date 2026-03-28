@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://c74kpql366p7c"]
+
+[ext_resource type="Resource" uid="uid://bhg1rh8ytfmrt" path="res://Recipes/Item Definitions/Wolfram_steel_ingot_Def.tres" id="1_6jhy5"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_dpufx"]
+
+[resource]
+script = ExtResource("2_dpufx")
+item = ExtResource("1_6jhy5")
+qty = 40
+id = &"Wolfram Steel Ingot"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"
