@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://lj3e8vvke6ic"]
+
+[ext_resource type="Resource" uid="uid://dsuxc3xtp738y" path="res://Recipes/Item Definitions/Epoxy_Def.tres" id="1_uiehf"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_3w370"]
+
+[resource]
+script = ExtResource("2_3w370")
+item = ExtResource("1_uiehf")
+qty = 10
+id = &"Epoxy"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

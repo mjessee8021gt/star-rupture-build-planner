@@ -1,18 +1,16 @@
-[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://3w52s3slrct4"]
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://t3nd0w70ooxb"]
 
-[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_4suqq"]
-[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_1ul4o"]
-[ext_resource type="Resource" uid="uid://b5gsytx34ys85" path="res://Recipes/Item Stacks/Calcium_powder_6_def.tres" id="2_oyape"]
-[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_0c1uo"]
-[ext_resource type="Resource" uid="uid://144j2injt4qc" path="res://Recipes/Item Stacks/Epoxy_5_def.tres" id="3_vwrvy"]
-[ext_resource type="Resource" uid="uid://nw32ajea6vjo" path="res://Recipes/Item Stacks/Plastic_10_def.tres" id="4_60hsu"]
-[ext_resource type="Resource" uid="uid://bqp71ukuy36iy" path="res://Recipes/Item Stacks/Synthetic_Resin_15_def.tres" id="5_npy0d"]
-[ext_resource type="Resource" uid="uid://df6nlrogubcgm" path="res://Recipes/Item Stacks/Pseudorubber_Insulator_10_def.tres" id="6_15nxs"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_2obav"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_y6vvb"]
+[ext_resource type="Resource" uid="uid://xp8izsi00a1y" path="res://Recipes/Item Stacks/Plastic_25_def.tres" id="3_ytun0"]
+[ext_resource type="Resource" uid="uid://lj3e8vvke6ic" path="res://Recipes/Item Stacks/Epoxy_10_def.tres" id="4_or0p3"]
+[ext_resource type="Resource" uid="uid://df6nlrogubcgm" path="res://Recipes/Item Stacks/Pseudorubber_Insulator_10_def.tres" id="5_zo3ch"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_am0le"]
 
 [resource]
-script = ExtResource("2_1ul4o")
+script = ExtResource("2_y6vvb")
 id = &"Pseudorubber Insulator"
 display_name = "Pseudorubber Insulator"
-inputs = Array[ExtResource("1_4suqq")]([ExtResource("2_oyape"), ExtResource("3_vwrvy"), ExtResource("4_60hsu"), ExtResource("5_npy0d")])
-outputs = Array[ExtResource("1_4suqq")]([ExtResource("6_15nxs")])
+inputs = Array[ExtResource("1_2obav")]([ExtResource("3_ytun0"), ExtResource("4_or0p3")])
+outputs = Array[ExtResource("1_2obav")]([ExtResource("5_zo3ch")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"
