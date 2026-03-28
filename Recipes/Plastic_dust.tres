@@ -1,18 +1,17 @@
-[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://y2o8fhyj1sgy"]
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://bw77wps0tm2j"]
 
-[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_5vgeb"]
-[ext_resource type="Resource" uid="uid://b5gsytx34ys85" path="res://Recipes/Item Stacks/Calcium_powder_6_def.tres" id="2_pnfpu"]
-[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_uct75"]
-[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_0kek0"]
-[ext_resource type="Resource" uid="uid://3sedarn52xaw" path="res://Recipes/Item Stacks/Organic_Compound_18_def.tres" id="3_7jhjg"]
-[ext_resource type="Resource" uid="uid://bxsn5jtmk12k6" path="res://Recipes/Item Stacks/Plastic_6_def.tres" id="4_1gn5w"]
-[ext_resource type="Resource" uid="uid://dhcxwm72aqdob" path="res://Recipes/Item Stacks/Synthetic_Resin_12_def.tres" id="5_xr80g"]
-[ext_resource type="Resource" uid="uid://ctw0oirb0rdpn" path="res://Recipes/Item Stacks/Plastic_Dust_12_def.tres" id="6_idfmn"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_rrmyd"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_eic0x"]
+[ext_resource type="Resource" uid="uid://cjm42lkbm6go8" path="res://Recipes/Item Stacks/Organic_Compound_12_def.tres" id="3_qskmo"]
+[ext_resource type="Resource" uid="uid://q6xz13ou4wru" path="res://Recipes/Item Stacks/Basic_fuel_6_def.tres" id="4_n6fx3"]
+[ext_resource type="Resource" uid="uid://d3sok5h1q0nmy" path="res://Recipes/Item Stacks/Plastic_12_def.tres" id="5_rt8dv"]
+[ext_resource type="Resource" uid="uid://04z0cuzlykf2" path="res://Recipes/Item Stacks/Plastic_dust_12_def.tres" id="6_rlxif"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_ev0cp"]
 
 [resource]
-script = ExtResource("2_uct75")
+script = ExtResource("2_eic0x")
 id = &"Plastic Dust"
 display_name = "Plastic Dust"
-inputs = Array[ExtResource("1_5vgeb")]([ExtResource("2_pnfpu"), ExtResource("3_7jhjg"), ExtResource("4_1gn5w"), ExtResource("5_xr80g")])
-outputs = Array[ExtResource("1_5vgeb")]([ExtResource("6_idfmn")])
+inputs = Array[ExtResource("1_rrmyd")]([ExtResource("3_qskmo"), ExtResource("4_n6fx3"), ExtResource("5_rt8dv")])
+outputs = Array[ExtResource("1_rrmyd")]([ExtResource("6_rlxif")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

@@ -1,18 +1,16 @@
-[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://dnjc3ur3jdwya"]
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://txf27eug1vpl"]
 
-[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_1mq4l"]
-[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_epdbq"]
-[ext_resource type="Resource" uid="uid://d3fsbh4vgshxt" path="res://Recipes/Item Stacks/Battery_6_def.tres" id="2_p6thx"]
-[ext_resource type="Resource" uid="uid://bifimv5s54fgc" path="res://Recipes/Item Stacks/Chemicals_18_def.tres" id="3_rdifq"]
-[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_sa2sx"]
-[ext_resource type="Resource" uid="uid://cu0j627bapexx" path="res://Recipes/Item Stacks/Epoxy_12_def.tres" id="4_i7i20"]
-[ext_resource type="Resource" uid="uid://catg71x3d7u20" path="res://Recipes/Item Stacks/Reinforced_Housing_6_def.tres" id="5_1e5px"]
-[ext_resource type="Resource" uid="uid://cigbs2ugwut6y" path="res://Recipes/Item Stacks/Explosive_charge_6_def.tres" id="6_y4wu3"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_tuu7v"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_ga5cg"]
+[ext_resource type="Resource" uid="uid://xtu0p01zww3s" path="res://Recipes/Item Stacks/Reinforced_Housing_20_def.tres" id="3_w2emr"]
+[ext_resource type="Resource" uid="uid://lj3e8vvke6ic" path="res://Recipes/Item Stacks/Epoxy_10_def.tres" id="4_j05tz"]
+[ext_resource type="Resource" uid="uid://ru3grg82gyzr" path="res://Recipes/Item Stacks/Explosive_Charge_10_def.tres" id="5_ictbc"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_qa6h1"]
 
 [resource]
-script = ExtResource("2_epdbq")
+script = ExtResource("2_ga5cg")
 id = &"Explosive Charge"
 display_name = "Explosive Charge"
-inputs = Array[ExtResource("1_1mq4l")]([ExtResource("2_p6thx"), ExtResource("3_rdifq"), ExtResource("4_i7i20"), ExtResource("5_1e5px")])
-outputs = Array[ExtResource("1_1mq4l")]([ExtResource("6_y4wu3")])
+inputs = Array[ExtResource("1_tuu7v")]([ExtResource("3_w2emr"), ExtResource("4_j05tz")])
+outputs = Array[ExtResource("1_tuu7v")]([ExtResource("5_ictbc")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"
