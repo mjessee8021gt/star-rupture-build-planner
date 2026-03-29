@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://c2rl6dxqejdvv"]
+
+[ext_resource type="Resource" uid="uid://bj4u57sdf0e15" path="res://Recipes/Item Definitions/Electromagnet_Def.tres" id="1_j3qp0"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_k475d"]
+
+[resource]
+script = ExtResource("2_k475d")
+item = ExtResource("1_j3qp0")
+qty = 6
+id = &"Electromagnet"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

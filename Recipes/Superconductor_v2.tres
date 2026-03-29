@@ -1,9 +1,19 @@
 [gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://dqicynqf175dk"]
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_odo03"]
+[ext_resource type="Resource" uid="uid://dyjuwhq4md23x" path="res://Recipes/Item Stacks/Synthetic_Resin_24_def.tres" id="2_4lvne"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_bdug1"]
+[ext_resource type="Resource" uid="uid://cummveiewyojp" path="res://Recipes/Item Stacks/Supermagnet_36_def.tres" id="3_d4hte"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_ghmy7"]
+[ext_resource type="Resource" uid="uid://wjf4sd8lhtid" path="res://Recipes/Item Stacks/Heat_Shield_24_def.tres" id="4_7scnf"]
+[ext_resource type="Resource" uid="uid://oatcf28g1sg2" path="res://Recipes/Item Stacks/Electromagnet_12_def.tres" id="5_w4v04"]
+[ext_resource type="Resource" uid="uid://djfpqq3uhcf0j" path="res://Recipes/Item Stacks/Aerogel_24_def.tres" id="6_pt37a"]
+[ext_resource type="Resource" uid="uid://dipeg0m35xpvt" path="res://Recipes/Item Stacks/Superconductor_24_def.tres" id="7_kd8fx"]
 
 [resource]
 script = ExtResource("2_bdug1")
+id = &"Superconductor"
+display_name = "Superconducor"
+inputs = Array[ExtResource("1_odo03")]([ExtResource("2_4lvne"), ExtResource("3_d4hte"), ExtResource("4_7scnf"), ExtResource("5_w4v04"), ExtResource("6_pt37a")])
+outputs = Array[ExtResource("1_odo03")]([ExtResource("7_kd8fx")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

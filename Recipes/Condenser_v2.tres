@@ -1,9 +1,19 @@
 [gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://cffj233iwqkav"]
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_d4rkg"]
+[ext_resource type="Resource" uid="uid://conu4nitdf4ws" path="res://Recipes/Item Stacks/Basic_Fuel_18_def.tres" id="2_d3in6"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_md1u1"]
+[ext_resource type="Resource" uid="uid://cor4oynkdk0is" path="res://Recipes/Item Stacks/Nano_Fibre_12_def.tres" id="3_0drkl"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_a4gwj"]
+[ext_resource type="Resource" uid="uid://bj58tr86ohjvb" path="res://Recipes/Item Stacks/Pump_6_def.tres" id="4_ctqem"]
+[ext_resource type="Resource" uid="uid://catg71x3d7u20" path="res://Recipes/Item Stacks/Reinforced_Housing_6_def.tres" id="5_5jiin"]
+[ext_resource type="Resource" uid="uid://cinx858s0hfpx" path="res://Recipes/Item Stacks/Resonator_6_def.tres" id="6_68tf5"]
+[ext_resource type="Resource" uid="uid://d0dlcva2syw4e" path="res://Recipes/Item Stacks/Condenser_12_def.tres" id="7_co3iy"]
 
 [resource]
 script = ExtResource("2_md1u1")
+id = &"Condenser"
+display_name = "Condenser"
+inputs = Array[ExtResource("1_d4rkg")]([ExtResource("2_d3in6"), ExtResource("3_0drkl"), ExtResource("4_ctqem"), ExtResource("5_5jiin"), ExtResource("6_68tf5")])
+outputs = Array[ExtResource("1_d4rkg")]([ExtResource("7_co3iy")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

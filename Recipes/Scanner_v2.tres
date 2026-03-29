@@ -1,9 +1,19 @@
 [gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://oshucssfq217"]
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_8sg8p"]
+[ext_resource type="Resource" uid="uid://dfr8ytf6gboog" path="res://Recipes/Item Stacks/Generator_12_def.tres" id="2_7wf34"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_wnk7m"]
+[ext_resource type="Resource" uid="uid://ysymjklknymv" path="res://Recipes/Item Stacks/Lens_12_def.tres" id="3_8pus8"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_v2d73"]
+[ext_resource type="Resource" uid="uid://l65kqubh5g2r" path="res://Recipes/Item Stacks/Pseudorubber_Insulator_18_def.tres" id="4_mr4ym"]
+[ext_resource type="Resource" uid="uid://b3uhtchktalfa" path="res://Recipes/Item Stacks/Stabilizer_36_def.tres" id="5_r6kvp"]
+[ext_resource type="Resource" uid="uid://cl7d6g5o47r0h" path="res://Recipes/Item Stacks/Uberfilament_6_def.tres" id="6_afwrk"]
+[ext_resource type="Resource" uid="uid://b4kgoihy8bkmj" path="res://Recipes/Item Stacks/Scanner_12_def.tres" id="7_52awr"]
 
 [resource]
 script = ExtResource("2_wnk7m")
+id = &"Scanner"
+display_name = "Scanner"
+inputs = Array[ExtResource("1_8sg8p")]([ExtResource("2_7wf34"), ExtResource("3_8pus8"), ExtResource("4_mr4ym"), ExtResource("5_r6kvp"), ExtResource("6_afwrk")])
+outputs = Array[ExtResource("1_8sg8p")]([ExtResource("7_52awr")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

@@ -1,9 +1,19 @@
 [gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://568fqdriyj1u"]
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_ki6l5"]
+[ext_resource type="Resource" uid="uid://lj3e8vvke6ic" path="res://Recipes/Item Stacks/Epoxy_10_def.tres" id="2_lui27"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_nomdp"]
+[ext_resource type="Resource" uid="uid://ru3grg82gy0r" path="res://Recipes/Item Stacks/Explosive_Charge_10_def.tres" id="3_g5pbr"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_iqh15"]
+[ext_resource type="Resource" uid="uid://b2uujabeybm46" path="res://Recipes/Item Stacks/Electromagnetic_coil_30_def.tres" id="4_88d5f"]
+[ext_resource type="Resource" uid="uid://snwjilsefp7q" path="res://Recipes/Item Stacks/Lens_10_def.tres" id="5_d5tgc"]
+[ext_resource type="Resource" uid="uid://16eplamq58aj" path="res://Recipes/Item Stacks/Resonator_10_def.tres" id="6_n2utv"]
+[ext_resource type="Resource" uid="uid://cx4s874t84vxw" path="res://Recipes/Item Stacks/Laser_Emitter_20_def.tres" id="7_mejnw"]
 
 [resource]
 script = ExtResource("2_nomdp")
+id = &"Laser Emitter"
+display_name = "Laser Emitter"
+inputs = Array[ExtResource("1_ki6l5")]([ExtResource("2_lui27"), ExtResource("3_g5pbr"), ExtResource("4_88d5f"), ExtResource("5_d5tgc"), ExtResource("6_n2utv")])
+outputs = Array[ExtResource("1_ki6l5")]([ExtResource("7_mejnw")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

@@ -2,8 +2,18 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_l8bpa"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_o0elt"]
+[ext_resource type="Resource" uid="uid://dktor42baawb7" path="res://Recipes/Item Stacks/Pressure_Tank_6_def.tres" id="2_vl1wq"]
+[ext_resource type="Resource" uid="uid://bxsn5jtmk12k6" path="res://Recipes/Item Stacks/Plastic_6_def.tres" id="3_0v26f"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_rsh6k"]
+[ext_resource type="Resource" uid="uid://cv2wag3hdkwmn" path="res://Recipes/Item Stacks/Geothite_lattice_6_def.tres" id="4_u86tb"]
+[ext_resource type="Resource" uid="uid://c2rl6dxqejdvv" path="res://Recipes/Item Stacks/Electromagnet_6_def.tres" id="5_6b0oe"]
+[ext_resource type="Resource" uid="uid://nva2ploanfia" path="res://Recipes/Item Stacks/Applicator_24_def.tres" id="6_do701"]
+[ext_resource type="Resource" uid="uid://daofbojunql7e" path="res://Recipes/Item Stacks/Ion Injector_12_def.tres" id="7_usrn4"]
 
 [resource]
 script = ExtResource("2_o0elt")
+id = &"Ion Injector"
+display_name = "Ion Injector"
+inputs = Array[ExtResource("1_l8bpa")]([ExtResource("2_vl1wq"), ExtResource("3_0v26f"), ExtResource("4_u86tb"), ExtResource("5_6b0oe"), ExtResource("6_do701")])
+outputs = Array[ExtResource("1_l8bpa")]([ExtResource("7_usrn4")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

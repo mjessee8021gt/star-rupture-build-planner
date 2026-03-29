@@ -20,24 +20,24 @@ func refresh() -> void:
 		_add_entry(patchnote)
 func _add_entry(patchNote: PatchNote) -> void:
 	if entry_scene == null:
-		push_warning("PatchNotesPanel: entry_scene is not set.")
+		print("PatchNotesPanel: entry_scene is not set.")
 		return
 	var entry := entry_scene.instantiate() as Control
 	if entry == null:
-		push_warning("PatchNotesPanel: entry_scene is not set.")
+		print("PatchNotesPanel: entry_scene is not set.")
 		return
 	list.add_child(entry)
 	
 	var version_label := entry.get_node_or_null("MarginContainer/VBoxContainer/Version") as Label
 	if version_label == null:
-		push_warning("PatchNotesPanel: version_label is not set.")
+		print("PatchNotesPanel: version_label is not set.")
 		return
 	version_label.text = "Version " + str(patchNote.patch_version)
 	print(version_label.text)
 	
 	var notes_rtl := entry.get_node("MarginContainer/VBoxContainer/Notes") as RichTextLabel
 	if notes_rtl == null:
-		push_warning("PatchNotesPanel: notes_rtl is not set.")
+		print("PatchNotesPanel: notes_rtl is not set.")
 		return
 	notes_rtl.bbcode_enabled = false
 	var unformatted_notes := patchNote.patch_notes
@@ -47,7 +47,7 @@ func _add_entry(patchNote: PatchNote) -> void:
 	
 	var issues_rtl := entry.get_node("MarginContainer/VBoxContainer/Issues") as RichTextLabel
 	if issues_rtl == null:
-		push_warning("PatchNotesPanel: issues_rtl is not set.")
+		print("PatchNotesPanel: issues_rtl is not set.")
 		return
 	issues_rtl.bbcode_enabled = false
 	issues_rtl.text = "Known Issues:\n" + (patchNote.known_issues if patchNote.known_issues != null else "")
@@ -64,12 +64,12 @@ func _load_patchnote_resources(dir_path: String) -> Array[PatchNote]:
 	var normalized_dir := dir_path.trim_suffix("/")
 	var directory := DirAccess.open(normalized_dir)
 	if directory == null:
-		push_warning("PatchNotesPanel: Could not open directory: " + normalized_dir)
+		print("PatchNotesPanel: Could not open directory: " + normalized_dir)
 		return out
 		
 	var files := directory.get_files()
 	if files.is_empty():
-		push_warning("PatchNotesPanel: No files found in directory: " + normalized_dir + ". If this happens in HTML5 exports, ensure patch note resources are included in export filters.")
+		print("PatchNotesPanel: No files found in directory: " + normalized_dir + ". If this happens in HTML5 exports, ensure patch note resources are included in export filters.")
 		return out
 	files.sort()
 	for file_name in files:
@@ -81,7 +81,7 @@ func _load_patchnote_resources(dir_path: String) -> Array[PatchNote]:
 		if res is PatchNote:
 			out.append(res)
 		else:
-			push_warning("PatchNotesPanel: Resource at " + path + " is not a PatchNote Resource.")
+			print("PatchNotesPanel: Resource at " + path + " is not a PatchNote Resource.")
 	
 	return out
 	
