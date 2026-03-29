@@ -25,6 +25,8 @@ func _ready() -> void:
 	extractionMenu.name = "Extraction"
 	extractionMenu.add_item("Ore Excavator")
 	extractionMenu.set_item_metadata(extractionMenu.item_count-1, &"ore_excavator")
+	extractionMenu.add_item("Ore Excavator V2")
+	extractionMenu.set_item_metadata(extractionMenu.item_count-1, &"ore_excavator_v2")
 	extractionMenu.add_item("Helium-3 Extractor")
 	extractionMenu.set_item_metadata(extractionMenu.item_count-1, &"helium_extractor")
 	extractionMenu.add_item("Sulfur Extractor")

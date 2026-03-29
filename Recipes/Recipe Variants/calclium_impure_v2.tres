@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RecipeVariant" format=3 uid="uid://vcd38ftubirk"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_soqvu"]
+[ext_resource type="Resource" uid="uid://c2xqfanqaachy" path="res://Recipes/Item Stacks/Calcium_ore_180_def.tres" id="2_soqvu"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_ms71d"]
+
+[resource]
+script = ExtResource("3_ms71d")
+id = &"impure_Calcium"
+display_name = "Impure"
+output_qty = 60
+outputs = Array[ExtResource("1_soqvu")]([ExtResource("2_soqvu")])
+metadata/_custom_type_script = "uid://cvtli7c3bbfbl"

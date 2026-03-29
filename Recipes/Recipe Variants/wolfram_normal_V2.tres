@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RecipeVariant" format=3 uid="uid://bpanw1738xd51"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_p2sat"]
+[ext_resource type="Resource" uid="uid://dmcw7r27py0ar" path="res://Recipes/Item Stacks/Wolfram_ore_300_def.tres" id="2_p2sat"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_mlrxx"]
+
+[resource]
+script = ExtResource("3_mlrxx")
+id = &"normal_wolfram"
+display_name = "Normal"
+output_qty = 120
+outputs = Array[ExtResource("1_p2sat")]([ExtResource("2_p2sat")])
+metadata/_custom_type_script = "uid://cvtli7c3bbfbl"

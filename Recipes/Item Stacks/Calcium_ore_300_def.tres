@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://mtc86k6psq0"]
+
+[ext_resource type="Resource" uid="uid://wvvw41rrhii2" path="res://Recipes/Item Definitions/Calcium_ore_Def.tres" id="1_j72yd"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_le5pj"]
+
+[resource]
+script = ExtResource("2_le5pj")
+item = ExtResource("1_j72yd")
+qty = 300
+id = &"Calcium Ore"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

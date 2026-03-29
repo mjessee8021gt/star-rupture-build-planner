@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://cpffqil62a73j"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_u15it"]
+[ext_resource type="Resource" uid="uid://d0isgjiof2cfr" path="res://Recipes/Item Stacks/Titanium_ore_180_def.tres" id="2_u15it"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="3_srp65"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="4_uns1y"]
+[ext_resource type="Resource" uid="uid://daj3taksdw801" path="res://Recipes/Recipe Variants/titanium_impure_v2.tres" id="5_beaeu"]
+[ext_resource type="Resource" uid="uid://qvi1j0e8oukk" path="res://Recipes/Recipe Variants/titanium_normal_v2.tres" id="6_srp65"]
+[ext_resource type="Resource" uid="uid://c4t3xvwucux8u" path="res://Recipes/Recipe Variants/titanium_pure_v2.tres" id="7_uns1y"]
+
+[resource]
+script = ExtResource("3_srp65")
+id = &"Titanium Ore"
+display_name = "Titanium Ore"
+outputs = Array[ExtResource("1_u15it")]([ExtResource("2_u15it")])
+variants = Array[ExtResource("4_uns1y")]([ExtResource("5_beaeu"), ExtResource("6_srp65"), ExtResource("7_uns1y")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RecipeVariant" format=3 uid="uid://daj3taksdw801"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_fnt2f"]
+[ext_resource type="Resource" uid="uid://d0isgjiof2cfr" path="res://Recipes/Item Stacks/Titanium_ore_180_def.tres" id="2_fnt2f"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_pt0ij"]
+
+[resource]
+script = ExtResource("3_pt0ij")
+id = &"impure_titanium"
+display_name = "Impure"
+output_qty = 60
+outputs = Array[ExtResource("1_fnt2f")]([ExtResource("2_fnt2f")])
+metadata/_custom_type_script = "uid://cvtli7c3bbfbl"

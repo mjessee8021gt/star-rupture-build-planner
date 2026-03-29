@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://dknfbwm44l2e7"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_fhx64"]
+[ext_resource type="Resource" uid="uid://cincokmkyi2ob" path="res://Recipes/Item Stacks/Wolfram_ore_180_def.tres" id="2_fhx64"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="3_mmvy4"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="4_b2wjf"]
+[ext_resource type="Resource" uid="uid://bv8fcoxp83htl" path="res://Recipes/Recipe Variants/wolfram_impure_v2.tres" id="5_eithv"]
+[ext_resource type="Resource" uid="uid://bpanw1738xd51" path="res://Recipes/Recipe Variants/wolfram_normal_V2.tres" id="6_mmvy4"]
+[ext_resource type="Resource" uid="uid://oc25sahxmgd" path="res://Recipes/Recipe Variants/wolfram_pure_v2.tres" id="7_b2wjf"]
+
+[resource]
+script = ExtResource("3_mmvy4")
+id = &"Wolfram Ore"
+display_name = "Wolfram Ore"
+outputs = Array[ExtResource("1_fhx64")]([ExtResource("2_fhx64")])
+variants = Array[ExtResource("4_b2wjf")]([ExtResource("5_eithv"), ExtResource("6_mmvy4"), ExtResource("7_b2wjf")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

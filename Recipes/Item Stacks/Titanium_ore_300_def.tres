@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://da3psgimyyfdq"]
+
+[ext_resource type="Resource" uid="uid://cjf1gu3rca5qx" path="res://Recipes/Item Definitions/Titanium_ore_Def.tres" id="1_ybjje"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_wusde"]
+
+[resource]
+script = ExtResource("2_wusde")
+item = ExtResource("1_ybjje")
+qty = 300
+id = &"Titanium Ore"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"
