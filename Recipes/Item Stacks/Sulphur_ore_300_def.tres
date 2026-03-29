@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://q6n4h2sm5ubi"]
+
+[ext_resource type="Resource" uid="uid://c7frpm58otrye" path="res://Recipes/Item Definitions/Sulphur_ore_Def.tres" id="1_em0i2"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_qdukf"]
+
+[resource]
+script = ExtResource("2_qdukf")
+item = ExtResource("1_em0i2")
+qty = 300
+id = &"Sulfur Ore"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

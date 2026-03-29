@@ -8,6 +8,6 @@
 script = ExtResource("3_6lst2")
 id = &"normal_calcium"
 display_name = "Normal"
-output_qty = 120
+output_qty = 300
 outputs = Array[ExtResource("1_mltr4")]([ExtResource("2_mltr4")])
 metadata/_custom_type_script = "uid://cvtli7c3bbfbl"

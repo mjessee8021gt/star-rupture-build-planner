@@ -8,5 +8,5 @@
 script = ExtResource("3_0dc1i")
 id = &"pure_calcium"
 display_name = "Pure"
-output_qty = 240
+output_qty = 480
 outputs = Array[ExtResource("1_rvryn")]([ExtResource("2_rvryn")])

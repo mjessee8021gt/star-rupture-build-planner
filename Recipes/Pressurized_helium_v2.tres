@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://bkbjt50gjty42"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_27mlg"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_587ap"]
+[ext_resource type="Resource" uid="uid://dre2h2mk0pvn5" path="res://Recipes/Item Stacks/Sulphur_ore_120_def.tres" id="2_lib4h"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_1ypyf"]
+[ext_resource type="Resource" uid="uid://c2y03n7ou71hd" path="res://Recipes/Item Stacks/Helium-3_90_def.tres" id="3_88ner"]
+[ext_resource type="Resource" uid="uid://d4cjngilxosma" path="res://Recipes/Item Stacks/Calcium_powder_60_def.tres" id="4_u5k8o"]
+[ext_resource type="Resource" uid="uid://bhrj8kqoshgb6" path="res://Recipes/Item Stacks/Pressurized_helium_150_def.tres" id="5_1o8n2"]
+
+[resource]
+script = ExtResource("2_587ap")
+id = &"Pressurized Helium"
+display_name = "Pressurized Helium"
+inputs = Array[ExtResource("1_27mlg")]([ExtResource("2_lib4h"), ExtResource("3_88ner"), ExtResource("4_u5k8o")])
+outputs = Array[ExtResource("1_27mlg")]([ExtResource("5_1o8n2")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

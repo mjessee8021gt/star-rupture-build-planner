@@ -102,6 +102,7 @@ func populate_recipe_dropdown() -> void:
 		recipe_dropdown.add_item(recipe.display_name)
 		#we need to store which recipe we're referring to above
 		recipe_dropdown.set_item_metadata(i, recipe)
+		print(recipe.display_name + " had been added to the recipe drop down")
 		
 	#now we're selecting the first recipe by defualt and populating the purity list
 	if available_recipes.size() > 0:

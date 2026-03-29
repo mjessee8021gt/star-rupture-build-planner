@@ -8,6 +8,6 @@
 script = ExtResource("3_6ir74")
 id = &"normal_titanium"
 display_name = "Normal"
-output_qty = 120
+output_qty = 300
 outputs = Array[ExtResource("1_bhklt")]([ExtResource("2_bhklt")])
 metadata/_custom_type_script = "uid://cvtli7c3bbfbl"

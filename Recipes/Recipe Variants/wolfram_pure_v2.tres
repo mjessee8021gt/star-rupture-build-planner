@@ -8,5 +8,5 @@
 script = ExtResource("3_tl04f")
 id = &"pure_wolfram"
 display_name = "Pure"
-output_qty = 240
+output_qty = 480
 outputs = Array[ExtResource("1_kxxfl")]([ExtResource("2_kxxfl")])

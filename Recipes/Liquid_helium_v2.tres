@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://c4v4cgo3c5hpb"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_mhi3x"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_caboi"]
+[ext_resource type="Resource" uid="uid://bnpc85srb8qlm" path="res://Recipes/Item Stacks/Chemicals_20_def.tres" id="2_r2xo6"]
+[ext_resource type="Resource" uid="uid://bkby3tichns71" path="res://Recipes/Item Stacks/Hardening_agent_20_def.tres" id="3_eumfp"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_h523u"]
+[ext_resource type="Resource" uid="uid://cbopjg7qfv0xx" path="res://Recipes/Item Stacks/Refined_Oil_20_def.tres" id="4_o7bi0"]
+[ext_resource type="Resource" uid="uid://c06mihf7gyme" path="res://Recipes/Item Stacks/Pressurized_helium_20_def.tres" id="5_q67xy"]
+[ext_resource type="Resource" uid="uid://bl180hhc2uo2q" path="res://Recipes/Item Stacks/Liquid_helium_100_def.tres" id="6_un23n"]
+
+[resource]
+script = ExtResource("2_caboi")
+id = &"Liquid Helium"
+display_name = "Liquid Helium"
+inputs = Array[ExtResource("1_mhi3x")]([ExtResource("2_r2xo6"), ExtResource("3_eumfp"), ExtResource("4_o7bi0"), ExtResource("5_q67xy")])
+outputs = Array[ExtResource("1_mhi3x")]([ExtResource("6_un23n")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

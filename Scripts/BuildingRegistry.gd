@@ -47,7 +47,9 @@ const BUILDINGS := {
 	&"fabricator_v2": preload("res://Buildings/Fabricator V2.tscn"),
 	&"furnace_v2": preload("res://Buildings/Furnace V2.tscn"),
 	&"orbital_launcher_v2": preload("res://Buildings/Orbital_launcher_v2.tscn"),
-	&"ore_excavator_v2": preload("res://Buildings/OreExcavator_v2.tscn")
+	&"ore_excavator_v2": preload("res://Buildings/OreExcavator_v2.tscn"),
+	&"compounder_v2": preload("res://Buildings/Compounder V2.tscn"),
+	&"constructorizer_v2": preload("res://Buildings/Constructorizer V2.tscn")
 }
 
 static func get_scene(key: StringName) -> PackedScene:

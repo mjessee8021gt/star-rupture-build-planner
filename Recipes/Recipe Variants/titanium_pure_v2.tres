@@ -8,5 +8,5 @@
 script = ExtResource("3_fod18")
 id = &"pure_titanium"
 display_name = "Pure"
-output_qty = 240
+output_qty = 480
 outputs = Array[ExtResource("1_teai6")]([ExtResource("2_teai6")])

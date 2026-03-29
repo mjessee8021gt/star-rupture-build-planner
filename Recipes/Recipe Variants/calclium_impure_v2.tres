@@ -8,6 +8,6 @@
 script = ExtResource("3_ms71d")
 id = &"impure_Calcium"
 display_name = "Impure"
-output_qty = 60
+output_qty = 180
 outputs = Array[ExtResource("1_soqvu")]([ExtResource("2_soqvu")])
 metadata/_custom_type_script = "uid://cvtli7c3bbfbl"

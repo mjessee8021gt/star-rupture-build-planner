@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://dj147hmwd2bpx"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_q7yhp"]
+[ext_resource type="Resource" uid="uid://b1yx4odq5q3mn" path="res://Recipes/Item Stacks/Chemicals_60_def.tres" id="2_v4v6v"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_y7gh2"]
+[ext_resource type="Resource" uid="uid://q6n4h2sm5ubi" path="res://Recipes/Item Stacks/Sulphur_ore_300_def.tres" id="3_0meol"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_quegu"]
+[ext_resource type="Resource" uid="uid://bypvganhgqlp3" path="res://Recipes/Item Stacks/Wolfram_powder_30_def.tres" id="4_khh3p"]
+[ext_resource type="Resource" uid="uid://cndjkvkc707yv" path="res://Recipes/Item Stacks/Sulpheric_acid_240_def.tres" id="5_1wwne"]
+
+[resource]
+script = ExtResource("2_y7gh2")
+id = &"Sulferic Acid"
+display_name = "Sulferic Acid"
+inputs = Array[ExtResource("1_q7yhp")]([ExtResource("2_v4v6v"), ExtResource("3_0meol"), ExtResource("4_khh3p")])
+outputs = Array[ExtResource("1_q7yhp")]([ExtResource("5_1wwne")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

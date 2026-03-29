@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://b042gqyapg14j"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_06ftq"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_2y1c7"]
+[ext_resource type="Resource" uid="uid://eyev6bs4ljau" path="res://Recipes/Item Stacks/Sulpheric_acid_100_def.tres" id="2_gwo0m"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_nxio6"]
+[ext_resource type="Resource" uid="uid://qqx4bxg2qo3f" path="res://Recipes/Item Stacks/Hardening_agent_40_def.tres" id="3_ovohx"]
+[ext_resource type="Resource" uid="uid://suformqkt2bo" path="res://Recipes/Item Stacks/Calcite_sheet_120_def.tres" id="4_6hmt7"]
+[ext_resource type="Resource" uid="uid://bs4nuu3phge2n" path="res://Recipes/Item Stacks/Synthetic_Resin_60_def.tres" id="5_i6npg"]
+
+[resource]
+script = ExtResource("2_2y1c7")
+id = &"Synthetic Resin"
+display_name = "Synthetic Resin"
+inputs = Array[ExtResource("1_06ftq")]([ExtResource("2_gwo0m"), ExtResource("3_ovohx"), ExtResource("4_6hmt7")])
+outputs = Array[ExtResource("1_06ftq")]([ExtResource("5_i6npg")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

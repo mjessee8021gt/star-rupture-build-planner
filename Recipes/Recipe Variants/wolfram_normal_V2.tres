@@ -8,6 +8,6 @@
 script = ExtResource("3_mlrxx")
 id = &"normal_wolfram"
 display_name = "Normal"
-output_qty = 120
+output_qty = 300
 outputs = Array[ExtResource("1_p2sat")]([ExtResource("2_p2sat")])
 metadata/_custom_type_script = "uid://cvtli7c3bbfbl"

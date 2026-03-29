@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://eyev6bs4ljau"]
+
+[ext_resource type="Resource" uid="uid://dbnmwgg0bm37r" path="res://Recipes/Item Definitions/Sulpheric_acid_Def.tres" id="1_8fpse"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_rbc3s"]
+
+[resource]
+script = ExtResource("2_rbc3s")
+item = ExtResource("1_8fpse")
+qty = 100
+id = &"Sulferic Acid"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"
