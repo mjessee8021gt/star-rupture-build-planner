@@ -1,7 +1,7 @@
 extends PopupPanel
 
-@export var patch_notes_dir: String = "res://Patch Notes/"
 @export var entry_scene: PackedScene
+@export var patch_notes: PatchRegistry
 
 @onready var list: VBoxContainer = $PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/List
 
@@ -11,7 +11,7 @@ func _ready() -> void:
 func refresh() -> void:
 	_clear_list()
 	
-	var notes := _load_patchnote_resources(patch_notes_dir)
+	var notes = patch_notes.patch_notes
 	#Sort newest-first.
 	notes.sort_custom(func(a: PatchNote, b: PatchNote) -> bool:
 		return _version_is_newer(str(a.patch_version), str(b.patch_version)))
@@ -80,6 +80,7 @@ func _load_patchnote_resources(dir_path: String) -> Array[PatchNote]:
 		var res := ResourceLoader.load(path)
 		if res is PatchNote:
 			out.append(res)
+			print("output file appended")
 		else:
 			print("PatchNotesPanel: Resource at " + path + " is not a PatchNote Resource.")
 	
