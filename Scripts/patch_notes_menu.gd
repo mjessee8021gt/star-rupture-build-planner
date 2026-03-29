@@ -1,5 +1,7 @@
 extends PopupPanel
 
+const DEFAULT_PATCH_REGISTRY: PatchRegistry = preload("res://Patch Notes/Patch_Registry.tres")
+
 @export var entry_scene: PackedScene
 @export var patch_notes: PatchRegistry
 
@@ -11,20 +13,43 @@ func _ready() -> void:
 func refresh() -> void:
 	_clear_list()
 	
-	var notes = patch_notes.patch_notes
-	#Sort newest-first.
+	var notes := _get_sorted_notes()
+	if notes.is_empty():
+		return
+	
+	for note in notes:
+		_add_entry(note)
+	
+func _get_sorted_notes() -> Array[PatchNote]:
+	var notes := _read_registry_notes()
 	notes.sort_custom(func(a: PatchNote, b: PatchNote) -> bool:
 		return _version_is_newer(str(a.patch_version), str(b.patch_version)))
+	return notes
 	
-	for patchnote in notes:
-		_add_entry(patchnote)
-func _add_entry(patchNote: PatchNote) -> void:
+func _read_registry_notes() -> Array[PatchNote]:
+	var registry := _resolve_registry()
+	if registry == null:
+		print("PatchNotesPanel: Patch Registry is not available.")
+		return[]
+	return registry.get_patch_notes()
+		
+func _resolve_registry() -> PatchRegistry:
+	if patch_notes != null:
+		return patch_notes
+		
+	if DEFAULT_PATCH_REGISTRY != null:
+		patch_notes = DEFAULT_PATCH_REGISTRY
+		return patch_notes
+		
+	return null
+	
+func _add_entry(patch_note: PatchNote) -> void:
 	if entry_scene == null:
 		print("PatchNotesPanel: entry_scene is not set.")
 		return
 	var entry := entry_scene.instantiate() as Control
 	if entry == null:
-		print("PatchNotesPanel: entry_scene is not set.")
+		print("PatchNotesPanel: entry_scene is not a control scene.")
 		return
 	list.add_child(entry)
 	
@@ -32,59 +57,27 @@ func _add_entry(patchNote: PatchNote) -> void:
 	if version_label == null:
 		print("PatchNotesPanel: version_label is not set.")
 		return
-	version_label.text = "Version " + str(patchNote.patch_version)
-	print(version_label.text)
+	version_label.text = "Version " + str(patch_note.patch_version)
 	
-	var notes_rtl := entry.get_node("MarginContainer/VBoxContainer/Notes") as RichTextLabel
+	var notes_rtl := entry.get_node_or_null("MarginContainer/VBoxContainer/Notes") as RichTextLabel
 	if notes_rtl == null:
 		print("PatchNotesPanel: notes_rtl is not set.")
 		return
 	notes_rtl.bbcode_enabled = false
-	var unformatted_notes := patchNote.patch_notes
-	var formatted_notes = unformatted_notes.replace("\\n", "\n")
-	notes_rtl.text = "Patch Notes:\n" + (formatted_notes if formatted_notes != null else "")
-	print(notes_rtl.text)
+	var formatted_notes := patch_note.patch_notes.replace("\\n", "\n")
+	notes_rtl.text = "Patch Notes:\n" + formatted_notes
 	
-	var issues_rtl := entry.get_node("MarginContainer/VBoxContainer/Issues") as RichTextLabel
+	var issues_rtl := entry.get_node_or_null("MarginContainer/VBoxContainer/Issues") as RichTextLabel
 	if issues_rtl == null:
 		print("PatchNotesPanel: issues_rtl is not set.")
 		return
 	issues_rtl.bbcode_enabled = false
-	issues_rtl.text = "Known Issues:\n" + (patchNote.known_issues if patchNote.known_issues != null else "")
-	print(issues_rtl.text)
 	
 	entry.visible = true
 	
 func _clear_list() -> void:
 	for child in list.get_children():
 		child.queue_free()
-
-func _load_patchnote_resources(dir_path: String) -> Array[PatchNote]:
-	var out: Array[PatchNote] = []
-	var normalized_dir := dir_path.trim_suffix("/")
-	var directory := DirAccess.open(normalized_dir)
-	if directory == null:
-		print("PatchNotesPanel: Could not open directory: " + normalized_dir)
-		return out
-		
-	var files := directory.get_files()
-	if files.is_empty():
-		print("PatchNotesPanel: No files found in directory: " + normalized_dir + ". If this happens in HTML5 exports, ensure patch note resources are included in export filters.")
-		return out
-	files.sort()
-	for file_name in files:
-		if not (file_name.ends_with(".tres") or file_name.ends_with(".res")):
-			continue
-			
-		var path := normalized_dir.path_join(file_name)
-		var res := ResourceLoader.load(path)
-		if res is PatchNote:
-			out.append(res)
-			print("output file appended")
-		else:
-			print("PatchNotesPanel: Resource at " + path + " is not a PatchNote Resource.")
-	
-	return out
 	
 func _version_is_newer(a: String, b: String) -> bool:
 	var ka := _version_key(a)
