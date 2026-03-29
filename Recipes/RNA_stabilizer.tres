@@ -1,18 +1,18 @@
 [gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://4uevnxq4sasu"]
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_niqrs"]
-[ext_resource type="Resource" uid="uid://x6xqwn8gefn2" path="res://Recipes/Item Stacks/Applicator_5_def.tres" id="2_invaa"]
+[ext_resource type="Resource" uid="uid://clbmnrnicvsoi" path="res://Recipes/Item Stacks/Nanosyringe_5_def.tres" id="2_invaa"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_t5lwe"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_4vv71"]
 [ext_resource type="Resource" uid="uid://br3d0ymfem6nw" path="res://Recipes/Item Stacks/Organic_Compound_10_def.tres" id="3_y6uyd"]
-[ext_resource type="Resource" uid="uid://dyfcxjsev5hqs" path="res://Recipes/Item Stacks/Plastic_5_def.tres" id="4_2sykr"]
-[ext_resource type="Resource" uid="uid://dpteo5owg0nm7" path="res://Recipes/Item Stacks/Synthetic_silicon_10_def.tres" id="5_2hdj5"]
-[ext_resource type="Resource" uid="uid://c3orpkqisd3lf" path="res://Recipes/Item Stacks/RNA_Stabilizer_10_def.tres" id="6_6a7yl"]
+[ext_resource type="Resource" uid="uid://cb1wtpn12rcyf" path="res://Recipes/Item Stacks/Plastic_20_def.tres" id="4_y6uyd"]
+[ext_resource type="Resource" path="res://Recipes/Item Stacks/Synthetic_Protein_10_def.tres" id="5_2sykr"]
+[ext_resource type="Resource" uid="uid://dfxqkq1dnxpbp" path="res://Recipes/Item Stacks/RNA_Stabilizer_5_def.tres" id="6_2hdj5"]
 
 [resource]
 script = ExtResource("2_t5lwe")
 id = &"RNA Stabilizer"
 display_name = "RNA Stabilizer"
-inputs = Array[ExtResource("1_niqrs")]([ExtResource("2_invaa"), ExtResource("3_y6uyd"), ExtResource("4_2sykr"), ExtResource("5_2hdj5")])
-outputs = Array[ExtResource("1_niqrs")]([ExtResource("6_6a7yl")])
+inputs = Array[ExtResource("1_niqrs")]([ExtResource("2_invaa"), ExtResource("3_y6uyd"), ExtResource("4_y6uyd"), ExtResource("5_2sykr")])
+outputs = Array[ExtResource("1_niqrs")]([ExtResource("6_2hdj5")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

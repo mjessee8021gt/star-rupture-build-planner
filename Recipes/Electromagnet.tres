@@ -5,13 +5,13 @@
 [ext_resource type="Resource" uid="uid://cfanj6upo5847" path="res://Recipes/Item Stacks/Synthetic_Resin_36_def.tres" id="2_y5k7p"]
 [ext_resource type="Resource" uid="uid://dakofvdj1p1fy" path="res://Recipes/Item Stacks/Electromagnetic_coil_36_def.tres" id="3_j5qcp"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_xbr0w"]
-[ext_resource type="Resource" uid="uid://blogg2fha8y8n" path="res://Recipes/Item Stacks/Accumulator_24_def.tres" id="4_5duup"]
+[ext_resource type="Resource" uid="uid://d20cgkbe20xrg" path="res://Recipes/Item Stacks/Accumulator_12_def.tres" id="4_y5k7p"]
 [ext_resource type="Resource" uid="uid://oatcf28g1sg2" path="res://Recipes/Item Stacks/Electromagnet_12_def.tres" id="5_poi7b"]
 
 [resource]
 script = ExtResource("2_gi0cu")
 id = &"Electromagnet"
 display_name = "Electromagnet"
-inputs = Array[ExtResource("1_1uv04")]([ExtResource("2_y5k7p"), ExtResource("3_j5qcp"), ExtResource("4_5duup")])
+inputs = Array[ExtResource("1_1uv04")]([ExtResource("2_y5k7p"), ExtResource("3_j5qcp"), ExtResource("4_y5k7p")])
 outputs = Array[ExtResource("1_1uv04")]([ExtResource("5_poi7b")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

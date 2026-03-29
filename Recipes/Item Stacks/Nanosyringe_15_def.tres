@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://ccnkhsb2bn1b7"]
+
+[ext_resource type="Resource" uid="uid://cvkr74osfxvuc" path="res://Recipes/Item Definitions/Nanosyringe_Def.tres" id="1_13bm8"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_64hqe"]
+
+[resource]
+script = ExtResource("2_64hqe")
+item = ExtResource("1_13bm8")
+qty = 15
+id = &"Nanosyringe"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

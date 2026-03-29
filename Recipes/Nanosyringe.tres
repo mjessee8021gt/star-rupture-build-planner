@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://dic4mfcb5m6m0"]
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_xxut2"]
-[ext_resource type="Resource" uid="uid://dn3bban3nb4h5" path="res://Recipes/Item Stacks/Accumulator_10_def.tres" id="2_e4pg0"]
+[ext_resource type="Resource" uid="uid://2jpqr0hq54nh" path="res://Recipes/Item Stacks/Applicator_12_def.tres" id="2_e4pg0"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_xyjbd"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_wllpg"]
-[ext_resource type="Resource" uid="uid://snwjilsefp7q" path="res://Recipes/Item Stacks/Lens_10_def.tres" id="3_yu1k4"]
-[ext_resource type="Resource" uid="uid://c4lhcxxmetb3x" path="res://Recipes/Item Stacks/Nano_Fibre_10_def.tres" id="4_t1vpn"]
-[ext_resource type="Resource" uid="uid://brkkljemn4djp" path="res://Recipes/Item Stacks/Substance_FHS-135-493_5_def.tres" id="5_ldxbx"]
-[ext_resource type="Resource" uid="uid://b6tu8juqxssmy" path="res://Recipes/Item Stacks/Nano_Fibre_5_def.tres" id="6_ni0dv"]
+[ext_resource type="Resource" uid="uid://dimybgc0tx5yu" path="res://Recipes/Item Stacks/Hardening_agent_6_def.tres" id="3_yu1k4"]
+[ext_resource type="Resource" uid="uid://c41tagmaftltg" path="res://Recipes/Item Stacks/Nano_Fibre_6_def.tres" id="4_t1vpn"]
+[ext_resource type="Resource" uid="uid://dq8acl4iao78x" path="res://Recipes/Item Stacks/Substance_FHS-135-493_6_def.tres" id="5_ldxbx"]
+[ext_resource type="Resource" uid="uid://c5a2hpgvqv4p0" path="res://Recipes/Item Stacks/Nanosyringe_6_def.tres" id="6_ni0dv"]
 
 [resource]
 script = ExtResource("2_xyjbd")

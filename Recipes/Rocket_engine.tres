@@ -2,17 +2,18 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_4io1m"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_6cton"]
-[ext_resource type="Resource" uid="uid://fh4sndfk0d0y" path="res://Recipes/Item Stacks/Geothite_Powder_18_def.tres" id="2_eambx"]
-[ext_resource type="Resource" uid="uid://cnos7fa5ojsst" path="res://Recipes/Item Stacks/Nozzle_18_def.tres" id="3_bvle4"]
+[ext_resource type="Resource" uid="uid://t64fobi4wnke" path="res://Recipes/Item Stacks/Rocket_Fuel_20_def.tres" id="2_bvle4"]
+[ext_resource type="Resource" uid="uid://drpawyqhbhexf" path="res://Recipes/Item Stacks/Nozzle_8_def.tres" id="3_ac83f"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_tqh7i"]
-[ext_resource type="Resource" uid="uid://bj58tr86ohjvb" path="res://Recipes/Item Stacks/Pump_6_def.tres" id="4_ac83f"]
-[ext_resource type="Resource" uid="uid://ccs6nl27tsvxh" path="res://Recipes/Item Stacks/Turbine_6_def.tres" id="5_5j4jd"]
-[ext_resource type="Resource" uid="uid://tcnepgg3buap" path="res://Recipes/Item Stacks/Rocket_Engine_6_def.tres" id="6_bgcj1"]
+[ext_resource type="Resource" uid="uid://eqs6601ggrai" path="res://Recipes/Item Stacks/Pump_12_def.tres" id="4_5j4jd"]
+[ext_resource type="Resource" uid="uid://cj5pgtnx27ijq" path="res://Recipes/Item Stacks/Turbine_4_def.tres" id="5_bgcj1"]
+[ext_resource type="Resource" uid="uid://bfd2s2rh1rtxm" path="res://Recipes/Item Stacks/Condenser_4_def.tres" id="6_0ndcu"]
+[ext_resource type="Resource" uid="uid://62eaoprnm1fm" path="res://Recipes/Item Stacks/Rocket_Engine_4_def.tres" id="7_o7ief"]
 
 [resource]
 script = ExtResource("2_6cton")
 id = &"Rocket Engine"
 display_name = "Rocket Engine"
-inputs = Array[ExtResource("1_4io1m")]([ExtResource("2_eambx"), ExtResource("3_bvle4"), ExtResource("4_ac83f"), ExtResource("5_5j4jd")])
-outputs = Array[ExtResource("1_4io1m")]([ExtResource("6_bgcj1")])
+inputs = Array[ExtResource("1_4io1m")]([ExtResource("2_bvle4"), ExtResource("3_ac83f"), ExtResource("4_5j4jd"), ExtResource("5_bgcj1"), ExtResource("6_0ndcu")])
+outputs = Array[ExtResource("1_4io1m")]([ExtResource("7_o7ief")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

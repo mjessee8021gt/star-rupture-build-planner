@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://vh0mef83f0fq"]
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_nyj2k"]
-[ext_resource type="Resource" uid="uid://b3fhfx8sho4cn" path="res://Recipes/Item Stacks/Pressure_Tank_10_def.tres" id="2_8u74w"]
+[ext_resource type="Resource" uid="uid://mgg8ymd5brym" path="res://Recipes/Item Stacks/Pressure_Tank_5_def.tres" id="2_8u74w"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_lhldj"]
-[ext_resource type="Resource" uid="uid://ccp8tv811wrbq" path="res://Recipes/Item Stacks/Electromagnet_20_def.tres" id="3_bp7vk"]
+[ext_resource type="Resource" uid="uid://dao3fvtduiky4" path="res://Recipes/Item Stacks/Electromagnet_10_def.tres" id="3_bp7vk"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_rpp8a"]
-[ext_resource type="Resource" uid="uid://6kgxcleup680" path="res://Recipes/Item Stacks/Applicator_50_def.tres" id="4_0lutb"]
+[ext_resource type="Resource" uid="uid://bg5ryxoamtocr" path="res://Recipes/Item Stacks/Applicator_40_def.tres" id="4_0lutb"]
 [ext_resource type="Resource" uid="uid://ddjq4it4nluod" path="res://Recipes/Item Stacks/Ion Injector_5_def.tres" id="5_xjs8n"]
 
 [resource]

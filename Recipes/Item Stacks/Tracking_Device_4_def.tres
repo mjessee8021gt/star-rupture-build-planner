@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://bo45ddyk8ten6"]
+
+[ext_resource type="Resource" uid="uid://b4i1620kccfw4" path="res://Recipes/Item Definitions/Tracking_device_Def.tres" id="1_vxell"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_fivym"]
+
+[resource]
+script = ExtResource("2_fivym")
+item = ExtResource("1_vxell")
+qty = 4
+id = &"Tracking Device"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

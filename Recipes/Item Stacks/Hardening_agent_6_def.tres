@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://dimybgc0tx5yu"]
+
+[ext_resource type="Resource" uid="uid://wgk8nmhduopq" path="res://Recipes/Item Definitions/Hardening_agent_Def.tres" id="1_pamb8"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_s0ixy"]
+
+[resource]
+script = ExtResource("2_s0ixy")
+item = ExtResource("1_pamb8")
+qty = 6
+id = &"Hardening Agent"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

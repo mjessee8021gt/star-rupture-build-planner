@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://3x8v4e23ht4e"]
+
+[ext_resource type="Resource" uid="uid://b4ojod4we6ced" path="res://Recipes/Item Definitions/Refined_oil_def.tres" id="1_86mck"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_mgho1"]
+
+[resource]
+script = ExtResource("2_mgho1")
+item = ExtResource("1_86mck")
+qty = 40
+id = &"Refined Oil"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

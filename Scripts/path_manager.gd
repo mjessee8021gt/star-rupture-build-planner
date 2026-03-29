@@ -17,7 +17,7 @@ extends Node2D
 
 # Default origin port node path
 const DEFAULT_FROM_PORT_PATH := NodePath("Ports/Output 1")
-const INPUT_PORTS := ["Input 1", "Input 2", "Input 3", "Input 4"]
+const INPUT_PORTS := ["Input 1", "Input 2", "Input 3", "Input 4", "Input 5"]
 
 # Drag state
 var _preview_container: Path2D = null

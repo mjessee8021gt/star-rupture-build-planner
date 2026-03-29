@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://bwyrrwm6qqgir"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_1dggl"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_og3df"]
+[ext_resource type="Resource" uid="uid://drlkoydb70htk" path="res://Recipes/Item Stacks/Powerium_10_def.tres" id="2_qmjt2"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_qmjt2"]
+
+[resource]
+script = ExtResource("2_og3df")
+outputs = Array[ExtResource("1_1dggl")]([ExtResource("2_qmjt2")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

@@ -1,0 +1,286 @@
+[gd_scene format=3 uid="uid://dkbxsqh520hrb"]
+
+[ext_resource type="Script" uid="uid://3b0jy0x81gfe" path="res://Buildings/Facturer.gd" id="1_u85w3"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_qw2ix"]
+[ext_resource type="Resource" uid="uid://cgjxil2ufmrw2" path="res://Recipes/Ion_bomb.tres" id="3_fkv1w"]
+[ext_resource type="Resource" uid="uid://cgoowr4ritprv" path="res://Recipes/Tracking_device.tres" id="4_ejilm"]
+[ext_resource type="Resource" uid="uid://d02lha7n5n0hx" path="res://Recipes/Biofilament.tres" id="5_6giog"]
+[ext_resource type="Resource" uid="uid://jb7wmt7v6i14" path="res://Recipes/Converter.tres" id="6_3rid3"]
+[ext_resource type="Resource" uid="uid://cte7oih6hhwa0" path="res://Recipes/Cyclotrone.tres" id="7_wd7rf"]
+[ext_resource type="Resource" uid="uid://b8a8j5rvd5btw" path="res://Recipes/Rocket_engine.tres" id="8_554po"]
+[ext_resource type="Resource" uid="uid://bukws6i16qx26" path="res://Recipes/Dome.tres" id="9_elgrs"]
+[ext_resource type="Resource" uid="uid://do088qc18a52y" path="res://Recipes/RTSC_generator.tres" id="10_qw2ix"]
+[ext_resource type="Resource" uid="uid://dl7l7oybf452y" path="res://Recipes/Satelite_body.tres" id="11_oai3j"]
+[ext_resource type="Resource" uid="uid://lyuslwgs8r6h" path="res://Recipes/Synthetic_dna.tres" id="12_1la1s"]
+[ext_resource type="Texture2D" uid="uid://b5c3alt8d2qj3" path="res://Assets/SRBP_4x6_BLDG.png" id="19_elgrs"]
+[ext_resource type="Texture2D" uid="uid://ckf3jbuufrs6i" path="res://Assets/SRBP_5x6_BLDG.png" id="20_il7wf"]
+[ext_resource type="Texture2D" uid="uid://ilmbegsn2c7" path="res://Assets/SRBP_Oval.png" id="21_mqmhj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
+size = Vector2(256, 384.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uf4xf"]
+size = Vector2(320, 384)
+
+[node name="Facturer" type="Node2D" unique_id=1728206745 groups=["buildings"]]
+script = ExtResource("1_u85w3")
+available_recipes = Array[ExtResource("2_qw2ix")]([ExtResource("3_fkv1w"), ExtResource("4_ejilm"), ExtResource("5_6giog"), ExtResource("6_3rid3"), ExtResource("7_wd7rf"), ExtResource("8_554po"), ExtResource("9_elgrs"), ExtResource("10_qw2ix"), ExtResource("11_oai3j"), ExtResource("12_1la1s")])
+id = &"megapress"
+metadata/_edit_vertical_guides_ = [63.0, 48.0, 64.0, 80.0, -24.0, 128.0, 192.0]
+
+[node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
+position = Vector2(-128, -192)
+texture = ExtResource("19_elgrs")
+centered = false
+
+[node name="AlternateSprite" type="Sprite2D" parent="." unique_id=1619536158]
+visible = false
+position = Vector2(-160, -192)
+texture = ExtResource("20_il7wf")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128283645]
+position = Vector2(0, 0.25)
+shape = SubResource("RectangleShape2D_gbqis")
+
+[node name="CollisionShapeAlt" type="CollisionShape2D" parent="." unique_id=1184700770]
+visible = false
+shape = SubResource("RectangleShape2D_uf4xf")
+disabled = true
+
+[node name="TitleLabel" type="Label" parent="." unique_id=904579435]
+offset_left = -75.999985
+offset_top = -74.0
+offset_right = 75.000015
+offset_bottom = -39.0
+theme_override_font_sizes/font_size = 25
+text = "FACTURER"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="PlacementArea" type="Area2D" parent="." unique_id=911391560]
+
+[node name="PlacementAreaAlt" type="Area2D" parent="." unique_id=445836450]
+
+[node name="Ports" type="Node2D" parent="." unique_id=1067444767]
+position = Vector2(-128, -160)
+
+[node name="Output 1" type="Button" parent="Ports" unique_id=1122308628 groups=["port_button"]]
+self_modulate = Color(1, 1, 1, 0.49803922)
+offset_left = 136.00003
+offset_top = -31.0
+offset_right = 208.00005
+offset_bottom = 9.0
+rotation = 1.5707964
+scale = Vector2(0.42, 0.42)
+icon = ExtResource("21_mqmhj")
+metadata/normal = Vector2(0, -1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Input 1" type="Button" parent="Ports" unique_id=1958701130 groups=["port_button"]]
+self_modulate = Color(1, 1, 1, 0.49803922)
+offset_left = 80.0
+offset_top = 321.0
+offset_right = 152.00002
+offset_bottom = 361.0
+rotation = 1.5707964
+scale = Vector2(0.42, 0.42)
+icon = ExtResource("21_mqmhj")
+metadata/normal = Vector2(0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Input 2" type="Button" parent="Ports" unique_id=1025542919 groups=["port_button"]]
+self_modulate = Color(1, 1, 1, 0.49803922)
+offset_left = 107.00003
+offset_top = 321.0
+offset_right = 179.00005
+offset_bottom = 361.0
+rotation = 1.5707964
+scale = Vector2(0.42, 0.42)
+icon = ExtResource("21_mqmhj")
+metadata/normal = Vector2(0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Input 3" type="Button" parent="Ports" unique_id=1275495196 groups=["port_button"]]
+self_modulate = Color(1, 1, 1, 0.49803922)
+offset_left = 135.99997
+offset_top = 321.0
+offset_right = 207.99997
+offset_bottom = 361.0
+rotation = 1.5707964
+scale = Vector2(0.42, 0.42)
+icon = ExtResource("21_mqmhj")
+metadata/normal = Vector2(0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Input 4" type="Button" parent="Ports" unique_id=1866691078 groups=["port_button"]]
+self_modulate = Color(1, 1, 1, 0.49803922)
+offset_left = 163.99997
+offset_top = 321.0
+offset_right = 235.99997
+offset_bottom = 361.0
+rotation = 1.5707964
+scale = Vector2(0.42, 0.42)
+icon = ExtResource("21_mqmhj")
+metadata/normal = Vector2(0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Input 5" type="Button" parent="Ports" unique_id=2134311986 groups=["port_button"]]
+self_modulate = Color(1, 1, 1, 0.49803922)
+offset_left = 192.0
+offset_top = 321.0
+offset_right = 264.0
+offset_bottom = 361.0
+rotation = 1.5707964
+scale = Vector2(0.42, 0.42)
+icon = ExtResource("21_mqmhj")
+metadata/normal = Vector2(0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
+offset_left = -98.0
+offset_top = -10.0
+offset_right = -4.0000153
+offset_bottom = 10.0
+theme_override_font_sizes/font_size = 16
+metadata/_edit_use_anchors_ = true
+
+[node name="outputBox" type="ColorRect" parent="." unique_id=1419396623]
+offset_left = -15.0
+offset_top = -160.0
+offset_right = 14.999992
+offset_bottom = -141.0
+color = Color(0, 0.64705884, 0.25490198, 0.57254905)
+metadata/_edit_use_anchors_ = true
+
+[node name="outputText" type="Label" parent="outputBox" unique_id=1040759306]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -3.0
+offset_right = 34.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0, 0.24313726, 0, 1)
+text = "000"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Input1Box" type="ColorRect" parent="." unique_id=1573327625]
+offset_left = -77.99999
+offset_top = 141.0
+offset_right = -47.999992
+offset_bottom = 160.0
+color = Color(0, 0.64705884, 0.25490198, 0.57254905)
+metadata/_edit_use_anchors_ = true
+
+[node name="input1Text" type="Label" parent="Input1Box" unique_id=1651637159]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -2.0
+offset_right = 34.0
+offset_bottom = 21.0
+theme_override_colors/font_color = Color(0, 0.24313726, 0, 1)
+text = "000"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Input2Box" type="ColorRect" parent="." unique_id=232719543]
+offset_left = -46.999992
+offset_top = 141.0
+offset_right = -16.999992
+offset_bottom = 160.0
+color = Color(0, 0.64705884, 0.25490198, 0.57254905)
+metadata/_edit_use_anchors_ = true
+
+[node name="input2Text" type="Label" parent="Input2Box" unique_id=332826267]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -2.0
+offset_right = 34.0
+offset_bottom = 21.0
+theme_override_colors/font_color = Color(0, 0.24313726, 0, 1)
+text = "000"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Input3Box" type="ColorRect" parent="." unique_id=1711166632]
+offset_left = -15.0
+offset_top = 141.0
+offset_right = 15.0
+offset_bottom = 160.0
+color = Color(0, 0.64705884, 0.25490198, 0.57254905)
+metadata/_edit_use_anchors_ = true
+
+[node name="input3Text" type="Label" parent="Input3Box" unique_id=844869573]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -2.0
+offset_right = 34.0
+offset_bottom = 21.0
+theme_override_colors/font_color = Color(0, 0.24313726, 0, 1)
+text = "000"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Input4Box" type="ColorRect" parent="." unique_id=1695541487]
+offset_left = 16.0
+offset_top = 141.0
+offset_right = 46.0
+offset_bottom = 160.0
+color = Color(0, 0.64705884, 0.25490198, 0.57254905)
+metadata/_edit_use_anchors_ = true
+
+[node name="input4Text" type="Label" parent="Input4Box" unique_id=652255700]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -2.0
+offset_right = 34.0
+offset_bottom = 21.0
+theme_override_colors/font_color = Color(0, 0.24313726, 0, 1)
+text = "000"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Input5Box" type="ColorRect" parent="." unique_id=684015529]
+offset_left = 47.0
+offset_top = 141.0
+offset_right = 77.0
+offset_bottom = 160.0
+color = Color(0, 0.64705884, 0.25490198, 0.57254905)
+metadata/_edit_use_anchors_ = true
+
+[node name="input5Text" type="Label" parent="Input5Box" unique_id=638329374]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -2.0
+offset_right = 34.0
+offset_bottom = 21.0
+theme_override_colors/font_color = Color(0, 0.24313726, 0, 1)
+text = "000"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[connection signal="mouse_entered" from="Ports/Output 1" to="." method="_on_output_1_mouse_entered"]
+[connection signal="mouse_exited" from="Ports/Output 1" to="." method="_on_output_1_mouse_exited"]
+[connection signal="pressed" from="Ports/Output 1" to="." method="_on_output_1_pressed"]
+[connection signal="mouse_entered" from="Ports/Input 1" to="." method="_on_input_1_mouse_entered"]
+[connection signal="mouse_exited" from="Ports/Input 1" to="." method="_on_input_1_mouse_exited"]
+[connection signal="pressed" from="Ports/Input 1" to="." method="_on_input_1_pressed"]
+[connection signal="mouse_entered" from="Ports/Input 2" to="." method="_on_input_2_mouse_entered"]
+[connection signal="mouse_exited" from="Ports/Input 2" to="." method="_on_input_2_mouse_exited"]
+[connection signal="pressed" from="Ports/Input 2" to="." method="_on_input_2_pressed"]
+[connection signal="mouse_entered" from="Ports/Input 3" to="." method="_on_input_3_mouse_entered"]
+[connection signal="mouse_exited" from="Ports/Input 3" to="." method="_on_input_3_mouse_exited"]
+[connection signal="pressed" from="Ports/Input 3" to="." method="_on_input_3_pressed"]
+[connection signal="mouse_entered" from="Ports/Input 4" to="." method="_on_input_4_mouse_entered"]
+[connection signal="mouse_exited" from="Ports/Input 4" to="." method="_on_input_4_mouse_exited"]
+[connection signal="pressed" from="Ports/Input 4" to="." method="_on_input_4_pressed"]
+[connection signal="mouse_entered" from="Ports/Input 5" to="." method="_on_input_5_mouse_entered"]
+[connection signal="mouse_exited" from="Ports/Input 5" to="." method="_on_input_5_mouse_exited"]
+[connection signal="pressed" from="Ports/Input 5" to="." method="_on_input_5_pressed"]
+[connection signal="item_selected" from="Recipe" to="." method="_on_recipe_item_selected"]

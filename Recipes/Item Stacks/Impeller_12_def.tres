@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://cdsrt7shhwr05"]
+
+[ext_resource type="Resource" uid="uid://c27ncbodjlh5v" path="res://Recipes/Item Definitions/Impeller_Def.tres" id="1_olv2j"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_p7csd"]
+
+[resource]
+script = ExtResource("2_p7csd")
+item = ExtResource("1_olv2j")
+qty = 12
+id = &"Impeller"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

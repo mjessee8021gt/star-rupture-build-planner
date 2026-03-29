@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_p7jih"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_1fdp3"]
-[ext_resource type="Resource" uid="uid://dhhhpw1es5n3b" path="res://Recipes/Item Stacks/Accumulator_8_def.tres" id="2_27b2o"]
-[ext_resource type="Resource" uid="uid://cm1j5kym4tvyj" path="res://Recipes/Item Stacks/Inductor_12_def.tres" id="3_bf4kx"]
+[ext_resource type="Resource" uid="uid://dn3bban3nb4h5" path="res://Recipes/Item Stacks/Accumulator_10_def.tres" id="2_27b2o"]
+[ext_resource type="Resource" uid="uid://dgiovgmogmfag" path="res://Recipes/Item Stacks/Onboard_Instruments_15_def.tres" id="3_bf4kx"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_kvjvs"]
-[ext_resource type="Resource" uid="uid://c7nfpmoailrlp" path="res://Recipes/Item Stacks/Ion_Stabilizer_4_def.tres" id="4_b1got"]
-[ext_resource type="Resource" uid="uid://cjh2udot857md" path="res://Recipes/Item Stacks/Electromagnet_4_def.tres" id="5_oaxix"]
-[ext_resource type="Resource" uid="uid://bb4axek70wlp7" path="res://Recipes/Item Stacks/Carbon_Sonar_4_def.tres" id="6_bsq5a"]
+[ext_resource type="Resource" uid="uid://b0heq45mc4e6k" path="res://Recipes/Item Stacks/Ion_Stabilizer_5_def.tres" id="4_b1got"]
+[ext_resource type="Resource" uid="uid://drrbt8oma566" path="res://Recipes/Item Stacks/Quantum_Tranquilizer_5_def.tres" id="5_oaxix"]
+[ext_resource type="Resource" uid="uid://j16tenipgwi3" path="res://Recipes/Item Stacks/Carbon_Sonar_5_def.tres" id="6_bsq5a"]
 
 [resource]
 script = ExtResource("2_1fdp3")

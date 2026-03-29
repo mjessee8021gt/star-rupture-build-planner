@@ -2,17 +2,17 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_v52wv"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_0gqhf"]
-[ext_resource type="Resource" uid="uid://dv8v2r0ej83uc" path="res://Recipes/Item Stacks/Ion Injector_6_def.tres" id="2_nq1be"]
-[ext_resource type="Resource" uid="uid://owpkhmx1h8xx" path="res://Recipes/Item Stacks/Nozzle_12_def.tres" id="3_dttf7"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_iwib6"]
+[ext_resource type="Resource" uid="uid://bv5ylaixjl5ha" path="res://Recipes/Item Stacks/Rocket_Fuel_6_def.tres" id="3_nq1be"]
+[ext_resource type="Resource" uid="uid://hgma1g1rt2kl" path="res://Recipes/Item Stacks/Valve_6_def.tres" id="4_dttf7"]
 [ext_resource type="Resource" uid="uid://dktor42baawb7" path="res://Recipes/Item Stacks/Pressure_Tank_6_def.tres" id="4_iku6o"]
-[ext_resource type="Resource" uid="uid://eqs6601ggrai" path="res://Recipes/Item Stacks/Pump_12_def.tres" id="5_p1rox"]
+[ext_resource type="Resource" uid="uid://b6yh8aetqyrom" path="res://Recipes/Item Stacks/Heat_Shield_6_def.tres" id="5_iku6o"]
 [ext_resource type="Resource" uid="uid://boeriwy3sjnm4" path="res://Recipes/Item Stacks/Ion_Thrusters_6_def.tres" id="6_ydfeg"]
 
 [resource]
 script = ExtResource("2_0gqhf")
 id = &"Ion Thruster"
 display_name = "Ion Thruster"
-inputs = Array[ExtResource("1_v52wv")]([ExtResource("2_nq1be"), ExtResource("3_dttf7"), ExtResource("4_iku6o"), ExtResource("5_p1rox")])
+inputs = Array[ExtResource("1_v52wv")]([ExtResource("4_iku6o"), ExtResource("3_nq1be"), ExtResource("4_dttf7"), ExtResource("5_iku6o")])
 outputs = Array[ExtResource("1_v52wv")]([ExtResource("6_ydfeg")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_unr8j"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_7r5p1"]
-[ext_resource type="Resource" uid="uid://dheiobv0x1vch" path="res://Recipes/Item Stacks/Geothite_Ore_180.tres" id="2_qtk3c"]
+[ext_resource type="Resource" uid="uid://cg5xixc4wfser" path="res://Recipes/Item Stacks/Geothite_Ore_15.tres" id="2_qtk3c"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_qtk3c"]
-[ext_resource type="Resource" uid="uid://cv6wddvd12vf6" path="res://Recipes/Item Stacks/Geothite_Ingot_60.tres" id="3_y83k7"]
+[ext_resource type="Resource" uid="uid://cxjg3ct5rko6j" path="res://Recipes/Item Stacks/Geothite_Ingot_150.tres" id="3_y83k7"]
 
 [resource]
 script = ExtResource("2_7r5p1")

@@ -2,17 +2,18 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_bqgcm"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_2phh6"]
-[ext_resource type="Resource" uid="uid://5ld3nw1tqsxx" path="res://Recipes/Item Stacks/Aerogel_12_def.tres" id="2_sgv3i"]
+[ext_resource type="Resource" uid="uid://cr0wes4g8bfys" path="res://Recipes/Item Stacks/Airlock_3_def.tres" id="2_lsx0o"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_i56wa"]
-[ext_resource type="Resource" uid="uid://by1w1nwqi6ukt" path="res://Recipes/Item Stacks/Glass_18_def.tres" id="3_lsx0o"]
-[ext_resource type="Resource" uid="uid://b6g48q3y0xwp" path="res://Recipes/Item Stacks/Hardening_agent_12_def.tres" id="4_ihavi"]
-[ext_resource type="Resource" uid="uid://dyfs5tt1dtaqr" path="res://Recipes/Item Stacks/Reinforced_Frame_6_def.tres" id="5_mlo8x"]
-[ext_resource type="Resource" uid="uid://3ad4n2f84f74" path="res://Recipes/Item Stacks/Dome_6_def.tres" id="6_3ppb4"]
+[ext_resource type="Resource" uid="uid://p0iaadq8nrh8" path="res://Recipes/Item Stacks/Condenser_6_def.tres" id="3_ihavi"]
+[ext_resource type="Resource" uid="uid://7oyt1gdsblhv" path="res://Recipes/Item Stacks/Converter_3_def.tres" id="4_mlo8x"]
+[ext_resource type="Resource" uid="uid://b70dl8d4oyafw" path="res://Recipes/Item Stacks/Scafolding_12_def.tres" id="5_3ppb4"]
+[ext_resource type="Resource" uid="uid://dpseb68q5eqle" path="res://Recipes/Item Stacks/Uberfilament_24_def.tres" id="6_axpfg"]
+[ext_resource type="Resource" uid="uid://bh0bw81wa5if2" path="res://Recipes/Item Stacks/Dome_3_def.tres" id="7_hs2d3"]
 
 [resource]
 script = ExtResource("2_2phh6")
 id = &"Dome"
 display_name = "Dome"
-inputs = Array[ExtResource("1_bqgcm")]([ExtResource("2_sgv3i"), ExtResource("3_lsx0o"), ExtResource("4_ihavi"), ExtResource("5_mlo8x")])
-outputs = Array[ExtResource("1_bqgcm")]([ExtResource("6_3ppb4")])
+inputs = Array[ExtResource("1_bqgcm")]([ExtResource("2_lsx0o"), ExtResource("3_ihavi"), ExtResource("4_mlo8x"), ExtResource("5_3ppb4"), ExtResource("6_axpfg")])
+outputs = Array[ExtResource("1_bqgcm")]([ExtResource("7_hs2d3")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

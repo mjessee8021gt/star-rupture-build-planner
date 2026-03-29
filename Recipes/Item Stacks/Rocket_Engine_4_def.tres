@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://62eaoprnm1fm"]
+
+[ext_resource type="Resource" uid="uid://bqlytamb4pm7y" path="res://Recipes/Item Definitions/Rocket_engine_Def.tres" id="1_xykkl"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_mo51m"]
+
+[resource]
+script = ExtResource("2_mo51m")
+item = ExtResource("1_xykkl")
+qty = 4
+id = &"Rocket Engine"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

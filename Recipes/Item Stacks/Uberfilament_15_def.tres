@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://bl3tyv1bgnhwx"]
+
+[ext_resource type="Resource" uid="uid://dma7y430xok3u" path="res://Recipes/Item Definitions/Uberfilament_Def.tres" id="1_xenne"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_l2g5k"]
+
+[resource]
+script = ExtResource("2_l2g5k")
+item = ExtResource("1_xenne")
+qty = 15
+id = &"Uberfilament"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

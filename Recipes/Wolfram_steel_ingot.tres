@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://chf6s6h7ljw3h"]
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_dqgvb"]
-[ext_resource type="Resource" uid="uid://bjwo145p50hbf" path="res://Recipes/Item Stacks/Geothite_Ore_120.tres" id="2_e7xor"]
+[ext_resource type="Resource" uid="uid://cg5xixc4wfser" path="res://Recipes/Item Stacks/Geothite_Ore_15.tres" id="2_e7xor"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_ypb5v"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_gfxj5"]
-[ext_resource type="Resource" uid="uid://6ppyan1b6cjr" path="res://Recipes/Item Stacks/Wolfram_bar_120_def.tres" id="3_rbdva"]
-[ext_resource type="Resource" uid="uid://bl3i00rigfske" path="res://Recipes/Item Stacks/Wolfram_Steel_Ingot_60_def.tres" id="4_x1ej7"]
+[ext_resource type="Resource" uid="uid://b3glny1afqfm2" path="res://Recipes/Item Stacks/Wolfram_bar_150_def.tres" id="3_rbdva"]
+[ext_resource type="Resource" uid="uid://b8dciwvarlkjf" path="res://Recipes/Item Stacks/Wolfram_steel_ingot_150_def.tres" id="4_x1ej7"]
 
 [resource]
 script = ExtResource("2_ypb5v")

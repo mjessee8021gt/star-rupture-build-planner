@@ -2,17 +2,18 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_r6dd7"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_4pn3w"]
-[ext_resource type="Resource" uid="uid://0xawa0uwik0y" path="res://Recipes/Item Stacks/Nanosyringe_4_def.tres" id="2_6ruhr"]
-[ext_resource type="Resource" uid="uid://begp6q1q01s5i" path="res://Recipes/Item Stacks/Plastic_8_def.tres" id="3_ls0la"]
+[ext_resource type="Resource" uid="uid://ccnkhsb2bn1b7" path="res://Recipes/Item Stacks/Nanosyringe_15_def.tres" id="2_ls0la"]
+[ext_resource type="Resource" path="res://Recipes/Item Stacks/Plastic_30_def.tres" id="3_rhgg8"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_uc4kj"]
-[ext_resource type="Resource" uid="uid://dtb47t1kwyj27" path="res://Recipes/Item Stacks/Substance_FHS-135-493_8_def.tres" id="4_rhgg8"]
-[ext_resource type="Resource" uid="uid://donrl0ky4ru7p" path="res://Recipes/Item Stacks/Synthetic_Protein_4_def.tres" id="5_vfv1x"]
-[ext_resource type="Resource" uid="uid://bsw0g7jw8gg8p" path="res://Recipes/Item Stacks/Synthetic_DNA_4_def.tres" id="6_scb1t"]
+[ext_resource type="Resource" uid="uid://cv6ktr5h1vl5l" path="res://Recipes/Item Stacks/Substance_FHS-135-493_18_def.tres" id="4_vfv1x"]
+[ext_resource type="Resource" uid="uid://b72pjqa86cjxo" path="res://Recipes/Item Stacks/Synthetic_Protein_30_def.tres" id="5_scb1t"]
+[ext_resource type="Resource" uid="uid://dtvvwtmbn1f3a" path="res://Recipes/Item Stacks/Biofilament_6_def.tres" id="6_b2opb"]
+[ext_resource type="Resource" uid="uid://d01fqfte03erp" path="res://Recipes/Item Stacks/Synthetic_DNA_3_def.tres" id="7_g5bef"]
 
 [resource]
 script = ExtResource("2_4pn3w")
 id = &"Synthetic DNA"
 display_name = "Synthetic DNA"
-inputs = Array[ExtResource("1_r6dd7")]([ExtResource("2_6ruhr"), ExtResource("3_ls0la"), ExtResource("4_rhgg8"), ExtResource("5_vfv1x")])
-outputs = Array[ExtResource("1_r6dd7")]([ExtResource("6_scb1t")])
+inputs = Array[ExtResource("1_r6dd7")]([ExtResource("2_ls0la"), ExtResource("3_rhgg8"), ExtResource("4_vfv1x"), ExtResource("5_scb1t"), ExtResource("6_b2opb")])
+outputs = Array[ExtResource("1_r6dd7")]([ExtResource("7_g5bef")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

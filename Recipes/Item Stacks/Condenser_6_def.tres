@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://p0iaadq8nrh8"]
+
+[ext_resource type="Resource" uid="uid://chesfotf5xdk1" path="res://Recipes/Item Definitions/Condenser_Def.tres" id="1_ykhix"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_80bv2"]
+
+[resource]
+script = ExtResource("2_80bv2")
+item = ExtResource("1_ykhix")
+qty = 6
+id = &"Condenser"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

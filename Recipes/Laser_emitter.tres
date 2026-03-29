@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_2cief"]
 [ext_resource type="Resource" uid="uid://16eplamq58aj" path="res://Recipes/Item Stacks/Resonator_10_def.tres" id="2_nd4pa"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_3m6wo"]
-[ext_resource type="Resource" uid="uid://bjgb4y3y2f2cc" path="res://Recipes/Item Stacks/Lens_20_def.tres" id="3_ivus2"]
+[ext_resource type="Resource" uid="uid://snwjilsefp7q" path="res://Recipes/Item Stacks/Lens_10_def.tres" id="3_nd4pa"]
 [ext_resource type="Resource" uid="uid://odb8pfargde6" path="res://Recipes/Item Stacks/Electromagnetic_coil_60_def.tres" id="4_ubqjf"]
 [ext_resource type="Resource" uid="uid://q568h68rvbqj" path="res://Recipes/Item Stacks/Laser_Emitter_10_def.tres" id="5_nbl28"]
 
@@ -12,6 +12,6 @@
 script = ExtResource("2_2cief")
 id = &"Laser Emitter"
 display_name = "Laser Emitter"
-inputs = Array[ExtResource("1_0vr16")]([ExtResource("2_nd4pa"), ExtResource("3_ivus2"), ExtResource("4_ubqjf")])
+inputs = Array[ExtResource("1_0vr16")]([ExtResource("2_nd4pa"), ExtResource("3_nd4pa"), ExtResource("4_ubqjf")])
 outputs = Array[ExtResource("1_0vr16")]([ExtResource("5_nbl28")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

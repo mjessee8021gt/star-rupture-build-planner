@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://txf27eug1vpl"]
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://dnjc3ur3jdwya"]
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_tuu7v"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_ga5cg"]
-[ext_resource type="Resource" uid="uid://xtu0p01zww3s" path="res://Recipes/Item Stacks/Reinforced_Housing_20_def.tres" id="3_w2emr"]
-[ext_resource type="Resource" uid="uid://lj3e8vvke6ic" path="res://Recipes/Item Stacks/Epoxy_10_def.tres" id="4_j05tz"]
-[ext_resource type="Resource" uid="uid://ru3grg82gyzr" path="res://Recipes/Item Stacks/Explosive_Charge_10_def.tres" id="5_ictbc"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_qa6h1"]
+[ext_resource type="Resource" path="res://Recipes/Item Stacks/Reinforced_Housing_20_def.tres" id="3_w2emr"]
+[ext_resource type="Resource" path="res://Recipes/Item Stacks/Epoxy_10_def.tres" id="4_j05tz"]
+[ext_resource type="Resource" path="res://Recipes/Item Stacks/Explosive_Charge_10_def.tres" id="5_ictbc"]
 
 [resource]
 script = ExtResource("2_ga5cg")

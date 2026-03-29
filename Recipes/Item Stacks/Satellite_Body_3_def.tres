@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://ba4rnvhd8h50k"]
+
+[ext_resource type="Resource" uid="uid://d1i8avu0t2okb" path="res://Recipes/Item Definitions/Satellite_body_Def.tres" id="1_aukv7"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_h8xps"]
+
+[resource]
+script = ExtResource("2_h8xps")
+item = ExtResource("1_aukv7")
+qty = 3
+id = &"Satellite Body"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

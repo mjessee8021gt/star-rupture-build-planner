@@ -2,17 +2,18 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_kwk13"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_mstyh"]
-[ext_resource type="Resource" uid="uid://xoyu0v8ql67v" path="res://Recipes/Item Stacks/Accumulator_3_def.tres" id="2_sqkik"]
+[ext_resource type="Resource" uid="uid://ctallaskmbl01" path="res://Recipes/Item Stacks/Accumulator_4_def.tres" id="2_sxg4b"]
+[ext_resource type="Resource" uid="uid://c00braf7v25mp" path="res://Recipes/Item Stacks/Laser_Emitter_8_def.tres" id="3_5pbgs"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_afciv"]
-[ext_resource type="Resource" uid="uid://cc6p88i0bhgah" path="res://Recipes/Item Stacks/Laser_Emitter_3_def.tres" id="3_sxg4b"]
-[ext_resource type="Resource" uid="uid://bq8222ocu7qdg" path="res://Recipes/Item Stacks/Plastic_9_def.tres" id="4_5pbgs"]
-[ext_resource type="Resource" uid="uid://do51602dpddrc" path="res://Recipes/Item Stacks/Superconductor_6_def.tres" id="5_nh18b"]
-[ext_resource type="Resource" uid="uid://7oyt1gdsblhv" path="res://Recipes/Item Stacks/Converter_3_def.tres" id="6_yobk5"]
+[ext_resource type="Resource" uid="uid://d3sok5h1q0nmy" path="res://Recipes/Item Stacks/Plastic_12_def.tres" id="4_nh18b"]
+[ext_resource type="Resource" uid="uid://batngvn7fybhx" path="res://Recipes/Item Stacks/Electromagnetic_coil_16_def.tres" id="5_yobk5"]
+[ext_resource type="Resource" uid="uid://bckojquicix1d" path="res://Recipes/Item Stacks/RTSC_4_def.tres" id="6_61mq8"]
+[ext_resource type="Resource" uid="uid://be6csmxw0243e" path="res://Recipes/Item Stacks/Converter_4_def.tres" id="7_dm616"]
 
 [resource]
 script = ExtResource("2_mstyh")
 id = &"Converter"
 display_name = "Converter"
-inputs = Array[ExtResource("1_kwk13")]([ExtResource("2_sqkik"), ExtResource("3_sxg4b"), ExtResource("4_5pbgs"), ExtResource("5_nh18b")])
-outputs = Array[ExtResource("1_kwk13")]([ExtResource("6_yobk5")])
+inputs = Array[ExtResource("1_kwk13")]([ExtResource("2_sxg4b"), ExtResource("3_5pbgs"), ExtResource("4_nh18b"), ExtResource("5_yobk5"), ExtResource("6_61mq8")])
+outputs = Array[ExtResource("1_kwk13")]([ExtResource("7_dm616")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

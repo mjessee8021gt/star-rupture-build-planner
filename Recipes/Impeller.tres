@@ -7,12 +7,12 @@
 [ext_resource type="Resource" uid="uid://b1pw2s2k2gi4j" path="res://Recipes/Item Stacks/Heat_resistant_sheet_30_def.tres" id="3_nbuls"]
 [ext_resource type="Resource" uid="uid://8djms15a28fj" path="res://Recipes/Item Stacks/Stabilizer_15_def.tres" id="4_cu6i7"]
 [ext_resource type="Resource" uid="uid://bap7iihibv7fb" path="res://Recipes/Item Stacks/Wolfram_plate_15_def.tres" id="5_d0gnp"]
-[ext_resource type="Resource" uid="uid://s88h4vlye6dh" path="res://Recipes/Item Stacks/Impeller_15_def.tres" id="6_wnbtj"]
+[ext_resource type="Resource" uid="uid://cdsrt7shhwr05" path="res://Recipes/Item Stacks/Impeller_12_def.tres" id="6_iehna"]
 
 [resource]
 script = ExtResource("2_mmxwh")
 id = &"Impeller"
 display_name = "Impeller"
 inputs = Array[ExtResource("1_qvp8o")]([ExtResource("2_iehna"), ExtResource("3_nbuls"), ExtResource("4_cu6i7"), ExtResource("5_d0gnp")])
-outputs = Array[ExtResource("1_qvp8o")]([ExtResource("6_wnbtj")])
+outputs = Array[ExtResource("1_qvp8o")]([ExtResource("6_iehna")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

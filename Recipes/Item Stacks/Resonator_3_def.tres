@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://cgn841gmjn811"]
+
+[ext_resource type="Resource" uid="uid://c10jdc6dkef3w" path="res://Recipes/Item Definitions/Resonator_Def.tres" id="1_theb7"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_kyyrs"]
+
+[resource]
+script = ExtResource("2_kyyrs")
+item = ExtResource("1_theb7")
+qty = 3
+id = &"Resonator"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

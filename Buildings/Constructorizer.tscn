@@ -4,23 +4,17 @@
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_dvrl1"]
 [ext_resource type="Resource" uid="uid://cidkpdxk8707u" path="res://Recipes/Airlock.tres" id="3_ug62v"]
 [ext_resource type="Resource" uid="uid://bxfobckjcm5se" path="res://Recipes/Anti-radiation_covers.tres" id="4_xt38l"]
-[ext_resource type="Resource" uid="uid://c0d1j3qyhigsn" path="res://Recipes/Bioprinter.tres" id="5_hkkht"]
-[ext_resource type="Resource" uid="uid://2rc3h432kj4h" path="res://Recipes/Control_systems.tres" id="6_wi5ay"]
-[ext_resource type="Resource" uid="uid://jb7wmt7v6i14" path="res://Recipes/Converter.tres" id="7_43utc"]
-[ext_resource type="Resource" uid="uid://cte7oih6hhwa0" path="res://Recipes/Cyclotrone.tres" id="8_vhhvs"]
-[ext_resource type="Resource" uid="uid://bukws6i16qx26" path="res://Recipes/Dome.tres" id="9_go5s2"]
-[ext_resource type="Resource" uid="uid://50c1febnkx6c" path="res://Recipes/Heat_shield.tres" id="10_2n2lg"]
-[ext_resource type="Resource" uid="uid://chg1tc13dl6d1" path="res://Recipes/Missile_housing.tres" id="11_1mhtw"]
+[ext_resource type="Resource" uid="uid://bqw508mc4jv5k" path="res://Recipes/Quantum_tranquilizer.tres" id="7_pm5m3"]
+[ext_resource type="Resource" uid="uid://cogoxol2tcc5i" path="res://Recipes/Carbon_sonar.tres" id="8_44sxp"]
+[ext_resource type="Resource" uid="uid://hp23tfctrro0" path="res://Recipes/RTSC.tres" id="9_dvrl1"]
+[ext_resource type="Resource" uid="uid://4uevnxq4sasu" path="res://Recipes/RNA_stabilizer.tres" id="10_hcg3b"]
+[ext_resource type="Resource" uid="uid://b066qu5konyix" path="res://Recipes/Ion_thruster.tres" id="11_6deal"]
 [ext_resource type="Resource" uid="uid://dic4mfcb5m6m0" path="res://Recipes/Nanosyringe.tres" id="12_cvl7e"]
-[ext_resource type="Resource" uid="uid://2kre3qp2ndlo" path="res://Recipes/Plasma_generator.tres" id="13_rixs3"]
+[ext_resource type="Resource" uid="uid://hloy06wmvn1t" path="res://Recipes/Rocket_fuel.tres" id="12_t8ulv"]
 [ext_resource type="Texture2D" uid="uid://cmwoe1nqgmtr6" path="res://Assets/SRBP_7x7_BLDG.png" id="14_dvrl1"]
-[ext_resource type="Resource" uid="uid://b8a8j5rvd5btw" path="res://Recipes/Rocket_engine.tres" id="14_fayp8"]
-[ext_resource type="Resource" uid="uid://do088qc18a52y" path="res://Recipes/RTSC_generator.tres" id="15_27em3"]
 [ext_resource type="Texture2D" uid="uid://c6383v80ur86v" path="res://Assets/SRBP_8x8_BLDG.png" id="15_hcg3b"]
-[ext_resource type="Resource" uid="uid://dl7l7oybf452y" path="res://Recipes/Satelite_body.tres" id="16_jg0i2"]
 [ext_resource type="Texture2D" uid="uid://ilmbegsn2c7" path="res://Assets/SRBP_Oval.png" id="16_rixs3"]
 [ext_resource type="Resource" uid="uid://dcmlg6icso5uc" path="res://Recipes/Scafolding.tres" id="17_dvjl8"]
-[ext_resource type="Resource" uid="uid://cgoowr4ritprv" path="res://Recipes/Tracking_device.tres" id="18_tpmab"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
 size = Vector2(448, 448)
@@ -30,7 +24,7 @@ size = Vector2(512, 512)
 
 [node name="Constructorizer" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_44sxp")
-available_recipes = Array[ExtResource("2_dvrl1")]([ExtResource("3_ug62v"), ExtResource("4_xt38l"), ExtResource("5_hkkht"), ExtResource("6_wi5ay"), ExtResource("7_43utc"), ExtResource("8_vhhvs"), ExtResource("9_go5s2"), ExtResource("10_2n2lg"), ExtResource("11_1mhtw"), ExtResource("12_cvl7e"), ExtResource("13_rixs3"), ExtResource("14_fayp8"), ExtResource("15_27em3"), ExtResource("16_jg0i2"), ExtResource("17_dvjl8"), ExtResource("18_tpmab")])
+available_recipes = Array[ExtResource("2_dvrl1")]([ExtResource("3_ug62v"), ExtResource("4_xt38l"), ExtResource("12_cvl7e"), ExtResource("17_dvjl8"), ExtResource("7_pm5m3"), ExtResource("8_44sxp"), ExtResource("9_dvrl1"), ExtResource("10_hcg3b"), ExtResource("11_6deal"), ExtResource("12_t8ulv")])
 id = &"megapress"
 metadata/_edit_vertical_guides_ = [63.0, 48.0, 64.0, 80.0, -24.0, 128.0, 192.0]
 

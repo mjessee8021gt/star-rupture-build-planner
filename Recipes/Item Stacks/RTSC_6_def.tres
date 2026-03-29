@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://yy7tqqi7ibwo"]
+
+[ext_resource type="Resource" uid="uid://7a7gih4e6ql0" path="res://Recipes/Item Definitions/RTSC_Def.tres" id="1_stpca"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_ahba7"]
+
+[resource]
+script = ExtResource("2_ahba7")
+item = ExtResource("1_stpca")
+qty = 6
+id = &"RTSC"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

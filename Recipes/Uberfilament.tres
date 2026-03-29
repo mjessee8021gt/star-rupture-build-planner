@@ -2,17 +2,16 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_phqnx"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_8n23q"]
-[ext_resource type="Resource" uid="uid://bx66plang6fy5" path="res://Recipes/Item Stacks/Epoxy_8_def.tres" id="2_cbfyt"]
-[ext_resource type="Resource" uid="uid://cor4oynkdk0is" path="res://Recipes/Item Stacks/Nano_Fibre_12_def.tres" id="3_dj3n3"]
+[ext_resource type="Resource" uid="uid://dbqn71pebbhdn" path="res://Recipes/Item Stacks/Epoxy_15_def.tres" id="2_ndjii"]
+[ext_resource type="Resource" uid="uid://bp35ipovrsvww" path="res://Recipes/Item Stacks/Geothite_lattice_30_def.tres" id="3_cbfyt"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_lwwfg"]
-[ext_resource type="Resource" uid="uid://dn2bppun8gxu2" path="res://Recipes/Item Stacks/Plastic_Dust_8_def.tres" id="4_bx4l2"]
-[ext_resource type="Resource" uid="uid://djrgru32oc8s" path="res://Recipes/Item Stacks/Sulpheric_acid_12_def.tres" id="5_paayk"]
-[ext_resource type="Resource" uid="uid://dqg1q6qmrehg8" path="res://Recipes/Item Stacks/Uberfilament_8_def.tres" id="6_p7oyd"]
+[ext_resource type="Resource" uid="uid://bmfv23okc867b" path="res://Recipes/Item Stacks/Calcium_powder_90_def.tres" id="4_dj3n3"]
+[ext_resource type="Resource" uid="uid://bl3tyv1bgnhwx" path="res://Recipes/Item Stacks/Uberfilament_15_def.tres" id="5_bx4l2"]
 
 [resource]
 script = ExtResource("2_8n23q")
 id = &"Uberfilament"
 display_name = "Uberfilament"
-inputs = Array[ExtResource("1_phqnx")]([ExtResource("2_cbfyt"), ExtResource("3_dj3n3"), ExtResource("4_bx4l2"), ExtResource("5_paayk")])
-outputs = Array[ExtResource("1_phqnx")]([ExtResource("6_p7oyd")])
+inputs = Array[ExtResource("1_phqnx")]([ExtResource("2_ndjii"), ExtResource("3_cbfyt"), ExtResource("4_dj3n3")])
+outputs = Array[ExtResource("1_phqnx")]([ExtResource("5_bx4l2")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

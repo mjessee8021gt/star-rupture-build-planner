@@ -2,15 +2,16 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_1e18y"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_3m8sw"]
-[ext_resource type="Resource" uid="uid://drufseiba4wn8" path="res://Recipes/Item Stacks/Tube_240_def.tres" id="2_qypr4"]
-[ext_resource type="Resource" uid="uid://cbnkgw8bqs2iw" path="res://Recipes/Item Stacks/Liquid_helium_60_def.tres" id="3_7eoe2"]
+[ext_resource type="Resource" uid="uid://c7nx1sglebdb" path="res://Recipes/Item Stacks/Tube_200_def.tres" id="2_7eoe2"]
+[ext_resource type="Resource" uid="uid://dnapfeiae102w" path="res://Recipes/Item Stacks/Liquid_helium_50_def.tres" id="3_m4yr0"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_p3pon"]
-[ext_resource type="Resource" uid="uid://cor4oynkdk0is" path="res://Recipes/Item Stacks/Nano_Fibre_12_def.tres" id="4_m4yr0"]
+[ext_resource type="Resource" uid="uid://ypx684fp254r" path="res://Recipes/Item Stacks/Wolfram_wire_80_def.tres" id="4_65hw4"]
+[ext_resource type="Resource" uid="uid://c2coyvsnyyt76" path="res://Recipes/Item Stacks/Nano_Fibre_20_def.tres" id="5_frmbp"]
 
 [resource]
 script = ExtResource("2_3m8sw")
 id = &"Nano Fibre"
 display_name = "Nano Fibre"
-inputs = Array[ExtResource("1_1e18y")]([ExtResource("2_qypr4"), ExtResource("3_7eoe2")])
-outputs = Array[ExtResource("1_1e18y")]([ExtResource("4_m4yr0")])
+inputs = Array[ExtResource("1_1e18y")]([ExtResource("2_7eoe2"), ExtResource("3_m4yr0"), ExtResource("4_65hw4")])
+outputs = Array[ExtResource("1_1e18y")]([ExtResource("5_frmbp")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://b3glny1afqfm2"]
+
+[ext_resource type="Resource" uid="uid://dnh8um64oae1f" path="res://Recipes/Item Definitions/Wolfram_bar_Def.tres" id="1_uc4n0"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_gmqmi"]
+
+[resource]
+script = ExtResource("2_gmqmi")
+item = ExtResource("1_uc4n0")
+qty = 150
+id = &"Wolfram Bar"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

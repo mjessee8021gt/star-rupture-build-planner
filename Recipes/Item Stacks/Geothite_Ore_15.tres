@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://cg5xixc4wfser"]
+
+[ext_resource type="Resource" uid="uid://dm5ksorcp73y3" path="res://Recipes/Item Definitions/Geothite_ore_Def.tres" id="1_nsau7"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_d0qpe"]
+
+[resource]
+script = ExtResource("2_d0qpe")
+item = ExtResource("1_nsau7")
+qty = 15
+id = &"Geothite Ore"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

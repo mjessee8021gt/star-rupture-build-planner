@@ -47,6 +47,8 @@ func _ready() -> void:
 	craftingMenu.set_item_metadata(craftingMenu.item_count-1, &"assembler")
 	craftingMenu.add_item("Constructorizer")
 	craftingMenu.set_item_metadata(craftingMenu.item_count-1, &"constructorizer")
+	craftingMenu.add_item("Facturer")
+	craftingMenu.set_item_metadata(craftingMenu.item_count-1, &"facturer")
 	craftingMenu.id_pressed.connect(_on_build_selected.bind(craftingMenu))
 	
 	var processingMenu = PopupMenu.new()
@@ -78,6 +80,8 @@ func _ready() -> void:
 	powerMenu.set_item_metadata(powerMenu.item_count-1, &"solar_v2")
 	powerMenu.add_item("Wind Mk2")
 	powerMenu.set_item_metadata(powerMenu.item_count-1, &"wind_v2")
+	powerMenu.add_item("Chemical Generator")
+	powerMenu.set_item_metadata(powerMenu.item_count-1, &"chemical_generator")
 	powerMenu.id_pressed.connect(_on_build_selected.bind(powerMenu))
 	print("Power Menu Item Selected...")
 	
@@ -95,6 +99,8 @@ func _ready() -> void:
 	railMenu.set_item_metadata(railMenu.item_count-1, &"multirail_5")
 	railMenu.add_item("Rail Modulator 5")
 	railMenu.set_item_metadata(railMenu.item_count-1, &"rail_modulator_5")
+	railMenu.add_item("Radial Rail Connector")
+	railMenu.set_item_metadata(railMenu.item_count-1, &"radial_rail")
 	railMenu.id_pressed.connect(_on_build_selected.bind(railMenu))
 	print("Rail Menu Item Selected...")
 	

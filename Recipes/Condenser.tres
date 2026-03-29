@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_taea0"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_ggkha"]
-[ext_resource type="Resource" uid="uid://dhcxwm72aqdob" path="res://Recipes/Item Stacks/Synthetic_Resin_12_def.tres" id="2_lw2n5"]
 [ext_resource type="Resource" uid="uid://bwfpx3unigmnh" path="res://Recipes/Item Stacks/Resonator_4_def.tres" id="3_0qkt7"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_asu7x"]
 [ext_resource type="Resource" uid="uid://eqs6601ggrai" path="res://Recipes/Item Stacks/Pump_12_def.tres" id="4_qyvn3"]
@@ -13,6 +12,6 @@
 script = ExtResource("2_ggkha")
 id = &"Condenser"
 display_name = "Condenser"
-inputs = Array[ExtResource("1_taea0")]([ExtResource("2_lw2n5"), ExtResource("3_0qkt7"), ExtResource("4_qyvn3"), ExtResource("5_cyfrk")])
+inputs = Array[ExtResource("1_taea0")]([ExtResource("3_0qkt7"), ExtResource("4_qyvn3"), ExtResource("5_cyfrk")])
 outputs = Array[ExtResource("1_taea0")]([ExtResource("6_86uqr")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"
