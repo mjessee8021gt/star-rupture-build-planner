@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://ci04gs21l7ysy"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_0ton8"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_n5kwd"]
+[ext_resource type="Resource" uid="uid://ljed4rwtxc3s" path="res://Recipes/Item Stacks/Titanium_rod_10_def.tres" id="2_p06uq"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_t6opr"]
+[ext_resource type="Resource" uid="uid://x4itvpf6kpri" path="res://Recipes/Item Stacks/Wolfram_wire_20_def.tres" id="3_yathe"]
+[ext_resource type="Resource" uid="uid://dyu4g6mnwcy0q" path="res://Recipes/Item Stacks/Wolfram_plate_10_def.tres" id="4_3pe2h"]
+[ext_resource type="Resource" uid="uid://d21u02bnkau7k" path="res://Recipes/Item Stacks/Rotor_60_def.tres" id="5_3hx6q"]
+
+[resource]
+script = ExtResource("2_n5kwd")
+id = &"Rotor"
+display_name = "Rotor"
+inputs = Array[ExtResource("1_0ton8")]([ExtResource("2_p06uq"), ExtResource("3_yathe"), ExtResource("4_3pe2h")])
+outputs = Array[ExtResource("1_0ton8")]([ExtResource("5_3hx6q")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

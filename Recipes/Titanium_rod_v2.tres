@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://fqufvvut3fk1"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_k7qtn"]
+[ext_resource type="Resource" uid="uid://vwl3v056rmfu" path="res://Recipes/Item Stacks/Titanium_bar_60_def.tres" id="2_0kumm"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_bfk2b"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_0kumm"]
+[ext_resource type="Resource" uid="uid://dwmedb48gktpe" path="res://Recipes/Item Stacks/Titanium_rod_120_def.tres" id="3_wrae4"]
+
+[resource]
+script = ExtResource("2_bfk2b")
+id = &"Titanium Rod"
+display_name = "Titanium Rod"
+inputs = Array[ExtResource("1_k7qtn")]([ExtResource("2_0kumm")])
+outputs = Array[ExtResource("1_k7qtn")]([ExtResource("3_wrae4")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

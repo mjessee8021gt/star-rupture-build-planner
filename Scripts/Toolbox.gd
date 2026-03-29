@@ -43,6 +43,8 @@ func _ready() -> void:
 	craftingMenu.name = "Crafting"
 	craftingMenu.add_item("Fabricator")
 	craftingMenu.set_item_metadata(craftingMenu.item_count-1, &"fabricator")
+	craftingMenu.add_item("Fabricator V2")
+	craftingMenu.set_item_metadata(craftingMenu.item_count-1, &"fabricator_v2")
 	craftingMenu.add_item("Assembler")
 	craftingMenu.set_item_metadata(craftingMenu.item_count-1, &"assembler")
 	craftingMenu.add_item("Constructorizer")
@@ -57,6 +59,8 @@ func _ready() -> void:
 	processingMenu.set_item_metadata(processingMenu.item_count-1, &"smelter")
 	processingMenu.add_item("Furnace")
 	processingMenu.set_item_metadata(processingMenu.item_count-1, &"furnace")
+	processingMenu.add_item("Furnace V2")
+	processingMenu.set_item_metadata(processingMenu.item_count-1, &"furnace_v2")
 	processingMenu.add_item("Mega Press")
 	processingMenu.set_item_metadata(processingMenu.item_count-1, &"mega_press")
 	processingMenu.add_item("Compounder")
@@ -101,6 +105,8 @@ func _ready() -> void:
 	railMenu.set_item_metadata(railMenu.item_count-1, &"rail_modulator_5")
 	railMenu.add_item("Radial Rail Connector")
 	railMenu.set_item_metadata(railMenu.item_count-1, &"radial_rail")
+	railMenu.add_item("Zipline")
+	railMenu.set_item_metadata(railMenu.item_count-1, &"zipline")
 	railMenu.id_pressed.connect(_on_build_selected.bind(railMenu))
 	print("Rail Menu Item Selected...")
 	
@@ -108,6 +114,8 @@ func _ready() -> void:
 	shipmentMenu.name = "Shipment"
 	shipmentMenu.add_item("Orbital Cargo Launcher")
 	shipmentMenu.set_item_metadata(shipmentMenu.item_count-1, &"orbital_launcher")
+	shipmentMenu.add_item("Orbital Cargo Launcher V2")
+	shipmentMenu.set_item_metadata(shipmentMenu.item_count-1, &"orbital_launcher_v2")
 	shipmentMenu.add_item("Cargo Dispatcher")
 	shipmentMenu.set_item_metadata(shipmentMenu.item_count-1, &"dispatcher")
 	shipmentMenu.add_item("Cargo Receiver")

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://dwmedb48gktpe"]
+
+[ext_resource type="Resource" uid="uid://djnqrmorp7moy" path="res://Recipes/Item Definitions/Titanium_rod_def.tres" id="1_pypk6"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_r65f3"]
+
+[resource]
+script = ExtResource("2_r65f3")
+item = ExtResource("1_pypk6")
+qty = 120
+id = &"Titanium Rod"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

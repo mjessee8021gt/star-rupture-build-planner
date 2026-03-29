@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://c772ifjdolrsb"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_glg05"]
+[ext_resource type="Resource" uid="uid://ceymf6opx5bb4" path="res://Recipes/Item Stacks/Calcite_sheet_30_def.tres" id="2_5kijx"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_gk67v"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_eqd7h"]
+[ext_resource type="Resource" uid="uid://b45chmmaxml58" path="res://Recipes/Item Stacks/Helium-3_60_def.tres" id="3_mm8gv"]
+[ext_resource type="Resource" uid="uid://bypvganhgqlp3" path="res://Recipes/Item Stacks/Wolfram_powder_30_def.tres" id="4_s1pqu"]
+[ext_resource type="Resource" uid="uid://bih8q4qxvs53n" path="res://Recipes/Item Stacks/Ceramics_120_def.tres" id="5_ty5l1"]
+
+[resource]
+script = ExtResource("2_gk67v")
+id = &"Ceramics"
+display_name = "Ceramics"
+inputs = Array[ExtResource("1_glg05")]([ExtResource("2_5kijx"), ExtResource("3_mm8gv"), ExtResource("4_s1pqu")])
+outputs = Array[ExtResource("1_glg05")]([ExtResource("5_ty5l1")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

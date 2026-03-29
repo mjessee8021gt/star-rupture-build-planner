@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://bnqr7s13bqju7"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_eoq3q"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_pjoho"]
+[ext_resource type="Resource" uid="uid://5butspmf2e78" path="res://Recipes/Item Stacks/Geothite_Ingot_30.tres" id="2_qvr2q"]
+[ext_resource type="Resource" uid="uid://nqeq866fjt58" path="res://Recipes/Item Stacks/Titanium_sheet_30_def.tres" id="3_535ev"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_m5pty"]
+[ext_resource type="Resource" uid="uid://bypvganhgqlp3" path="res://Recipes/Item Stacks/Wolfram_powder_30_def.tres" id="4_gwltf"]
+[ext_resource type="Resource" uid="uid://drufseiba4wn8" path="res://Recipes/Item Stacks/Tube_240_def.tres" id="5_ojbap"]
+
+[resource]
+script = ExtResource("2_pjoho")
+id = &"Tube"
+display_name = "Tube"
+inputs = Array[ExtResource("1_eoq3q")]([ExtResource("2_qvr2q"), ExtResource("3_535ev"), ExtResource("4_gwltf")])
+outputs = Array[ExtResource("1_eoq3q")]([ExtResource("5_ojbap")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

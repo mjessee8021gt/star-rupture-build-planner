@@ -1,0 +1,199 @@
+[gd_scene format=3 uid="uid://c1qdiamuvvpg0"]
+
+[ext_resource type="Script" uid="uid://cj7aegrckskgc" path="res://Buildings/Fabricator V2.gd" id="1_0aywl"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_8nmmk"]
+[ext_resource type="Resource" uid="uid://fqufvvut3fk1" path="res://Recipes/Titanium_rod_v2.tres" id="3_r258o"]
+[ext_resource type="Resource" uid="uid://dd8pgmpociqlt" path="res://Recipes/Titanium_sheet_v2.tres" id="4_qs8hr"]
+[ext_resource type="Resource" uid="uid://cu01icbloljji" path="res://Recipes/Wolfram_plate_v2.tres" id="5_i52ob"]
+[ext_resource type="Resource" uid="uid://baj2v7ck6ovpw" path="res://Recipes/Wolfram_wire_v2.tres" id="6_4p0e1"]
+[ext_resource type="Resource" uid="uid://bnqr7s13bqju7" path="res://Recipes/Tube_v2.tres" id="7_ojcnw"]
+[ext_resource type="Resource" uid="uid://cxgiuavvq8nb5" path="res://Recipes/Stator_v2.tres" id="8_ed1xg"]
+[ext_resource type="Resource" uid="uid://ci04gs21l7ysy" path="res://Recipes/Rotor_v2.tres" id="9_qhapw"]
+[ext_resource type="Texture2D" uid="uid://grouobxe87tu" path="res://Assets/SRBP_4x4_BLDG.png" id="16_c4bb4"]
+[ext_resource type="Texture2D" uid="uid://bodskb20g6htb" path="res://Assets/SRBP_5x4_BLDG.png" id="16_ed1xg"]
+[ext_resource type="Texture2D" uid="uid://ilmbegsn2c7" path="res://Assets/SRBP_Oval.png" id="21_803ag"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
+size = Vector2(256, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uf4xf"]
+size = Vector2(320, 256)
+
+[node name="Fabricator V2" type="Node2D" unique_id=1728206745 groups=["buildings"]]
+script = ExtResource("1_0aywl")
+available_recipes = Array[ExtResource("2_8nmmk")]([ExtResource("3_r258o"), ExtResource("4_qs8hr"), ExtResource("5_i52ob"), ExtResource("6_4p0e1"), ExtResource("7_ojcnw"), ExtResource("8_ed1xg"), ExtResource("9_qhapw")])
+id = &"furnace"
+metadata/_edit_vertical_guides_ = [63.0, 48.0, 64.0, 96.0]
+
+[node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
+position = Vector2(-128, -128)
+texture = ExtResource("16_c4bb4")
+centered = false
+
+[node name="AlternateSprite" type="Sprite2D" parent="." unique_id=1619536158]
+visible = false
+position = Vector2(-160, -128)
+texture = ExtResource("16_ed1xg")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128283645]
+shape = SubResource("RectangleShape2D_gbqis")
+
+[node name="CollisionShapeAlt" type="CollisionShape2D" parent="." unique_id=1184700770]
+visible = false
+shape = SubResource("RectangleShape2D_uf4xf")
+disabled = true
+
+[node name="TitleLabel" type="Label" parent="." unique_id=904579435]
+offset_left = -76.0
+offset_top = -60.0
+offset_right = 76.0
+offset_bottom = 13.0
+theme_override_font_sizes/font_size = 25
+text = "FABRICATOR
+V2"
+horizontal_alignment = 1
+
+[node name="PlacementArea" type="Area2D" parent="." unique_id=911391560]
+
+[node name="PlacementAreaAlt" type="Area2D" parent="." unique_id=445836450]
+
+[node name="Ports" type="Node2D" parent="." unique_id=1067444767]
+position = Vector2(-96, -128)
+
+[node name="Output 1" type="Button" parent="Ports" unique_id=1122308628 groups=["port_button"]]
+self_modulate = Color(1, 1, 1, 0.49803922)
+offset_left = 105.0
+offset_top = 1.0
+offset_right = 177.0
+offset_bottom = 41.0
+rotation = 1.5707964
+scale = Vector2(0.42, 0.42)
+icon = ExtResource("21_803ag")
+metadata/normal = Vector2(0, -1)
+
+[node name="Input 1" type="Button" parent="Ports" unique_id=1958701130 groups=["port_button"]]
+self_modulate = Color(1, 1, 1, 0.49803922)
+offset_left = 79.0
+offset_top = 225.00006
+offset_right = 151.0
+offset_bottom = 265.00006
+rotation = 1.5707964
+scale = Vector2(0.42, 0.42)
+icon = ExtResource("21_803ag")
+metadata/normal = Vector2(0, 1)
+
+[node name="Input 2" type="Button" parent="Ports" unique_id=1025542919 groups=["port_button"]]
+self_modulate = Color(1, 1, 1, 0.49803922)
+offset_left = 105.0
+offset_top = 225.0
+offset_right = 177.00002
+offset_bottom = 265.0
+rotation = 1.5707964
+scale = Vector2(0.42, 0.42)
+icon = ExtResource("21_803ag")
+metadata/normal = Vector2(0, 1)
+
+[node name="Input 3" type="Button" parent="Ports" unique_id=1275495196 groups=["port_button"]]
+self_modulate = Color(1, 1, 1, 0.49803922)
+offset_left = 129.00006
+offset_top = 225.00006
+offset_right = 201.00006
+offset_bottom = 265.00006
+rotation = 1.5707964
+scale = Vector2(0.42, 0.42)
+icon = ExtResource("21_803ag")
+metadata/normal = Vector2(0, 1)
+
+[node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
+offset_left = -69.0
+offset_top = 13.0
+offset_right = 25.0
+offset_bottom = 33.0
+theme_override_font_sizes/font_size = 10
+
+[node name="outputBox" type="ColorRect" parent="." unique_id=1419396623]
+offset_left = -15.0
+offset_top = -96.0
+offset_right = 14.0
+offset_bottom = -77.0
+color = Color(0, 0.64705884, 0.25490198, 0.57254905)
+
+[node name="outputText" type="Label" parent="outputBox" unique_id=1040759306]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -4.0
+offset_right = 34.0
+offset_bottom = 19.0
+theme_override_colors/font_color = Color(0, 0.24313726, 0, 1)
+text = "000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Input1Box" type="ColorRect" parent="." unique_id=1573327625]
+offset_left = -46.0
+offset_top = 77.0
+offset_right = -16.0
+offset_bottom = 96.0
+color = Color(0, 0.64705884, 0.25490198, 0.57254905)
+
+[node name="input1Text" type="Label" parent="Input1Box" unique_id=1651637159]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -2.0
+offset_right = 34.0
+offset_bottom = 21.0
+theme_override_colors/font_color = Color(0, 0.24313726, 0, 1)
+text = "000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Input2Box" type="ColorRect" parent="." unique_id=232719543]
+offset_left = -14.999992
+offset_top = 77.0
+offset_right = 15.0
+offset_bottom = 96.0
+color = Color(0, 0.64705884, 0.25490198, 0.57254905)
+
+[node name="input2Text" type="Label" parent="Input2Box" unique_id=332826267]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -2.0
+offset_right = 34.0
+offset_bottom = 21.0
+theme_override_colors/font_color = Color(0, 0.24313726, 0, 1)
+text = "000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Input3Box" type="ColorRect" parent="." unique_id=1711166632]
+offset_left = 16.0
+offset_top = 77.0
+offset_right = 46.0
+offset_bottom = 96.0
+color = Color(0, 0.64705884, 0.25490198, 0.57254905)
+
+[node name="input3Text" type="Label" parent="Input3Box" unique_id=844869573]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -2.0
+offset_right = 35.0
+offset_bottom = 21.0
+theme_override_colors/font_color = Color(0, 0.24313726, 0, 1)
+text = "000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="mouse_entered" from="Ports/Output 1" to="." method="_on_output_1_mouse_entered"]
+[connection signal="mouse_exited" from="Ports/Output 1" to="." method="_on_output_1_mouse_exited"]
+[connection signal="pressed" from="Ports/Output 1" to="." method="_on_output_1_pressed"]
+[connection signal="mouse_entered" from="Ports/Input 1" to="." method="_on_input_1_mouse_entered"]
+[connection signal="mouse_exited" from="Ports/Input 1" to="." method="_on_input_1_mouse_exited"]
+[connection signal="pressed" from="Ports/Input 1" to="." method="_on_input_1_pressed"]
+[connection signal="mouse_entered" from="Ports/Input 2" to="." method="_on_input_2_mouse_entered"]
+[connection signal="mouse_exited" from="Ports/Input 2" to="." method="_on_input_2_mouse_exited"]
+[connection signal="pressed" from="Ports/Input 2" to="." method="_on_input_2_pressed"]
+[connection signal="mouse_entered" from="Ports/Input 3" to="." method="_on_input_3_mouse_entered"]
+[connection signal="mouse_exited" from="Ports/Input 3" to="." method="_on_input_3_mouse_exited"]
+[connection signal="pressed" from="Ports/Input 3" to="." method="_on_input_3_pressed"]
+[connection signal="item_selected" from="Recipe" to="." method="_on_recipe_item_selected"]

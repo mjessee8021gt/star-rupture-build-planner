@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://bv6vjqoc1fvx5"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_q0cm2"]
+[ext_resource type="Resource" uid="uid://g2lhxnntsoqm" path="res://Recipes/Item Stacks/Helium-3_45_def.tres" id="2_b0phj"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_muiao"]
+[ext_resource type="Resource" uid="uid://c2igyl44bji71" path="res://Recipes/Item Stacks/Titanoferrite_Ingot_15_Def.tres" id="3_cxw0h"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_ejwfa"]
+[ext_resource type="Resource" uid="uid://cmaer4a4sel4g" path="res://Recipes/Item Stacks/Wolfram_steel_ingot_15_def.tres" id="4_a8wuu"]
+[ext_resource type="Resource" uid="uid://fjlda4f1l2mp" path="res://Recipes/Item Stacks/Heat_resistant_sheet_45_def.tres" id="5_fudyf"]
+
+[resource]
+script = ExtResource("2_muiao")
+id = &"Heat Resistant SHeet"
+display_name = "Heat Resistant Sheet"
+inputs = Array[ExtResource("1_q0cm2")]([ExtResource("2_b0phj"), ExtResource("3_cxw0h"), ExtResource("4_a8wuu")])
+outputs = Array[ExtResource("1_q0cm2")]([ExtResource("5_fudyf")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

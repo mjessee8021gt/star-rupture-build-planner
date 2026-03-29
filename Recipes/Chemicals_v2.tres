@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://c0qtsgukaurxi"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_kp32v"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_0mxfp"]
+[ext_resource type="Resource" uid="uid://b1otlku5o3v3f" path="res://Recipes/Item Stacks/Calcium_powder_30_def.tres" id="2_2bppn"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_3q5cf"]
+[ext_resource type="Resource" uid="uid://5butspmf2e78" path="res://Recipes/Item Stacks/Geothite_Ingot_30.tres" id="3_82cgo"]
+[ext_resource type="Resource" uid="uid://bvtb8snns5jmv" path="res://Recipes/Item Stacks/Helium-3_120_def.tres" id="4_4qft5"]
+[ext_resource type="Resource" uid="uid://djds0d5w4q2ex" path="res://Recipes/Item Stacks/Wolfram_powder_60_def.tres" id="5_qi3w4"]
+[ext_resource type="Resource" uid="uid://tgdf38lwlv2c" path="res://Recipes/Item Stacks/Chemicals_120_def.tres" id="6_t3wjw"]
+
+[resource]
+script = ExtResource("2_0mxfp")
+id = &"Chemicals"
+display_name = "Chemicals"
+inputs = Array[ExtResource("1_kp32v")]([ExtResource("2_2bppn"), ExtResource("3_82cgo"), ExtResource("4_4qft5"), ExtResource("5_qi3w4")])
+outputs = Array[ExtResource("1_kp32v")]([ExtResource("6_t3wjw")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://bf4axsgeklwab"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_p8m2w"]
+[ext_resource type="Resource" uid="uid://cmvtaxoa75csu" path="res://Recipes/Item Stacks/Calcite_sheet_20_def.tres" id="2_h3d7i"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_hvvok"]
+[ext_resource type="Resource" uid="uid://bm1axvgi0cwgm" path="res://Recipes/Item Stacks/Geothite_Ingot_20.tres" id="3_0twgh"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_hcbmu"]
+[ext_resource type="Resource" uid="uid://c06mihf7gyme" path="res://Recipes/Item Stacks/Pressurized_helium_20_def.tres" id="4_imt0e"]
+[ext_resource type="Resource" uid="uid://dx23jpsb6eec3" path="res://Recipes/Item Stacks/Glass_80_def.tres" id="5_j63t6"]
+
+[resource]
+script = ExtResource("2_hvvok")
+id = &"Glass"
+display_name = "Glass"
+inputs = Array[ExtResource("1_p8m2w")]([ExtResource("2_h3d7i"), ExtResource("3_0twgh"), ExtResource("4_imt0e")])
+outputs = Array[ExtResource("1_p8m2w")]([ExtResource("5_j63t6")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

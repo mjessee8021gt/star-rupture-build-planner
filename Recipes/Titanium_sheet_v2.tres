@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://dd8pgmpociqlt"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_tcjhs"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_fka7i"]
+[ext_resource type="Resource" uid="uid://vwl3v056rmfu" path="res://Recipes/Item Stacks/Titanium_bar_60_def.tres" id="2_g7hbw"]
+[ext_resource type="Resource" uid="uid://by5gy3jjjgs2k" path="res://Recipes/Item Stacks/Titanium_sheet_180_def.tres" id="3_btocv"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_g7hbw"]
+
+[resource]
+script = ExtResource("2_fka7i")
+id = &"Titanium Sheet"
+display_name = "Titanium Sheet"
+inputs = Array[ExtResource("1_tcjhs")]([ExtResource("2_g7hbw")])
+outputs = Array[ExtResource("1_tcjhs")]([ExtResource("3_btocv")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

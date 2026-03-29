@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://d21u02bnkau7k"]
+
+[ext_resource type="Resource" uid="uid://crsgtqe25mpnk" path="res://Recipes/Item Definitions/Rotor_Def.tres" id="1_mcc53"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_fl6ug"]
+
+[resource]
+script = ExtResource("2_fl6ug")
+item = ExtResource("1_mcc53")
+qty = 60
+id = &"Rotor"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

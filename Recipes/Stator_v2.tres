@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://cxgiuavvq8nb5"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_jmctp"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_jd45o"]
+[ext_resource type="Resource" uid="uid://dd6h6tgbcka3u" path="res://Recipes/Item Stacks/Titanium_housing_20_def.tres" id="2_pb7as"]
+[ext_resource type="Resource" uid="uid://s5fw5fkfgwgc" path="res://Recipes/Item Stacks/Titanium_sheet_20_def.tres" id="3_k12mw"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_mv7mg"]
+[ext_resource type="Resource" uid="uid://x4itvpf6kpri" path="res://Recipes/Item Stacks/Wolfram_wire_20_def.tres" id="4_cek1y"]
+[ext_resource type="Resource" uid="uid://t5o00lyxdd56" path="res://Recipes/Item Stacks/Stator_60_def.tres" id="5_wbr4x"]
+
+[resource]
+script = ExtResource("2_jd45o")
+id = &"Stator"
+display_name = "Stator"
+inputs = Array[ExtResource("1_jmctp")]([ExtResource("2_pb7as"), ExtResource("3_k12mw"), ExtResource("4_cek1y")])
+outputs = Array[ExtResource("1_jmctp")]([ExtResource("5_wbr4x")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"
