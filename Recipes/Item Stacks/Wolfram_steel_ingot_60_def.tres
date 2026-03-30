@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://ukdio8v2slb3"]
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://bl3i00rigfske"]
 
-[ext_resource type="Resource" uid="uid://bhg1rh8ytfmrt" path="res://Recipes/Item Definitions/Wolfram_steel_ingot_Def.tres" id="1_isnmk"]
-[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_v0uo5"]
+[ext_resource type="Resource" uid="uid://bhg1rh8ytfmrt" path="res://Recipes/Item Definitions/Wolfram_steel_ingot_Def.tres" id="1_1rjsw"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_1wg3j"]
 
 [resource]
-script = ExtResource("2_v0uo5")
-item = ExtResource("1_isnmk")
+script = ExtResource("1_1wg3j")
+item = ExtResource("1_1rjsw")
 qty = 60
 id = &"Wolfram Steel Ingot"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"
