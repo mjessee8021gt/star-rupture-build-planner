@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="PatchRegistry" format=3 uid="uid://krivacmtb7q8"]
+
+[ext_resource type="Script" uid="uid://b0cwm23pcrr11" path="res://Scripts/PatchRegistry.gd" id="1_2nyv6"]
+[ext_resource type="Resource" uid="uid://c1tstgpukd065" path="res://Patch Notes/0_1_0t.tres" id="1_6nauq"]
+[ext_resource type="Resource" uid="uid://83qoxdq03x2y" path="res://Patch Notes/0_1_1c.tres" id="2_ob4w8"]
+[ext_resource type="Resource" path="res://Patch Notes/0_1_2.tres" id="3_aegox"]
+[ext_resource type="Resource" uid="uid://b276rduyh62od" path="res://Patch Notes/0_1_3.tres" id="4_mikts"]
+
+[resource]
+script = ExtResource("1_2nyv6")
+patch_notes = Array[Resource]([ExtResource("1_6nauq"), ExtResource("2_ob4w8"), ExtResource("3_aegox"), ExtResource("4_mikts")])
+metadata/_custom_type_script = "uid://b0cwm23pcrr11"
