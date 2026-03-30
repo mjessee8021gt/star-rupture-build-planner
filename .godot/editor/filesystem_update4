@@ -1,0 +1,6 @@
+res://Scripts/patch_notes_menu.gd
+res://Scenes/Main.tscn
+res://Scripts/PatchRegistry.gd
+res://Scripts/buildManager.gd
+res://Scripts/path_manager.gd
+res://Scripts/main.gd

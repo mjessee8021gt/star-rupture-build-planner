@@ -111,6 +111,9 @@ func _position_from_anchor_cell(building: Node, anchor_cell: Vector2i) -> Vector
 func start_build(scene: PackedScene) -> void:
 	print("We are now starting the build preview in the build manager")
 	$"../Camera2D/CanvasLayer/Debug Panel/DebugFeed".text = $"../Camera2D/CanvasLayer/Debug Panel/DebugFeed".text + "\n" + "We are now starting the build preview in the build manager"
+	var pm := $"../PathManager"
+	if pm != null and pm.has_method("cancel_active_path_drag"):
+		pm.cancel_active_path_drag()
 	cancel_build()
 	
 	current_scene = scene
@@ -235,15 +238,19 @@ func try_remove_building_under_mouse() -> bool:
 	var cell := world_to_cell(mouse_pos)
 	var building := get_building_at_cells(cell)
 	var build_ledger := _get_prod_ledger()
+	var pm := $"../PathManager"
+	
 	if building == null:
 		return false
+		
+	if pm != null and pm.has_method("cancel_active_path_drag"):
+		pm.cancel_active_path_drag()
 
 	# 1) Production deltas: remove this building's contribution from the ledger
 	if build_ledger != null and build_ledger.has_method("remove_source"):
 		build_ledger.remove_source(_get_prod_source_id(building))
 
 	# 2) Remove any paths that reference this building
-	var pm := $"../PathManager"
 	if pm != null and pm.has_method("remove_paths_for_building"):
 		pm.remove_paths_for_building(building)
 

@@ -38,7 +38,8 @@ func _ready() -> void:
 	# Auto-connect to newly added buildings
 	if not get_tree().node_added.is_connected(_on_node_added):
 		get_tree().node_added.connect(_on_node_added)
-
+	if not get_tree().node_removed.is_connected(_on_node_removed):
+		get_tree().node_removed.connect(_on_node_removed)
 
 # -------------------------------------------------------------------
 # Building discovery / signal wiring
@@ -51,6 +52,11 @@ func _on_node_added(n: Node) -> void:
 	if n.is_in_group(endpoints_group) or n.has_signal("port_drag_started"):
 		_connect_to_building(n)
 
+func _on_node_removed(n: Node) -> void:
+	if n == null:
+		return
+	if n == _from_building:
+		cancel_active_path_drag()
 
 func _connect_to_buildings() -> void:
 	for b in get_tree().get_nodes_in_group(endpoints_group):
@@ -111,6 +117,8 @@ func _resolve_origin_port_path(start_port_name: String) -> NodePath:
 		return NodePath("Ports/%s" % start_port_name)
 	return DEFAULT_FROM_PORT_PATH
 
+func _is_active_drag_valid() -> bool:
+	return is_instance_valid(_preview_container) and is_instance_valid(_preview_line) and is_instance_valid(_from_building)
 
 func _get_port_center(building: Node, port_path: NodePath) -> Variant:
 	var target_button := building.get_node_or_null(port_path)
@@ -357,6 +365,10 @@ func _route_points_local_with_normals(container: Node2D,from_pos_g: Vector2, fro
 
 # Preview / finalize lifecycle
 func _on_port_start(building: Node2D, port_name: String, _start_pos: Vector2) -> void:
+	if building == null or not is_instance_valid(building):
+		cancel_active_path_drag()
+		return
+	
 	# Start only once; if already drawing, treat as end.
 	if _preview_container != null:
 		_on_port_end(building, port_name, _start_pos)
@@ -391,12 +403,17 @@ func _on_port_update(_building: Node2D, _port_name: String, mouse_pos: Vector2) 
 	if not _can_start_paths():
 		_cleanup_preview()
 		return
-	if _preview_container == null or _preview_line == null or _from_building == null:
+	if not _is_active_drag_valid():
+		_cleanup_preview()
 		return
 	_refresh_preview(mouse_pos)
 
 
 func _refresh_preview(mouse_pos: Vector2) -> void:
+	if not _is_active_drag_valid():
+		_cleanup_preview()
+		return
+	
 	var from_pos = _get_port_center(_from_building, _from_port_path)
 	if from_pos == null:
 		_cleanup_preview()
@@ -412,7 +429,8 @@ func _on_port_end(building: Node2D, port_name: String, mouse_pos: Vector2) -> vo
 		_cleanup_preview()
 		return
 
-	if _preview_container == null or _preview_line == null or _from_building == null:
+	if building == null or not is_instance_valid(building):
+		_cleanup_preview()
 		return
 
 	# Don't allow ending on the origin building (prevents accidental self-links)
@@ -470,6 +488,11 @@ func _cleanup_preview() -> void:
 	_from_building = null
 	_from_port_path = DEFAULT_FROM_PORT_PATH
 
+func cancel_active_path_drag() -> void:
+	if is_instance_valid(_from_building) and _from_building.has_method("cancel_port_drag"):
+		_from_building.cancel_port_drag()
+	_cleanup_preview()
+
 # Updating existing paths when buildings move / are deleted
 func update_paths_for_building(building: Node2D) -> void:
 	for child in get_children():
@@ -504,6 +527,9 @@ func update_paths_for_building(building: Node2D) -> void:
 
 #Upon deletion of a building, clean up the paths stemming from or to it.
 func remove_paths_for_building(building: Node2D) -> void:
+	if building == _from_building:
+		cancel_active_path_drag()
+	
 	var to_delete: Array[Node] = []
 	for child in get_children():
 		if child is Path2D and child.has_meta("from_building") and child.has_meta("to_building"):
