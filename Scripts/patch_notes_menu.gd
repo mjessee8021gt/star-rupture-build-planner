@@ -1,6 +1,5 @@
 extends PopupPanel
 
-@export var patch_notes_dir: String = "res://Patch Notes/"
 @export var entry_scene: PackedScene
 
 @onready var list: VBoxContainer = $PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/List
@@ -11,7 +10,7 @@ func _ready() -> void:
 func refresh() -> void:
 	_clear_list()
 	
-	var notes := _load_patchnote_resources(patch_notes_dir)
+	var notes := _load_patchnote_resources()
 	#Sort newest-first.
 	notes.sort_custom(func(a: PatchNote, b: PatchNote) -> bool:
 		return _version_is_newer(str(a.patch_version), str(b.patch_version)))
@@ -59,29 +58,23 @@ func _clear_list() -> void:
 	for child in list.get_children():
 		child.queue_free()
 
-func _load_patchnote_resources(dir_path: String) -> Array[PatchNote]:
+func _load_patchnote_resources() -> Array[PatchNote]:
 	var out: Array[PatchNote] = []
-	var normalized_dir := dir_path.trim_suffix("/")
-	var directory := DirAccess.open(normalized_dir)
-	if directory == null:
-		print("PatchNotesPanel: Could not open directory: " + normalized_dir)
+	var root := get_tree().root
+	var patch_registry := root.get_node_or_null("PatchRegistry")
+	if patch_registry == null:
+		patch_registry = root.get_node_or_null("PatchReg")
+	if patch_registry == null:
+		print ("PatchNotesPanel: Could not access PatchRegistry autoload singleton")
 		return out
-		
-	var files := directory.get_files()
-	if files.is_empty():
-		print("PatchNotesPanel: No files found in directory: " + normalized_dir + ". If this happens in HTML5 exports, ensure patch note resources are included in export filters.")
-		return out
-	files.sort()
-	for file_name in files:
-		if not (file_name.ends_with(".tres") or file_name.ends_with(".res")):
-			continue
-			
-		var path := normalized_dir.path_join(file_name)
-		var res := ResourceLoader.load(path)
+	
+	var patch_map: Dictionary = patch_registry.PATCHES
+	for key in patch_map.keys():
+		var res = patch_map[key]
 		if res is PatchNote:
 			out.append(res)
 		else:
-			print("PatchNotesPanel: Resource at " + path + " is not a PatchNote Resource.")
+			print("PatchNotesPanel: Resource at " + str(key) + " is not a PatchNote Resource.")
 	
 	return out
 	
