@@ -54,8 +54,8 @@ func remove_source(source_id: int) -> void:
 			if is_equal_approx(float(gross_totals[k]), 0.0):
 				gross_totals.erase(k)
 		elif delta < 0.0:
-			gross_negative_totals[k] = float(gross_negative_totals.get(k, 0.0)) - delta
-			if is_equal_approx(float(gross_negative_totals[k]), 0.0):
+			gross_negative_totals[k] = float(gross_negative_totals.get(k, 0.0)) + delta
+			if gross_negative_totals[k] <= 0.0 or is_equal_approx(float(gross_negative_totals[k]), 0.0):
 				gross_negative_totals.erase(k)
 		
 	by_source.erase(source_id)

@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://7jyji8msm5gx"]
 
 [ext_resource type="Script" uid="uid://ccwdt1powl6x1" path="res://Scripts/patch_notes_menu.gd" id="1_ghpbc"]
-[ext_resource type="PackedScene" uid="uid://c2uwua6eva0gs" path="res://Scenes/Main.tscn" id="2_cj463"]
-[ext_resource type="Resource" uid="uid://krivacmtb7q8" path="res://Patch Notes/Patch_Registry.tres" id="3_qa2bd"]
+[ext_resource type="PackedScene" uid="uid://c8t0wuou8x04o" path="res://Resources/PatchNotesEntry.tscn" id="2_xp55n"]
 
 [node name="PatchNotesPanel" type="PopupPanel" unique_id=1990882362]
 oversampling_override = 1.0
@@ -10,8 +9,7 @@ position = Vector2i(51, 463)
 size = Vector2i(300, 500)
 visible = true
 script = ExtResource("1_ghpbc")
-entry_scene = ExtResource("2_cj463")
-patch_notes = ExtResource("3_qa2bd")
+entry_scene = ExtResource("2_xp55n")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=876251613]
 offset_left = 4.0

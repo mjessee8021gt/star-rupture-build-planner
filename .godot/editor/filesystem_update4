@@ -4,3 +4,6 @@ res://Scripts/PatchRegistry.gd
 res://Scripts/buildManager.gd
 res://Scripts/path_manager.gd
 res://Scripts/main.gd
+res://Scenes/patchNotesPanel.tscn
+res://Scripts/ProductionLedger.gd
+res://Buildings/Orbital_launcher.tscn
