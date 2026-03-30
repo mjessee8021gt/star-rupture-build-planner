@@ -24,7 +24,7 @@ func _get_sorted_notes() -> Array[PatchNote]:
 	var notes := _read_registry_notes()
 	notes.sort_custom(func(a: PatchNote, b: PatchNote) -> bool:
 		return _version_is_newer(str(a.patch_version), str(b.patch_version)))
-	return notes
+	return notes ##this is a comment to reset the commit
 	
 func _read_registry_notes() -> Array[PatchNote]:
 	var registry := _resolve_registry()
