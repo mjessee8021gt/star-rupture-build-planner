@@ -210,6 +210,7 @@ func confirm_build(multi_build_held : bool = false) -> void:
 	
 	$"../Camera2D/CanvasLayer/Panel/HeatLabel".text = str(int($"../Camera2D/CanvasLayer/Panel/HeatLabel".text) + real_building.heat)
 	$"../Camera2D/CanvasLayer/Panel/PowerLabel".text = str(int($"../Camera2D/CanvasLayer/Panel/PowerLabel".text) + real_building.power)
+	_apply_build_cost_delta(real_building, 1)
 	
 	if real_building.id == &"helium_extractor" or real_building.id == &"sulfur_extractor":
 		ProdLedger.add_source(real_building.get_instance_id(), real_building,real_building.get_production_deltas(real_building.recipe))
@@ -257,6 +258,7 @@ func try_remove_building_under_mouse() -> bool:
 	# Update the global heat and power consumption.
 	$"../Camera2D/CanvasLayer/Panel/HeatLabel".text = str(int($"../Camera2D/CanvasLayer/Panel/HeatLabel".text) - building.heat)
 	$"../Camera2D/CanvasLayer/Panel/PowerLabel".text = str(int($"../Camera2D/CanvasLayer/Panel/PowerLabel".text) - building.power)
+	_apply_build_cost_delta(building, -1)
 
 	# Free grid occupancy
 	free_cells_for_building(building)
@@ -338,6 +340,33 @@ func _finish_drag_building() -> void:
 func _mouse_is_over_control() -> bool:
 	var hoveredControl = get_viewport().gui_get_hovered_control()
 	return hoveredControl != null and hoveredControl.is_in_group("port_button")
+	
+func _apply_build_cost_delta(building: Node, direction: int) -> void:
+	if building == null or not ("build_cost_amount" in building):
+		return
+
+	var amount := int(building.get("build_cost_amount"))
+	if amount == 0:
+		return
+
+	var panel_path := "../Camera2D/CanvasLayer/Panel/"
+	var label_path := ""
+	var cost_type := int(building.get("build_cost_type")) if "build_cost_type" in building else 0
+	match cost_type:
+		Building.BuildCostType.BBM:
+			label_path = "BBMCostLabel"
+		Building.BuildCostType.IBM:
+			label_path = "IBMCostLabel"
+		Building.BuildCostType.METEOR_CORE:
+			label_path = "MeteorCoreCostLabel"
+		_:
+			return
+
+	var cost_label := get_node_or_null(panel_path + label_path) as Label
+	if cost_label == null:
+		return
+
+	cost_label.text = str(int(cost_label.text) + amount * direction)
 	
 func _process(_delta: float) -> void:
 	var mouse_pos

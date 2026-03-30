@@ -2,6 +2,12 @@ extends Node2D
 
 class_name Building
 
+enum BuildCostType {
+	BBM,
+	IBM,
+	METEOR_CORE
+}
+
 ##------OnReady variables------##
 @onready var placement_area: Area2D = $PlacementArea
 
@@ -11,6 +17,8 @@ class_name Building
 @export var rotatedTick := 0
 @export var id: StringName
 @export var anchor := Vector2i.ZERO
+@export_enum("BBM", "IBM", "Meteor Core") var build_cost_type : int = BuildCostType.BBM
+@export var build_cost_amount := 0
 
 ##-----------Signals-----------##
 signal port_drag_started(building: Node2D, port_name: String, port_global_pos: Vector2)

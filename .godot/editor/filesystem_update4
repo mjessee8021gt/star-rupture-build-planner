@@ -7,3 +7,9 @@ res://Scripts/main.gd
 res://Scenes/patchNotesPanel.tscn
 res://Scripts/ProductionLedger.gd
 res://Buildings/Orbital_launcher.tscn
+res://Resources/building.gd
+res://Buildings/OreExcavator.tscn
+res://Buildings/Oil Extractor.tscn
+res://Buildings/Orbital_launcher_v2.tscn
+res://Buildings/Base Core.tscn
+res://Buildings/Base Core.gd

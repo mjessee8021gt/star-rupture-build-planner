@@ -45,3 +45,22 @@ horizontal_alignment = 1
 [node name="PlacementArea" type="Area2D" parent="." unique_id=911391560]
 
 [node name="PlacementAreaAlt" type="Area2D" parent="." unique_id=445836450]
+
+[node name="CoreLevel" type="OptionButton" parent="." unique_id=415684926]
+offset_left = -21.0
+offset_top = 6.0
+offset_right = 21.0
+offset_bottom = 37.0
+item_count = 5
+popup/item_0/text = "0"
+popup/item_0/id = 0
+popup/item_1/text = "1"
+popup/item_1/id = 1
+popup/item_2/text = "2"
+popup/item_2/id = 2
+popup/item_3/text = "3"
+popup/item_3/id = 3
+popup/item_4/text = "4"
+popup/item_4/id = 4
+
+[connection signal="item_selected" from="CoreLevel" to="." method="_on_core_level_item_selected"]

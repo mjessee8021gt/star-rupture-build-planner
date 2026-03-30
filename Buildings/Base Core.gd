@@ -27,3 +27,17 @@ func flip_footprint() -> void:
 		$CollisionShapeAlt.disabled = true
 		footprint = footprint_primary
 		is_alternate = false
+
+
+func _on_core_level_item_selected(index: int) -> void:
+	if $CoreLevel.selected == 0:
+		heat = -1000
+	elif $CoreLevel.selected == 1:
+		heat = -2500
+	elif $CoreLevel.selected == 2:
+		heat = -4000
+	elif $CoreLevel.selected == 3:
+		heat = -6000
+	else:
+		heat = -10000
+	

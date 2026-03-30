@@ -15,6 +15,7 @@ size = Vector2(192, 256)
 script = ExtResource("1_m443x")
 available_recipes = Array[ExtResource("2_veacw")]([ExtResource("3_rhfiq"), ExtResource("4_dkway"), ExtResource("5_43axb")])
 id = &"excavator"
+build_cost_amount = 80
 metadata/_edit_vertical_guides_ = [96.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]

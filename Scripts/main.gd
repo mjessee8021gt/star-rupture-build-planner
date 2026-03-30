@@ -7,6 +7,9 @@ const SAVE_FORMAT_VERSION := 1
 @onready var tile_map_layer: TileMapLayer = $TileMapLayer
 @onready var heat_label: Label = $Camera2D/CanvasLayer/Panel/HeatLabel
 @onready var power_label: Label = $Camera2D/CanvasLayer/Panel/PowerLabel
+@onready var bbm_cost_label: Label = $Camera2D/CanvasLayer/Panel/BBMCostLabel
+@onready var ibm_cost_label: Label = $Camera2D/CanvasLayer/Panel/IBMCostLabel
+@onready var meteor_core_cost_label: Label = $Camera2D/CanvasLayer/Panel/MeteorCoreCostLabel
 @onready var prod_panel: PanelContainer = $Camera2D/CanvasLayer/ProdMenu/ProdPanel
 @onready var build_manager: Node = $BuildManager
 @onready var path_manager: Node = $PathManager
@@ -21,6 +24,9 @@ var load_dialog: FileDialog
 func _ready() -> void:
 	heat_label.text = "0"
 	power_label.text = "0"
+	bbm_cost_label.text = "0"
+	ibm_cost_label.text = "0"
+	meteor_core_cost_label.text = "0"
 	_setup_save_load_ui()
 	get_viewport().size_changed.connect(_on_viewport_size_changed)
 	Adjust_ui_for_resolution()
@@ -77,7 +83,7 @@ func _setup_save_load_ui() -> void:
 func Adjust_ui_for_resolution() -> void:
 	$Camera2D/CanvasLayer/MenuButton.position = Vector2 (15, 15)
 	$Camera2D/CanvasLayer/Panel.position = Vector2 (get_viewport().size.x - 180, 5)
-	$Camera2D/CanvasLayer/ProdMenu.position = Vector2 (get_viewport().size.x - 75, 42)
+	$Camera2D/CanvasLayer/ProdMenu.position = Vector2 (get_viewport().size.x - 75, 100)
 	$Camera2D/CanvasLayer/ControlMenu.position = Vector2(15, get_viewport().size.y -50)
 	$"Camera2D/CanvasLayer/Patch Notes".position = Vector2(15, get_viewport().size.y -90)
 	
@@ -177,6 +183,9 @@ func _collect_save_state() -> Dictionary:
 		"saved_at_unix": Time.get_unix_time_from_system(),
 		"heat": int(heat_label.text),
 		"power": int(power_label.text),
+		"cost_bbm": int(bbm_cost_label.text),
+		"cost_ibm": int(ibm_cost_label.text),
+		"cost_meteor_cores": int(meteor_core_cost_label.text),
 		"camera": {
 			"position": [camera.position.x, camera.position.y],
 			"zoom": [camera.zoom.x, camera.zoom.y]
@@ -274,6 +283,16 @@ func _apply_save_state(save_state: Dictionary) -> void:
 		power_label.text = str(int(save_state["power"]))
 	else:
 		power_label.text = str(_sum_building_stat(loaded_buildings, "power"))
+
+	if save_state.has("cost_bbm") and save_state.has("cost_ibm") and save_state.has("cost_meteor_cores"):
+		bbm_cost_label.text = str(int(save_state["cost_bbm"]))
+		ibm_cost_label.text = str(int(save_state["cost_ibm"]))
+		meteor_core_cost_label.text = str(int(save_state["cost_meteor_cores"]))
+	else:
+		var cost_totals := _sum_building_costs(loaded_buildings)
+		bbm_cost_label.text = str(cost_totals.get("bbm", 0))
+		ibm_cost_label.text = str(cost_totals.get("ibm", 0))
+		meteor_core_cost_label.text = str(cost_totals.get("meteor_cores", 0))
 
 	_rebuild_production_ledger(loaded_buildings)
 
@@ -445,4 +464,28 @@ func _sum_building_stat(loaded_buildings: Array[Node2D], stat_name: String) -> i
 		if stat_name in building:
 			total += int(building.get(stat_name))
 	return total
+	
+func _sum_building_costs(loaded_buildings: Array[Node2D]) -> Dictionary:
+	var totals := {
+		"bbm": 0,
+		"ibm": 0,
+		"meteor_cores": 0
+	}
+
+	for building in loaded_buildings:
+		if not ("build_cost_amount" in building):
+			continue
+
+		var amount := int(building.get("build_cost_amount"))
+		var cost_type := int(building.get("build_cost_type")) if "build_cost_type" in building else 0
+
+		match cost_type:
+			Building.BuildCostType.BBM:
+				totals["bbm"] += amount
+			Building.BuildCostType.IBM:
+				totals["ibm"] += amount
+			Building.BuildCostType.METEOR_CORE:
+				totals["meteor_cores"] += amount
+
+	return totals
 	

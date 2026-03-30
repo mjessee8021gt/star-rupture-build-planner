@@ -15,6 +15,8 @@ size = Vector2(256, 256)
 script = ExtResource("1_bhhip")
 heat = 40
 id = &"orbital_launcher_v2"
+build_cost_type = 1
+build_cost_amount = 120
 metadata/_edit_vertical_guides_ = [63.0, 96.0, 112.0, 80.0, 128.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]

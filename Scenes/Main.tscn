@@ -51,7 +51,7 @@ BuildManager = NodePath("../../../BuildManager")
 offset_left = 1104.0
 offset_top = 1.0
 offset_right = 1279.0
-offset_bottom = 33.0
+offset_bottom = 95.0
 
 [node name="HeatIcon" type="Sprite2D" parent="Camera2D/CanvasLayer/Panel" unique_id=1228076443]
 position = Vector2(16.5, 15)
@@ -80,6 +80,63 @@ offset_right = 171.0
 offset_bottom = 31.0
 theme_override_font_sizes/font_size = 21
 text = "0000"
+horizontal_alignment = 2
+
+[node name="BBMTextLabel" type="Label" parent="Camera2D/CanvasLayer/Panel" unique_id=1300045001]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 32.0
+offset_right = 65.0
+offset_bottom = 55.0
+theme_override_font_sizes/font_size = 15
+text = "BBM:"
+
+[node name="BBMCostLabel" type="Label" parent="Camera2D/CanvasLayer/Panel" unique_id=1608655122]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 32.0
+offset_right = 95.0
+offset_bottom = 55.0
+theme_override_font_sizes/font_size = 15
+text = "0"
+horizontal_alignment = 2
+
+[node name="IBMTextLabel" type="Label" parent="Camera2D/CanvasLayer/Panel" unique_id=1869679014]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 32.0
+offset_right = 149.0
+offset_bottom = 55.0
+theme_override_font_sizes/font_size = 15
+text = "IBM:"
+
+[node name="IBMCostLabel" type="Label" parent="Camera2D/CanvasLayer/Panel" unique_id=202860460]
+layout_mode = 0
+offset_left = 142.0
+offset_top = 32.0
+offset_right = 171.0
+offset_bottom = 55.0
+theme_override_font_sizes/font_size = 15
+text = "0"
+horizontal_alignment = 2
+
+[node name="MeteorCoreTextLabel" type="Label" parent="Camera2D/CanvasLayer/Panel" unique_id=1634346124]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 58.0
+offset_right = 119.0
+offset_bottom = 81.0
+theme_override_font_sizes/font_size = 15
+text = "Meteor Cores:"
+
+[node name="MeteorCoreCostLabel" type="Label" parent="Camera2D/CanvasLayer/Panel" unique_id=321517503]
+layout_mode = 0
+offset_left = 118.0
+offset_top = 58.0
+offset_right = 171.0
+offset_bottom = 81.0
+theme_override_font_sizes/font_size = 15
+text = "0"
 horizontal_alignment = 2
 
 [node name="ProdMenu" type="MenuButton" parent="Camera2D/CanvasLayer" unique_id=537098699]
