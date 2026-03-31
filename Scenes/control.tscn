@@ -1,7 +1,0 @@
-[gd_scene format=3 uid="uid://clvlgvj3otk0l"]
-
-[ext_resource type="PackedScene" uid="uid://bgtdi8ffnyye6" path="res://Scenes/4MatBuilding.tscn" id="1_sjmnu"]
-
-[node name="Control" type="CanvasLayer" unique_id=836448232]
-
-[node name="DraggableItem" parent="." unique_id=836522632 instance=ExtResource("1_sjmnu")]
