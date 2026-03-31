@@ -16,6 +16,7 @@ const SAVE_FORMAT_VERSION := 1
 @onready var buildings_root: Node2D = $buildings
 
 var save_button: Button
+var new_button: Button
 var load_button: Button
 var export_pdf_button: Button
 var save_dialog: FileDialog
@@ -57,6 +58,12 @@ func _setup_save_load_ui() -> void:
 	save_button.text = "Save"
 	save_button.pressed.connect(_on_save_pressed)
 	$Camera2D/CanvasLayer.add_child(save_button)
+
+	new_button = Button.new()
+	new_button.name = "NewButton"
+	new_button.text = "New"
+	new_button.pressed.connect(_on_new_pressed)
+	$Camera2D/CanvasLayer.add_child(new_button)
 
 	load_button = Button.new()
 	load_button.name = "LoadButton"
@@ -104,6 +111,8 @@ func Adjust_ui_for_resolution() -> void:
 	$Camera2D/CanvasLayer/ControlMenu.position = Vector2(15, get_viewport().size.y -50)
 	$"Camera2D/CanvasLayer/Patch Notes".position = Vector2(15, get_viewport().size.y -90)
 	
+	if new_button != null:
+		new_button.position = Vector2(get_viewport().size.x - 490, 8)
 	if save_button != null:
 		save_button.position = Vector2(get_viewport().size.x - 430, 8)
 	if load_button != null:
@@ -146,6 +155,9 @@ func _on_export_pdf_pressed() -> void:
 	export_pdf_dialog.current_file = "build_plan.pdf"
 	export_pdf_dialog.popup_centered_ratio(0.7)
 
+func _on_new_pressed() -> void:
+	_clear_scene_plan()
+
 func _on_save_file_selected(path: String) -> void:
 	var result := _write_save_file(path)
 	if not result:
@@ -160,6 +172,40 @@ func _on_export_pdf_file_selected(path: String) -> void:
 	var exported := _write_pdf_file(path)
 	if not exported:
 		push_warning("Failed to export PDF file to %s" % path)
+
+func _clear_scene_plan() -> void:
+	if build_manager != null and build_manager.has_method("cancel_build"):
+		build_manager.cancel_build()
+
+	if path_manager != null and path_manager.has_method("cancel_active_path_drag"):
+		path_manager.cancel_active_path_drag()
+		
+	if path_manager != null:
+		for child in path_manager.get_children():
+			if child is Path2D:
+				child.queue_free()
+
+	for child in buildings_root.get_children():
+		child.queue_free()
+		
+	if build_manager != null and "occupied_cells" in build_manager:
+		build_manager.occupied_cells.clear()
+
+	heat_label.text = "0"
+	power_label.text = "0"
+	bbm_cost_label.text = "0"
+	ibm_cost_label.text = "0"
+	meteor_core_cost_label.text = "0"
+	
+	var ledger := get_tree().root.get_node_or_null("ProdLedger")
+	if ledger == null:
+		ledger = get_tree().root.get_node_or_null("ProductionLedger")
+	if ledger != null:
+		ledger.net_totals.clear()
+		ledger.gross_totals.clear()
+		ledger.gross_negative_totals.clear()
+		ledger.by_source.clear()
+		ledger.totals_changed.emit(ledger.net_totals, ledger.gross_totals, ledger.gross_negative_totals)
 
 func _download_save_to_browser() -> void:
 	var save_state := _collect_save_state()
