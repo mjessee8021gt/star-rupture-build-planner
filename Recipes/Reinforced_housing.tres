@@ -6,7 +6,7 @@
 [ext_resource type="Resource" uid="uid://bs75ohv43ai2q" path="res://Recipes/Item Stacks/Titanium_housing_15_def.tres" id="3_j4uu5"]
 [ext_resource type="Resource" path="res://Recipes/Item Stacks/Wolfram_steel_ingot_60_def.tres" id="4_z1bvt"]
 [ext_resource type="Resource" uid="uid://co4omxbr25fik" path="res://Recipes/Item Stacks/Wolfram_plate_45_def.tres" id="5_i4v5v"]
-[ext_resource type="Resource" path="res://Recipes/Item Stacks/Reinforced_Housing_15_def.tres" id="6_pwyic"]
+[ext_resource type="Resource" uid="uid://ib8lnr58v5s6" path="res://Recipes/Item Stacks/Reinforced_Housing_15_def.tres" id="6_pwyic"]
 
 [resource]
 script = ExtResource("2_9yeng")

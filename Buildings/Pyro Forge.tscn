@@ -18,7 +18,9 @@ size = Vector2(448, 448)
 [node name="Pyro Forge" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_odjxt")
 available_recipes = Array[ExtResource("2_gdxhn")]([ExtResource("3_euguc"), ExtResource("4_v3o03"), ExtResource("5_vyacb")])
-id = &"fabricator"
+id = &"pyro_forge"
+build_cost_type = 1
+build_cost_amount = 130
 metadata/_edit_vertical_guides_ = [63.0, 96.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
@@ -89,9 +91,9 @@ icon = ExtResource("18_y1h1k")
 metadata/normal = Vector2(0, 1)
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
-offset_left = -80.0
+offset_left = -92.0
 offset_top = 6.0
-offset_right = 14.0
+offset_right = 2.0
 offset_bottom = 26.0
 theme_override_font_sizes/font_size = 16
 

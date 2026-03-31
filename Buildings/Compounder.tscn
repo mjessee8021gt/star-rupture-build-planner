@@ -114,9 +114,9 @@ icon = ExtResource("17_28hxc")
 metadata/normal = Vector2(0, 1)
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
-offset_left = -79.999985
+offset_left = -105.999985
 offset_top = -32.0
-offset_right = 14.000015
+offset_right = -11.999985
 offset_bottom = -12.0
 theme_override_font_sizes/font_size = 16
 

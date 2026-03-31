@@ -12,6 +12,7 @@ size = Vector2(320, 256)
 [node name="Habitat" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_54pr6")
 id = &"habitat"
+build_cost_amount = 20
 metadata/_edit_vertical_guides_ = [63.0, 96.0, 112.0, 80.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]

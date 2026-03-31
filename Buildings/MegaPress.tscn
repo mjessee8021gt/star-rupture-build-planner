@@ -15,7 +15,7 @@
 [ext_resource type="Resource" uid="uid://ofj320xbtcjl" path="res://Recipes/Valve.tres" id="13_w5apf"]
 [ext_resource type="Texture2D" uid="uid://ca0431w33u4jt" path="res://Assets/SRBP_4x5_BLDG.png" id="14_oc300"]
 [ext_resource type="Resource" uid="uid://ce31hq8jrenvr" path="res://Recipes/Reinforced_frame.tres" id="14_omxsb"]
-[ext_resource type="Resource" path="res://Recipes/Reinforced_housing.tres" id="15_hurqg"]
+[ext_resource type="Resource" uid="uid://dpaauwa0scrgn" path="res://Recipes/Reinforced_housing.tres" id="15_hurqg"]
 [ext_resource type="Texture2D" uid="uid://ckf3jbuufrs6i" path="res://Assets/SRBP_5x6_BLDG.png" id="15_oc300"]
 [ext_resource type="Resource" uid="uid://rwh1ni4p7phe" path="res://Recipes/Geothite_lattice.tres" id="16_nyaiv"]
 [ext_resource type="Texture2D" uid="uid://ilmbegsn2c7" path="res://Assets/SRBP_Oval.png" id="17_ef2ad"]
@@ -32,6 +32,8 @@ size = Vector2(320, 384)
 script = ExtResource("1_oc300")
 available_recipes = Array[ExtResource("2_omxsb")]([ExtResource("3_facf6"), ExtResource("4_omxsb"), ExtResource("5_hurqg"), ExtResource("6_4e8em"), ExtResource("7_nyaiv"), ExtResource("8_x2mdb"), ExtResource("9_8hkdk"), ExtResource("10_hqy5a"), ExtResource("11_jcftm"), ExtResource("12_txqpt"), ExtResource("13_w5apf"), ExtResource("14_omxsb"), ExtResource("15_hurqg"), ExtResource("16_nyaiv"), ExtResource("17_x2mdb"), ExtResource("18_8hkdk")])
 id = &"megapress"
+build_cost_type = 1
+build_cost_amount = 80
 metadata/_edit_vertical_guides_ = [63.0, 48.0, 64.0, 80.0, -24.0, 128.0, 192.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]

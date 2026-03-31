@@ -13,9 +13,10 @@ size = Vector2(448, 448)
 
 [node name="Expandable Storage" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_sgi7p")
-heat = 60
-power = -5
-id = &"dispatcher"
+heat = 200
+id = &"expandable_storage"
+build_cost_type = 1
+build_cost_amount = 120
 metadata/_edit_vertical_guides_ = [63.0, 96.0, 112.0, 80.0, 128.0]
 metadata/_edit_horizontal_guides_ = [64.0, 96.0, 128.0]
 

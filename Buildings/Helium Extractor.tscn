@@ -14,8 +14,8 @@ size = Vector2(256, 256)
 [node name="Helium Extractor" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_lri10")
 recipe = ExtResource("22_t8n67")
-power = -15
 id = &"helium_extractor"
+build_cost_amount = 250
 metadata/_edit_vertical_guides_ = [63.0, 96.0, 112.0, 80.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]

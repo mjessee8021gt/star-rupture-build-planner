@@ -7,5 +7,7 @@
 
 [resource]
 script = ExtResource("2_og3df")
+id = &"Powerium"
+display_name = "Powerium"
 outputs = Array[ExtResource("1_1dggl")]([ExtResource("2_qmjt2")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

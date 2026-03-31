@@ -1,9 +1,9 @@
 extends Building
 
-@export var footprint_primary := Vector2i(7, 7)
-@export var footprint_alt := Vector2i(8, 8)
-@export var heat := 40
-@export var power := -80
+@export var footprint_primary := Vector2i(4,6)
+@export var footprint_alt := Vector2i(5,6)
+@export var heat := 500
+@export var power := -700
 @export var available_recipes: Array[Recipe] = []
 
 @onready var recipe_dropdown: OptionButton = $Recipe
@@ -34,7 +34,7 @@ var input4_is_pressed := false
 var output1_is_connected := false
 var output1_is_pressed := false
 var other_button_pressed := false
-var footprint := Vector2i(7, 7)
+var footprint := Vector2i(4,6)
 
 func _ready() -> void:
 	$"Ports/Output 1".modulate = Color(1,0,0,0.5)
@@ -58,16 +58,6 @@ func flip_footprint() -> void:
 		$AlternateSprite.visible = true
 		$CollisionShape2D.disabled = true
 		$CollisionShapeAlt.disabled = false
-		$"Ports/Output 1".position = Vector2(136, -95)
-		$"Ports/Input 1".position = Vector2(96,385)
-		$"Ports/Input 2".position = Vector2(123, 385)
-		$"Ports/Input 3".position = Vector2(150, 385)
-		$"Ports/Input 4".position = Vector2(177, 385)
-		$outputBox.position = Vector2(-15, -224)
-		$Input1Box.position = Vector2(-62, 205)
-		$Input2Box.position = Vector2(-31, 205)
-		$Input3Box.position = Vector2(1, 205)
-		$Input4Box.position = Vector2(32, 205)
 		footprint = footprint_alt
 		is_alternate = true
 	else:
@@ -75,16 +65,6 @@ func flip_footprint() -> void:
 		$CollisionShape2D.disabled = false
 		$AlternateSprite.visible = false
 		$CollisionShapeAlt.disabled = true
-		$"Ports/Output 1".position = Vector2(136, -63)
-		$"Ports/Input 1".position = Vector2(96, 353)
-		$"Ports/Input 2".position = Vector2(123, 353)
-		$"Ports/Input 3".position = Vector2(150, 353)
-		$"Ports/Input 4".position = Vector2(177, 353)
-		$outputBox.position = Vector2(-15, -192)
-		$Input1Box.position = Vector2(-62, 173)
-		$Input2Box.position = Vector2(-31, 173)
-		$Input3Box.position = Vector2(1, 173)
-		$Input4Box.position = Vector2(32, 173)
 		footprint = footprint_primary
 		is_alternate = false
 		

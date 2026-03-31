@@ -11,7 +11,10 @@ size = Vector2(256, 256)
 
 [node name="Wind V2" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_k1coi")
+heat = 500
 id = &"wind_v2"
+build_cost_type = 1
+build_cost_amount = 240
 metadata/_edit_vertical_guides_ = [63.0, 96.0, 112.0, 80.0, 128.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]

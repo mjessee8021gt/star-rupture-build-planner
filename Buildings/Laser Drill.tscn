@@ -14,8 +14,11 @@ size = Vector2(256, 256)
 [node name="Laser Drill" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_4rie8")
 recipe = ExtResource("2_s31y8")
-power = 5
-id = &"helium_extractor"
+heat = 200
+power = -250
+id = &"laser_drill"
+build_cost_type = 1
+build_cost_amount = 150
 metadata/_edit_vertical_guides_ = [63.0, 96.0, 112.0, 80.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
@@ -59,7 +62,7 @@ offset_top = -2.0
 offset_right = 36.0
 offset_bottom = 21.0
 theme_override_colors/font_color = Color(0, 0.24313726, 0, 1)
-text = "400"
+text = "15"
 horizontal_alignment = 1
 vertical_alignment = 1
 

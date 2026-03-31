@@ -23,6 +23,7 @@ size = Vector2(320, 320)
 script = ExtResource("1_mbsge")
 available_recipes = Array[ExtResource("2_eiaqr")]([ExtResource("3_ecagv"), ExtResource("4_g4byg"), ExtResource("5_ohfef"), ExtResource("6_dxxqh"), ExtResource("7_lv848"), ExtResource("8_5bamd"), ExtResource("9_ofxr0")])
 id = &"furnace_v2"
+build_cost_amount = 450
 metadata/_edit_vertical_guides_ = [63.0, 48.0, 64.0, 80.0, -24.0, 128.0, 192.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
@@ -118,9 +119,9 @@ icon = ExtResource("21_3saao")
 metadata/normal = Vector2(0, 1)
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
-offset_left = -98.0
+offset_left = -97.0
 offset_top = -10.0
-offset_right = -4.0000153
+offset_right = -3.0000153
 offset_bottom = 10.0
 theme_override_font_sizes/font_size = 16
 
