@@ -1,0 +1,234 @@
+[gd_scene format=3 uid="uid://c2uwua6eva0gs"]
+
+[ext_resource type="Script" uid="uid://cmy1thrc38yvq" path="res://Scripts/main.gd" id="1_kln2b"]
+[ext_resource type="PackedScene" uid="uid://dvfbce7bhnsbd" path="res://Scenes/GridMap.tscn" id="1_r150o"]
+[ext_resource type="Texture2D" uid="uid://3o5vaan8nvby" path="res://Assets/SRBP_Grid_1.png" id="3_2w5on"]
+[ext_resource type="Script" uid="uid://cssd864lah4hf" path="res://Scripts/CameraControls.gd" id="3_rgh2o"]
+[ext_resource type="Texture2D" uid="uid://bpgiktvpebx6e" path="res://Assets/SRBP_TOOLBOX.png" id="4_rgh2o"]
+[ext_resource type="Script" uid="uid://ddx74ounb8bc7" path="res://Scripts/Toolbox.gd" id="5_frkhe"]
+[ext_resource type="Script" uid="uid://cwao0e766iwdd" path="res://Scripts/buildManager.gd" id="6_v1gob"]
+[ext_resource type="Texture2D" uid="uid://bixocxjthy7cb" path="res://Assets/SRBP_Heat Icon.png" id="6_vy5pj"]
+[ext_resource type="Texture2D" uid="uid://b0q6pkjakr41b" path="res://Assets/SRBP_Power Icon.png" id="7_bmxlf"]
+[ext_resource type="Texture2D" uid="uid://bd7brbyjru5ea" path="res://Assets/SRBP_Stats_icon.png" id="8_bmxlf"]
+[ext_resource type="Script" uid="uid://brffdis28ou82" path="res://Scripts/prod_panel.gd" id="9_4kpch"]
+[ext_resource type="Texture2D" uid="uid://d2y1jxj184hie" path="res://Assets/SRBP_Controls.png" id="10_grg3l"]
+[ext_resource type="Script" uid="uid://de7lx8hb5y0o" path="res://Scenes/control_menu.gd" id="11_frkhe"]
+[ext_resource type="Texture2D" uid="uid://b0o4ul02ammwi" path="res://Assets/SRBP_Info_Button.png" id="12_1p5hy"]
+[ext_resource type="Script" uid="uid://ctcvj2tgfppa1" path="res://Scripts/patch_notes.gd" id="13_erwvk"]
+[ext_resource type="PackedScene" uid="uid://7jyji8msm5gx" path="res://Scenes/patchNotesPanel.tscn" id="14_erwvk"]
+[ext_resource type="Script" uid="uid://b0dhul6pq5435" path="res://Scripts/path_manager_2.gd" id="17_2w5on"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_346fj"]
+texture = ExtResource("3_2w5on")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_erwvk"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetAtlasSource_346fj")
+
+[node name="Main" type="Node2D" unique_id=1429791362]
+script = ExtResource("1_kln2b")
+
+[node name="TileMapLayer" parent="." unique_id=1244418290 instance=ExtResource("1_r150o")]
+tile_set = SubResource("TileSet_erwvk")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=958064929]
+script = ExtResource("3_rgh2o")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D" unique_id=958093744]
+
+[node name="MenuButton" type="MenuButton" parent="Camera2D/CanvasLayer" unique_id=431646375 node_paths=PackedStringArray("BuildManager")]
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 97.0
+offset_bottom = 97.0
+icon = ExtResource("4_rgh2o")
+script = ExtResource("5_frkhe")
+BuildManager = NodePath("../../../BuildManager")
+
+[node name="Panel" type="Panel" parent="Camera2D/CanvasLayer" unique_id=1180101363]
+offset_left = 1104.0
+offset_top = 1.0
+offset_right = 1279.0
+offset_bottom = 95.0
+
+[node name="HeatIcon" type="Sprite2D" parent="Camera2D/CanvasLayer/Panel" unique_id=1228076443]
+position = Vector2(16.5, 15)
+scale = Vector2(0.484375, 0.46875)
+texture = ExtResource("6_vy5pj")
+
+[node name="PowerIcon" type="Sprite2D" parent="Camera2D/CanvasLayer/Panel" unique_id=1711027906]
+position = Vector2(105.999985, 17)
+scale = Vector2(0.4765623, 0.4375)
+texture = ExtResource("7_bmxlf")
+
+[node name="HeatLabel" type="Label" parent="Camera2D/CanvasLayer/Panel" unique_id=197643977]
+layout_mode = 0
+offset_left = 38.0
+offset_right = 84.0
+offset_bottom = 29.0
+theme_override_font_sizes/font_size = 21
+text = "0000"
+horizontal_alignment = 2
+
+[node name="PowerLabel" type="Label" parent="Camera2D/CanvasLayer/Panel" unique_id=1482456259]
+layout_mode = 0
+offset_left = 123.0
+offset_top = 1.0
+offset_right = 171.0
+offset_bottom = 31.0
+theme_override_font_sizes/font_size = 21
+text = "0000"
+horizontal_alignment = 2
+
+[node name="BBMTextLabel" type="Label" parent="Camera2D/CanvasLayer/Panel" unique_id=1300045001]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 32.0
+offset_right = 65.0
+offset_bottom = 55.0
+theme_override_font_sizes/font_size = 15
+text = "BBM:"
+
+[node name="BBMCostLabel" type="Label" parent="Camera2D/CanvasLayer/Panel" unique_id=1608655122]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 32.0
+offset_right = 95.0
+offset_bottom = 55.0
+theme_override_font_sizes/font_size = 15
+text = "0"
+horizontal_alignment = 2
+
+[node name="IBMTextLabel" type="Label" parent="Camera2D/CanvasLayer/Panel" unique_id=1869679014]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 32.0
+offset_right = 149.0
+offset_bottom = 55.0
+theme_override_font_sizes/font_size = 15
+text = "IBM:"
+
+[node name="IBMCostLabel" type="Label" parent="Camera2D/CanvasLayer/Panel" unique_id=202860460]
+layout_mode = 0
+offset_left = 142.0
+offset_top = 32.0
+offset_right = 171.0
+offset_bottom = 55.0
+theme_override_font_sizes/font_size = 15
+text = "0"
+horizontal_alignment = 2
+
+[node name="MeteorCoreTextLabel" type="Label" parent="Camera2D/CanvasLayer/Panel" unique_id=1634346124]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 58.0
+offset_right = 119.0
+offset_bottom = 81.0
+theme_override_font_sizes/font_size = 15
+text = "Meteor Cores:"
+
+[node name="MeteorCoreCostLabel" type="Label" parent="Camera2D/CanvasLayer/Panel" unique_id=321517503]
+layout_mode = 0
+offset_left = 118.0
+offset_top = 58.0
+offset_right = 171.0
+offset_bottom = 81.0
+theme_override_font_sizes/font_size = 15
+text = "0"
+horizontal_alignment = 2
+
+[node name="ProdMenu" type="MenuButton" parent="Camera2D/CanvasLayer" unique_id=537098699]
+offset_left = 1208.0
+offset_top = 35.0
+offset_right = 1344.0
+offset_bottom = 171.0
+scale = Vector2(0.5, 0.5)
+icon = ExtResource("8_bmxlf")
+
+[node name="ProdPanel" type="PanelContainer" parent="Camera2D/CanvasLayer/ProdMenu" unique_id=1865534537]
+visible = false
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = -268.0
+offset_top = 138.0
+offset_right = 130.0
+offset_bottom = 1194.0
+script = ExtResource("9_4kpch")
+
+[node name="MarginContainer" type="MarginContainer" parent="Camera2D/CanvasLayer/ProdMenu/ProdPanel" unique_id=308655820]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Camera2D/CanvasLayer/ProdMenu/ProdPanel" unique_id=209524709]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Camera2D/CanvasLayer/ProdMenu/ProdPanel/ScrollContainer" unique_id=1328382313]
+layout_mode = 2
+
+[node name="Debug Panel" type="Panel" parent="Camera2D/CanvasLayer" unique_id=1044732433]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -412.0
+offset_top = 5.0
+offset_right = 418.0
+offset_bottom = 708.0
+grow_horizontal = 2
+
+[node name="DebugFeed" type="Label" parent="Camera2D/CanvasLayer/Debug Panel" unique_id=305992419]
+layout_mode = 0
+offset_right = 825.0
+offset_bottom = 698.0
+
+[node name="ControlMenu" type="MenuButton" parent="Camera2D/CanvasLayer" unique_id=1955834739]
+offset_left = 15.0
+offset_top = 628.0
+offset_right = 87.0
+offset_bottom = 700.0
+scale = Vector2(0.5, 0.5)
+icon = ExtResource("10_grg3l")
+script = ExtResource("11_frkhe")
+popup_path = NodePath("../PopupPanel")
+list_path = NodePath("../PopupPanel/MarginContainer/ScrollContainer/VBoxContainer")
+
+[node name="PopupPanel" type="PopupPanel" parent="Camera2D/CanvasLayer" unique_id=1072106267]
+oversampling_override = 1.0
+title = "Controls"
+position = Vector2i(51, 234)
+size = Vector2i(300, 250)
+visible = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Camera2D/CanvasLayer/PopupPanel" unique_id=1945906527]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 296.0
+offset_bottom = 246.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Camera2D/CanvasLayer/PopupPanel/MarginContainer" unique_id=90211902]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Camera2D/CanvasLayer/PopupPanel/MarginContainer/ScrollContainer" unique_id=1900633321]
+layout_mode = 2
+
+[node name="Patch Notes" type="MenuButton" parent="Camera2D/CanvasLayer" unique_id=1991974272]
+offset_left = 14.0
+offset_top = 588.0
+offset_right = 86.0
+offset_bottom = 660.0
+scale = Vector2(0.5, 0.5)
+keep_pressed_outside = true
+icon = ExtResource("12_1p5hy")
+script = ExtResource("13_erwvk")
+panel_scene = ExtResource("14_erwvk")
+
+[node name="BuildManager" type="Node2D" parent="." unique_id=695504288]
+script = ExtResource("6_v1gob")
+
+[node name="PathManager" type="Node2D" parent="." unique_id=1207476002]
+script = ExtResource("17_2w5on")
+
+[node name="buildings" type="Node2D" parent="." unique_id=1655476447]
+
+[connection signal="pressed" from="Camera2D/CanvasLayer/ProdMenu" to="." method="_on_prod_menu_pressed"]

@@ -11,7 +11,9 @@ size = Vector2(128, 128)
 
 [node name="Core Amplifier v1" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_44pl7")
-id = &"habitat"
+id = &"core_amp_v1"
+build_cost_type = 1
+build_cost_amount = 100
 metadata/_edit_vertical_guides_ = [63.0, 96.0, 112.0, 80.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]

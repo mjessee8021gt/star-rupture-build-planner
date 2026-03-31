@@ -31,6 +31,8 @@ heat = 150
 power = -60
 available_recipes = Array[ExtResource("2_ueiug")]([ExtResource("3_md1ix"), ExtResource("4_6fqcw"), ExtResource("5_w2ivq"), ExtResource("6_ueiug"), ExtResource("7_alc6w"), ExtResource("8_qa0va"), ExtResource("9_tjlp1"), ExtResource("10_glqjf"), ExtResource("11_alc6w"), ExtResource("12_qa0va"), ExtResource("13_tjlp1"), ExtResource("14_glqjf"), ExtResource("15_j1hit")])
 id = &"assembler"
+build_cost_type = 1
+build_cost_amount = 200
 metadata/_edit_vertical_guides_ = [63.0, 48.0, 64.0, 80.0, -24.0, 96.0, 192.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
@@ -124,9 +126,9 @@ icon = ExtResource("16_gbtw0")
 metadata/normal = Vector2(0, 1)
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
-offset_left = -72.0
+offset_left = -108.0
 offset_top = -84.0
-offset_right = 22.0
+offset_right = -14.0
 offset_bottom = -64.0
 theme_override_font_sizes/font_size = 16
 

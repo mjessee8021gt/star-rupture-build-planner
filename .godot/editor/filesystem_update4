@@ -13,3 +13,36 @@ res://Buildings/Oil Extractor.tscn
 res://Buildings/Orbital_launcher_v2.tscn
 res://Buildings/Base Core.tscn
 res://Buildings/Base Core.gd
+res://Scripts/path_manager_2.gd
+res://Patch Notes/0_2_0.tres
+res://Buildings/Assembler.tscn
+res://Recipes/Item Stacks/Accumulator_6_def.tres
+res://Recipes/Resonator.tres
+res://Recipes/Item Stacks/Generator_18_def.tres
+res://Recipes/Scanner.tres
+res://Recipes/Item Stacks/Geothite_lattice_15_def.tres
+res://Recipes/Pseudorubber_insulator.tres
+res://Buildings/Core Amplifier v1.tscn
+res://Buildings/Core Amplifier v2.tscn
+res://Buildings/Chemical Generator.tscn
+res://Buildings/Compounder.tscn
+res://Recipes/Ion Injector.tres
+res://Recipes/Lens.tres
+res://Recipes/Liquid_helium.tres
+res://Recipes/Nano_fibre.tres
+res://Recipes/Superconductor.tres
+res://Recipes/Synthetic_resin.tres
+res://Recipes/Geothite_powder.tres
+res://Recipes/Epoxy.tres
+res://Recipes/Substance_FHS-135-493.tres
+res://Recipes/Plastic.tres
+res://Recipes/Basic_fuel.tres
+res://Recipes/Organic_compound.tres
+res://Recipes/Aerogel.tres
+res://Recipes/Synthetic_protein.tres
+res://Buildings/Compounder V2.tscn
+res://Recipes/Liquid_helium_v2.tres
+res://Recipes/Pressurized_helium_v2.tres
+res://Recipes/Sulferic_acid_v2.tres
+res://Recipes/Synthetic_resin_v2.tres
+res://Scripts/prod_panel.gd
