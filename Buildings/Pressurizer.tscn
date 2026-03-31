@@ -17,7 +17,9 @@ size = Vector2(448, 448)
 [node name="Pressurizer" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_k1xno")
 available_recipes = Array[ExtResource("2_13a1u")]([ExtResource("3_k1xno"), ExtResource("4_uo3ni")])
-id = &"refinery"
+id = &"pressurizer"
+build_cost_type = 1
+build_cost_amount = 90
 metadata/_edit_vertical_guides_ = [63.0, 96.0, 112.0, 192.0, 224.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]

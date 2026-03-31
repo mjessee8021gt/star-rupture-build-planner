@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_rm23p"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_q7bqi"]
-[ext_resource type="Resource" path="res://Recipes/Item Stacks/Refined_oil_18_def.tres" id="3_8pphq"]
+[ext_resource type="Resource" uid="uid://tqm5gp8ph40g" path="res://Recipes/Item Stacks/Refined_oil_18_def.tres" id="3_8pphq"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_wkf3f"]
-[ext_resource type="Resource" path="res://Recipes/Item Stacks/Sulpheric_acid_6_def.tres" id="4_tfsrn"]
-[ext_resource type="Resource" path="res://Recipes/Item Stacks/Chemicals_6_def.tres" id="5_c6d2r"]
-[ext_resource type="Resource" path="res://Recipes/Item Stacks/Plastic_30_def.tres" id="6_tji45"]
+[ext_resource type="Resource" uid="uid://vkeod5icrokb" path="res://Recipes/Item Stacks/Sulpheric_acid_6_def.tres" id="4_tfsrn"]
+[ext_resource type="Resource" uid="uid://qatk55jd6aye" path="res://Recipes/Item Stacks/Chemicals_6_def.tres" id="5_c6d2r"]
+[ext_resource type="Resource" uid="uid://t55rdax6l0f1" path="res://Recipes/Item Stacks/Plastic_30_def.tres" id="6_tji45"]
 
 [resource]
 script = ExtResource("2_q7bqi")

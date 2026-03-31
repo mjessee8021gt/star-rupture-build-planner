@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_ogtl5")
 item = ExtResource("1_1us2d")
-qty = 90
+qty = 300
 id = &"Wolfram Powder"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

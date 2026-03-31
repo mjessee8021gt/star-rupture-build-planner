@@ -6,7 +6,7 @@
 [ext_resource type="Resource" uid="uid://cuixlv2pyfib1" path="res://Recipes/Item Stacks/Sulpheric_acid_15_def.tres" id="3_awijk"]
 [ext_resource type="Resource" uid="uid://13aoqu31n772" path="res://Recipes/Item Stacks/Refined_Oil_30_def.tres" id="4_p1tkn"]
 [ext_resource type="Resource" uid="uid://dbqn71pebbhdn" path="res://Recipes/Item Stacks/Epoxy_15_def.tres" id="5_hwa7y"]
-[ext_resource type="Resource" path="res://Recipes/Item Stacks/Organic_compound_45_def.tres" id="6_nx8k7"]
+[ext_resource type="Resource" uid="uid://ja6avuaxhc3a" path="res://Recipes/Item Stacks/Organic_compound_45_def.tres" id="6_nx8k7"]
 
 [resource]
 script = ExtResource("2_0fmla")

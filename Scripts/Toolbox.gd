@@ -35,8 +35,8 @@ func _ready() -> void:
 	extractionMenu.set_item_metadata(extractionMenu.item_count-1, &"oil_extractor")
 	extractionMenu.add_item("Laser Drill") ## added in pre-release update 1
 	extractionMenu.set_item_metadata(extractionMenu.item_count-1, &"laser_drill")
-	extractionMenu.add_item("Deuterium Extractor") ## Datamined from Alpha release
-	extractionMenu.set_item_metadata(extractionMenu.item_count-1, &"deuterium_extractor")
+	##extractionMenu.add_item("Deuterium Extractor") ## Datamined from Alpha release
+	##extractionMenu.set_item_metadata(extractionMenu.item_count-1, &"deuterium_extractor")
 	extractionMenu.id_pressed.connect(_on_build_selected.bind(extractionMenu))
 	print("Extraction Menu Item Selected...")
 	$"../Debug Panel/DebugFeed".text = "Extraction Menu Item Selected..."

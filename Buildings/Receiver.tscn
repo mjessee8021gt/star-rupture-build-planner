@@ -6,65 +6,108 @@
 [ext_resource type="Resource" uid="uid://r0d0exei0uo1" path="res://Recipes/Accumulator.tres" id="3_samut"]
 [ext_resource type="Resource" uid="uid://ol82gygr5cgr" path="res://Recipes/Sulpheric_acid.tres" id="4_57olk"]
 [ext_resource type="Resource" uid="uid://db7oghfdpodmj" path="res://Recipes/Applicator.tres" id="4_eokah"]
+[ext_resource type="Resource" uid="uid://20rutftfrtk" path="res://Recipes/Aerogel.tres" id="4_x5a4o"]
+[ext_resource type="Resource" uid="uid://cidkpdxk8707u" path="res://Recipes/Airlock.tres" id="5_1s16j"]
 [ext_resource type="Resource" uid="uid://bhaqbv0yp1oun" path="res://Recipes/Basic_building_materials.tres" id="5_hg4dv"]
 [ext_resource type="Texture2D" uid="uid://grouobxe87tu" path="res://Assets/SRBP_4x4_BLDG.png" id="5_vgmvo"]
+[ext_resource type="Resource" uid="uid://bxfobckjcm5se" path="res://Recipes/Anti-radiation_covers.tres" id="6_bam1a"]
 [ext_resource type="Resource" uid="uid://d0sdic63qwigq" path="res://Recipes/Battery.tres" id="6_ik4me"]
 [ext_resource type="Texture2D" uid="uid://bodskb20g6htb" path="res://Assets/SRBP_5x4_BLDG.png" id="6_vgmvo"]
 [ext_resource type="Texture2D" uid="uid://ilmbegsn2c7" path="res://Assets/SRBP_Oval.png" id="7_s8jfm"]
 [ext_resource type="Resource" uid="uid://bcnioljv0bmy5" path="res://Recipes/Calcite_sheet.tres" id="7_ya4ee"]
 [ext_resource type="Resource" uid="uid://7pge5tl0fdlt" path="res://Recipes/Calcium_block.tres" id="8_rsowt"]
+[ext_resource type="Resource" uid="uid://4oteybuej7nj" path="res://Recipes/Basic_fuel.tres" id="9_c7a4t"]
 [ext_resource type="Resource" uid="uid://dci71xdo3rg31" path="res://Recipes/Calcium_powder.tres" id="9_e11i1"]
 [ext_resource type="Resource" uid="uid://bd5npx5570loq" path="res://Recipes/Ceramics.tres" id="10_w4ooe"]
 [ext_resource type="Resource" uid="uid://bens7k5sjog37" path="res://Recipes/Chemicals.tres" id="11_n2poc"]
 [ext_resource type="Resource" uid="uid://cmjmbv2b7rdfr" path="res://Recipes/Condenser.tres" id="12_3lws4"]
 [ext_resource type="Resource" uid="uid://bov57lnl8s77e" path="res://Recipes/Electromagnet.tres" id="13_bx1do"]
 [ext_resource type="Resource" uid="uid://bm5tce02dibfx" path="res://Recipes/Electromagnetic_coil.tres" id="14_bs823"]
+[ext_resource type="Resource" uid="uid://cogoxol2tcc5i" path="res://Recipes/Carbon_sonar.tres" id="14_c5vbv"]
 [ext_resource type="Resource" uid="uid://bifbyj6q5ko1v" path="res://Recipes/Electronics.tres" id="15_syjry"]
 [ext_resource type="Resource" uid="uid://bwf4d8viv2o0h" path="res://Recipes/Generator.tres" id="16_11uiy"]
 [ext_resource type="Resource" uid="uid://bbdpit4o7qmsk" path="res://Recipes/Glass.tres" id="17_64ph6"]
+[ext_resource type="Resource" uid="uid://jb7wmt7v6i14" path="res://Recipes/Converter.tres" id="18_foe5q"]
 [ext_resource type="Resource" uid="uid://c1my1p2jpswiu" path="res://Recipes/Hardening_agent.tres" id="18_pkfnj"]
 [ext_resource type="Resource" uid="uid://cgbgy3tpgbdbk" path="res://Recipes/Harvest_helium-3.tres" id="19_6eykf"]
+[ext_resource type="Resource" uid="uid://cte7oih6hhwa0" path="res://Recipes/Cyclotrone.tres" id="19_6upcg"]
 [ext_resource type="Resource" uid="uid://bc2giok2mktnn" path="res://Recipes/harvest_sulpher.tres" id="20_p33r4"]
+[ext_resource type="Resource" uid="uid://bukws6i16qx26" path="res://Recipes/Dome.tres" id="20_rjn08"]
 [ext_resource type="Resource" uid="uid://qg8p6hfj8nl1" path="res://Recipes/Heat_resistant_sheet.tres" id="21_o3je5"]
 [ext_resource type="Resource" uid="uid://blnkss8ny4461" path="res://Recipes/Heavy_ammo.tres" id="22_5mo7m"]
 [ext_resource type="Resource" uid="uid://cbrjb43o0imhn" path="res://Recipes/Impeller.tres" id="23_xc0tw"]
 [ext_resource type="Resource" uid="uid://bsf5opdbdf673" path="res://Recipes/Inductor.tres" id="24_0fpiq"]
+[ext_resource type="Resource" uid="uid://qfxaeo3tiyix" path="res://Recipes/Epoxy.tres" id="24_qyyss"]
+[ext_resource type="Resource" uid="uid://dnjc3ur3jdwya" path="res://Recipes/Explosive_charge.tres" id="25_0nwyi"]
 [ext_resource type="Resource" uid="uid://bhu3n0sbfkiga" path="res://Recipes/Intermediate_building_materials.tres" id="25_6sswu"]
 [ext_resource type="Resource" uid="uid://vh0mef83f0fq" path="res://Recipes/Ion Injector.tres" id="26_03ypq"]
 [ext_resource type="Resource" uid="uid://qbdm2k4of01k" path="res://Recipes/Laser_emitter.tres" id="27_041ti"]
+[ext_resource type="Resource" uid="uid://fcnifabcs8af" path="res://Recipes/Geothite_ingot.tres" id="27_faj5x"]
+[ext_resource type="Resource" uid="uid://rwh1ni4p7phe" path="res://Recipes/Geothite_lattice.tres" id="28_c8fi3"]
 [ext_resource type="Resource" uid="uid://buienv7dio767" path="res://Recipes/Lens.tres" id="28_mtjbr"]
 [ext_resource type="Resource" uid="uid://du7jjotq5e67x" path="res://Recipes/Liquid_helium.tres" id="29_sbq2h"]
+[ext_resource type="Resource" uid="uid://b5tyh2bf183iy" path="res://Recipes/Geothite_ore.tres" id="29_yj22e"]
+[ext_resource type="Resource" uid="uid://mv5r7s5b2nvh" path="res://Recipes/Geothite_powder.tres" id="30_qn3o4"]
 [ext_resource type="Resource" uid="uid://djqxq1reiv2ra" path="res://Recipes/Nano_fibre.tres" id="30_us3g3"]
 [ext_resource type="Resource" uid="uid://cayj85qaw4vr1" path="res://Recipes/Nozzle.tres" id="31_4g24q"]
 [ext_resource type="Resource" uid="uid://dow8hsj6coner" path="res://Recipes/Pistol_ammo.tres" id="32_8a18h"]
 [ext_resource type="Resource" uid="uid://bw0tp80ndefay" path="res://Recipes/pressure_tank.tres" id="33_k2spg"]
 [ext_resource type="Resource" uid="uid://du010csmip8ol" path="res://Recipes/Pump.tres" id="35_cipqk"]
 [ext_resource type="Resource" uid="uid://cryw6iu71sfb0" path="res://Recipes/Resonator.tres" id="36_d11ft"]
+[ext_resource type="Resource" uid="uid://50c1febnkx6c" path="res://Recipes/Heat_shield.tres" id="36_gvn8l"]
 [ext_resource type="Resource" uid="uid://c7lhgy3lelxcw" path="res://Recipes/Rotor.tres" id="37_g2cfl"]
 [ext_resource type="Resource" uid="uid://bdbuxc406wwsc" path="res://Recipes/Scanner.tres" id="38_ghy42"]
 [ext_resource type="Resource" uid="uid://hpa8npqtht2k" path="res://Recipes/Shotgun_ammo.tres" id="39_o6wqc"]
 [ext_resource type="Resource" uid="uid://cdu55ckunlv2i" path="res://Recipes/Stabilizer.tres" id="40_igiks"]
 [ext_resource type="Resource" uid="uid://dqe75s0ad60oo" path="res://Recipes/Standard_ammo.tres" id="41_w7i4q"]
+[ext_resource type="Resource" uid="uid://cgjxil2ufmrw2" path="res://Recipes/Ion_bomb.tres" id="42_t0jee"]
 [ext_resource type="Resource" uid="uid://deusm6el3e55" path="res://Recipes/Stator.tres" id="42_wqajh"]
+[ext_resource type="Resource" uid="uid://c3l25q8aqemu7" path="res://Recipes/Ion_stabilizer.tres" id="43_h4yqh"]
+[ext_resource type="Resource" uid="uid://b066qu5konyix" path="res://Recipes/Ion_thruster.tres" id="44_hqx5u"]
 [ext_resource type="Resource" uid="uid://c020d7653ktna" path="res://Recipes/Superconductor.tres" id="44_vabsm"]
 [ext_resource type="Resource" uid="uid://c4yhx1qmql6hj" path="res://Recipes/Supermagnet.tres" id="45_buqqx"]
 [ext_resource type="Resource" uid="uid://bbayven6k6srd" path="res://Recipes/Synthetic Silicon.tres" id="46_x5a4o"]
 [ext_resource type="Resource" uid="uid://dv5yt7tce8sok" path="res://Recipes/Synthetic_resin.tres" id="47_1s16j"]
+[ext_resource type="Resource" uid="uid://dic4mfcb5m6m0" path="res://Recipes/Nanosyringe.tres" id="51_vcsj0"]
 [ext_resource type="Resource" uid="uid://oqna0imhy8e4" path="res://Recipes/Titanium housing.tres" id="53_rjn08"]
+[ext_resource type="Resource" uid="uid://hxl3ygjst65n" path="res://Recipes/Onboard_instruments.tres" id="54_lccaa"]
 [ext_resource type="Resource" uid="uid://dyy41nbehgytu" path="res://Recipes/Titanium_bar.tres" id="54_qyyss"]
 [ext_resource type="Resource" uid="uid://cww6ylj7i0ehh" path="res://Recipes/Titanium_beam.tres" id="55_0nwyi"]
+[ext_resource type="Resource" uid="uid://ga6as808731t" path="res://Recipes/Organic_compound.tres" id="55_hy8s4"]
 [ext_resource type="Resource" uid="uid://d18djk1gxnglo" path="res://Recipes/Titanium_rod.tres" id="56_faj5x"]
 [ext_resource type="Resource" uid="uid://do2uq7v7felwj" path="res://Recipes/Titanium_sheet.tres" id="57_c8fi3"]
+[ext_resource type="Resource" uid="uid://ctl3w36kfkq2u" path="res://Recipes/Plastic.tres" id="57_d6w16"]
+[ext_resource type="Resource" uid="uid://y2o8fhyj1sgy" path="res://Recipes/Plastic_dust.tres" id="58_ad327"]
 [ext_resource type="Resource" uid="uid://bq05m5kfssqq0" path="res://Recipes/Tube.tres" id="58_yj22e"]
 [ext_resource type="Resource" uid="uid://d2fbwjoy35ta7" path="res://Recipes/Turbine.tres" id="59_qn3o4"]
+[ext_resource type="Resource" uid="uid://bwyrrwm6qqgir" path="res://Recipes/Powerium.tres" id="59_qtirh"]
 [ext_resource type="Resource" uid="uid://ofj320xbtcjl" path="res://Recipes/Valve.tres" id="60_gvn8l"]
 [ext_resource type="Resource" uid="uid://d6ixs121qoye" path="res://Recipes/mine_Calcium.tres" id="60_q6uod"]
 [ext_resource type="Resource" uid="uid://crimyte5pq30h" path="res://Recipes/mine_Titanium.tres" id="61_7m0hi"]
 [ext_resource type="Resource" uid="uid://bnyf8aou0r7cx" path="res://Recipes/Wolfram_bar.tres" id="61_t0jee"]
+[ext_resource type="Resource" uid="uid://3w52s3slrct4" path="res://Recipes/Pseudorubber_insulator.tres" id="62_1swbb"]
 [ext_resource type="Resource" uid="uid://bhi7fb0mnjc32" path="res://Recipes/Wolfram_plate.tres" id="62_h4yqh"]
 [ext_resource type="Resource" uid="uid://kxel8v7alqj3" path="res://Recipes/mine_Wolfram.tres" id="62_samut"]
 [ext_resource type="Resource" uid="uid://bjc2p2md5xs62" path="res://Recipes/Wolfram_powder.tres" id="63_hqx5u"]
+[ext_resource type="Resource" uid="uid://bqw508mc4jv5k" path="res://Recipes/Quantum_tranquilizer.tres" id="64_hgc0h"]
 [ext_resource type="Resource" uid="uid://s3kc6mkd3goq" path="res://Recipes/Wolfram_wire.tres" id="64_vcsj0"]
+[ext_resource type="Resource" uid="uid://cgpxu3oe44jds" path="res://Recipes/Refined_oil.tres" id="65_bojgf"]
+[ext_resource type="Resource" uid="uid://ce31hq8jrenvr" path="res://Recipes/Reinforced_frame.tres" id="66_w64yt"]
+[ext_resource type="Resource" uid="uid://dpaauwa0scrgn" path="res://Recipes/Reinforced_housing.tres" id="67_a88xa"]
+[ext_resource type="Resource" uid="uid://4uevnxq4sasu" path="res://Recipes/RNA_stabilizer.tres" id="69_f7m20"]
+[ext_resource type="Resource" uid="uid://b8a8j5rvd5btw" path="res://Recipes/Rocket_engine.tres" id="70_23gar"]
+[ext_resource type="Resource" uid="uid://hloy06wmvn1t" path="res://Recipes/Rocket_fuel.tres" id="71_67cfh"]
+[ext_resource type="Resource" uid="uid://hp23tfctrro0" path="res://Recipes/RTSC.tres" id="73_6glt0"]
+[ext_resource type="Resource" uid="uid://do088qc18a52y" path="res://Recipes/RTSC_generator.tres" id="74_sls04"]
+[ext_resource type="Resource" uid="uid://dl7l7oybf452y" path="res://Recipes/Satelite_body.tres" id="75_02mcq"]
+[ext_resource type="Resource" uid="uid://dcmlg6icso5uc" path="res://Recipes/Scafolding.tres" id="76_qc7w6"]
+[ext_resource type="Resource" uid="uid://cx12l7etk2144" path="res://Recipes/Substance_FHS-135-493.tres" id="82_qj4n7"]
+[ext_resource type="Resource" uid="uid://lyuslwgs8r6h" path="res://Recipes/Synthetic_dna.tres" id="87_aisxe"]
+[ext_resource type="Resource" uid="uid://3cvsl2mfbvwm" path="res://Recipes/Synthetic_protein.tres" id="88_uep7v"]
+[ext_resource type="Resource" uid="uid://cinjqpjge6g31" path="res://Recipes/Titanoferrite_ingot.tres" id="95_7lher"]
+[ext_resource type="Resource" uid="uid://cgoowr4ritprv" path="res://Recipes/Tracking_device.tres" id="96_rc1vy"]
+[ext_resource type="Resource" uid="uid://cx4lxig6r8tny" path="res://Recipes/Uberfilament.tres" id="99_1sow5"]
+[ext_resource type="Resource" uid="uid://chf6s6h7ljw3h" path="res://Recipes/Wolfram_steel_ingot.tres" id="104_tgt6q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
 size = Vector2(256, 256)
@@ -75,8 +118,10 @@ size = Vector2(320, 256)
 [node name="Receiver" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_vgmvo")
 heat = 40
-available_recipes = Array[ExtResource("2_2qpsu")]([ExtResource("3_samut"), ExtResource("4_eokah"), ExtResource("5_hg4dv"), ExtResource("6_ik4me"), ExtResource("7_ya4ee"), ExtResource("8_rsowt"), ExtResource("60_q6uod"), ExtResource("9_e11i1"), ExtResource("10_w4ooe"), ExtResource("11_n2poc"), ExtResource("12_3lws4"), ExtResource("13_bx1do"), ExtResource("14_bs823"), ExtResource("15_syjry"), ExtResource("16_11uiy"), ExtResource("17_64ph6"), ExtResource("18_pkfnj"), ExtResource("21_o3je5"), ExtResource("22_5mo7m"), ExtResource("19_6eykf"), ExtResource("23_xc0tw"), ExtResource("24_0fpiq"), ExtResource("25_6sswu"), ExtResource("26_03ypq"), ExtResource("27_041ti"), ExtResource("28_mtjbr"), ExtResource("29_sbq2h"), ExtResource("30_us3g3"), ExtResource("31_4g24q"), ExtResource("32_8a18h"), ExtResource("33_k2spg"), ExtResource("3_roq06"), ExtResource("35_cipqk"), ExtResource("36_d11ft"), ExtResource("37_g2cfl"), ExtResource("38_ghy42"), ExtResource("39_o6wqc"), ExtResource("40_igiks"), ExtResource("41_w7i4q"), ExtResource("42_wqajh"), ExtResource("20_p33r4"), ExtResource("4_57olk"), ExtResource("44_vabsm"), ExtResource("45_buqqx"), ExtResource("46_x5a4o"), ExtResource("47_1s16j"), ExtResource("53_rjn08"), ExtResource("54_qyyss"), ExtResource("55_0nwyi"), ExtResource("61_7m0hi"), ExtResource("56_faj5x"), ExtResource("57_c8fi3"), ExtResource("58_yj22e"), ExtResource("59_qn3o4"), ExtResource("60_gvn8l"), ExtResource("61_t0jee"), ExtResource("62_samut"), ExtResource("62_h4yqh"), ExtResource("63_hqx5u"), ExtResource("64_vcsj0")])
+available_recipes = Array[ExtResource("2_2qpsu")]([ExtResource("3_samut"), ExtResource("4_x5a4o"), ExtResource("5_1s16j"), ExtResource("6_bam1a"), ExtResource("4_eokah"), ExtResource("5_hg4dv"), ExtResource("9_c7a4t"), ExtResource("6_ik4me"), ExtResource("7_ya4ee"), ExtResource("8_rsowt"), ExtResource("9_e11i1"), ExtResource("14_c5vbv"), ExtResource("10_w4ooe"), ExtResource("11_n2poc"), ExtResource("12_3lws4"), ExtResource("18_foe5q"), ExtResource("19_6upcg"), ExtResource("20_rjn08"), ExtResource("13_bx1do"), ExtResource("14_bs823"), ExtResource("15_syjry"), ExtResource("24_qyyss"), ExtResource("25_0nwyi"), ExtResource("16_11uiy"), ExtResource("27_faj5x"), ExtResource("28_c8fi3"), ExtResource("29_yj22e"), ExtResource("30_qn3o4"), ExtResource("17_64ph6"), ExtResource("18_pkfnj"), ExtResource("19_6eykf"), ExtResource("20_p33r4"), ExtResource("21_o3je5"), ExtResource("36_gvn8l"), ExtResource("22_5mo7m"), ExtResource("23_xc0tw"), ExtResource("24_0fpiq"), ExtResource("25_6sswu"), ExtResource("26_03ypq"), ExtResource("42_t0jee"), ExtResource("43_h4yqh"), ExtResource("44_hqx5u"), ExtResource("27_041ti"), ExtResource("28_mtjbr"), ExtResource("29_sbq2h"), ExtResource("60_q6uod"), ExtResource("61_7m0hi"), ExtResource("62_samut"), ExtResource("51_vcsj0"), ExtResource("30_us3g3"), ExtResource("31_4g24q"), ExtResource("54_lccaa"), ExtResource("55_hy8s4"), ExtResource("32_8a18h"), ExtResource("57_d6w16"), ExtResource("58_ad327"), ExtResource("59_qtirh"), ExtResource("33_k2spg"), ExtResource("3_roq06"), ExtResource("62_1swbb"), ExtResource("35_cipqk"), ExtResource("64_hgc0h"), ExtResource("65_bojgf"), ExtResource("66_w64yt"), ExtResource("67_a88xa"), ExtResource("36_d11ft"), ExtResource("69_f7m20"), ExtResource("70_23gar"), ExtResource("71_67cfh"), ExtResource("37_g2cfl"), ExtResource("73_6glt0"), ExtResource("74_sls04"), ExtResource("75_02mcq"), ExtResource("76_qc7w6"), ExtResource("38_ghy42"), ExtResource("39_o6wqc"), ExtResource("40_igiks"), ExtResource("41_w7i4q"), ExtResource("42_wqajh"), ExtResource("82_qj4n7"), ExtResource("4_57olk"), ExtResource("44_vabsm"), ExtResource("45_buqqx"), ExtResource("46_x5a4o"), ExtResource("87_aisxe"), ExtResource("88_uep7v"), ExtResource("47_1s16j"), ExtResource("53_rjn08"), ExtResource("54_qyyss"), ExtResource("55_0nwyi"), ExtResource("56_faj5x"), ExtResource("57_c8fi3"), ExtResource("95_7lher"), ExtResource("96_rc1vy"), ExtResource("58_yj22e"), ExtResource("59_qn3o4"), ExtResource("99_1sow5"), ExtResource("60_gvn8l"), ExtResource("61_t0jee"), ExtResource("62_h4yqh"), ExtResource("63_hqx5u"), ExtResource("104_tgt6q"), ExtResource("64_vcsj0")])
 id = &"receiver"
+build_cost_type = 1
+build_cost_amount = 80
 metadata/_edit_vertical_guides_ = [63.0, 96.0, 112.0, 80.0, 128.0, 160.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
@@ -127,7 +172,7 @@ offset_right = 73.0
 offset_bottom = 175.0
 scale = Vector2(0.5, 0.5)
 icon = ExtResource("7_s8jfm")
-metadata/normal = Vector2(0, 1)
+metadata/normal = Vector2(-1, 0)
 
 [node name="Output 2" type="Button" parent="Ports" unique_id=1025542919 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
@@ -138,14 +183,14 @@ offset_right = 291.0
 offset_bottom = 175.0
 scale = Vector2(0.5, 0.5)
 icon = ExtResource("7_s8jfm")
-metadata/normal = Vector2(0, 1)
+metadata/normal = Vector2(1, 0)
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
-offset_left = -65.0
+offset_left = -111.0
 offset_top = -69.0
-offset_right = 29.0
+offset_right = -17.0
 offset_bottom = -49.0
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 16
 
 [connection signal="mouse_entered" from="Ports/Output 1" to="." method="_on_output_1_mouse_entered"]
 [connection signal="mouse_exited" from="Ports/Output 1" to="." method="_on_output_1_mouse_exited"]

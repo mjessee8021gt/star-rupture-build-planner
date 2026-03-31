@@ -20,6 +20,8 @@ size = Vector2(448, 448)
 script = ExtResource("1_4vllf")
 available_recipes = Array[ExtResource("2_ewwso")]([ExtResource("3_fel1l"), ExtResource("4_52103"), ExtResource("5_806fp"), ExtResource("6_vpact")])
 id = &"compounder_v2"
+build_cost_type = 1
+build_cost_amount = 220
 metadata/_edit_vertical_guides_ = [63.0, 48.0, 64.0, 96.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
@@ -103,11 +105,11 @@ icon = ExtResource("17_f6wgv")
 metadata/normal = Vector2(0, 1)
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
-offset_left = -69.0
+offset_left = -95.0
 offset_top = -10.0
-offset_right = 25.0
+offset_right = -1.0
 offset_bottom = 10.0
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 16
 
 [node name="outputBox" type="ColorRect" parent="." unique_id=1419396623]
 offset_left = -15.0

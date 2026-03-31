@@ -13,7 +13,8 @@ size = Vector2(192, 192)
 
 [node name="Storage V1" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_upofk")
-id = &"dispatcher"
+id = &"storage_v1"
+build_cost_amount = 100
 metadata/_edit_vertical_guides_ = [63.0, 96.0, 112.0, 80.0, 128.0]
 metadata/_edit_horizontal_guides_ = [64.0, 96.0]
 

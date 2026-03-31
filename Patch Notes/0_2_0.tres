@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="PatchNote" format=3 uid="uid://bam6m3nqeyybc"]
+
+[ext_resource type="Script" uid="uid://b6tmiam3vo7cr" path="res://Resources/PatchNote.gd" id="1_uhaen"]
+
+[resource]
+script = ExtResource("1_uhaen")
+patch_version = &"v0.2.0"
+patch_notes = "New Features:
+- All buildings for Update 1 have been added
+- Recipes have been adjusted to fit the new balance that Creepy Jar has made in Update 1
+- Base Core and Base Core Amplifiers v1 an v2 have now been added and will actively reduce the heat. Base core features all 5 levels for accurate calculation
+- Players can now save their designs locally to their computer and load them at a later date for sharing or archival purposes.
+- Players can now generate a PDF 1-sheet of their build with all of the vitals
+- The Build planner now includes build cost. So players can know how much they will need of Basic Build Materials, Intermediate Build Materials, and Meteor Cores prior to starting.
+
+Bug Fixes:
+- Added an internal testing branch on Itch to properly troubleshoot issues specific with the HTML 5 implementation
+- Fixed an issue where changing a buildings recipe did not produce the desired results on the production pane
+- Fixed an issue where if the user starts a path then deletes the originating building, the path manager panics and refuses to build any further paths.
+- Fixed an issue where the Patch Notes panel was not presenting patch notes in the web version of the software
+- Fixed an issue where the right and bottom buttons on the Rail Connector asset were not pointing paths the correct direction at creation.
+
+"
+known_issues = "-Rail pathing is still just not where i want it to be. The path manager improvements are coming, the Path manager is actively being completely rebuilt to make it perform better.
+
+"

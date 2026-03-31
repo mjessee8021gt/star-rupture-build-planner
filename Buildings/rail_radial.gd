@@ -154,3 +154,134 @@ func _unhandled_input(event: InputEvent) -> void:
 		emit_signal("port_drag_ended", self, _dragging_port, p)
 		
 		_dragging_port = ""
+
+
+func _on_universal_3_pressed() -> void:
+	if not universal3_is_pressed:
+		if not other_button_pressed:
+			$"Ports/Universal 3".modulate = Color(0.5, 0.5, 0.5, 1)
+			universal3_is_pressed = true
+			other_button_pressed = true
+	else:
+		$"Ports/Universal 3".modulate = Color(0.5, 0.5, 0.5, 0.5)
+		universal3_is_pressed = false
+		other_button_pressed = false
+
+
+func _on_universal_3_mouse_entered() -> void:
+	if not universal3_is_pressed:
+		$"Ports/Universal 3".modulate = Color(0.5, 0.5, 0.5, 0.75)
+
+
+func _on_universal_3_mouse_exited() -> void:
+	if not universal3_is_pressed:
+		$"Ports/Universal 3".modulate = Color(0.5, 0.5, 0.5, 0.5)
+
+
+func _on_universal_4_pressed() -> void:
+	if not universal4_is_pressed:
+		if not other_button_pressed:
+			$"Ports/Universal 4".modulate = Color(0.5, 0.5, 0.5, 1)
+			universal4_is_pressed = true
+			other_button_pressed = true
+	else:
+		$"Ports/Universal 4".modulate = Color(0.5, 0.5, 0.5, 0.5)
+		universal4_is_pressed = false
+		other_button_pressed = false
+
+
+func _on_universal_4_mouse_entered() -> void:
+	if not universal4_is_pressed:
+		$"Ports/Universal 4".modulate = Color(0.5, 0.5, 0.5, 0.75)
+
+
+func _on_universal_4_mouse_exited() -> void:
+	if not universal4_is_pressed:
+		$"Ports/Universal 4".modulate = Color(0.5, 0.5, 0.5, 0.5)
+
+
+func _on_universal_5_pressed() -> void:
+	if not universal5_is_pressed:
+		if not other_button_pressed:
+			$"Ports/Universal 5".modulate = Color(0.5, 0.5, 0.5, 1)
+			universal5_is_pressed = true
+			other_button_pressed = true
+	else:
+		$"Ports/Universal 5".modulate = Color(0.5, 0.5, 0.5, 0.5)
+		universal5_is_pressed = false
+		other_button_pressed = false
+
+
+func _on_universal_5_mouse_entered() -> void:
+	if not universal5_is_pressed:
+		$"Ports/Universal 5".modulate = Color(0.5, 0.5, 0.5, 0.75)
+
+
+func _on_universal_5_mouse_exited() -> void:
+	if not universal5_is_pressed:
+		$"Ports/Universal 5".modulate = Color(0.5, 0.5, 0.5, 0.5)
+
+
+func _on_universal_6_pressed() -> void:
+	if not universal6_is_pressed:
+		if not other_button_pressed:
+			$"Ports/Universal 6".modulate = Color(0.5, 0.5, 0.5, 1)
+			universal6_is_pressed = true
+			other_button_pressed = true
+	else:
+		$"Ports/Universal 6".modulate = Color(0.5, 0.5, 0.5, 0.5)
+		universal6_is_pressed = false
+		other_button_pressed = false
+
+
+func _on_universal_6_mouse_entered() -> void:
+	if not universal6_is_pressed:
+		$"Ports/Universal 6".modulate = Color(0.5, 0.5, 0.5, 0.75)
+
+
+func _on_universal_6_mouse_exited() -> void:
+	if not universal6_is_pressed:
+		$"Ports/Universal 6".modulate = Color(0.5, 0.5, 0.5, 0.5)
+
+
+func _on_universal_7_pressed() -> void:
+	if not universal7_is_pressed:
+		if not other_button_pressed:
+			$"Ports/Universal 7".modulate = Color(0.5, 0.5, 0.5, 1)
+			universal7_is_pressed = true
+			other_button_pressed = true
+	else:
+		$"Ports/Universal 7".modulate = Color(0.5, 0.5, 0.5, 0.5)
+		universal7_is_pressed = false
+		other_button_pressed = false
+
+
+func _on_universal_7_mouse_entered() -> void:
+	if not universal7_is_pressed:
+		$"Ports/Universal 7".modulate = Color(0.5, 0.5, 0.5, 0.75)
+
+func _on_universal_7_mouse_exited() -> void:
+	if not universal7_is_pressed:
+		$"Ports/Universal 7".modulate = Color(0.5, 0.5, 0.5, 0.5)
+
+
+func _on_universal_8_pressed() -> void:
+	if not universal8_is_pressed:
+		if not other_button_pressed:
+			$"Ports/Universal 8".modulate = Color(0.5, 0.5, 0.5, 1)
+			universal8_is_pressed = true
+			other_button_pressed = true
+	else:
+		$"Ports/Universal 8".modulate = Color(0.5, 0.5, 0.5, 0.5)
+		universal8_is_pressed = false
+		other_button_pressed = false
+
+
+func _on_universal_8_mouse_entered() -> void:
+	if not universal8_is_pressed:
+		$"Ports/Universal 8".modulate = Color(0.5, 0.5, 0.5, 0.75)
+
+
+func _on_universal_8_mouse_exited() -> void:
+	if not universal8_is_pressed:
+		$"Ports/Universal 8".modulate = Color(0.5, 0.5, 0.5, 0.5)

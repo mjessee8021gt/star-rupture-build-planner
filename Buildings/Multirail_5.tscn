@@ -14,6 +14,8 @@ size = Vector2(128, 128)
 [node name="Multirail 5" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_kqxye")
 id = &"multirail_5"
+build_cost_type = 1
+build_cost_amount = 5
 metadata/_edit_vertical_guides_ = [32.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]

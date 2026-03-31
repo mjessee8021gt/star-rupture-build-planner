@@ -19,6 +19,7 @@ size = Vector2(256, 256)
 script = ExtResource("1_7hisn")
 available_recipes = Array[ExtResource("2_3rles")]([ExtResource("3_yt2l3"), ExtResource("4_e8x7b"), ExtResource("5_356qw")])
 id = &"smelter"
+build_cost_amount = 100
 metadata/_edit_vertical_guides_ = [64.0, 96.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]

@@ -25,7 +25,9 @@ size = Vector2(320, 384)
 [node name="Facturer" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_u85w3")
 available_recipes = Array[ExtResource("2_qw2ix")]([ExtResource("3_fkv1w"), ExtResource("4_ejilm"), ExtResource("5_6giog"), ExtResource("6_3rid3"), ExtResource("7_wd7rf"), ExtResource("8_554po"), ExtResource("9_elgrs"), ExtResource("10_qw2ix"), ExtResource("11_oai3j"), ExtResource("12_1la1s")])
-id = &"megapress"
+id = &"facturer"
+build_cost_type = 1
+build_cost_amount = 400
 metadata/_edit_vertical_guides_ = [63.0, 48.0, 64.0, 80.0, -24.0, 128.0, 192.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
@@ -138,9 +140,9 @@ metadata/normal = Vector2(0, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
-offset_left = -98.0
+offset_left = -79.0
 offset_top = -10.0
-offset_right = -4.0000153
+offset_right = 14.999985
 offset_bottom = 10.0
 theme_override_font_sizes/font_size = 16
 metadata/_edit_use_anchors_ = true

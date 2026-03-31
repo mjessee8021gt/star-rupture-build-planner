@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_ut1ot"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_4l3ig"]
 [ext_resource type="Resource" uid="uid://bub5k12nl3tgs" path="res://Recipes/Item Stacks/Liquid_helium_30_def.tres" id="3_abrvp"]
-[ext_resource type="Resource" path="res://Recipes/Item Stacks/Basic_fuel_10_def.tres" id="4_7201p"]
+[ext_resource type="Resource" uid="uid://yptntde7gily" path="res://Recipes/Item Stacks/Basic_fuel_10_def.tres" id="4_7201p"]
 [ext_resource type="Resource" uid="uid://cuixlv2pyfib1" path="res://Recipes/Item Stacks/Sulpheric_acid_15_def.tres" id="5_uxhet"]
 [ext_resource type="Resource" uid="uid://bhnmll7t03j56" path="res://Recipes/Item Stacks/Rocket_Fuel_10_def.tres" id="6_435hd"]
 

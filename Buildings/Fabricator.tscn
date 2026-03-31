@@ -27,9 +27,9 @@ size = Vector2(256, 256)
 
 [node name="Fabricator" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_563xu")
-footprint_primary = Vector2i(3, 4)
 available_recipes = Array[ExtResource("2_d6koq")]([ExtResource("3_kxm6t"), ExtResource("4_nhxvb"), ExtResource("5_68agd"), ExtResource("6_cd0o3"), ExtResource("7_lavtn"), ExtResource("8_dgwtc"), ExtResource("9_1dd5x"), ExtResource("10_47kw3"), ExtResource("11_igp7r"), ExtResource("12_q1ghm"), ExtResource("13_hllad"), ExtResource("14_ocqxr"), ExtResource("15_x3jwo")])
 id = &"fabricator"
+build_cost_amount = 140
 metadata/_edit_vertical_guides_ = [63.0, 96.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]

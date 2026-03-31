@@ -53,6 +53,16 @@ offset_top = 1.0
 offset_right = 1279.0
 offset_bottom = 95.0
 
+[node name="BBMCostLabel" type="Label" parent="Camera2D/CanvasLayer/Panel" unique_id=1608655122]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 32.0
+offset_right = 95.0
+offset_bottom = 55.0
+theme_override_font_sizes/font_size = 15
+text = "0"
+horizontal_alignment = 2
+
 [node name="HeatIcon" type="Sprite2D" parent="Camera2D/CanvasLayer/Panel" unique_id=1228076443]
 position = Vector2(16.5, 15)
 scale = Vector2(0.484375, 0.46875)
@@ -90,16 +100,6 @@ offset_right = 65.0
 offset_bottom = 55.0
 theme_override_font_sizes/font_size = 15
 text = "BBM:"
-
-[node name="BBMCostLabel" type="Label" parent="Camera2D/CanvasLayer/Panel" unique_id=1608655122]
-layout_mode = 0
-offset_left = 62.0
-offset_top = 32.0
-offset_right = 95.0
-offset_bottom = 55.0
-theme_override_font_sizes/font_size = 15
-text = "0"
-horizontal_alignment = 2
 
 [node name="IBMTextLabel" type="Label" parent="Camera2D/CanvasLayer/Panel" unique_id=1869679014]
 layout_mode = 0

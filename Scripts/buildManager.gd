@@ -212,7 +212,7 @@ func confirm_build(multi_build_held : bool = false) -> void:
 	$"../Camera2D/CanvasLayer/Panel/PowerLabel".text = str(int($"../Camera2D/CanvasLayer/Panel/PowerLabel".text) + real_building.power)
 	_apply_build_cost_delta(real_building, 1)
 	
-	if real_building.id == &"helium_extractor" or real_building.id == &"sulfur_extractor":
+	if real_building.id == &"helium_extractor" or real_building.id == &"sulfur_extractor" or real_building.id == &"laser_drill" or real_building.id == &"oil_extractor":
 		ProdLedger.add_source(real_building.get_instance_id(), real_building,real_building.get_production_deltas(real_building.recipe))
 		
 	if _is_multi_build_active() == false:

@@ -8,16 +8,20 @@
 [ext_resource type="Texture2D" uid="uid://ilmbegsn2c7" path="res://Assets/SRBP_Oval.png" id="18_pfrlw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
-size = Vector2(448, 384)
+size = Vector2(384, 384)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uf4xf"]
-size = Vector2(448, 448)
+size = Vector2(448, 384)
 
 [node name="Refinery" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_k1xno")
 footprint_alt = Vector2i(7, 6)
+heat = 100
+power = -150
 available_recipes = Array[ExtResource("2_13a1u")]([ExtResource("3_jiyar")])
 id = &"refinery"
+build_cost_type = 1
+build_cost_amount = 200
 metadata/_edit_vertical_guides_ = [63.0, 96.0, 112.0, 192.0, 224.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
@@ -88,11 +92,11 @@ icon = ExtResource("18_pfrlw")
 metadata/normal = Vector2(0, 1)
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
-offset_left = -64.0
+offset_left = -58.0
 offset_top = -59.0
-offset_right = 30.0
+offset_right = 36.0
 offset_bottom = -39.0
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 16
 
 [node name="outputBox" type="ColorRect" parent="." unique_id=1419396623]
 offset_left = -17.0

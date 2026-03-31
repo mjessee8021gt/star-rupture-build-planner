@@ -21,6 +21,8 @@ size = Vector2(512, 448)
 script = ExtResource("1_kpdtb")
 available_recipes = Array[ExtResource("2_v2ajd")]([ExtResource("3_08ttv"), ExtResource("4_i18e6"), ExtResource("5_1xcm4"), ExtResource("6_v0v6b"), ExtResource("7_wedxf")])
 id = &"constructorizer_v2"
+build_cost_type = 1
+build_cost_amount = 300
 metadata/_edit_vertical_guides_ = [63.0, 48.0, 64.0, 80.0, -24.0, 128.0, 192.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
@@ -115,9 +117,9 @@ icon = ExtResource("21_qtdcr")
 metadata/normal = Vector2(0, 1)
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
-offset_left = -98.0
+offset_left = -87.0
 offset_top = -10.0
-offset_right = -4.0000153
+offset_right = 6.9999847
 offset_bottom = 10.0
 theme_override_font_sizes/font_size = 16
 

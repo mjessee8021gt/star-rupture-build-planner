@@ -34,16 +34,16 @@ func _on_totals_changed(net_totals: Dictionary, gross_totals: Dictionary, gross_
 		display_keys[key] = true
 	for key in gross_negative_totals.keys():
 		display_keys[key] = true
+	for key in net_totals.keys():
+		display_keys[key] = true
 		
 	for key in display_keys.keys():
 		var gross_positive := float(gross_totals.get(key, 0.0))
-		var gross_negative := float(gross_negative_totals.get(key, 0.0))
-		var gross_rate := gross_positive - gross_negative
-		
-		if is_equal_approx(gross_rate, 0.0):
-			continue
-
+		var gross_rate := gross_positive
 		var net_rate := float(net_totals.get(key, 0.0))
+		
+		if is_equal_approx(gross_rate, 0.0) and is_equal_approx(net_rate, 0.0):
+			continue
 
 		var row
 		if not rows.has(key) or not is_instance_valid(rows[key]):

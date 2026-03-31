@@ -14,6 +14,7 @@ size = Vector2(128, 128)
 [node name="Rail Connector" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_j7cj1")
 id = &"rail_connector"
+build_cost_amount = 10
 metadata/_edit_vertical_guides_ = [32.0, 64.0]
 metadata/_edit_horizontal_guides_ = [64.0]
 
