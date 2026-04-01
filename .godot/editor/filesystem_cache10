@@ -1,6 +1,6 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1774986658
-export_presets.cfg::TextFile::-1::1774986658::0::1::::<><><>0<>0<><>::
+::res://::1775008344
+export_presets.cfg::TextFile::-1::1775008344::0::1::::<><><>0<>0<><>::
 ::res://Assets/::1774836848
 SRBP_1x1_BLDG.png::CompressedTexture2D::144076478421116839::1774836557::1774836848::1::::<><><>0<>0<>eab7077c50006ea9986f091c2088679b<>res://.godot/imported/SRBP_1x1_BLDG.png-4245c35f90595d3a862745c5499bf6ba.ctex::
 SRBP_1x1_Zip.png::CompressedTexture2D::5262675006880472454::1774836555::1774836846::1::::<><><>0<>0<>b78b646aab497185436e11e34a5d04fb<>res://.godot/imported/SRBP_1x1_Zip.png-fea1598144168443bab97e7318e8c54b.ctex::
@@ -46,7 +46,7 @@ SRBP_Rail_Support_Plus.png::CompressedTexture2D::4957780527455288731::1774836556
 SRBP_Rail_Support_Straight.png::CompressedTexture2D::8812946971898227199::1774836557::1774836842::1::::<><><>0<>0<>7db8e0705cce0a09bee2ec090a859086<>res://.godot/imported/SRBP_Rail_Support_Straight.png-fd8656cab234040af71921455cf6f9df.ctex::
 SRBP_Stats_icon.png::CompressedTexture2D::2663138468257374288::1774836550::1774836848::1::::<><><>0<>0<>ca9b4ca7405e2d4adcf47292ea3ffdd9<>res://.godot/imported/SRBP_Stats_icon.png-2decb9d9accd1294133f5de21d37c58a.ctex::
 SRBP_TOOLBOX.png::CompressedTexture2D::3452144229740615270::1774836552::1774836848::1::::<><><>0<>0<>924b7f02fc3e0e7b5d41be981db7991b<>res://.godot/imported/SRBP_TOOLBOX.png-6502c178881c562f9f73211939dc022c.ctex::
-::res://Buildings/::1774986215
+::res://Buildings/::1775008125
 Assembler.gd::GDScript::4462589680044390853::1774836544::0::1::::<>Building<><>0<>0<><>::
 Assembler.tscn::PackedScene::4758624750678591304::1774985854::0::1::::<><><>0<>0<><>::uid://b4tyg2ij0eoq4::::res://Buildings/Assembler.gd<>uid://ruttqq3j8kw3::::res://Resources/Recipe.gd<>uid://r0d0exei0uo1::::res://Recipes/Accumulator.tres<>uid://cmjmbv2b7rdfr::::res://Recipes/Condenser.tres<>uid://bov57lnl8s77e::::res://Recipes/Electromagnet.tres<>uid://bwf4d8viv2o0h::::res://Recipes/Generator.tres<>uid://qbdm2k4of01k::::res://Recipes/Laser_emitter.tres<>uid://bw0tp80ndefay::::res://Recipes/pressure_tank.tres<>uid://cryw6iu71sfb0::::res://Recipes/Resonator.tres<>uid://bdbuxc406wwsc::::res://Recipes/Scanner.tres<>uid://cx4lxig6r8tny::::res://Recipes/Uberfilament.tres<>uid://dy4jf651nmiwp::::res://Assets/SRBP_3x6_BLDG.png<>uid://dckm1irx4k8o3::::res://Assets/SRBP_6x6_BLDG.png<>uid://hxl3ygjst65n::::res://Recipes/Onboard_instruments.tres<>uid://dnjc3ur3jdwya::::res://Recipes/Explosive_charge.tres<>uid://3w52s3slrct4::::res://Recipes/Pseudorubber_insulator.tres<>uid://y2o8fhyj1sgy::::res://Recipes/Plastic_dust.tres<>uid://ilmbegsn2c7::::res://Assets/SRBP_Oval.png
 Base Core.gd::GDScript::6495767764200974721::1774857243::0::1::::<>Building<><>0<>0<><>::
@@ -133,7 +133,7 @@ Storage_v1.tscn::PackedScene::4340203331091337731::1774985854::0::1::::<><><>0<>
 Storage_V2.gd::GDScript::2606686701862693346::1774836544::0::1::::<>Building<><>0<>0<><>::
 Storage_v2.tscn::PackedScene::6231625138316476782::1774985854::0::1::::<><><>0<>0<><>::uid://bdex0qaeb8x4u::::res://Buildings/Storage_V2.gd<>uid://qpt8mgvgh8ii::::res://Assets/SRBP_3x3_BLDG.png<>uid://grouobxe87tu::::res://Assets/SRBP_4x4_BLDG.png<>uid://ilmbegsn2c7::::res://Assets/SRBP_Oval.png
 Sulfur Extractor.gd::GDScript::6713278207706434487::1774836544::0::1::::<>Building<><>0<>0<><>::
-Sulfur Extractor.tscn::PackedScene::3356183766593401566::1774986215::0::1::::<><><>0<>0<><>::uid://c2v7yghku1urv::::res://Buildings/Sulfur Extractor.gd<>uid://bc2giok2mktnn::::res://Recipes/harvest_sulpher.tres<>uid://grouobxe87tu::::res://Assets/SRBP_4x4_BLDG.png<>uid://ilmbegsn2c7::::res://Assets/SRBP_Oval.png
+Sulfur Extractor.tscn::PackedScene::3356183766593401566::1775008125::0::1::::<><><>0<>0<><>::uid://c2v7yghku1urv::::res://Buildings/Sulfur Extractor.gd<>uid://bc2giok2mktnn::::res://Recipes/harvest_sulpher.tres<>uid://grouobxe87tu::::res://Assets/SRBP_4x4_BLDG.png<>uid://ilmbegsn2c7::::res://Assets/SRBP_Oval.png
 Teleporter.gd::GDScript::4160741026056268257::1774836544::0::1::::<>Building<><>0<>0<><>::
 Teleporter.tscn::PackedScene::2295857081674733297::1774985854::0::1::::<><><>0<>0<><>::uid://b0jq2ddyinhmf::::res://Buildings/Teleporter.gd<>uid://ckf3jbuufrs6i::::res://Assets/SRBP_5x6_BLDG.png
 Wind V1.gd::GDScript::8637990530165600292::1774836544::0::1::::<>Building<><>0<>0<><>::
@@ -839,10 +839,10 @@ wolfram_normal.tres::Resource/RecipeVariant::5835562486454895429::1774836544::0:
 wolfram_normal_V2.tres::Resource/RecipeVariant::3440083362993503082::1774836544::0::1::::<><><>0<>0<><>::uid://fx4756jwfgbl::::res://Resources/ItemStack.gd<>uid://dmcw7r27py0ar::::res://Recipes/Item Stacks/Wolfram_ore_300_def.tres<>uid://cvtli7c3bbfbl::::res://Resources/RecipeVariant.gd
 wolfram_pure.tres::Resource/RecipeVariant::6173701267112546890::1774836544::0::1::::<><><>0<>0<><>::uid://fx4756jwfgbl::::res://Resources/ItemStack.gd<>uid://dr3gimlp67utq::::res://Recipes/Item Stacks/Wolfram_ore_240_def.tres<>uid://cvtli7c3bbfbl::::res://Resources/RecipeVariant.gd
 wolfram_pure_v2.tres::Resource/RecipeVariant::29072542495058215::1774836544::0::1::::<><><>0<>0<><>::uid://fx4756jwfgbl::::res://Resources/ItemStack.gd<>uid://dw3pjaap5q66h::::res://Recipes/Item Stacks/Wolfram_ore_480_def.tres<>uid://cvtli7c3bbfbl::::res://Resources/RecipeVariant.gd
-::res://Releases/::1774986662
-index.apple-touch-icon.png::CompressedTexture2D::6227245804483828190::1774986662::1774986672::1::::<><><>0<>0<>a147a1b408807923baf0707781632419<>res://.godot/imported/index.apple-touch-icon.png-3a93fa9a3dcc1166de1e758ae00c1dda.ctex::
-index.icon.png::CompressedTexture2D::5340554003520769173::1774986662::1774986672::1::::<><><>0<>0<>8e0c50c8061bbd89e6a49fbf53639502<>res://.godot/imported/index.icon.png-8972255513758a56c3d84fad0af26c6b.ctex::
-index.png::CompressedTexture2D::4037933331861402450::1774986662::1774986672::1::::<><><>0<>0<>132b341b196a1adbe8bcf61638fd3bf9<>res://.godot/imported/index.png-ecac08375d7bbd42fdb9d46242075d4c.ctex::
+::res://Releases/::1775008347
+index.apple-touch-icon.png::CompressedTexture2D::8280055996922420263::1775008347::1775008353::1::::<><><>0<>0<>0344980b465c712cb445f0907e691025<>res://.godot/imported/index.apple-touch-icon.png-3a93fa9a3dcc1166de1e758ae00c1dda.ctex::
+index.icon.png::CompressedTexture2D::294269773040161542::1775008347::1775008353::1::::<><><>0<>0<>8a1ed0947b8502dac5f9f942376010c9<>res://.godot/imported/index.icon.png-8972255513758a56c3d84fad0af26c6b.ctex::
+index.png::CompressedTexture2D::7281884501004297252::1775008347::1775008353::1::::<><><>0<>0<>b5762747cc67c71afd7ce7ab27f6a467<>res://.godot/imported/index.png-ecac08375d7bbd42fdb9d46242075d4c.ctex::
 ::res://Resources/::1774854182
 building.gd::GDScript::740271632636940848::1774854182::0::1::::Building<>Node2D<><>0<>0<><>::
 ItemDefinition.gd::GDScript::792717381279097699::1774836544::0::1::::ItemDefinition<>Resource<><>0<>0<><>::
@@ -859,11 +859,11 @@ Main.tscn::PackedScene::6710599238512002898::1774985854::0::1::::<><><>0<>0<><>:
 patchNotesPanel.tscn::PackedScene::2266096147910246043::1774849386::0::1::::<><><>0<>0<><>::uid://ccwdt1powl6x1::::res://Scripts/patch_notes_menu.gd<>uid://c8t0wuou8x04o::::res://Resources/PatchNotesEntry.tscn
 ResourceRow.tscn::PackedScene::2929728595450852361::1774836544::0::1::::<><><>0<>0<><>::uid://g80qoo0g055j::::res://Scenes/resource_row.gd<>uid://cnn6vxsw63oxw::::res://Assets/SRBP_Production_frame.png
 resource_row.gd::GDScript::490804783332892613::1774836544::0::1::::<>HBoxContainer<><>0<>0<><>::
-::res://Scripts/::1774986215
+::res://Scripts/::1775008125
 BuildingRegistry.gd::GDScript::5454827344132405048::1774836544::0::1::::BuildRegistry<>Node<><>0<>0<><>::
-buildManager.gd::GDScript::6317890871146673873::1774985854::0::1::::<>Node2D<><>0<>0<><>::
+buildManager.gd::GDScript::6317890871146673873::1775007636::0::1::::<>Node2D<><>0<>0<><>::
 CameraControls.gd::GDScript::6073642108144303039::1774836544::0::1::::<>Camera2D<><>0<>0<><>::
-main.gd::GDScript::5666265523090886274::1774986215::0::1::::<>Node2D<><>0<>0<><>::
+main.gd::GDScript::5666265523090886274::1775008125::0::1::::<>Node2D<><>0<>0<><>::
 patch_notes.gd::GDScript::6111850728771815710::1774836544::0::1::::<>MenuButton<><>0<>0<><>::
 patch_notes_menu.gd::GDScript::4958852835759208668::1774848010::0::1::::<>PopupPanel<><>0<>0<><>::
 ProductionLedger.gd::GDScript::569146813013944499::1774849386::0::1::::ProductionLedger<>Node<><>0<>0<><>::
