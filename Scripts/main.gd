@@ -22,6 +22,7 @@ var export_pdf_button: Button
 var save_dialog: FileDialog
 var load_dialog: FileDialog
 var export_pdf_dialog: FileDialog
+var _last_viewport_size: Vector2i = Vector2i.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -32,11 +33,14 @@ func _ready() -> void:
 	meteor_core_cost_label.text = "0"
 	_setup_save_load_ui()
 	get_viewport().size_changed.connect(_on_viewport_size_changed)
+	_last_viewport_size = get_viewport().size
 	Adjust_ui_for_resolution()
+	call_deferred("_refresh_grid_visibility")
 	recenter_camera()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
+	_poll_viewport_resize()
 	if(Input.is_action_just_released("Zoom Out")):
 		$Camera2D.zoomOut()
 	elif (Input.is_action_just_released("Zoom In")):
@@ -121,7 +125,23 @@ func Adjust_ui_for_resolution() -> void:
 		export_pdf_button.position = Vector2(get_viewport().size.x - 310, 8)
 	
 func _on_viewport_size_changed() -> void:
+	_last_viewport_size = get_viewport().size
 	Adjust_ui_for_resolution()
+	call_deferred("_refresh_grid_visibility")
+	
+func _poll_viewport_resize() -> void:
+	var viewport_size: Vector2i = get_viewport().size
+	if viewport_size == _last_viewport_size:
+		return
+	_on_viewport_size_changed()
+
+func _refresh_grid_visibility() -> void:
+	if tile_map_layer == null or not is_instance_valid(tile_map_layer):
+		return
+	tile_map_layer.hide()
+	tile_map_layer.show()
+	tile_map_layer.notify_runtime_tile_data_update()
+	tile_map_layer.queue_redraw()
 
 func recenter_camera() -> void:
 	$Camera2D.position = get_tilemap_center_global()

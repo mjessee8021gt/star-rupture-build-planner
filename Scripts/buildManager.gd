@@ -178,16 +178,19 @@ func _unhandled_input(event: InputEvent) -> void:
 			cancel_build()
 		return
 		
-	if not Input.is_action_pressed("Move Build"):
+	if is_dragging_building and event.is_action_released("Move Build"):
+		_finish_drag_building()
+		return
+	if is_dragging_building:
+		return
+		
+	if not event.is_action_pressed("Move Build"):
 		return
 	if _mouse_is_over_control():
 		return
 		
 	if building != null:
 		_start_drag_building(building)
-	else:
-		if is_dragging_building:
-			_finish_drag_building()
 	
 
 func confirm_build(multi_build_held : bool = false) -> void:
@@ -328,7 +331,7 @@ func _finish_drag_building() -> void:
 	
 	
 	if path_manager != null and path_manager.has_method("update_paths_for_building"):
-		path_manager.update_path_for_building(dragged_building)
+		path_manager.update_paths_for_building(dragged_building)
 	
 	#drag state cleanup
 	is_dragging_building = false
@@ -378,6 +381,9 @@ func _process(_delta: float) -> void:
 	var valid_placement
 	
 	if is_dragging_building and dragged_building != null:
+		if not Input.is_action_pressed("Move Build"):
+			_finish_drag_building()
+			return
 		mouse_pos = get_global_mouse_position() + drag_mouse_offset
 		anchor_cell = world_to_cell(mouse_pos)
 		top_left_cell = anchor_cell - get_building_anchor(dragged_building)
