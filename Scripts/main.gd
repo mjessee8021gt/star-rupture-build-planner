@@ -7,6 +7,10 @@ const SAVE_FORMAT_VERSION := 2
 const RAIL_VERSION_OPTIONS := ["V1 Rails", "V2 Rails", "V3 Rails"]
 const RAIL_VERSION_DROPDOWN_SIZE := Vector2(128, 36)
 const RAIL_VERSION_DROPDOWN_MARGIN := 12.0
+const TOOLBAR_BUTTON_WIDTH_EXTRA := 10.0
+const NEW_BUTTON_LEFT_SHIFT := 40.0
+const SAVE_BUTTON_LEFT_SHIFT := 30.0
+const LOAD_BUTTON_LEFT_SHIFT := 20.0
 
 @onready var camera: Camera2D = $Camera2D
 @onready var tile_map_layer: TileMapLayer = $TileMapLayer
@@ -68,7 +72,7 @@ func _is_controls_menu_open() -> bool:
 
 
 func is_scene_input_blocked() -> bool:
-	return _is_file_dialog_open()
+	return _is_file_dialog_open() or _is_controls_menu_open()
 
 
 func _is_file_dialog_open() -> bool:
@@ -84,30 +88,35 @@ func _setup_save_load_ui() -> void:
 	save_button = Button.new()
 	save_button.name = "SaveButton"
 	save_button.text = "Save"
+	save_button.alignment = HORIZONTAL_ALIGNMENT_CENTER
 	save_button.pressed.connect(_on_save_pressed)
 	$Camera2D/CanvasLayer.add_child(save_button)
 
 	new_button = Button.new()
 	new_button.name = "NewButton"
 	new_button.text = "New"
+	new_button.alignment = HORIZONTAL_ALIGNMENT_CENTER
 	new_button.pressed.connect(_on_new_pressed)
 	$Camera2D/CanvasLayer.add_child(new_button)
 
 	load_button = Button.new()
 	load_button.name = "LoadButton"
 	load_button.text = "Load"
+	load_button.alignment = HORIZONTAL_ALIGNMENT_CENTER
 	load_button.pressed.connect(_on_load_pressed)
 	$Camera2D/CanvasLayer.add_child(load_button)
 
 	export_pdf_button = Button.new()
 	export_pdf_button.name = "ExportPdfButton"
 	export_pdf_button.text = "Export PDF"
+	export_pdf_button.alignment = HORIZONTAL_ALIGNMENT_CENTER
 	export_pdf_button.pressed.connect(_on_export_pdf_pressed)
 	$Camera2D/CanvasLayer.add_child(export_pdf_button)
 
 	rail_version_dropdown = OptionButton.new()
 	rail_version_dropdown.name = "RailVersionDropdown"
 	rail_version_dropdown.custom_minimum_size = RAIL_VERSION_DROPDOWN_SIZE
+	rail_version_dropdown.alignment = HORIZONTAL_ALIGNMENT_CENTER
 	for option_name in RAIL_VERSION_OPTIONS:
 		rail_version_dropdown.add_item(option_name)
 	rail_version_dropdown.select(0)
@@ -154,6 +163,7 @@ func _apply_visual_theme() -> void:
 	for button in [save_button, new_button, load_button, export_pdf_button, rail_version_dropdown]:
 		if button != null:
 			_style_button(button)
+	_configure_toolbar_button_widths()
 
 	for label in [
 		heat_label,
@@ -182,6 +192,14 @@ func _style_button(button: BaseButton) -> void:
 	button.add_theme_stylebox_override("pressed", PlannerPalette.make_button_style(PlannerPalette.BUTTON_PRESSED))
 	button.add_theme_stylebox_override("focus", PlannerPalette.make_button_style(PlannerPalette.BUTTON_HOVER))
 	button.add_theme_stylebox_override("disabled", PlannerPalette.make_button_style(PlannerPalette.BUTTON_PRESSED))
+
+
+func _configure_toolbar_button_widths() -> void:
+	for button in [new_button, save_button, load_button, export_pdf_button]:
+		if button == null:
+			continue
+		button.custom_minimum_size.x = 0.0
+		button.custom_minimum_size.x = button.get_combined_minimum_size().x + TOOLBAR_BUTTON_WIDTH_EXTRA
 	
 func Adjust_ui_for_resolution() -> void:
 	$Camera2D/CanvasLayer/MenuButton.position = Vector2 (15, 15)
@@ -199,11 +217,11 @@ func Adjust_ui_for_resolution() -> void:
 		)
 	
 	if new_button != null:
-		new_button.position = Vector2(get_viewport().size.x - 490, 8)
+		new_button.position = Vector2(get_viewport().size.x - 490 - NEW_BUTTON_LEFT_SHIFT, 8)
 	if save_button != null:
-		save_button.position = Vector2(get_viewport().size.x - 430, 8)
+		save_button.position = Vector2(get_viewport().size.x - 430 - SAVE_BUTTON_LEFT_SHIFT, 8)
 	if load_button != null:
-		load_button.position = Vector2(get_viewport().size.x - 370, 8)
+		load_button.position = Vector2(get_viewport().size.x - 370 - LOAD_BUTTON_LEFT_SHIFT, 8)
 	if export_pdf_button != null:
 		export_pdf_button.position = Vector2(get_viewport().size.x - 310, 8)
 

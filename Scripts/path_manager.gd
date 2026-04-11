@@ -21,8 +21,8 @@ const PlannerPalette = preload("res://Scripts/palette.gd")
 @export var direction_indicator_min_path_length := 30.0
 @export var direction_indicator_spacing := 220.0
 @export var direction_indicator_max_count := 3
-@export var direction_indicator_length := 14.0
-@export var direction_indicator_width := 10.0
+@export var direction_indicator_length := 20.0
+@export var direction_indicator_width := 14.0
 
 # BuildManager path gating
 @export var build_manager_path: NodePath = NodePath("../BuildManager")
