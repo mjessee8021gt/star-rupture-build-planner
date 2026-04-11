@@ -1,6 +1,6 @@
 extends MenuButton
 
-const PlannerPalette = preload("res://Scripts/palette.gd")
+const Palette = preload("res://Scripts/palette.gd")
 const BINDINGS_CONFIG_SECTION := "input_bindings"
 const REBIND_PROMPT := "Press input..."
 const UNBOUND_TEXT := "-"
@@ -80,7 +80,7 @@ func _make_row(action_name: String, bindings: String) -> Control:
 
 	left.text = action_name
 	left.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	left.add_theme_color_override("font_color", PlannerPalette.TEXT_PRIMARY)
+	left.add_theme_color_override("font_color", Palette.TEXT_PRIMARY)
 
 	middle_spacer.custom_minimum_size.x = 50.0
 
@@ -88,13 +88,13 @@ func _make_row(action_name: String, bindings: String) -> Control:
 	right.alignment = HORIZONTAL_ALIGNMENT_CENTER
 	right.size_flags_horizontal = Control.SIZE_SHRINK_END
 	right.custom_minimum_size.x = 160.0
-	right.add_theme_color_override("font_color", PlannerPalette.TEXT_MUTED)
-	right.add_theme_color_override("font_hover_color", PlannerPalette.TEXT_PRIMARY)
-	right.add_theme_color_override("font_pressed_color", PlannerPalette.TEXT_PRIMARY)
-	right.add_theme_stylebox_override("normal", PlannerPalette.make_button_style(PlannerPalette.BUTTON_FILL))
-	right.add_theme_stylebox_override("hover", PlannerPalette.make_button_style(PlannerPalette.BUTTON_HOVER))
-	right.add_theme_stylebox_override("pressed", PlannerPalette.make_button_style(PlannerPalette.BUTTON_PRESSED))
-	right.add_theme_stylebox_override("focus", PlannerPalette.make_button_style(PlannerPalette.BUTTON_HOVER))
+	right.add_theme_color_override("font_color", Palette.TEXT_MUTED)
+	right.add_theme_color_override("font_hover_color", Palette.TEXT_PRIMARY)
+	right.add_theme_color_override("font_pressed_color", Palette.TEXT_PRIMARY)
+	right.add_theme_stylebox_override("normal", Palette.make_button_style(Palette.BUTTON_FILL))
+	right.add_theme_stylebox_override("hover", Palette.make_button_style(Palette.BUTTON_HOVER))
+	right.add_theme_stylebox_override("pressed", Palette.make_button_style(Palette.BUTTON_PRESSED))
+	right.add_theme_stylebox_override("focus", Palette.make_button_style(Palette.BUTTON_HOVER))
 	right.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	right.pressed.connect(_on_binding_button_pressed.bind(action_name, right))
 
@@ -157,7 +157,7 @@ func _ensure_capture_overlay() -> void:
 	overlay_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	overlay_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	overlay_label.text = REBIND_PROMPT
-	overlay_label.add_theme_color_override("font_color", PlannerPalette.TEXT_MUTED)
+	overlay_label.add_theme_color_override("font_color", Palette.TEXT_MUTED)
 	_capture_overlay.add_child(overlay_label)
 
 
@@ -234,13 +234,34 @@ func _normalize_rebind_event(event: InputEvent) -> InputEvent:
 
 func _apply_rebind(action_name: String, input_event: InputEvent) -> void:
 	var action := StringName(action_name)
+	var rebound_family := _get_input_event_family(input_event)
+	var preserved_events: Array[InputEvent] = []
+	for existing_event in InputMap.action_get_events(action):
+		if rebound_family != "" and _get_input_event_family(existing_event) == rebound_family:
+			continue
+		preserved_events.append(existing_event)
+
 	InputMap.action_erase_events(action)
+	for preserved_event in preserved_events:
+		InputMap.action_add_event(action, preserved_event)
 	InputMap.action_add_event(action, input_event)
 	_save_bindings()
 	_awaiting_action = ""
 	_awaiting_button = null
 	_hide_capture_overlay()
 	_refresh_list()
+
+
+func _get_input_event_family(event: InputEvent) -> String:
+	if event is InputEventKey:
+		return "key"
+	if event is InputEventMouseButton:
+		return "mouse_button"
+	if event is InputEventJoypadButton:
+		return "joypad_button"
+	if event is InputEventJoypadMotion:
+		return "joypad_motion"
+	return ""
 
 func _save_bindings() -> void:
 	var config := ConfigFile.new()

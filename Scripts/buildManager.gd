@@ -1,10 +1,9 @@
 extends Node2D
 
-const PlannerPalette = preload("res://Scripts/palette.gd")
+const Palette = preload("res://Scripts/palette.gd")
 
 
 ##------OnReady variables------##
-@onready var debug_feed : Label = $"../Camera2D/CanvasLayer/Debug Panel/DebugFeed"
 @onready var tile_map_layer: TileMapLayer = $"../TileMapLayer"
 
 ##------Object Variables-------##
@@ -19,8 +18,8 @@ var is_dragging_building := false
 var drag_last_valid := false
 
 ##------Exported Variables-----##
-@export var canBuildColor := PlannerPalette.BUILD_VALID
-@export var cannotbuildColor := PlannerPalette.BUILD_INVALID
+@export var canBuildColor := Palette.BUILD_VALID
+@export var cannotbuildColor := Palette.BUILD_INVALID
 @export var tile_size := 64
 
 ##------Vector2 Variables------##
@@ -49,22 +48,6 @@ func _get_prod_ledger() -> Node:
 	if tree_root.has_node("ProductionLedger"):
 		return tree_root.get_node("ProductionLedger")
 	return null
-
-func _set_buttons_disabled_recuirsive(node: Node, disabled: bool) -> void:
-	if node is Button:
-		(node as Button).disabled = disabled
-	
-	for child in node.get_children():
-		_set_buttons_disabled_recuirsive(child, disabled)
-
-func _disable_ports_on_ghost(disabled: bool) -> void:
-	if ghost_instance == null:
-		return
-		
-	var ports := ghost_instance.get_node_or_null("Ports")
-	if ports != null:
-		_set_buttons_disabled_recuirsive(ports, disabled)
-
 
 func _is_scene_input_blocked() -> bool:
 	var main_scene := get_parent()
@@ -116,8 +99,6 @@ func _position_from_anchor_cell(building: Node, anchor_cell: Vector2i) -> Vector
 
 #entry point to the build manager for the MenuButton
 func start_build(scene: PackedScene) -> void:
-	print("We are now starting the build preview in the build manager")
-	$"../Camera2D/CanvasLayer/Debug Panel/DebugFeed".text = $"../Camera2D/CanvasLayer/Debug Panel/DebugFeed".text + "\n" + "We are now starting the build preview in the build manager"
 	var pm := $"../PathManager"
 	if pm != null and pm.has_method("cancel_active_path_drag"):
 		pm.cancel_active_path_drag()
@@ -203,7 +184,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		_start_drag_building(building)
 	
 
-func confirm_build(multi_build_held : bool = false) -> void:
+func confirm_build(_multi_build_held : bool = false) -> void:
 	$"../Camera2D/CanvasLayer/Debug Panel/DebugFeed".text = $"../Camera2D/CanvasLayer/Debug Panel/DebugFeed".text + "\n" + "We are now confirming the build..."
 	var anchor_cell := _anchor_cell_from_building_position(ghost_instance, ghost_instance.global_position)
 	var footprint = get_building_cells(ghost_instance,anchor_cell)
@@ -296,9 +277,9 @@ func cell_to_world(cell: Vector2i) -> Vector2:
 		return tile_map_layer.to_global(center_local - half_tile)
 	return Vector2(cell * tile_size)
 	
-func occupy_cells(cells: Array[Vector2i], Building: Node) -> void:
+func occupy_cells(cells: Array[Vector2i], building_node: Node) -> void:
 	for cell in cells:
-			occupied_cells[cell] = Building
+			occupied_cells[cell] = building_node
 
 func is_cell_free(cell: Vector2i) -> bool:
 	return not occupied_cells.has(cell)
@@ -390,7 +371,6 @@ func _process(_delta: float) -> void:
 	var path_manager := get_node_or_null("../PathManager")
 	var building_footprint
 	var new_pos
-	var top_left_cell
 	var valid_placement
 	
 	if is_dragging_building and dragged_building != null:
@@ -399,9 +379,9 @@ func _process(_delta: float) -> void:
 			return
 		mouse_pos = get_global_mouse_position() + drag_mouse_offset
 		anchor_cell = world_to_cell(mouse_pos)
-		top_left_cell = anchor_cell - get_building_anchor(dragged_building)
 		new_pos = _position_from_anchor_cell(dragged_building, anchor_cell)
 		building_footprint = get_building_cells(dragged_building, anchor_cell)
+		var position_changed := dragged_building.global_position.distance_to(new_pos) > 0.01
 		
 		dragged_building.global_position = new_pos
 		drag_last_cells = building_footprint
@@ -414,8 +394,8 @@ func _process(_delta: float) -> void:
 			dragged_building.modulate = cannotbuildColor
 			dragged_building.modulate.a = 1.0
 			
-		if path_manager != null and path_manager.has_method("update_paths_for_building"):
-			path_manager.update_paths_for_building(dragged_building)
+		if position_changed and path_manager != null and path_manager.has_method("update_paths_for_building"):
+			path_manager.update_paths_for_building(dragged_building, false)
 		return 
 	
 	if is_building and ghost_instance != null and Input.is_action_just_pressed("Alternate"):
@@ -430,6 +410,8 @@ func _process(_delta: float) -> void:
 		if is_building:
 			cancel_build()
 		else:
+			if path_manager != null and path_manager.has_method("try_remove_path_under_mouse") and path_manager.try_remove_path_under_mouse():
+				return
 			try_remove_building_under_mouse()
 		return
 	
@@ -438,8 +420,6 @@ func _process(_delta: float) -> void:
 		
 	mouse_pos = get_global_mouse_position()
 	anchor_cell = world_to_cell(mouse_pos)
-	top_left_cell = anchor_cell - get_building_anchor(ghost_instance)
-	print("The recorded footprint of the ghost instance is: %s, %s" %[ghost_instance.footprint.x, ghost_instance.footprint.y])
 	building_footprint = get_building_cells(ghost_instance, anchor_cell)
 	valid_placement = can_place_at(building_footprint)
 	

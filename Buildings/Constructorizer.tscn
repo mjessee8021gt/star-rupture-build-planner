@@ -13,6 +13,7 @@
 [ext_resource type="Resource" uid="uid://hloy06wmvn1t" path="res://Recipes/Rocket_fuel.tres" id="12_t8ulv"]
 [ext_resource type="Texture2D" uid="uid://b5c3alt8d2qj3" path="res://Assets/SRBP_4x6_BLDG.png" id="13_pm5m3"]
 [ext_resource type="Texture2D" uid="uid://ckf3jbuufrs6i" path="res://Assets/SRBP_5x6_BLDG.png" id="14_44sxp"]
+[ext_resource type="LabelSettings" uid="uid://bwg7jbpx2gog5" path="res://Assets/std_bldg_label_settings.tres" id="15_44sxp"]
 [ext_resource type="Texture2D" uid="uid://ilmbegsn2c7" path="res://Assets/SRBP_Oval.png" id="16_rixs3"]
 [ext_resource type="Resource" uid="uid://dcmlg6icso5uc" path="res://Recipes/Scafolding.tres" id="17_dvjl8"]
 
@@ -56,6 +57,7 @@ offset_right = 118.000015
 offset_bottom = -39.0
 theme_override_font_sizes/font_size = 25
 text = "CONSTRUCTORIZER"
+label_settings = ExtResource("15_44sxp")
 horizontal_alignment = 1
 
 [node name="PlacementArea" type="Area2D" parent="." unique_id=911391560]
@@ -121,9 +123,9 @@ icon = ExtResource("16_rixs3")
 metadata/normal = Vector2(0, 1)
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
-offset_left = -100.0
+offset_left = -98.0
 offset_top = -10.0
-offset_right = -6.0000153
+offset_right = -4.0000153
 offset_bottom = 10.0
 theme_override_font_sizes/font_size = 16
 

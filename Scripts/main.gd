@@ -1,9 +1,9 @@
 extends Node2D
 
-const PlannerPalette = preload("res://Scripts/palette.gd")
+const Palette = preload("res://Scripts/palette.gd")
 
 const SAVE_FILE_EXTENSION := "srbp"
-const SAVE_FORMAT_VERSION := 2
+const SAVE_FORMAT_VERSION := 3
 const RAIL_VERSION_OPTIONS := ["V1 Rails", "V2 Rails", "V3 Rails"]
 const RAIL_VERSION_DROPDOWN_SIZE := Vector2(128, 36)
 const RAIL_VERSION_DROPDOWN_MARGIN := 12.0
@@ -20,6 +20,7 @@ const LOAD_BUTTON_LEFT_SHIFT := 20.0
 @onready var ibm_cost_label: Label = $Camera2D/CanvasLayer/Panel/IBMCostLabel
 @onready var meteor_core_cost_label: Label = $Camera2D/CanvasLayer/Panel/MeteorCoreCostLabel
 @onready var controls_popup: PopupPanel = $Camera2D/CanvasLayer/PopupPanel
+@onready var patch_notes_button: Node = $"Camera2D/CanvasLayer/Patch Notes"
 @onready var prod_panel: PanelContainer = $Camera2D/CanvasLayer/ProdMenu/ProdPanel
 @onready var build_manager: Node = $BuildManager
 @onready var path_manager: Node = $PathManager
@@ -34,6 +35,15 @@ var save_dialog: FileDialog
 var load_dialog: FileDialog
 var export_pdf_dialog: FileDialog
 var _last_viewport_size: Vector2i = Vector2i.ZERO
+var _web_load_input = null
+var _web_load_reader = null
+var _web_load_input_callback = null
+var _web_load_read_callback = null
+var _web_load_error_callback = null
+var _web_load_pending_file_name := ""
+var _web_save_success_callback = null
+var _web_save_error_callback = null
+var _web_save_pending_file_name := ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -71,8 +81,12 @@ func _is_controls_menu_open() -> bool:
 	return controls_popup != null and controls_popup.visible
 
 
+func _is_patch_notes_open() -> bool:
+	return patch_notes_button != null and patch_notes_button.has_method("is_panel_open") and patch_notes_button.call("is_panel_open")
+
+
 func is_scene_input_blocked() -> bool:
-	return _is_file_dialog_open() or _is_controls_menu_open()
+	return _is_file_dialog_open() or _is_controls_menu_open() or _is_patch_notes_open()
 
 
 func _is_file_dialog_open() -> bool:
@@ -177,21 +191,21 @@ func _apply_visual_theme() -> void:
 		$Camera2D/CanvasLayer/"Debug Panel"/DebugFeed,
 	]:
 		if label != null:
-			label.add_theme_color_override("font_color", PlannerPalette.TEXT_PRIMARY)
+			label.add_theme_color_override("font_color", Palette.TEXT_PRIMARY)
 
 
 func _style_panel(panel: Control) -> void:
-	panel.add_theme_stylebox_override("panel", PlannerPalette.make_panel_style(PlannerPalette.SCENE_PANEL_FILL, PlannerPalette.SCENE_PANEL_BORDER))
+	panel.add_theme_stylebox_override("panel", Palette.make_panel_style(Palette.SCENE_PANEL_FILL, Palette.SCENE_PANEL_BORDER))
 
 
 func _style_button(button: BaseButton) -> void:
-	button.add_theme_color_override("font_color", PlannerPalette.TEXT_PRIMARY)
-	button.add_theme_color_override("font_disabled_color", PlannerPalette.TEXT_MUTED)
-	button.add_theme_stylebox_override("normal", PlannerPalette.make_button_style(PlannerPalette.BUTTON_FILL))
-	button.add_theme_stylebox_override("hover", PlannerPalette.make_button_style(PlannerPalette.BUTTON_HOVER))
-	button.add_theme_stylebox_override("pressed", PlannerPalette.make_button_style(PlannerPalette.BUTTON_PRESSED))
-	button.add_theme_stylebox_override("focus", PlannerPalette.make_button_style(PlannerPalette.BUTTON_HOVER))
-	button.add_theme_stylebox_override("disabled", PlannerPalette.make_button_style(PlannerPalette.BUTTON_PRESSED))
+	button.add_theme_color_override("font_color", Palette.TEXT_PRIMARY)
+	button.add_theme_color_override("font_disabled_color", Palette.TEXT_MUTED)
+	button.add_theme_stylebox_override("normal", Palette.make_button_style(Palette.BUTTON_FILL))
+	button.add_theme_stylebox_override("hover", Palette.make_button_style(Palette.BUTTON_HOVER))
+	button.add_theme_stylebox_override("pressed", Palette.make_button_style(Palette.BUTTON_PRESSED))
+	button.add_theme_stylebox_override("focus", Palette.make_button_style(Palette.BUTTON_HOVER))
+	button.add_theme_stylebox_override("disabled", Palette.make_button_style(Palette.BUTTON_PRESSED))
 
 
 func _configure_toolbar_button_widths() -> void:
@@ -255,7 +269,8 @@ func recenter_camera() -> void:
 
 func get_tilemap_center_global() -> Vector2:
 	var used_rect: Rect2i = tile_map_layer.get_used_rect()
-	var center_cell := used_rect.position + used_rect.size/2
+	var half_size := Vector2i(floori(float(used_rect.size.x) * 0.5), floori(float(used_rect.size.y) * 0.5))
+	var center_cell := used_rect.position + half_size
 	var local_pos = tile_map_layer.map_to_local(center_cell)
 	
 	if used_rect.size == Vector2i.ZERO:
@@ -265,13 +280,16 @@ func get_tilemap_center_global() -> Vector2:
 
 func _on_save_pressed() -> void:
 	if OS.has_feature("web") and JavaScriptBridge != null:
-		_download_save_to_browser()
+		_request_save_to_browser()
 		return
 
 	save_dialog.current_file = "build_plan.%s" % SAVE_FILE_EXTENSION
 	save_dialog.popup_centered_ratio(0.7)
 
 func _on_load_pressed() -> void:
+	if OS.has_feature("web") and JavaScriptBridge != null:
+		_request_load_from_browser()
+		return
 	load_dialog.popup_centered_ratio(0.7)
 	
 func _on_export_pdf_pressed() -> void:
@@ -339,6 +357,98 @@ func _download_save_to_browser() -> void:
 	var json_text := JSON.stringify(save_state, "\t")
 	var bytes := json_text.to_utf8_buffer()
 	JavaScriptBridge.download_buffer(bytes, "build_plan.%s" % SAVE_FILE_EXTENSION, "application/json")
+
+func _request_save_to_browser() -> void:
+	var window = JavaScriptBridge.get_interface("window")
+	if window == null:
+		_download_save_to_browser()
+		return
+
+	var install_script := """
+if (!window.__srbpSaveTextFile) {
+	window.__srbpSaveTextFile = function(content, suggestedName, mime, success, failure) {
+		const fallbackDownload = () => {
+			try {
+				const blob = new Blob([content], { type: mime });
+				const url = URL.createObjectURL(blob);
+				const anchor = document.createElement('a');
+				anchor.href = url;
+				anchor.download = suggestedName;
+				anchor.style.display = 'none';
+				document.body.appendChild(anchor);
+				anchor.click();
+				setTimeout(() => {
+					if (anchor.parentNode) {
+						anchor.parentNode.removeChild(anchor);
+					}
+					URL.revokeObjectURL(url);
+				}, 0);
+				if (success) success('download');
+			} catch (err) {
+				if (failure) failure(String(err));
+			}
+		};
+
+		if (!window.showSaveFilePicker) {
+			fallbackDownload();
+			return;
+		}
+
+		(async () => {
+			try {
+				const handle = await window.showSaveFilePicker({
+					suggestedName,
+					types: [{
+						description: 'SRBP Save File',
+						accept: {
+							'application/json': ['.srbp', '.json']
+						}
+					}]
+				});
+				const writable = await handle.createWritable();
+				await writable.write(content);
+				await writable.close();
+				if (success) success('picker');
+			} catch (err) {
+				if (err && err.name === 'AbortError') {
+					if (failure) failure('AbortError');
+					return;
+				}
+				fallbackDownload();
+			}
+		})();
+	};
+}
+"""
+	JavaScriptBridge.eval(install_script, true)
+
+	var suggested_name := "build_plan.%s" % SAVE_FILE_EXTENSION
+	var save_state := _collect_save_state()
+	var json_text := JSON.stringify(save_state, "\t")
+	_web_save_pending_file_name = suggested_name
+	_web_save_success_callback = JavaScriptBridge.create_callback(_on_web_save_succeeded)
+	_web_save_error_callback = JavaScriptBridge.create_callback(_on_web_save_failed)
+	window.__srbpSaveTextFile(json_text, suggested_name, "application/json", _web_save_success_callback, _web_save_error_callback)
+
+func _cleanup_web_save_callbacks() -> void:
+	_web_save_success_callback = null
+	_web_save_error_callback = null
+	_web_save_pending_file_name = ""
+
+func _on_web_save_succeeded(_args: Array) -> void:
+	_cleanup_web_save_callbacks()
+
+func _on_web_save_failed(args: Array) -> void:
+	var error_text := ""
+	if not args.is_empty():
+		error_text = str(args[0])
+
+	if error_text == "AbortError":
+		_cleanup_web_save_callbacks()
+		return
+
+	push_warning("Failed to save browser-selected file %s" % _web_save_pending_file_name)
+	_cleanup_web_save_callbacks()
 	
 func _download_pdf_to_browser() -> void:
 	var pdf_bytes := _build_pdf_bytes()
@@ -360,6 +470,77 @@ func _write_pdf_file(path: String) -> bool:
 	file.store_buffer(_build_pdf_bytes())
 	return true
 
+func _request_load_from_browser() -> void:
+	_cleanup_web_load_picker()
+
+	var document = JavaScriptBridge.get_interface("document")
+	if document == null or document.body == null:
+		push_warning("Browser file picker is unavailable in this web build.")
+		return
+
+	_web_load_input = document.createElement("input")
+	if _web_load_input == null:
+		push_warning("Failed to create browser file input for loading saves.")
+		return
+
+	_web_load_input.setAttribute("type", "file")
+	_web_load_input.setAttribute("accept", ".%s,.json,application/json" % SAVE_FILE_EXTENSION)
+	_web_load_input.setAttribute("style", "display:none")
+	_web_load_input_callback = JavaScriptBridge.create_callback(_on_web_load_input_changed)
+	_web_load_input.onchange = _web_load_input_callback
+	document.body.appendChild(_web_load_input)
+	_web_load_input.click()
+
+func _cleanup_web_load_picker() -> void:
+	if _web_load_input != null:
+		if _web_load_input.parentNode != null:
+			_web_load_input.parentNode.removeChild(_web_load_input)
+		_web_load_input = null
+	_web_load_reader = null
+	_web_load_input_callback = null
+	_web_load_read_callback = null
+	_web_load_error_callback = null
+	_web_load_pending_file_name = ""
+
+func _on_web_load_input_changed(args: Array) -> void:
+	if args.is_empty():
+		_cleanup_web_load_picker()
+		return
+
+	var event = args[0]
+	if event == null or event.target == null or event.target.files == null or int(event.target.files.length) < 1:
+		_cleanup_web_load_picker()
+		return
+
+	var selected_file = event.target.files[0]
+	_web_load_pending_file_name = str(selected_file.name)
+	_web_load_reader = JavaScriptBridge.create_object("FileReader")
+	if _web_load_reader == null:
+		push_warning("Failed to create browser file reader for %s." % _web_load_pending_file_name)
+		_cleanup_web_load_picker()
+		return
+
+	_web_load_read_callback = JavaScriptBridge.create_callback(_on_web_load_reader_loaded)
+	_web_load_error_callback = JavaScriptBridge.create_callback(_on_web_load_reader_failed)
+	_web_load_reader.onload = _web_load_read_callback
+	_web_load_reader.onerror = _web_load_error_callback
+	_web_load_reader.readAsText(selected_file)
+
+func _on_web_load_reader_loaded(args: Array) -> void:
+	var raw_text := ""
+	if not args.is_empty() and args[0] != null and args[0].target != null:
+		raw_text = str(args[0].target.result)
+
+	var loaded := raw_text != "" and _apply_save_text(raw_text)
+	if not loaded:
+		push_warning("Failed to load save file from browser-selected file %s" % _web_load_pending_file_name)
+
+	_cleanup_web_load_picker()
+
+func _on_web_load_reader_failed(_args: Array) -> void:
+	push_warning("Failed to read save file from browser-selected file %s" % _web_load_pending_file_name)
+	_cleanup_web_load_picker()
+
 func _load_save_file(path: String) -> bool:
 	if not FileAccess.file_exists(path):
 		return false
@@ -369,6 +550,9 @@ func _load_save_file(path: String) -> bool:
 		return false
 
 	var raw := file.get_as_text()
+	return _apply_save_text(raw)
+
+func _apply_save_text(raw: String) -> bool:
 	var parsed = JSON.parse_string(raw)
 	if not (parsed is Dictionary):
 		return false
@@ -426,7 +610,7 @@ func _build_pdf_bytes() -> PackedByteArray:
 
 	var bbm_total = $Camera2D/CanvasLayer/Panel/BBMCostLabel.text.to_int()
 	var ibm_total = $Camera2D/CanvasLayer/Panel/IBMCostLabel.text.to_int()
-	var meteor_core_total = $Camera2D/CanvasLayer/Panel/IBMCostLabel.text.to_int()
+	var meteor_core_total = $Camera2D/CanvasLayer/Panel/MeteorCoreCostLabel.text.to_int()
 	
 	lines.append("Star Rupture Build Planner")
 	lines.append("Build Plan Export")
@@ -637,6 +821,7 @@ func _format_resource_name(value: String) -> String:
 func _serialize_building(building: Node2D) -> Dictionary:
 	var recipe_selection := _serialize_option_button(building.get_node_or_null("Recipe"))
 	var purity_selection := _serialize_option_button(building.get_node_or_null("Purity"))
+	var core_level_selection := _serialize_option_button(building.get_node_or_null("CoreLevel"))
 	var saved_anchor_cell := Vector2i.ZERO
 	if build_manager != null and build_manager.has_method("_anchor_cell_from_building_position"):
 		saved_anchor_cell = build_manager._anchor_cell_from_building_position(building, building.global_position)
@@ -659,7 +844,8 @@ func _serialize_building(building: Node2D) -> Dictionary:
 		"anchor_cell": [int(saved_anchor_cell.x), int(saved_anchor_cell.y)],
 		"footprint": [max(1, int(saved_footprint.x)), max(1, int(saved_footprint.y))],
 		"recipe": recipe_selection,
-		"purity": purity_selection
+		"purity": purity_selection,
+		"core_level": core_level_selection
 	}
 
 func _serialize_option_button(node: Node) -> Dictionary:
@@ -780,8 +966,8 @@ func _instantiate_saved_building(data: Dictionary) -> Node2D:
 	var scene: PackedScene = null
 
 	var id_key := StringName(data.get("id", ""))
-	if id_key != StringName("") and get_tree().root.has_node("BuildingRegistry"):
-		scene = BuildingRegistry.get_scene(id_key)
+	if id_key != StringName(""):
+		scene = BuildRegistry.get_scene(id_key)
 
 	if scene == null:
 		var scene_path := String(data.get("scene_path", ""))
@@ -811,14 +997,16 @@ func _instantiate_saved_building(data: Dictionary) -> Node2D:
 	_restore_loaded_building_selection_state(
 		instance,
 		data.get("recipe", {}),
-		data.get("purity", {})
+		data.get("purity", {}),
+		data.get("core_level", {})
 	)
 
 	return instance
 
-func _restore_loaded_building_selection_state(building: Node2D, recipe_selection: Dictionary, purity_selection: Dictionary) -> void:
+func _restore_loaded_building_selection_state(building: Node2D, recipe_selection: Dictionary, purity_selection: Dictionary, core_level_selection: Dictionary = {}) -> void:
 	var recipe_dropdown := building.get_node_or_null("Recipe") as OptionButton
 	var purity_dropdown := building.get_node_or_null("Purity") as OptionButton
+	var core_level_dropdown := building.get_node_or_null("CoreLevel") as OptionButton
 
 	_restore_option_selection(recipe_dropdown, recipe_selection)
 
@@ -831,6 +1019,9 @@ func _restore_loaded_building_selection_state(building: Node2D, recipe_selection
 
 	if not _call_option_selection_handler(building, "_on_purity_item_selected", purity_dropdown):
 		_call_option_selection_handler(building, "_on_recipe_item_selected", recipe_dropdown)
+
+	_restore_option_selection(core_level_dropdown, core_level_selection)
+	_call_option_selection_handler(building, "_on_core_level_item_selected", core_level_dropdown)
 
 func _call_option_selection_handler(building: Node, method_name: String, option_button: OptionButton) -> bool:
 	if building == null or option_button == null:

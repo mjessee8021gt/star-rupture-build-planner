@@ -3,15 +3,6 @@ extends MenuButton
 signal build_requested(scene: PackedScene)
 
 @export var BuildManager : Node2D
-
-var Idx
-
-enum ExtractionItem {ORE_EXCAVATOR, HELIUM_3_EXTRACTOR, SULFUR_EXTRACTOR}
-enum ProcessingItem {SMELTER, FURNACE, MEGA_PRESS, COMPOUNDER}
-
-@onready var build_scenes := {
-	ProcessingItem.SMELTER:preload("res://Buildings/Smelter.tscn")
-}
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 
@@ -38,8 +29,6 @@ func _ready() -> void:
 	##extractionMenu.add_item("Deuterium Extractor") ## Datamined from Alpha release
 	##extractionMenu.set_item_metadata(extractionMenu.item_count-1, &"deuterium_extractor")
 	extractionMenu.id_pressed.connect(_on_build_selected.bind(extractionMenu))
-	print("Extraction Menu Item Selected...")
-	$"../Debug Panel/DebugFeed".text = "Extraction Menu Item Selected..."
 	
 	var craftingMenu = PopupMenu.new()
 	craftingMenu.name = "Crafting"
@@ -78,7 +67,6 @@ func _ready() -> void:
 	processingMenu.add_item("Pyro Forge")
 	processingMenu.set_item_metadata(processingMenu.item_count-1, &"pyro_forge")
 	processingMenu.id_pressed.connect(_on_build_selected.bind(processingMenu))
-	print("Processing Menu Item Selected...")
 	
 	var powerMenu = PopupMenu.new()
 	powerMenu.name = "Power"
@@ -93,7 +81,6 @@ func _ready() -> void:
 	powerMenu.add_item("Chemical Generator")
 	powerMenu.set_item_metadata(powerMenu.item_count-1, &"chemical_generator")
 	powerMenu.id_pressed.connect(_on_build_selected.bind(powerMenu))
-	print("Power Menu Item Selected...")
 	
 	var railMenu = PopupMenu.new()
 	railMenu.name = "Rails"
@@ -114,7 +101,6 @@ func _ready() -> void:
 	railMenu.add_item("Zipline")
 	railMenu.set_item_metadata(railMenu.item_count-1, &"zipline")
 	railMenu.id_pressed.connect(_on_build_selected.bind(railMenu))
-	print("Rail Menu Item Selected...")
 	
 	var shipmentMenu = PopupMenu.new()
 	shipmentMenu.name = "Shipment"
@@ -129,7 +115,6 @@ func _ready() -> void:
 	shipmentMenu.add_item("Teleporter")
 	shipmentMenu.set_item_metadata(shipmentMenu.item_count-1, &"teleporter")
 	shipmentMenu.id_pressed.connect(_on_build_selected.bind(shipmentMenu))
-	print("Shipment Menu Item Selected...")
 	
 	var storageMenu = PopupMenu.new()
 	storageMenu.name = "Storage"
@@ -184,12 +169,9 @@ func _on_build_selected(id: int, menu:PopupMenu) -> void:
 	var idx := menu.get_item_index(id)
 	var key := menu.get_item_metadata(idx) as StringName
 	
-	var scene = BuildingRegistry.get_scene(key)
+	var scene = BuildRegistry.get_scene(key)
 	if scene:
-		print("Submitting build reuqest...")
-		$"../Debug Panel/DebugFeed".text = "Submitting build reuqest..."
 		build_requested.emit(scene)
 	else:
 		push_warning("No registered for key: %s" % key)
-		$"../Debug Panel/DebugFeed".text = "No registered for key: %s" % key
 		return

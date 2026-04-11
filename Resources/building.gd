@@ -2,7 +2,7 @@ extends Node2D
 
 class_name Building
 
-const PlannerPalette = preload("res://Scripts/palette.gd")
+const Palette = preload("res://Scripts/palette.gd")
 
 enum BuildCostType {
 	BBM,
@@ -32,42 +32,27 @@ var _dragging_port := ""
 
 ##------Boolean Variables------##
 var _dragging := false
-var dragging := false
 var _themed_port_buttons: Array[Button] = []
-
-##------Vector2 Variables------##
-var drag_offset := Vector2.ZERO
-
+var _port_palette_refresh_queued := false
 
 func _enter_tree() -> void:
 	call_deferred("_apply_visual_theme")
 
-func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int):
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			dragging = event.pressed
-			if dragging:
-				drag_offset = global_position - get_global_mouse_position()
-		elif event.button_index == KEY_CTRL:
-			if has_node("PrimarySprite") and has_node("AlternateSprite"):
-				$PrimarySprite.visible = not $PrimarySprite.visible
-				$AlternateSprite.visible = not $AlternateSprite.visible
-
-func _process(delta: float):
-	if dragging:
-		var mouse_pos = get_global_mouse_position() + drag_offset
-		snap_to_grid(mouse_pos)
+func _process(_delta: float):
 	if _dragging:
-		emit_signal("port_drag_updated", self, _dragging_port, get_global_mouse_position())
-	_normalize_port_palette()
+		_emit_port_drag_updated(_dragging_port, get_global_mouse_position())
 
-func snap_to_grid(world_pos: Vector2):
-	if tileMap == null:
-		return
-	var local_pos = tileMap.to_local(world_pos)
-	var map_coords = tileMap.local_to_map(local_pos)
-	var snapped_local = tileMap.map_to_local(map_coords)
-	global_position = tileMap.to_global(snapped_local)
+
+func _emit_port_drag_started(port_name: String, port_global_pos: Vector2) -> void:
+	port_drag_started.emit(self, port_name, port_global_pos)
+
+
+func _emit_port_drag_updated(port_name: String, port_global_pos: Vector2) -> void:
+	port_drag_updated.emit(self, port_name, port_global_pos)
+
+
+func _emit_port_drag_ended(port_name: String, port_global_pos: Vector2) -> void:
+	port_drag_ended.emit(self, port_name, port_global_pos)
 
 func get_footprint_cells(anchor_cell: Vector2i, footprint_size: Vector2i, footprint_anchor: Vector2i) -> Array[Vector2i]:
 	var cells: Array[Vector2i] = []
@@ -99,6 +84,27 @@ func _cache_port_buttons() -> void:
 	for child in ports.get_children():
 		if child is Button:
 			_themed_port_buttons.append(child)
+			_bind_port_palette_updates(child as Button)
+
+
+func _bind_port_palette_updates(button: Button) -> void:
+	if button == null:
+		return
+
+	if not button.button_down.is_connected(_queue_port_palette_normalize):
+		button.button_down.connect(_queue_port_palette_normalize)
+	if not button.button_up.is_connected(_queue_port_palette_normalize):
+		button.button_up.connect(_queue_port_palette_normalize)
+	if not button.mouse_entered.is_connected(_queue_port_palette_normalize):
+		button.mouse_entered.connect(_queue_port_palette_normalize)
+	if not button.mouse_exited.is_connected(_queue_port_palette_normalize):
+		button.mouse_exited.connect(_queue_port_palette_normalize)
+	if not button.focus_entered.is_connected(_queue_port_palette_normalize):
+		button.focus_entered.connect(_queue_port_palette_normalize)
+	if not button.focus_exited.is_connected(_queue_port_palette_normalize):
+		button.focus_exited.connect(_queue_port_palette_normalize)
+	if not button.toggled.is_connected(_queue_port_palette_normalize):
+		button.toggled.connect(_queue_port_palette_normalize)
 
 
 func _apply_building_backdrop() -> void:
@@ -107,11 +113,11 @@ func _apply_building_backdrop() -> void:
 		return
 
 	_remove_theme_polygon("ThemeBackdrop")
-	var outline_width := PlannerPalette.building_outline_width(id)
+	var outline_width := Palette.building_outline_width(id)
 	var outline_rect := bounds.grow(-outline_width * 0.5)
 	if outline_rect.size.x <= 0.0 or outline_rect.size.y <= 0.0:
 		outline_rect = bounds
-	var outline_color := PlannerPalette.building_outline_color(id)
+	var outline_color := Palette.building_outline_color(id)
 	_set_theme_outline("ThemeOutline", outline_rect, outline_color, outline_width)
 
 
@@ -196,11 +202,11 @@ func _theme_labels(node: Node) -> void:
 		if child is Label:
 			var label := child as Label
 			if label.get_parent() is ColorRect:
-				label.add_theme_color_override("font_color", PlannerPalette.TEXT_BADGE)
+				label.add_theme_color_override("font_color", Palette.TEXT_BADGE)
 			elif label.name.to_lower().contains("title"):
-				label.add_theme_color_override("font_color", PlannerPalette.TEXT_PRIMARY)
+				label.add_theme_color_override("font_color", Palette.TEXT_PRIMARY)
 			else:
-				label.add_theme_color_override("font_color", PlannerPalette.TEXT_MUTED)
+				label.add_theme_color_override("font_color", Palette.TEXT_MUTED)
 
 		_theme_labels(child)
 
@@ -209,7 +215,7 @@ func _theme_badges(node: Node) -> void:
 	for child in node.get_children():
 		if child is ColorRect:
 			var rect := child as ColorRect
-			rect.color = PlannerPalette.badge_fill_for_name(rect.name)
+			rect.color = Palette.badge_fill_for_name(rect.name)
 
 		_theme_badges(child)
 
@@ -218,13 +224,13 @@ func _theme_option_buttons(node: Node) -> void:
 	for child in node.get_children():
 		if child is OptionButton:
 			var option := child as OptionButton
-			option.add_theme_color_override("font_color", PlannerPalette.TEXT_PRIMARY)
-			option.add_theme_color_override("font_disabled_color", PlannerPalette.TEXT_MUTED)
-			option.add_theme_stylebox_override("normal", PlannerPalette.make_button_style(PlannerPalette.BUTTON_FILL, 6))
-			option.add_theme_stylebox_override("hover", PlannerPalette.make_button_style(PlannerPalette.BUTTON_HOVER, 6))
-			option.add_theme_stylebox_override("pressed", PlannerPalette.make_button_style(PlannerPalette.BUTTON_PRESSED, 6))
-			option.add_theme_stylebox_override("focus", PlannerPalette.make_button_style(PlannerPalette.BUTTON_HOVER, 6))
-			option.add_theme_stylebox_override("disabled", PlannerPalette.make_button_style(PlannerPalette.BUTTON_PRESSED, 6))
+			option.add_theme_color_override("font_color", Palette.TEXT_PRIMARY)
+			option.add_theme_color_override("font_disabled_color", Palette.TEXT_MUTED)
+			option.add_theme_stylebox_override("normal", Palette.make_button_style(Palette.BUTTON_FILL, 6))
+			option.add_theme_stylebox_override("hover", Palette.make_button_style(Palette.BUTTON_HOVER, 6))
+			option.add_theme_stylebox_override("pressed", Palette.make_button_style(Palette.BUTTON_PRESSED, 6))
+			option.add_theme_stylebox_override("focus", Palette.make_button_style(Palette.BUTTON_HOVER, 6))
+			option.add_theme_stylebox_override("disabled", Palette.make_button_style(Palette.BUTTON_PRESSED, 6))
 
 		_theme_option_buttons(child)
 
@@ -234,5 +240,17 @@ func _normalize_port_palette() -> void:
 		if not is_instance_valid(button):
 			continue
 
-		var port_color := PlannerPalette.port_color_for_name(button.name)
-		button.modulate = PlannerPalette.with_alpha(port_color, button.modulate.a)
+		var port_color := Palette.port_color_for_name(button.name)
+		button.modulate = Palette.with_alpha(port_color, button.modulate.a)
+
+
+func _queue_port_palette_normalize(_unused = null) -> void:
+	if _port_palette_refresh_queued:
+		return
+	_port_palette_refresh_queued = true
+	call_deferred("_flush_port_palette_normalize")
+
+
+func _flush_port_palette_normalize() -> void:
+	_port_palette_refresh_queued = false
+	_normalize_port_palette()

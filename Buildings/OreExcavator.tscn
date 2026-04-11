@@ -57,9 +57,9 @@ icon = ExtResource("3_veacw")
 metadata/normal = Vector2(0, -1)
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=1551064749]
-offset_left = -67.0
+offset_left = -61.0
 offset_top = 35.0
-offset_right = 26.0
+offset_right = 32.0
 offset_bottom = 55.0
 theme_override_font_sizes/font_size = 16
 

@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://ol82gygr5cgr" path="res://Recipes/Sulpheric_acid.tres" id="4_uo3ni"]
 [ext_resource type="Texture2D" uid="uid://dckm1irx4k8o3" path="res://Assets/SRBP_6x6_BLDG.png" id="5_k1xno"]
 [ext_resource type="Texture2D" uid="uid://cmwoe1nqgmtr6" path="res://Assets/SRBP_7x7_BLDG.png" id="6_uo3ni"]
+[ext_resource type="LabelSettings" uid="uid://bwg7jbpx2gog5" path="res://Assets/std_bldg_label_settings.tres" id="7_mdgc2"]
 [ext_resource type="Texture2D" uid="uid://ilmbegsn2c7" path="res://Assets/SRBP_Oval.png" id="18_pfrlw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
@@ -48,6 +49,7 @@ offset_right = 80.0
 offset_bottom = -73.0
 theme_override_font_sizes/font_size = 25
 text = "PRESSURIZER"
+label_settings = ExtResource("7_mdgc2")
 
 [node name="PlacementArea" type="Area2D" parent="." unique_id=911391560]
 
@@ -90,9 +92,9 @@ icon = ExtResource("18_pfrlw")
 metadata/normal = Vector2(0, 1)
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
-offset_left = -64.0
+offset_left = -61.0
 offset_top = -59.0
-offset_right = 30.0
+offset_right = 33.0
 offset_bottom = -39.0
 theme_override_font_sizes/font_size = 10
 
