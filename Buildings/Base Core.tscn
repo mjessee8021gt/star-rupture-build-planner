@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cysul1aqe6byv" path="res://Buildings/Base Core.gd" id="1_ajxhi"]
 [ext_resource type="Texture2D" uid="uid://b2k53j0c3amt2" path="res://Assets/SRBP_Core_BLDG.png" id="2_4fik0"]
+[ext_resource type="LabelSettings" uid="uid://bwg7jbpx2gog5" path="res://Assets/std_bldg_label_settings.tres" id="3_4fik0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
 size = Vector2(256, 256)
@@ -42,6 +43,7 @@ offset_right = 76.0
 offset_bottom = -1.0
 theme_override_font_sizes/font_size = 25
 text = "BASE  CORE"
+label_settings = ExtResource("3_4fik0")
 horizontal_alignment = 1
 
 [node name="PlacementArea" type="Area2D" parent="." unique_id=911391560]

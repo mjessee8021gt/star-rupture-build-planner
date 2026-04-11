@@ -30,3 +30,7 @@ func _open_panel() -> void:
 	_panel.popup_centered(Vector2i(900, 650))
 	if _panel.has_method("refresh"):
 		_panel.call("refresh")
+
+
+func is_panel_open() -> bool:
+	return _panel != null and is_instance_valid(_panel) and _panel.visible

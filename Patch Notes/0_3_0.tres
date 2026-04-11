@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="PatchNote" format=3 uid="uid://cs12ul571gfme"]
+
+[ext_resource type="Script" uid="uid://b6tmiam3vo7cr" path="res://Resources/PatchNote.gd" id="1_rc4nl"]
+
+[resource]
+script = ExtResource("1_rc4nl")
+patch_version = &"v0.3.0"
+patch_notes = "New Features:
+- Update 1 is officially released to the public branch. It came with a handful of tweaks, those tweaks have been applied within the Build Planner for accuracy.
+- Path Manager has been completely retooled and she looks niiiiice.
+- Player can now change the key mappings as they choose.
+- Rail tiers have been implemented
+- Arrows will now appear on the drawn rails to indicate direction of flow.
+- Rails now actively try to avoid building
+- Rails that overlap with another already drawn rail will adjust it's color automatically for visibility and ease of tracing.
+- Another pass on the visual aspects of the UI to make things more readable (shoutout to Technomere over on reddit for this suggestion!)
+- All colors inside the platform have been adjusted to be Color-blind friendly! (shoutout to Technomere over on reddit for this suggestion!)
+- User Guide Doc has been drafted now that the program is getting relatively feature rich.
+
+Bug Fixes:
+- Pan controls now show properly in the controls menu
+- Added an alternative method of panning so the tool is more accessible to laptop users. (Shoutout to Comfortable-Paint818 for the feedback on this)
+- Save/Load logic fixed so loading a saved blueprint actually retains all of the production numbers and tooltips on both the buildings and the production pane
+- Save/Load logic fixed so that we are now recording base core level.
+- Paths can now be deleted by right-clicking directly onto them. No more having to delete a building to remove the path.
+- Some general UI Polish has been done.
+- Several of the context menus will now block inputs on the main screen while they're open so you can scroll through and interact with these panels without having to worry about your build planner spazzing out. These windows include:
+   - Save Menu
+   - Load Menu
+   - Controls Menu
+   - Patch Notes Menu
+
+"
+known_issues = "-Rail pathing will sometimes travel under the originating building. I will attempt to fix this in a future build but paths are substantially polished compared to where they used to be so this might get tabled for a minute.
+
+"

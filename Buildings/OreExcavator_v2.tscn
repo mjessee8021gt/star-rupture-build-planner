@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://dknfbwm44l2e7" path="res://Recipes/mine_Wolfram_v2.tres" id="5_heydw"]
 [ext_resource type="Texture2D" uid="uid://qwwrxvfqjgub" path="res://Assets/SRBP_3x4_BLDG.png" id="6_7arco"]
 [ext_resource type="Texture2D" uid="uid://ilmbegsn2c7" path="res://Assets/SRBP_Oval.png" id="7_68tkp"]
+[ext_resource type="LabelSettings" uid="uid://bwg7jbpx2gog5" path="res://Assets/std_bldg_label_settings.tres" id="7_bsi1f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
 size = Vector2(192, 256)
@@ -38,11 +39,12 @@ shape = SubResource("RectangleShape2D_gbqis")
 [node name="TitleLabel" type="Label" parent="." unique_id=904579435]
 offset_left = -72.0
 offset_top = -47.0
-offset_right = 72.0
-offset_bottom = -12.0
-theme_override_font_sizes/font_size = 25
+offset_right = 75.0
+offset_bottom = 38.0
+theme_override_font_sizes/font_size = 24
 text = "EXCAVATOR
 V2"
+label_settings = ExtResource("7_bsi1f")
 horizontal_alignment = 1
 
 [node name="PlacementArea" type="Area2D" parent="." unique_id=911391560]
@@ -61,9 +63,9 @@ icon = ExtResource("7_68tkp")
 metadata/normal = Vector2(0, -1)
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=1551064749]
-offset_left = -67.0
+offset_left = -62.0
 offset_top = 35.0
-offset_right = 26.0
+offset_right = 31.0
 offset_bottom = 55.0
 theme_override_font_sizes/font_size = 16
 

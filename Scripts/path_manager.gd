@@ -1,10 +1,10 @@
 extends Node2D
 
-const PlannerPalette = preload("res://Scripts/palette.gd")
+const Palette = preload("res://Scripts/palette.gd")
 
 # Styling
-@export var preview_color := PlannerPalette.PATH_PREVIEW
-@export var final_color := PlannerPalette.PATH_FINAL
+@export var preview_color := Palette.PATH_PREVIEW
+@export var final_color := Palette.PATH_FINAL
 @export var line_width := 5.0
 
 # Manhattan appearance
@@ -21,8 +21,8 @@ const PlannerPalette = preload("res://Scripts/palette.gd")
 @export var direction_indicator_min_path_length := 30.0
 @export var direction_indicator_spacing := 220.0
 @export var direction_indicator_max_count := 3
-@export var direction_indicator_length := 14.0
-@export var direction_indicator_width := 10.0
+@export var direction_indicator_length := 20.0
+@export var direction_indicator_width := 14.0
 
 # BuildManager path gating
 @export var build_manager_path: NodePath = NodePath("../BuildManager")
@@ -1697,6 +1697,73 @@ func _refresh_path_overlap_shading() -> void:
 		_refresh_direction_markers_for_path(path, line)
 
 
+func _refresh_path_markers(paths: Array[Path2D]) -> void:
+	for path in paths:
+		if path == null or not is_instance_valid(path):
+			continue
+
+		var line := _get_path_line(path)
+		if line == null:
+			continue
+		_refresh_direction_markers_for_path(path, line)
+
+
+func _distance_to_segment(point: Vector2, start: Vector2, end: Vector2) -> float:
+	var segment := end - start
+	var segment_length_sq := segment.length_squared()
+	if segment_length_sq <= 0.001:
+		return point.distance_to(start)
+
+	var t = clamp((point - start).dot(segment) / segment_length_sq, 0.0, 1.0)
+	var closest = start + segment * t
+	return point.distance_to(closest)
+
+
+func _is_point_near_polyline(point: Vector2, points: PackedVector2Array, tolerance: float) -> bool:
+	if points.size() < 2:
+		return false
+
+	for i in range(1, points.size()):
+		if _distance_to_segment(point, points[i - 1], points[i]) <= tolerance:
+			return true
+	return false
+
+
+func _get_baked_path_under_global_point(global_point: Vector2) -> Path2D:
+	var children := get_children()
+	for i in range(children.size() - 1, -1, -1):
+		var child = children[i]
+		if not (child is Path2D):
+			continue
+
+		var path := child as Path2D
+		if path == _preview_container:
+			continue
+		if not path.has_meta("from_building") or not path.has_meta("to_building"):
+			continue
+
+		var line := _get_path_line(path)
+		if line == null or line.points.size() < 2:
+			continue
+
+		var local_mouse := path.to_local(global_point)
+		var hit_tolerance = max(line.width * 0.75, 8.0)
+		if _is_point_near_polyline(local_mouse, line.points, hit_tolerance):
+			return path
+
+	return null
+
+
+func try_remove_path_under_mouse() -> bool:
+	var target_path := _get_baked_path_under_global_point(get_global_mouse_position())
+	if target_path == null:
+		return false
+
+	target_path.queue_free()
+	call_deferred("_refresh_path_overlap_shading")
+	return true
+
+
 func _build_route_points_local(container: Node2D, from_b: Node2D, from_port: NodePath, from_pos_g: Vector2, to_b: Node2D, to_port: NodePath, to_pos_g: Vector2) -> Array[Vector2]:
 	return _build_route_points_local_with_normals(
 		container,
@@ -1844,7 +1911,7 @@ func _refresh_preview(mouse_pos: Vector2) -> void:
 	)
 
 
-func _on_port_end(building: Node2D, port_name: String, mouse_pos: Vector2) -> void:
+func _on_port_end(building: Node2D, port_name: String, _mouse_pos: Vector2) -> void:
 	if not _can_start_paths():
 		_cleanup_preview()
 		return
@@ -1916,7 +1983,8 @@ func cancel_active_path_drag() -> void:
 	_cleanup_preview()
 
 # Updating existing paths when buildings move / are deleted
-func update_paths_for_building(building: Node2D) -> void:
+func update_paths_for_building(building: Node2D, refresh_overlap := true) -> void:
+	var updated_paths: Array[Path2D] = []
 	for child in get_children():
 		if not (child is Path2D):
 			continue
@@ -1948,7 +2016,11 @@ func update_paths_for_building(building: Node2D) -> void:
 			var raw_local_points := _build_route_points_local(path, from_building, from_port, from_pos, to_building, to_port, to_pos)
 			line.points = _round_polyline(raw_local_points, corner_radius, arc_segments)
 			path.set_meta("route_polyline_local", raw_local_points)
-	_refresh_path_overlap_shading()
+			updated_paths.append(path)
+	if refresh_overlap:
+		_refresh_path_overlap_shading()
+	else:
+		_refresh_path_markers(updated_paths)
 
 #Upon deletion of a building, clean up the paths stemming from or to it.
 func remove_paths_for_building(building: Node2D) -> void:

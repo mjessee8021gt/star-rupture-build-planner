@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://qg8enxibgb7k" path="res://Buildings/Wind V2.gd" id="1_k1coi"]
 [ext_resource type="Texture2D" uid="uid://grouobxe87tu" path="res://Assets/SRBP_4x4_BLDG.png" id="2_jby0i"]
+[ext_resource type="LabelSettings" uid="uid://bwg7jbpx2gog5" path="res://Assets/std_bldg_label_settings.tres" id="3_jby0i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
 size = Vector2(256, 256)
@@ -38,13 +39,13 @@ shape = SubResource("RectangleShape2D_uf4xf")
 disabled = true
 
 [node name="TitleLabel" type="Label" parent="." unique_id=904579435]
-offset_left = -34.0
+offset_left = -52.0
 offset_top = -121.0
-offset_right = 35.0
+offset_right = 53.0
 offset_bottom = -48.0
 theme_override_font_sizes/font_size = 25
-text = "WIND
-V2"
+text = "WIND V2"
+label_settings = ExtResource("3_jby0i")
 horizontal_alignment = 1
 
 [node name="outputBox" type="ColorRect" parent="." unique_id=1954160661]

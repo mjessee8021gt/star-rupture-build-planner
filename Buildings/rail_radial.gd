@@ -149,7 +149,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		_dragging = false
 		
 		#we need to use the center of the button here for ther final endpoint
-		print("UNHANDLED INPUT FROM BUILDING: " + str(_dragging_port))
 		var p := _get_port_global_pos(_dragging_port)
 		emit_signal("port_drag_ended", self, _dragging_port, p)
 		

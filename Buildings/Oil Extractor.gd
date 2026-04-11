@@ -79,5 +79,5 @@ func _unhandled_input(event: InputEvent) -> void:
 		emit_signal("port_drag_ended", self, _dragging_port, get_global_mouse_position())
 		_dragging_port = ""
 		
-func get_production_deltas(recipe: Recipe) -> Dictionary:
-	return recipe.get_deltas()
+func get_production_deltas(selected_recipe: Recipe) -> Dictionary:
+	return selected_recipe.get_deltas()

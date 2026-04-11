@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://bnqr7s13bqju7" path="res://Recipes/Tube_v2.tres" id="7_ojcnw"]
 [ext_resource type="Resource" uid="uid://cxgiuavvq8nb5" path="res://Recipes/Stator_v2.tres" id="8_ed1xg"]
 [ext_resource type="Resource" uid="uid://ci04gs21l7ysy" path="res://Recipes/Rotor_v2.tres" id="9_qhapw"]
+[ext_resource type="LabelSettings" uid="uid://bwg7jbpx2gog5" path="res://Assets/std_bldg_label_settings.tres" id="12_qs8hr"]
 [ext_resource type="Texture2D" uid="uid://grouobxe87tu" path="res://Assets/SRBP_4x4_BLDG.png" id="16_c4bb4"]
 [ext_resource type="Texture2D" uid="uid://bodskb20g6htb" path="res://Assets/SRBP_5x4_BLDG.png" id="16_ed1xg"]
 [ext_resource type="Texture2D" uid="uid://ilmbegsn2c7" path="res://Assets/SRBP_Oval.png" id="21_803ag"]
@@ -49,12 +50,13 @@ disabled = true
 
 [node name="TitleLabel" type="Label" parent="." unique_id=904579435]
 offset_left = -76.0
-offset_top = -60.0
+offset_top = -62.0
 offset_right = 76.0
-offset_bottom = 13.0
+offset_bottom = 23.0
 theme_override_font_sizes/font_size = 25
 text = "FABRICATOR
 V2"
+label_settings = ExtResource("12_qs8hr")
 horizontal_alignment = 1
 
 [node name="PlacementArea" type="Area2D" parent="." unique_id=911391560]
@@ -109,10 +111,10 @@ icon = ExtResource("21_803ag")
 metadata/normal = Vector2(0, 1)
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
-offset_left = -75.0
-offset_top = 13.0
-offset_right = 19.0
-offset_bottom = 33.0
+offset_left = -71.0
+offset_top = 19.0
+offset_right = 23.0
+offset_bottom = 39.0
 theme_override_font_sizes/font_size = 16
 
 [node name="outputBox" type="ColorRect" parent="." unique_id=1419396623]

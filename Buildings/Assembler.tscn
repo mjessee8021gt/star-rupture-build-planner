@@ -18,6 +18,7 @@
 [ext_resource type="Resource" uid="uid://3w52s3slrct4" path="res://Recipes/Pseudorubber_insulator.tres" id="14_glqjf"]
 [ext_resource type="Resource" uid="uid://y2o8fhyj1sgy" path="res://Recipes/Plastic_dust.tres" id="15_j1hit"]
 [ext_resource type="Texture2D" uid="uid://ilmbegsn2c7" path="res://Assets/SRBP_Oval.png" id="16_gbtw0"]
+[ext_resource type="LabelSettings" uid="uid://bwg7jbpx2gog5" path="res://Assets/std_bldg_label_settings.tres" id="18_qa0va"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
 size = Vector2(192, 384)
@@ -61,6 +62,7 @@ offset_right = 71.0
 offset_bottom = -90.0
 theme_override_font_sizes/font_size = 25
 text = "ASSEMBLER"
+label_settings = ExtResource("18_qa0va")
 horizontal_alignment = 1
 
 [node name="PlacementArea" type="Area2D" parent="." unique_id=911391560]
@@ -126,9 +128,9 @@ icon = ExtResource("16_gbtw0")
 metadata/normal = Vector2(0, 1)
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
-offset_left = -108.0
+offset_left = -100.0
 offset_top = -84.0
-offset_right = -14.0
+offset_right = -6.0
 offset_bottom = -64.0
 theme_override_font_sizes/font_size = 16
 

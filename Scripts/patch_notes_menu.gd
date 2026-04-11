@@ -19,38 +19,35 @@ func refresh() -> void:
 		_add_entry(patchnote)
 func _add_entry(patchNote: PatchNote) -> void:
 	if entry_scene == null:
-		print("PatchNotesPanel: entry_scene is not set.")
+		push_warning("PatchNotesPanel: entry_scene is not set.")
 		return
 	var entry := entry_scene.instantiate() as Control
 	if entry == null:
-		print("PatchNotesPanel: entry_scene is not set.")
+		push_warning("PatchNotesPanel: Failed to instantiate patch note entry scene.")
 		return
 	list.add_child(entry)
 	
 	var version_label := entry.get_node_or_null("MarginContainer/VBoxContainer/Version") as Label
 	if version_label == null:
-		print("PatchNotesPanel: version_label is not set.")
+		push_warning("PatchNotesPanel: version_label is not set.")
 		return
 	version_label.text = "Version " + str(patchNote.patch_version)
-	print(version_label.text)
 	
-	var notes_rtl := entry.get_node("MarginContainer/VBoxContainer/Notes") as RichTextLabel
+	var notes_rtl := entry.get_node_or_null("MarginContainer/VBoxContainer/Notes") as RichTextLabel
 	if notes_rtl == null:
-		print("PatchNotesPanel: notes_rtl is not set.")
+		push_warning("PatchNotesPanel: notes_rtl is not set.")
 		return
 	notes_rtl.bbcode_enabled = false
 	var unformatted_notes := patchNote.patch_notes
 	var formatted_notes = unformatted_notes.replace("\\n", "\n")
 	notes_rtl.text = "Patch Notes:\n" + (formatted_notes if formatted_notes != null else "")
-	print(notes_rtl.text)
 	
-	var issues_rtl := entry.get_node("MarginContainer/VBoxContainer/Issues") as RichTextLabel
+	var issues_rtl := entry.get_node_or_null("MarginContainer/VBoxContainer/Issues") as RichTextLabel
 	if issues_rtl == null:
-		print("PatchNotesPanel: issues_rtl is not set.")
+		push_warning("PatchNotesPanel: issues_rtl is not set.")
 		return
 	issues_rtl.bbcode_enabled = false
 	issues_rtl.text = "Known Issues:\n" + (patchNote.known_issues if patchNote.known_issues != null else "")
-	print(issues_rtl.text)
 	
 	entry.visible = true
 	
@@ -65,7 +62,7 @@ func _load_patchnote_resources() -> Array[PatchNote]:
 	if patch_registry == null:
 		patch_registry = root.get_node_or_null("PatchReg")
 	if patch_registry == null:
-		print ("PatchNotesPanel: Could not access PatchRegistry autoload singleton")
+		push_warning("PatchNotesPanel: Could not access PatchRegistry autoload singleton")
 		return out
 	
 	var patch_map: Dictionary = patch_registry.PATCHES
@@ -74,7 +71,7 @@ func _load_patchnote_resources() -> Array[PatchNote]:
 		if res is PatchNote:
 			out.append(res)
 		else:
-			print("PatchNotesPanel: Resource at " + str(key) + " is not a PatchNote Resource.")
+			push_warning("PatchNotesPanel: Resource at %s is not a PatchNote Resource." % str(key))
 	
 	return out
 	

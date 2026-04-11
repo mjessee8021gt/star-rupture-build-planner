@@ -12,6 +12,7 @@
 [ext_resource type="Resource" uid="uid://do088qc18a52y" path="res://Recipes/RTSC_generator.tres" id="10_qw2ix"]
 [ext_resource type="Resource" uid="uid://dl7l7oybf452y" path="res://Recipes/Satelite_body.tres" id="11_oai3j"]
 [ext_resource type="Resource" uid="uid://lyuslwgs8r6h" path="res://Recipes/Synthetic_dna.tres" id="12_1la1s"]
+[ext_resource type="LabelSettings" uid="uid://bwg7jbpx2gog5" path="res://Assets/std_bldg_label_settings.tres" id="15_ejilm"]
 [ext_resource type="Texture2D" uid="uid://b5c3alt8d2qj3" path="res://Assets/SRBP_4x6_BLDG.png" id="19_elgrs"]
 [ext_resource type="Texture2D" uid="uid://ckf3jbuufrs6i" path="res://Assets/SRBP_5x6_BLDG.png" id="20_il7wf"]
 [ext_resource type="Texture2D" uid="uid://ilmbegsn2c7" path="res://Assets/SRBP_Oval.png" id="21_mqmhj"]
@@ -57,6 +58,7 @@ offset_right = 75.000015
 offset_bottom = -39.0
 theme_override_font_sizes/font_size = 25
 text = "FACTURER"
+label_settings = ExtResource("15_ejilm")
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
@@ -140,9 +142,9 @@ metadata/normal = Vector2(0, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
-offset_left = -79.0
+offset_left = -70.0
 offset_top = -10.0
-offset_right = 14.999985
+offset_right = 23.999985
 offset_bottom = 10.0
 theme_override_font_sizes/font_size = 16
 metadata/_edit_use_anchors_ = true

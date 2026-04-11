@@ -1,33 +1,49 @@
-res://Recipes/Item Stacks/Titanium_bar_20_def.tres
-res://Recipes/Item Stacks/Titanium_beam_20_def.tres
-res://Buildings/Wind V1.tscn
-res://Recipes/Titanium_beam.tres
-res://Recipes/Item Stacks/Titanium_bar_40_def.tres
-res://Recipes/Item Stacks/Titanium_beam_60_def.tres
-res://Buildings/Wind V2.tscn
-res://Buildings/Solar V2.tscn
-res://Buildings/Core Amplifier v2.tscn
-res://Buildings/Chemical Generator.tscn
-res://Buildings/Constructorizer V2.tscn
-res://Buildings/Fabricator V2.tscn
-res://Buildings/Furnace V2.tscn
-res://Buildings/Furnace.tscn
-res://Buildings/Helium Extractor.tscn
-res://Buildings/Oil Extractor.tscn
-res://Buildings/Orbital_launcher_v2.tscn
-res://Buildings/OreExcavator_v2.tscn
-res://Buildings/Pyro Forge.tscn
-res://Buildings/rail_radial.tscn
-res://Buildings/Teleporter.tscn
-res://Buildings/Zipline.tscn
 res://Scripts/path_manager.gd
-res://Scenes/Main.tscn
-res://Resources/building.gd
 res://Scenes/control_menu.gd
-res://Scenes/resource_row.gd
-res://Scripts/buildManager.gd
 res://Scripts/main.gd
-res://Scripts/palette.gd
-res://Scripts/CameraControls.gd
-res://Buildings/rail_support.tscn
-res://Buildings/rail_modulator_3.tscn
+res://Scripts/buildManager.gd
+res://Scenes/Main.tscn
+res://Scripts/PatchRegistry.gd
+res://Patch Notes/0_3_0.tres
+res://Scripts/patch_notes.gd
+res://Buildings/Helium Extractor.gd
+res://Buildings/Laser Drill.gd
+res://Buildings/Oil Extractor.gd
+res://Buildings/Sulfur Extractor.gd
+res://Resources/building.gd
+res://Scenes/resource_row.gd
+res://Buildings/OreExcavator_v2.gd
+res://Buildings/rail_radial.gd
+res://Buildings/rail_support.gd
+res://Buildings/zipline.gd
+res://Scripts/patch_notes_menu.gd
+res://Scripts/Toolbox.gd
+res://Buildings/OreExcavator.tscn
+res://Buildings/OreExcavator_v2.tscn
+res://Buildings/Helium Extractor.tscn
+res://Buildings/Sulfur Extractor.tscn
+res://Buildings/Oil Extractor.tscn
+res://Buildings/Laser Drill.tscn
+res://Buildings/Fabricator V2.tscn
+res://Buildings/Fabricator.tscn
+res://Buildings/Assembler.tscn
+res://Buildings/Constructorizer.tscn
+res://Buildings/Constructorizer V2.tscn
+res://Buildings/Facturer.tscn
+res://Buildings/Pressurizer.tscn
+res://Buildings/Smelter.tscn
+res://Buildings/Furnace.tscn
+res://Buildings/Furnace V2.tscn
+res://Buildings/MegaPress.tscn
+res://Buildings/Compounder.tscn
+res://Buildings/Compounder V2.tscn
+res://Buildings/Refinery.tscn
+res://Buildings/Pyro Forge.tscn
+res://Buildings/Solar V1.tscn
+res://Buildings/Solar V2.tscn
+res://Buildings/Wind V1.tscn
+res://Buildings/Wind V2.tscn
+res://Buildings/Chemical Generator.tscn
+res://Buildings/Core Amplifier v1.tscn
+res://Buildings/Core Amplifier v2.tscn
+res://Buildings/Base Core.tscn

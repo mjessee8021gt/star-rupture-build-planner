@@ -1,6 +1,6 @@
 extends HBoxContainer
 
-const PlannerPalette = preload("res://Scripts/palette.gd")
+const Palette = preload("res://Scripts/palette.gd")
 
 
 func _ready() -> void:
@@ -16,9 +16,9 @@ func _ready() -> void:
 			continue
 
 		if label_path.ends_with("ResourceName"):
-			label.add_theme_color_override("font_color", PlannerPalette.TEXT_PRIMARY)
+			label.add_theme_color_override("font_color", Palette.TEXT_PRIMARY)
 		else:
-			label.add_theme_color_override("font_color", PlannerPalette.TEXT_MUTED)
+			label.add_theme_color_override("font_color", Palette.TEXT_MUTED)
 
 func set_label_values(resourceName : String, grossRate : float, netRate : float) -> void:
 	$TextureRect/ResourceName.text = resourceName
