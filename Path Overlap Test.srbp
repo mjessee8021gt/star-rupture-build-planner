@@ -1,0 +1,144 @@
+{
+	"buildings": [
+		{
+			"anchor_cell": [
+				13,
+				-11
+			],
+			"footprint": [
+				3,
+				4
+			],
+			"id": "ore_excavator",
+			"is_alternate": false,
+			"position": [
+				928.0,
+				-576.0
+			],
+			"purity": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/OreExcavator.tscn"
+		},
+		{
+			"anchor_cell": [
+				19,
+				-13
+			],
+			"footprint": [
+				3,
+				4
+			],
+			"id": "ore_excavator",
+			"is_alternate": false,
+			"position": [
+				1312.0,
+				-704.0
+			],
+			"purity": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/OreExcavator.tscn"
+		},
+		{
+			"anchor_cell": [
+				25,
+				-11
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_connector",
+			"is_alternate": false,
+			"position": [
+				1632.0,
+				-672.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_connector.tscn"
+		}
+	],
+	"camera": {
+		"position": [
+			1184.0,
+			-597.003051757813
+		],
+		"zoom": [
+			0.939249455928802,
+			0.939249455928802
+		]
+	},
+	"cost_bbm": 170,
+	"cost_ibm": 0,
+	"cost_meteor_cores": 0,
+	"heat": 6,
+	"occupied_cells": [
+		"13,-11",
+		"14,-11",
+		"15,-11",
+		"13,-10",
+		"14,-10",
+		"15,-10",
+		"13,-9",
+		"14,-9",
+		"15,-9",
+		"13,-8",
+		"14,-8",
+		"15,-8",
+		"19,-13",
+		"20,-13",
+		"21,-13",
+		"19,-12",
+		"20,-12",
+		"21,-12",
+		"19,-11",
+		"20,-11",
+		"21,-11",
+		"19,-10",
+		"20,-10",
+		"21,-10",
+		"25,-11"
+	],
+	"paths": [
+		{
+			"from_index": 0,
+			"from_port": "Ports/Output 1",
+			"rail_version": 0,
+			"to_index": 2,
+			"to_port": "Ports/Universal 3"
+		},
+		{
+			"from_index": 1,
+			"from_port": "Ports/Output 1",
+			"rail_version": 0,
+			"to_index": 2,
+			"to_port": "Ports/Universal 3"
+		}
+	],
+	"power": -10,
+	"production_panel_visible": false,
+	"saved_at_unix": 1775926826.34,
+	"version": 2
+}

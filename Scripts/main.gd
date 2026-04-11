@@ -1,7 +1,12 @@
 extends Node2D
 
+const PlannerPalette = preload("res://Scripts/palette.gd")
+
 const SAVE_FILE_EXTENSION := "srbp"
-const SAVE_FORMAT_VERSION := 1
+const SAVE_FORMAT_VERSION := 2
+const RAIL_VERSION_OPTIONS := ["V1 Rails", "V2 Rails", "V3 Rails"]
+const RAIL_VERSION_DROPDOWN_SIZE := Vector2(128, 36)
+const RAIL_VERSION_DROPDOWN_MARGIN := 12.0
 
 @onready var camera: Camera2D = $Camera2D
 @onready var tile_map_layer: TileMapLayer = $TileMapLayer
@@ -10,6 +15,7 @@ const SAVE_FORMAT_VERSION := 1
 @onready var bbm_cost_label: Label = $Camera2D/CanvasLayer/Panel/BBMCostLabel
 @onready var ibm_cost_label: Label = $Camera2D/CanvasLayer/Panel/IBMCostLabel
 @onready var meteor_core_cost_label: Label = $Camera2D/CanvasLayer/Panel/MeteorCoreCostLabel
+@onready var controls_popup: PopupPanel = $Camera2D/CanvasLayer/PopupPanel
 @onready var prod_panel: PanelContainer = $Camera2D/CanvasLayer/ProdMenu/ProdPanel
 @onready var build_manager: Node = $BuildManager
 @onready var path_manager: Node = $PathManager
@@ -19,6 +25,7 @@ var save_button: Button
 var new_button: Button
 var load_button: Button
 var export_pdf_button: Button
+var rail_version_dropdown: OptionButton
 var save_dialog: FileDialog
 var load_dialog: FileDialog
 var export_pdf_dialog: FileDialog
@@ -32,6 +39,7 @@ func _ready() -> void:
 	ibm_cost_label.text = "0"
 	meteor_core_cost_label.text = "0"
 	_setup_save_load_ui()
+	_apply_visual_theme()
 	get_viewport().size_changed.connect(_on_viewport_size_changed)
 	_last_viewport_size = get_viewport().size
 	Adjust_ui_for_resolution()
@@ -41,9 +49,11 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	_poll_viewport_resize()
-	if(Input.is_action_just_released("Zoom Out")):
+	if is_scene_input_blocked():
+		return
+	if Input.is_action_just_released("Zoom Out") and not _is_controls_menu_open():
 		$Camera2D.zoomOut()
-	elif (Input.is_action_just_released("Zoom In")):
+	elif Input.is_action_just_released("Zoom In") and not _is_controls_menu_open():
 		$Camera2D.ZoomIn()
 	elif (Input.is_action_just_released("Show Debug Feed")):
 		if $"Camera2D/CanvasLayer/Debug Panel".visible == false:
@@ -52,6 +62,20 @@ func _process(_delta: float) -> void:
 			$"Camera2D/CanvasLayer/Debug Panel".visible = false
 	elif (Input.is_action_just_released("Recenter Camera")):
 		recenter_camera()
+
+func _is_controls_menu_open() -> bool:
+	return controls_popup != null and controls_popup.visible
+
+
+func is_scene_input_blocked() -> bool:
+	return _is_file_dialog_open()
+
+
+func _is_file_dialog_open() -> bool:
+	for dialog in [save_dialog, load_dialog, export_pdf_dialog]:
+		if dialog != null and dialog.visible:
+			return true
+	return false
 
 func _on_prod_menu_pressed() -> void:
 	$Camera2D/CanvasLayer/ProdMenu/ProdPanel.visible = not $Camera2D/CanvasLayer/ProdMenu/ProdPanel.visible
@@ -81,6 +105,15 @@ func _setup_save_load_ui() -> void:
 	export_pdf_button.pressed.connect(_on_export_pdf_pressed)
 	$Camera2D/CanvasLayer.add_child(export_pdf_button)
 
+	rail_version_dropdown = OptionButton.new()
+	rail_version_dropdown.name = "RailVersionDropdown"
+	rail_version_dropdown.custom_minimum_size = RAIL_VERSION_DROPDOWN_SIZE
+	for option_name in RAIL_VERSION_OPTIONS:
+		rail_version_dropdown.add_item(option_name)
+	rail_version_dropdown.select(0)
+	$Camera2D/CanvasLayer.add_child(rail_version_dropdown)
+	_sync_rail_version_selector()
+
 	save_dialog = FileDialog.new()
 	save_dialog.name = "SaveDialog"
 	save_dialog.file_mode = FileDialog.FILE_MODE_SAVE_FILE
@@ -107,13 +140,63 @@ func _setup_save_load_ui() -> void:
 	export_pdf_dialog.filters = PackedStringArray(["*.pdf ; PDF Document"])
 	export_pdf_dialog.file_selected.connect(_on_export_pdf_file_selected)
 	add_child(export_pdf_dialog)
+
+
+func _apply_visual_theme() -> void:
+	_style_panel($Camera2D/CanvasLayer/Panel)
+	_style_panel($Camera2D/CanvasLayer/"Debug Panel")
+	_style_panel($Camera2D/CanvasLayer/ProdMenu)
+
+	if prod_panel != null:
+		prod_panel.self_modulate = Color.WHITE
+		_style_panel(prod_panel)
+
+	for button in [save_button, new_button, load_button, export_pdf_button, rail_version_dropdown]:
+		if button != null:
+			_style_button(button)
+
+	for label in [
+		heat_label,
+		power_label,
+		bbm_cost_label,
+		ibm_cost_label,
+		meteor_core_cost_label,
+		$Camera2D/CanvasLayer/Panel/BBMTextLabel,
+		$Camera2D/CanvasLayer/Panel/IBMTextLabel,
+		$Camera2D/CanvasLayer/Panel/MeteorCoreTextLabel,
+		$Camera2D/CanvasLayer/"Debug Panel"/DebugFeed,
+	]:
+		if label != null:
+			label.add_theme_color_override("font_color", PlannerPalette.TEXT_PRIMARY)
+
+
+func _style_panel(panel: Control) -> void:
+	panel.add_theme_stylebox_override("panel", PlannerPalette.make_panel_style(PlannerPalette.SCENE_PANEL_FILL, PlannerPalette.SCENE_PANEL_BORDER))
+
+
+func _style_button(button: BaseButton) -> void:
+	button.add_theme_color_override("font_color", PlannerPalette.TEXT_PRIMARY)
+	button.add_theme_color_override("font_disabled_color", PlannerPalette.TEXT_MUTED)
+	button.add_theme_stylebox_override("normal", PlannerPalette.make_button_style(PlannerPalette.BUTTON_FILL))
+	button.add_theme_stylebox_override("hover", PlannerPalette.make_button_style(PlannerPalette.BUTTON_HOVER))
+	button.add_theme_stylebox_override("pressed", PlannerPalette.make_button_style(PlannerPalette.BUTTON_PRESSED))
+	button.add_theme_stylebox_override("focus", PlannerPalette.make_button_style(PlannerPalette.BUTTON_HOVER))
+	button.add_theme_stylebox_override("disabled", PlannerPalette.make_button_style(PlannerPalette.BUTTON_PRESSED))
 	
 func Adjust_ui_for_resolution() -> void:
 	$Camera2D/CanvasLayer/MenuButton.position = Vector2 (15, 15)
-	$Camera2D/CanvasLayer/Panel.position = Vector2 (get_viewport().size.x - 180, 5)
+	$Camera2D/CanvasLayer/Panel.position = Vector2 (get_viewport().size.x - 190, 5)
 	$Camera2D/CanvasLayer/ProdMenu.position = Vector2 (get_viewport().size.x - 75, 100)
 	$Camera2D/CanvasLayer/ControlMenu.position = Vector2(15, get_viewport().size.y -50)
 	$"Camera2D/CanvasLayer/Patch Notes".position = Vector2(15, get_viewport().size.y -90)
+
+	if rail_version_dropdown != null:
+		var menu_button := $Camera2D/CanvasLayer/MenuButton
+		var menu_button_width = menu_button.size.x * menu_button.scale.x
+		rail_version_dropdown.position = Vector2(
+			menu_button.position.x + menu_button_width + RAIL_VERSION_DROPDOWN_MARGIN,
+			menu_button.position.y
+		)
 	
 	if new_button != null:
 		new_button.position = Vector2(get_viewport().size.x - 490, 8)
@@ -123,6 +206,12 @@ func Adjust_ui_for_resolution() -> void:
 		load_button.position = Vector2(get_viewport().size.x - 370, 8)
 	if export_pdf_button != null:
 		export_pdf_button.position = Vector2(get_viewport().size.x - 310, 8)
+
+func _sync_rail_version_selector() -> void:
+	if rail_version_dropdown == null or path_manager == null:
+		return
+	if path_manager.has_method("set_rail_version_selector"):
+		path_manager.set_rail_version_selector(rail_version_dropdown)
 	
 func _on_viewport_size_changed() -> void:
 	_last_viewport_size = get_viewport().size
@@ -590,11 +679,18 @@ func _serialize_paths(building_index: Dictionary) -> Array[Dictionary]:
 		if not building_index.has(from_building) or not building_index.has(to_building):
 			continue
 
+		var rail_version := -1
+		if path_manager != null and path_manager.has_method("get_path_rail_version"):
+			rail_version = int(path_manager.get_path_rail_version(child))
+		elif child.has_meta("rail_version"):
+			rail_version = int(child.get_meta("rail_version"))
+
 		out.append({
 			"from_index": int(building_index[from_building]),
 			"to_index": int(building_index[to_building]),
 			"from_port": str(child.get_meta("from_port")),
-			"to_port": str(child.get_meta("to_port"))
+			"to_port": str(child.get_meta("to_port")),
+			"rail_version": rail_version
 		})
 
 	return out
@@ -612,8 +708,8 @@ func _apply_save_state(save_state: Dictionary) -> void:
 			continue
 		loaded_buildings.append(building)
 
-	_restore_paths(save_state.get("paths", []), loaded_buildings)
 	_rebuild_occupancy_from_scene(loaded_buildings)
+	_restore_paths(save_state.get("paths", []), loaded_buildings)
 	_restore_camera(save_state.get("camera", {}))
 	prod_panel.visible = bool(save_state.get("production_panel_visible", false))
 
@@ -694,10 +790,40 @@ func _instantiate_saved_building(data: Dictionary) -> Node2D:
 		instance.rotatedTick = int(data.get("rotated_tick", 0))
 
 	buildings_root.add_child(instance)
-	_restore_option_selection(instance.get_node_or_null("Recipe"), data.get("recipe", {}))
-	_restore_option_selection(instance.get_node_or_null("Purity"), data.get("purity", {}))
+	_restore_loaded_building_selection_state(
+		instance,
+		data.get("recipe", {}),
+		data.get("purity", {})
+	)
 
 	return instance
+
+func _restore_loaded_building_selection_state(building: Node2D, recipe_selection: Dictionary, purity_selection: Dictionary) -> void:
+	var recipe_dropdown := building.get_node_or_null("Recipe") as OptionButton
+	var purity_dropdown := building.get_node_or_null("Purity") as OptionButton
+
+	_restore_option_selection(recipe_dropdown, recipe_selection)
+
+	# Some buildings rebuild their purity choices from the selected recipe,
+	# so replay that step before restoring the saved purity selection.
+	if purity_dropdown != null and building.has_method("_on_purity_item_selected"):
+		_call_option_selection_handler(building, "_on_recipe_item_selected", recipe_dropdown)
+
+	_restore_option_selection(purity_dropdown, purity_selection)
+
+	if not _call_option_selection_handler(building, "_on_purity_item_selected", purity_dropdown):
+		_call_option_selection_handler(building, "_on_recipe_item_selected", recipe_dropdown)
+
+func _call_option_selection_handler(building: Node, method_name: String, option_button: OptionButton) -> bool:
+	if building == null or option_button == null:
+		return false
+	if not building.has_method(method_name):
+		return false
+	if option_button.selected < 0 or option_button.selected >= option_button.item_count:
+		return false
+
+	building.call(method_name, option_button.selected)
+	return true
 
 func _restore_option_selection(node: Node, selection_data: Dictionary) -> void:
 	if node == null or not (node is OptionButton):
@@ -739,11 +865,12 @@ func _restore_paths(path_entries: Array, loaded_buildings: Array[Node2D]) -> voi
 		var to_b := loaded_buildings[to_idx]
 		var from_port := NodePath(String(entry.get("from_port", "Ports/Output 1")))
 		var to_port := NodePath(String(entry.get("to_port", "Ports/Input 1")))
+		var rail_version := int(entry.get("rail_version", -1))
 		var from_pos = path_manager._get_port_center(from_b, from_port)
 		var to_pos = path_manager._get_port_center(to_b, to_port)
 		if from_pos == null or to_pos == null:
 			continue
-		path_manager._finalize_path(from_b, from_port, from_pos, to_b, to_port, to_pos)
+		path_manager._finalize_path(from_b, from_port, from_pos, to_b, to_port, to_pos, rail_version)
 
 func _rebuild_occupancy_from_scene(loaded_buildings: Array[Node2D]) -> void:
 	build_manager.occupied_cells.clear()

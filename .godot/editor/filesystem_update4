@@ -1,181 +1,33 @@
-res://Scripts/patch_notes_menu.gd
-res://Scenes/Main.tscn
-res://Scripts/PatchRegistry.gd
-res://Scripts/buildManager.gd
-res://Scripts/path_manager.gd
-res://Scripts/main.gd
-res://Scenes/patchNotesPanel.tscn
-res://Scripts/ProductionLedger.gd
-res://Buildings/Orbital_launcher.tscn
-res://Resources/building.gd
-res://Buildings/OreExcavator.tscn
-res://Buildings/Oil Extractor.tscn
-res://Buildings/Orbital_launcher_v2.tscn
-res://Buildings/Base Core.tscn
-res://Buildings/Base Core.gd
-res://Scripts/path_manager_2.gd
-res://Patch Notes/0_2_0.tres
-res://Buildings/Assembler.tscn
-res://Recipes/Item Stacks/Accumulator_6_def.tres
-res://Recipes/Resonator.tres
-res://Recipes/Item Stacks/Generator_18_def.tres
-res://Recipes/Scanner.tres
-res://Recipes/Item Stacks/Geothite_lattice_15_def.tres
-res://Recipes/Pseudorubber_insulator.tres
-res://Buildings/Core Amplifier v1.tscn
+res://Recipes/Item Stacks/Titanium_bar_20_def.tres
+res://Recipes/Item Stacks/Titanium_beam_20_def.tres
+res://Buildings/Wind V1.tscn
+res://Recipes/Titanium_beam.tres
+res://Recipes/Item Stacks/Titanium_bar_40_def.tres
+res://Recipes/Item Stacks/Titanium_beam_60_def.tres
+res://Buildings/Wind V2.tscn
+res://Buildings/Solar V2.tscn
 res://Buildings/Core Amplifier v2.tscn
 res://Buildings/Chemical Generator.tscn
-res://Buildings/Compounder.tscn
-res://Recipes/Ion Injector.tres
-res://Recipes/Lens.tres
-res://Recipes/Liquid_helium.tres
-res://Recipes/Nano_fibre.tres
-res://Recipes/Superconductor.tres
-res://Recipes/Synthetic_resin.tres
-res://Recipes/Geothite_powder.tres
-res://Recipes/Epoxy.tres
-res://Recipes/Substance_FHS-135-493.tres
-res://Recipes/Plastic.tres
-res://Recipes/Basic_fuel.tres
-res://Recipes/Organic_compound.tres
-res://Recipes/Aerogel.tres
-res://Recipes/Synthetic_protein.tres
-res://Buildings/Compounder V2.tscn
-res://Recipes/Liquid_helium_v2.tres
-res://Recipes/Pressurized_helium_v2.tres
-res://Recipes/Sulferic_acid_v2.tres
-res://Recipes/Synthetic_resin_v2.tres
-res://Scripts/prod_panel.gd
-res://Buildings/Constructorizer.tscn
-res://Buildings/Constructorizer.gd
-res://Recipes/Airlock.tres
-res://Recipes/Anti-radiation_covers.tres
-res://Recipes/Item Stacks/Supermagnet_5_def.tres
-res://Recipes/Quantum_tranquilizer.tres
-res://Recipes/Carbon_sonar.tres
-res://Recipes/RTSC.tres
-res://Recipes/RNA_stabilizer.tres
-res://Recipes/Ion_thruster.tres
-res://Recipes/Nanosyringe.tres
-res://Recipes/Rocket_fuel.tres
-res://Recipes/Scafolding.tres
 res://Buildings/Constructorizer V2.tscn
-res://Recipes/Condenser_v2.tres
-res://Recipes/ion_injector_v2.tres
-res://Recipes/laser_emitter_v2.tres
-res://Recipes/Scanner_v2.tres
-res://Recipes/Superconductor_v2.tres
-res://Buildings/Dispatcher.tscn
-res://Buildings/Expandable Storage.tscn
-res://Recipes/Powerium.tres
-res://Buildings/Fabricator.tscn
-res://Recipes/Titanium_rod.tres
-res://Recipes/Titanium_sheet.tres
-res://Recipes/Titanium_beam.tres
-res://Recipes/Wolfram_plate.tres
-res://Recipes/Wolfram_wire.tres
-res://Recipes/Tube.tres
-res://Recipes/Stator.tres
-res://Recipes/Rotor.tres
-res://Recipes/Stabilizer.tres
-res://Recipes/Calcite_sheet.tres
-res://Recipes/Applicator.tres
-res://Recipes/Basic_building_materials.tres
-res://Recipes/Pistol_ammo.tres
 res://Buildings/Fabricator V2.tscn
-res://Recipes/Titanium_rod_v2.tres
-res://Recipes/Titanium_sheet_v2.tres
-res://Recipes/Wolfram_plate_v2.tres
-res://Recipes/Wolfram_wire_v2.tres
-res://Recipes/Tube_v2.tres
-res://Recipes/Stator_v2.tres
-res://Recipes/Rotor_v2.tres
-res://Buildings/Facturer.tscn
-res://Recipes/Ion_bomb.tres
-res://Recipes/Tracking_device.tres
-res://Recipes/Biofilament.tres
-res://Recipes/Converter.tres
-res://Recipes/Cyclotrone.tres
-res://Recipes/Rocket_engine.tres
-res://Recipes/Dome.tres
-res://Recipes/RTSC_generator.tres
-res://Recipes/Satelite_body.tres
-res://Recipes/Synthetic_dna.tres
-res://Buildings/Furnace.tscn
-res://Recipes/Calcium_powder.tres
-res://Recipes/Ceramics.tres
-res://Recipes/Chemicals.tres
-res://Recipes/Electronics.tres
-res://Recipes/Glass.tres
-res://Recipes/Hardening_agent.tres
-res://Recipes/Heat_resistant_sheet.tres
-res://Recipes/Inductor.tres
-res://Recipes/Supermagnet.tres
-res://Recipes/Synthetic Silicon.tres
-res://Recipes/Titanium housing.tres
-res://Recipes/Wolfram_powder.tres
 res://Buildings/Furnace V2.tscn
-res://Recipes/Calcium_powder_v2.tres
-res://Recipes/Ceramics_v2.tres
-res://Recipes/Chemicals_v2.tres
-res://Recipes/Glass_v2.tres
-res://Recipes/Hardening_agent_v2.tres
-res://Recipes/Heat_resistant_sheet_v2.tres
-res://Recipes/Item Stacks/Wolfram_powder_300_def.tres
-res://Recipes/Wolfram_powder_v2.tres
-res://Buildings/Habitat.tscn
+res://Buildings/Furnace.tscn
 res://Buildings/Helium Extractor.tscn
-res://Buildings/Large Habitat.tscn
-res://Buildings/Laser Drill.tscn
-res://Buildings/MegaPress.tscn
-res://Buildings/Multirail_3.tscn
-res://Recipes/Battery.tres
-res://Recipes/Electromagnetic_coil.tres
-res://Recipes/Heavy_ammo.tres
-res://Recipes/Impeller.tres
-res://Recipes/Intermediate_building_materials.tres
-res://Recipes/Nozzle.tres
-res://Recipes/Pump.tres
-res://Recipes/Shotgun_ammo.tres
-res://Recipes/Standard_ammo.tres
-res://Recipes/Turbine.tres
-res://Recipes/Valve.tres
-res://Recipes/Reinforced_frame.tres
-res://Recipes/Reinforced_housing.tres
-res://Recipes/Geothite_lattice.tres
-res://Recipes/Heat_shield.tres
-res://Recipes/Ion_stabilizer.tres
-res://Buildings/Multirail_5.tscn
-res://Buildings/MultiStore.tscn
-res://Scripts/Toolbox.gd
+res://Buildings/Oil Extractor.tscn
+res://Buildings/Orbital_launcher_v2.tscn
 res://Buildings/OreExcavator_v2.tscn
 res://Buildings/Pyro Forge.tscn
-res://Recipes/Pressurized_helium.tres
-res://Recipes/Sulpheric_acid.tres
-res://Recipes/Geothite_ingot.tres
-res://Recipes/Titanoferrite_ingot.tres
-res://Recipes/Wolfram_steel_ingot.tres
-res://Buildings/Pressurizer.tscn
 res://Buildings/rail_radial.tscn
-res://Buildings/rail_connector.tscn
-res://Buildings/rail_modulator_5.tscn
-res://Buildings/rail_support.tscn
-res://Buildings/rail_modulator_3.tscn
-res://Buildings/rail_radial.gd
-res://Buildings/rail_modulator_5.gd
-res://Buildings/Receiver.tscn
-res://Buildings/Refinery.tscn
-res://Recipes/Refined_oil.tres
-res://Buildings/Smelter.tscn
-res://Recipes/Calcium_block.tres
-res://Recipes/Titanium_bar.tres
-res://Recipes/Wolfram_bar.tres
-res://Buildings/Solar V1.tscn
-res://Buildings/Solar V2.tscn
-res://Buildings/Wind V1.tscn
-res://Buildings/Wind V2.tscn
-res://Buildings/Storage_v1.tscn
-res://Buildings/Storage_v2.tscn
 res://Buildings/Teleporter.tscn
 res://Buildings/Zipline.tscn
-res://Buildings/Sulfur Extractor.tscn
+res://Scripts/path_manager.gd
+res://Scenes/Main.tscn
+res://Resources/building.gd
+res://Scenes/control_menu.gd
+res://Scenes/resource_row.gd
+res://Scripts/buildManager.gd
+res://Scripts/main.gd
+res://Scripts/palette.gd
+res://Scripts/CameraControls.gd
+res://Buildings/rail_support.tscn
+res://Buildings/rail_modulator_3.tscn

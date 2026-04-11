@@ -78,9 +78,9 @@ metadata/normal = Vector2(0, -1)
 
 [node name="Universal 4" type="Button" parent="Ports" unique_id=742351239 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
-offset_left = 37.999996
+offset_left = 38.000008
 offset_top = 39.999996
-offset_right = 110.0
+offset_right = 110.00001
 offset_bottom = 80.0
 rotation = 1.5707964
 scale = Vector2(0.32, 0.32)

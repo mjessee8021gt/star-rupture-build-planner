@@ -13,8 +13,8 @@ size = Vector2(192, 256)
 
 [node name="OreExcavator_v2" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_2v8n3")
-heat = 80
-power = -120
+heat = 18
+power = -30
 available_recipes = Array[ExtResource("2_bsi1f")]([ExtResource("3_bsi1f"), ExtResource("4_wxg67"), ExtResource("5_heydw")])
 id = &"ore_excavator_v2"
 build_cost_type = 1

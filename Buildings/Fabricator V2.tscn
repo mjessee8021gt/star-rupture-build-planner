@@ -21,6 +21,8 @@ size = Vector2(320, 256)
 
 [node name="Fabricator V2" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_0aywl")
+heat = 8
+power = -25
 available_recipes = Array[ExtResource("2_8nmmk")]([ExtResource("3_r258o"), ExtResource("4_qs8hr"), ExtResource("5_i52ob"), ExtResource("6_4p0e1"), ExtResource("7_ojcnw"), ExtResource("8_ed1xg"), ExtResource("9_qhapw")])
 id = &"fabricator_v2"
 build_cost_amount = 350

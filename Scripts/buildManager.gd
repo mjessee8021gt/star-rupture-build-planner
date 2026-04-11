@@ -1,5 +1,7 @@
 extends Node2D
 
+const PlannerPalette = preload("res://Scripts/palette.gd")
+
 
 ##------OnReady variables------##
 @onready var debug_feed : Label = $"../Camera2D/CanvasLayer/Debug Panel/DebugFeed"
@@ -17,8 +19,8 @@ var is_dragging_building := false
 var drag_last_valid := false
 
 ##------Exported Variables-----##
-@export var canBuildColor := Color(0,1,0, 0.5)
-@export var cannotbuildColor := Color(1,0,0,0.5)
+@export var canBuildColor := PlannerPalette.BUILD_VALID
+@export var cannotbuildColor := PlannerPalette.BUILD_INVALID
 @export var tile_size := 64
 
 ##------Vector2 Variables------##
@@ -62,6 +64,11 @@ func _disable_ports_on_ghost(disabled: bool) -> void:
 	var ports := ghost_instance.get_node_or_null("Ports")
 	if ports != null:
 		_set_buttons_disabled_recuirsive(ports, disabled)
+
+
+func _is_scene_input_blocked() -> bool:
+	var main_scene := get_parent()
+	return main_scene != null and main_scene.has_method("is_scene_input_blocked") and main_scene.is_scene_input_blocked()
 
 func is_build_mode_active() -> bool:
 	return is_building
@@ -169,6 +176,9 @@ func get_building_cells(building: Node, anchor_cell: Vector2i) -> Array[Vector2i
 	return cells
 
 func _unhandled_input(event: InputEvent) -> void:
+	if _is_scene_input_blocked():
+		return
+
 	var building = get_building_under_mouse()
 	
 	if is_building:
@@ -372,6 +382,9 @@ func _apply_build_cost_delta(building: Node, direction: int) -> void:
 	cost_label.text = str(int(cost_label.text) + amount * direction)
 	
 func _process(_delta: float) -> void:
+	if _is_scene_input_blocked():
+		return
+
 	var mouse_pos
 	var anchor_cell
 	var path_manager := get_node_or_null("../PathManager")

@@ -17,6 +17,8 @@ size = Vector2(448, 448)
 
 [node name="Pyro Forge" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_odjxt")
+heat = 180
+power = -200
 available_recipes = Array[ExtResource("2_gdxhn")]([ExtResource("3_euguc"), ExtResource("4_v3o03"), ExtResource("5_vyacb")])
 id = &"pyro_forge"
 build_cost_type = 1

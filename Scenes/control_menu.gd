@@ -1,5 +1,7 @@
 extends MenuButton
 
+const PlannerPalette = preload("res://Scripts/palette.gd")
+
 ##------OnReady variables------##
 @onready var popup: PopupPanel = get_node(popup_path)
 @onready var list_vbox: VBoxContainer = get_node(list_path)
@@ -37,7 +39,9 @@ func _refresh_list() -> void:
 
 	#grabbing a full list of inputs from the input map
 	var actions := InputMap.get_actions()
-	actions.sort()
+	actions.sort_custom(func(a: StringName, b: StringName) -> bool:
+		return String(a).naturalnocasecmp_to(String(b)) < 0
+	)
 
 	#we're going to walk through each of the inputs 1 by 1 and compare them against our display filter parameters.
 	for action_name in actions:
@@ -62,18 +66,26 @@ func _make_row(action_name: String, bindings: String) -> Control:
 	var row := HBoxContainer.new()
 	var left := Label.new()
 	var right := Label.new()
+	var right_padding := Control.new()
 	
 	row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row.add_theme_constant_override("separation", 20)
 
 	left.text = action_name
 	left.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	
+	left.add_theme_color_override("font_color", PlannerPalette.TEXT_PRIMARY)
+
 	right.text = bindings
 	right.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	right.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	right.size_flags_horizontal = Control.SIZE_SHRINK_END
+	right.custom_minimum_size.x = 140.0
+	right.add_theme_color_override("font_color", PlannerPalette.TEXT_MUTED)
+
+	right_padding.custom_minimum_size.x = 18.0
 
 	row.add_child(left)
 	row.add_child(right)
+	row.add_child(right_padding)
 
 	return row
 

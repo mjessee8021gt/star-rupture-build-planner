@@ -11,11 +11,11 @@ size = Vector2(256, 256)
 
 [node name="Wind V1" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_c8t4k")
-heat = 250
-power = 1000
+heat = 100
+power = 1200
 id = &"wind_v1"
 build_cost_type = 1
-build_cost_amount = 120
+build_cost_amount = 160
 metadata/_edit_vertical_guides_ = [63.0, 96.0, 112.0, 80.0, 128.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
@@ -60,7 +60,7 @@ offset_top = -2.0
 offset_right = 36.0
 offset_bottom = 21.0
 theme_override_colors/font_color = Color(0, 0.24313726, 0, 1)
-text = "1000"
+text = "1200"
 horizontal_alignment = 1
 vertical_alignment = 1
 

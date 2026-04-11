@@ -51,8 +51,8 @@ offset_bottom = -32.0
 [node name="Universal 1" type="Button" parent="Ports" unique_id=1122308628 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
 layout_mode = 0
-offset_left = 20.000002
-offset_top = 1.0000001
+offset_left = 20.0
+offset_top = 1.0
 offset_right = 92.0
 offset_bottom = 41.0
 scale = Vector2(0.32, 0.32)
@@ -62,11 +62,10 @@ metadata/normal = Vector2(0, -1)
 [node name="Universal 2" type="Button" parent="Ports" unique_id=1958701130 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
 layout_mode = 0
-offset_left = 43.99999
-offset_top = 62.999996
-offset_right = 116.0
-offset_bottom = 103.0
-rotation = 3.1415927
+offset_left = 20.0
+offset_top = 50.0
+offset_right = 92.000015
+offset_bottom = 90.0
 scale = Vector2(0.32, 0.32)
 icon = ExtResource("8_8edi5")
 metadata/normal = Vector2(0, 1)

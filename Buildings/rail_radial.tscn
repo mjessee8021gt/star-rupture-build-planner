@@ -11,7 +11,7 @@ size = Vector2(64, 64)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uf4xf"]
 size = Vector2(128, 128)
 
-[node name="Rail Radial" type="Node2D" unique_id=1728206745 groups=["buildings"]]
+[node name="Rail Roundabout" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_oeauk")
 id = &"radial_rail_connect"
 build_cost_type = 1

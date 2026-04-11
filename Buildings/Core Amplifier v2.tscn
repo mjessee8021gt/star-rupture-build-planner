@@ -14,7 +14,7 @@ script = ExtResource("1_i2ad1")
 heat = -250
 id = &"core_amp_v2"
 build_cost_type = 1
-build_cost_amount = 250
+build_cost_amount = 350
 metadata/_edit_vertical_guides_ = [63.0, 96.0, 112.0, 80.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]

@@ -21,6 +21,8 @@ size = Vector2(320, 320)
 
 [node name="Furnace V2" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_mbsge")
+heat = 14
+power = -50
 available_recipes = Array[ExtResource("2_eiaqr")]([ExtResource("3_ecagv"), ExtResource("4_g4byg"), ExtResource("5_ohfef"), ExtResource("6_dxxqh"), ExtResource("7_lv848"), ExtResource("8_5bamd"), ExtResource("9_ofxr0")])
 id = &"furnace_v2"
 build_cost_amount = 450

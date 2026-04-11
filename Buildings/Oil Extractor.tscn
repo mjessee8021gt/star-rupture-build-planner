@@ -14,6 +14,8 @@ size = Vector2(256, 256)
 [node name="Oil Extractor" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_pwglr")
 recipe = ExtResource("2_pwglr")
+heat = 300
+power = -400
 id = &"oil_extractor"
 build_cost_type = 1
 build_cost_amount = 240
