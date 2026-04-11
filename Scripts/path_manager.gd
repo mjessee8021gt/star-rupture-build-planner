@@ -10,6 +10,7 @@ extends Node2D
 @export var corner_radius := 16.0      # pixels
 @export var arc_segments := 6          # per rounded corner (higher = smoother)
 @export var min_stub_len := 8.0
+@export var obstacle_clearance := 10.0
 
 # BuildManager path gating
 @export var build_manager_path: NodePath = NodePath("../BuildManager")
@@ -120,53 +121,68 @@ func _resolve_origin_port_path(start_port_name: String) -> NodePath:
 func _is_active_drag_valid() -> bool:
 	return is_instance_valid(_preview_container) and is_instance_valid(_preview_line) and is_instance_valid(_from_building)
 
+func _get_tile_size() -> float:
+	if _build_manager != null and "tile_size" in _build_manager:
+		return max(float(_build_manager.tile_size), 1.0)
+	return 64.0
+
+func _get_node_global_center(target_button: Node) -> Variant:
+	if target_button is Control:
+		return (target_button as Control).get_global_rect().get_center()
+	if target_button is Node2D:
+		return (target_button as Node2D).global_position
+	if "global_position" in target_button:
+		return target_button.global_position
+	return null
+
+func _get_raw_port_center(building: Node, port_path: NodePath) -> Variant:
+	if building == null:
+		return null
+	var target_button := building.get_node_or_null(port_path)
+	if target_button == null:
+		return null
+	return _get_node_global_center(target_button)
+
 func _get_port_center(building: Node, port_path: NodePath) -> Variant:
 	var target_button := building.get_node_or_null(port_path)
 	if target_button == null:
 		return null
 
+	var center = _get_node_global_center(target_button)
+	if center == null:
+		return null
+
 	if target_button is Control:
 		var button_control := target_button as Control
-		var center := button_control.get_global_rect().get_center()
-
-		# Push the endpoint outward to the rim of the button
 		var normal := _get_port_normal(building, port_path)
-		var left_normal_offset := Vector2(-5.0, -7.0)
-		var right_normal_offset := Vector2(-30.0, -13.0)
-		var minimum_radius = min(button_control.size.x, button_control.size.y) * 0.5
-		if normal.is_equal_approx(Vector2.LEFT):
-			var left_aligned_normals = center + normal * minimum_radius
-			print("PORT %s NORMALS: %s... CALCULATED AS %s + %s * %s" %[target_button, left_aligned_normals, center, normal, minimum_radius])
-			return center +(0.5 * normal) * minimum_radius + left_normal_offset
-		var right_aligned_normals = center - (normal) * minimum_radius
-		print("PORT %s NORMALS: %s... CALCULATED AS %s - (0.5 * %s) * %s" %[target_button,right_aligned_normals, center, normal, minimum_radius])
-		return center - (normal) * minimum_radius + right_normal_offset
+		var global_rect := button_control.get_global_rect()
+		var half_size := global_rect.size * 0.5
+		var directional_radius = abs(normal.x) * half_size.x + abs(normal.y) * half_size.y
+		return (center as Vector2) + normal * directional_radius
 
-	if target_button is Node2D:
-		return (target_button as Node2D).global_position
-
-	if "global_position" in target_button:
-		return target_button.global_position
-
-	return null
+	return center
 
 
-func _get_port_normal(building: Node2D, port_path: NodePath) -> Vector2:
+func _get_port_normal(building: Node, port_path: NodePath) -> Vector2:
 	# Preferred: explicit metadata on the port Control:
 	#   normal = Vector2.LEFT / RIGHT / UP / DOWN
+	if building == null:
+		return Vector2.RIGHT
 	var target_button := building.get_node_or_null(port_path)
 	if target_button != null and target_button.has_meta("normal"):
 		var normal_standard = target_button.get_meta("normal")
 		if normal_standard is Vector2:
-			var normal_rotated: Vector2 = normal_standard
-			var normal_rotated_display = normal_rotated.rotated(building.global_rotation).normalized()
+			var normal_rotated: Vector2 = normal_standard.normalized()
 			if normal_rotated.length() > 0.001:
-				print("PORT %s ROTATION: %s" %[target_button, normal_rotated_display])
-				return normal_rotated.rotated(building.global_rotation).normalized()
+				if building is Node2D:
+					return normal_rotated.rotated((building as Node2D).global_rotation).normalized()
+				return normal_rotated
 
 	# Fallback: infer from port position relative to building center (global_position).
-	var building_center := building.global_position
-	var port_center = _get_port_center(building, port_path)
+	if not (building is Node2D):
+		return Vector2.RIGHT
+	var building_center := (building as Node2D).global_position
+	var port_center = _get_raw_port_center(building, port_path)
 	if port_center == null:
 		return Vector2.RIGHT
 
@@ -187,13 +203,233 @@ func _choose_corner(a: Vector2, b: Vector2) -> Vector2:
 	var segment_length_two = min(a.distance_to(corner_option_two), corner_option_two.distance_to(b))
 	return corner_option_one if segment_length_one >= segment_length_two else corner_option_two
 
+func _append_unique_scalar(values: Array[float], value: float, epsilon := 0.5) -> void:
+	for existing in values:
+		if abs(existing - value) <= epsilon:
+			return
+	values.append(value)
 
-func _build_manhattan_polyline(a: Vector2, b: Vector2) -> Array[Vector2]:
-	# If already axis-aligned, no corner needed.
+func _polyline_length(points: Array[Vector2]) -> float:
+	var total := 0.0
+	for i in range(1, points.size()):
+		total += points[i - 1].distance_to(points[i])
+	return total
+
+func _get_polyline_bounds(points: Array[Vector2], padding := 0.0) -> Rect2:
+	if points.is_empty():
+		return Rect2()
+
+	var min_x := points[0].x
+	var max_x := points[0].x
+	var min_y := points[0].y
+	var max_y := points[0].y
+
+	for point in points:
+		min_x = min(min_x, point.x)
+		max_x = max(max_x, point.x)
+		min_y = min(min_y, point.y)
+		max_y = max(max_y, point.y)
+
+	return Rect2(
+		Vector2(min_x - padding, min_y - padding),
+		Vector2((max_x - min_x) + padding * 2.0, (max_y - min_y) + padding * 2.0)
+	)
+
+func _append_candidate(candidates: Array, points: Array[Vector2]) -> void:
+	var candidate := _sanitize_polyline(points)
+	if candidate.size() >= 2:
+		candidates.append(candidate)
+
+func _route_axis(normal: Vector2) -> Vector2:
+	if normal.length() <= 0.001:
+		return Vector2.ZERO
+	return _dominant_axis_normal(normal)
+
+func _route_detour_distance(a: Vector2, b: Vector2) -> float:
+	var tile_size := _get_tile_size()
+	var span := max(abs(a.x - b.x), abs(a.y - b.y))
+	return max(tile_size * 0.5, min(span * 0.2, tile_size * 1.5), corner_radius + obstacle_clearance)
+
+func _append_orientation_candidates(candidates: Array, a: Vector2, b: Vector2, from_n: Vector2, to_n: Vector2) -> void:
+	var from_axis := _route_axis(from_n)
+	var to_axis := _route_axis(to_n)
+	if from_axis == Vector2.ZERO or to_axis == Vector2.ZERO:
+		return
+
+	var mid_x := (a.x + b.x) * 0.5
+	var mid_y := (a.y + b.y) * 0.5
+	_append_candidate(candidates, [a, Vector2(mid_x, a.y), Vector2(mid_x, b.y), b])
+	_append_candidate(candidates, [a, Vector2(a.x, mid_y), Vector2(b.x, mid_y), b])
+
+	var dot := from_axis.dot(to_axis)
+	var detour := _route_detour_distance(a, b)
+
+	if dot > 0.99:
+		if abs(from_axis.y) > 0.0:
+			var outer_y := (min(a.y, b.y) if from_axis.y < 0.0 else max(a.y, b.y)) + from_axis.y * detour
+			_append_candidate(candidates, [a, Vector2(a.x, outer_y), Vector2(b.x, outer_y), b])
+		else:
+			var outer_x := (min(a.x, b.x) if from_axis.x < 0.0 else max(a.x, b.x)) + from_axis.x * detour
+			_append_candidate(candidates, [a, Vector2(outer_x, a.y), Vector2(outer_x, b.y), b])
+		return
+
+	if dot < -0.99:
+		if abs(from_axis.x) > 0.0:
+			_append_candidate(candidates, [a, Vector2(mid_x, a.y), Vector2(mid_x, b.y), b])
+		else:
+			_append_candidate(candidates, [a, Vector2(a.x, mid_y), Vector2(b.x, mid_y), b])
+		return
+
+	if abs(from_axis.y) > 0.0:
+		_append_candidate(candidates, [a, Vector2(a.x, mid_y), Vector2(b.x, mid_y), b])
+	else:
+		_append_candidate(candidates, [a, Vector2(mid_x, a.y), Vector2(mid_x, b.y), b])
+
+func _get_occupied_cells() -> Dictionary:
+	if _build_manager == null or not ("occupied_cells" in _build_manager):
+		return {}
+	var cells = _build_manager.occupied_cells
+	return cells if cells is Dictionary else {}
+
+func _get_cell_world_rect(cell: Vector2i) -> Rect2:
+	var tile_size := _get_tile_size()
+	var top_left := Vector2(cell.x, cell.y) * tile_size
+	if _build_manager != null and _build_manager.has_method("cell_to_world"):
+		top_left = _build_manager.cell_to_world(cell)
+	return Rect2(top_left, Vector2(tile_size, tile_size))
+
+func _get_nearby_obstacle_rects(bounds: Rect2, ignored_buildings: Array) -> Array[Rect2]:
+	var obstacles: Array[Rect2] = []
+	var occupied_cells := _get_occupied_cells()
+	if occupied_cells.is_empty():
+		return obstacles
+
+	for cell in occupied_cells.keys():
+		var occupant = occupied_cells[cell]
+		if ignored_buildings.has(occupant):
+			continue
+		var obstacle_rect := _get_cell_world_rect(cell)
+		if obstacle_rect.intersects(bounds):
+			obstacles.append(obstacle_rect)
+	return obstacles
+
+func _segment_intersects_rect(start: Vector2, end: Vector2, rect: Rect2) -> bool:
+	if is_equal_approx(start.x, end.x):
+		var x := start.x
+		if x < rect.position.x or x > rect.position.x + rect.size.x:
+			return false
+		var min_y = min(start.y, end.y)
+		var max_y = max(start.y, end.y)
+		return max_y >= rect.position.y and min_y <= rect.position.y + rect.size.y
+
+	if is_equal_approx(start.y, end.y):
+		var y := start.y
+		if y < rect.position.y or y > rect.position.y + rect.size.y:
+			return false
+		var min_x = min(start.x, end.x)
+		var max_x = max(start.x, end.x)
+		return max_x >= rect.position.x and min_x <= rect.position.x + rect.size.x
+
+	return false
+
+func _polyline_is_clear(points: Array[Vector2], ignored_buildings: Array) -> bool:
+	if points.size() < 2:
+		return true
+
+	var tile_size := _get_tile_size()
+	var bounds := _get_polyline_bounds(points, tile_size * 1.5)
+	var obstacles := _get_nearby_obstacle_rects(bounds, ignored_buildings)
+	if obstacles.is_empty():
+		return true
+
+	for i in range(1, points.size()):
+		var start := points[i - 1]
+		var end := points[i]
+		if not (is_equal_approx(start.x, end.x) or is_equal_approx(start.y, end.y)):
+			return false
+
+		for obstacle in obstacles:
+			if _segment_intersects_rect(start, end, obstacle.grow(obstacle_clearance)):
+				return false
+
+	return true
+
+func _candidate_score(candidate: Array[Vector2], from_n: Vector2, to_n: Vector2) -> float:
+	var score := _polyline_length(candidate) + float(max(candidate.size() - 2, 0)) * 12.0
+	var preferred_segment_length := max(corner_radius * 1.5, 12.0)
+
+	for i in range(1, candidate.size()):
+		var segment_length := candidate[i - 1].distance_to(candidate[i])
+		if segment_length < preferred_segment_length:
+			score += (preferred_segment_length - segment_length) * 4.0
+
+	var from_axis := _route_axis(from_n)
+	var to_axis := _route_axis(to_n)
+	if candidate.size() >= 2 and from_axis != Vector2.ZERO:
+		var first_segment := candidate[1] - candidate[0]
+		if first_segment.length() > 0.5:
+			var first_dir := _dominant_axis_normal(first_segment)
+			if first_dir.dot(from_axis) < 0.99:
+				score += 28.0
+
+	if candidate.size() >= 2 and to_axis != Vector2.ZERO:
+		var last_segment := candidate[candidate.size() - 1] - candidate[candidate.size() - 2]
+		if last_segment.length() > 0.5:
+			var last_dir := _dominant_axis_normal(last_segment)
+			if last_dir.dot(-to_axis) < 0.99:
+				score += 28.0
+
+	if from_axis != Vector2.ZERO and to_axis != Vector2.ZERO and from_axis.dot(to_axis) > 0.99 and candidate.size() <= 3:
+		score += 24.0
+
+	return score
+
+func _build_manhattan_polyline(a: Vector2, b: Vector2, from_n: Vector2, to_n: Vector2, ignored_buildings: Array = []) -> Array[Vector2]:
+	var candidates: Array = []
+	_append_candidate(candidates, [a, b])
+	_append_candidate(candidates, [a, Vector2(b.x, a.y), b])
+	_append_candidate(candidates, [a, Vector2(a.x, b.y), b])
+	_append_orientation_candidates(candidates, a, b, from_n, to_n)
+
+	var tile_size := _get_tile_size()
+	var direct_bounds := _get_polyline_bounds([a, b], tile_size * 3.0)
+	var nearby_obstacles := _get_nearby_obstacle_rects(direct_bounds, ignored_buildings)
+	var x_guides: Array[float] = [a.x, b.x]
+	var y_guides: Array[float] = [a.y, b.y]
+	_append_unique_scalar(x_guides, (a.x + b.x) * 0.5)
+	_append_unique_scalar(y_guides, (a.y + b.y) * 0.5)
+
+	for obstacle in nearby_obstacles:
+		_append_unique_scalar(x_guides, obstacle.position.x - obstacle_clearance)
+		_append_unique_scalar(x_guides, obstacle.position.x + obstacle.size.x + obstacle_clearance)
+		_append_unique_scalar(y_guides, obstacle.position.y - obstacle_clearance)
+		_append_unique_scalar(y_guides, obstacle.position.y + obstacle.size.y + obstacle_clearance)
+
+	for x in x_guides:
+		_append_candidate(candidates, [a, Vector2(x, a.y), Vector2(x, b.y), b])
+	for y in y_guides:
+		_append_candidate(candidates, [a, Vector2(a.x, y), Vector2(b.x, y), b])
+
+	var best_route: Array[Vector2] = []
+	var best_score := INF
+
+	for candidate_variant in candidates:
+		var candidate: Array[Vector2] = candidate_variant
+		if not _polyline_is_clear(candidate, ignored_buildings):
+			continue
+
+		var score := _candidate_score(candidate, from_n, to_n)
+		if score < best_score:
+			best_score = score
+			best_route = candidate
+
+	if not best_route.is_empty():
+		return best_route
+
 	if is_equal_approx(a.x, b.x) or is_equal_approx(a.y, b.y):
 		return [a, b]
-	var c := _choose_corner(a, b)
-	return [a, c, b]
+
+	return _sanitize_polyline([a, _choose_corner(a, b), b])
 
 func _adaptive_stub_length(from_pos: Vector2, to_pos: Vector2) -> float:
 	# Keep the stubs visually strong for long routes, but shrink them when buildings are close.
@@ -326,9 +562,16 @@ func _round_polyline(points: Array[Vector2], radius: float, segments: int) -> Pa
 
 
 func _route_points_local(container: Node2D, from_b: Node2D, from_port: NodePath, from_pos_g: Vector2, to_b: Node2D, to_port: NodePath, to_pos_g: Vector2) -> PackedVector2Array:
-	return _route_points_local_with_normals(container, from_pos_g, _get_port_normal(from_b, from_port), to_pos_g, _get_port_normal(to_b, to_port))
+	return _route_points_local_with_normals(
+		container,
+		from_pos_g,
+		_get_port_normal(from_b, from_port),
+		to_pos_g,
+		_get_port_normal(to_b, to_port),
+		[from_b, to_b]
+	)
 	
-func _route_points_local_with_normals(container: Node2D,from_pos_g: Vector2, from_n: Vector2,to_pos_g: Vector2, to_n: Vector2) -> PackedVector2Array:
+func _route_points_local_with_normals(container: Node2D, from_pos_g: Vector2, from_n: Vector2, to_pos_g: Vector2, to_n: Vector2, ignored_buildings: Array = []) -> PackedVector2Array:
 	# Build a "rational" Manhattan path:
 	# start -> start_stub -> orthogonal route -> end_stub -> end
 	var stub_length := _adaptive_stub_length(from_pos_g, to_pos_g)
@@ -340,7 +583,7 @@ func _route_points_local_with_normals(container: Node2D,from_pos_g: Vector2, fro
 	var b2 := to_pos_g + to_n * stub_length
 
 	# Orthogonal between stubs
-	var mid_poly := _build_manhattan_polyline(a2, b2) # Array[Vector2] (global)
+	var mid_poly := _build_manhattan_polyline(a2, b2, from_n, to_n, ignored_buildings) # Array[Vector2] (global)
 
 	# Assemble full polyline (global)
 	var poly_g: Array[Vector2] = []
@@ -421,7 +664,14 @@ func _refresh_preview(mouse_pos: Vector2) -> void:
 
 	var to_normal := _dominant_axis_normal(from_pos - mouse_pos)
 
-	_preview_line.points = _route_points_local_with_normals(_preview_container, from_pos, _get_port_normal(_from_building, _from_port_path), mouse_pos, to_normal)
+	_preview_line.points = _route_points_local_with_normals(
+		_preview_container,
+		from_pos,
+		_get_port_normal(_from_building, _from_port_path),
+		mouse_pos,
+		to_normal,
+		[_from_building]
+	)
 
 
 func _on_port_end(building: Node2D, port_name: String, mouse_pos: Vector2) -> void:
