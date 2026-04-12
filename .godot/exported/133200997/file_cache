@@ -1,50 +1,50 @@
-res://Buildings/Assembler.tscn::7ff1d758b8c1a41deee82ce1f5697bdd::1775948845::res://.godot/exported/133200997/export-f74296da50c5bfea074fab69880fe6b0-Assembler.scn
-res://Buildings/Base Core.tscn::381ed1818f0b4c075d400f3b818a0517::1775949624::res://.godot/exported/133200997/export-54d1394afffc66d459e13bad245eb69b-Base Core.scn
-res://Buildings/Chemical Generator.tscn::c88865403caeee9a906c9b4ce63b0556::1775949351::res://.godot/exported/133200997/export-8225b2f434f0a91776e9ca842e81ecfd-Chemical Generator.scn
-res://Buildings/Compounder V2.tscn::bf97e2a21cc19fa463629d6df23a55ed::1775949188::res://.godot/exported/133200997/export-c68c8acac4ba3b221b9919803f2defa2-Compounder V2.scn
-res://Buildings/Compounder.tscn::25f2cd3a2ace4c82257abb9a76f9f053::1775949145::res://.godot/exported/133200997/export-909106895fdaf706353f5cc03e85e8d8-Compounder.scn
-res://Buildings/Constructorizer V2.tscn::6f5678f5b6e3139f72d645515e06fcf8::1775948899::res://.godot/exported/133200997/export-adc2b09ea48f114ae49170a8eb4f6515-Constructorizer V2.scn
-res://Buildings/Constructorizer.tscn::0ae35537637c5ff1bfdc22d0e7f7f9f2::1775948881::res://.godot/exported/133200997/export-cb78a9610d99b5e995a4d12baf732967-Constructorizer.scn
-res://Buildings/Core Amplifier v1.tscn::87393066505abbcacf6d2ead598da747::1775949389::res://.godot/exported/133200997/export-d58029468eb797e1f22fb2ed5df6e822-Core Amplifier v1.scn
-res://Buildings/Core Amplifier v2.tscn::300f45a35fa4d8e3e9b3764eb1660e31::1775949393::res://.godot/exported/133200997/export-d7721055dbb70c51624d1e0e3bbc894a-Core Amplifier v2.scn
+res://Buildings/Assembler.tscn::70c265375e27168445136488d336bca0::1775950532::res://.godot/exported/133200997/export-f74296da50c5bfea074fab69880fe6b0-Assembler.scn
+res://Buildings/Base Core.tscn::2becf1d061307294db59999492c77fc3::1775950532::res://.godot/exported/133200997/export-54d1394afffc66d459e13bad245eb69b-Base Core.scn
+res://Buildings/Chemical Generator.tscn::e6867a89304b3f102e84a7b6f136bc4b::1775950532::res://.godot/exported/133200997/export-8225b2f434f0a91776e9ca842e81ecfd-Chemical Generator.scn
+res://Buildings/Compounder V2.tscn::52ec97937dc7f61547a4ffb25fdfcf76::1775950532::res://.godot/exported/133200997/export-c68c8acac4ba3b221b9919803f2defa2-Compounder V2.scn
+res://Buildings/Compounder.tscn::51936ff5edf36749bf52f739fbb8ebce::1775950532::res://.godot/exported/133200997/export-909106895fdaf706353f5cc03e85e8d8-Compounder.scn
+res://Buildings/Constructorizer V2.tscn::17431623e8b12a9aa147527f0077d094::1775950532::res://.godot/exported/133200997/export-adc2b09ea48f114ae49170a8eb4f6515-Constructorizer V2.scn
+res://Buildings/Constructorizer.tscn::07b1656ef2c6fb6c439896011bd5b41d::1775950532::res://.godot/exported/133200997/export-cb78a9610d99b5e995a4d12baf732967-Constructorizer.scn
+res://Buildings/Core Amplifier v1.tscn::6ef6783cc9bfc82ca5a605d67dca065c::1775950532::res://.godot/exported/133200997/export-d58029468eb797e1f22fb2ed5df6e822-Core Amplifier v1.scn
+res://Buildings/Core Amplifier v2.tscn::12a296e75d94d153cfc8848ae89342a2::1775950532::res://.godot/exported/133200997/export-d7721055dbb70c51624d1e0e3bbc894a-Core Amplifier v2.scn
 res://Buildings/Dispatcher.tscn::c76b86cfa8f64fc6c6c52c596d05ced5::1774985854::res://.godot/exported/133200997/export-eaf3cb61a670d9ff77fb2653474ed03b-Dispatcher.scn
 res://Buildings/Expandable Storage.tscn::543f1cc73600e2adaaf5561f0cc382c3::1774985854::res://.godot/exported/133200997/export-a02f6cdccef1995b5314b4817bf2ef43-Expandable Storage.scn
-res://Buildings/Fabricator V2.tscn::0184a7e76d842cf53eaba20c8c8cda06::1775948792::res://.godot/exported/133200997/export-8580301517b918ceccb8285b060e72e6-Fabricator V2.scn
-res://Buildings/Fabricator.tscn::05e96c515072c26e17bbc9e02481b03b::1775948817::res://.godot/exported/133200997/export-6dd41e1e154abd1355fc6c7a3d544433-Fabricator.scn
-res://Buildings/Facturer.tscn::ef96afd247a6f49d4987884abaedb6d8::1775948954::res://.godot/exported/133200997/export-07b8b0e366919316cd6c2d470c361c4e-Facturer.scn
-res://Buildings/Furnace V2.tscn::660954abac4daa4add20f9be742954e6::1775949074::res://.godot/exported/133200997/export-5f8b51ba86a89e1bda772488d3e1bb4a-Furnace V2.scn
-res://Buildings/Furnace.tscn::c8e3d9769043c14b7ca23f69368a3271::1775949035::res://.godot/exported/133200997/export-6a0a4fed52285824f7c58bc4a37c7d63-Furnace.scn
+res://Buildings/Fabricator V2.tscn::b794f2899e73ccfcbc9ee8922b4705a4::1775950532::res://.godot/exported/133200997/export-8580301517b918ceccb8285b060e72e6-Fabricator V2.scn
+res://Buildings/Fabricator.tscn::98a3305b6ecadad0bc8fe61bda039087::1775950532::res://.godot/exported/133200997/export-6dd41e1e154abd1355fc6c7a3d544433-Fabricator.scn
+res://Buildings/Facturer.tscn::7f5c07f84e475ccad5bd23557d3bef82::1775950532::res://.godot/exported/133200997/export-07b8b0e366919316cd6c2d470c361c4e-Facturer.scn
+res://Buildings/Furnace V2.tscn::fc1efd194d149160648d35276bdc0014::1775950532::res://.godot/exported/133200997/export-5f8b51ba86a89e1bda772488d3e1bb4a-Furnace V2.scn
+res://Buildings/Furnace.tscn::f5e9fac6ad819ace7e70cf0bb97b60b6::1775950532::res://.godot/exported/133200997/export-6a0a4fed52285824f7c58bc4a37c7d63-Furnace.scn
 res://Buildings/Habitat.tscn::744104f8e2c82ee1314cfc0fb8587f2d::1774985854::res://.godot/exported/133200997/export-5cb9ffe1e9b592c4cb349973ff3e3a20-Habitat.scn
-res://Buildings/Helium Extractor.tscn::c5e55d56519fc669f01630b73e2d956a::1775948604::res://.godot/exported/133200997/export-7ac9b63c5724f445e2c5b8fc0f3fd4e6-Helium Extractor.scn
+res://Buildings/Helium Extractor.tscn::5b2cc775bacf5e45b91f6933b7ffe42d::1775950532::res://.godot/exported/133200997/export-7ac9b63c5724f445e2c5b8fc0f3fd4e6-Helium Extractor.scn
 res://Buildings/Large Habitat.tscn::de0747a006000bb8a3795b473dfebe19::1774985854::res://.godot/exported/133200997/export-61b6a9d9f54c0649ed53365f6d48ba38-Large Habitat.scn
-res://Buildings/Laser Drill.tscn::164f86c8d28bcfcf16e2de3c87ef0ae3::1775948759::res://.godot/exported/133200997/export-b12cadc69f1f9e05bd3b737ef8b53db8-Laser Drill.scn
-res://Buildings/MegaPress.tscn::46d027012e9ebdabc6fb2fe320400247::1775949128::res://.godot/exported/133200997/export-95a737427f4756e52a6df482b2328f31-MegaPress.scn
+res://Buildings/Laser Drill.tscn::421b0659cd644dffb0e602707c60491d::1775950532::res://.godot/exported/133200997/export-b12cadc69f1f9e05bd3b737ef8b53db8-Laser Drill.scn
+res://Buildings/MegaPress.tscn::2d405deb566d03ad8e8f503e758e4dba::1775950532::res://.godot/exported/133200997/export-95a737427f4756e52a6df482b2328f31-MegaPress.scn
 res://Buildings/Multirail_3.tscn::5befda4a8a38526298ece9ef3e1d0760::1774985854::res://.godot/exported/133200997/export-9a104194e00db70597f3bc403730c9a1-Multirail_3.scn
 res://Buildings/Multirail_5.tscn::625ebf6f2e1931a20381f066d1fc7fb4::1774985854::res://.godot/exported/133200997/export-babc89e3d4e62f635f9c4a31387c7771-Multirail_5.scn
 res://Buildings/MultiStore.tscn::b76b64ed80b9d34cf6a542236ad6dca8::1774985854::res://.godot/exported/133200997/export-11b2f4fc50217a0da94ff62672583bfb-MultiStore.scn
-res://Buildings/Oil Extractor.tscn::cb255449a76dbfa985163aeae4fc0ce9::1775948740::res://.godot/exported/133200997/export-22441ef9063f942a18a2bd6ff6cb0d98-Oil Extractor.scn
+res://Buildings/Oil Extractor.tscn::69b7ebe292317eb4219026f14a4f69cc::1775950532::res://.godot/exported/133200997/export-22441ef9063f942a18a2bd6ff6cb0d98-Oil Extractor.scn
 res://Buildings/Orbital_launcher.tscn::7e3bbd8567cd90875f1d1da6f613dfda::1774985854::res://.godot/exported/133200997/export-6315cd4c604d906b61bcd6d0b7698477-Orbital_launcher.scn
 res://Buildings/Orbital_launcher_v2.tscn::c704d2b082b6a82bea04e822dc8545a1::1775882161::res://.godot/exported/133200997/export-1e6978b11e347b23abcb4e3366d5809f-Orbital_launcher_v2.scn
-res://Buildings/OreExcavator.tscn::cfad1cb48f72a969606562d2e92b0d66::1775948624::res://.godot/exported/133200997/export-1cf7f45f4bcd48d28ebc4131fd10d95e-OreExcavator.scn
-res://Buildings/OreExcavator_v2.tscn::34935322f0383efdb4b858efeda951c6::1775948619::res://.godot/exported/133200997/export-35eb9366d211f8e37f40664429ecdbc1-OreExcavator_v2.scn
-res://Buildings/Pressurizer.tscn::954a9289884d165576789a39ce32db35::1775949002::res://.godot/exported/133200997/export-79d673d1f01b03cda4e302bf53aa5def-Pressurizer.scn
-res://Buildings/Pyro Forge.tscn::ab8113db5c741f432332baea9bf280f3::1775949222::res://.godot/exported/133200997/export-e8e9888ed4c68873769d8e3985a852bd-Pyro Forge.scn
+res://Buildings/OreExcavator.tscn::630fa5083e8d60ddf115d7dfab73b757::1775950532::res://.godot/exported/133200997/export-1cf7f45f4bcd48d28ebc4131fd10d95e-OreExcavator.scn
+res://Buildings/OreExcavator_v2.tscn::c37af25efad22c3d5e8f45726bce65f2::1775950532::res://.godot/exported/133200997/export-35eb9366d211f8e37f40664429ecdbc1-OreExcavator_v2.scn
+res://Buildings/Pressurizer.tscn::add65c4f57513a1eab69fabbb330a2ec::1775950532::res://.godot/exported/133200997/export-79d673d1f01b03cda4e302bf53aa5def-Pressurizer.scn
+res://Buildings/Pyro Forge.tscn::3f1804184c998888c8eb8f4c2881e22e::1775950532::res://.godot/exported/133200997/export-e8e9888ed4c68873769d8e3985a852bd-Pyro Forge.scn
 res://Buildings/rail_connector.tscn::48f19c01b9b858cb34623173cce27395::1774985854::res://.godot/exported/133200997/export-96fe292a9422e23ae064eb00709e7f86-rail_connector.scn
 res://Buildings/rail_modulator_3.tscn::ccb1551e8068c8b6082c518dfefa0ddf::1775929251::res://.godot/exported/133200997/export-4e03f2f965488b7789949d157d2aa34d-rail_modulator_3.scn
 res://Buildings/rail_modulator_5.tscn::36aa908a66f5b6862a1895dce9b477a7::1774985854::res://.godot/exported/133200997/export-bebb2b2cd71db2e39445dd4ef6cecf16-rail_modulator_5.scn
 res://Buildings/rail_radial.tscn::5f7b42916eae7f516128b85873a3dac4::1775882331::res://.godot/exported/133200997/export-7c1006f867775f5f8e20cb481227f68e-rail_radial.scn
 res://Buildings/rail_support.tscn::8368523611cb5f3b03357de9dca73725::1775929447::res://.godot/exported/133200997/export-791c06d36ff092db8ac6079f6b9e998a-rail_support.scn
 res://Buildings/Receiver.tscn::0dca3666b2409a9ec3adef66ca5efbf6::1774985854::res://.godot/exported/133200997/export-3867f235dfd2c16fabb9c94e8eb026e7-Receiver.scn
-res://Buildings/Refinery.tscn::fefd724279ee55e5ba9171eea3017779::1775949204::res://.godot/exported/133200997/export-a930140c666bcfc5875488b6f5fc4aeb-Refinery.scn
-res://Buildings/Smelter.tscn::9bb3588cf109a05a5e8e8a89e7c24865::1775949015::res://.godot/exported/133200997/export-972764afb3bc331e5efb5b76c85ad90e-Smelter.scn
-res://Buildings/Solar V1.tscn::bdea4c45f90538f9071c95e1eef9bf93::1775949266::res://.godot/exported/133200997/export-a3d03b514f001a2035aceeea1276b0c5-Solar V1.scn
-res://Buildings/Solar V2.tscn::d89846a4d288fe5e19ca5413f8217972::1775949279::res://.godot/exported/133200997/export-2a6ee983729dc1f045daec08e8fb295b-Solar V2.scn
+res://Buildings/Refinery.tscn::420a58f094d4bd88775859266521e52f::1775950532::res://.godot/exported/133200997/export-a930140c666bcfc5875488b6f5fc4aeb-Refinery.scn
+res://Buildings/Smelter.tscn::dc5c90f3686fba1e00b1fb900ddf70d5::1775950532::res://.godot/exported/133200997/export-972764afb3bc331e5efb5b76c85ad90e-Smelter.scn
+res://Buildings/Solar V1.tscn::c86d1602971c7cc79f90a95a8196fbfd::1775950532::res://.godot/exported/133200997/export-a3d03b514f001a2035aceeea1276b0c5-Solar V1.scn
+res://Buildings/Solar V2.tscn::0fc7aac4e21770d3d9b01c7290bc9b35::1775950532::res://.godot/exported/133200997/export-2a6ee983729dc1f045daec08e8fb295b-Solar V2.scn
 res://Buildings/Storage_v1.tscn::788fa7438b6bf0de48d7484e486bc945::1774985854::res://.godot/exported/133200997/export-795a838853a954c4fde2430f0e9ea95c-Storage_v1.scn
 res://Buildings/Storage_v2.tscn::722fb1433059414a5a1ccdfdfe60b233::1774985854::res://.godot/exported/133200997/export-2bdf752c4b9ae915ca0b6bef29475561-Storage_v2.scn
-res://Buildings/Sulfur Extractor.tscn::49a2ce4844691580e29c97253b19c145::1775948963::res://.godot/exported/133200997/export-fa5837e04e71ef24f97bd0f9fac98259-Sulfur Extractor.scn
+res://Buildings/Sulfur Extractor.tscn::fd4bc93cd3e1add7e74ae34151c95dcd::1775950532::res://.godot/exported/133200997/export-fa5837e04e71ef24f97bd0f9fac98259-Sulfur Extractor.scn
 res://Buildings/Teleporter.tscn::023ae6f7057637d8a8ba07eae4406ac6::1775883982::res://.godot/exported/133200997/export-c327c9796a067956c19acc98c786eef6-Teleporter.scn
-res://Buildings/Wind V1.tscn::4411b6b2b077c79650076e5b2dddb306::1775949285::res://.godot/exported/133200997/export-129fca3142d56a36aaa72dede6b0c99d-Wind V1.scn
-res://Buildings/Wind V2.tscn::48df53166ff4fbd8a063b0fe70dad381::1775949308::res://.godot/exported/133200997/export-23ee3ce5f36fb388da31085fe631adf0-Wind V2.scn
+res://Buildings/Wind V1.tscn::216dccb2fa90ce26beef7eaff6276dff::1775950532::res://.godot/exported/133200997/export-129fca3142d56a36aaa72dede6b0c99d-Wind V1.scn
+res://Buildings/Wind V2.tscn::2e04227ec6b446ab62216dbcd71a5f33::1775950532::res://.godot/exported/133200997/export-23ee3ce5f36fb388da31085fe631adf0-Wind V2.scn
 res://Buildings/Zipline.tscn::cf5e1bd04b806ea73ee34670264309fd::1775884070::res://.godot/exported/133200997/export-183663d884f9a85a38dac2acd991f35c-Zipline.scn
 res://Patch Notes/0_1_0t.tres::ae7d9dfdcd2d38e0b69c040e78694ca0::1774836544::res://.godot/exported/133200997/export-b31818f71c09238b4bbf1db07a72a697-0_1_0t.res
 res://Patch Notes/0_1_1c.tres::dc78aa274428055ea7b42f79f838899c::1774836544::res://.godot/exported/133200997/export-4d4cd87cab28ebd712c9ef1cd3bb2015-0_1_1c.res
@@ -739,13 +739,13 @@ res://Recipes/Wolfram_wire_v2.tres::b5dcb4f44751207a29ad54b13eb254fe::1774940713
 res://Resources/PatchNotesEntry.tscn::1b07649bb409fcf1b46db863c7dae18d::1774836544::res://.godot/exported/133200997/export-317ef8fbc86a67d257a3830eb9ad6ded-PatchNotesEntry.scn
 res://Scenes/building.tscn::ff777b0b81623a7513a55cf509d5ff3e::1774836544::res://.godot/exported/133200997/export-d8468afbf5cf8699f9b44d8de387282c-building.scn
 res://Scenes/GridMap.tscn::2f29695b87c5aae98ebac3a82c0812b3::1774836544::res://.godot/exported/133200997/export-3614e3fe96b6740ac5ca9ffd79d61e6f-GridMap.scn
-res://Scenes/Main.tscn::57017117a41bb5c635fd625073fc8eaf::1775942627::res://.godot/exported/133200997/export-a8e1520d83f25710dd4e3da8c6f32601-Main.scn
+res://Scenes/Main.tscn::10a5df2c3f62f16b1434ba2e3a621af6::1775950532::res://.godot/exported/133200997/export-a8e1520d83f25710dd4e3da8c6f32601-Main.scn
 res://Scenes/patchNotesPanel.tscn::aefde8114708158e15b92f95182de481::1774849386::res://.godot/exported/133200997/export-f0423b0bc2e3f569ed23b27ca04b89a3-patchNotesPanel.scn
 res://Scenes/ResourceRow.tscn::ebd4c022d746488c5954538d63bd41ca::1774836544::res://.godot/exported/133200997/export-e48bc0f948761d01a233008f6a35478e-ResourceRow.scn
 res://Patch Notes/Patch_Registry.tres::92015a7884940d4549ccacb2ae1a5343::1774848076::res://.godot/exported/133200997/export-8174160ae81efd0716b4c45c3e17436f-Patch_Registry.res
 res://Patch Notes/0_2_0.tres::8da0041f17c528f96458b3bddced5824::1774986215::res://.godot/exported/133200997/export-a8a77c815b953d0608924eb19182476c-0_2_0.res
-res://Assets/std_bldg_label_settings.tres::805f70c1c25582e8db881ff49ffe60ef::1775948550::res://.godot/exported/133200997/export-3b5465b299e5b0b9d010df17d987742f-std_bldg_label_settings.res
-res://Patch Notes/0_3_0.tres::fa032021150e27efbbc2d62b8401e80d::1775948386::res://.godot/exported/133200997/export-7cb4636a1d84d105b3d8ee2f8d329cb4-0_3_0.res
+res://Assets/std_bldg_label_settings.tres::0a28fe72c43ec55ca6be7f1175b33cd7::1775950532::res://.godot/exported/133200997/export-3b5465b299e5b0b9d010df17d987742f-std_bldg_label_settings.res
+res://Patch Notes/0_3_0.tres::39735aa20f87672a32d60360a5e897f8::1775950620::res://.godot/exported/133200997/export-7cb4636a1d84d105b3d8ee2f8d329cb4-0_3_0.res
 res://Recipes/Item Stacks/Titanium_bar_40_def.tres::98d19eb6a70f028c49562a9ee298bb0c::1775862528::res://.godot/exported/133200997/export-3f7b98033422f4ed3da35857fd9c36d9-Titanium_bar_40_def.res
 res://Recipes/Item Stacks/Titanium_beam_60_def.tres::9e6b614d4a5050c627884787b2853ae2::1775862528::res://.godot/exported/133200997/export-d84f6d0e3905216c07db28774fa8b5b6-Titanium_beam_60_def.res
-res://Recipes/Item Stacks/Wolfram_steel_ingot_60_def.tres::b0214ff0ac74430bfabe15f3f9fe8385::1775944134::res://.godot/exported/133200997/export-446a7a4af633c78651373720f9630a17-Wolfram_steel_ingot_60_def.res
+res://Recipes/Item Stacks/Wolfram_steel_ingot_60_def.tres::4d89d617497f5d4c17a694c2a4f8b4a8::1775950532::res://.godot/exported/133200997/export-446a7a4af633c78651373720f9630a17-Wolfram_steel_ingot_60_def.res

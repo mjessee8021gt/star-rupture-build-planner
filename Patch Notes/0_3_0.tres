@@ -20,6 +20,7 @@ patch_notes = "New Features:
 Bug Fixes:
 - Pan controls now show properly in the controls menu
 - Added an alternative method of panning so the tool is more accessible to laptop users. (Shoutout to Comfortable-Paint818 for the feedback on this)
+- Fixed an error in the code that was preventing users from saving or loading in the browser version
 - Save/Load logic fixed so loading a saved blueprint actually retains all of the production numbers and tooltips on both the buildings and the production pane
 - Save/Load logic fixed so that we are now recording base core level.
 - Paths can now be deleted by right-clicking directly onto them. No more having to delete a building to remove the path.
