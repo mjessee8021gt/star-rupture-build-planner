@@ -14,7 +14,8 @@ size = Vector2(192, 256)
 [node name="OreExcavator" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_m443x")
 available_recipes = Array[ExtResource("2_veacw")]([ExtResource("3_rhfiq"), ExtResource("4_dkway"), ExtResource("5_43axb")])
-id = &"excavator"
+id = &"ore_excavator"
+build_cost_amount = 80
 metadata/_edit_vertical_guides_ = [96.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
@@ -56,9 +57,9 @@ icon = ExtResource("3_veacw")
 metadata/normal = Vector2(0, -1)
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=1551064749]
-offset_left = -67.0
+offset_left = -61.0
 offset_top = 35.0
-offset_right = 26.0
+offset_right = 32.0
 offset_bottom = 55.0
 theme_override_font_sizes/font_size = 16
 

@@ -11,9 +11,11 @@ size = Vector2(64, 64)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uf4xf"]
 size = Vector2(128, 128)
 
-[node name="Rail Radial" type="Node2D" unique_id=1728206745 groups=["buildings"]]
+[node name="Rail Roundabout" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_oeauk")
-id = &"rail_support"
+id = &"radial_rail_connect"
+build_cost_type = 1
+build_cost_amount = 10
 metadata/_edit_vertical_guides_ = [32.0, 64.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
@@ -69,7 +71,7 @@ offset_bottom = 48.0
 rotation = 2.3561945
 scale = Vector2(0.32, 0.32)
 icon = ExtResource("4_7td3x")
-metadata/normal = Vector2(0, 1)
+metadata/normal = Vector2(1, -1)
 
 [node name="Universal 3" type="Button" parent="Ports" unique_id=134965464 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
@@ -80,7 +82,7 @@ offset_right = 112.000015
 offset_bottom = 66.0
 scale = Vector2(0.32, 0.32)
 icon = ExtResource("4_7td3x")
-metadata/normal = Vector2(0, 1)
+metadata/normal = Vector2(1, 0)
 
 [node name="Universal 4" type="Button" parent="Ports" unique_id=897505968 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
@@ -92,7 +94,7 @@ offset_bottom = 80.00002
 rotation = 0.7853982
 scale = Vector2(0.32, 0.32)
 icon = ExtResource("4_7td3x")
-metadata/normal = Vector2(0, 1)
+metadata/normal = Vector2(1, 1)
 
 [node name="Universal 5" type="Button" parent="Ports" unique_id=2136248684 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
@@ -116,7 +118,7 @@ offset_bottom = 89.00002
 rotation = 2.3561945
 scale = Vector2(0.32, 0.32)
 icon = ExtResource("4_7td3x")
-metadata/normal = Vector2(0, 1)
+metadata/normal = Vector2(-1, 1)
 
 [node name="Universal 7" type="Button" parent="Ports" unique_id=1981340572 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
@@ -127,7 +129,7 @@ offset_right = 73.000015
 offset_bottom = 66.0
 scale = Vector2(0.32, 0.32)
 icon = ExtResource("4_7td3x")
-metadata/normal = Vector2(0, 1)
+metadata/normal = Vector2(-1, 0)
 
 [node name="Universal 8" type="Button" parent="Ports" unique_id=780234938 groups=["port_button"]]
 self_modulate = Color(1, 1, 1, 0.49803922)
@@ -138,7 +140,7 @@ offset_bottom = 40.000008
 rotation = 0.7853982
 scale = Vector2(0.32, 0.32)
 icon = ExtResource("4_7td3x")
-metadata/normal = Vector2(0, 1)
+metadata/normal = Vector2(-1, -1)
 
 [connection signal="mouse_entered" from="Ports/Universal 1" to="." method="_on_universal_1_mouse_entered"]
 [connection signal="mouse_exited" from="Ports/Universal 1" to="." method="_on_universal_1_mouse_exited"]
@@ -146,21 +148,21 @@ metadata/normal = Vector2(0, 1)
 [connection signal="mouse_entered" from="Ports/Universal 2" to="." method="_on_universal_2_mouse_entered"]
 [connection signal="mouse_exited" from="Ports/Universal 2" to="." method="_on_universal_2_mouse_exited"]
 [connection signal="pressed" from="Ports/Universal 2" to="." method="_on_universal_2_pressed"]
-[connection signal="mouse_entered" from="Ports/Universal 3" to="." method="_on_universal_2_mouse_entered"]
-[connection signal="mouse_exited" from="Ports/Universal 3" to="." method="_on_universal_2_mouse_exited"]
-[connection signal="pressed" from="Ports/Universal 3" to="." method="_on_universal_2_pressed"]
-[connection signal="mouse_entered" from="Ports/Universal 4" to="." method="_on_universal_2_mouse_entered"]
-[connection signal="mouse_exited" from="Ports/Universal 4" to="." method="_on_universal_2_mouse_exited"]
-[connection signal="pressed" from="Ports/Universal 4" to="." method="_on_universal_2_pressed"]
-[connection signal="mouse_entered" from="Ports/Universal 5" to="." method="_on_universal_2_mouse_entered"]
-[connection signal="mouse_exited" from="Ports/Universal 5" to="." method="_on_universal_2_mouse_exited"]
-[connection signal="pressed" from="Ports/Universal 5" to="." method="_on_universal_2_pressed"]
-[connection signal="mouse_entered" from="Ports/Universal 6" to="." method="_on_universal_2_mouse_entered"]
-[connection signal="mouse_exited" from="Ports/Universal 6" to="." method="_on_universal_2_mouse_exited"]
-[connection signal="pressed" from="Ports/Universal 6" to="." method="_on_universal_2_pressed"]
-[connection signal="mouse_entered" from="Ports/Universal 7" to="." method="_on_universal_2_mouse_entered"]
-[connection signal="mouse_exited" from="Ports/Universal 7" to="." method="_on_universal_2_mouse_exited"]
-[connection signal="pressed" from="Ports/Universal 7" to="." method="_on_universal_2_pressed"]
-[connection signal="mouse_entered" from="Ports/Universal 8" to="." method="_on_universal_2_mouse_entered"]
-[connection signal="mouse_exited" from="Ports/Universal 8" to="." method="_on_universal_2_mouse_exited"]
-[connection signal="pressed" from="Ports/Universal 8" to="." method="_on_universal_2_pressed"]
+[connection signal="mouse_entered" from="Ports/Universal 3" to="." method="_on_universal_3_mouse_entered"]
+[connection signal="mouse_exited" from="Ports/Universal 3" to="." method="_on_universal_3_mouse_exited"]
+[connection signal="pressed" from="Ports/Universal 3" to="." method="_on_universal_3_pressed"]
+[connection signal="mouse_entered" from="Ports/Universal 4" to="." method="_on_universal_4_mouse_entered"]
+[connection signal="mouse_exited" from="Ports/Universal 4" to="." method="_on_universal_4_mouse_exited"]
+[connection signal="pressed" from="Ports/Universal 4" to="." method="_on_universal_4_pressed"]
+[connection signal="mouse_entered" from="Ports/Universal 5" to="." method="_on_universal_5_mouse_entered"]
+[connection signal="mouse_exited" from="Ports/Universal 5" to="." method="_on_universal_5_mouse_exited"]
+[connection signal="pressed" from="Ports/Universal 5" to="." method="_on_universal_5_pressed"]
+[connection signal="mouse_entered" from="Ports/Universal 6" to="." method="_on_universal_6_mouse_entered"]
+[connection signal="mouse_exited" from="Ports/Universal 6" to="." method="_on_universal_6_mouse_exited"]
+[connection signal="pressed" from="Ports/Universal 6" to="." method="_on_universal_6_pressed"]
+[connection signal="mouse_entered" from="Ports/Universal 7" to="." method="_on_universal_7_mouse_entered"]
+[connection signal="mouse_exited" from="Ports/Universal 7" to="." method="_on_universal_7_mouse_exited"]
+[connection signal="pressed" from="Ports/Universal 7" to="." method="_on_universal_7_pressed"]
+[connection signal="mouse_entered" from="Ports/Universal 8" to="." method="_on_universal_8_mouse_entered"]
+[connection signal="mouse_exited" from="Ports/Universal 8" to="." method="_on_universal_8_mouse_exited"]
+[connection signal="pressed" from="Ports/Universal 8" to="." method="_on_universal_8_pressed"]

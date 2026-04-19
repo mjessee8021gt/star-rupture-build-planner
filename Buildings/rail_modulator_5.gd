@@ -167,7 +167,7 @@ func _on_universal_3_mouse_exited() -> void:
 func _on_universal_4_pressed() -> void:
 	if not universal4_is_pressed:
 		if not other_button_pressed:
-			$"Ports/Universal41".modulate = Color(0.5, 0.5, 0.5, 1)
+			$"Ports/Universal4".modulate = Color(0.5, 0.5, 0.5, 1)
 			universal4_is_pressed = true
 			other_button_pressed = true
 	else:

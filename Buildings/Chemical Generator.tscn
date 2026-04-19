@@ -9,9 +9,16 @@ size = Vector2(128, 128)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uf4xf"]
 size = Vector2(128, 128)
 
+[sub_resource type="LabelSettings" id="LabelSettings_h02o6"]
+line_spacing = -10.0
+
 [node name="Chemical Generator" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_h02o6")
-id = &"solar_v1"
+heat = 400
+power = 8200
+id = &"chemical_generator"
+build_cost_type = 1
+build_cost_amount = 900
 metadata/_edit_vertical_guides_ = [63.0, 96.0, 112.0, 80.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
@@ -41,6 +48,7 @@ offset_bottom = 10.0
 theme_override_font_sizes/font_size = 21
 text = "CHEMICAL
 GENERATOR"
+label_settings = SubResource("LabelSettings_h02o6")
 horizontal_alignment = 1
 
 [node name="outputBox" type="ColorRect" parent="." unique_id=1954160661]

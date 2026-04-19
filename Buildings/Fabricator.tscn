@@ -18,6 +18,7 @@
 [ext_resource type="Resource" uid="uid://db7oghfdpodmj" path="res://Recipes/Applicator.tres" id="13_hllad"]
 [ext_resource type="Resource" uid="uid://bhaqbv0yp1oun" path="res://Recipes/Basic_building_materials.tres" id="14_ocqxr"]
 [ext_resource type="Resource" uid="uid://dow8hsj6coner" path="res://Recipes/Pistol_ammo.tres" id="15_x3jwo"]
+[ext_resource type="LabelSettings" uid="uid://bwg7jbpx2gog5" path="res://Assets/std_bldg_label_settings.tres" id="18_kxm6t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
 size = Vector2(192, 192)
@@ -27,9 +28,9 @@ size = Vector2(256, 256)
 
 [node name="Fabricator" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_563xu")
-footprint_primary = Vector2i(3, 4)
 available_recipes = Array[ExtResource("2_d6koq")]([ExtResource("3_kxm6t"), ExtResource("4_nhxvb"), ExtResource("5_68agd"), ExtResource("6_cd0o3"), ExtResource("7_lavtn"), ExtResource("8_dgwtc"), ExtResource("9_1dd5x"), ExtResource("10_47kw3"), ExtResource("11_igp7r"), ExtResource("12_q1ghm"), ExtResource("13_hllad"), ExtResource("14_ocqxr"), ExtResource("15_x3jwo")])
 id = &"fabricator"
+build_cost_amount = 140
 metadata/_edit_vertical_guides_ = [63.0, 96.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
@@ -58,6 +59,7 @@ offset_right = 76.0
 offset_bottom = -4.0
 theme_override_font_sizes/font_size = 25
 text = "FABRICATOR"
+label_settings = ExtResource("18_kxm6t")
 
 [node name="PlacementArea" type="Area2D" parent="." unique_id=911391560]
 
@@ -100,9 +102,9 @@ icon = ExtResource("8_2dmew")
 metadata/normal = Vector2(0, 1)
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
-offset_left = -80.0
+offset_left = -72.0
 offset_top = 6.0
-offset_right = 14.0
+offset_right = 22.0
 offset_bottom = 26.0
 theme_override_font_sizes/font_size = 16
 

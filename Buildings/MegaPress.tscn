@@ -15,12 +15,13 @@
 [ext_resource type="Resource" uid="uid://ofj320xbtcjl" path="res://Recipes/Valve.tres" id="13_w5apf"]
 [ext_resource type="Texture2D" uid="uid://ca0431w33u4jt" path="res://Assets/SRBP_4x5_BLDG.png" id="14_oc300"]
 [ext_resource type="Resource" uid="uid://ce31hq8jrenvr" path="res://Recipes/Reinforced_frame.tres" id="14_omxsb"]
-[ext_resource type="Resource" path="res://Recipes/Reinforced_housing.tres" id="15_hurqg"]
+[ext_resource type="Resource" uid="uid://dpaauwa0scrgn" path="res://Recipes/Reinforced_housing.tres" id="15_hurqg"]
 [ext_resource type="Texture2D" uid="uid://ckf3jbuufrs6i" path="res://Assets/SRBP_5x6_BLDG.png" id="15_oc300"]
 [ext_resource type="Resource" uid="uid://rwh1ni4p7phe" path="res://Recipes/Geothite_lattice.tres" id="16_nyaiv"]
 [ext_resource type="Texture2D" uid="uid://ilmbegsn2c7" path="res://Assets/SRBP_Oval.png" id="17_ef2ad"]
 [ext_resource type="Resource" uid="uid://50c1febnkx6c" path="res://Recipes/Heat_shield.tres" id="17_x2mdb"]
 [ext_resource type="Resource" uid="uid://c3l25q8aqemu7" path="res://Recipes/Ion_stabilizer.tres" id="18_8hkdk"]
+[ext_resource type="LabelSettings" uid="uid://bwg7jbpx2gog5" path="res://Assets/std_bldg_label_settings.tres" id="21_x2mdb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
 size = Vector2(256, 320)
@@ -32,6 +33,8 @@ size = Vector2(320, 384)
 script = ExtResource("1_oc300")
 available_recipes = Array[ExtResource("2_omxsb")]([ExtResource("3_facf6"), ExtResource("4_omxsb"), ExtResource("5_hurqg"), ExtResource("6_4e8em"), ExtResource("7_nyaiv"), ExtResource("8_x2mdb"), ExtResource("9_8hkdk"), ExtResource("10_hqy5a"), ExtResource("11_jcftm"), ExtResource("12_txqpt"), ExtResource("13_w5apf"), ExtResource("14_omxsb"), ExtResource("15_hurqg"), ExtResource("16_nyaiv"), ExtResource("17_x2mdb"), ExtResource("18_8hkdk")])
 id = &"megapress"
+build_cost_type = 1
+build_cost_amount = 80
 metadata/_edit_vertical_guides_ = [63.0, 48.0, 64.0, 80.0, -24.0, 128.0, 192.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
@@ -60,6 +63,7 @@ offset_right = 75.000015
 offset_bottom = -39.0
 theme_override_font_sizes/font_size = 25
 text = "MEGA PRESS"
+label_settings = ExtResource("21_x2mdb")
 horizontal_alignment = 1
 
 [node name="PlacementArea" type="Area2D" parent="." unique_id=911391560]
@@ -125,9 +129,9 @@ icon = ExtResource("17_ef2ad")
 metadata/normal = Vector2(0, 1)
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
-offset_left = -98.0
+offset_left = -89.0
 offset_top = -10.0
-offset_right = -4.0000153
+offset_right = 4.9999847
 offset_bottom = 10.0
 theme_override_font_sizes/font_size = 16
 

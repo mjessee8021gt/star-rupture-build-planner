@@ -27,3 +27,31 @@ func flip_footprint() -> void:
 		$CollisionShapeAlt.disabled = true
 		footprint = footprint_primary
 		is_alternate = false
+
+
+func _on_core_level_item_selected(index: int) -> void:
+	var old_heat := heat
+	
+	if index == 0:
+		heat = -1000
+	elif index == 1:
+		heat = -2500
+	elif index == 2:
+		heat = -4000
+	elif index == 3:
+		heat = -6000
+	else:
+		heat = -10000
+		
+	if get_parent() == null or get_parent().name != "buildings":
+		return
+	var main_scene := get_tree().current_scene
+	if main_scene == null:
+		return
+		
+	var heat_label: Label = main_scene.get_node_or_null("./Camera2D/CanvasLayer/Panel/HeatLabel")
+	if heat_label == null:
+		return
+
+	heat_label.text = str(int(heat_label.text) + (heat - old_heat))
+	

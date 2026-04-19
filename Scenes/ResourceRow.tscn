@@ -3,11 +3,14 @@
 [ext_resource type="Script" uid="uid://g80qoo0g055j" path="res://Scenes/resource_row.gd" id="1_4g0wp"]
 [ext_resource type="Texture2D" uid="uid://cnn6vxsw63oxw" path="res://Assets/SRBP_Production_frame.png" id="1_v1aeq"]
 
-[node name="ResourceRow" type="HBoxContainer" unique_id=1682107029]
+[node name="ResourceRow" type="Control" unique_id=1682107029]
+custom_minimum_size = Vector2(398, 99)
 script = ExtResource("1_4g0wp")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1306078749]
-layout_mode = 2
+layout_mode = 0
+offset_right = 398.0
+offset_bottom = 99.0
 texture = ExtResource("1_v1aeq")
 
 [node name="TextureRect" type="TextureRect" parent="TextureRect" unique_id=405141529]

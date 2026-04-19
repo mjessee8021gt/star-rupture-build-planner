@@ -13,8 +13,10 @@ size = Vector2(256, 256)
 
 [node name="Orbital Launcher V2" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_bhhip")
-heat = 40
+heat = 20
+power = -40
 id = &"orbital_launcher_v2"
+build_cost_amount = 400
 metadata/_edit_vertical_guides_ = [63.0, 96.0, 112.0, 80.0, 128.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
@@ -41,6 +43,7 @@ offset_left = -61.0
 offset_top = -58.0
 offset_right = 60.0
 offset_bottom = 1.0
+theme_override_constants/line_spacing = -15
 theme_override_font_sizes/font_size = 20
 text = "ORBITAL
 LAUNCHER
@@ -72,9 +75,9 @@ metadata/normal = Vector2(0, 1)
 
 [node name="outputBox" type="ColorRect" parent="." unique_id=651101535]
 offset_left = -17.0
-offset_top = 38.0
+offset_top = 55.0
 offset_right = 18.0
-offset_bottom = 57.0
+offset_bottom = 74.0
 color = Color(0, 0.64705884, 0.25490198, 0.57254905)
 
 [node name="outputText" type="Label" parent="outputBox" unique_id=1972433829]
@@ -84,7 +87,7 @@ offset_top = -2.0
 offset_right = 36.0
 offset_bottom = 21.0
 theme_override_colors/font_color = Color(0, 0.24313726, 0, 1)
-text = "30"
+text = "300"
 horizontal_alignment = 1
 vertical_alignment = 1
 

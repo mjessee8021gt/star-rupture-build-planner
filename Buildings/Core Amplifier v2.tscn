@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b0mimh8hotnki" path="res://Buildings/Core Amplifier v2.gd" id="1_i2ad1"]
 [ext_resource type="Texture2D" uid="uid://grouobxe87tu" path="res://Assets/SRBP_4x4_BLDG.png" id="2_i2ad1"]
+[ext_resource type="LabelSettings" uid="uid://bwg7jbpx2gog5" path="res://Assets/std_bldg_label_settings.tres" id="3_mfxna"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
 size = Vector2(256, 256)
@@ -11,7 +12,10 @@ size = Vector2(256, 256)
 
 [node name="Core Amplifier v2" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_i2ad1")
-id = &"habitat"
+heat = -250
+id = &"core_amp_v2"
+build_cost_type = 1
+build_cost_amount = 350
 metadata/_edit_vertical_guides_ = [63.0, 96.0, 112.0, 80.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
@@ -41,6 +45,7 @@ offset_bottom = -1.0
 theme_override_font_sizes/font_size = 25
 text = "CORE AMP
 V2"
+label_settings = ExtResource("3_mfxna")
 horizontal_alignment = 1
 
 [node name="PlacementArea" type="Area2D" parent="." unique_id=911391560]

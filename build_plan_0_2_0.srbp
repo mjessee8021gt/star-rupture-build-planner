@@ -1,0 +1,1850 @@
+{
+	"buildings": [
+		{
+			"anchor_cell": [
+				8,
+				-6
+			],
+			"footprint": [
+				3,
+				4
+			],
+			"id": "ore_excavator",
+			"is_alternate": false,
+			"position": [
+				608.0,
+				-256.0
+			],
+			"purity": {
+				"metadata_path": "res://Recipes/Recipe Variants/titanium_pure.tres",
+				"selected": 2
+			},
+			"recipe": {
+				"metadata_path": "res://Recipes/mine_Titanium.tres",
+				"selected": 1
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/OreExcavator.tscn"
+		},
+		{
+			"anchor_cell": [
+				11,
+				-6
+			],
+			"footprint": [
+				3,
+				4
+			],
+			"id": "ore_excavator",
+			"is_alternate": false,
+			"position": [
+				800.0,
+				-256.0
+			],
+			"purity": {
+				"metadata_path": "res://Recipes/Recipe Variants/titanium_pure.tres",
+				"selected": 2
+			},
+			"recipe": {
+				"metadata_path": "res://Recipes/mine_Titanium.tres",
+				"selected": 1
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/OreExcavator.tscn"
+		},
+		{
+			"anchor_cell": [
+				14,
+				-6
+			],
+			"footprint": [
+				3,
+				4
+			],
+			"id": "ore_excavator",
+			"is_alternate": false,
+			"position": [
+				992.0,
+				-256.0
+			],
+			"purity": {
+				"metadata_path": "res://Recipes/Recipe Variants/titanium_normal.tres",
+				"selected": 1
+			},
+			"recipe": {
+				"metadata_path": "res://Recipes/mine_Titanium.tres",
+				"selected": 1
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/OreExcavator.tscn"
+		},
+		{
+			"anchor_cell": [
+				17,
+				-6
+			],
+			"footprint": [
+				3,
+				4
+			],
+			"id": "ore_excavator",
+			"is_alternate": false,
+			"position": [
+				1184.0,
+				-256.0
+			],
+			"purity": {
+				"metadata_path": "res://Recipes/Recipe Variants/titanium_normal.tres",
+				"selected": 1
+			},
+			"recipe": {
+				"metadata_path": "res://Recipes/mine_Titanium.tres",
+				"selected": 1
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/OreExcavator.tscn"
+		},
+		{
+			"anchor_cell": [
+				17,
+				-7
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				1120.0,
+				-416.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				2,
+				-12
+			],
+			"footprint": [
+				3,
+				4
+			],
+			"id": "smelter",
+			"is_alternate": false,
+			"position": [
+				224.0,
+				-640.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "res://Recipes/Titanium_bar.tres",
+				"selected": 1
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Smelter.tscn"
+		},
+		{
+			"anchor_cell": [
+				5,
+				-12
+			],
+			"footprint": [
+				3,
+				4
+			],
+			"id": "smelter",
+			"is_alternate": false,
+			"position": [
+				416.0,
+				-640.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "res://Recipes/Titanium_bar.tres",
+				"selected": 1
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Smelter.tscn"
+		},
+		{
+			"anchor_cell": [
+				8,
+				-12
+			],
+			"footprint": [
+				3,
+				4
+			],
+			"id": "smelter",
+			"is_alternate": false,
+			"position": [
+				608.0,
+				-640.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "res://Recipes/Titanium_bar.tres",
+				"selected": 1
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Smelter.tscn"
+		},
+		{
+			"anchor_cell": [
+				11,
+				-12
+			],
+			"footprint": [
+				3,
+				4
+			],
+			"id": "smelter",
+			"is_alternate": false,
+			"position": [
+				800.0,
+				-640.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "res://Recipes/Titanium_bar.tres",
+				"selected": 1
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Smelter.tscn"
+		},
+		{
+			"anchor_cell": [
+				14,
+				-12
+			],
+			"footprint": [
+				3,
+				4
+			],
+			"id": "smelter",
+			"is_alternate": false,
+			"position": [
+				992.0,
+				-640.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "res://Recipes/Titanium_bar.tres",
+				"selected": 1
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Smelter.tscn"
+		},
+		{
+			"anchor_cell": [
+				17,
+				-12
+			],
+			"footprint": [
+				3,
+				4
+			],
+			"id": "smelter",
+			"is_alternate": false,
+			"position": [
+				1184.0,
+				-640.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "res://Recipes/Titanium_bar.tres",
+				"selected": 1
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Smelter.tscn"
+		},
+		{
+			"anchor_cell": [
+				20,
+				-12
+			],
+			"footprint": [
+				3,
+				4
+			],
+			"id": "smelter",
+			"is_alternate": false,
+			"position": [
+				1376.0,
+				-640.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "res://Recipes/Titanium_bar.tres",
+				"selected": 1
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Smelter.tscn"
+		},
+		{
+			"anchor_cell": [
+				23,
+				-12
+			],
+			"footprint": [
+				3,
+				4
+			],
+			"id": "smelter",
+			"is_alternate": false,
+			"position": [
+				1568.0,
+				-640.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "res://Recipes/Titanium_bar.tres",
+				"selected": 1
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Smelter.tscn"
+		},
+		{
+			"anchor_cell": [
+				2,
+				-17
+			],
+			"footprint": [
+				3,
+				3
+			],
+			"id": "fabricator",
+			"is_alternate": false,
+			"position": [
+				224.0,
+				-992.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "res://Recipes/Titanium_rod.tres",
+				"selected": 0
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Fabricator.tscn"
+		},
+		{
+			"anchor_cell": [
+				5,
+				-17
+			],
+			"footprint": [
+				3,
+				3
+			],
+			"id": "fabricator",
+			"is_alternate": false,
+			"position": [
+				416.0,
+				-992.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "res://Recipes/Titanium_sheet.tres",
+				"selected": 1
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Fabricator.tscn"
+		},
+		{
+			"anchor_cell": [
+				8,
+				-17
+			],
+			"footprint": [
+				3,
+				3
+			],
+			"id": "fabricator",
+			"is_alternate": false,
+			"position": [
+				608.0,
+				-992.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "res://Recipes/Titanium_rod.tres",
+				"selected": 0
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Fabricator.tscn"
+		},
+		{
+			"anchor_cell": [
+				11,
+				-17
+			],
+			"footprint": [
+				3,
+				3
+			],
+			"id": "fabricator",
+			"is_alternate": false,
+			"position": [
+				800.0,
+				-992.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "res://Recipes/Titanium_sheet.tres",
+				"selected": 1
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Fabricator.tscn"
+		},
+		{
+			"anchor_cell": [
+				14,
+				-17
+			],
+			"footprint": [
+				3,
+				3
+			],
+			"id": "fabricator",
+			"is_alternate": false,
+			"position": [
+				992.0,
+				-992.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "res://Recipes/Titanium_beam.tres",
+				"selected": 2
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Fabricator.tscn"
+		},
+		{
+			"anchor_cell": [
+				17,
+				-17
+			],
+			"footprint": [
+				3,
+				3
+			],
+			"id": "fabricator",
+			"is_alternate": false,
+			"position": [
+				1184.0,
+				-992.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "res://Recipes/Titanium_beam.tres",
+				"selected": 2
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Fabricator.tscn"
+		},
+		{
+			"anchor_cell": [
+				20,
+				-17
+			],
+			"footprint": [
+				3,
+				3
+			],
+			"id": "fabricator",
+			"is_alternate": false,
+			"position": [
+				1376.0,
+				-992.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "res://Recipes/Titanium_rod.tres",
+				"selected": 0
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Fabricator.tscn"
+		},
+		{
+			"anchor_cell": [
+				23,
+				-17
+			],
+			"footprint": [
+				3,
+				3
+			],
+			"id": "fabricator",
+			"is_alternate": false,
+			"position": [
+				1568.0,
+				-992.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "res://Recipes/Titanium_sheet.tres",
+				"selected": 1
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Fabricator.tscn"
+		},
+		{
+			"anchor_cell": [
+				4,
+				-13
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				288.0,
+				-800.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				2,
+				-7
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				160.0,
+				-416.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				4,
+				-14
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				288.0,
+				-864.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				23,
+				-8
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				1504.0,
+				-480.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				14,
+				-7
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				928.0,
+				-416.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				11,
+				-7
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				736.0,
+				-416.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				8,
+				-7
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				544.0,
+				-416.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				2,
+				-8
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				160.0,
+				-480.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				5,
+				-8
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				352.0,
+				-480.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				8,
+				-8
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				544.0,
+				-480.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				11,
+				-8
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				736.0,
+				-480.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				14,
+				-8
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				928.0,
+				-480.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				17,
+				-8
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1120.0,
+				-480.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				20,
+				-8
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1312.0,
+				-480.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				7,
+				-13
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				480.0,
+				-800.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				10,
+				-13
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				672.0,
+				-800.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				13,
+				-13
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				864.0,
+				-800.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				16,
+				-13
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1056.0,
+				-800.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				19,
+				-13
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1248.0,
+				-800.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				22,
+				-13
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1440.0,
+				-800.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				25,
+				-13
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1632.0,
+				-800.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				25,
+				-14
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1632.0,
+				-864.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				22,
+				-14
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1440.0,
+				-864.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				19,
+				-14
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1248.0,
+				-864.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				16,
+				-14
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1056.0,
+				-864.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				13,
+				-14
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				864.0,
+				-864.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				10,
+				-14
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				672.0,
+				-864.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				7,
+				-14
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				480.0,
+				-864.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		}
+	],
+	"camera": {
+		"position": [
+			955.0,
+			-560.0
+		],
+		"zoom": [
+			0.500000178813934,
+			0.500000178813934
+		]
+	},
+	"cost_bbm": 2505,
+	"cost_ibm": 0,
+	"cost_meteor_cores": 0,
+	"heat": 76,
+	"occupied_cells": [
+		"8,-6",
+		"9,-6",
+		"10,-6",
+		"8,-5",
+		"9,-5",
+		"10,-5",
+		"8,-4",
+		"9,-4",
+		"10,-4",
+		"8,-3",
+		"9,-3",
+		"10,-3",
+		"11,-6",
+		"12,-6",
+		"13,-6",
+		"11,-5",
+		"12,-5",
+		"13,-5",
+		"11,-4",
+		"12,-4",
+		"13,-4",
+		"11,-3",
+		"12,-3",
+		"13,-3",
+		"14,-6",
+		"15,-6",
+		"16,-6",
+		"14,-5",
+		"15,-5",
+		"16,-5",
+		"14,-4",
+		"15,-4",
+		"16,-4",
+		"14,-3",
+		"15,-3",
+		"16,-3",
+		"17,-6",
+		"18,-6",
+		"19,-6",
+		"17,-5",
+		"18,-5",
+		"19,-5",
+		"17,-4",
+		"18,-4",
+		"19,-4",
+		"17,-3",
+		"18,-3",
+		"19,-3",
+		"17,-7",
+		"2,-12",
+		"3,-12",
+		"4,-12",
+		"2,-11",
+		"3,-11",
+		"4,-11",
+		"2,-10",
+		"3,-10",
+		"4,-10",
+		"2,-9",
+		"3,-9",
+		"4,-9",
+		"5,-12",
+		"6,-12",
+		"7,-12",
+		"5,-11",
+		"6,-11",
+		"7,-11",
+		"5,-10",
+		"6,-10",
+		"7,-10",
+		"5,-9",
+		"6,-9",
+		"7,-9",
+		"8,-12",
+		"9,-12",
+		"10,-12",
+		"8,-11",
+		"9,-11",
+		"10,-11",
+		"8,-10",
+		"9,-10",
+		"10,-10",
+		"8,-9",
+		"9,-9",
+		"10,-9",
+		"11,-12",
+		"12,-12",
+		"13,-12",
+		"11,-11",
+		"12,-11",
+		"13,-11",
+		"11,-10",
+		"12,-10",
+		"13,-10",
+		"11,-9",
+		"12,-9",
+		"13,-9",
+		"14,-12",
+		"15,-12",
+		"16,-12",
+		"14,-11",
+		"15,-11",
+		"16,-11",
+		"14,-10",
+		"15,-10",
+		"16,-10",
+		"14,-9",
+		"15,-9",
+		"16,-9",
+		"17,-12",
+		"18,-12",
+		"19,-12",
+		"17,-11",
+		"18,-11",
+		"19,-11",
+		"17,-10",
+		"18,-10",
+		"19,-10",
+		"17,-9",
+		"18,-9",
+		"19,-9",
+		"20,-12",
+		"21,-12",
+		"22,-12",
+		"20,-11",
+		"21,-11",
+		"22,-11",
+		"20,-10",
+		"21,-10",
+		"22,-10",
+		"20,-9",
+		"21,-9",
+		"22,-9",
+		"23,-12",
+		"24,-12",
+		"25,-12",
+		"23,-11",
+		"24,-11",
+		"25,-11",
+		"23,-10",
+		"24,-10",
+		"25,-10",
+		"23,-9",
+		"24,-9",
+		"25,-9",
+		"2,-17",
+		"3,-17",
+		"4,-17",
+		"2,-16",
+		"3,-16",
+		"4,-16",
+		"2,-15",
+		"3,-15",
+		"4,-15",
+		"5,-17",
+		"6,-17",
+		"7,-17",
+		"5,-16",
+		"6,-16",
+		"7,-16",
+		"5,-15",
+		"6,-15",
+		"7,-15",
+		"8,-17",
+		"9,-17",
+		"10,-17",
+		"8,-16",
+		"9,-16",
+		"10,-16",
+		"8,-15",
+		"9,-15",
+		"10,-15",
+		"11,-17",
+		"12,-17",
+		"13,-17",
+		"11,-16",
+		"12,-16",
+		"13,-16",
+		"11,-15",
+		"12,-15",
+		"13,-15",
+		"14,-17",
+		"15,-17",
+		"16,-17",
+		"14,-16",
+		"15,-16",
+		"16,-16",
+		"14,-15",
+		"15,-15",
+		"16,-15",
+		"17,-17",
+		"18,-17",
+		"19,-17",
+		"17,-16",
+		"18,-16",
+		"19,-16",
+		"17,-15",
+		"18,-15",
+		"19,-15",
+		"20,-17",
+		"21,-17",
+		"22,-17",
+		"20,-16",
+		"21,-16",
+		"22,-16",
+		"20,-15",
+		"21,-15",
+		"22,-15",
+		"23,-17",
+		"24,-17",
+		"25,-17",
+		"23,-16",
+		"24,-16",
+		"25,-16",
+		"23,-15",
+		"24,-15",
+		"25,-15",
+		"4,-13",
+		"2,-7",
+		"4,-14",
+		"23,-8",
+		"14,-7",
+		"11,-7",
+		"8,-7",
+		"2,-8",
+		"5,-8",
+		"8,-8",
+		"11,-8",
+		"14,-8",
+		"17,-8",
+		"20,-8",
+		"7,-13",
+		"10,-13",
+		"13,-13",
+		"16,-13",
+		"19,-13",
+		"22,-13",
+		"25,-13",
+		"25,-14",
+		"22,-14",
+		"19,-14",
+		"16,-14",
+		"13,-14",
+		"10,-14",
+		"7,-14"
+	],
+	"paths": [
+		{
+			"from_index": 3,
+			"from_port": "Ports/Output 1",
+			"to_index": 4,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 4,
+			"from_port": "Ports/Universal 2",
+			"to_index": 25,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 2,
+			"from_port": "Ports/Output 1",
+			"to_index": 25,
+			"to_port": "Ports/Universal 3"
+		},
+		{
+			"from_index": 25,
+			"from_port": "Ports/Universal 4",
+			"to_index": 26,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 1,
+			"from_port": "Ports/Output 1",
+			"to_index": 26,
+			"to_port": "Ports/Universal 3"
+		},
+		{
+			"from_index": 26,
+			"from_port": "Ports/Universal 4",
+			"to_index": 27,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 0,
+			"from_port": "Ports/Output 1",
+			"to_index": 27,
+			"to_port": "Ports/Universal 3"
+		},
+		{
+			"from_index": 27,
+			"from_port": "Ports/Universal 4",
+			"to_index": 22,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 22,
+			"from_port": "Ports/Universal 2",
+			"to_index": 28,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 28,
+			"from_port": "Ports/Universal 1",
+			"to_index": 5,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 28,
+			"from_port": "Ports/Universal 2",
+			"to_index": 29,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 29,
+			"from_port": "Ports/Universal 1",
+			"to_index": 6,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 29,
+			"from_port": "Ports/Universal 2",
+			"to_index": 30,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 30,
+			"from_port": "Ports/Universal 1",
+			"to_index": 7,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 30,
+			"from_port": "Ports/Universal 2",
+			"to_index": 31,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 31,
+			"from_port": "Ports/Universal 1",
+			"to_index": 8,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 31,
+			"from_port": "Ports/Universal 2",
+			"to_index": 32,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 32,
+			"from_port": "Ports/Universal 1",
+			"to_index": 9,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 32,
+			"from_port": "Ports/Universal 2",
+			"to_index": 33,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 33,
+			"from_port": "Ports/Universal 1",
+			"to_index": 10,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 33,
+			"from_port": "Ports/Universal 2",
+			"to_index": 34,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 34,
+			"from_port": "Ports/Universal 1",
+			"to_index": 11,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 34,
+			"from_port": "Ports/Universal 2",
+			"to_index": 24,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 24,
+			"from_port": "Ports/Universal 1",
+			"to_index": 12,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 5,
+			"from_port": "Ports/Output 1",
+			"to_index": 21,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 21,
+			"from_port": "Ports/Universal 1",
+			"to_index": 35,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 6,
+			"from_port": "Ports/Output 1",
+			"to_index": 35,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 35,
+			"from_port": "Ports/Universal 4",
+			"to_index": 36,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 7,
+			"from_port": "Ports/Output 1",
+			"to_index": 36,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 36,
+			"from_port": "Ports/Universal 4",
+			"to_index": 37,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 8,
+			"from_port": "Ports/Output 1",
+			"to_index": 37,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 37,
+			"from_port": "Ports/Universal 4",
+			"to_index": 38,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 9,
+			"from_port": "Ports/Output 1",
+			"to_index": 38,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 38,
+			"from_port": "Ports/Universal 4",
+			"to_index": 39,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 10,
+			"from_port": "Ports/Output 1",
+			"to_index": 39,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 39,
+			"from_port": "Ports/Universal 4",
+			"to_index": 40,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 11,
+			"from_port": "Ports/Output 1",
+			"to_index": 40,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 40,
+			"from_port": "Ports/Universal 4",
+			"to_index": 41,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 12,
+			"from_port": "Ports/Output 1",
+			"to_index": 41,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 41,
+			"from_port": "Ports/Universal 4",
+			"to_index": 42,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 42,
+			"from_port": "Ports/Universal 3",
+			"to_index": 20,
+			"to_port": "Ports/Input 2"
+		},
+		{
+			"from_index": 42,
+			"from_port": "Ports/Universal 2",
+			"to_index": 43,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 43,
+			"from_port": "Ports/Universal 3",
+			"to_index": 19,
+			"to_port": "Ports/Input 2"
+		},
+		{
+			"from_index": 43,
+			"from_port": "Ports/Universal 2",
+			"to_index": 44,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 44,
+			"from_port": "Ports/Universal 3",
+			"to_index": 18,
+			"to_port": "Ports/Input 2"
+		},
+		{
+			"from_index": 44,
+			"from_port": "Ports/Universal 2",
+			"to_index": 45,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 45,
+			"from_port": "Ports/Universal 3",
+			"to_index": 17,
+			"to_port": "Ports/Input 2"
+		},
+		{
+			"from_index": 45,
+			"from_port": "Ports/Universal 2",
+			"to_index": 46,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 46,
+			"from_port": "Ports/Universal 3",
+			"to_index": 16,
+			"to_port": "Ports/Input 2"
+		},
+		{
+			"from_index": 46,
+			"from_port": "Ports/Universal 2",
+			"to_index": 47,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 47,
+			"from_port": "Ports/Universal 3",
+			"to_index": 15,
+			"to_port": "Ports/Input 2"
+		},
+		{
+			"from_index": 47,
+			"from_port": "Ports/Universal 2",
+			"to_index": 48,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 48,
+			"from_port": "Ports/Universal 3",
+			"to_index": 14,
+			"to_port": "Ports/Input 2"
+		},
+		{
+			"from_index": 48,
+			"from_port": "Ports/Universal 2",
+			"to_index": 23,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 23,
+			"from_port": "Ports/Universal 2",
+			"to_index": 13,
+			"to_port": "Ports/Input 2"
+		}
+	],
+	"power": -140,
+	"production_panel_visible": true,
+	"saved_at_unix": 1774986641.583,
+	"version": 1
+}

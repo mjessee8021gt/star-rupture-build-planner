@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://bmwiex5rbnrcn"]
+
+[ext_resource type="Script" uid="uid://bsvkskx52h6sr" path="res://Buildings/defense_turret.gd" id="1_x0utu"]
+[ext_resource type="Texture2D" uid="uid://pii6ht7uxekf" path="res://Assets/SRBP_1x1_Turret.png" id="2_jkhly"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uf4xf"]
+size = Vector2(64, 64)
+
+[node name="Defense Turret" type="Node2D" unique_id=1728206745 groups=["buildings"]]
+script = ExtResource("1_x0utu")
+heat = 20
+power = -20
+id = &"defense_turret"
+build_cost_amount = 200
+metadata/_edit_vertical_guides_ = [32.0, 64.0]
+
+[node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
+position = Vector2(-32, -32)
+texture = ExtResource("2_jkhly")
+centered = false
+
+[node name="AlternateSprite" type="Sprite2D" parent="." unique_id=1619536158]
+visible = false
+position = Vector2(-32, -32)
+texture = ExtResource("2_jkhly")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1128283645]
+shape = SubResource("RectangleShape2D_gbqis")
+
+[node name="CollisionShapeAlt" type="CollisionShape2D" parent="." unique_id=1184700770]
+visible = false
+shape = SubResource("RectangleShape2D_uf4xf")
+disabled = true
+
+[node name="PlacementArea" type="Area2D" parent="." unique_id=911391560]
+
+[node name="PlacementAreaAlt" type="Area2D" parent="." unique_id=445836450]

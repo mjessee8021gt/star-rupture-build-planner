@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cysul1aqe6byv" path="res://Buildings/Base Core.gd" id="1_ajxhi"]
 [ext_resource type="Texture2D" uid="uid://b2k53j0c3amt2" path="res://Assets/SRBP_Core_BLDG.png" id="2_4fik0"]
+[ext_resource type="LabelSettings" uid="uid://bwg7jbpx2gog5" path="res://Assets/std_bldg_label_settings.tres" id="3_4fik0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
 size = Vector2(256, 256)
@@ -11,7 +12,9 @@ size = Vector2(256, 256)
 
 [node name="Base Core" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_ajxhi")
-id = &"habitat"
+id = &"base_core"
+build_cost_type = 2
+build_cost_amount = 1
 metadata/_edit_vertical_guides_ = [63.0, 96.0, 112.0, 80.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
@@ -40,8 +43,28 @@ offset_right = 76.0
 offset_bottom = -1.0
 theme_override_font_sizes/font_size = 25
 text = "BASE  CORE"
+label_settings = ExtResource("3_4fik0")
 horizontal_alignment = 1
 
 [node name="PlacementArea" type="Area2D" parent="." unique_id=911391560]
 
 [node name="PlacementAreaAlt" type="Area2D" parent="." unique_id=445836450]
+
+[node name="CoreLevel" type="OptionButton" parent="." unique_id=415684926]
+offset_left = -21.0
+offset_top = 6.0
+offset_right = 21.0
+offset_bottom = 37.0
+item_count = 5
+popup/item_0/text = "0"
+popup/item_0/id = 0
+popup/item_1/text = "1"
+popup/item_1/id = 1
+popup/item_2/text = "2"
+popup/item_2/id = 2
+popup/item_3/text = "3"
+popup/item_3/id = 3
+popup/item_4/text = "4"
+popup/item_4/id = 4
+
+[connection signal="item_selected" from="CoreLevel" to="." method="_on_core_level_item_selected"]

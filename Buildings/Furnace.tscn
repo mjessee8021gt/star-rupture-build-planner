@@ -15,6 +15,7 @@
 [ext_resource type="Resource" uid="uid://oqna0imhy8e4" path="res://Recipes/Titanium housing.tres" id="13_m5eqo"]
 [ext_resource type="Resource" uid="uid://bjc2p2md5xs62" path="res://Recipes/Wolfram_powder.tres" id="14_sov4o"]
 [ext_resource type="Texture2D" uid="uid://qwwrxvfqjgub" path="res://Assets/SRBP_3x4_BLDG.png" id="16_a2cv4"]
+[ext_resource type="LabelSettings" uid="uid://bwg7jbpx2gog5" path="res://Assets/std_bldg_label_settings.tres" id="17_a2cv4"]
 [ext_resource type="Texture2D" uid="uid://grouobxe87tu" path="res://Assets/SRBP_4x4_BLDG.png" id="17_kdjnc"]
 [ext_resource type="Texture2D" uid="uid://ilmbegsn2c7" path="res://Assets/SRBP_Oval.png" id="18_gkjec"]
 
@@ -28,6 +29,7 @@ size = Vector2(256, 256)
 script = ExtResource("1_a2cv4")
 available_recipes = Array[ExtResource("2_u3fyf")]([ExtResource("3_l2jlo"), ExtResource("4_a2cv4"), ExtResource("5_u3fyf"), ExtResource("6_o0iyx"), ExtResource("7_dkke5"), ExtResource("8_wcpt0"), ExtResource("9_ou50j"), ExtResource("10_sn8a3"), ExtResource("11_k6fgg"), ExtResource("12_ngkt1"), ExtResource("13_m5eqo"), ExtResource("14_sov4o")])
 id = &"furnace"
+build_cost_amount = 200
 metadata/_edit_vertical_guides_ = [63.0, 48.0, 64.0, 96.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
@@ -56,6 +58,7 @@ offset_right = 57.0
 offset_bottom = -25.0
 theme_override_font_sizes/font_size = 25
 text = "FURNACE"
+label_settings = ExtResource("17_a2cv4")
 horizontal_alignment = 1
 
 [node name="PlacementArea" type="Area2D" parent="." unique_id=911391560]
@@ -110,11 +113,11 @@ icon = ExtResource("18_gkjec")
 metadata/normal = Vector2(0, 1)
 
 [node name="Recipe" type="OptionButton" parent="." unique_id=714617816]
-offset_left = -69.0
+offset_left = -90.0
 offset_top = -10.0
-offset_right = 25.0
+offset_right = 4.0
 offset_bottom = 10.0
-theme_override_font_sizes/font_size = 10
+theme_override_font_sizes/font_size = 16
 
 [node name="outputBox" type="ColorRect" parent="." unique_id=1419396623]
 offset_left = -15.0

@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://b0o4ul02ammwi" path="res://Assets/SRBP_Info_Button.png" id="12_1p5hy"]
 [ext_resource type="Script" uid="uid://ctcvj2tgfppa1" path="res://Scripts/patch_notes.gd" id="13_erwvk"]
 [ext_resource type="PackedScene" uid="uid://7jyji8msm5gx" path="res://Scenes/patchNotesPanel.tscn" id="14_erwvk"]
+[ext_resource type="Texture2D" uid="uid://bjsxrfyahtpo4" path="res://Assets/SRBP_Whatif_Button.png" id="16_346fj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_346fj"]
 texture = ExtResource("3_2w5on")
@@ -48,38 +49,96 @@ script = ExtResource("5_frkhe")
 BuildManager = NodePath("../../../BuildManager")
 
 [node name="Panel" type="Panel" parent="Camera2D/CanvasLayer" unique_id=1180101363]
-offset_left = 1104.0
+offset_left = 1090.0
 offset_top = 1.0
 offset_right = 1279.0
-offset_bottom = 33.0
+offset_bottom = 95.0
+
+[node name="BBMCostLabel" type="Label" parent="Camera2D/CanvasLayer/Panel" unique_id=1608655122]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 35.0
+offset_right = 95.0
+offset_bottom = 58.0
+theme_override_font_sizes/font_size = 15
+text = "0"
+horizontal_alignment = 2
 
 [node name="HeatIcon" type="Sprite2D" parent="Camera2D/CanvasLayer/Panel" unique_id=1228076443]
-position = Vector2(16.5, 15)
+position = Vector2(21.5, 17)
 scale = Vector2(0.484375, 0.46875)
 texture = ExtResource("6_vy5pj")
 
 [node name="PowerIcon" type="Sprite2D" parent="Camera2D/CanvasLayer/Panel" unique_id=1711027906]
-position = Vector2(105.999985, 17)
+position = Vector2(111, 19)
 scale = Vector2(0.4765623, 0.4375)
 texture = ExtResource("7_bmxlf")
 
 [node name="HeatLabel" type="Label" parent="Camera2D/CanvasLayer/Panel" unique_id=197643977]
 layout_mode = 0
-offset_left = 38.0
-offset_right = 84.0
-offset_bottom = 29.0
+offset_left = 43.0
+offset_top = 2.0
+offset_right = 91.0
+offset_bottom = 32.0
 theme_override_font_sizes/font_size = 21
 text = "0000"
 horizontal_alignment = 2
 
 [node name="PowerLabel" type="Label" parent="Camera2D/CanvasLayer/Panel" unique_id=1482456259]
 layout_mode = 0
-offset_left = 123.0
-offset_top = 1.0
-offset_right = 171.0
-offset_bottom = 31.0
+offset_left = 128.0
+offset_top = 3.0
+offset_right = 176.0
+offset_bottom = 33.0
 theme_override_font_sizes/font_size = 21
 text = "0000"
+horizontal_alignment = 2
+
+[node name="BBMTextLabel" type="Label" parent="Camera2D/CanvasLayer/Panel" unique_id=1300045001]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 35.0
+offset_right = 65.0
+offset_bottom = 58.0
+theme_override_font_sizes/font_size = 15
+text = "BBM:"
+
+[node name="IBMTextLabel" type="Label" parent="Camera2D/CanvasLayer/Panel" unique_id=1869679014]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 35.0
+offset_right = 149.0
+offset_bottom = 58.0
+theme_override_font_sizes/font_size = 15
+text = "IBM:"
+
+[node name="IBMCostLabel" type="Label" parent="Camera2D/CanvasLayer/Panel" unique_id=202860460]
+layout_mode = 0
+offset_left = 142.0
+offset_top = 35.0
+offset_right = 171.0
+offset_bottom = 58.0
+theme_override_font_sizes/font_size = 15
+text = "0"
+horizontal_alignment = 2
+
+[node name="MeteorCoreTextLabel" type="Label" parent="Camera2D/CanvasLayer/Panel" unique_id=1634346124]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 61.0
+offset_right = 119.0
+offset_bottom = 84.0
+theme_override_font_sizes/font_size = 15
+text = "Meteor Cores:"
+
+[node name="MeteorCoreCostLabel" type="Label" parent="Camera2D/CanvasLayer/Panel" unique_id=321517503]
+layout_mode = 0
+offset_left = 118.0
+offset_top = 61.0
+offset_right = 171.0
+offset_bottom = 84.0
+theme_override_font_sizes/font_size = 15
+text = "0"
 horizontal_alignment = 2
 
 [node name="ProdMenu" type="MenuButton" parent="Camera2D/CanvasLayer" unique_id=537098699]
@@ -96,7 +155,7 @@ self_modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_left = -268.0
 offset_top = 138.0
-offset_right = 130.0
+offset_right = 237.0
 offset_bottom = 1194.0
 script = ExtResource("9_4kpch")
 
@@ -140,13 +199,13 @@ list_path = NodePath("../PopupPanel/MarginContainer/ScrollContainer/VBoxContaine
 oversampling_override = 1.0
 title = "Controls"
 position = Vector2i(51, 234)
-size = Vector2i(300, 250)
+size = Vector2i(460, 250)
 visible = true
 
 [node name="MarginContainer" type="MarginContainer" parent="Camera2D/CanvasLayer/PopupPanel" unique_id=1945906527]
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 296.0
+offset_right = 456.0
 offset_bottom = 246.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Camera2D/CanvasLayer/PopupPanel/MarginContainer" unique_id=90211902]
@@ -166,15 +225,23 @@ icon = ExtResource("12_1p5hy")
 script = ExtResource("13_erwvk")
 panel_scene = ExtResource("14_erwvk")
 
+[node name="WhatIfButton" type="Button" parent="Camera2D/CanvasLayer" unique_id=1096417576]
+offset_left = 14.0
+offset_top = 548.0
+offset_right = 86.0
+offset_bottom = 620.0
+scale = Vector2(0.5, 0.5)
+icon = ExtResource("16_346fj")
+
 [node name="BuildManager" type="Node2D" parent="." unique_id=695504288]
 script = ExtResource("6_v1gob")
 
 [node name="PathManager" type="Node2D" parent="." unique_id=1207476002]
 script = ExtResource("11_4kpch")
-port_stub_len = 40.0
+port_stub_len = 15.0
 corner_radius = 10.0
 arc_segments = 5
-min_stub_len = 100.0
+min_stub_len = 25.0
 
 [node name="buildings" type="Node2D" parent="." unique_id=1655476447]
 

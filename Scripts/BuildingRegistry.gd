@@ -1,5 +1,5 @@
 extends Node
-#BUildingRegistry holds the enumaeration for all buildings in the tool. This ensures enumeration IDs remain constant through the entire program.
+# BuildingRegistry holds the enumeration for all buildings in the tool.
 class_name BuildRegistry
 const BUILDINGS := {
 	&"smelter": preload("res://Buildings/Smelter.tscn"),
@@ -49,8 +49,19 @@ const BUILDINGS := {
 	&"orbital_launcher_v2": preload("res://Buildings/Orbital_launcher_v2.tscn"),
 	&"ore_excavator_v2": preload("res://Buildings/OreExcavator_v2.tscn"),
 	&"compounder_v2": preload("res://Buildings/Compounder V2.tscn"),
-	&"constructorizer_v2": preload("res://Buildings/Constructorizer V2.tscn")
+	&"constructorizer_v2": preload("res://Buildings/Constructorizer V2.tscn"),
+	&"defense_turret": preload("res://Buildings/defense_turret.tscn"),
+	&"defense_tower": preload("res://Buildings/defense_tower.tscn")
+}
+
+const BUILDING_ALIASES := {
+	&"megapress": &"mega_press",
+	&"orbital_launcher_v1": &"orbital_launcher",
+	&"rail_mod_3": &"rail_modulator_3",
+	&"rail_mod_5": &"rail_modulator_5",
+	&"radial_rail_connect": &"radial_rail",
 }
 
 static func get_scene(key: StringName) -> PackedScene:
-	return BUILDINGS.get(key, null)
+	var resolved_key: StringName = BUILDING_ALIASES.get(key, key)
+	return BUILDINGS.get(resolved_key, null)

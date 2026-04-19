@@ -1,0 +1,758 @@
+res://Buildings/Assembler.tscn::70c265375e27168445136488d336bca0::1775950532::res://.godot/exported/133200997/export-f74296da50c5bfea074fab69880fe6b0-Assembler.scn
+res://Buildings/Base Core.tscn::2becf1d061307294db59999492c77fc3::1775950532::res://.godot/exported/133200997/export-54d1394afffc66d459e13bad245eb69b-Base Core.scn
+res://Buildings/Chemical Generator.tscn::e6867a89304b3f102e84a7b6f136bc4b::1775950532::res://.godot/exported/133200997/export-8225b2f434f0a91776e9ca842e81ecfd-Chemical Generator.scn
+res://Buildings/Compounder V2.tscn::52ec97937dc7f61547a4ffb25fdfcf76::1775950532::res://.godot/exported/133200997/export-c68c8acac4ba3b221b9919803f2defa2-Compounder V2.scn
+res://Buildings/Compounder.tscn::51936ff5edf36749bf52f739fbb8ebce::1775950532::res://.godot/exported/133200997/export-909106895fdaf706353f5cc03e85e8d8-Compounder.scn
+res://Buildings/Constructorizer V2.tscn::17431623e8b12a9aa147527f0077d094::1775950532::res://.godot/exported/133200997/export-adc2b09ea48f114ae49170a8eb4f6515-Constructorizer V2.scn
+res://Buildings/Constructorizer.tscn::07b1656ef2c6fb6c439896011bd5b41d::1775950532::res://.godot/exported/133200997/export-cb78a9610d99b5e995a4d12baf732967-Constructorizer.scn
+res://Buildings/Core Amplifier v1.tscn::6ef6783cc9bfc82ca5a605d67dca065c::1775950532::res://.godot/exported/133200997/export-d58029468eb797e1f22fb2ed5df6e822-Core Amplifier v1.scn
+res://Buildings/Core Amplifier v2.tscn::12a296e75d94d153cfc8848ae89342a2::1775950532::res://.godot/exported/133200997/export-d7721055dbb70c51624d1e0e3bbc894a-Core Amplifier v2.scn
+res://Buildings/Dispatcher.tscn::c76b86cfa8f64fc6c6c52c596d05ced5::1774985854::res://.godot/exported/133200997/export-eaf3cb61a670d9ff77fb2653474ed03b-Dispatcher.scn
+res://Buildings/Expandable Storage.tscn::543f1cc73600e2adaaf5561f0cc382c3::1774985854::res://.godot/exported/133200997/export-a02f6cdccef1995b5314b4817bf2ef43-Expandable Storage.scn
+res://Buildings/Fabricator V2.tscn::b794f2899e73ccfcbc9ee8922b4705a4::1775950532::res://.godot/exported/133200997/export-8580301517b918ceccb8285b060e72e6-Fabricator V2.scn
+res://Buildings/Fabricator.tscn::98a3305b6ecadad0bc8fe61bda039087::1775950532::res://.godot/exported/133200997/export-6dd41e1e154abd1355fc6c7a3d544433-Fabricator.scn
+res://Buildings/Facturer.tscn::7f5c07f84e475ccad5bd23557d3bef82::1775950532::res://.godot/exported/133200997/export-07b8b0e366919316cd6c2d470c361c4e-Facturer.scn
+res://Buildings/Furnace V2.tscn::fc1efd194d149160648d35276bdc0014::1775950532::res://.godot/exported/133200997/export-5f8b51ba86a89e1bda772488d3e1bb4a-Furnace V2.scn
+res://Buildings/Furnace.tscn::f5e9fac6ad819ace7e70cf0bb97b60b6::1775950532::res://.godot/exported/133200997/export-6a0a4fed52285824f7c58bc4a37c7d63-Furnace.scn
+res://Buildings/Habitat.tscn::744104f8e2c82ee1314cfc0fb8587f2d::1774985854::res://.godot/exported/133200997/export-5cb9ffe1e9b592c4cb349973ff3e3a20-Habitat.scn
+res://Buildings/Helium Extractor.tscn::5b2cc775bacf5e45b91f6933b7ffe42d::1775950532::res://.godot/exported/133200997/export-7ac9b63c5724f445e2c5b8fc0f3fd4e6-Helium Extractor.scn
+res://Buildings/Large Habitat.tscn::de0747a006000bb8a3795b473dfebe19::1774985854::res://.godot/exported/133200997/export-61b6a9d9f54c0649ed53365f6d48ba38-Large Habitat.scn
+res://Buildings/Laser Drill.tscn::421b0659cd644dffb0e602707c60491d::1775950532::res://.godot/exported/133200997/export-b12cadc69f1f9e05bd3b737ef8b53db8-Laser Drill.scn
+res://Buildings/MegaPress.tscn::2d405deb566d03ad8e8f503e758e4dba::1775950532::res://.godot/exported/133200997/export-95a737427f4756e52a6df482b2328f31-MegaPress.scn
+res://Buildings/Multirail_3.tscn::5befda4a8a38526298ece9ef3e1d0760::1774985854::res://.godot/exported/133200997/export-9a104194e00db70597f3bc403730c9a1-Multirail_3.scn
+res://Buildings/Multirail_5.tscn::625ebf6f2e1931a20381f066d1fc7fb4::1774985854::res://.godot/exported/133200997/export-babc89e3d4e62f635f9c4a31387c7771-Multirail_5.scn
+res://Buildings/MultiStore.tscn::b76b64ed80b9d34cf6a542236ad6dca8::1774985854::res://.godot/exported/133200997/export-11b2f4fc50217a0da94ff62672583bfb-MultiStore.scn
+res://Buildings/Oil Extractor.tscn::69b7ebe292317eb4219026f14a4f69cc::1775950532::res://.godot/exported/133200997/export-22441ef9063f942a18a2bd6ff6cb0d98-Oil Extractor.scn
+res://Buildings/Orbital_launcher.tscn::e7d630059ff3d5e4eb34c0a67fc562f6::1776572466::res://.godot/exported/133200997/export-6315cd4c604d906b61bcd6d0b7698477-Orbital_launcher.scn
+res://Buildings/Orbital_launcher_v2.tscn::d21ab71f545e0ca04b78d599f2ab6291::1776577066::res://.godot/exported/133200997/export-1e6978b11e347b23abcb4e3366d5809f-Orbital_launcher_v2.scn
+res://Buildings/OreExcavator.tscn::630fa5083e8d60ddf115d7dfab73b757::1775950532::res://.godot/exported/133200997/export-1cf7f45f4bcd48d28ebc4131fd10d95e-OreExcavator.scn
+res://Buildings/OreExcavator_v2.tscn::c37af25efad22c3d5e8f45726bce65f2::1775950532::res://.godot/exported/133200997/export-35eb9366d211f8e37f40664429ecdbc1-OreExcavator_v2.scn
+res://Buildings/Pressurizer.tscn::add65c4f57513a1eab69fabbb330a2ec::1775950532::res://.godot/exported/133200997/export-79d673d1f01b03cda4e302bf53aa5def-Pressurizer.scn
+res://Buildings/Pyro Forge.tscn::3f1804184c998888c8eb8f4c2881e22e::1775950532::res://.godot/exported/133200997/export-e8e9888ed4c68873769d8e3985a852bd-Pyro Forge.scn
+res://Buildings/rail_connector.tscn::48f19c01b9b858cb34623173cce27395::1774985854::res://.godot/exported/133200997/export-96fe292a9422e23ae064eb00709e7f86-rail_connector.scn
+res://Buildings/rail_modulator_3.tscn::ccb1551e8068c8b6082c518dfefa0ddf::1775929251::res://.godot/exported/133200997/export-4e03f2f965488b7789949d157d2aa34d-rail_modulator_3.scn
+res://Buildings/rail_modulator_5.tscn::36aa908a66f5b6862a1895dce9b477a7::1774985854::res://.godot/exported/133200997/export-bebb2b2cd71db2e39445dd4ef6cecf16-rail_modulator_5.scn
+res://Buildings/rail_radial.tscn::5f7b42916eae7f516128b85873a3dac4::1775882331::res://.godot/exported/133200997/export-7c1006f867775f5f8e20cb481227f68e-rail_radial.scn
+res://Buildings/rail_support.tscn::8368523611cb5f3b03357de9dca73725::1775929447::res://.godot/exported/133200997/export-791c06d36ff092db8ac6079f6b9e998a-rail_support.scn
+res://Buildings/Receiver.tscn::0dca3666b2409a9ec3adef66ca5efbf6::1774985854::res://.godot/exported/133200997/export-3867f235dfd2c16fabb9c94e8eb026e7-Receiver.scn
+res://Buildings/Refinery.tscn::420a58f094d4bd88775859266521e52f::1775950532::res://.godot/exported/133200997/export-a930140c666bcfc5875488b6f5fc4aeb-Refinery.scn
+res://Buildings/Smelter.tscn::dc5c90f3686fba1e00b1fb900ddf70d5::1775950532::res://.godot/exported/133200997/export-972764afb3bc331e5efb5b76c85ad90e-Smelter.scn
+res://Buildings/Solar V1.tscn::c86d1602971c7cc79f90a95a8196fbfd::1775950532::res://.godot/exported/133200997/export-a3d03b514f001a2035aceeea1276b0c5-Solar V1.scn
+res://Buildings/Solar V2.tscn::0fc7aac4e21770d3d9b01c7290bc9b35::1775950532::res://.godot/exported/133200997/export-2a6ee983729dc1f045daec08e8fb295b-Solar V2.scn
+res://Buildings/Storage_v1.tscn::788fa7438b6bf0de48d7484e486bc945::1774985854::res://.godot/exported/133200997/export-795a838853a954c4fde2430f0e9ea95c-Storage_v1.scn
+res://Buildings/Storage_v2.tscn::722fb1433059414a5a1ccdfdfe60b233::1774985854::res://.godot/exported/133200997/export-2bdf752c4b9ae915ca0b6bef29475561-Storage_v2.scn
+res://Buildings/Sulfur Extractor.tscn::fd4bc93cd3e1add7e74ae34151c95dcd::1775950532::res://.godot/exported/133200997/export-fa5837e04e71ef24f97bd0f9fac98259-Sulfur Extractor.scn
+res://Buildings/Teleporter.tscn::023ae6f7057637d8a8ba07eae4406ac6::1775883982::res://.godot/exported/133200997/export-c327c9796a067956c19acc98c786eef6-Teleporter.scn
+res://Buildings/Wind V1.tscn::216dccb2fa90ce26beef7eaff6276dff::1775950532::res://.godot/exported/133200997/export-129fca3142d56a36aaa72dede6b0c99d-Wind V1.scn
+res://Buildings/Wind V2.tscn::2e04227ec6b446ab62216dbcd71a5f33::1775950532::res://.godot/exported/133200997/export-23ee3ce5f36fb388da31085fe631adf0-Wind V2.scn
+res://Buildings/Zipline.tscn::cf5e1bd04b806ea73ee34670264309fd::1775884070::res://.godot/exported/133200997/export-183663d884f9a85a38dac2acd991f35c-Zipline.scn
+res://Patch Notes/0_1_0t.tres::ae7d9dfdcd2d38e0b69c040e78694ca0::1774836544::res://.godot/exported/133200997/export-b31818f71c09238b4bbf1db07a72a697-0_1_0t.res
+res://Patch Notes/0_1_1c.tres::dc78aa274428055ea7b42f79f838899c::1774836544::res://.godot/exported/133200997/export-4d4cd87cab28ebd712c9ef1cd3bb2015-0_1_1c.res
+res://Patch Notes/0_1_2.tres::9d3f91b9dbe07dddbea5b5a286399fda::1774836544::res://.godot/exported/133200997/export-a867def6ed7d6437d259410a1b869458-0_1_2.res
+res://Patch Notes/0_1_3.tres::9b0b8b6f444a5fea9b4c1e4f36afd7ca::1774836544::res://.godot/exported/133200997/export-6e8c2dcce701185d03292605874f0605-0_1_3.res
+res://Recipes/Item Definitions/Accumulator_Def.tres::79075ed806c333a6ee20b14e7b7aa9c3::1774836544::res://.godot/exported/133200997/export-5be8e3b311f9f02100f695b4328ce840-Accumulator_Def.res
+res://Recipes/Item Definitions/Aerogel_Def.tres::2203d9655ba058eeb16821464944646c::1774836544::res://.godot/exported/133200997/export-aefd8557814d9324a6aeb3a03447272d-Aerogel_Def.res
+res://Recipes/Item Definitions/Airlock_Def.tres::18eda796024c87c81dbaa4edada6b85e::1774836544::res://.godot/exported/133200997/export-d4918b51199e74f5716aa1f164f558df-Airlock_Def.res
+res://Recipes/Item Definitions/Anti-radiation_covers_Def.tres::e871a4b33a0b7e2e7fddf81fa01b5d3b::1774836544::res://.godot/exported/133200997/export-4b79a26e5bdcd7998f1e273b95c04cbb-Anti-radiation_covers_Def.res
+res://Recipes/Item Definitions/Applicator_Def.tres::ca1913f47e7e706cdb78e2f9b6417f64::1774836544::res://.godot/exported/133200997/export-8bb20d75a12154f1465d2651913703d4-Applicator_Def.res
+res://Recipes/Item Definitions/Basic_Building_Materials_Def.tres::fdc3492080e264fc7dfc8304354998b4::1774836544::res://.godot/exported/133200997/export-22ed2afbf2ca15b5f2edd3dae82a11ac-Basic_Building_Materials_Def.res
+res://Recipes/Item Definitions/Basic_fuel_Def.tres::375a2b978a6106b4751b0dd0b1223a59::1774836544::res://.godot/exported/133200997/export-0a862efecd92602596aaca53565fe5da-Basic_fuel_Def.res
+res://Recipes/Item Definitions/Battery_Def.tres::40584551391cb967942d4e5b7a5f1959::1774836544::res://.godot/exported/133200997/export-d4c696a2a9e52d2e628b963b21733727-Battery_Def.res
+res://Recipes/Item Definitions/Biofilament_Def.tres::c4090609926dc31cd430d2fb50f2835d::1774836544::res://.godot/exported/133200997/export-7b9cf05dc98e79dc8a1d2a1a45a4d823-Biofilament_Def.res
+res://Recipes/Item Definitions/Bioprinter_Def.tres::dcd3640f8562e38933a5890942d7cd47::1774836544::res://.godot/exported/133200997/export-9da14d530abebd1fdd93c7f41a268126-Bioprinter_Def.res
+res://Recipes/Item Definitions/Calcite_Sheet_Def.tres::ba0698488b05ca718aa8fa1fcc71db90::1774836544::res://.godot/exported/133200997/export-5ca3ec359ebb28012f8217d69f831474-Calcite_Sheet_Def.res
+res://Recipes/Item Definitions/Calcium_block_Def.tres::47cb6fabd06abf3520c1a6d084b1b3b8::1774836544::res://.godot/exported/133200997/export-52ac970a6268009c1b46d546356ab296-Calcium_block_Def.res
+res://Recipes/Item Definitions/Calcium_ore_Def.tres::fd6ae6adab9193a1c47c448758e033f6::1774836544::res://.godot/exported/133200997/export-acd7afbf10af28bafd4e327a3f0ae12a-Calcium_ore_Def.res
+res://Recipes/Item Definitions/Calcium_powder_Def.tres::402bd2fe8f825662ec2b4e82a0222714::1774836544::res://.godot/exported/133200997/export-420040697895c088709cf2f28f7ceefd-Calcium_powder_Def.res
+res://Recipes/Item Definitions/Carbon_sonar_Def.tres::2c7f4696d49e9be114a159aa269729ef::1774836544::res://.godot/exported/133200997/export-9b01e4d66f4d39255f32ac6d638588a4-Carbon_sonar_Def.res
+res://Recipes/Item Definitions/Ceramics_Def.tres::0a1b40ace981cb9b41415886ec0eb230::1774836544::res://.godot/exported/133200997/export-19510eee0121fdb676329894cb7ad075-Ceramics_Def.res
+res://Recipes/Item Definitions/Chemicals_Def.tres::0df7d7f533c24665d18ba2256b8f2a46::1774836544::res://.godot/exported/133200997/export-bf172d5ea17babae42e4dc19508ae923-Chemicals_Def.res
+res://Recipes/Item Definitions/Condenser_Def.tres::a5720f8648b00eaf4d3b1acdbbe644e2::1774836544::res://.godot/exported/133200997/export-f80c2417635983a7d2e710cebf8edbb4-Condenser_Def.res
+res://Recipes/Item Definitions/Containment_vessel_def.tres::845fc595674f2e46b15c1ca61ce3c9e2::1774836544::res://.godot/exported/133200997/export-55318002264c925da1f0e2a47f355a08-Containment_vessel_def.res
+res://Recipes/Item Definitions/Control_system_Def.tres::98fd9b33d1348a86c07322044bf05f3d::1774836544::res://.godot/exported/133200997/export-c50cf8cce299c8499d0cb4e4a2dd367c-Control_system_Def.res
+res://Recipes/Item Definitions/Converter_Def.tres::16e6f03722a3d6f636102fac1f84c359::1774836544::res://.godot/exported/133200997/export-b48934cccff16d5050e5527b4b9adb79-Converter_Def.res
+res://Recipes/Item Definitions/Crude_oil_def.tres::0f62d9f27e2f53d4b50c1d25a65302e4::1774836544::res://.godot/exported/133200997/export-1135b62814ed7bd1ceb0cb1d5b84f5bc-Crude_oil_def.res
+res://Recipes/Item Definitions/Cyclotrone_Def.tres::8ede312bd9d8187145faa99869b4c605::1774836544::res://.godot/exported/133200997/export-59b30d6e8bf1427e43bcb37c77528f2b-Cyclotrone_Def.res
+res://Recipes/Item Definitions/Deuterium_Def.tres::ddee41129b0adb3c9e73bb5657818c3d::1774836544::res://.godot/exported/133200997/export-0ce894c5f46cf6f2799d19dd386e490d-Deuterium_Def.res
+res://Recipes/Item Definitions/Dome_Def.tres::ef265b1d35ac194b2099df9cd6caf883::1774836544::res://.godot/exported/133200997/export-d04737d4f33ec0dc45d9f26029a97a4b-Dome_Def.res
+res://Recipes/Item Definitions/Electromagnetic_coil_Def.tres::ae00d327d58f8bffe47148b45b6a85c8::1774836544::res://.godot/exported/133200997/export-5753bbe6f6b7bfc828682fe33c432363-Electromagnetic_coil_Def.res
+res://Recipes/Item Definitions/Electromagnet_Def.tres::7033167e6bf024af82f54d15c9049a30::1774836544::res://.godot/exported/133200997/export-1f195217feade0c7a54c7b7e05abc913-Electromagnet_Def.res
+res://Recipes/Item Definitions/Electronics_Def.tres::97e6923282693b1fc4cba8f6e32b828f::1774836544::res://.godot/exported/133200997/export-3a8f4a6f82ea20445658d151bbbe0fb9-Electronics_Def.res
+res://Recipes/Item Definitions/Epoxy_Def.tres::62dc033fb010b4e21038e2d5f9248351::1774836544::res://.godot/exported/133200997/export-325bbb824ea78cadc757ff6aaf14acf3-Epoxy_Def.res
+res://Recipes/Item Definitions/Explosive_charge_def.tres::3e8272b6acf0472582e6144c4aa451ae::1774836544::res://.godot/exported/133200997/export-fbcaf9b9fd06e65556146b9efe2797c7-Explosive_charge_def.res
+res://Recipes/Item Definitions/Generator_Def.tres::0628af0ebe8426f5a89c37346c30eefc::1774836544::res://.godot/exported/133200997/export-7a0db679fcd0aa0be76faa2193ebe1e1-Generator_Def.res
+res://Recipes/Item Definitions/Geothite_ingot_Def.tres::80923532203f1ea890f753beded7a67e::1774836544::res://.godot/exported/133200997/export-8ce26c861aa8332b1a49c5b903bf518d-Geothite_ingot_Def.res
+res://Recipes/Item Definitions/Geothite_lattice_def.tres::51d066694f3c01e054da581749d7cf3d::1774836544::res://.godot/exported/133200997/export-469b35072031fdfacdb2da947748abe4-Geothite_lattice_def.res
+res://Recipes/Item Definitions/Geothite_ore_Def.tres::4c984a81adfa57d5f9907fb3eed51f8c::1774836544::res://.godot/exported/133200997/export-c66adb837c0792e56e2f6d1952721488-Geothite_ore_Def.res
+res://Recipes/Item Definitions/Geothite_powder_Def.tres::49c5cdb70bf655cdbf8fd8bcdf85871f::1774836544::res://.godot/exported/133200997/export-fd45bfe3db360935a22634071e46f099-Geothite_powder_Def.res
+res://Recipes/Item Definitions/Glass_Def.tres::2f2384a4429e587776a9655d31678652::1774836544::res://.godot/exported/133200997/export-476c1878ae2c48124715a47176cd0372-Glass_Def.res
+res://Recipes/Item Definitions/Hardening_agent_Def.tres::8cb3cb6320562c2f536e851908bb3ba7::1774836544::res://.godot/exported/133200997/export-a5c83efd3d95753cce36d23353663eba-Hardening_agent_Def.res
+res://Recipes/Item Definitions/Heat_resistant_sheet_Def.tres::9d657f69e2e779330338b5a66db05a4b::1774836544::res://.godot/exported/133200997/export-65c72c5c7857d5437d95267b00d7b043-Heat_resistant_sheet_Def.res
+res://Recipes/Item Definitions/Heat_shield_Def.tres::237113c103edb9f8d2483c7608dcc119::1774836544::res://.godot/exported/133200997/export-387e5bb38a8e6c35b6097dd2630abfc0-Heat_shield_Def.res
+res://Recipes/Item Definitions/Heavy_ammo_Def.tres::09cfd2e97f4e03cb0900fa01272744ef::1774836544::res://.godot/exported/133200997/export-6cbcc75dd43c912721f0e9841ae37675-Heavy_ammo_Def.res
+res://Recipes/Item Definitions/Helium-3_Def.tres::38f6869609d28058f1c142f4cd9eca3e::1774836544::res://.godot/exported/133200997/export-1dfc52833e1bcdc67bc3bc8d6cbea937-Helium-3_Def.res
+res://Recipes/Item Definitions/Impeller_Def.tres::3627c1dcca49cdf9ed528bad490f678c::1774836544::res://.godot/exported/133200997/export-1725a0098d9c2214f2af175366fa1ad1-Impeller_Def.res
+res://Recipes/Item Definitions/Inductor_Def.tres::69e00a22d6f72a737e56699c2c8ffe75::1774836544::res://.godot/exported/133200997/export-e0a4cacf8226bc809158e6ad99e6d93b-Inductor_Def.res
+res://Recipes/Item Definitions/Intermediate_building_materials_Def.tres::b0eb57e879f75e500e1593065869a1f1::1774836544::res://.godot/exported/133200997/export-4e6be5619909cca5820d56e3a2540fce-Intermediate_building_materials_Def.res
+res://Recipes/Item Definitions/Ion_bomb_def.tres::ac5f382fcf248fdaf9d6e2bdd800d355::1774836544::res://.godot/exported/133200997/export-4f6f401f24d9ac1cc127c03477999b38-Ion_bomb_def.res
+res://Recipes/Item Definitions/Ion_injector_Def.tres::b89c9d3aba425f69d4a01505311e848e::1774836544::res://.godot/exported/133200997/export-0424f1fc928ba516f540b6b6ba34ce92-Ion_injector_Def.res
+res://Recipes/Item Definitions/Ion_stabilizer_Def.tres::88a5f52da850539da5049475891d2d18::1774836544::res://.godot/exported/133200997/export-d78fded0efa560f5381ebfc145ad1786-Ion_stabilizer_Def.res
+res://Recipes/Item Definitions/Ion_thrusters_def.tres::b01841227c74ef2e05289473b84f0b6f::1774836544::res://.godot/exported/133200997/export-32b2c06515f461a0e258955dee8cabde-Ion_thrusters_def.res
+res://Recipes/Item Definitions/Laser_emitter_Def.tres::f86ee5e4ca251a8eb23a83ccb4cc20b3::1774836544::res://.godot/exported/133200997/export-9c5fa8897192af8dab9c6a0e53fa9c2e-Laser_emitter_Def.res
+res://Recipes/Item Definitions/Lens_Def.tres::c34626a45cd91d5cf307ec8af6d9695f::1774836544::res://.godot/exported/133200997/export-2aca635d6084e3cd411ffdeec85a6980-Lens_Def.res
+res://Recipes/Item Definitions/Liquid_helium_Def.tres::d822c016fd5b7496e924c416c0ce8d58::1774836544::res://.godot/exported/133200997/export-f440ff093f179876e19dd82ada7f5bdd-Liquid_helium_Def.res
+res://Recipes/Item Definitions/Mars_habitat_base_def.tres::543f48f0a15da12e1cea9bf8caa91d01::1774836544::res://.godot/exported/133200997/export-89dd2c4b6e106085e582b2f40680ba23-Mars_habitat_base_def.res
+res://Recipes/Item Definitions/Missile_housing_Def.tres::96212439aa9748ca2b23da320ff56d93::1774836544::res://.godot/exported/133200997/export-ff8c296e4be8aaad4d7ac6dc7ddb981d-Missile_housing_Def.res
+res://Recipes/Item Definitions/Molecular_scalpel.tres::374240d2c7f48e260cdb92911e3b7023::1774836544::res://.godot/exported/133200997/export-c8be6419b12165b71a85717cd6f64aeb-Molecular_scalpel.res
+res://Recipes/Item Definitions/Nanosyringe_Def.tres::3e0f0ec528bcf159943408fc20a284e1::1774836544::res://.godot/exported/133200997/export-c81b7ccbd64614fe4c74749b736d2fed-Nanosyringe_Def.res
+res://Recipes/Item Definitions/Nano_fibre_Def.tres::85218d174e9e4307a21ffe67e425efec::1774836544::res://.godot/exported/133200997/export-89dc56ab90a80ebb943d947d984f1036-Nano_fibre_Def.res
+res://Recipes/Item Definitions/Nozzle_Def.tres::c6601fe8994f994268081bde5959474b::1774836544::res://.godot/exported/133200997/export-01a675c9b5b09a4eb2f92e6f06d2eec6-Nozzle_Def.res
+res://Recipes/Item Definitions/Onboard_instruments_def.tres::80cf71eaab877e7366ede8de559bf36c::1774836544::res://.godot/exported/133200997/export-e8840b2fec9e9cb0b252ee4035589712-Onboard_instruments_def.res
+res://Recipes/Item Definitions/Organic_compound_Def.tres::de6e2e56033648674932fb406e026342::1774836544::res://.godot/exported/133200997/export-ba175f96e61d5e8d61ae71c67bc4c25c-Organic_compound_Def.res
+res://Recipes/Item Definitions/Payload_stage_def.tres::20aaf4971fea51b64ba127e35f53fe61::1774836544::res://.godot/exported/133200997/export-59dc4bd336be27fe02393300a53b7190-Payload_stage_def.res
+res://Recipes/Item Definitions/Pistol_Ammo_Def.tres::f3a98dadaeba5f0e8eafce85af03237f::1774836544::res://.godot/exported/133200997/export-9ef8741b2a66f9a3373757fe26dfc194-Pistol_Ammo_Def.res
+res://Recipes/Item Definitions/Plasma_generator_Def.tres::a744ec2747ad9be3f8ccf26212a6f1e7::1774836544::res://.godot/exported/133200997/export-bfdea2ee157c39ed8cfb7657bfa96e27-Plasma_generator_Def.res
+res://Recipes/Item Definitions/Plastic_Def.tres::5b875b9f4f2a4e38850d2d646b8f0fe7::1774836544::res://.godot/exported/133200997/export-ded2515a94174b0db15c5327a131cf58-Plastic_Def.res
+res://Recipes/Item Definitions/Plastic_dust_Def.tres::f698dd9f1f23ee8b86014673574c0d47::1774836544::res://.godot/exported/133200997/export-ecc0ef29f1ccb73a1f0a2084a306bf8b-Plastic_dust_Def.res
+res://Recipes/Item Definitions/Powerium.tres::ebadf974e1c6f5d9388dca19f389c9ea::1774836544::res://.godot/exported/133200997/export-215b936620584dc4bde142bdc60b9d8c-Powerium.res
+res://Recipes/Item Definitions/Pressure_tank_Def.tres::58f828d7169866a482a094fee0d12946::1774836544::res://.godot/exported/133200997/export-7586febf5cd0b6a64bc6f52a6e5271e1-Pressure_tank_Def.res
+res://Recipes/Item Definitions/Pressurized_helium_Def.tres::f75097482c32ff90993ba5d9ba9b11d4::1774836544::res://.godot/exported/133200997/export-92d9bedf3e1cd9a310a35e3c8cfe010a-Pressurized_helium_Def.res
+res://Recipes/Item Definitions/Propulsion_stage_def.tres::1177a73c425fd6e47c32f362ea97a95b::1774836544::res://.godot/exported/133200997/export-00d24f52397fceca8a98f04b88e50464-Propulsion_stage_def.res
+res://Recipes/Item Definitions/Pseudorubber_insulator_Def.tres::353b40674b91c16b0ef7079b9f32295d::1774836544::res://.godot/exported/133200997/export-8af48a4e1d777891b869bdbe4a8e6ce4-Pseudorubber_insulator_Def.res
+res://Recipes/Item Definitions/Pump_Def.tres::4807abae406add81f3a515a15a8ca2ed::1774836544::res://.godot/exported/133200997/export-fd46320a5dbf8678e73ffd1c4144c808-Pump_Def.res
+res://Recipes/Item Definitions/Quantum_tranquilizer_Def.tres::2e5f7f26913d507017dfee8e07da3f47::1774836544::res://.godot/exported/133200997/export-0baa5ec75e7f57b24117e01860b52ffb-Quantum_tranquilizer_Def.res
+res://Recipes/Item Definitions/Refined_oil_def.tres::2874e33b9728df7b9c0fc18edfb6600f::1774836544::res://.godot/exported/133200997/export-b55fd66841fe4945d6fd207b4fa7bc02-Refined_oil_def.res
+res://Recipes/Item Definitions/Reinforced_frame_Def.tres::f2349276ba91415a7a0665b0463b48e7::1774836544::res://.godot/exported/133200997/export-69672e4f36714a6461600e54e86c71b2-Reinforced_frame_Def.res
+res://Recipes/Item Definitions/Reinforced_housing_Def.tres::501a511383fa476acf769a4371dfbd4b::1774836544::res://.godot/exported/133200997/export-f770a53395d10d652a4f06db51fe6d2b-Reinforced_housing_Def.res
+res://Recipes/Item Definitions/Resonator_Def.tres::d75cfa747f61077534fef4c5b9ce587a::1774836544::res://.godot/exported/133200997/export-449b1547ee4295e78349bc21f3d4e290-Resonator_Def.res
+res://Recipes/Item Definitions/RNA_stabilizer_Def.tres::8a6519cada3808a9e6834fe24250622f::1774836544::res://.godot/exported/133200997/export-70ebe429f0a07ed02955177f0c47a56f-RNA_stabilizer_Def.res
+res://Recipes/Item Definitions/Rocket_engine_Def.tres::45ef6c81e569aa4828093adc487dfec5::1774836544::res://.godot/exported/133200997/export-df19b3e97293eee2b62291e2ba60a52d-Rocket_engine_Def.res
+res://Recipes/Item Definitions/Rocket_fuel_Def.tres::d41936fada5bf8dd73d7b3b729871589::1774836544::res://.godot/exported/133200997/export-0b2f321a79a40fd4a49e8408300e766a-Rocket_fuel_Def.res
+res://Recipes/Item Definitions/Rotor_Def.tres::a05556d33eb8d8f0539586baec568994::1774836544::res://.godot/exported/133200997/export-016eb1d4bcd5512ab7ed3caf63c3c803-Rotor_Def.res
+res://Recipes/Item Definitions/RTSC_Def.tres::c339417ddf6ccc6c61b0842f2bca37e3::1774836544::res://.godot/exported/133200997/export-f0f042bd79ac1ca0ed1dce819b7dd381-RTSC_Def.res
+res://Recipes/Item Definitions/RTSC_generator_Def.tres::7d1b8ca2d1c6f2dd39e0b0104cd5abc4::1774836544::res://.godot/exported/133200997/export-e102cb0f2150f0e9659da234ec1dba14-RTSC_generator_Def.res
+res://Recipes/Item Definitions/Satellite_body_Def.tres::a7bd0503e0116e4232e568892f55d016::1774836544::res://.godot/exported/133200997/export-77d3f911140d76e642d1a259be847d3a-Satellite_body_Def.res
+res://Recipes/Item Definitions/Scafolding_Def.tres::e01cb325001e92f17942d73b2df38bfc::1774836544::res://.godot/exported/133200997/export-1a9867d9f1faab615a91bee91a154dad-Scafolding_Def.res
+res://Recipes/Item Definitions/Scanner_Def.tres::9a4feb2fde083d72d67a9e1fb635e7b3::1774836544::res://.godot/exported/133200997/export-1c9f79d28b44d674eba29c30af0e7413-Scanner_Def.res
+res://Recipes/Item Definitions/Shotgun_ammo_def.tres::fe1d7dbfa9c2698e042c861c5b1d1d6b::1774836544::res://.godot/exported/133200997/export-67cbd7f34b6094adc4e7f70f5d4b9bd5-Shotgun_ammo_def.res
+res://Recipes/Item Definitions/Stabilizer_Def.tres::27e69d64f191ac2c6c6454ab8d91eb98::1774836544::res://.godot/exported/133200997/export-251ce79307f7149f6aedb17faf5ed2e8-Stabilizer_Def.res
+res://Recipes/Item Definitions/Standard_ammo_Def.tres::53848041d64ec7e528e9c0f6f200263e::1774836544::res://.godot/exported/133200997/export-bde03d49297b288d3e23f6fd5ea49f2b-Standard_ammo_Def.res
+res://Recipes/Item Definitions/Stator_Def.tres::b9306a0d3bd50203e796229fc007f02b::1774836544::res://.godot/exported/133200997/export-d019d1cc9681d81a8eae7c6942f75535-Stator_Def.res
+res://Recipes/Item Definitions/Substance_FHS-135-493_Def.tres::e1702ea68438222a92e03e9cc8d56018::1774836544::res://.godot/exported/133200997/export-00bdd8e834d2c2ce5f799defc44aed87-Substance_FHS-135-493_Def.res
+res://Recipes/Item Definitions/Sulpheric_acid_Def.tres::d93d850e364a666607961d3cd2d82115::1774836544::res://.godot/exported/133200997/export-0bd4ec4e00416ee6fe5b10529909cf2f-Sulpheric_acid_Def.res
+res://Recipes/Item Definitions/Sulphur_ore_Def.tres::4d349a408f1ced59a501f486e50060d6::1774836544::res://.godot/exported/133200997/export-78b16387808037118a861e1e915820d2-Sulphur_ore_Def.res
+res://Recipes/Item Definitions/Superconductor_Def.tres::6ec206bc8c9cafc77555e4d4cab0761e::1774836544::res://.godot/exported/133200997/export-2eaffb97cf8311efd6dc6095a1cde355-Superconductor_Def.res
+res://Recipes/Item Definitions/Supermagnet_Def.tres::258b667da265d6ec4f47088374d73103::1774836544::res://.godot/exported/133200997/export-e29fade5e25b88d69415af1dc1f3a7fb-Supermagnet_Def.res
+res://Recipes/Item Definitions/Synthetic_dna_Def.tres::cb61b8de38e689a2024315a879be0956::1774836544::res://.godot/exported/133200997/export-ce7707f132cded3fa1592b50b9f1008e-Synthetic_dna_Def.res
+res://Recipes/Item Definitions/Synthetic_protein_Def.tres::a9d7b4dde8954195519bc1f4937c97d9::1774836544::res://.godot/exported/133200997/export-16d7ea428b83fe09ede5c870029bfd34-Synthetic_protein_Def.res
+res://Recipes/Item Definitions/Synthetic_resin_Def.tres::451a3fdc021ef8d0c8b33ceac0279de3::1774836544::res://.godot/exported/133200997/export-b638fc2e79a76647dc1488f29528e9a4-Synthetic_resin_Def.res
+res://Recipes/Item Definitions/Synthetic_silicon_Def.tres::cae3b6d319252dc5e474f0361e340337::1774836544::res://.godot/exported/133200997/export-29e0692be4eb09341285f382d03418fb-Synthetic_silicon_Def.res
+res://Recipes/Item Definitions/Titanium_bar_Def.tres::c8f6eddac1478ca12ce1cb6b517aef87::1774836544::res://.godot/exported/133200997/export-0805992b2b0ac115bdce37bfe77867dd-Titanium_bar_Def.res
+res://Recipes/Item Definitions/Titanium_Beam_Def.tres::9ce6d1ed2b44a4171c717e9a3e237ca3::1774836544::res://.godot/exported/133200997/export-ac526761d335b0a35362680f8e20053e-Titanium_Beam_Def.res
+res://Recipes/Item Definitions/Titanium_housing_Def.tres::c20f70c330bbb9837a6d20c43a74c4dd::1774836544::res://.godot/exported/133200997/export-f2e92f0f65cb339dc217e5ea4598d0c2-Titanium_housing_Def.res
+res://Recipes/Item Definitions/Titanium_ore_Def.tres::87f70a333d01569c8e8d46086caa0217::1774836544::res://.godot/exported/133200997/export-8dce20d1931c67bd27aa2d5d0c81c5de-Titanium_ore_Def.res
+res://Recipes/Item Definitions/Titanium_rod_def.tres::6b1a98c0a135df4727509317b7101e78::1774836544::res://.godot/exported/133200997/export-5ebff1cbd58a88b854470eef20b68165-Titanium_rod_def.res
+res://Recipes/Item Definitions/Titanium_sheet_def.tres::a315f1a2467d410e1111a8b2beec5139::1774836544::res://.godot/exported/133200997/export-2084830a3ec8c417f7b5e07e69500e5e-Titanium_sheet_def.res
+res://Recipes/Item Definitions/Titanoferrite_ingot_Def.tres::7787ebfba353fb69e9684e16f410cd3d::1774836544::res://.godot/exported/133200997/export-b85cd0dc712c495dc5601b7bc058eb60-Titanoferrite_ingot_Def.res
+res://Recipes/Item Definitions/Tracking_device_Def.tres::f54e19bd49298a2a0094c9bb9afee167::1774836544::res://.godot/exported/133200997/export-15232f5a24d44715e3507f5366851792-Tracking_device_Def.res
+res://Recipes/Item Definitions/Tube_def.tres::891788caf058dd72d348078a922d1ba7::1774836544::res://.godot/exported/133200997/export-d21ece7582d1936cffa74b77e8896565-Tube_def.res
+res://Recipes/Item Definitions/Turbine_Def.tres::c38f92367ce2fe38cfbebc0174a435d4::1774836544::res://.godot/exported/133200997/export-8a45a0473b98b3a8ca233b8af4e1be69-Turbine_Def.res
+res://Recipes/Item Definitions/Uberfilament_Def.tres::e37f47188948078e8424eaa877ad6bd2::1774836544::res://.godot/exported/133200997/export-00cd0af30d2e0533b3b77c8d45877d13-Uberfilament_Def.res
+res://Recipes/Item Definitions/Valve_Def.tres::2fff023f3fb74151663464907ebeb402::1774836544::res://.godot/exported/133200997/export-8e628a4303a007efa12e27b526fe63c6-Valve_Def.res
+res://Recipes/Item Definitions/Wolfram_bar_Def.tres::7481bf2eff1a6aec6b9b981067450e67::1774836544::res://.godot/exported/133200997/export-7a751528080891ad959aaf0f31e88f03-Wolfram_bar_Def.res
+res://Recipes/Item Definitions/Wolfram_ore_Def.tres::ff02808efa9ceecabdf5098fca38431a::1774836544::res://.godot/exported/133200997/export-4532b4fe42007b9f56743d46233df214-Wolfram_ore_Def.res
+res://Recipes/Item Definitions/Wolfram_Plate_Def.tres::ded31abd298a8513a1600522c205a11f::1774836544::res://.godot/exported/133200997/export-c2fd859a5499aeb612ace17f28da5391-Wolfram_Plate_Def.res
+res://Recipes/Item Definitions/Wolfram_powder_Def.tres::455165a0b96a9357a0e84239d5f6bd8d::1774836544::res://.godot/exported/133200997/export-61010461e456fe399ece37fbf3890ad7-Wolfram_powder_Def.res
+res://Recipes/Item Definitions/Wolfram_steel_ingot_Def.tres::945db2b58d567301304c847e3671bf14::1774836544::res://.godot/exported/133200997/export-ab20835b4a5ab0c20839ddf07b913f3c-Wolfram_steel_ingot_Def.res
+res://Recipes/Item Definitions/Wolfram_Wire_Def.tres::11ce21e8f294b098f4b7dc027f569150::1774836544::res://.godot/exported/133200997/export-17058562b04875b2fba0e7f524d6113c-Wolfram_Wire_Def.res
+res://Recipes/Item Stacks/Accumulator_4_def.tres::f03f64cc9c74e10a05ad48c9a04412d9::1774836544::res://.godot/exported/133200997/export-b1e5dcad81fe1b2be0cab8cc5951cc3a-Accumulator_4_def.res
+res://Recipes/Item Stacks/Accumulator_6_def.tres::9b5dcb0ebde497e0476a62f89ff8df9a::1774986215::res://.godot/exported/133200997/export-ad8d97341cfa36eb8e42b584fed4ce3d-Accumulator_6_def.res
+res://Recipes/Item Stacks/Accumulator_8_def.tres::35a6bd82a93329b0aa8a9073e4248d49::1774836544::res://.godot/exported/133200997/export-309f7e2b8718af5c311bf23882735044-Accumulator_8_def.res
+res://Recipes/Item Stacks/Accumulator_10_def.tres::85444a852020f717edd6964d54309869::1774836544::res://.godot/exported/133200997/export-fa99fcd921125f6b7cc4db411e5c39f2-Accumulator_10_def.res
+res://Recipes/Item Stacks/Accumulator_12_def.tres::7812b83670b1b87d7219dde271cc0bd3::1774836544::res://.godot/exported/133200997/export-9cbc7c9d9ec476e04f87436998cbd61f-Accumulator_12_def.res
+res://Recipes/Item Stacks/Aerogel_12_def.tres::bfcdd585deb62c511c83b20bf7dc9cdf::1774836544::res://.godot/exported/133200997/export-b05c6c7505c0ab0a5f388884fdf06b78-Aerogel_12_def.res
+res://Recipes/Item Stacks/Aerogel_18_def.tres::f028e5ccba7c77e9407d7819a8942336::1774836544::res://.godot/exported/133200997/export-93f8afad601f5d57fe6505789e5cf26e-Aerogel_18_def.res
+res://Recipes/Item Stacks/Aerogel_20_def.tres::69e20755749154ad3488b0abb201f402::1774836544::res://.godot/exported/133200997/export-4892490656f0bbbb3c1799b2b5a06fb4-Aerogel_20_def.res
+res://Recipes/Item Stacks/Aerogel_24_def.tres::054c79b85dab5cd44af69c2be546fba5::1774836544::res://.godot/exported/133200997/export-fb052a7a1910dadfa65b98e4933ce532-Aerogel_24_def.res
+res://Recipes/Item Stacks/Aerogel_32_def.tres::5855be7a961ab7a6144859e214d2aabc::1774836544::res://.godot/exported/133200997/export-068797a2685c567e93842b0f866c6fee-Aerogel_32_def.res
+res://Recipes/Item Stacks/Airlock_3_def.tres::0868079aa023dbab346dc0bf6b32bbd5::1774836544::res://.godot/exported/133200997/export-79674764f64f3bef23b297a308cfb2ca-Airlock_3_def.res
+res://Recipes/Item Stacks/Airlock_4_def.tres::f9b3dde9e247a055713f8548622dd642::1774836544::res://.godot/exported/133200997/export-c68cde7e80d2cfb230b74cd3680ce7d7-Airlock_4_def.res
+res://Recipes/Item Stacks/Anti-radiation_Covers_4_def.tres::a098c55817fde20ac96dd84574b57651::1774836544::res://.godot/exported/133200997/export-57393bde6b2f2aecaa830407ad44314f-Anti-radiation_Covers_4_def.res
+res://Recipes/Item Stacks/Anti-radiation_Covers_6_def.tres::f5b7b5c5244c52325b2723fbba4ad4d3::1774836544::res://.godot/exported/133200997/export-339e327aaf56a6396d90221674a55684-Anti-radiation_Covers_6_def.res
+res://Recipes/Item Stacks/Anti-radiation_Covers_12_def.tres::b0b16a7390d16a065006b8cbedddd80a::1774836544::res://.godot/exported/133200997/export-9d60626c9b5f9f5c27c3c4558b4f0ef7-Anti-radiation_Covers_12_def.res
+res://Recipes/Item Stacks/Applicator_12_def.tres::d3f9b4b80eee20c5378ed39a7ddff573::1774836544::res://.godot/exported/133200997/export-8e83c30c4b8cba14c70856e1b2892ec0-Applicator_12_def.res
+res://Recipes/Item Stacks/Applicator_15_def.tres::06e93801b2a78df2825120e5364690e4::1774836544::res://.godot/exported/133200997/export-0c088a0f502431007a326651c20cd59f-Applicator_15_def.res
+res://Recipes/Item Stacks/Applicator_24_def.tres::4590ecbc0a6c5b380c13276e335c7e17::1774836544::res://.godot/exported/133200997/export-68ed22bf6cf8bb24a0628778b244f747-Applicator_24_def.res
+res://Recipes/Item Stacks/Applicator_40_def.tres::1a6f352c9feb4605f33854b0226a747b::1774836544::res://.godot/exported/133200997/export-696ad009621023568f6b1a4efb784820-Applicator_40_def.res
+res://Recipes/Item Stacks/Basic_Build_180_def.tres::e46c606edd22d4ea660feab562aa129f::1774836544::res://.godot/exported/133200997/export-aebf38bb05cc2718ed9a59017305fc2d-Basic_Build_180_def.res
+res://Recipes/Item Stacks/Basic_Build_200_def.tres::f8cd6d6dfa10596bf202fe8e699775ac::1774836544::res://.godot/exported/133200997/export-20bd36b615f434da6ead28893a7bcae6-Basic_Build_200_def.res
+res://Recipes/Item Stacks/Basic_Build_210_def.tres::2fddd99cb8d99a0fe5487a4670a31aac::1774836544::res://.godot/exported/133200997/export-dec70c89cea7bdb080e2f87efbee9e20-Basic_Build_210_def.res
+res://Recipes/Item Stacks/Basic_Build_240_def.tres::e790510c22918786b1ab31739e64a346::1774836544::res://.godot/exported/133200997/export-50c159d2b70f290439eae2f65d38d882-Basic_Build_240_def.res
+res://Recipes/Item Stacks/Basic_Build_300_def.tres::1bf8b6b5c77415e8a6a1c7eb76502276::1774836544::res://.godot/exported/133200997/export-cdc31196787234fb628864c4ffa280cb-Basic_Build_300_def.res
+res://Recipes/Item Stacks/Basic_Build_400_def.tres::5eed5d49d0b37b223c310279337cd0a7::1774836544::res://.godot/exported/133200997/export-274d4d1fd778ce5316493efc0487f067-Basic_Build_400_def.res
+res://Recipes/Item Stacks/Basic_fuel_6_def.tres::d07b032a13ec12dca0d19e7dddc30e06::1774836544::res://.godot/exported/133200997/export-7d1c84d1b5ea7e1b05410e81f82a5b42-Basic_fuel_6_def.res
+res://Recipes/Item Stacks/Basic_fuel_10_def.tres::2f0a5d6247bd4eff6bdcff8764416ace::1774836544::res://.godot/exported/133200997/export-898a9cfcdbd3853e552e1f26a2815296-Basic_fuel_10_def.res
+res://Recipes/Item Stacks/Basic_Fuel_18_def.tres::24678e9c0bf21d5585b031a5947e25d9::1774836544::res://.godot/exported/133200997/export-db6097d65759f9748c70d6609dc67789-Basic_Fuel_18_def.res
+res://Recipes/Item Stacks/Battery_6_def.tres::1b1ba93d1dff13a9dc73662c66f4257d::1774836544::res://.godot/exported/133200997/export-2ccd1427804128c8c160834bbb251854-Battery_6_def.res
+res://Recipes/Item Stacks/Battery_12_def.tres::6ca900305bb58cee4ff38b9da7513323::1774836544::res://.godot/exported/133200997/export-5e0e0bf361c47730fa1ef29f6259a5b0-Battery_12_def.res
+res://Recipes/Item Stacks/Battery_15_def.tres::d441edb330c7736f27ab76703b54104b::1774836544::res://.godot/exported/133200997/export-cfcb4eb3c8d8ca24c7a09058f35bc0d9-Battery_15_def.res
+res://Recipes/Item Stacks/Biofilament_4_def.tres::ec60467acb08a3f0eba7058b1c03c209::1774836544::res://.godot/exported/133200997/export-365623608fb0d4dbfd4e171f86db3d51-Biofilament_4_def.res
+res://Recipes/Item Stacks/Biofilament_6_def.tres::175b10931dfa957e1a222bd7c7ad2a6e::1774836544::res://.godot/exported/133200997/export-49c5c4f570d65c9aeab5af5fd9979352-Biofilament_6_def.res
+res://Recipes/Item Stacks/Bioprinter_3_def.tres::cc6ab62d8beed550be0a59d86c6923c8::1774836544::res://.godot/exported/133200997/export-214b42bca38a56662ce9bb18de3a8153-Bioprinter_3_def.res
+res://Recipes/Item Stacks/Calcite_sheet_20_def.tres::cbacc351524caabc00632487584be5a0::1774836544::res://.godot/exported/133200997/export-24bb21947be699c373185fec087989ca-Calcite_sheet_20_def.res
+res://Recipes/Item Stacks/Calcite_sheet_30_def.tres::fd5ba3988967ccd902fb7ee140e15635::1774836544::res://.godot/exported/133200997/export-6fa768b78f5fa82217bd687a57122f3c-Calcite_sheet_30_def.res
+res://Recipes/Item Stacks/Calcite_sheet_60_def.tres::17b987b879a0857cfd2f3cb4d9e46a49::1774836544::res://.godot/exported/133200997/export-e0b65cafbbc3d718c42e54578646fbb9-Calcite_sheet_60_def.res
+res://Recipes/Item Stacks/Calcite_sheet_120_def.tres::dbac0f9f27edc055760cb94adafaff6d::1774836544::res://.godot/exported/133200997/export-189eafbafaa9b3b915e95c9aa05c89fb-Calcite_sheet_120_def.res
+res://Recipes/Item Stacks/Calcium_block_20_def.tres::80665abd3587daaf325100010c926ae8::1774836544::res://.godot/exported/133200997/export-8bf0b031eab14556a6f7d7be89ce2bf4-Calcium_block_20_def.res
+res://Recipes/Item Stacks/Calcium_block_30_def.tres::68c37bb239b3a0d91e6b5769c3d1c42a::1774836544::res://.godot/exported/133200997/export-a9dcba32f9a4a915e4c50b7dfeffbde3-Calcium_block_30_def.res
+res://Recipes/Item Stacks/Calcium_block_60_def.tres::04adf271a16e20f9703922a6cc871e1f::1774836544::res://.godot/exported/133200997/export-1c7c3fd776ea0e029652dfe0f76a02fe-Calcium_block_60_def.res
+res://Recipes/Item Stacks/Calcium_ore_60_def.tres::f914372744ef86327bdb0222efa95a74::1774836544::res://.godot/exported/133200997/export-8a89981896cbe7621704fbcfcba90d9c-Calcium_ore_60_def.res
+res://Recipes/Item Stacks/Calcium_ore_120_def.tres::8a17517d1991988480f3c2b7cf0af121::1774836544::res://.godot/exported/133200997/export-b83700d198d0a9be747e89b5ff502118-Calcium_ore_120_def.res
+res://Recipes/Item Stacks/Calcium_ore_180_def.tres::7d5692ec5eb01cf514ee620deae8e4ca::1774836544::res://.godot/exported/133200997/export-1ff17d76cb33a3454c923f23ba5ca630-Calcium_ore_180_def.res
+res://Recipes/Item Stacks/Calcium_ore_240_def.tres::20e0b541aa13bdecadd44f4ee2183e61::1774836544::res://.godot/exported/133200997/export-6c8c6c13debcf58f45a5bb4da4c4ec59-Calcium_ore_240_def.res
+res://Recipes/Item Stacks/Calcium_ore_300_def.tres::ceab56a6c8c973ef468cc5c95e65a21e::1774836544::res://.godot/exported/133200997/export-9ae017ce2d2ba2e11785d2f6b2fc3ec7-Calcium_ore_300_def.res
+res://Recipes/Item Stacks/Calcium_ore_480_def.tres::9a7a6e93a47fcdc3b010c22523c1a04a::1774836544::res://.godot/exported/133200997/export-1ef201c2d3ae74632a34c76463c126ba-Calcium_ore_480_def.res
+res://Recipes/Item Stacks/Calcium_powder_30_def.tres::aaf9ff51dd9e10afe25935eadde6abec::1774836544::res://.godot/exported/133200997/export-fa5e963c5da5aef5c3a2b9fbe8945813-Calcium_powder_30_def.res
+res://Recipes/Item Stacks/Calcium_powder_40_def.tres::9f0eb07a34bc30bbb39a0e1969c61192::1774836544::res://.godot/exported/133200997/export-31bf42633fca99d98fc5cf5af0d029dc-Calcium_powder_40_def.res
+res://Recipes/Item Stacks/Calcium_powder_60_def.tres::09281dbab9d6f5a35f9b95781c341fae::1774836544::res://.godot/exported/133200997/export-6bf15296f4cdbd7cd30c3461acae083e-Calcium_powder_60_def.res
+res://Recipes/Item Stacks/Calcium_powder_90_def.tres::3654a5acab4933eb05ca3cf6d0506298::1774836544::res://.godot/exported/133200997/export-86d265d9f79386bd207d2ab8f848fbb5-Calcium_powder_90_def.res
+res://Recipes/Item Stacks/Calcium_powder_200_def.tres::76ad9ba71f8e43a3f03bf43ad690300b::1774836544::res://.godot/exported/133200997/export-4e29abad51ee86b18265b72ecdcfbb1b-Calcium_powder_200_def.res
+res://Recipes/Item Stacks/Carbon_Sonar_4_def.tres::43a315995f8def1259a18ded3c0f9726::1774836544::res://.godot/exported/133200997/export-d549f76187e971fb08355c7949208f59-Carbon_Sonar_4_def.res
+res://Recipes/Item Stacks/Carbon_Sonar_5_def.tres::c62e394663e804e8cbdc0cbc26408356::1774836544::res://.godot/exported/133200997/export-e2d24e87bd1751df7a84ddbc7750d83d-Carbon_Sonar_5_def.res
+res://Recipes/Item Stacks/Ceramics_30_def.tres::39a295da1ecd50c2124d62def8b1d4a8::1774836544::res://.godot/exported/133200997/export-7b0c086354a6bcb0570384ed5c56646c-Ceramics_30_def.res
+res://Recipes/Item Stacks/Ceramics_60_def.tres::58654733530b6f7926164953f3bdfec3::1774836544::res://.godot/exported/133200997/export-4e7c80c2179304f57ef3d58a38601dce-Ceramics_60_def.res
+res://Recipes/Item Stacks/Ceramics_120_def.tres::cfbac321bdc902b324c876e9204cf228::1774836544::res://.godot/exported/133200997/export-bce7409b59f740b0fc10aeeec28f8ef4-Ceramics_120_def.res
+res://Recipes/Item Stacks/Chemicals_6_def.tres::e1d9a5a30e7cb8e94ca3f0e5b4ede6c1::1774836544::res://.godot/exported/133200997/export-a167f7d0ed00596bcc7a04e688160fb4-Chemicals_6_def.res
+res://Recipes/Item Stacks/Chemicals_20_def.tres::24d19556b5ab8894328101dda0fb0347::1774836544::res://.godot/exported/133200997/export-aafad7a3b71cef9f3e37e472b5fd853e-Chemicals_20_def.res
+res://Recipes/Item Stacks/Chemicals_60_def.tres::cbf464e9f6959762b0cb1ebb45e3d78b::1774836544::res://.godot/exported/133200997/export-c877194a40ddfbc63abd81ab8586f593-Chemicals_60_def.res
+res://Recipes/Item Stacks/Chemicals_120_def.tres::b458ea2e3a642b1c97358818bba32c8c::1774836544::res://.godot/exported/133200997/export-7008f48c0cd42fa2bbe1dffb4809b39b-Chemicals_120_def.res
+res://Recipes/Item Stacks/Condenser_4_def.tres::04e8949f94c8c73dea59019ffc0ccd67::1774836544::res://.godot/exported/133200997/export-e3065afd504a8e226964515a3594640b-Condenser_4_def.res
+res://Recipes/Item Stacks/Condenser_6_def.tres::f545646d9e813bb77bbf224d0c398898::1774836544::res://.godot/exported/133200997/export-265f9bed2df240cfb7ae40ef97dc2e76-Condenser_6_def.res
+res://Recipes/Item Stacks/Condenser_12_def.tres::d7a5770d36fc48979d84de824345a003::1774836544::res://.godot/exported/133200997/export-e3a305842e05ad77dc5198bf9330ab8b-Condenser_12_def.res
+res://Recipes/Item Stacks/Containment_Vessel_4_def.tres::cdfa14fed8a405e19415ec143716b709::1774836544::res://.godot/exported/133200997/export-acdb06f32c451a1f011f941e7ffd3dcd-Containment_Vessel_4_def.res
+res://Recipes/Item Stacks/Control_Systems_4_def.tres::e4cc1f409d514d4affd0b12eae79d2fd::1774836544::res://.godot/exported/133200997/export-72b5d3b22b52f74cbd1f934c9d93fbc5-Control_Systems_4_def.res
+res://Recipes/Item Stacks/Converter_3_def.tres::9bc083b70a82f52e988f75271fb0c74b::1774836544::res://.godot/exported/133200997/export-f49f6e580282ab03b307362a73aadfdd-Converter_3_def.res
+res://Recipes/Item Stacks/Converter_4_def.tres::d1cffefec47ecee4280c5af9f298ba35::1774836544::res://.godot/exported/133200997/export-3d394ad4c437fb5dcdfc11c9a7425526-Converter_4_def.res
+res://Recipes/Item Stacks/Crude_Oil_300_def.tres::ce9676796c343a8a4b4c046bda5d4923::1774836544::res://.godot/exported/133200997/export-ecfa43f629d29d355ba77ff54dbde302-Crude_Oil_300_def.res
+res://Recipes/Item Stacks/Cyclotrone_3_def.tres::878d8be6c26791803554913a5a14774d::1774836544::res://.godot/exported/133200997/export-297e174ef07fd2bf6fe2e65c69e6268c-Cyclotrone_3_def.res
+res://Recipes/Item Stacks/Cyclotrone_4_def.tres::6e92fb13311245ec0ea58217daf9a7f4::1774836544::res://.godot/exported/133200997/export-88fb5fe159956ad4d4961c57fef932ef-Cyclotrone_4_def.res
+res://Recipes/Item Stacks/Deuterium_12_def.tres::7544af47115fe213ff59696f33645b97::1774836544::res://.godot/exported/133200997/export-a982b7479508dca2c0338ff59ea78497-Deuterium_12_def.res
+res://Recipes/Item Stacks/Dome_3_def.tres::447aafae3becdc8f2da77439975ebaaa::1774836544::res://.godot/exported/133200997/export-c7525d6b329806741a5ccb52b9f7243e-Dome_3_def.res
+res://Recipes/Item Stacks/Electromagnetic_coil_15_def.tres::8fad4f0fbf33d63637e9c3f30b1e975f::1774836544::res://.godot/exported/133200997/export-2176560a3a9e4fe36424ba1cdcb821ad-Electromagnetic_coil_15_def.res
+res://Recipes/Item Stacks/Electromagnetic_coil_16_def.tres::7460a1c74f86f94f2ead1de1f9c70bef::1774836544::res://.godot/exported/133200997/export-6c9fda4f523976f08570f075e376670d-Electromagnetic_coil_16_def.res
+res://Recipes/Item Stacks/Electromagnetic_coil_30_def.tres::aed4184b0608a540e38410bc8b050c3e::1774836544::res://.godot/exported/133200997/export-e1d54b507aa96d9e7637c8ed8dd7c3ff-Electromagnetic_coil_30_def.res
+res://Recipes/Item Stacks/Electromagnetic_coil_36_def.tres::630b929bf790cbff3c3560fbbde8cc78::1774836544::res://.godot/exported/133200997/export-6471c63acb603bff806f367b22d001ac-Electromagnetic_coil_36_def.res
+res://Recipes/Item Stacks/Electromagnetic_coil_60_def.tres::940df79f3432b0c156eee212df0b3211::1774836544::res://.godot/exported/133200997/export-f6d84ef80d44ec31647d55bc2de9b272-Electromagnetic_coil_60_def.res
+res://Recipes/Item Stacks/Electromagnet_4_def.tres::02afa02f2d86ee75a5cbfc6d9db7adab::1774836544::res://.godot/exported/133200997/export-5c5874d17c7ab71b89fd05e7454f0929-Electromagnet_4_def.res
+res://Recipes/Item Stacks/Electromagnet_6_def.tres::d8bb6a7a0eb8c3e925b170bfa6d403ad::1774836544::res://.godot/exported/133200997/export-6278dec5bfb87951b8ea720f863d915c-Electromagnet_6_def.res
+res://Recipes/Item Stacks/Electromagnet_10_def.tres::beb5037490d0d291644c139040bbe6f0::1774836544::res://.godot/exported/133200997/export-eb4e8eea44f85c6762500638556cf90b-Electromagnet_10_def.res
+res://Recipes/Item Stacks/Electromagnet_12_def.tres::f8a66d83fe5e3c6db9af515f0d06e803::1774836544::res://.godot/exported/133200997/export-21823dc11f68f3a341d752cb5d22ff8b-Electromagnet_12_def.res
+res://Recipes/Item Stacks/Electromagnet_24_def.tres::ba35d409579b5ccdbddf8448668cce61::1774836544::res://.godot/exported/133200997/export-63d6bc21d8296bd8e925dfb1acbc98be-Electromagnet_24_def.res
+res://Recipes/Item Stacks/Electronics_12_def.tres::0ae620ad8cf54408ad5c39440403047f::1774836544::res://.godot/exported/133200997/export-3174b79e81d9d96cd1ebd0ac7960ac80-Electronics_12_def.res
+res://Recipes/Item Stacks/Electronics_15_def.tres::c6e214a09de6e7c763678c4c0a0bfb22::1774836544::res://.godot/exported/133200997/export-4eea56adcab7188d5162fe027027ae65-Electronics_15_def.res
+res://Recipes/Item Stacks/Electronics_24_def.tres::2d13ae37e12d5c1eff0ba10ecde82aca::1774836544::res://.godot/exported/133200997/export-7ecdb7ac7b53460b36ab6be5082e1606-Electronics_24_def.res
+res://Recipes/Item Stacks/Epoxy_6_def.tres::7e80bcab5b9a74fbab514e7eb604deb6::1774836544::res://.godot/exported/133200997/export-cf33d1733b9a7ac2925184f10a5c9b10-Epoxy_6_def.res
+res://Recipes/Item Stacks/Epoxy_10_def.tres::9a637a954e237e7228532e5ba0a9ea43::1774836544::res://.godot/exported/133200997/export-584f4d93f3bcac0332fa9a83147a7cd5-Epoxy_10_def.res
+res://Recipes/Item Stacks/Epoxy_12_def.tres::79aacdb38355d727bd3efc55f90f158a::1774836544::res://.godot/exported/133200997/export-e92221a8965ad8c182ed5656137000d8-Epoxy_12_def.res
+res://Recipes/Item Stacks/Epoxy_15_def.tres::f8b709ee0cbe574bfd64e2def94bad64::1774836544::res://.godot/exported/133200997/export-505ff3508f92c806e62b8043cbf2ab07-Epoxy_15_def.res
+res://Recipes/Item Stacks/Epoxy_18_def.tres::0b0571430a670bcc77dcd5d77a6f3dac::1774836544::res://.godot/exported/133200997/export-9339071dfad22394cf475940301975a1-Epoxy_18_def.res
+res://Recipes/Item Stacks/Epoxy_40_def.tres::649dd85927b133f7bf23c8d86ddb2cf7::1774836544::res://.godot/exported/133200997/export-50e5588688449b747c65ea7b171e1faa-Epoxy_40_def.res
+res://Recipes/Item Stacks/Explosive_charge_6_def.tres::96531edb4fde9b4987d77d02c2d8632c::1774836544::res://.godot/exported/133200997/export-0fc2d8d1ce6426da2605cdd3c0eb5015-Explosive_charge_6_def.res
+res://Recipes/Item Stacks/Explosive_Charge_10_def.tres::963caafbf07a29e5f4e0d91da0735d50::1774836544::res://.godot/exported/133200997/export-a4904d662b09a1830a5ca38bff045b5f-Explosive_Charge_10_def.res
+res://Recipes/Item Stacks/Explosive_Charge_18_def.tres::cd1642bb44d6406b22c709d716cd41f4::1774836544::res://.godot/exported/133200997/export-65f477be15fd81d5e1b12cc5f0b18d16-Explosive_Charge_18_def.res
+res://Recipes/Item Stacks/Generator_3_def.tres::e0d5b8392f95bd3d55f96c4ba14b73c9::1774836544::res://.godot/exported/133200997/export-5fc6fa53f448a65c897ff5f6a995c915-Generator_3_def.res
+res://Recipes/Item Stacks/Generator_6_def.tres::5ead9815cc7307f6e5ba901653e08699::1774836544::res://.godot/exported/133200997/export-b8546b3b55b4fd285a555a64eda34ddf-Generator_6_def.res
+res://Recipes/Item Stacks/Generator_8_def.tres::7c75b24c48605d31cfa4940901fb674c::1774836544::res://.godot/exported/133200997/export-65ababf98328a67c23d07b3337e0967d-Generator_8_def.res
+res://Recipes/Item Stacks/Generator_12_def.tres::d2781de7a6a6060e816efcdef75d4349::1774836544::res://.godot/exported/133200997/export-101eaf75912059123cfef2df48b68247-Generator_12_def.res
+res://Recipes/Item Stacks/Generator_18_def.tres::c8fe83f0036ced8aca8737751918c0d3::1774986215::res://.godot/exported/133200997/export-8b5400abc80bade1efe039c3d1c6fb29-Generator_18_def.res
+res://Recipes/Item Stacks/Geothite_Ingot_20.tres::ccf1e6fb16bf4353821d94eb89cc0cd1::1774836544::res://.godot/exported/133200997/export-397118c86ebfa744fdc968735dfe7d8b-Geothite_Ingot_20.res
+res://Recipes/Item Stacks/Geothite_Ingot_30.tres::c7958f9c0b38cf1309df0b37eb4b4355::1774836544::res://.godot/exported/133200997/export-26831a3d8f25faec610f7e0f22104f01-Geothite_Ingot_30.res
+res://Recipes/Item Stacks/Geothite_Ingot_40.tres::c7c24fe214bbb43db963c820aeb7bc7b::1774836544::res://.godot/exported/133200997/export-6a183afb46618422970b7dcab8bd9ba9-Geothite_Ingot_40.res
+res://Recipes/Item Stacks/Geothite_Ingot_150.tres::1d1b9111492103e46f86619845e4ad3f::1774836544::res://.godot/exported/133200997/export-867424ec57105b7986d0150816b44b36-Geothite_Ingot_150.res
+res://Recipes/Item Stacks/Geothite_lattice_6_def.tres::5cf2592cef35729ceb46714037c69f9c::1774836544::res://.godot/exported/133200997/export-0d3ef6ba3a40fb99238cf0e16c63b0ae-Geothite_lattice_6_def.res
+res://Recipes/Item Stacks/Geothite_lattice_15_def.tres::11d6a5a5d7244a8250f32a8bbe008ea3::1774986215::res://.godot/exported/133200997/export-a6e8f616e8f27d930ff19c5dba1813b2-Geothite_lattice_15_def.res
+res://Recipes/Item Stacks/Geothite_lattice_30_def.tres::c464642c1ad20a78d19592db8114593e::1774836544::res://.godot/exported/133200997/export-19f231ff6f6dc406075eba860913abdf-Geothite_lattice_30_def.res
+res://Recipes/Item Stacks/Geothite_lattice_40_def.tres::c5227f9ac43a511d0698559645f3f80f::1774836544::res://.godot/exported/133200997/export-74ec5de8056b8ce1d86e4278227c6378-Geothite_lattice_40_def.res
+res://Recipes/Item Stacks/Geothite_Ore_15.tres::79c7cd653bbaca26e7ee4f187037ae8f::1774836544::res://.godot/exported/133200997/export-bc01a0775880e6a16137de6c7d9f985e-Geothite_Ore_15.res
+res://Recipes/Item Stacks/Geothite_Powder_20_def.tres::dd338d2577c484ec0bb46e20f751a14e::1774836544::res://.godot/exported/133200997/export-b76efbe2da006d6793ae4cc05c938282-Geothite_Powder_20_def.res
+res://Recipes/Item Stacks/Geothite_Powder_30_def.tres::d44bf3860b2a459b8011f388fcafb78c::1774836544::res://.godot/exported/133200997/export-ec221a74ff9ba85dc36e9ff5d6d312fb-Geothite_Powder_30_def.res
+res://Recipes/Item Stacks/Geothite_Powder_40_def.tres::1bbe96a3c631edd3f1f523f81cd30b77::1774836544::res://.godot/exported/133200997/export-ca338b0bffd87c4ef46f60411e092e15-Geothite_Powder_40_def.res
+res://Recipes/Item Stacks/Geothite_Powder_60_def.tres::d5c88da19d83067be80b54d043f80d78::1774836544::res://.godot/exported/133200997/export-ed0956c0686dbfc1b3b683eaf9f21a8b-Geothite_Powder_60_def.res
+res://Recipes/Item Stacks/Geothite_Powder_120_def.tres::f88305f6e01f0500f224d36da9732206::1774836544::res://.godot/exported/133200997/export-699252cab46a7ac0bec78d7c5dcf2b03-Geothite_Powder_120_def.res
+res://Recipes/Item Stacks/Glass_15_def.tres::632588594dc9de0fedc2961f9c070066::1774836544::res://.godot/exported/133200997/export-927b097536534ffc380198f7017c818c-Glass_15_def.res
+res://Recipes/Item Stacks/Glass_20_def.tres::cf9341c1e5da1cd347d3b50d4d3a4a3a::1774836544::res://.godot/exported/133200997/export-c96a4a3a5733eafdc68562755eaaa42c-Glass_20_def.res
+res://Recipes/Item Stacks/Glass_30_def.tres::ddf7633139429355c86f41cf0fe6eae3::1774836544::res://.godot/exported/133200997/export-d14982ac26ef8f719bc35bc959f3c7fb-Glass_30_def.res
+res://Recipes/Item Stacks/Glass_60_def.tres::02c320a3cc9caea80c5872eb495abf7a::1774836544::res://.godot/exported/133200997/export-b7d8641a9fe8357ffdf736c7f73a9b92-Glass_60_def.res
+res://Recipes/Item Stacks/Glass_80_def.tres::79e8dec7f28dfcb88614d93011dcf45e::1774836544::res://.godot/exported/133200997/export-f748fa0a255ffb7d2ce38a79ec4b7e12-Glass_80_def.res
+res://Recipes/Item Stacks/Hardening_agent_6_def.tres::f85f82ab866861509571876f805d10bb::1774836544::res://.godot/exported/133200997/export-936868159f4ddd39a93c608b8ba58f77-Hardening_agent_6_def.res
+res://Recipes/Item Stacks/Hardening_agent_20_def.tres::d8da07c7ccb0ef671c633710d94edb0e::1774836544::res://.godot/exported/133200997/export-0209b8604ca4630c22087ffdb3d2c539-Hardening_agent_20_def.res
+res://Recipes/Item Stacks/Hardening_agent_30_def.tres::f932562d7342c7a6f8fe8fc46ba69d52::1774836544::res://.godot/exported/133200997/export-676cb55544ae3f60cc6d15801d9d0e27-Hardening_agent_30_def.res
+res://Recipes/Item Stacks/Hardening_agent_36_def.tres::3ba9b889e89d6811df001e345b18488d::1774836544::res://.godot/exported/133200997/export-865690db4e209a5ba6ce5d262f854bf3-Hardening_agent_36_def.res
+res://Recipes/Item Stacks/Hardening_agent_40_def.tres::4b794506017fb89af4f99459cda36204::1774836544::res://.godot/exported/133200997/export-aec402f595f5f823a709d66651a30d2c-Hardening_agent_40_def.res
+res://Recipes/Item Stacks/Hardening_agent_75_def.tres::7406f806ed4bbd9429c3b09097911252::1774836544::res://.godot/exported/133200997/export-70cafdff0e645004431baa734a76989d-Hardening_agent_75_def.res
+res://Recipes/Item Stacks/Heat_resistant_sheet_15_def.tres::9a25a86aa56905834f0858cb6b44bae8::1774836544::res://.godot/exported/133200997/export-b07bb5bc53c34ca3db9ef4a269416446-Heat_resistant_sheet_15_def.res
+res://Recipes/Item Stacks/Heat_resistant_sheet_24_def.tres::b0dad36774eac7a8ff3b2aa0cffdf99d::1774836544::res://.godot/exported/133200997/export-50814cb70f9793447b2fd6f8a596462d-Heat_resistant_sheet_24_def.res
+res://Recipes/Item Stacks/Heat_resistant_sheet_30_def.tres::3289caef97066f5ef0bc6a1e0090d4f7::1774836544::res://.godot/exported/133200997/export-849bc7016fc04207c6ac507fee17b863-Heat_resistant_sheet_30_def.res
+res://Recipes/Item Stacks/Heat_resistant_sheet_45_def.tres::a83d93467d66b547dab0c21e183bc4cc::1774836544::res://.godot/exported/133200997/export-160bf70ab12cb5d9ade4a4b99ee3ca38-Heat_resistant_sheet_45_def.res
+res://Recipes/Item Stacks/Heat_Shield_6_def.tres::a3baa5969e2a03e2cf6dfd155b663e58::1774836544::res://.godot/exported/133200997/export-dc5f8861b32adf99751c8fb6bd821144-Heat_Shield_6_def.res
+res://Recipes/Item Stacks/Heat_Shield_9_def.tres::66e7198ef9bb1c19dcd6fead8a3332b8::1774836544::res://.godot/exported/133200997/export-50cfbd3ff302dbea70553fd27dbf433f-Heat_Shield_9_def.res
+res://Recipes/Item Stacks/Heat_Shield_12_def.tres::c3cf0741db79e8f0ffa70b00a75ad1c0::1774836544::res://.godot/exported/133200997/export-b5dbde2b4395c7bad1ed34c9c3d2528b-Heat_Shield_12_def.res
+res://Recipes/Item Stacks/Heat_Shield_18_def.tres::a7f6d79f1d34c74f3bd040154b12c41b::1774836544::res://.godot/exported/133200997/export-ce9b24689398297931e228e1fb4182f0-Heat_Shield_18_def.res
+res://Recipes/Item Stacks/Heat_Shield_24_def.tres::586173cb53dad4fe05bbb522dc9dcba4::1774836544::res://.godot/exported/133200997/export-f63b71a1e5e51ff0184d5438098b656c-Heat_Shield_24_def.res
+res://Recipes/Item Stacks/Heavy_ammo_150_def.tres::9a2ed5fab948511c2f6ef0153ea50fed::1774836544::res://.godot/exported/133200997/export-3a57274ac5a5969f3041f1011cb0565b-Heavy_ammo_150_def.res
+res://Recipes/Item Stacks/Helium-3_20_def.tres::093e719f71f4e0bcf127a56cfed5c677::1774836544::res://.godot/exported/133200997/export-266488b7944ff9df4d0ca3b6b9f8f0ac-Helium-3_20_def.res
+res://Recipes/Item Stacks/Helium-3_30_def.tres::2f605fecd4895211852bc66098eb8bf2::1774836544::res://.godot/exported/133200997/export-277a4d20b2e445c5b82278444555477b-Helium-3_30_def.res
+res://Recipes/Item Stacks/Helium-3_45_def.tres::f5213e81ddd88240992a5c4d390cbf40::1774836544::res://.godot/exported/133200997/export-1234ff4b54d6bbca08a0bb6bef30b2a1-Helium-3_45_def.res
+res://Recipes/Item Stacks/Helium-3_60_def.tres::8a189ce00d2127645cd42ebca9c7bfff::1774836544::res://.godot/exported/133200997/export-270cbf3f0419d79713d6a10ecce369cf-Helium-3_60_def.res
+res://Recipes/Item Stacks/Helium-3_72_def.tres::58e5c63493ee40aead1b8a71733c91ef::1774836544::res://.godot/exported/133200997/export-471f0a1ced74edfe9a12dcb357e3566d-Helium-3_72_def.res
+res://Recipes/Item Stacks/Helium-3_90_def.tres::e9f2f5242f9b946b4671e232ff689ecd::1774836544::res://.godot/exported/133200997/export-b15e3c6379aee2702e6c33121fc292f8-Helium-3_90_def.res
+res://Recipes/Item Stacks/Helium-3_120_def.tres::e483fe1819cbf0542c3ee5f6c442df45::1774836544::res://.godot/exported/133200997/export-d89918affc0bb56949831691959bd964-Helium-3_120_def.res
+res://Recipes/Item Stacks/Helium-3_240_def.tres::8ee09a6711c133b5bff69714b0729c65::1774836544::res://.godot/exported/133200997/export-7b72ec38444a2d0d11ead8acdf4c029f-Helium-3_240_def.res
+res://Recipes/Item Stacks/Impeller_6_def.tres::97628e0cd4ca1e38221d353e01543349::1774836544::res://.godot/exported/133200997/export-d12836c44d2ff35468d2c269c53e8824-Impeller_6_def.res
+res://Recipes/Item Stacks/Impeller_10_def.tres::a31b8834db41bf1c8d39ed6e24c78067::1774836544::res://.godot/exported/133200997/export-9fd85cf55ace355e02cbc6fd7cbcd871-Impeller_10_def.res
+res://Recipes/Item Stacks/Impeller_12_def.tres::5cf59df3bdff141ea2b55d7362b1e713::1774836544::res://.godot/exported/133200997/export-8e15e85cdba505534f3ead5a1cf57276-Impeller_12_def.res
+res://Recipes/Item Stacks/Inductor_12_def.tres::0b4ee262a5fdcf0c1261894c0b49d40a::1774836544::res://.godot/exported/133200997/export-6d6207bc39170d6a5321181ee9f18c0a-Inductor_12_def.res
+res://Recipes/Item Stacks/Inductor_15_def.tres::5e8e64c64ab425c120386d164051762d::1774836544::res://.godot/exported/133200997/export-d7468b8cf6daeee84738b8cfd6e8219d-Inductor_15_def.res
+res://Recipes/Item Stacks/Inductor_20_def.tres::7c3e4edbef290b9d85134e34678baae2::1774836544::res://.godot/exported/133200997/export-27ac1448f8f8f6f08063ec0bf4f0d051-Inductor_20_def.res
+res://Recipes/Item Stacks/Inductor_30_def.tres::afe30d819a82f42e6e13fddd75c34bb8::1774836544::res://.godot/exported/133200997/export-f26dd7e3ee5ed5bc8ec34842090eb289-Inductor_30_def.res
+res://Recipes/Item Stacks/Intermediate_building_Material_250_def.tres::b8dc694ae7a7b74c5ed8a17a3df780d2::1774836544::res://.godot/exported/133200997/export-c75f9e4a6795c18ae0ad5e0b9d2c7115-Intermediate_building_Material_250_def.res
+res://Recipes/Item Stacks/Ion Injector_4_def.tres::5251e15df857bee9b20f511aa864a3da::1774836544::res://.godot/exported/133200997/export-71de1c6016eeb0f037a649bb3076ab7c-Ion Injector_4_def.res
+res://Recipes/Item Stacks/Ion Injector_5_def.tres::03d23550aa75932dcc87312830475e7f::1774836544::res://.godot/exported/133200997/export-618e613e6c16c288764437c28fcaebee-Ion Injector_5_def.res
+res://Recipes/Item Stacks/Ion Injector_6_def.tres::9e73859e4e0090f11fa8b8864cb650eb::1774836544::res://.godot/exported/133200997/export-d65c99ac0f266dcd80d81f8c61ef0b7f-Ion Injector_6_def.res
+res://Recipes/Item Stacks/Ion Injector_8_def.tres::b7a106a4666eda998aab7815423e5976::1774836544::res://.godot/exported/133200997/export-bb06d583d08ef37da5ec74b51e496bf3-Ion Injector_8_def.res
+res://Recipes/Item Stacks/Ion Injector_12_def.tres::1b7cae489d8a7809c290ff832e397804::1774836544::res://.godot/exported/133200997/export-5473e4385776aec99d1e4e13330437e0-Ion Injector_12_def.res
+res://Recipes/Item Stacks/Ion_Bomb_3_def.tres::244938e538b714354997156fda9bfd70::1774836544::res://.godot/exported/133200997/export-806fc08bcc02df0e2dac85d700a89df5-Ion_Bomb_3_def.res
+res://Recipes/Item Stacks/Ion_Stabilizer_5_def.tres::d6d337b5155f38c954ae4198a795a7c8::1774836544::res://.godot/exported/133200997/export-e2855c7f6f79af643fe54c07e3e95638-Ion_Stabilizer_5_def.res
+res://Recipes/Item Stacks/Ion_Stabilizer_6_def.tres::014f0f8a66144b2f1341a3009f701197::1774836544::res://.godot/exported/133200997/export-b23fe5de3616f9e90fbe6a666777baeb-Ion_Stabilizer_6_def.res
+res://Recipes/Item Stacks/Ion_Thrusters_6_def.tres::d88f99cbe943dab715a43b7ab5a2b091::1774836544::res://.godot/exported/133200997/export-d7054d41fb9199501f9dbd3c625331c4-Ion_Thrusters_6_def.res
+res://Recipes/Item Stacks/Laser_Emitter_4_def.tres::2a618ad38aad1c4676c76ba13309498f::1774836544::res://.godot/exported/133200997/export-098342f900dc4837e118c416ad830e39-Laser_Emitter_4_def.res
+res://Recipes/Item Stacks/Laser_Emitter_6_def.tres::73971fecc2a80a3d4c1038c79102e4aa::1774836544::res://.godot/exported/133200997/export-97e83c7cf39768e795250b7db6f9f991-Laser_Emitter_6_def.res
+res://Recipes/Item Stacks/Laser_Emitter_8_def.tres::d2970808a09a01f8eec1b4029c4f767f::1774836544::res://.godot/exported/133200997/export-37f53950ab1a6ec6bce1dc7199edc3e1-Laser_Emitter_8_def.res
+res://Recipes/Item Stacks/Laser_Emitter_10_def.tres::31faaa69efe0ff67e405301ca205af4a::1774836544::res://.godot/exported/133200997/export-4c57f536cef62360273ee392222689a9-Laser_Emitter_10_def.res
+res://Recipes/Item Stacks/Laser_Emitter_20_def.tres::ccc22e68aab9e7f5ff0a095240c5b0a3::1774836544::res://.godot/exported/133200997/export-49db033a7a7b725334bf5aac6c47802b-Laser_Emitter_20_def.res
+res://Recipes/Item Stacks/Lens_4_def.tres::ae90d65d60517cf41647e71cc7e98e21::1774836544::res://.godot/exported/133200997/export-49f469f49db6e11a51122c3a50ae4f70-Lens_4_def.res
+res://Recipes/Item Stacks/Lens_6_def.tres::07973bc6c90409e4df3991de6b8bec68::1774836544::res://.godot/exported/133200997/export-f78bb9711a1b69ff5a505fc6a5d884eb-Lens_6_def.res
+res://Recipes/Item Stacks/Lens_10_def.tres::d8a5e01f606b948c0390faf1490e7a85::1774836544::res://.godot/exported/133200997/export-9405636b2e2001059fd90895494383a3-Lens_10_def.res
+res://Recipes/Item Stacks/Lens_12_def.tres::c6afe2589823783e0926a04258aa4ed1::1774836544::res://.godot/exported/133200997/export-03b9a2bb4dca6ef99d54fd9b91734087-Lens_12_def.res
+res://Recipes/Item Stacks/Lens_18_def.tres::1402c8426aacbd5d4be0e5d07f0dac3a::1774836544::res://.godot/exported/133200997/export-fb246558232e1f4e99dc78f8ef5bfb6f-Lens_18_def.res
+res://Recipes/Item Stacks/Liquid_helium_12_def.tres::6d8bff0d2f7bd5fd9895a8b5226751e7::1774836544::res://.godot/exported/133200997/export-71a480600ff0995c84c9091edd0e9237-Liquid_helium_12_def.res
+res://Recipes/Item Stacks/Liquid_helium_18_def.tres::0b331c44ba235cca5c3d118be36d13e7::1774836544::res://.godot/exported/133200997/export-5c17115642c909c8f37072d972558429-Liquid_helium_18_def.res
+res://Recipes/Item Stacks/Liquid_helium_20_def.tres::dd2dcedc0b97311036565469c67064db::1774836544::res://.godot/exported/133200997/export-f05b60442114aaca741ee0cba698925d-Liquid_helium_20_def.res
+res://Recipes/Item Stacks/Liquid_helium_30_def.tres::0e7fb613067a6041e250c787495cae2e::1774836544::res://.godot/exported/133200997/export-9d6ca85d7d42e1ec0f2c97a23cdfd2fd-Liquid_helium_30_def.res
+res://Recipes/Item Stacks/Liquid_helium_40_def.tres::81a38ff127eccb8190fe07981a6f0878::1774836544::res://.godot/exported/133200997/export-efbdb2c0cb9b02896dbe29f31bfc6365-Liquid_helium_40_def.res
+res://Recipes/Item Stacks/Liquid_helium_50_def.tres::0d86d98248f8a4e57bbe450100155fa1::1774836544::res://.godot/exported/133200997/export-6c7624e1ab28b34a8958b1c4f82ade00-Liquid_helium_50_def.res
+res://Recipes/Item Stacks/Liquid_helium_100_def.tres::2d71df9f2d70051b77d78dede19d1e18::1774836544::res://.godot/exported/133200997/export-304ec5036b448676bce754244cc658b4-Liquid_helium_100_def.res
+res://Recipes/Item Stacks/Mars_Habitat_Base_3_def.tres::a857e109c8dcddd44f269a9c6776ca12::1774836544::res://.godot/exported/133200997/export-3a980c8eb26a4b6e9fd11d411f9a665b-Mars_Habitat_Base_3_def.res
+res://Recipes/Item Stacks/Missile_Housing_4_def.tres::20ac9f72ca0638caddaec2e9bea5497a::1774836544::res://.godot/exported/133200997/export-c658034900c19b9db9017b8a33698f26-Missile_Housing_4_def.res
+res://Recipes/Item Stacks/Molecular_scalpel_3_def.tres::4f6c479fcb7737b9d2b6fb60f9ce953f::1774836544::res://.godot/exported/133200997/export-24b37a3436710ea0ce71d51211c4a8f8-Molecular_scalpel_3_def.res
+res://Recipes/Item Stacks/Nanosyringe_5_def.tres::4e3a415db78bed26a34d6497a74c33f2::1774836544::res://.godot/exported/133200997/export-31a88259c6415ffa29862b6da12be0eb-Nanosyringe_5_def.res
+res://Recipes/Item Stacks/Nanosyringe_6_def.tres::e1bc0aedbc9e4c504360116d5e8e0d5c::1774836544::res://.godot/exported/133200997/export-2418183bb410b924bbbe099a14b4258a-Nanosyringe_6_def.res
+res://Recipes/Item Stacks/Nanosyringe_15_def.tres::56892155d1c8403248fdb3e28786f552::1774836544::res://.godot/exported/133200997/export-839593044339a6a8dea7e40f0975080f-Nanosyringe_15_def.res
+res://Recipes/Item Stacks/Nano_Fibre_6_def.tres::fe86b720e5a63992904194408dc18a61::1774836544::res://.godot/exported/133200997/export-c3003571022e06c89b08402834d34651-Nano_Fibre_6_def.res
+res://Recipes/Item Stacks/Nano_Fibre_12_def.tres::d7570e6e26a79069470101dcb64da598::1774836544::res://.godot/exported/133200997/export-f307ed5697abbfd5101b584ef4e96293-Nano_Fibre_12_def.res
+res://Recipes/Item Stacks/Nano_Fibre_20_def.tres::5529c4d596d125e1e68369d236f7d313::1774836544::res://.godot/exported/133200997/export-f4ef8af0b53bd43c057c7f2068ce7613-Nano_Fibre_20_def.res
+res://Recipes/Item Stacks/Nano_Fibre_32_def.tres::0c871d8213d97563b1b58b68c2e113cd::1774836544::res://.godot/exported/133200997/export-123c0dbfda478d9040f571c0f36586f9-Nano_Fibre_32_def.res
+res://Recipes/Item Stacks/Nozzle_3_def.tres::ad26534b41d16cf58e869c2988a7250a::1774836544::res://.godot/exported/133200997/export-9e88870ef3d374bfa69880a6bd356b27-Nozzle_3_def.res
+res://Recipes/Item Stacks/Nozzle_6_def.tres::772e266c1228b0e2148c75d6124f0361::1774836544::res://.godot/exported/133200997/export-5b81e426dfb1d5fcbe0c0b5e61e1340b-Nozzle_6_def.res
+res://Recipes/Item Stacks/Nozzle_8_def.tres::da7282b7ef9e767ccebbcb5d7959d5b5::1774836544::res://.godot/exported/133200997/export-ee74c6b3a2f51078663ff20aceb49759-Nozzle_8_def.res
+res://Recipes/Item Stacks/Nozzle_12_def.tres::834609ea63cf612fac57b648a1402bb9::1774836544::res://.godot/exported/133200997/export-f9a075c43fcfe2a0940d7a76df830fdd-Nozzle_12_def.res
+res://Recipes/Item Stacks/Onboard_Instruments_3_def.tres::3dbd69d11d07b1dae15f30512eb06e3d::1774836544::res://.godot/exported/133200997/export-1375be8c1f4d0ee22d26a4c3049a72f4-Onboard_Instruments_3_def.res
+res://Recipes/Item Stacks/Onboard_Instruments_6_def.tres::5c29274cc6ff5470743fa2496f5d6932::1774836544::res://.godot/exported/133200997/export-ff8327da7be63f7a6f327fb679b64303-Onboard_Instruments_6_def.res
+res://Recipes/Item Stacks/Onboard_Instruments_12_def.tres::805986fff6157945a95c80e8661b3965::1774836544::res://.godot/exported/133200997/export-de4a672e786993ca58bc107bad0345b2-Onboard_Instruments_12_def.res
+res://Recipes/Item Stacks/Onboard_Instruments_15_def.tres::3124ef30157aa1aa6045d866212d6d5a::1774836544::res://.godot/exported/133200997/export-a0c40ccea24703f3f7f4adb5347907d2-Onboard_Instruments_15_def.res
+res://Recipes/Item Stacks/Organic_Compound_10_def.tres::645ebde5606d071c24af4f1f493de675::1774836544::res://.godot/exported/133200997/export-2d3a49ec71712b8fcde9de496399b3a1-Organic_Compound_10_def.res
+res://Recipes/Item Stacks/Organic_Compound_12_def.tres::bac3e8bc0cab81efe7f7f0214dbc5516::1774836544::res://.godot/exported/133200997/export-77636d6abe5f8500e0848f9c9e8806a8-Organic_Compound_12_def.res
+res://Recipes/Item Stacks/Organic_Compound_20_def.tres::614242afe76aa708df80382c1e134455::1774836544::res://.godot/exported/133200997/export-6bd8c0b7da10ef30528df94b1dafaa40-Organic_Compound_20_def.res
+res://Recipes/Item Stacks/Organic_compound_45_def.tres::58aaaec1a5d8a2c04373ab95f69fede1::1774836544::res://.godot/exported/133200997/export-10a6e75a9e7ba528f69174bd7643e86d-Organic_compound_45_def.res
+res://Recipes/Item Stacks/Payload_Stage_3_def.tres::0e1ef45214fcf606ff60705ff3df7cc0::1774836544::res://.godot/exported/133200997/export-fb315620cca7f48fe713bb11eba527ff-Payload_Stage_3_def.res
+res://Recipes/Item Stacks/Pistol_ammo_375_def.tres::888b0b71e3a2cf207fdaabfa0bb48177::1774836544::res://.godot/exported/133200997/export-af5fa60c957ea1b7713eb972bfd6493b-Pistol_ammo_375_def.res
+res://Recipes/Item Stacks/Plasma_generator_4_def.tres::8f700287b5a17090ceea078da6dd23f8::1774836544::res://.godot/exported/133200997/export-c5f4f98ef81b419ee9974ed68a25d0a9-Plasma_generator_4_def.res
+res://Recipes/Item Stacks/Plastic_6_def.tres::af800f0283601ca551ef1507e791df1f::1774836544::res://.godot/exported/133200997/export-061a3ad2b06896d23405d8507990ef0f-Plastic_6_def.res
+res://Recipes/Item Stacks/Plastic_12_def.tres::907253f47a6ee8652f48e0af54ea042e::1774836544::res://.godot/exported/133200997/export-f8462a36559393ce4e910797f9600c0d-Plastic_12_def.res
+res://Recipes/Item Stacks/Plastic_20_def.tres::74825f6084858f47f5de52344b171f19::1774836544::res://.godot/exported/133200997/export-7bd17303eb16d104e09079704b031cfd-Plastic_20_def.res
+res://Recipes/Item Stacks/Plastic_25_def.tres::43c1e8432a64486ae39a5c36869e7583::1774836544::res://.godot/exported/133200997/export-18993081ba7df55240b72f4daf23f3c0-Plastic_25_def.res
+res://Recipes/Item Stacks/Plastic_30_def.tres::5fd79043be079c251f0944b4ae179c8b::1774836544::res://.godot/exported/133200997/export-ec81e4d61e00806cf3918e23ee20d1b0-Plastic_30_def.res
+res://Recipes/Item Stacks/Plastic_Dust_5_def.tres::0ae301d27d793874fc5880dc806be164::1774836544::res://.godot/exported/133200997/export-625f0ba9bb1cf7e1a2b1a12782161e32-Plastic_Dust_5_def.res
+res://Recipes/Item Stacks/Plastic_Dust_6_def.tres::6430a16786e550f1b0ee61b4e76982d2::1774836544::res://.godot/exported/133200997/export-57e5095e40ff5f645c60c0c157653586-Plastic_Dust_6_def.res
+res://Recipes/Item Stacks/Plastic_Dust_12_def.tres::17b9695bcf8a9fed25ecee73461fa7da::1774836544::res://.godot/exported/133200997/export-6641ef579e2e1fa79dd3691797a2ded4-Plastic_Dust_12_def.res
+res://Recipes/Item Stacks/Plastic_Dust_20_def.tres::d3565825cbfe6cb078b349918f7a9126::1774836544::res://.godot/exported/133200997/export-f36619258e957ffe1d7e4dc8a3d17f92-Plastic_Dust_20_def.res
+res://Recipes/Item Stacks/Powerium_10_def.tres::2c8309c48abb2eeafc26cf0186fe02f5::1774836544::res://.godot/exported/133200997/export-1f99d18d92bfdd0d2bf37e157eb9ee5a-Powerium_10_def.res
+res://Recipes/Item Stacks/Pressure_Tank_4_def.tres::e0f86d487dda28447e7e006959c07e03::1774836544::res://.godot/exported/133200997/export-a7e45314b4bbcaaf092e32a843287ca8-Pressure_Tank_4_def.res
+res://Recipes/Item Stacks/Pressure_Tank_5_def.tres::4533db0a9b372a39b0c3615e2c02b94f::1774836544::res://.godot/exported/133200997/export-6a74efc8f73f1f5991d851c134981a2a-Pressure_Tank_5_def.res
+res://Recipes/Item Stacks/Pressure_Tank_6_def.tres::050fbe56d8a316d2ea9251567d6e86f6::1774836544::res://.godot/exported/133200997/export-158b9ff08a4878aad47805aa0d70eb97-Pressure_Tank_6_def.res
+res://Recipes/Item Stacks/Pressurized_helium_15_def.tres::0b9f45dd35ddb6b9a17ad910de0322e3::1774836544::res://.godot/exported/133200997/export-78d44e3b5dd0061089a7a9f13b8f64c5-Pressurized_helium_15_def.res
+res://Recipes/Item Stacks/Pressurized_helium_20_def.tres::d87c138b156c5213c997b945082c31d2::1774836544::res://.godot/exported/133200997/export-bc41053b824aff9b2c24071f1a2ad344-Pressurized_helium_20_def.res
+res://Recipes/Item Stacks/Pressurized_helium_30_def.tres::097abd0a8168678178416b9ea4b8fa5c::1774836544::res://.godot/exported/133200997/export-3587f66ba624538f420cb7f2b7d67bd3-Pressurized_helium_30_def.res
+res://Recipes/Item Stacks/Pressurized_helium_150_def.tres::431577fd17a08611cd020181f3834e1e::1774836544::res://.godot/exported/133200997/export-60249cc0fc2d0556a05ac1da2a546c04-Pressurized_helium_150_def.res
+res://Recipes/Item Stacks/Propulsion_Stage_3_def.tres::304f40b268b3a5f021da6adcfadca61e::1774836544::res://.godot/exported/133200997/export-ff6d78f1442c888ce981709e70edfa61-Propulsion_Stage_3_def.res
+res://Recipes/Item Stacks/Pseudorubber_Insulator_4_def.tres::ec7ff1545972ca2a6faa9f6847094b4a::1774836544::res://.godot/exported/133200997/export-e64c97f36d0d5806148c3f17d7c2aaa6-Pseudorubber_Insulator_4_def.res
+res://Recipes/Item Stacks/Pseudorubber_Insulator_6_def.tres::9d0b950549f5d4b3e73de5e9cef4c8f4::1774836544::res://.godot/exported/133200997/export-e02215fe03af512751d3a2d3ffb471e3-Pseudorubber_Insulator_6_def.res
+res://Recipes/Item Stacks/Pseudorubber_Insulator_8_def.tres::0e972e4d3a5e67869cd5eb7100d3db57::1774836544::res://.godot/exported/133200997/export-414795e9d087a94f8a5f41c627bdd72d-Pseudorubber_Insulator_8_def.res
+res://Recipes/Item Stacks/Pseudorubber_Insulator_10_def.tres::0db8ee4a99419e7b936d049d5d1ada77::1774836544::res://.godot/exported/133200997/export-ec29b2042b2ce790f836511ad983ca48-Pseudorubber_Insulator_10_def.res
+res://Recipes/Item Stacks/Pseudorubber_Insulator_12_def.tres::fe985003c0752b0129b7f7534ea595c0::1774836544::res://.godot/exported/133200997/export-190a81fc1917a916d71abf71cf278a41-Pseudorubber_Insulator_12_def.res
+res://Recipes/Item Stacks/Pseudorubber_Insulator_18_def.tres::2ad659f614ed3c7d7eced1b53d533e71::1774836544::res://.godot/exported/133200997/export-ea7ad8db572dfd7ccafbbb08159254fb-Pseudorubber_Insulator_18_def.res
+res://Recipes/Item Stacks/Pump_6_def.tres::85bb847425c0856bd96e99495de26ad7::1774836544::res://.godot/exported/133200997/export-d0acbe3c096ad0a10208ea1d80c3fa0e-Pump_6_def.res
+res://Recipes/Item Stacks/Pump_9_def.tres::01fc4478cf2e92215e5ffe7a6e34c5bd::1774836544::res://.godot/exported/133200997/export-f495cd5d7dba849214beb0684d17c780-Pump_9_def.res
+res://Recipes/Item Stacks/Pump_12_def.tres::a91bf2202d984f3ffe13c58433af022f::1774836544::res://.godot/exported/133200997/export-8531b1e1e6688cc29a5b66b221b4bcdd-Pump_12_def.res
+res://Recipes/Item Stacks/Quantum_Tranquilizer_4_def.tres::6a2fe2ec7a9388d71c74d2cfcfcd8e42::1774836544::res://.godot/exported/133200997/export-d84dbfe62f4eeaf9b4ad21af3af7590f-Quantum_Tranquilizer_4_def.res
+res://Recipes/Item Stacks/Quantum_Tranquilizer_5_def.tres::113481624fa9c259fe81f574642c3eaf::1774836544::res://.godot/exported/133200997/export-7dd3f17803a2165d3e294c776b289cbb-Quantum_Tranquilizer_5_def.res
+res://Recipes/Item Stacks/Refined_oil_18_def.tres::8c6f959ab7cc5cbbf1ee24542a1b6a70::1774836544::res://.godot/exported/133200997/export-10e4b689f32a3d37da436d5fe86cec15-Refined_oil_18_def.res
+res://Recipes/Item Stacks/Refined_Oil_20_def.tres::c443ec3f782ffec14178fbf22069afcf::1774836544::res://.godot/exported/133200997/export-d1c7ed0d969ffcde21a76840fee52cd7-Refined_Oil_20_def.res
+res://Recipes/Item Stacks/Refined_Oil_30_def.tres::fe3fa4e82c7e5ed3c9248a879afefe01::1774836544::res://.godot/exported/133200997/export-5605c17024516f815970bf5710c677da-Refined_Oil_30_def.res
+res://Recipes/Item Stacks/Refined_Oil_40_def.tres::66b12d5d454b3f27d56128b9c5af0a5e::1774836544::res://.godot/exported/133200997/export-085fbf1bb9449d61d9e22545c9239a1d-Refined_Oil_40_def.res
+res://Recipes/Item Stacks/Refined_Oil_100_def.tres::87ea30697c2c2d03ae6e8ebb89fd768d::1774836544::res://.godot/exported/133200997/export-bab64958763bd1da51d046e11d1725a6-Refined_Oil_100_def.res
+res://Recipes/Item Stacks/Reinforced_Frame_6_def.tres::377265657cc1282285acf0260bd267b7::1774836544::res://.godot/exported/133200997/export-88355d0d7156dfa8fe8f7c90e36200ba-Reinforced_Frame_6_def.res
+res://Recipes/Item Stacks/Reinforced_Frame_12_def.tres::7a1cdb4eb935bf1fb1a328bcca50df34::1774836544::res://.godot/exported/133200997/export-af083e0b751aa70e2c30258fa75e9228-Reinforced_Frame_12_def.res
+res://Recipes/Item Stacks/Reinforced_Housing_4_def.tres::d8dce9ed00a355c079bfe762012a47c1::1774836544::res://.godot/exported/133200997/export-82b735cb5ce067f167827731cd6244e2-Reinforced_Housing_4_def.res
+res://Recipes/Item Stacks/Reinforced_Housing_6_def.tres::23a7ecd67214caf20a2fe94a2d54f08f::1774836544::res://.godot/exported/133200997/export-5c01bb72dc4bb2fb740f234e4365f1fa-Reinforced_Housing_6_def.res
+res://Recipes/Item Stacks/Reinforced_Housing_8_def.tres::01d77a6bdce6c510352c11a2a1ad00ee::1774836544::res://.godot/exported/133200997/export-9239e048b99e09190f5cd1dbf6728f99-Reinforced_Housing_8_def.res
+res://Recipes/Item Stacks/Reinforced_Housing_12_def.tres::3ef54601e141c913d7233d19c2e836e4::1774836544::res://.godot/exported/133200997/export-a7c3f26615c47376e054313277df8c86-Reinforced_Housing_12_def.res
+res://Recipes/Item Stacks/Reinforced_Housing_15_def.tres::5794f0774adbee99daf42d75662021be::1774836544::res://.godot/exported/133200997/export-b37dbca590c959563217674e1178f7db-Reinforced_Housing_15_def.res
+res://Recipes/Item Stacks/Reinforced_Housing_20_def.tres::8424de34b7dd2dfb72471878401ecdb0::1774836544::res://.godot/exported/133200997/export-15db932ad4c396348f4ddd17778b060c-Reinforced_Housing_20_def.res
+res://Recipes/Item Stacks/Resonator_3_def.tres::8756fd02349fea07fc7ef6078117de8f::1774836544::res://.godot/exported/133200997/export-f5bfba82a3255ee3176454b2c27544c6-Resonator_3_def.res
+res://Recipes/Item Stacks/Resonator_4_def.tres::37d05d6ff16ddff76d81465da226a3ce::1774836544::res://.godot/exported/133200997/export-fbc4778ecef0eafb5acbc215c06922ea-Resonator_4_def.res
+res://Recipes/Item Stacks/Resonator_6_def.tres::98242708fd90911fff2f5249ed7312ef::1774836544::res://.godot/exported/133200997/export-3f851e3990ab9261afcc8e43d8963de2-Resonator_6_def.res
+res://Recipes/Item Stacks/Resonator_10_def.tres::d119334e9d2d53e0e79b6e9c111a42bf::1774836544::res://.godot/exported/133200997/export-57cb67cdccb26016dbac2dc9998914fb-Resonator_10_def.res
+res://Recipes/Item Stacks/RNA_Stabilizer_3_def.tres::1786ed067373e5f0653dbd9ddc18e8c6::1774836544::res://.godot/exported/133200997/export-2b0b8ebe6324a120694195c01ba2b7c7-RNA_Stabilizer_3_def.res
+res://Recipes/Item Stacks/RNA_Stabilizer_4_def.tres::3f9731fe34cf013d23e5b23a95b8b117::1774836544::res://.godot/exported/133200997/export-e777662a33d0afbcd06baa9dde31e67c-RNA_Stabilizer_4_def.res
+res://Recipes/Item Stacks/RNA_Stabilizer_5_def.tres::32941a6d738315fe7e34d380fe1b9054::1774836544::res://.godot/exported/133200997/export-579d696042f4ee60a6b13360611d274a-RNA_Stabilizer_5_def.res
+res://Recipes/Item Stacks/Rocket_Engine_3_def.tres::6fb4ba5d18af6b9cd25a6528a497f33b::1774836544::res://.godot/exported/133200997/export-bcebccea3619e7a805e7872c2e51cc95-Rocket_Engine_3_def.res
+res://Recipes/Item Stacks/Rocket_Engine_4_def.tres::63299d8705cd732654964746b7a50af7::1774836544::res://.godot/exported/133200997/export-74de39b2910d2c42a44b4a87db4fc081-Rocket_Engine_4_def.res
+res://Recipes/Item Stacks/Rocket_Engine_9_def.tres::724a97b108dc9c2eec65ff86f19cc3af::1774836544::res://.godot/exported/133200997/export-f1de57f51707f7f837a8ee937a579829-Rocket_Engine_9_def.res
+res://Recipes/Item Stacks/Rocket_Fuel_6_def.tres::236e1871e5ce3341d36327936e9342a3::1774836544::res://.godot/exported/133200997/export-ba45e35e624965a6682b3ce89ecde570-Rocket_Fuel_6_def.res
+res://Recipes/Item Stacks/Rocket_Fuel_10_def.tres::e4849d87a48b7b33f7457e425e7c4cd0::1774836544::res://.godot/exported/133200997/export-13eb963fc514fd427321793d9b2f137f-Rocket_Fuel_10_def.res
+res://Recipes/Item Stacks/Rocket_Fuel_20_def.tres::07dadb9f4d6f181e408fd8520de7799d::1774836544::res://.godot/exported/133200997/export-6a8c9d2e0698cd688a1697bc3ec74ea0-Rocket_Fuel_20_def.res
+res://Recipes/Item Stacks/Rotor_10_def.tres::7f7e6b7248ac437d10c5b24ef676e541::1774836544::res://.godot/exported/133200997/export-2255f9cf78a0421187d81fbd7e7e7858-Rotor_10_def.res
+res://Recipes/Item Stacks/Rotor_20_def.tres::c8824947d33f03d847cc39636b9550ec::1774836544::res://.godot/exported/133200997/export-beb503e684cfe0dcdd5743d3a9df3e02-Rotor_20_def.res
+res://Recipes/Item Stacks/Rotor_60_def.tres::20710d0dfe4291db7374736ab607b1b7::1774836544::res://.godot/exported/133200997/export-50eb56375ec0b6f8890e33041921429b-Rotor_60_def.res
+res://Recipes/Item Stacks/RTSC_4_def.tres::b737926d949497d2397c71e99243b653::1774836544::res://.godot/exported/133200997/export-c81993001da5d3dcec93c234024fcbc8-RTSC_4_def.res
+res://Recipes/Item Stacks/RTSC_6_def.tres::a812eb902b4bff4e10d68f1c59594cb7::1774836544::res://.godot/exported/133200997/export-192ddebb4115c852c15d469ff9fffc93-RTSC_6_def.res
+res://Recipes/Item Stacks/RTSC_Generator_3_def.tres::c8adba8316e32d20e45300bb16019161::1774836544::res://.godot/exported/133200997/export-35e509a99d0d23cec12ea74313876a68-RTSC_Generator_3_def.res
+res://Recipes/Item Stacks/Satellite_Body_3_def.tres::e41b039db5130e2f53c42793853bc78d::1774836544::res://.godot/exported/133200997/export-ed2a23bdbb8addc8d386b15265619219-Satellite_Body_3_def.res
+res://Recipes/Item Stacks/Scafolding_4_def.tres::b4e563f5b4f6ef6b0164adc29697979e::1774836544::res://.godot/exported/133200997/export-b128b567084c08f5692b8ac08c1b71e1-Scafolding_4_def.res
+res://Recipes/Item Stacks/Scafolding_6_def.tres::f1815d7ec6f359cd7f074332ee8f5a5d::1774836544::res://.godot/exported/133200997/export-7fa6a02534c2d9e004c5e1a938ed226f-Scafolding_6_def.res
+res://Recipes/Item Stacks/Scafolding_9_def.tres::49492080595869619b62ba9fe207d698::1774836544::res://.godot/exported/133200997/export-ecc325a85414e11d698b219fc3692ba9-Scafolding_9_def.res
+res://Recipes/Item Stacks/Scafolding_12_def.tres::ffa9a7c35067ed563dc8eec40bb9fd22::1774836544::res://.godot/exported/133200997/export-3ed93f56d28a6f8802cdf8bd7ebb60b3-Scafolding_12_def.res
+res://Recipes/Item Stacks/Scanner_3_def.tres::58bd27381a5693e44d563f615dc3fe26::1774836544::res://.godot/exported/133200997/export-59ee9b4de11719ad4136bc20dcd6a4bd-Scanner_3_def.res
+res://Recipes/Item Stacks/Scanner_4_def.tres::631911ed11135f203e69f4fc2c654ab6::1774836544::res://.godot/exported/133200997/export-3e11ed99b63bcc0c32dedf717fe43d4c-Scanner_4_def.res
+res://Recipes/Item Stacks/Scanner_6_def.tres::f34275a7f4a38c8ba7827254ad9a8638::1774836544::res://.godot/exported/133200997/export-62032ca6f67e923965aec2bdb29c358a-Scanner_6_def.res
+res://Recipes/Item Stacks/Scanner_12_def.tres::bcf4a7b32f8ca1f54860ec60632f91ab::1774836544::res://.godot/exported/133200997/export-57f3932df42b9917f0750a5a6c50bd51-Scanner_12_def.res
+res://Recipes/Item Stacks/Shotgun_ammo_150_def.tres::e9d29dc637e4330b5bc54a6830998dca::1774836544::res://.godot/exported/133200997/export-2a98bf362f4d723e937cbfae1ce850f2-Shotgun_ammo_150_def.res
+res://Recipes/Item Stacks/Stabilizer_8_def.tres::a9750591e220d8aff04b2a9c49feb6c1::1774836544::res://.godot/exported/133200997/export-73b96a5c8b49588bd51fbba8076f9cae-Stabilizer_8_def.res
+res://Recipes/Item Stacks/Stabilizer_10_def.tres::6a5bdb1a20c6e3a5a8753dfcd1e4861a::1774836544::res://.godot/exported/133200997/export-ba535b445b09eba5f56ea48025519467-Stabilizer_10_def.res
+res://Recipes/Item Stacks/Stabilizer_12_def.tres::4064993933d0d1f44d3ce3fd62fb261d::1774836544::res://.godot/exported/133200997/export-ebd5a6f91036d601e248766f80b25888-Stabilizer_12_def.res
+res://Recipes/Item Stacks/Stabilizer_15_def.tres::e617f60ffd82935bc85ce4d33d86986e::1774836544::res://.godot/exported/133200997/export-0cd5cb4d9b7b01f307119349334fedae-Stabilizer_15_def.res
+res://Recipes/Item Stacks/Stabilizer_24_def.tres::148c1b3253211103061ff2c46e5a95f8::1774836544::res://.godot/exported/133200997/export-2ca064c6943a8325c7a0b11aa0421a07-Stabilizer_24_def.res
+res://Recipes/Item Stacks/Stabilizer_36_def.tres::2e47288336054c2fca4fabb1ddf06f06::1774836544::res://.godot/exported/133200997/export-0128e8a07da5b18e1edb64e80b834901-Stabilizer_36_def.res
+res://Recipes/Item Stacks/Stabilizer_72_def.tres::4322d51b99c1fbbe380073974bae7609::1774836544::res://.godot/exported/133200997/export-d8ea2870c3e12bc0de59356547a0b934-Stabilizer_72_def.res
+res://Recipes/Item Stacks/Standard_ammo_200_def.tres::a3a5fbec7c6171158f6efaa193a7d661::1774836544::res://.godot/exported/133200997/export-93049081e55c2dfbc3e10b94b0888c52-Standard_ammo_200_def.res
+res://Recipes/Item Stacks/Stator_10_def.tres::78bf25a6ca5238be3e2624c25d22f97f::1774836544::res://.godot/exported/133200997/export-b89a13205f6e00857cb99f3012b6fca7-Stator_10_def.res
+res://Recipes/Item Stacks/Stator_12_def.tres::974ebfd85c710b2166c5167cc427dce2::1774836544::res://.godot/exported/133200997/export-301864a422ad9816f1bbfd4ca95149a4-Stator_12_def.res
+res://Recipes/Item Stacks/Stator_20_def.tres::8185aa946269eba8df57406bf931fcf7::1774836544::res://.godot/exported/133200997/export-4f5778fd0fb04acdfdf4ecd69d784c07-Stator_20_def.res
+res://Recipes/Item Stacks/Stator_60_def.tres::9e5de3cd861cea05229209697ad5e54f::1774836544::res://.godot/exported/133200997/export-4c9400db5a0c9cb004560706eb2d0fdc-Stator_60_def.res
+res://Recipes/Item Stacks/Substance_FHS-135-493_6_def.tres::5105d1af8cec3c12089add4cab533c0f::1774836544::res://.godot/exported/133200997/export-fbd22bac720570a90b9623fccd9c75e5-Substance_FHS-135-493_6_def.res
+res://Recipes/Item Stacks/Substance_FHS-135-493_10_def.tres::b4ceca1404117b1f0614cf96ae345a35::1774836544::res://.godot/exported/133200997/export-964eeaccd433acf44d9f2b0c699dc30f-Substance_FHS-135-493_10_def.res
+res://Recipes/Item Stacks/Substance_FHS-135-493_16_def.tres::37aa1a005097b85fb7a489468b345a65::1774836544::res://.godot/exported/133200997/export-11e368aec8fc2fb37abf93669595e959-Substance_FHS-135-493_16_def.res
+res://Recipes/Item Stacks/Substance_FHS-135-493_18_def.tres::177b71db778b80f281007892085bb2e8::1774836544::res://.godot/exported/133200997/export-62c5411c2285e01b73f2942ba0164238-Substance_FHS-135-493_18_def.res
+res://Recipes/Item Stacks/Sulpheric_acid_6_def.tres::8b898ed983e80efc7019dce96cebd3a0::1774836544::res://.godot/exported/133200997/export-032340c59255386472907c2c64c75254-Sulpheric_acid_6_def.res
+res://Recipes/Item Stacks/Sulpheric_acid_10_def.tres::ed38263226ad6b973ceab463684612da::1774836544::res://.godot/exported/133200997/export-9c7dd8c18bca33dc143a8e8977907aac-Sulpheric_acid_10_def.res
+res://Recipes/Item Stacks/Sulpheric_acid_15_def.tres::438947b5f07cb582d09b92846f7a337b::1774836544::res://.godot/exported/133200997/export-b97ee1dd7a24fc88a605522011685773-Sulpheric_acid_15_def.res
+res://Recipes/Item Stacks/Sulpheric_acid_18_def.tres::4b896d6293e721cc9e25621e36c26980::1774836544::res://.godot/exported/133200997/export-f143fe03d13964cd84afa5b76206be88-Sulpheric_acid_18_def.res
+res://Recipes/Item Stacks/Sulpheric_acid_20_def.tres::dd69c13db94d5cd31a562a1092ccf927::1774836544::res://.godot/exported/133200997/export-daa8cf93439cb33b19a08db94dc88215-Sulpheric_acid_20_def.res
+res://Recipes/Item Stacks/Sulpheric_acid_30_def.tres::97af205a389155e193add914866d0804::1774836544::res://.godot/exported/133200997/export-47d7f960a798f45a96d41c268b95ebb9-Sulpheric_acid_30_def.res
+res://Recipes/Item Stacks/Sulpheric_acid_60_def.tres::cd370875cafb38cb56230e0319feacf2::1774836544::res://.godot/exported/133200997/export-e86bf175733d03de6349b81f4f0dda0b-Sulpheric_acid_60_def.res
+res://Recipes/Item Stacks/Sulpheric_acid_75_def.tres::d73ef739b914f62e640d8b79f2732dc6::1774836544::res://.godot/exported/133200997/export-d91b4925fafb8245d6c10e037bdd5ca0-Sulpheric_acid_75_def.res
+res://Recipes/Item Stacks/Sulpheric_acid_80_def.tres::9e17f7aa1d10218bb670eb6bf40524d5::1774836544::res://.godot/exported/133200997/export-0c65618ae109027ddd50d5d37f185ad6-Sulpheric_acid_80_def.res
+res://Recipes/Item Stacks/Sulpheric_acid_100_def.tres::18d7a6579e7bcfd8cc4cf4e5b528d6d4::1774836544::res://.godot/exported/133200997/export-4b75645f20135657ad208d90bf2d36e5-Sulpheric_acid_100_def.res
+res://Recipes/Item Stacks/Sulpheric_acid_120_def.tres::b6915ba0a2a4606e1fe61fffd992277e::1774836544::res://.godot/exported/133200997/export-8e61d2332d87578f47d55a520ec8dffc-Sulpheric_acid_120_def.res
+res://Recipes/Item Stacks/Sulpheric_acid_240_def.tres::b8adde6265873d9cc2be23290157f839::1774836544::res://.godot/exported/133200997/export-f375adc56c629ad90e49af75c1569efc-Sulpheric_acid_240_def.res
+res://Recipes/Item Stacks/Sulphur_ore_30_def.tres::e675602adee3539e66ba6d43d07e395a::1774836544::res://.godot/exported/133200997/export-4488b48ae97b8f52c5a96db8c4472045-Sulphur_ore_30_def.res
+res://Recipes/Item Stacks/Sulphur_ore_120_def.tres::247fb553bf86230f239c490d56a4ccff::1774836544::res://.godot/exported/133200997/export-ebdec5e6816d0bf9b3d2fbd2b6d6b01d-Sulphur_ore_120_def.res
+res://Recipes/Item Stacks/Sulphur_ore_240_def.tres::79c0196ec03ace92e904a8394a57828d::1774836544::res://.godot/exported/133200997/export-16af6d2696655cbfed21874af443ce25-Sulphur_ore_240_def.res
+res://Recipes/Item Stacks/Sulphur_ore_300_def.tres::dd53ecd76d6f26a554715640c5a93a3f::1774836544::res://.godot/exported/133200997/export-c77015f4d0c4e9a208366b4008cdd5fa-Sulphur_ore_300_def.res
+res://Recipes/Item Stacks/Superconductor_8_def.tres::4c6b583b7b5e6746b1e3d32a8a3db543::1774836544::res://.godot/exported/133200997/export-c3a9c8787773d5985c233169c25858ac-Superconductor_8_def.res
+res://Recipes/Item Stacks/Superconductor_12_def.tres::52a7332e79becd63369582979e5a4bca::1774836544::res://.godot/exported/133200997/export-eb2259abb1bf1103dc3c36bc807ae8c5-Superconductor_12_def.res
+res://Recipes/Item Stacks/Superconductor_24_def.tres::71dbc84035bcf9524eff5749e41d9374::1774836544::res://.godot/exported/133200997/export-b283609b83986359a6149a5ebe9f2b24-Superconductor_24_def.res
+res://Recipes/Item Stacks/Supermagnet_5_def.tres::2a5a518f4cff10a2308f332654f9d7ef::1774986215::res://.godot/exported/133200997/export-b5bfe66ab5803ff0f9ba08a8730de05a-Supermagnet_5_def.res
+res://Recipes/Item Stacks/Supermagnet_15_def.tres::61fd2f60bb58d46c5d1ba2aad2b341c6::1774836544::res://.godot/exported/133200997/export-28fa4e03dadf89836db51989b7a4b582-Supermagnet_15_def.res
+res://Recipes/Item Stacks/Supermagnet_20_def.tres::3eea11d74d03a3ac9a39d5691bc0d175::1774836544::res://.godot/exported/133200997/export-e1419063c9e3c129f5f594959fccb456-Supermagnet_20_def.res
+res://Recipes/Item Stacks/Supermagnet_36_def.tres::899a9a04ced679e27db7e4aa9f6a6e1a::1774836544::res://.godot/exported/133200997/export-4a3f4204d9f3a9e014e4f5166a4d43bf-Supermagnet_36_def.res
+res://Recipes/Item Stacks/Supermagnet_72_def.tres::6053cae40433362de685d3605179f0b2::1774836544::res://.godot/exported/133200997/export-9011f07eccab1ad6f0d423f44ddd833f-Supermagnet_72_def.res
+res://Recipes/Item Stacks/Synthetic_DNA_3_def.tres::3c4ec92e326cd12b11cc49968001c1ba::1774836544::res://.godot/exported/133200997/export-a8cb774c9a08ca6e4ce648ff59434181-Synthetic_DNA_3_def.res
+res://Recipes/Item Stacks/Synthetic_Protein_8_def.tres::c7253449ecb06802437ac4629d953d4a::1774836544::res://.godot/exported/133200997/export-42314731116f09d07103c776f7488c19-Synthetic_Protein_8_def.res
+res://Recipes/Item Stacks/Synthetic_Protein_10_def.tres::ded9dc9ec6bfa7ecc564d28d8c81b896::1774836544::res://.godot/exported/133200997/export-ac2edf1ef66968bdcc91ae316082b2ad-Synthetic_Protein_10_def.res
+res://Recipes/Item Stacks/Synthetic_Protein_30_def.tres::71e94e9360ef0c0461cfc3c93d970c2f::1774836544::res://.godot/exported/133200997/export-19ca233769573690f0335e2408aa5c97-Synthetic_Protein_30_def.res
+res://Recipes/Item Stacks/Synthetic_Resin_20_def.tres::0c2002730374b03d0647d3757ba27dfc::1774836544::res://.godot/exported/133200997/export-ca34915dc6d2d1e39e05a6a834178154-Synthetic_Resin_20_def.res
+res://Recipes/Item Stacks/Synthetic_Resin_24_def.tres::535affe9a7d60e8f9a76bd29f63dbebb::1774836544::res://.godot/exported/133200997/export-fdb08f87f2ca193d40537cc1f936ba71-Synthetic_Resin_24_def.res
+res://Recipes/Item Stacks/Synthetic_Resin_36_def.tres::1910f3c3ea035a1e16a65e38008f12e7::1774836544::res://.godot/exported/133200997/export-8ce0d231c466ccced9d51707aea25960-Synthetic_Resin_36_def.res
+res://Recipes/Item Stacks/Synthetic_Resin_48_def.tres::73d043afdb426672c5e04f6b35ecbf32::1774836544::res://.godot/exported/133200997/export-edfb187f9e4e4ac6d373526c8814a843-Synthetic_Resin_48_def.res
+res://Recipes/Item Stacks/Synthetic_Resin_60_def.tres::2010eb51e21332e45b767e26c645b5e3::1774836544::res://.godot/exported/133200997/export-281eeafd34904b46a424485305d389ad-Synthetic_Resin_60_def.res
+res://Recipes/Item Stacks/Synthetic_silicon_15_def.tres::00ee346d1c011a4b316639b1171244a0::1774836544::res://.godot/exported/133200997/export-d8f0fa0f5628adfd169a06c39e5e0ea6-Synthetic_silicon_15_def.res
+res://Recipes/Item Stacks/Synthetic_silicon_24_def.tres::6684f284576135dbe65983320f6622e8::1774836544::res://.godot/exported/133200997/export-35571c3618d8fddd27e649b6e6bed548-Synthetic_silicon_24_def.res
+res://Recipes/Item Stacks/Synthetic_silicon_30_def.tres::9f8607dfbb19d4ea6d6099795f1eb3e7::1774836544::res://.godot/exported/133200997/export-bd45346d6f1407ab9ae5de4eefbfb048-Synthetic_silicon_30_def.res
+res://Recipes/Item Stacks/Synthetic_silicon_60_def.tres::99a21842dcc3916e0b58b309cc0b0f12::1774836544::res://.godot/exported/133200997/export-e25884ff4a81e397c2f0b59612deb8ae-Synthetic_silicon_60_def.res
+res://Recipes/Item Stacks/Titanium_bar_20_def.tres::01d30010eb85d90b946d158fbdb4fcbe::1775862401::res://.godot/exported/133200997/export-603ecc3fdb9cc26acb0b2b4a9771cf74-Titanium_bar_20_def.res
+res://Recipes/Item Stacks/Titanium_bar_30_def.tres::18c318c3acf612185dfdcbf38f964455::1774836544::res://.godot/exported/133200997/export-91473d1a7669594984dc4ee6ffda71ef-Titanium_bar_30_def.res
+res://Recipes/Item Stacks/Titanium_bar_60_def.tres::d9eeff09033d6194f24b8b8b315785d3::1774836544::res://.godot/exported/133200997/export-42cc09bc946cab84af209413f1d69577-Titanium_bar_60_def.res
+res://Recipes/Item Stacks/Titanium_bar_150_def.tres::f41adb048d3937252b2becc794597d63::1774836544::res://.godot/exported/133200997/export-c653df77d321259334cb3badd47e2e71-Titanium_bar_150_def.res
+res://Recipes/Item Stacks/Titanium_beam_18_def.tres::b650b218154d76c4ccedcf1869b86e30::1774836544::res://.godot/exported/133200997/export-631841d4bf3adeb94b4d090be0e383b9-Titanium_beam_18_def.res
+res://Recipes/Item Stacks/Titanium_beam_20_def.tres::e6bc25d5904234f8b845d45b568ac393::1775862421::res://.godot/exported/133200997/export-172569bfe5ba0f5639267ef09cd7f806-Titanium_beam_20_def.res
+res://Recipes/Item Stacks/Titanium_beam_24_def.tres::f99397698568cd48e23dfa4f057b995b::1774836544::res://.godot/exported/133200997/export-c6904d2bb747c1a50606ee4a7355d5b6-Titanium_beam_24_def.res
+res://Recipes/Item Stacks/Titanium_beam_30_def.tres::3954ce60bd3c08b78d0ea2fa9dc731ec::1774836544::res://.godot/exported/133200997/export-d2d67e32618b41815e1140634a1b7b25-Titanium_beam_30_def.res
+res://Recipes/Item Stacks/Titanium_housing_6_def.tres::8a901a0a6bd84d5d90a3f6883b04ebf5::1774836544::res://.godot/exported/133200997/export-727101e0b07dd3cc463ac9c088924680-Titanium_housing_6_def.res
+res://Recipes/Item Stacks/Titanium_housing_15_def.tres::449752519f8fa8b3326a63746afd8c74::1774836544::res://.godot/exported/133200997/export-6ec0dfb4562f3a880ea8f59211af02e1-Titanium_housing_15_def.res
+res://Recipes/Item Stacks/Titanium_housing_20_def.tres::e0e7f9aad4c33783b68dde7aa4ecf732::1774836544::res://.godot/exported/133200997/export-f6bfd797bffce2960bee66b02a140040-Titanium_housing_20_def.res
+res://Recipes/Item Stacks/Titanium_housing_30_def.tres::af865f1e0a9d9aba77bb08528f68b209::1774836544::res://.godot/exported/133200997/export-5f86fbeecb8ee14b5fd0c4f96f38205e-Titanium_housing_30_def.res
+res://Recipes/Item Stacks/Titanium_housing_40_def.tres::ef88626258983120195f40ea5ef86c45::1774836544::res://.godot/exported/133200997/export-449141c7b697234d0a28cdc5c39dd79c-Titanium_housing_40_def.res
+res://Recipes/Item Stacks/Titanium_ore_30_def.tres::9fa6cf529f6a6e8d93e9ae69593684c2::1774836544::res://.godot/exported/133200997/export-0338f01f3fb672063cf11b487034215b-Titanium_ore_30_def.res
+res://Recipes/Item Stacks/Titanium_ore_60_def.tres::620be3067040ba052633e07e683fcb45::1774836544::res://.godot/exported/133200997/export-041d3f587bb9a9ba10be5294ee1c846a-Titanium_ore_60_def.res
+res://Recipes/Item Stacks/Titanium_ore_120_def.tres::6aebb5428dee998ad49c7dded93cfe8a::1774836544::res://.godot/exported/133200997/export-19a6cddb7104d2041c37b570c9002245-Titanium_ore_120_def.res
+res://Recipes/Item Stacks/Titanium_ore_180_def.tres::2552128977c15d6d05ff30d3be9e6e50::1774836544::res://.godot/exported/133200997/export-196de844d5f1d743a1113eb8c552b908-Titanium_ore_180_def.res
+res://Recipes/Item Stacks/Titanium_ore_240_def.tres::0051aa1c25fc4b58c1b046031ffd77d1::1774836544::res://.godot/exported/133200997/export-216538d6b60890eb28ebee1c8732286d-Titanium_ore_240_def.res
+res://Recipes/Item Stacks/Titanium_ore_300_def.tres::f0e3d1f655ea377934c0f0b0f3be9a4b::1774836544::res://.godot/exported/133200997/export-81eb87cad717d25cefb8be3b7e25bf52-Titanium_ore_300_def.res
+res://Recipes/Item Stacks/Titanium_ore_480_def.tres::d1d4155cff92219117906a3fc6f3ba9e::1774836544::res://.godot/exported/133200997/export-bdabd691b025786cc81016b08a923bf6-Titanium_ore_480_def.res
+res://Recipes/Item Stacks/Titanium_rod_10_def.tres::af980e35c43c682c80e3ea86ec39ffbc::1774836544::res://.godot/exported/133200997/export-cfdda228be11ed87f7cc2f08e65043e4-Titanium_rod_10_def.res
+res://Recipes/Item Stacks/Titanium_rod_12_def.tres::f8c18c535e4c76ac3e92e68ae78ba2d6::1774836544::res://.godot/exported/133200997/export-29319dae96ed3ebf202bd2c1da248444-Titanium_rod_12_def.res
+res://Recipes/Item Stacks/Titanium_rod_20_def.tres::8201a399ab56bd9e0f9b374696fd5521::1774836544::res://.godot/exported/133200997/export-039041f00ce2eaae87beefe9a6336d13-Titanium_rod_20_def.res
+res://Recipes/Item Stacks/Titanium_rod_30_def.tres::900825f94ae0bd0f58302a45abc95b10::1774836544::res://.godot/exported/133200997/export-453eacf3d3603365b1a0348675a244aa-Titanium_rod_30_def.res
+res://Recipes/Item Stacks/Titanium_rod_60_def.tres::8f12b7a3985f8d08e809ee20e9ebf37c::1774836544::res://.godot/exported/133200997/export-b7b5598d46ef672b044a3dbe74042d51-Titanium_rod_60_def.res
+res://Recipes/Item Stacks/Titanium_rod_120_def.tres::0e77ebf8033658d7ae386f140d4c28b6::1774836544::res://.godot/exported/133200997/export-198c60e535eacfa84c5087d9cb6732c1-Titanium_rod_120_def.res
+res://Recipes/Item Stacks/Titanium_sheet_20_def.tres::74942398a0a60e929d2a52363cce37b2::1774836544::res://.godot/exported/133200997/export-5c62a91acda4aaeb058c886d96f06e12-Titanium_sheet_20_def.res
+res://Recipes/Item Stacks/Titanium_sheet_30_def.tres::212127ac19e019f6430bf94ef6fa63c0::1774836544::res://.godot/exported/133200997/export-e7844d6aa471b041999ee6f19d40a10c-Titanium_sheet_30_def.res
+res://Recipes/Item Stacks/Titanium_sheet_60_def.tres::75894c428ee71b7f918195ca2182e0ed::1774836544::res://.godot/exported/133200997/export-08b9b2b33c9dbe517dac500edad98acd-Titanium_sheet_60_def.res
+res://Recipes/Item Stacks/Titanium_sheet_180_def.tres::bd85b837d06a0204737e349a641a5b5d::1774836544::res://.godot/exported/133200997/export-35c59c7b4b3c22def7c9f23d87af796d-Titanium_sheet_180_def.res
+res://Recipes/Item Stacks/Titanoferrite_Ingot_15_Def.tres::2d25eaa5bfbd1e8b9f2673cef0135215::1774836544::res://.godot/exported/133200997/export-336e7e09cc20b6128f2726656bf2b182-Titanoferrite_Ingot_15_Def.res
+res://Recipes/Item Stacks/Titanoferrite_Ingot_40_Def.tres::a802b09dc70e918bbf05fd00908c7b7d::1774836544::res://.godot/exported/133200997/export-2ad4b25ce55dd61116340e774d1cf5a4-Titanoferrite_Ingot_40_Def.res
+res://Recipes/Item Stacks/Titanoferrite_Ingot_48_Def.tres::cb1a8128600a8c326f1850bf51b4b668::1774836544::res://.godot/exported/133200997/export-30f0fc629c0b47d275bd29a0ecf17906-Titanoferrite_Ingot_48_Def.res
+res://Recipes/Item Stacks/Titanoferrite_Ingot_150_Def.tres::179f8416f843e19c22ae809a6d644a49::1774836544::res://.godot/exported/133200997/export-e9e3abef047ed97297d3b3e1ce63ce3d-Titanoferrite_Ingot_150_Def.res
+res://Recipes/Item Stacks/Tracking_Device_3_def.tres::ae74300fd633e9b7d0fd2c64025afbcb::1774836544::res://.godot/exported/133200997/export-ef6183997e428cd1f15d4e985cc2c346-Tracking_Device_3_def.res
+res://Recipes/Item Stacks/Tracking_Device_4_def.tres::c37f5228af189e3802e2db2d796e1199::1774836544::res://.godot/exported/133200997/export-0031b49ce383d3ca5d493f1256eec8e3-Tracking_Device_4_def.res
+res://Recipes/Item Stacks/Tube_30_def.tres::b13634a09df08b58a925571b341ad62e::1774836544::res://.godot/exported/133200997/export-d0b7021dff062889f3b1dd842307a7bc-Tube_30_def.res
+res://Recipes/Item Stacks/Tube_48_def.tres::9bbf2022335fd3751eb9070cf4e756d9::1774836544::res://.godot/exported/133200997/export-26ea384876e5f0b4899cca239cb24b78-Tube_48_def.res
+res://Recipes/Item Stacks/Tube_60_def.tres::84477ef0cfecfa8f4631c08ae982df4b::1774836544::res://.godot/exported/133200997/export-035226094890eb1db3c0c01682f7a551-Tube_60_def.res
+res://Recipes/Item Stacks/Tube_120_def.tres::621acf16ccdbff4502369ffced9b4461::1774836544::res://.godot/exported/133200997/export-1ebd34e0a1cbf542828f8a3d3cd2895a-Tube_120_def.res
+res://Recipes/Item Stacks/Tube_200_def.tres::e455dc6557dcb82628891f46e716e465::1774836544::res://.godot/exported/133200997/export-21c3354517212b75de615f86545bb1b9-Tube_200_def.res
+res://Recipes/Item Stacks/Tube_240_def.tres::b1bd6bda3443e2318b8b51a9033c3ba4::1774836544::res://.godot/exported/133200997/export-ecde82619d42bb04630b37ff967c0efd-Tube_240_def.res
+res://Recipes/Item Stacks/Turbine_4_def.tres::c82cf99b9d1b842cb88e6cfb906728f6::1774836544::res://.godot/exported/133200997/export-55ab634c93b2ebfb5273017b418c5ace-Turbine_4_def.res
+res://Recipes/Item Stacks/Turbine_6_def.tres::f7ea43636a73df27f02472197a25626d::1774836544::res://.godot/exported/133200997/export-a18cc05678a2ee0a768df79de23ea541-Turbine_6_def.res
+res://Recipes/Item Stacks/Turbine_10_def.tres::329706bcd80fbd5518f9908c1f5da1da::1774836544::res://.godot/exported/133200997/export-bbbf831ba3561a616d4ec8b24bc7ec29-Turbine_10_def.res
+res://Recipes/Item Stacks/Uberfilament_4_def.tres::c6c258ff15e8dda3b7d6c40df6dff511::1774836544::res://.godot/exported/133200997/export-69f8b4457b939b86789fb88ed2446d64-Uberfilament_4_def.res
+res://Recipes/Item Stacks/Uberfilament_6_def.tres::1f180fe73341e77ed83cf75775ad5e5a::1774836544::res://.godot/exported/133200997/export-4f0d9cda9fa21323dbe13565de2c2639-Uberfilament_6_def.res
+res://Recipes/Item Stacks/Uberfilament_12_def.tres::737519c5091ec3c7d9a4026aec45be85::1774836544::res://.godot/exported/133200997/export-74d9449bd07eeabfec3f3b35cf197872-Uberfilament_12_def.res
+res://Recipes/Item Stacks/Uberfilament_15_def.tres::0f301b9e92fc90e010b87f757f4a9ce7::1774836544::res://.godot/exported/133200997/export-4b0cefd0071b86e1ed404af403b6708b-Uberfilament_15_def.res
+res://Recipes/Item Stacks/Uberfilament_18_def.tres::d770d9f3dda9ef2f5de8ba0831d224b2::1774836544::res://.godot/exported/133200997/export-1d81a8817a31e5d305789d5277eaf96d-Uberfilament_18_def.res
+res://Recipes/Item Stacks/Uberfilament_24_def.tres::1ff15fc6cf23d21636ece1e4a6e47e69::1774836544::res://.godot/exported/133200997/export-c77297a7f89bf31a65674fe3eb146aa3-Uberfilament_24_def.res
+res://Recipes/Item Stacks/Valve_6_def.tres::4c57ea1af0b6dec614ccdee63f15cfa7::1774836544::res://.godot/exported/133200997/export-7bd919ad624deeeb65f0368e0f4f0285-Valve_6_def.res
+res://Recipes/Item Stacks/Valve_8_def.tres::982f5f1d7ca58c7fcae2dcc6c56bdafc::1774836544::res://.godot/exported/133200997/export-4ebe8f388bf9fc7d2b49d297945b18a7-Valve_8_def.res
+res://Recipes/Item Stacks/Valve_9_def.tres::ebf75614238f7a95d3bb5341c2eb21df::1774836544::res://.godot/exported/133200997/export-42d1655fa593e7ed5a7858d9ff5c5263-Valve_9_def.res
+res://Recipes/Item Stacks/Valve_12_def.tres::311a291c8fce37ba0cf324a27ca90b2d::1774836544::res://.godot/exported/133200997/export-5083a5ea90e6c7ca3984f520e5a0e7e4-Valve_12_def.res
+res://Recipes/Item Stacks/Wolfram_bar_15_def.tres::31d7390f58f48ad0a22b60958c08e5b1::1774836544::res://.godot/exported/133200997/export-6b9f97567c11a6f0e34e513ee3ff0a78-Wolfram_bar_15_def.res
+res://Recipes/Item Stacks/Wolfram_bar_30_def.tres::b405456f7b2515942d9e86d221643a88::1774836544::res://.godot/exported/133200997/export-17dfaa6be9bc6a4156039e7e1be52c70-Wolfram_bar_30_def.res
+res://Recipes/Item Stacks/Wolfram_bar_60_def.tres::b3c04f76e1074388996a29fc657db89b::1774836544::res://.godot/exported/133200997/export-2e11a2198dd56a0a8a640ac92f9a5344-Wolfram_bar_60_def.res
+res://Recipes/Item Stacks/Wolfram_bar_150_def.tres::be508630a0ecbee191ebcb7bb75079df::1774836544::res://.godot/exported/133200997/export-ee9feb9749e81d9c902bdf53d830692a-Wolfram_bar_150_def.res
+res://Recipes/Item Stacks/Wolfram_ore_30_def.tres::8c0b34285101a14b1568a17ac1bb07d5::1774836544::res://.godot/exported/133200997/export-31a06677cc7d30425c383dd506c9ee4d-Wolfram_ore_30_def.res
+res://Recipes/Item Stacks/Wolfram_ore_60_def.tres::5fa469de38d450a42ee1a65e166002d5::1774836544::res://.godot/exported/133200997/export-b8309e74cf4241420e1a8613b11dd4c9-Wolfram_ore_60_def.res
+res://Recipes/Item Stacks/Wolfram_ore_120_def.tres::babcea4883210e2742c10694ed270215::1774836544::res://.godot/exported/133200997/export-8b521f7d2deda3b38c391836286657ea-Wolfram_ore_120_def.res
+res://Recipes/Item Stacks/Wolfram_ore_180_def.tres::67a2cc8240a2b959d8d2755de3d14129::1774836544::res://.godot/exported/133200997/export-c29d34f0e859aa04fa1046818d201d4c-Wolfram_ore_180_def.res
+res://Recipes/Item Stacks/Wolfram_ore_240_def.tres::2ce449bc2e55a29357eecb118f564be1::1774836544::res://.godot/exported/133200997/export-f5d848008de395af44bc21f69fcfa3b3-Wolfram_ore_240_def.res
+res://Recipes/Item Stacks/Wolfram_ore_300_def.tres::03027881feaf62897357877de5ac2ae0::1774836544::res://.godot/exported/133200997/export-191ca72622f9f9f17842af30ed860098-Wolfram_ore_300_def.res
+res://Recipes/Item Stacks/Wolfram_ore_480_def.tres::d15e4d2be7d1e99d6a41ed9c4bb07a06::1774836544::res://.godot/exported/133200997/export-b70d34c07da7fc7119125203a756b0dd-Wolfram_ore_480_def.res
+res://Recipes/Item Stacks/Wolfram_plate_10_def.tres::6dcc9dfda5bb43a5ed866e6235d942cf::1774836544::res://.godot/exported/133200997/export-d933e86c8aea620152411937aff2705f-Wolfram_plate_10_def.res
+res://Recipes/Item Stacks/Wolfram_plate_15_def.tres::cf5b4c9c7fe29e374bacedf336cb8f7c::1774836544::res://.godot/exported/133200997/export-738eb554a2c282f822a59e27442d9526-Wolfram_plate_15_def.res
+res://Recipes/Item Stacks/Wolfram_plate_45_def.tres::76ebb89ff98ebc743c18b4382dad9492::1774836544::res://.godot/exported/133200997/export-a50f3265e52b3b09f1669a9828ca77ed-Wolfram_plate_45_def.res
+res://Recipes/Item Stacks/Wolfram_plate_60_def.tres::3254f948141220f55b45f89e10435fec::1774836544::res://.godot/exported/133200997/export-954bc8134bc69ba9fc675518a2cc9d5a-Wolfram_plate_60_def.res
+res://Recipes/Item Stacks/Wolfram_plate_80_def.tres::6e142ec4dd01064d00aeaf2c3a18d545::1774836544::res://.godot/exported/133200997/export-0cb9a7c7b732ade194631635a8322b8e-Wolfram_plate_80_def.res
+res://Recipes/Item Stacks/Wolfram_plate_90_def.tres::feee67832dfc56925e4330f61585dfe8::1774836544::res://.godot/exported/133200997/export-34b2d0ec06a9923926c17acad1e4d263-Wolfram_plate_90_def.res
+res://Recipes/Item Stacks/Wolfram_plate_210_def.tres::46ca96e54fded44f6612d0fe95d2ef96::1774836544::res://.godot/exported/133200997/export-c819afb3f6bd18230745c576e67eeb4a-Wolfram_plate_210_def.res
+res://Recipes/Item Stacks/Wolfram_powder_30_def.tres::648c80d3d612ed8b00cfe39bfdf15cfc::1774836544::res://.godot/exported/133200997/export-64d1b509ba5e90416d0c5aacfd8d1eed-Wolfram_powder_30_def.res
+res://Recipes/Item Stacks/Wolfram_powder_40_def.tres::f367dcb837133b1a7905d246d8ba3a3b::1774836544::res://.godot/exported/133200997/export-edd98bab25788b2fa636007de08dd00d-Wolfram_powder_40_def.res
+res://Recipes/Item Stacks/Wolfram_powder_60_def.tres::9f9ff64fdd85a9b5b405d45c983086a9::1774836544::res://.godot/exported/133200997/export-e1b569b56d43228366471c667e31e9be-Wolfram_powder_60_def.res
+res://Recipes/Item Stacks/Wolfram_powder_90_def.tres::71c814a1438c0e23089c074cf45b4691::1774836544::res://.godot/exported/133200997/export-0fa301726c3d3840832c4899bfaa440c-Wolfram_powder_90_def.res
+res://Recipes/Item Stacks/Wolfram_powder_300_def.tres::67e5de83f23ec7739ee6ef9b0629e202::1774986215::res://.godot/exported/133200997/export-fbacff23231f909e63d58cce14907827-Wolfram_powder_300_def.res
+res://Recipes/Item Stacks/Wolfram_steel_ingot_15_def.tres::9f6c09a69138ca1e12a1201ae0f591bd::1774836544::res://.godot/exported/133200997/export-b52f6a8b0344748cbbf37d0a70463b8f-Wolfram_steel_ingot_15_def.res
+res://Recipes/Item Stacks/Wolfram_steel_ingot_40_def.tres::b6609b41eeb50dbd76e3ba7105b972ef::1774836544::res://.godot/exported/133200997/export-ce97f53f5490fdfbe328ce6e95baafa5-Wolfram_steel_ingot_40_def.res
+res://Recipes/Item Stacks/Wolfram_steel_ingot_150_def.tres::2638f929bc4a8b7ab5bbc7f79f845f10::1774836544::res://.godot/exported/133200997/export-97cbc98005f3237988d616d2e4dced5c-Wolfram_steel_ingot_150_def.res
+res://Recipes/Item Stacks/Wolfram_wire_15_def.tres::29fa1300d1b781fc86cde73d7cd5a4d3::1774836544::res://.godot/exported/133200997/export-0f48dbd605a32d9c4ce72687ac162d0a-Wolfram_wire_15_def.res
+res://Recipes/Item Stacks/Wolfram_wire_20_def.tres::ee3812face0d54e7a5a835a5f43b2b61::1774836544::res://.godot/exported/133200997/export-55743120918d19f524884023b2dab122-Wolfram_wire_20_def.res
+res://Recipes/Item Stacks/Wolfram_wire_30_def.tres::fa17404380f55225559eae0f7452f5e6::1774836544::res://.godot/exported/133200997/export-539c6e3e4979744e4200769cd89a2090-Wolfram_wire_30_def.res
+res://Recipes/Item Stacks/Wolfram_wire_80_def.tres::fa8f1091cf713b165c0446b922b9589f::1774836544::res://.godot/exported/133200997/export-7a4d3c03d9d4afc7e0a23f67c673870d-Wolfram_wire_80_def.res
+res://Recipes/Item Stacks/Wolfram_wire_120_def.tres::a2e9b30a809ea3e189cff645ec7b6e71::1774836544::res://.godot/exported/133200997/export-55fec1839764de9af4f18938daf092f9-Wolfram_wire_120_def.res
+res://Recipes/Recipe Variants/calcium_normal.tres::5eaef816de5e9f4282a722f482a5ab6e::1774836544::res://.godot/exported/133200997/export-0729d4ce0a90297094a981a993f6d09f-calcium_normal.res
+res://Recipes/Recipe Variants/calcium_normal_v2.tres::125e7bc450efa2a155fd43994d7473cf::1774836544::res://.godot/exported/133200997/export-1bc6c90f035eca53461bd48ea5d57d28-calcium_normal_v2.res
+res://Recipes/Recipe Variants/calcium_pure.tres::3ac9fbd408713239b7d15ae16b4c4045::1774836544::res://.godot/exported/133200997/export-a5a8e881453a67896faafe22390ec935-calcium_pure.res
+res://Recipes/Recipe Variants/calcium_pure_v2.tres::fc7a5a322540438463aca1d92e4f10f9::1774836544::res://.godot/exported/133200997/export-759816486a2d855a355454d79a909e70-calcium_pure_v2.res
+res://Recipes/Recipe Variants/calclium_impure.tres::644a833edc5e16c59a60c12e860c72e6::1774836544::res://.godot/exported/133200997/export-d112a570a4fdd3753522aa818571c1a4-calclium_impure.res
+res://Recipes/Recipe Variants/calclium_impure_v2.tres::83e5fec54d44c9739f79b259cf22c6a3::1774836544::res://.godot/exported/133200997/export-e1eeac4304f1101e7d3bfdb4d450c5da-calclium_impure_v2.res
+res://Recipes/Recipe Variants/titanium_impure.tres::67a9095e2d8c05e74960f51b204852a9::1774836544::res://.godot/exported/133200997/export-58885cfdf79f7d59c0cd8c6136404984-titanium_impure.res
+res://Recipes/Recipe Variants/titanium_impure_v2.tres::015ac6e42d37363a6af962bc0796df25::1774836544::res://.godot/exported/133200997/export-3e6a1273d1fd54b3dcff1f2fbce6f3f5-titanium_impure_v2.res
+res://Recipes/Recipe Variants/titanium_normal.tres::8ba5316b46b5fb3ad07f793d8451823f::1774836544::res://.godot/exported/133200997/export-6bff23b72d35978de1dd003e7e233e76-titanium_normal.res
+res://Recipes/Recipe Variants/titanium_normal_v2.tres::e807fce5ce5cb566191c255a092c8567::1774836544::res://.godot/exported/133200997/export-5f29782179a26bed901fef60dd69b12e-titanium_normal_v2.res
+res://Recipes/Recipe Variants/titanium_pure.tres::c534c9090e46085756822ee251d91570::1774836544::res://.godot/exported/133200997/export-7e1973a1f8b642c6a428535fd138f16b-titanium_pure.res
+res://Recipes/Recipe Variants/titanium_pure_v2.tres::c866bd791af0073491972ce31213644d::1774836544::res://.godot/exported/133200997/export-411a31ab90d5e1a3b396e02e9d341507-titanium_pure_v2.res
+res://Recipes/Recipe Variants/wolfram_impure.tres::029c05baceaadf46fb2e1fd8b5b82d7a::1774836544::res://.godot/exported/133200997/export-d4079fe19c5368e486096c49b66fd4f2-wolfram_impure.res
+res://Recipes/Recipe Variants/wolfram_impure_v2.tres::d499db9b120b1f3d2060063933c6a7ce::1774836544::res://.godot/exported/133200997/export-4b0ec1ace26c9b8ee7bcbb8b8246c4e0-wolfram_impure_v2.res
+res://Recipes/Recipe Variants/wolfram_normal.tres::bcd36cdbc6ecb5f1cb64b783b0b08d1d::1774836544::res://.godot/exported/133200997/export-fb41d679a872d1e98a90222409cb59f3-wolfram_normal.res
+res://Recipes/Recipe Variants/wolfram_normal_V2.tres::5e010e47074e691af3e51f8573c6e990::1774836544::res://.godot/exported/133200997/export-c828981a44879e4fb69d9c99ac738a27-wolfram_normal_V2.res
+res://Recipes/Recipe Variants/wolfram_pure.tres::38a17db3c98194f94eb72777467b105e::1774836544::res://.godot/exported/133200997/export-dba308a5fe5bb3634bae678230870840-wolfram_pure.res
+res://Recipes/Recipe Variants/wolfram_pure_v2.tres::0770c4bb1783aef9f9bc1371d02b57d4::1774836544::res://.godot/exported/133200997/export-a743ea92701398f9a0fe2af658a03494-wolfram_pure_v2.res
+res://Recipes/Accumulator.tres::ed8704c4261369ad06c7e13981e57c57::1774836544::res://.godot/exported/133200997/export-3bad5768dd5041186125cad5da8a3ae5-Accumulator.res
+res://Recipes/Aerogel.tres::ecac0abfa8b96c463de528d79936c5bf::1774986215::res://.godot/exported/133200997/export-26ab6b5a3716dd5d98872b020905963b-Aerogel.res
+res://Recipes/Airlock.tres::79bc075135629120ce0689e330e2c681::1774938031::res://.godot/exported/133200997/export-1b0f66c96987bbd58fc4f5f753318211-Airlock.res
+res://Recipes/Anti-radiation_covers.tres::45eda5bdcf584f1d9a6cf1071ca8a7ee::1774986215::res://.godot/exported/133200997/export-9923cebc2937e1e3aafe5479077c32dd-Anti-radiation_covers.res
+res://Recipes/Applicator.tres::bd35ae40bb7b398ad0ba65112cbcccd0::1774940583::res://.godot/exported/133200997/export-aa0a95df69ade074857714765dfd9efe-Applicator.res
+res://Recipes/Basic_building_materials.tres::0f60ae531aad9580f1decf32e2cebeee::1774940583::res://.godot/exported/133200997/export-5882559510420cf693741e415134cc5d-Basic_building_materials.res
+res://Recipes/Basic_fuel.tres::fd0820f299ab059b74552e678ca3d40f::1774986215::res://.godot/exported/133200997/export-c64f9d70596d7dcfef5442db05c25cb6-Basic_fuel.res
+res://Recipes/Battery.tres::21ca0c212f55d9ea8a3de65ead2e8116::1774968759::res://.godot/exported/133200997/export-566f26a802d209b291144935c2da2ea7-Battery.res
+res://Recipes/Biofilament.tres::f6c3184a03df398d5c6b05b38047dab7::1774941814::res://.godot/exported/133200997/export-7a6342c2ec1cc8cce5dd2d5a7314033e-Biofilament.res
+res://Recipes/Bioprinter.tres::e5a023553eb76467e969170f2089a584::1774836544::res://.godot/exported/133200997/export-ef83e3676bd3d1b652b116ef20c574e3-Bioprinter.res
+res://Recipes/Calcite_sheet.tres::ce15684322f0804a9747263121285776::1774940583::res://.godot/exported/133200997/export-e9c002ede314e461a2eacca23ccf91f8-Calcite_sheet.res
+res://Recipes/Calcium_block.tres::cbea92a9586337a257e63087073cc892::1774976387::res://.godot/exported/133200997/export-247973a6e04713c9bc8e8b88dfe67a4a-Calcium_block.res
+res://Recipes/Calcium_powder.tres::d34123a6e22ffa4a0cee96e1cb1c619e::1774942225::res://.godot/exported/133200997/export-75d0efb436b270d5d34bdae340016516-Calcium_powder.res
+res://Recipes/Calcium_powder_v2.tres::d010c37d557f3721ee09db44e496bd8d::1774942514::res://.godot/exported/133200997/export-f9cd4dbaf372be1a82cffd43dafea7bf-Calcium_powder_v2.res
+res://Recipes/Carbon_sonar.tres::e1b87bd5a5f4dd85627076f5fa3e0ed7::1774938031::res://.godot/exported/133200997/export-df0d017957b52d17a5d9ef9ff7bf18bc-Carbon_sonar.res
+res://Recipes/Ceramics.tres::4229f9b225bb51c924b0b62ee247ab8a::1774942225::res://.godot/exported/133200997/export-e56c7a7ff0e7fc7fd674e5648b5fa97c-Ceramics.res
+res://Recipes/Ceramics_v2.tres::18d2447065af11afe541849f2b34aa8d::1774942514::res://.godot/exported/133200997/export-e9a8e5352a3c1cbf0c037e1282c09a3c-Ceramics_v2.res
+res://Recipes/Chemicals.tres::35a15f9cff79cc47ecb50a7d44a87e2b::1774942225::res://.godot/exported/133200997/export-af04ba68dd3e0b33a5d7c0f5dbb41754-Chemicals.res
+res://Recipes/Chemicals_v2.tres::a2f3274cd5e8811aed9d3f624111d32c::1774942514::res://.godot/exported/133200997/export-1bcc879cf20bc3cefa11ddb4bbf3f000-Chemicals_v2.res
+res://Recipes/Condenser.tres::2e66f6c4454f14f958f88117dede03aa::1774836544::res://.godot/exported/133200997/export-773b01d0acad7e497f884360fe4deee3-Condenser.res
+res://Recipes/Condenser_v2.tres::8258bfc5c708be17fb77b2956f9044c2::1774938271::res://.godot/exported/133200997/export-96b452b64fa3cc6e147b12d594f30961-Condenser_v2.res
+res://Recipes/Containment_vessel.tres::5605805c92c04fb5ad70981de80a1613::1774836544::res://.godot/exported/133200997/export-d82b546cc30ec41bbe940745739755b1-Containment_vessel.res
+res://Recipes/Control_systems.tres::bb86af49891f5833ec7b035af090de75::1774836544::res://.godot/exported/133200997/export-ddb982ca6270e465d62d55b49fc335d3-Control_systems.res
+res://Recipes/Converter.tres::3f6cfe1103dcfe8dd435037beb71bb8a::1774941814::res://.godot/exported/133200997/export-eb4533b87c19af130ad0cceae035d680-Converter.res
+res://Recipes/Cyclotrone.tres::e013dd6ee0920048d0aa90e5dc1fb391::1774986215::res://.godot/exported/133200997/export-45d7db45f4ae9cfc608c6ea894959fc7-Cyclotrone.res
+res://Recipes/Deuterium.tres::65be51be2d1b77c17920430c65586c4c::1774836544::res://.godot/exported/133200997/export-4ec036d95514873606ca812c1426ebc2-Deuterium.res
+res://Recipes/Dome.tres::da25e52a082a61ee36d38a6df3936512::1774941814::res://.godot/exported/133200997/export-96cd18ed44277a02e82610bad41612bd-Dome.res
+res://Recipes/Electromagnet.tres::2e7887e6d1cd94b31665d86a2a5d4ee1::1774836544::res://.godot/exported/133200997/export-818c5eb5bc868b44df4c92e4013bc051-Electromagnet.res
+res://Recipes/Electromagnetic_coil.tres::b632df6ba5845899931d1de807da5639::1774968759::res://.godot/exported/133200997/export-565cf08e0f9792696c0c9ec0bbbd3f3d-Electromagnetic_coil.res
+res://Recipes/Electronics.tres::069a74c6b809796148af70c60c2f9126::1774942225::res://.godot/exported/133200997/export-0428e79e3e57bbd3ad0fabe30787b6c0-Electronics.res
+res://Recipes/Epoxy.tres::ccf87619e8f44b5ea10091d16fa4b596::1774931016::res://.godot/exported/133200997/export-c3f904b529e7facdd28909c443d278ee-Epoxy.res
+res://Recipes/Explosive_charge.tres::b06dc66c823c372e9ecd34923d5610d0::1774836544::res://.godot/exported/133200997/export-bcf2424e03b6fea0519518e138040c20-Explosive_charge.res
+res://Recipes/Generator.tres::5eddc90d2ca32fccb4d30672d4567252::1774836544::res://.godot/exported/133200997/export-c5d3bffe62d02a608366bc2b541490a8-Generator.res
+res://Recipes/Geothite_ingot.tres::e1faa9f874d9919ec458514fb852abd3::1774971034::res://.godot/exported/133200997/export-cd52995e0b3ad510e2aded9801a6a7f0-Geothite_ingot.res
+res://Recipes/Geothite_lattice.tres::9b47dcfc2b0c5b09c30821de216af556::1774968760::res://.godot/exported/133200997/export-908512151c2db87ec1fdf04a4692420f-Geothite_lattice.res
+res://Recipes/Geothite_ore.tres::ad6cfa86248f2129178e798275f35e63::1774836544::res://.godot/exported/133200997/export-cc12eefe47604719839b61dd43a6d735-Geothite_ore.res
+res://Recipes/Geothite_powder.tres::0ba974263a35e6981c348f8f48007d89::1774931016::res://.godot/exported/133200997/export-23f31f236e7e79f1e156bd905da9754b-Geothite_powder.res
+res://Recipes/Glass.tres::3f1d50a2586db75990c74225df94800a::1774942225::res://.godot/exported/133200997/export-f7765bee815aab4847233ba7d55ae059-Glass.res
+res://Recipes/Glass_v2.tres::f248b752e818a74c064777e9d1933c90::1774942514::res://.godot/exported/133200997/export-2ff1b7b70d26bf86671597a6ceeeec90-Glass_v2.res
+res://Recipes/Hardening_agent.tres::a12f639a461a904cf6b6accad03713de::1774942225::res://.godot/exported/133200997/export-397912b7c424c4040a38176a3696310b-Hardening_agent.res
+res://Recipes/Hardening_agent_v2.tres::1e3b8f47e7867ce2e765408175588c8e::1774942514::res://.godot/exported/133200997/export-e74b24e4b7ebf5217c6f1af6f6800f6c-Hardening_agent_v2.res
+res://Recipes/Harvest_crude_oil.tres::97301bee5527a4852ae40830799f196d::1774836544::res://.godot/exported/133200997/export-15d12826711f3bffb54270795b14c462-Harvest_crude_oil.res
+res://Recipes/Harvest_helium-3.tres::bf4100a07b943ad547ae964c2ad9eb74::1774836544::res://.godot/exported/133200997/export-34399e2d486fb6e6286db1e1fa5295cc-Harvest_helium-3.res
+res://Recipes/harvest_sulpher.tres::2ca7a28ae05fe2b80f47ec7ac3872faa::1774836544::res://.godot/exported/133200997/export-f00408a88e28d71c0fa4fa4801df42d2-harvest_sulpher.res
+res://Recipes/Heat_resistant_sheet.tres::a822a14eb6c82d83a53301cc7c2f65bc::1774942225::res://.godot/exported/133200997/export-a81af0d3c932951b151ca57155a9204d-Heat_resistant_sheet.res
+res://Recipes/Heat_resistant_sheet_v2.tres::d3edd6652dc60546e25f89840483d7aa::1774942514::res://.godot/exported/133200997/export-96c9cb847e4b28c7ed7047a5156c1fb8-Heat_resistant_sheet_v2.res
+res://Recipes/Heat_shield.tres::32a8c01a37b1b0ba9fe417471d4c0085::1774968760::res://.godot/exported/133200997/export-d3e3f14d559f5dd9cc1cea15bacbd82c-Heat_shield.res
+res://Recipes/Heavy_ammo.tres::c2b84a95718db204450c32f3faf664bd::1774968759::res://.godot/exported/133200997/export-1e3a0a7d9571d1a50d6ee785ec13808d-Heavy_ammo.res
+res://Recipes/Impeller.tres::926e077d118cabfe63568aa1f54f8623::1774968759::res://.godot/exported/133200997/export-43a9f532d6a65da43b1a8b64a183d415-Impeller.res
+res://Recipes/Inductor.tres::9eef892aefe31d169321b1d99909760e::1774942225::res://.godot/exported/133200997/export-08ba6f14ffe141dc4ed7b82bce21ed2c-Inductor.res
+res://Recipes/Intermediate_building_materials.tres::55f1a4bc83cf18a2d34fd1ab227509bb::1774968760::res://.godot/exported/133200997/export-0c6ae295fc6d426b46401577fab9c8fb-Intermediate_building_materials.res
+res://Recipes/Ion Injector.tres::8508323d3264ee873f226be2a2194518::1774931016::res://.godot/exported/133200997/export-b79de89c4c748db09d4519318107a202-Ion Injector.res
+res://Recipes/Ion_bomb.tres::29df3c2ee8c463b2f2c396cbd1fcb8ea::1774941814::res://.godot/exported/133200997/export-69af9f6f8feff40bef9afb9dccb9a643-Ion_bomb.res
+res://Recipes/ion_injector_v2.tres::5a8a64f816beaeaeaaea60f134e82211::1774938271::res://.godot/exported/133200997/export-c7eeb3c02692c6194552ad590a437883-ion_injector_v2.res
+res://Recipes/Ion_stabilizer.tres::018639d48488df34e0fb9db5a4bdc963::1774968760::res://.godot/exported/133200997/export-5e0e7e1d76f1e6357b3d613d86497cf3-Ion_stabilizer.res
+res://Recipes/Ion_thruster.tres::5dff2c017e49e63d2b7b9604972a3155::1774938031::res://.godot/exported/133200997/export-4cd6d1a48bffc2f153291bec89a057d3-Ion_thruster.res
+res://Recipes/Laser_emitter.tres::38e56cb912e122ef06b3607f9197a8ee::1774836544::res://.godot/exported/133200997/export-8663e67c21c20495a3ae1a4330d10c1a-Laser_emitter.res
+res://Recipes/laser_emitter_v2.tres::c85692ba2c0817a1efe496bb60f5f6f6::1774938271::res://.godot/exported/133200997/export-96110c026eff09dc675f663f86c59bbe-laser_emitter_v2.res
+res://Recipes/Lens.tres::4b7e46b6701cc9ba5cb97b8d99702856::1774931016::res://.godot/exported/133200997/export-461383f07ef54bbaf496ad4b39d11ae3-Lens.res
+res://Recipes/Liquid_helium.tres::cab088b317c146942335469d822a39e0::1774931016::res://.godot/exported/133200997/export-4ad7f4880f75fc846f0dfb9f692b000b-Liquid_helium.res
+res://Recipes/Liquid_helium_v2.tres::9ac77a927cddce0d860750ba36a2498a::1774931267::res://.godot/exported/133200997/export-dacb2f5452fa670c4e68eefbdc75bb76-Liquid_helium_v2.res
+res://Recipes/Mars_habitat_base.tres::e66e0f1189dfdb2736f446565390c18d::1774836544::res://.godot/exported/133200997/export-3dd7926b2b4e37064b3030edb599377f-Mars_habitat_base.res
+res://Recipes/mine_Calcium.tres::45b42820d77006ea51d94052ee4ce021::1774836544::res://.godot/exported/133200997/export-366ce4f95895d31fba6f9a9959a12f5a-mine_Calcium.res
+res://Recipes/mine_Calcium_v2.tres::244c69db156431012b60b2a0b258f71d::1774836544::res://.godot/exported/133200997/export-7724cd0ec66f6392975d61667e9a38bf-mine_Calcium_v2.res
+res://Recipes/mine_Titanium.tres::ed236803d010a936745877d7afcd00db::1774836544::res://.godot/exported/133200997/export-3d052e34467e4b19e6e5bc704798ee76-mine_Titanium.res
+res://Recipes/mine_Titanium_v2.tres::89cd134d63b38deae7dbf3508dfc8876::1774836544::res://.godot/exported/133200997/export-a647da075a68303db29f8b78231ea282-mine_Titanium_v2.res
+res://Recipes/mine_Wolfram.tres::6ed9277538bdec88290757352d03806e::1774836544::res://.godot/exported/133200997/export-3945db1e33a6b7dd80115160e3d870fc-mine_Wolfram.res
+res://Recipes/mine_Wolfram_v2.tres::3918250dadbfec54c3e824dfeef45afa::1774836544::res://.godot/exported/133200997/export-ab38f0ce1e9336d30ebb340141e55e46-mine_Wolfram_v2.res
+res://Recipes/Missile_housing.tres::04fe6d622bf89eeb00c476e3c7370cc0::1774836544::res://.godot/exported/133200997/export-b51d0e50fce0ea6a2465a8d2e585d43b-Missile_housing.res
+res://Recipes/Molecular_scalpel.tres::5ea4f2a286f84ce37e55c2e902802f80::1774836544::res://.godot/exported/133200997/export-fc21ca7eb21502dd9766973100d96838-Molecular_scalpel.res
+res://Recipes/Nanosyringe.tres::97609f265dbe50b29a27c307ceac0afb::1774938031::res://.godot/exported/133200997/export-168026b1db2e36f9bbfbcc059096701c-Nanosyringe.res
+res://Recipes/Nano_fibre.tres::1ecdd5de6435fb675de212b368d43d64::1774931016::res://.godot/exported/133200997/export-515903b90f1d552a7342971eea7590ef-Nano_fibre.res
+res://Recipes/Nozzle.tres::48f588e7f0f5fded33b34e760474f906::1774968760::res://.godot/exported/133200997/export-6d4dc95b7623f9c43ebf6840a501ff9f-Nozzle.res
+res://Recipes/Onboard_instruments.tres::8601743e0652facd91567311bcdb1108::1774836544::res://.godot/exported/133200997/export-f33ede261537c85c494900c8b7d3beaa-Onboard_instruments.res
+res://Recipes/Organic_compound.tres::5f3d0e0b45fc1e72889d941513c6899e::1774986215::res://.godot/exported/133200997/export-dd39e67324ba682c216140f70fa3577e-Organic_compound.res
+res://Recipes/Payload_stage.tres::1f00fa2085cd05f24629599db0267694::1774836544::res://.godot/exported/133200997/export-2a68a61d02a137f91177a36753fdfc0f-Payload_stage.res
+res://Recipes/Pistol_ammo.tres::1691a96cdebb1e2c636150523c64635c::1774940583::res://.godot/exported/133200997/export-7d84e3b2920cd593f553d562e6ebfcd4-Pistol_ammo.res
+res://Recipes/Plasma_generator.tres::693d5128318c46e9bfb7a4c88fd7003b::1774836544::res://.godot/exported/133200997/export-42bc26578f0bc15ebbc47d516d3fb82a-Plasma_generator.res
+res://Recipes/Plastic.tres::4347a31d05dbdca2cbf1a4c13087baf1::1774986215::res://.godot/exported/133200997/export-37930aaf6f78e65cd20b3ae218572b6d-Plastic.res
+res://Recipes/Plastic_dust.tres::e41cbcab586848255c04a30b5de98f7f::1774836544::res://.godot/exported/133200997/export-423b3f24799724e7761fa637652dc64f-Plastic_dust.res
+res://Recipes/Powerium.tres::168a6d33e660a4299faa8a2a1499afc9::1774986215::res://.godot/exported/133200997/export-f8bc2c801686d8b6b2fc37a0a848419a-Powerium.res
+res://Recipes/pressure_tank.tres::aaddd41d0bd8e467e85064e646e2e60f::1774836544::res://.godot/exported/133200997/export-52e1f6e70a6a331cdfcddde29c46ef84-pressure_tank.res
+res://Recipes/Pressurized_helium.tres::66cdc644392d9cbc62d93ade90256491::1774971034::res://.godot/exported/133200997/export-7a3ea374ac852c8f14265f7af9f2aead-Pressurized_helium.res
+res://Recipes/Pressurized_helium_v2.tres::8a85f726230dd91e619ec9eb5346be1d::1774931267::res://.godot/exported/133200997/export-7441d46a44880605490cc47e877b10d1-Pressurized_helium_v2.res
+res://Recipes/Propulsion_stage.tres::6b8f4dd5de37f1ea08a0c04554a4a5f3::1774836544::res://.godot/exported/133200997/export-9d0d37e4dd13de4c7e66b54c4e338294-Propulsion_stage.res
+res://Recipes/Pseudorubber_insulator.tres::fa46ddb9ca204bf910c43272f0b9e559::1774986215::res://.godot/exported/133200997/export-a75e6ebb47cd370de91005debf1cfb88-Pseudorubber_insulator.res
+res://Recipes/Pump.tres::ba64a1f1a4cb549b2e745215d4977eb8::1774968760::res://.godot/exported/133200997/export-fe68f8581b38333dad8531d72fbee495-Pump.res
+res://Recipes/Quantum_tranquilizer.tres::c375c2fdca179e076211d7f80fb083a7::1774986215::res://.godot/exported/133200997/export-5f182d47eb28c042558c20b5d80ab41a-Quantum_tranquilizer.res
+res://Recipes/Refined_oil.tres::50767bbd508b3074fb1c3552646609a5::1774974903::res://.godot/exported/133200997/export-cda8a586469cbda43eedff4c3fa31d37-Refined_oil.res
+res://Recipes/Reinforced_frame.tres::41b041adf0aa4e90e8bd5ff227b66f18::1774968760::res://.godot/exported/133200997/export-93c3d37171d6dd754cef677982c562db-Reinforced_frame.res
+res://Recipes/Reinforced_housing.tres::3b27f55be5fe96f41a6c06b1b315c186::1774986215::res://.godot/exported/133200997/export-4d4dca6b3842c47b6f559ef0a723c74d-Reinforced_housing.res
+res://Recipes/Resonator.tres::8c61c2ccbf0a0b4c01e032214f0f2de2::1774928648::res://.godot/exported/133200997/export-167a8414ad310298fcdc8f2b15824357-Resonator.res
+res://Recipes/RNA_stabilizer.tres::0d4ee055f1e9dc083df6882a0bc8a718::1774986215::res://.godot/exported/133200997/export-a97ed4a69c5345d7683013fccef125a0-RNA_stabilizer.res
+res://Recipes/Rocket_engine.tres::4d078eed4ae75e6b5e9addf332d08861::1774941814::res://.godot/exported/133200997/export-7a805c4cdab6e5bfc46fc7de8dd5e341-Rocket_engine.res
+res://Recipes/Rocket_fuel.tres::0393ee620aa0e40363ed19e76096dfe4::1774986215::res://.godot/exported/133200997/export-34feade038137af55115457fce85114a-Rocket_fuel.res
+res://Recipes/Rotor.tres::bff74d6b5ca1727f8201e30d7774ac5b::1774940583::res://.godot/exported/133200997/export-1b05b5796f3c1532676f3f0a486f7405-Rotor.res
+res://Recipes/Rotor_v2.tres::d80349d32efacf75f43a9a4455a97631::1774940713::res://.godot/exported/133200997/export-6970dbe797a2db2036bf11b9261971b3-Rotor_v2.res
+res://Recipes/RTSC.tres::8d7f1b6efcff55c7c2a5611e387f876f::1774938031::res://.godot/exported/133200997/export-51b9fd192a6a05cf0e0d03f5b72ae1be-RTSC.res
+res://Recipes/RTSC_generator.tres::fbac8687f1a94753466200c3887d3a64::1774986215::res://.godot/exported/133200997/export-6af254a3673a23e74db11ff7e2829af6-RTSC_generator.res
+res://Recipes/Satelite_body.tres::cedb5182ea513680a43c690f07aa52f9::1774941814::res://.godot/exported/133200997/export-c55d27c0b875a8e9a8cfd24f9acecdc0-Satelite_body.res
+res://Recipes/Scafolding.tres::ff6358bc28bd0a9405b58d248f4cd5cd::1774938031::res://.godot/exported/133200997/export-81b679bd0f102dbf1ce043c90cc0d232-Scafolding.res
+res://Recipes/Scanner.tres::f0e408ca04a50d34dc09c422bda3cb23::1774928774::res://.godot/exported/133200997/export-f3f6c656d853ed1914e3dcc6e04142dc-Scanner.res
+res://Recipes/Scanner_v2.tres::05ccdf447e4f779f5c281c0d84c2da1d::1774938271::res://.godot/exported/133200997/export-2b4bf10d7a63436ce191b89dcd2dd5de-Scanner_v2.res
+res://Recipes/Shotgun_ammo.tres::d3deb8cc4c6542530acfae2718f47e79::1774968760::res://.godot/exported/133200997/export-4dd713d976d0a2aa9690a1a448a075b9-Shotgun_ammo.res
+res://Recipes/Stabilizer.tres::85448b24ceeb7a169d37a064413e608a::1774940583::res://.godot/exported/133200997/export-56fd58c00dbefad2ce57550b4279c191-Stabilizer.res
+res://Recipes/Standard_ammo.tres::2ca2de155be0401aa435477fd8316155::1774968760::res://.godot/exported/133200997/export-7081468951902a2d7f9bf2bdbfc10979-Standard_ammo.res
+res://Recipes/Stator.tres::648e4c53fccf8f86b63139733bad28df::1774940583::res://.godot/exported/133200997/export-f4e4b4e612eadd6042894fef2557ea8b-Stator.res
+res://Recipes/Stator_v2.tres::3957e320958635bd2381ce16443355a3::1774940713::res://.godot/exported/133200997/export-9511630181850c9aec1505920149b9ee-Stator_v2.res
+res://Recipes/Substance_FHS-135-493.tres::4ced7eb9cf6a70a88b1627406835c976::1774986215::res://.godot/exported/133200997/export-776902fbac8269646586201f619ad523-Substance_FHS-135-493.res
+res://Recipes/Sulferic_acid_v2.tres::ddaab5a089fd71293f618acfd90a39c1::1774931267::res://.godot/exported/133200997/export-1837cd1b1c2f21245c9e7f6cd9714563-Sulferic_acid_v2.res
+res://Recipes/Sulpheric_acid.tres::da1538f8550f409b12983cbb0acdd096::1774971034::res://.godot/exported/133200997/export-4382035dbcfdf9ae5cb11c5ca5da80b3-Sulpheric_acid.res
+res://Recipes/Superconductor.tres::7bf1075f389175e5afee28639f60c900::1774931016::res://.godot/exported/133200997/export-876f7fa20469e3009d60e86cf9cb7e8e-Superconductor.res
+res://Recipes/Superconductor_v2.tres::82159c357c8b1e34182b550b378571f6::1774938271::res://.godot/exported/133200997/export-868c92bf1ed51991874d26b72a4435e4-Superconductor_v2.res
+res://Recipes/Supermagnet.tres::c2512b57858268d6290ea0b33acb14f6::1774942225::res://.godot/exported/133200997/export-333c2cc448206f6127f3ffd01c82b9df-Supermagnet.res
+res://Recipes/Synthetic Silicon.tres::0eb028f9631e4fe90f5c115fe7b3fb1d::1774942225::res://.godot/exported/133200997/export-d3a22ac4bec5e644cf762acd40640768-Synthetic Silicon.res
+res://Recipes/Synthetic_dna.tres::03880adfffda9fd2b87107d3c118df9c::1774986215::res://.godot/exported/133200997/export-470cfb530c80f055da01e4be17685e88-Synthetic_dna.res
+res://Recipes/Synthetic_protein.tres::df5e197c919d945dcc946648436ab793::1774986215::res://.godot/exported/133200997/export-7abdc3f35ced9a28727c731d4544fe3e-Synthetic_protein.res
+res://Recipes/Synthetic_resin.tres::c5452a646775f6f5b680dd6b128a4c68::1774931016::res://.godot/exported/133200997/export-ae02653489e85453b02b07fd30cb9106-Synthetic_resin.res
+res://Recipes/Synthetic_resin_v2.tres::ec9dedf2894ff15adc36403ae45d9c5c::1774931267::res://.godot/exported/133200997/export-b9ddaf1d33a95365f27c41804c45052b-Synthetic_resin_v2.res
+res://Recipes/Titanium housing.tres::91109b44ea1adb1c6d91db8e499de7f1::1774942225::res://.godot/exported/133200997/export-4fc86349932ce9deacfeaa9201f2f5f1-Titanium housing.res
+res://Recipes/Titanium_bar.tres::59854dcdc509a570ef0b6b6ca9d6e142::1774976387::res://.godot/exported/133200997/export-ebed6c69ccc0d2ca5a349a389d5b1148-Titanium_bar.res
+res://Recipes/Titanium_beam.tres::c947b9403d2606717368d1b536e06058::1775862528::res://.godot/exported/133200997/export-c5d3f07b0b8957002a7d4043badfa813-Titanium_beam.res
+res://Recipes/Titanium_rod.tres::06fb75e97f84aa6a5db4d09a63ca974c::1774940583::res://.godot/exported/133200997/export-feece351c416bd92eb0ea9643e85b15a-Titanium_rod.res
+res://Recipes/Titanium_rod_v2.tres::d57efa821b4ff44659db4cd8e7596aaa::1774940713::res://.godot/exported/133200997/export-4befed92a09460f06fbb4a1329340ed4-Titanium_rod_v2.res
+res://Recipes/Titanium_sheet.tres::cfda0ef4db6f4afb7aa8966f3ce4a137::1774940583::res://.godot/exported/133200997/export-5fd59bff80846447a924c76561b84d43-Titanium_sheet.res
+res://Recipes/Titanium_sheet_v2.tres::d051e5fa91bab5f64ca58dce2555f83c::1774940713::res://.godot/exported/133200997/export-86a735f08c2d7e393344664f5385ed66-Titanium_sheet_v2.res
+res://Recipes/Titanoferrite_ingot.tres::bedd4bbddfb72bee0e14d1db8f04e999::1774971034::res://.godot/exported/133200997/export-9984c3f00cb992380f2536e87a3bdad4-Titanoferrite_ingot.res
+res://Recipes/Tracking_device.tres::8d3b9da1b3b29bced3eb7b68e414a2c1::1774941814::res://.godot/exported/133200997/export-1470dc2685734c2e657b270f76d064eb-Tracking_device.res
+res://Recipes/Tube.tres::428e9b54ed8f3ded58888804452261b6::1774940583::res://.godot/exported/133200997/export-a9265ee2bb63196245825053a41d59ed-Tube.res
+res://Recipes/Tube_v2.tres::5b31a80d1c33fc327c18ff95e21bdc46::1774940713::res://.godot/exported/133200997/export-2e91b26d95ee7051681ca324ddc3effd-Tube_v2.res
+res://Recipes/Turbine.tres::9cf99bf8de2de35dcdb5a475d10adc92::1774968760::res://.godot/exported/133200997/export-2ef87c4197f7aff7add34a079e463a00-Turbine.res
+res://Recipes/Uberfilament.tres::d0d19936c20d057f7c35d17b58cbd71f::1774836544::res://.godot/exported/133200997/export-4752bc666d8e79eeb0b390f3fd4e4efa-Uberfilament.res
+res://Recipes/Valve.tres::0f72813441d973905a86030c4dcd209e::1774968760::res://.godot/exported/133200997/export-46e5480b1c94f2bb0adf307782a8e768-Valve.res
+res://Recipes/Wolfram_bar.tres::8a098d741e6c4354767d0de1c748abbf::1774976387::res://.godot/exported/133200997/export-ef036cba391d5484ddc352e210f23f9b-Wolfram_bar.res
+res://Recipes/Wolfram_plate.tres::b7e72dd840a2343e2eb630f04fdd80d9::1774940583::res://.godot/exported/133200997/export-31d34b1e1032fd3e1e6c535e8486f2ee-Wolfram_plate.res
+res://Recipes/Wolfram_plate_v2.tres::c91a66515c18f10f57cc45641aaa8b55::1774940713::res://.godot/exported/133200997/export-36d1b740e07637dc0dbf67a1e5aaad38-Wolfram_plate_v2.res
+res://Recipes/Wolfram_powder.tres::cc433f87607402fbfbf64dcf922048a0::1774942225::res://.godot/exported/133200997/export-cd9f384f88ac30842d6ca9940de48cb1-Wolfram_powder.res
+res://Recipes/Wolfram_powder_v2.tres::1ae3bfc654dfff5f05f2bfcf94980c55::1774942514::res://.godot/exported/133200997/export-380f4681cbbdbf091d37e5d89f64dd7e-Wolfram_powder_v2.res
+res://Recipes/Wolfram_steel_ingot.tres::cfa10e1267b5f3da2082310e476a5098::1774971034::res://.godot/exported/133200997/export-4b9d69582c323ab4d6ddd5bdd2a468e8-Wolfram_steel_ingot.res
+res://Recipes/Wolfram_wire.tres::3c0be819c4fb1c7a2a430de68737a61f::1774940583::res://.godot/exported/133200997/export-eec856f743fa7b74c8e777c7419d9ad0-Wolfram_wire.res
+res://Recipes/Wolfram_wire_v2.tres::b5dcb4f44751207a29ad54b13eb254fe::1774940713::res://.godot/exported/133200997/export-9701785988e51b514146f1ff0a752e36-Wolfram_wire_v2.res
+res://Resources/PatchNotesEntry.tscn::1b07649bb409fcf1b46db863c7dae18d::1774836544::res://.godot/exported/133200997/export-317ef8fbc86a67d257a3830eb9ad6ded-PatchNotesEntry.scn
+res://Scenes/building.tscn::ff777b0b81623a7513a55cf509d5ff3e::1774836544::res://.godot/exported/133200997/export-d8468afbf5cf8699f9b44d8de387282c-building.scn
+res://Scenes/GridMap.tscn::2f29695b87c5aae98ebac3a82c0812b3::1774836544::res://.godot/exported/133200997/export-3614e3fe96b6740ac5ca9ffd79d61e6f-GridMap.scn
+res://Scenes/Main.tscn::69c56b64e1eb13ac2f9bf5c7c703cac8::1776616243::res://.godot/exported/133200997/export-a8e1520d83f25710dd4e3da8c6f32601-Main.scn
+res://Scenes/patchNotesPanel.tscn::aefde8114708158e15b92f95182de481::1774849386::res://.godot/exported/133200997/export-f0423b0bc2e3f569ed23b27ca04b89a3-patchNotesPanel.scn
+res://Scenes/ResourceRow.tscn::2f1f97961b48adc21420b29327df3aaf::1776578942::res://.godot/exported/133200997/export-e48bc0f948761d01a233008f6a35478e-ResourceRow.scn
+res://Patch Notes/Patch_Registry.tres::92015a7884940d4549ccacb2ae1a5343::1774848076::res://.godot/exported/133200997/export-8174160ae81efd0716b4c45c3e17436f-Patch_Registry.res
+res://Patch Notes/0_2_0.tres::8da0041f17c528f96458b3bddced5824::1774986215::res://.godot/exported/133200997/export-a8a77c815b953d0608924eb19182476c-0_2_0.res
+res://Assets/std_bldg_label_settings.tres::0a28fe72c43ec55ca6be7f1175b33cd7::1775950532::res://.godot/exported/133200997/export-3b5465b299e5b0b9d010df17d987742f-std_bldg_label_settings.res
+res://Patch Notes/0_3_0.tres::39735aa20f87672a32d60360a5e897f8::1775950620::res://.godot/exported/133200997/export-7cb4636a1d84d105b3d8ee2f8d329cb4-0_3_0.res
+res://Recipes/Item Stacks/Titanium_bar_40_def.tres::98d19eb6a70f028c49562a9ee298bb0c::1775862528::res://.godot/exported/133200997/export-3f7b98033422f4ed3da35857fd9c36d9-Titanium_bar_40_def.res
+res://Recipes/Item Stacks/Titanium_beam_60_def.tres::9e6b614d4a5050c627884787b2853ae2::1775862528::res://.godot/exported/133200997/export-d84f6d0e3905216c07db28774fa8b5b6-Titanium_beam_60_def.res
+res://Recipes/Item Stacks/Wolfram_steel_ingot_60_def.tres::4d89d617497f5d4c17a694c2a4f8b4a8::1775950532::res://.godot/exported/133200997/export-446a7a4af633c78651373720f9630a17-Wolfram_steel_ingot_60_def.res
+res://Buildings/defense_turret.tscn::ff259bdb4b33d57a5d5a54948543488d::1776626715::res://.godot/exported/133200997/export-7d62e736114c4459dcf6a7232b0db3f3-defense_turret.scn
+res://Buildings/defense_tower.tscn::e9b89928c518bce9d2f048404765da44::1776626714::res://.godot/exported/133200997/export-b19e3ca204f56e022f8a45c5314b14f6-defense_tower.scn
+res://Patch Notes/0_4_0.tres::043974945584221419f24dd28e5fe5a0::1776627069::res://.godot/exported/133200997/export-8202e42243137be149253435f922b295-0_4_0.res
+res://Resources/Whatif_Core.tres::90534114e55df8825ec74fc839fe7f52::1776618465::res://.godot/exported/133200997/export-34b8f7f81773b60a32f4f054257b7946-Whatif_Core.res
+res://Resources/Whatif_Headerbox.tres::d30112e852423d4147ef2960b096251e::1776618748::res://.godot/exported/133200997/export-76e90ebf710c24f8b94832614577ed84-Whatif_Headerbox.res
+res://Resources/whatif_raisedSurface.tres::90609e5064e8165b4b0e8976cfc0db0c::1776618748::res://.godot/exported/133200997/export-e589cdfd9854c4864940983299cf363d-whatif_raisedSurface.res
+res://Scenes/WhatIfMachine.tscn::e8575f854e2f0b50a909df39807c8f76::1776623063::res://.godot/exported/133200997/export-aff9333188429b4358b84e1a8c95755b-WhatIfMachine.scn

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://bqw508mc4jv5k"]
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_ljjxd"]
-[ext_resource type="Resource" uid="uid://b78f2njes3nsu" path="res://Recipes/Item Stacks/Plastic_Dust_6_def.tres" id="2_8lk17"]
+[ext_resource type="Resource" uid="uid://cbmdphbudsu0v" path="res://Recipes/Item Stacks/Plastic_Dust_5_def.tres" id="2_8lk17"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_mtw45"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_mhoai"]
 [ext_resource type="Resource" uid="uid://b0heq45mc4e6k" path="res://Recipes/Item Stacks/Ion_Stabilizer_5_def.tres" id="3_xbtn4"]

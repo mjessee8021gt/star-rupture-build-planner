@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cg82omo8gf4t" path="res://Buildings/Solar V2.gd" id="1_3djyx"]
 [ext_resource type="Texture2D" uid="uid://qpt8mgvgh8ii" path="res://Assets/SRBP_3x3_BLDG.png" id="2_3djyx"]
+[ext_resource type="LabelSettings" uid="uid://bwg7jbpx2gog5" path="res://Assets/std_bldg_label_settings.tres" id="3_lmtca"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gbqis"]
 size = Vector2(192, 192)
@@ -11,7 +12,10 @@ size = Vector2(192, 192)
 
 [node name="Solar V2" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_3djyx")
-id = &"solar_v1"
+heat = 20
+power = 140
+id = &"solar_v2"
+build_cost_amount = 400
 metadata/_edit_vertical_guides_ = [63.0, 96.0, 112.0, 80.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]
@@ -41,6 +45,7 @@ offset_bottom = -22.0
 theme_override_font_sizes/font_size = 25
 text = "SOLAR
 V2"
+label_settings = ExtResource("3_lmtca")
 horizontal_alignment = 1
 
 [node name="outputBox" type="ColorRect" parent="." unique_id=1954160661]
@@ -56,7 +61,7 @@ offset_top = -2.0
 offset_right = 37.0
 offset_bottom = 21.0
 theme_override_colors/font_color = Color(0, 0.24313726, 0, 1)
-text = "1000"
+text = "140"
 horizontal_alignment = 1
 vertical_alignment = 1
 

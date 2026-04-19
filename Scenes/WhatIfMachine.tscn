@@ -1,0 +1,201 @@
+[gd_scene format=3 uid="uid://6b6mhbsi6ufl"]
+
+[ext_resource type="Script" uid="uid://58waq5my4wmf" path="res://Scripts/what_if_machine.gd" id="1_3tqwn"]
+[ext_resource type="StyleBox" uid="uid://c05ftehbwlk1i" path="res://Resources/Whatif_Core.tres" id="2_60rcf"]
+[ext_resource type="StyleBox" uid="uid://bhart32ix4hvc" path="res://Resources/whatif_raisedSurface.tres" id="3_qfde5"]
+[ext_resource type="StyleBox" uid="uid://d3gf2yod41ka" path="res://Resources/Whatif_Headerbox.tres" id="4_u8rtg"]
+
+[node name="Control" type="Control" unique_id=1887238960]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3tqwn")
+metadata/_edit_vertical_guides_ = [640.0]
+metadata/_edit_horizontal_guides_ = [360.0]
+
+[node name="Panel" type="Panel" parent="." unique_id=144005532]
+self_modulate = Color(0.09019608, 0.07450981, 0.14901961, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("2_60rcf")
+
+[node name="Interaction Area" type="Panel" parent="Panel" unique_id=1304560618]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 109.0
+offset_right = 478.0
+offset_bottom = 712.0
+theme_override_styles/panel = ExtResource("3_qfde5")
+
+[node name="Recipe" type="MenuButton" parent="Panel/Interaction Area" unique_id=537004567]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 46.0
+offset_right = 168.0
+offset_bottom = 77.0
+theme_override_colors/font_color = Color(0.9647059, 0.94509804, 1, 1)
+text = "Choose a Recipe..."
+
+[node name="RecipeLabel" type="Label" parent="Panel/Interaction Area" unique_id=1439256406]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 20.0
+offset_right = 77.0
+offset_bottom = 43.0
+theme_override_colors/font_color = Color(0.9647059, 0.94509804, 1, 1)
+text = "Recipe:"
+
+[node name="QtyTxtbox" type="LineEdit" parent="Panel/Interaction Area" unique_id=119824022]
+layout_mode = 0
+offset_left = 286.0
+offset_top = 46.0
+offset_right = 354.5
+offset_bottom = 77.0
+
+[node name="QtyLabel" type="Label" parent="Panel/Interaction Area" unique_id=1391986191]
+layout_mode = 0
+offset_left = 286.0
+offset_top = 20.0
+offset_right = 420.0
+offset_bottom = 43.0
+theme_override_colors/font_color = Color(0.9647059, 0.94509804, 1, 1)
+text = "Quantity/ Minute"
+
+[node name="V2Label" type="Label" parent="Panel/Interaction Area" unique_id=974393265]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 91.0
+offset_right = 156.0
+offset_bottom = 114.0
+theme_override_colors/font_color = Color(0.9647059, 0.94509804, 1, 1)
+text = "Use V2 Buildings?"
+
+[node name="ExcavatorV2" type="CheckButton" parent="Panel/Interaction Area" unique_id=1627894093]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 114.0
+offset_right = 169.0
+offset_bottom = 145.0
+text = "Excavator V2"
+
+[node name="FabricatorV2" type="CheckButton" parent="Panel/Interaction Area" unique_id=1723407346]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 134.0
+offset_right = 169.0
+offset_bottom = 165.0
+text = "Fabricator V2"
+
+[node name="FurnaceV2" type="CheckButton" parent="Panel/Interaction Area" unique_id=249120398]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 153.0
+offset_right = 172.0
+offset_bottom = 184.0
+text = "Furnace V2"
+
+[node name="CompounderV2" type="CheckButton" parent="Panel/Interaction Area" unique_id=1805759081]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 172.0
+offset_right = 194.0
+offset_bottom = 203.0
+text = "Compounder V2"
+
+[node name="ConstructorizerV2" type="CheckButton" parent="Panel/Interaction Area" unique_id=17070531]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 191.0
+offset_right = 194.0
+offset_bottom = 222.0
+text = "Constructorizer V2"
+
+[node name="Output Reading" type="Panel" parent="Panel" unique_id=1595235377]
+layout_mode = 0
+offset_left = 492.0
+offset_top = 109.0
+offset_right = 1274.0
+offset_bottom = 712.0
+theme_override_styles/panel = ExtResource("3_qfde5")
+
+[node name="RequirementsTree" type="Tree" parent="Panel/Output Reading" unique_id=1614352632]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 5
+column_titles_visible = true
+hide_root = true
+
+[node name="Selector" type="TabBar" parent="Panel/Output Reading" unique_id=1673511120]
+layout_mode = 0
+offset_top = -37.0
+offset_right = 208.0
+offset_bottom = 3.0
+
+[node name="PrintButton" type="Button" parent="Panel/Output Reading" unique_id=164788938]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -196.0
+offset_top = -37.0
+offset_right = -105.0
+offset_bottom = -6.0
+grow_horizontal = 0
+tooltip_text = "Export PDF"
+text = "Print"
+
+[node name="GenerateButton" type="Button" parent="Panel/Output Reading" unique_id=634201067]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -98.0
+offset_top = -37.0
+offset_right = -9.0
+offset_bottom = -6.0
+grow_horizontal = 0
+text = "Generate"
+
+[node name="HeaderBand" type="Panel" parent="Panel" unique_id=1384786454]
+layout_mode = 0
+offset_right = 1279.0
+offset_bottom = 65.0
+theme_override_styles/panel = ExtResource("4_u8rtg")
+
+[node name="CloseButton" type="Button" parent="Panel/HeaderBand" unique_id=1811505060]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -55.0
+offset_top = 16.0
+offset_right = -15.0
+offset_bottom = 52.0
+grow_horizontal = 0
+tooltip_text = "Close"
+text = "X"
+
+[node name="TitleLabel" type="Label" parent="Panel/HeaderBand" unique_id=533925618]
+layout_mode = 0
+offset_left = 394.0
+offset_top = 3.0
+offset_right = 887.0
+offset_bottom = 58.0
+theme_override_colors/font_color = Color(0.9647059, 0.94509804, 1, 1)
+theme_override_font_sizes/font_size = 40
+text = "What If Scenario Analyzer"

@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_acrlm"]
 [ext_resource type="Resource" uid="uid://cjh2udot857md" path="res://Recipes/Item Stacks/Electromagnet_4_def.tres" id="3_wrvle"]
 [ext_resource type="Resource" uid="uid://5yfnecd6sepv" path="res://Recipes/Item Stacks/Ion Injector_8_def.tres" id="4_wcdbl"]
-[ext_resource type="Resource" path="res://Recipes/Item Stacks/Reinforced_Housing_20_def.tres" id="5_l3lb0"]
+[ext_resource type="Resource" uid="uid://xtu0p010ww3s" path="res://Recipes/Item Stacks/Reinforced_Housing_20_def.tres" id="5_l3lb0"]
 [ext_resource type="Resource" uid="uid://w6c1b3b52ush" path="res://Recipes/Item Stacks/Aerogel_32_def.tres" id="6_tggls"]
 [ext_resource type="Resource" uid="uid://duu623hj58uqc" path="res://Recipes/Item Stacks/Cyclotrone_4_def.tres" id="6_uu1pl"]
 

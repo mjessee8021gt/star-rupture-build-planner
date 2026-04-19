@@ -13,7 +13,8 @@ size = Vector2(128, 128)
 
 [node name="Zipline" type="Node2D" unique_id=1728206745 groups=["buildings"]]
 script = ExtResource("1_5ayra")
-id = &"rail_support"
+id = &"zipline"
+build_cost_amount = 50
 metadata/_edit_vertical_guides_ = [32.0, 64.0]
 
 [node name="PrimarySprite" type="Sprite2D" parent="." unique_id=1163650788]

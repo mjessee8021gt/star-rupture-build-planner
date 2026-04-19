@@ -1,9 +1,6 @@
 extends PopupPanel
 
-const DEFAULT_PATCH_REGISTRY: PatchRegistry = preload("res://Patch Notes/Patch_Registry.tres")
-
 @export var entry_scene: PackedScene
-@export var patch_notes: PatchRegistry
 
 @onready var list: VBoxContainer = $PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/List
 
@@ -13,71 +10,70 @@ func _ready() -> void:
 func refresh() -> void:
 	_clear_list()
 	
-	var notes := _get_sorted_notes()
-	if notes.is_empty():
-		return
-	
-	for note in notes:
-		_add_entry(note)
-	
-func _get_sorted_notes() -> Array[PatchNote]:
-	var notes := _read_registry_notes()
+	var notes := _load_patchnote_resources()
+	#Sort newest-first.
 	notes.sort_custom(func(a: PatchNote, b: PatchNote) -> bool:
 		return _version_is_newer(str(a.patch_version), str(b.patch_version)))
-	return notes ##this is a comment to reset the commit
 	
-func _read_registry_notes() -> Array[PatchNote]:
-	var registry := _resolve_registry()
-	if registry == null:
-		print("PatchNotesPanel: Patch Registry is not available.")
-		return[]
-	return registry.get_patch_notes()
-		
-func _resolve_registry() -> PatchRegistry:
-	if patch_notes != null:
-		return patch_notes
-		
-	if DEFAULT_PATCH_REGISTRY != null:
-		patch_notes = DEFAULT_PATCH_REGISTRY
-		return patch_notes
-		
-	return null
-	
-func _add_entry(patch_note: PatchNote) -> void:
+	for patchnote in notes:
+		_add_entry(patchnote)
+func _add_entry(patchNote: PatchNote) -> void:
 	if entry_scene == null:
-		print("PatchNotesPanel: entry_scene is not set.")
+		push_warning("PatchNotesPanel: entry_scene is not set.")
 		return
 	var entry := entry_scene.instantiate() as Control
 	if entry == null:
-		print("PatchNotesPanel: entry_scene is not a control scene.")
+		push_warning("PatchNotesPanel: Failed to instantiate patch note entry scene.")
 		return
 	list.add_child(entry)
 	
 	var version_label := entry.get_node_or_null("MarginContainer/VBoxContainer/Version") as Label
 	if version_label == null:
-		print("PatchNotesPanel: version_label is not set.")
+		push_warning("PatchNotesPanel: version_label is not set.")
 		return
-	version_label.text = "Version " + str(patch_note.patch_version)
+	version_label.text = "Version " + str(patchNote.patch_version)
 	
 	var notes_rtl := entry.get_node_or_null("MarginContainer/VBoxContainer/Notes") as RichTextLabel
 	if notes_rtl == null:
-		print("PatchNotesPanel: notes_rtl is not set.")
+		push_warning("PatchNotesPanel: notes_rtl is not set.")
 		return
 	notes_rtl.bbcode_enabled = false
-	var formatted_notes := patch_note.patch_notes.replace("\\n", "\n")
-	notes_rtl.text = "Patch Notes:\n" + formatted_notes
+	var unformatted_notes := patchNote.patch_notes
+	var formatted_notes = unformatted_notes.replace("\\n", "\n")
+	notes_rtl.text = "Patch Notes:\n" + (formatted_notes if formatted_notes != null else "")
 	
 	var issues_rtl := entry.get_node_or_null("MarginContainer/VBoxContainer/Issues") as RichTextLabel
 	if issues_rtl == null:
-		print("PatchNotesPanel: issues_rtl is not set.")
+		push_warning("PatchNotesPanel: issues_rtl is not set.")
 		return
 	issues_rtl.bbcode_enabled = false
+	issues_rtl.text = "Known Issues:\n" + (patchNote.known_issues if patchNote.known_issues != null else "")
 	
 	entry.visible = true
 	
 func _clear_list() -> void:
 	for child in list.get_children():
 		child.queue_free()
+
+func _load_patchnote_resources() -> Array[PatchNote]:
+	var out: Array[PatchNote] = []
+	var root := get_tree().root
+	var patch_registry := root.get_node_or_null("PatchRegistry")
+	if patch_registry == null:
+		patch_registry = root.get_node_or_null("PatchReg")
+	if patch_registry == null:
+		push_warning("PatchNotesPanel: Could not access PatchRegistry autoload singleton")
+		return out
+	
+	var patch_map: Dictionary = patch_registry.PATCHES
+	for key in patch_map.keys():
+		var res = patch_map[key]
+		if res is PatchNote:
+			out.append(res)
+		else:
+			push_warning("PatchNotesPanel: Resource at %s is not a PatchNote Resource." % str(key))
+	
+	return out
 	
 func _version_is_newer(a: String, b: String) -> bool:
 	var ka := _version_key(a)
