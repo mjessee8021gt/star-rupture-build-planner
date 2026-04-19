@@ -36,6 +36,20 @@ const RAIL_VERSION_V2 := 1
 const RAIL_VERSION_V3 := 2
 const V2_FINAL_COLOR := Color8(127, 200, 169, 255)
 const V3_FINAL_COLOR := Color8(200, 162, 200, 255)
+const RAIL_VISIBILITY_STANDARD := 0
+const RAIL_VISIBILITY_HIGH := 1
+const RAIL_VISIBILITY_NONE := 2
+const RAIL_Z_STANDARD := 0
+const RAIL_Z_HIGH_VISIBILITY := 100
+const RAIL_ALPHA_VISIBLE := 1.0
+const RAIL_ALPHA_HIDDEN := 0.0
+const RAIL_HIGH_VISIBILITY_ALPHA_DEFAULT := 1.0
+const RAIL_CAPACITY_BADGE_NAME := "RailCapacityBadge"
+const RAIL_CAPACITY_TEXT_NAME := "CapacityText"
+const RAIL_CAPACITY_BADGE_SIZE := Vector2(46.0, 24.0)
+const RAIL_CAPACITY_BADGE_FILL := Color(0.08, 0.10, 0.13, 0.94)
+const RAIL_CAPACITY_BADGE_BORDER := Color(0.92, 0.95, 0.98, 0.72)
+const RAIL_CAPACITY_BADGE_FONT_SIZE := 13
 
 # Drag state
 var _preview_container: Path2D = null
@@ -44,6 +58,8 @@ var _from_building: Node2D = null
 var _from_port_path: NodePath = DEFAULT_FROM_PORT_PATH
 var _rail_version_selector: OptionButton = null
 var _selected_rail_version := RAIL_VERSION_V1
+var _rail_visibility_mode := RAIL_VISIBILITY_STANDARD
+var _high_visibility_alpha := RAIL_HIGH_VISIBILITY_ALPHA_DEFAULT
 
 # Cached nodes
 var _build_manager: Node = null
@@ -51,6 +67,7 @@ var _build_manager: Node = null
 
 func _ready() -> void:
 	_build_manager = get_node_or_null(build_manager_path)
+	_apply_rail_visibility_mode()
 
 	# Connect to existing buildings
 	_connect_to_buildings()
@@ -81,6 +98,68 @@ func _on_rail_version_changed(index: int) -> void:
 
 func get_selected_rail_version() -> int:
 	return _selected_rail_version
+
+func cycle_rail_visibility_mode() -> int:
+	set_rail_visibility_mode((_rail_visibility_mode + 1) % 3)
+	return _rail_visibility_mode
+
+func set_rail_visibility_mode(mode: int) -> void:
+	_rail_visibility_mode = clampi(mode, RAIL_VISIBILITY_STANDARD, RAIL_VISIBILITY_NONE)
+	_apply_rail_visibility_mode()
+
+func get_rail_visibility_mode() -> int:
+	return _rail_visibility_mode
+
+func get_rail_visibility_mode_name() -> String:
+	match _rail_visibility_mode:
+		RAIL_VISIBILITY_HIGH:
+			return "High Visibility"
+		RAIL_VISIBILITY_NONE:
+			return "None"
+		_:
+			return "Standard"
+
+func set_high_visibility_alpha(alpha: float) -> void:
+	_high_visibility_alpha = clampf(alpha, RAIL_ALPHA_HIDDEN, RAIL_ALPHA_VISIBLE)
+	if _rail_visibility_mode == RAIL_VISIBILITY_HIGH:
+		_apply_rail_visibility_mode()
+
+func get_high_visibility_alpha() -> float:
+	return _high_visibility_alpha
+
+func _apply_rail_visibility_mode() -> void:
+	var next_alpha := RAIL_ALPHA_VISIBLE
+	match _rail_visibility_mode:
+		RAIL_VISIBILITY_HIGH:
+			z_index = RAIL_Z_HIGH_VISIBILITY
+			next_alpha = _high_visibility_alpha
+		RAIL_VISIBILITY_NONE:
+			z_index = RAIL_Z_STANDARD
+			next_alpha = RAIL_ALPHA_HIDDEN
+		_:
+			z_index = RAIL_Z_STANDARD
+
+	var next_modulate := modulate
+	next_modulate.a = next_alpha
+	modulate = next_modulate
+	_sync_rail_layer_order()
+
+func _sync_rail_layer_order() -> void:
+	var parent_node := get_parent()
+	if parent_node == null:
+		return
+
+	var buildings_root := parent_node.get_node_or_null("buildings")
+	if buildings_root == null:
+		return
+
+	if _rail_visibility_mode == RAIL_VISIBILITY_HIGH:
+		if get_index() != parent_node.get_child_count() - 1:
+			parent_node.move_child(self, parent_node.get_child_count() - 1)
+		return
+
+	if get_index() > buildings_root.get_index():
+		parent_node.move_child(self, buildings_root.get_index())
 
 func get_path_rail_version(path: Path2D) -> int:
 	if path == null or not is_instance_valid(path):
@@ -235,32 +314,7 @@ func _get_raw_port_center(building: Node, port_path: NodePath) -> Variant:
 	return _get_node_global_center(target_button)
 
 func _get_port_center(building: Node, port_path: NodePath) -> Variant:
-	var target_button := building.get_node_or_null(port_path)
-	if target_button == null:
-		return null
-
-	var center = _get_node_global_center(target_button)
-	if center == null:
-		return null
-
-	if target_button is Control:
-		var button_control := target_button as Control
-		var normal := _get_port_normal(building, port_path)
-		var button_transform := button_control.get_global_transform()
-		var local_normal := button_transform.basis_xform_inv(normal)
-		if local_normal.length() <= 0.001:
-			return center
-		local_normal = local_normal.normalized()
-
-		var local_point := button_control.size * 0.5
-		if abs(local_normal.x) >= abs(local_normal.y):
-			local_point.x = button_control.size.x if local_normal.x >= 0.0 else 0.0
-		else:
-			local_point.y = button_control.size.y if local_normal.y >= 0.0 else 0.0
-
-		return button_transform * local_point
-
-	return center
+	return _get_raw_port_center(building, port_path)
 
 
 func _get_port_normal(building: Node, port_path: NodePath) -> Vector2:
@@ -1531,6 +1585,79 @@ func _refresh_direction_markers_for_path(path: Path2D, line: Line2D) -> void:
 		marker_root.add_child(marker)
 
 
+func _get_rail_capacity_text(rail_version: int) -> String:
+	match clampi(rail_version, RAIL_VERSION_V1, RAIL_VERSION_V3):
+		RAIL_VERSION_V2:
+			return "240"
+		RAIL_VERSION_V3:
+			return "480"
+		_:
+			return "120"
+
+
+func _get_rail_capacity_badge(path: Path2D) -> PanelContainer:
+	var badge := path.get_node_or_null(RAIL_CAPACITY_BADGE_NAME) as PanelContainer
+	if badge != null:
+		return badge
+
+	badge = PanelContainer.new()
+	badge.name = RAIL_CAPACITY_BADGE_NAME
+	badge.z_index = 3
+	badge.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	badge.custom_minimum_size = RAIL_CAPACITY_BADGE_SIZE
+	badge.size = RAIL_CAPACITY_BADGE_SIZE
+
+	var badge_style := Palette.make_panel_style(RAIL_CAPACITY_BADGE_FILL, RAIL_CAPACITY_BADGE_BORDER, 6, 1)
+	badge_style.set_content_margin(SIDE_LEFT, 6)
+	badge_style.set_content_margin(SIDE_RIGHT, 6)
+	badge_style.set_content_margin(SIDE_TOP, 3)
+	badge_style.set_content_margin(SIDE_BOTTOM, 3)
+	badge.add_theme_stylebox_override("panel", badge_style)
+
+	var label := Label.new()
+	label.name = RAIL_CAPACITY_TEXT_NAME
+	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.custom_minimum_size = Vector2(RAIL_CAPACITY_BADGE_SIZE.x - 12.0, RAIL_CAPACITY_BADGE_SIZE.y - 6.0)
+	label.add_theme_color_override("font_color", Palette.TEXT_BADGE)
+	label.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.78))
+	label.add_theme_constant_override("outline_size", 2)
+	label.add_theme_font_size_override("font_size", RAIL_CAPACITY_BADGE_FONT_SIZE)
+	badge.add_child(label)
+
+	path.add_child(badge)
+	return badge
+
+
+func _refresh_rail_capacity_badge_for_path(path: Path2D, line: Line2D) -> void:
+	if path == null or line == null:
+		return
+
+	var badge := _get_rail_capacity_badge(path)
+	if line.points.size() < 2:
+		badge.visible = false
+		return
+
+	var total_length := _get_packed_polyline_length(line.points)
+	if total_length <= 0.001:
+		badge.visible = false
+		return
+
+	var sample := _sample_polyline_point_and_tangent(line.points, total_length * 0.5)
+	if sample.is_empty():
+		badge.visible = false
+		return
+
+	var label := badge.get_node_or_null(RAIL_CAPACITY_TEXT_NAME) as Label
+	if label != null:
+		label.text = _get_rail_capacity_text(get_path_rail_version(path))
+
+	badge.size = RAIL_CAPACITY_BADGE_SIZE
+	badge.position = Vector2(sample.get("position", Vector2.ZERO)) - (RAIL_CAPACITY_BADGE_SIZE * 0.5)
+	badge.visible = true
+
+
 func _get_overlap_segments_for_path(path: Path2D) -> Array:
 	var line := _get_path_line(path)
 	if line == null:
@@ -1716,6 +1843,7 @@ func _refresh_path_overlap_shading() -> void:
 		line.default_color = _get_overlap_tinted_path_color(path, overlap_depth)
 		_clear_overlap_overlay(path)
 		_refresh_direction_markers_for_path(path, line)
+		_refresh_rail_capacity_badge_for_path(path, line)
 
 
 func _refresh_path_markers(paths: Array[Path2D]) -> void:
@@ -1727,6 +1855,7 @@ func _refresh_path_markers(paths: Array[Path2D]) -> void:
 		if line == null:
 			continue
 		_refresh_direction_markers_for_path(path, line)
+		_refresh_rail_capacity_badge_for_path(path, line)
 
 
 func _distance_to_segment(point: Vector2, start: Vector2, end: Vector2) -> float:
@@ -1776,6 +1905,9 @@ func _get_baked_path_under_global_point(global_point: Vector2) -> Path2D:
 
 
 func try_remove_path_under_mouse() -> bool:
+	if _rail_visibility_mode == RAIL_VISIBILITY_NONE:
+		return false
+
 	var target_path := _get_baked_path_under_global_point(get_global_mouse_position())
 	if target_path == null:
 		return false

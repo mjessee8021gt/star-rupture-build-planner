@@ -23,8 +23,8 @@ res://Buildings/Multirail_3.tscn::5befda4a8a38526298ece9ef3e1d0760::1774985854::
 res://Buildings/Multirail_5.tscn::625ebf6f2e1931a20381f066d1fc7fb4::1774985854::res://.godot/exported/133200997/export-babc89e3d4e62f635f9c4a31387c7771-Multirail_5.scn
 res://Buildings/MultiStore.tscn::b76b64ed80b9d34cf6a542236ad6dca8::1774985854::res://.godot/exported/133200997/export-11b2f4fc50217a0da94ff62672583bfb-MultiStore.scn
 res://Buildings/Oil Extractor.tscn::69b7ebe292317eb4219026f14a4f69cc::1775950532::res://.godot/exported/133200997/export-22441ef9063f942a18a2bd6ff6cb0d98-Oil Extractor.scn
-res://Buildings/Orbital_launcher.tscn::7e3bbd8567cd90875f1d1da6f613dfda::1774985854::res://.godot/exported/133200997/export-6315cd4c604d906b61bcd6d0b7698477-Orbital_launcher.scn
-res://Buildings/Orbital_launcher_v2.tscn::c704d2b082b6a82bea04e822dc8545a1::1775882161::res://.godot/exported/133200997/export-1e6978b11e347b23abcb4e3366d5809f-Orbital_launcher_v2.scn
+res://Buildings/Orbital_launcher.tscn::e7d630059ff3d5e4eb34c0a67fc562f6::1776572466::res://.godot/exported/133200997/export-6315cd4c604d906b61bcd6d0b7698477-Orbital_launcher.scn
+res://Buildings/Orbital_launcher_v2.tscn::d21ab71f545e0ca04b78d599f2ab6291::1776577066::res://.godot/exported/133200997/export-1e6978b11e347b23abcb4e3366d5809f-Orbital_launcher_v2.scn
 res://Buildings/OreExcavator.tscn::630fa5083e8d60ddf115d7dfab73b757::1775950532::res://.godot/exported/133200997/export-1cf7f45f4bcd48d28ebc4131fd10d95e-OreExcavator.scn
 res://Buildings/OreExcavator_v2.tscn::c37af25efad22c3d5e8f45726bce65f2::1775950532::res://.godot/exported/133200997/export-35eb9366d211f8e37f40664429ecdbc1-OreExcavator_v2.scn
 res://Buildings/Pressurizer.tscn::add65c4f57513a1eab69fabbb330a2ec::1775950532::res://.godot/exported/133200997/export-79d673d1f01b03cda4e302bf53aa5def-Pressurizer.scn
@@ -739,9 +739,9 @@ res://Recipes/Wolfram_wire_v2.tres::b5dcb4f44751207a29ad54b13eb254fe::1774940713
 res://Resources/PatchNotesEntry.tscn::1b07649bb409fcf1b46db863c7dae18d::1774836544::res://.godot/exported/133200997/export-317ef8fbc86a67d257a3830eb9ad6ded-PatchNotesEntry.scn
 res://Scenes/building.tscn::ff777b0b81623a7513a55cf509d5ff3e::1774836544::res://.godot/exported/133200997/export-d8468afbf5cf8699f9b44d8de387282c-building.scn
 res://Scenes/GridMap.tscn::2f29695b87c5aae98ebac3a82c0812b3::1774836544::res://.godot/exported/133200997/export-3614e3fe96b6740ac5ca9ffd79d61e6f-GridMap.scn
-res://Scenes/Main.tscn::10a5df2c3f62f16b1434ba2e3a621af6::1775950532::res://.godot/exported/133200997/export-a8e1520d83f25710dd4e3da8c6f32601-Main.scn
+res://Scenes/Main.tscn::69c56b64e1eb13ac2f9bf5c7c703cac8::1776616243::res://.godot/exported/133200997/export-a8e1520d83f25710dd4e3da8c6f32601-Main.scn
 res://Scenes/patchNotesPanel.tscn::aefde8114708158e15b92f95182de481::1774849386::res://.godot/exported/133200997/export-f0423b0bc2e3f569ed23b27ca04b89a3-patchNotesPanel.scn
-res://Scenes/ResourceRow.tscn::ebd4c022d746488c5954538d63bd41ca::1774836544::res://.godot/exported/133200997/export-e48bc0f948761d01a233008f6a35478e-ResourceRow.scn
+res://Scenes/ResourceRow.tscn::2f1f97961b48adc21420b29327df3aaf::1776578942::res://.godot/exported/133200997/export-e48bc0f948761d01a233008f6a35478e-ResourceRow.scn
 res://Patch Notes/Patch_Registry.tres::92015a7884940d4549ccacb2ae1a5343::1774848076::res://.godot/exported/133200997/export-8174160ae81efd0716b4c45c3e17436f-Patch_Registry.res
 res://Patch Notes/0_2_0.tres::8da0041f17c528f96458b3bddced5824::1774986215::res://.godot/exported/133200997/export-a8a77c815b953d0608924eb19182476c-0_2_0.res
 res://Assets/std_bldg_label_settings.tres::0a28fe72c43ec55ca6be7f1175b33cd7::1775950532::res://.godot/exported/133200997/export-3b5465b299e5b0b9d010df17d987742f-std_bldg_label_settings.res
@@ -749,3 +749,10 @@ res://Patch Notes/0_3_0.tres::39735aa20f87672a32d60360a5e897f8::1775950620::res:
 res://Recipes/Item Stacks/Titanium_bar_40_def.tres::98d19eb6a70f028c49562a9ee298bb0c::1775862528::res://.godot/exported/133200997/export-3f7b98033422f4ed3da35857fd9c36d9-Titanium_bar_40_def.res
 res://Recipes/Item Stacks/Titanium_beam_60_def.tres::9e6b614d4a5050c627884787b2853ae2::1775862528::res://.godot/exported/133200997/export-d84f6d0e3905216c07db28774fa8b5b6-Titanium_beam_60_def.res
 res://Recipes/Item Stacks/Wolfram_steel_ingot_60_def.tres::4d89d617497f5d4c17a694c2a4f8b4a8::1775950532::res://.godot/exported/133200997/export-446a7a4af633c78651373720f9630a17-Wolfram_steel_ingot_60_def.res
+res://Buildings/defense_turret.tscn::ff259bdb4b33d57a5d5a54948543488d::1776626715::res://.godot/exported/133200997/export-7d62e736114c4459dcf6a7232b0db3f3-defense_turret.scn
+res://Buildings/defense_tower.tscn::e9b89928c518bce9d2f048404765da44::1776626714::res://.godot/exported/133200997/export-b19e3ca204f56e022f8a45c5314b14f6-defense_tower.scn
+res://Patch Notes/0_4_0.tres::043974945584221419f24dd28e5fe5a0::1776627069::res://.godot/exported/133200997/export-8202e42243137be149253435f922b295-0_4_0.res
+res://Resources/Whatif_Core.tres::90534114e55df8825ec74fc839fe7f52::1776618465::res://.godot/exported/133200997/export-34b8f7f81773b60a32f4f054257b7946-Whatif_Core.res
+res://Resources/Whatif_Headerbox.tres::d30112e852423d4147ef2960b096251e::1776618748::res://.godot/exported/133200997/export-76e90ebf710c24f8b94832614577ed84-Whatif_Headerbox.res
+res://Resources/whatif_raisedSurface.tres::90609e5064e8165b4b0e8976cfc0db0c::1776618748::res://.godot/exported/133200997/export-e589cdfd9854c4864940983299cf363d-whatif_raisedSurface.res
+res://Scenes/WhatIfMachine.tscn::e8575f854e2f0b50a909df39807c8f76::1776623063::res://.godot/exported/133200997/export-aff9333188429b4358b84e1a8c95755b-WhatIfMachine.scn

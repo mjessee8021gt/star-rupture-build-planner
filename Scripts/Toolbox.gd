@@ -139,6 +139,10 @@ func _ready() -> void:
 	habitatMenu.set_item_metadata(habitatMenu.item_count-1, &"habitat")
 	habitatMenu.add_item("Large Habitat")
 	habitatMenu.set_item_metadata(habitatMenu.item_count-1, &"large_habitat")
+	habitatMenu.add_item("Defense Turret")
+	habitatMenu.set_item_metadata(habitatMenu.item_count-1, &"defense_turret")
+	habitatMenu.add_item("Defense Tower")
+	habitatMenu.set_item_metadata(habitatMenu.item_count-1, &"defense_tower")
 	habitatMenu.id_pressed.connect(_on_build_selected.bind(habitatMenu))
 	
 	var transportMenu = PopupMenu.new()

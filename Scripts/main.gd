@@ -1,12 +1,22 @@
 extends Node2D
 
 const Palette = preload("res://Scripts/palette.gd")
+const WHAT_IF_MACHINE_SCENE := preload("res://Scenes/WhatIfMachine.tscn")
 
 const SAVE_FILE_EXTENSION := "srbp"
 const SAVE_FORMAT_VERSION := 3
 const RAIL_VERSION_OPTIONS := ["V1 Rails", "V2 Rails", "V3 Rails"]
 const RAIL_VERSION_DROPDOWN_SIZE := Vector2(128, 36)
 const RAIL_VERSION_DROPDOWN_MARGIN := 12.0
+const RAIL_VISIBILITY_ACTION := &"Rail Visibility"
+const RAIL_VISIBILITY_MODE_HIGH := 1
+const RAIL_VISIBILITY_INDICATOR_SIZE := Vector2(144, 36)
+const RAIL_VISIBILITY_INDICATOR_MARGIN := 8.0
+const RAIL_VISIBILITY_INDICATOR_DURATION := 4.0
+const RAIL_VISIBILITY_ALPHA_CONTROL_SIZE := Vector2(220, 36)
+const RAIL_VISIBILITY_ALPHA_CONTROL_TOP_MARGIN := 6.0
+const RAIL_VISIBILITY_ALPHA_TEXT_WIDTH := 54.0
+const RAIL_VISIBILITY_ALPHA_STEP := 0.01
 const TOOLBAR_BUTTON_WIDTH_EXTRA := 10.0
 const NEW_BUTTON_LEFT_SHIFT := 40.0
 const SAVE_BUTTON_LEFT_SHIFT := 30.0
@@ -17,10 +27,19 @@ const HISTORY_ACTION_BUILDING_DELETED := "Building deleted"
 const HISTORY_ACTION_RAIL_CREATED := "Rail created"
 const HISTORY_ACTION_RAIL_DELETED := "Rail deleted"
 const HISTORY_ACTION_BUILDING_MOVED := "Building moved"
+const HISTORY_ACTION_WHAT_IF_GENERATED := "What If plan generated"
 const PROD_PANEL_SCREEN_WIDTH_RATIO := 0.20
 const PROD_PANEL_MIN_SCREEN_WIDTH := 220.0
 const PROD_PANEL_TOP_OFFSET_FROM_MENU := 69.0
 const PROD_PANEL_BOTTOM_MARGIN := 23.0
+const WHAT_IF_GENERATION_MAX_DEPTH := 48
+const WHAT_IF_GENERATION_COLUMN_SPACING := 2
+const WHAT_IF_GENERATION_ROW_SPACING := 3
+const WHAT_IF_GENERATION_START_CELL := Vector2i(-8, -8)
+const WHAT_IF_GENERATION_EXISTING_PLAN_MARGIN := 8
+const WHAT_IF_RAIL_V1_CAPACITY := 120.0
+const WHAT_IF_RAIL_V2_CAPACITY := 240.0
+const WHAT_IF_RAIL_V3_CAPACITY := 480.0
 
 @onready var camera: Camera2D = $Camera2D
 @onready var tile_map_layer: TileMapLayer = $TileMapLayer
@@ -31,6 +50,7 @@ const PROD_PANEL_BOTTOM_MARGIN := 23.0
 @onready var meteor_core_cost_label: Label = $Camera2D/CanvasLayer/Panel/MeteorCoreCostLabel
 @onready var controls_popup: PopupPanel = $Camera2D/CanvasLayer/PopupPanel
 @onready var patch_notes_button: Node = $"Camera2D/CanvasLayer/Patch Notes"
+@onready var what_if_button: Button = $Camera2D/CanvasLayer/WhatIfButton
 @onready var prod_menu: MenuButton = $Camera2D/CanvasLayer/ProdMenu
 @onready var prod_panel: PanelContainer = $Camera2D/CanvasLayer/ProdMenu/ProdPanel
 @onready var build_manager: Node = $BuildManager
@@ -42,6 +62,12 @@ var new_button: Button
 var load_button: Button
 var export_pdf_button: Button
 var rail_version_dropdown: OptionButton
+var rail_visibility_indicator: PanelContainer
+var rail_visibility_indicator_label: Label
+var rail_visibility_indicator_timer: Timer
+var rail_alpha_controls: PanelContainer
+var rail_alpha_slider: HSlider
+var rail_alpha_input: LineEdit
 var save_dialog: FileDialog
 var load_dialog: FileDialog
 var export_pdf_dialog: FileDialog
@@ -58,6 +84,9 @@ var _web_save_pending_file_name := ""
 var _undo_stack: Array[Dictionary] = []
 var _redo_stack: Array[Dictionary] = []
 var _is_replaying_history := false
+var _syncing_rail_alpha_controls := false
+var _what_if_machine_overlay: Control
+var _pending_what_if_generation_request: Dictionary = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -67,10 +96,12 @@ func _ready() -> void:
 	ibm_cost_label.text = "0"
 	meteor_core_cost_label.text = "0"
 	_setup_save_load_ui()
+	_setup_what_if_button()
 	_apply_visual_theme()
 	get_viewport().size_changed.connect(_on_viewport_size_changed)
 	_last_viewport_size = get_viewport().size
 	Adjust_ui_for_resolution()
+	_sync_rail_alpha_controls_visibility()
 	call_deferred("_refresh_grid_visibility")
 	recenter_camera()
 	
@@ -80,6 +111,8 @@ func _process(_delta: float) -> void:
 	if is_scene_input_blocked():
 		return
 	if _process_history_input():
+		return
+	if _process_rail_visibility_input():
 		return
 	if Input.is_action_just_released("Zoom Out") and not _is_controls_menu_open():
 		$Camera2D.zoomOut()
@@ -101,8 +134,12 @@ func _is_patch_notes_open() -> bool:
 	return patch_notes_button != null and patch_notes_button.has_method("is_panel_open") and patch_notes_button.call("is_panel_open")
 
 
+func _is_what_if_machine_open() -> bool:
+	return _what_if_machine_overlay != null and is_instance_valid(_what_if_machine_overlay) and _what_if_machine_overlay.is_inside_tree()
+
+
 func is_scene_input_blocked() -> bool:
-	return _is_file_dialog_open() or _is_controls_menu_open() or _is_patch_notes_open()
+	return _is_file_dialog_open() or _is_controls_menu_open() or _is_patch_notes_open() or _is_what_if_machine_open()
 
 
 func _is_file_dialog_open() -> bool:
@@ -114,6 +151,65 @@ func _is_file_dialog_open() -> bool:
 func _on_prod_menu_pressed() -> void:
 	_layout_prod_panel()
 	prod_panel.visible = not prod_panel.visible
+
+
+func _setup_what_if_button() -> void:
+	if what_if_button == null:
+		return
+	if not what_if_button.pressed.is_connected(_on_what_if_button_pressed):
+		what_if_button.pressed.connect(_on_what_if_button_pressed)
+
+
+func _on_what_if_button_pressed() -> void:
+	if _is_what_if_machine_open():
+		_what_if_machine_overlay.call_deferred("grab_focus")
+		return
+
+	var overlay := WHAT_IF_MACHINE_SCENE.instantiate() as Control
+	if overlay == null:
+		push_warning("WhatIfButton: WhatIfMachine root must be a Control.")
+		return
+
+	_what_if_machine_overlay = overlay
+	_configure_what_if_overlay(overlay)
+	$Camera2D/CanvasLayer.add_child(overlay)
+	if overlay.has_signal("close_requested"):
+		overlay.connect("close_requested", Callable(self, "_close_what_if_machine_overlay"))
+	if overlay.has_signal("generate_requested"):
+		overlay.connect("generate_requested", Callable(self, "_on_what_if_generate_requested"))
+	overlay.tree_exited.connect(_on_what_if_machine_overlay_exited)
+	overlay.call_deferred("grab_focus")
+
+
+func _configure_what_if_overlay(overlay: Control) -> void:
+	overlay.name = "WhatIfMachineOverlay"
+	overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
+	overlay.offset_left = 0.0
+	overlay.offset_top = 0.0
+	overlay.offset_right = 0.0
+	overlay.offset_bottom = 0.0
+	overlay.size = Vector2(get_viewport().size)
+	overlay.z_index = 4096
+	overlay.mouse_filter = Control.MOUSE_FILTER_STOP
+	overlay.focus_mode = Control.FOCUS_ALL
+
+
+func _close_what_if_machine_overlay() -> void:
+	if not _is_what_if_machine_open():
+		_what_if_machine_overlay = null
+		return
+	_what_if_machine_overlay.queue_free()
+
+
+func _on_what_if_machine_overlay_exited() -> void:
+	_what_if_machine_overlay = null
+
+
+func _on_what_if_generate_requested(request: Dictionary) -> void:
+	_pending_what_if_generation_request = request.duplicate()
+	_close_what_if_machine_overlay()
+	call_deferred("_generate_pending_what_if_plan")
+
 
 func _setup_save_load_ui() -> void:
 	save_button = Button.new()
@@ -153,6 +249,7 @@ func _setup_save_load_ui() -> void:
 	rail_version_dropdown.select(0)
 	$Camera2D/CanvasLayer.add_child(rail_version_dropdown)
 	_sync_rail_version_selector()
+	_setup_rail_visibility_indicator()
 
 	save_dialog = FileDialog.new()
 	save_dialog.name = "SaveDialog"
@@ -195,6 +292,30 @@ func _apply_visual_theme() -> void:
 		if button != null:
 			_style_button(button)
 	_configure_toolbar_button_widths()
+	if rail_visibility_indicator != null:
+		var indicator_style := Palette.make_panel_style(Palette.BUTTON_PRESSED, Palette.SCENE_PANEL_BORDER, 8, 1)
+		indicator_style.set_content_margin(SIDE_LEFT, 10)
+		indicator_style.set_content_margin(SIDE_RIGHT, 10)
+		indicator_style.set_content_margin(SIDE_TOP, 4)
+		indicator_style.set_content_margin(SIDE_BOTTOM, 4)
+		rail_visibility_indicator.add_theme_stylebox_override("panel", indicator_style)
+	if rail_visibility_indicator_label != null:
+		rail_visibility_indicator_label.add_theme_color_override("font_color", Palette.TEXT_PRIMARY)
+		rail_visibility_indicator_label.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.35))
+		rail_visibility_indicator_label.add_theme_font_size_override("font_size", 14)
+	if rail_alpha_controls != null:
+		var alpha_style := Palette.make_panel_style(Palette.BUTTON_PRESSED, Palette.SCENE_PANEL_BORDER, 8, 1)
+		alpha_style.set_content_margin(SIDE_LEFT, 8)
+		alpha_style.set_content_margin(SIDE_RIGHT, 8)
+		alpha_style.set_content_margin(SIDE_TOP, 5)
+		alpha_style.set_content_margin(SIDE_BOTTOM, 5)
+		rail_alpha_controls.add_theme_stylebox_override("panel", alpha_style)
+	if rail_alpha_input != null:
+		rail_alpha_input.add_theme_color_override("font_color", Palette.TEXT_PRIMARY)
+		rail_alpha_input.add_theme_color_override("font_placeholder_color", Palette.TEXT_MUTED)
+		rail_alpha_input.add_theme_stylebox_override("normal", Palette.make_button_style(Palette.BUTTON_FILL, 6, 1))
+		rail_alpha_input.add_theme_stylebox_override("focus", Palette.make_button_style(Palette.BUTTON_HOVER, 6, 1))
+		rail_alpha_input.add_theme_stylebox_override("read_only", Palette.make_button_style(Palette.BUTTON_PRESSED, 6, 1))
 
 	for label in [
 		heat_label,
@@ -239,6 +360,8 @@ func Adjust_ui_for_resolution() -> void:
 	_layout_prod_panel()
 	$Camera2D/CanvasLayer/ControlMenu.position = Vector2(15, get_viewport().size.y -50)
 	$"Camera2D/CanvasLayer/Patch Notes".position = Vector2(15, get_viewport().size.y -90)
+	if what_if_button != null:
+		what_if_button.position = Vector2(15, get_viewport().size.y -130)
 
 	if rail_version_dropdown != null:
 		var menu_button := $Camera2D/CanvasLayer/MenuButton
@@ -247,6 +370,8 @@ func Adjust_ui_for_resolution() -> void:
 			menu_button.position.x + menu_button_width + RAIL_VERSION_DROPDOWN_MARGIN,
 			menu_button.position.y
 		)
+		_layout_rail_visibility_indicator()
+		_layout_rail_alpha_controls()
 	
 	if new_button != null:
 		new_button.position = Vector2(get_viewport().size.x - 490 - NEW_BUTTON_LEFT_SHIFT, 8)
@@ -288,6 +413,176 @@ func _sync_rail_version_selector() -> void:
 		return
 	if path_manager.has_method("set_rail_version_selector"):
 		path_manager.set_rail_version_selector(rail_version_dropdown)
+
+func _setup_rail_visibility_indicator() -> void:
+	rail_visibility_indicator = PanelContainer.new()
+	rail_visibility_indicator.name = "RailVisibilityIndicator"
+	rail_visibility_indicator.custom_minimum_size = RAIL_VISIBILITY_INDICATOR_SIZE
+	rail_visibility_indicator.size = RAIL_VISIBILITY_INDICATOR_SIZE
+	rail_visibility_indicator.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	rail_visibility_indicator.visible = false
+
+	rail_visibility_indicator_label = Label.new()
+	rail_visibility_indicator_label.name = "ModeLabel"
+	rail_visibility_indicator_label.text = "Standard"
+	rail_visibility_indicator_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	rail_visibility_indicator_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	rail_visibility_indicator_label.custom_minimum_size = RAIL_VISIBILITY_INDICATOR_SIZE
+	rail_visibility_indicator.add_child(rail_visibility_indicator_label)
+	$Camera2D/CanvasLayer.add_child(rail_visibility_indicator)
+
+	rail_visibility_indicator_timer = Timer.new()
+	rail_visibility_indicator_timer.name = "RailVisibilityIndicatorTimer"
+	rail_visibility_indicator_timer.one_shot = true
+	rail_visibility_indicator_timer.wait_time = RAIL_VISIBILITY_INDICATOR_DURATION
+	rail_visibility_indicator_timer.timeout.connect(_hide_rail_visibility_indicator)
+	add_child(rail_visibility_indicator_timer)
+	_setup_rail_alpha_controls()
+
+func _layout_rail_visibility_indicator() -> void:
+	if rail_visibility_indicator == null or rail_version_dropdown == null:
+		return
+
+	rail_visibility_indicator.size = RAIL_VISIBILITY_INDICATOR_SIZE
+	var dropdown_width = max(rail_version_dropdown.size.x, RAIL_VERSION_DROPDOWN_SIZE.x) * rail_version_dropdown.scale.x
+	rail_visibility_indicator.position = Vector2(
+		rail_version_dropdown.position.x + dropdown_width + RAIL_VISIBILITY_INDICATOR_MARGIN,
+		rail_version_dropdown.position.y
+	)
+
+func _setup_rail_alpha_controls() -> void:
+	rail_alpha_controls = PanelContainer.new()
+	rail_alpha_controls.name = "RailAlphaControls"
+	rail_alpha_controls.custom_minimum_size = RAIL_VISIBILITY_ALPHA_CONTROL_SIZE
+	rail_alpha_controls.size = RAIL_VISIBILITY_ALPHA_CONTROL_SIZE
+	rail_alpha_controls.visible = false
+
+	var alpha_row := HBoxContainer.new()
+	alpha_row.name = "AlphaRow"
+	alpha_row.add_theme_constant_override("separation", 8)
+	rail_alpha_controls.add_child(alpha_row)
+
+	rail_alpha_slider = HSlider.new()
+	rail_alpha_slider.name = "AlphaSlider"
+	rail_alpha_slider.min_value = 0.0
+	rail_alpha_slider.max_value = 1.0
+	rail_alpha_slider.step = RAIL_VISIBILITY_ALPHA_STEP
+	rail_alpha_slider.page = RAIL_VISIBILITY_ALPHA_STEP
+	rail_alpha_slider.value = _get_high_visibility_alpha()
+	rail_alpha_slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	rail_alpha_slider.tooltip_text = "Rail alpha"
+	rail_alpha_slider.value_changed.connect(_on_rail_alpha_slider_changed)
+	alpha_row.add_child(rail_alpha_slider)
+
+	rail_alpha_input = LineEdit.new()
+	rail_alpha_input.name = "AlphaInput"
+	rail_alpha_input.custom_minimum_size = Vector2(RAIL_VISIBILITY_ALPHA_TEXT_WIDTH, 0.0)
+	rail_alpha_input.text = _format_rail_alpha(_get_high_visibility_alpha())
+	rail_alpha_input.placeholder_text = "1.00"
+	rail_alpha_input.alignment = HORIZONTAL_ALIGNMENT_CENTER
+	rail_alpha_input.tooltip_text = "Rail alpha"
+	rail_alpha_input.text_submitted.connect(_on_rail_alpha_text_submitted)
+	rail_alpha_input.focus_exited.connect(_commit_rail_alpha_input)
+	alpha_row.add_child(rail_alpha_input)
+
+	$Camera2D/CanvasLayer.add_child(rail_alpha_controls)
+
+func _layout_rail_alpha_controls() -> void:
+	if rail_alpha_controls == null or rail_visibility_indicator == null:
+		return
+
+	rail_alpha_controls.size = RAIL_VISIBILITY_ALPHA_CONTROL_SIZE
+	rail_alpha_controls.position = Vector2(
+		rail_visibility_indicator.position.x,
+		rail_visibility_indicator.position.y + RAIL_VISIBILITY_INDICATOR_SIZE.y + RAIL_VISIBILITY_ALPHA_CONTROL_TOP_MARGIN
+	)
+
+func _process_rail_visibility_input() -> bool:
+	if not InputMap.has_action(RAIL_VISIBILITY_ACTION):
+		return false
+	if not Input.is_action_just_pressed(RAIL_VISIBILITY_ACTION, true):
+		return false
+	if path_manager == null or not path_manager.has_method("cycle_rail_visibility_mode"):
+		return false
+
+	path_manager.call("cycle_rail_visibility_mode")
+	var mode_name := "Standard"
+	if path_manager.has_method("get_rail_visibility_mode_name"):
+		mode_name = String(path_manager.call("get_rail_visibility_mode_name"))
+	_show_rail_visibility_indicator(mode_name)
+	_sync_rail_alpha_controls_visibility()
+	return true
+
+func _show_rail_visibility_indicator(mode_name: String) -> void:
+	if rail_visibility_indicator_label != null:
+		rail_visibility_indicator_label.text = mode_name
+	if rail_visibility_indicator != null:
+		_layout_rail_visibility_indicator()
+		rail_visibility_indicator.visible = true
+	if rail_visibility_indicator_timer != null:
+		rail_visibility_indicator_timer.start(RAIL_VISIBILITY_INDICATOR_DURATION)
+
+func _hide_rail_visibility_indicator() -> void:
+	if rail_visibility_indicator != null:
+		rail_visibility_indicator.visible = false
+
+func _is_high_visibility_mode() -> bool:
+	if path_manager == null or not path_manager.has_method("get_rail_visibility_mode"):
+		return false
+	return int(path_manager.call("get_rail_visibility_mode")) == RAIL_VISIBILITY_MODE_HIGH
+
+func _get_high_visibility_alpha() -> float:
+	if path_manager == null or not path_manager.has_method("get_high_visibility_alpha"):
+		return 1.0
+	return clampf(float(path_manager.call("get_high_visibility_alpha")), 0.0, 1.0)
+
+func _set_high_visibility_alpha(alpha: float) -> void:
+	var clamped_alpha := clampf(alpha, 0.0, 1.0)
+	if path_manager != null and path_manager.has_method("set_high_visibility_alpha"):
+		path_manager.call("set_high_visibility_alpha", clamped_alpha)
+	_sync_rail_alpha_controls(clamped_alpha)
+
+func _format_rail_alpha(alpha: float) -> String:
+	return "%.2f" % clampf(alpha, 0.0, 1.0)
+
+func _sync_rail_alpha_controls(alpha: float) -> void:
+	_syncing_rail_alpha_controls = true
+	if rail_alpha_slider != null:
+		rail_alpha_slider.value = clampf(alpha, 0.0, 1.0)
+	if rail_alpha_input != null:
+		rail_alpha_input.text = _format_rail_alpha(alpha)
+	_syncing_rail_alpha_controls = false
+
+func _sync_rail_alpha_controls_visibility() -> void:
+	if rail_alpha_controls == null:
+		return
+
+	rail_alpha_controls.visible = _is_high_visibility_mode()
+	if rail_alpha_controls.visible:
+		_layout_rail_alpha_controls()
+		_sync_rail_alpha_controls(_get_high_visibility_alpha())
+
+func _on_rail_alpha_slider_changed(value: float) -> void:
+	if _syncing_rail_alpha_controls:
+		return
+	_set_high_visibility_alpha(value)
+
+func _on_rail_alpha_text_submitted(_new_text: String) -> void:
+	_commit_rail_alpha_input()
+
+func _commit_rail_alpha_input() -> void:
+	if _syncing_rail_alpha_controls or rail_alpha_input == null:
+		return
+
+	var raw := rail_alpha_input.text.strip_edges().replace("%", "")
+	if not raw.is_valid_float():
+		_sync_rail_alpha_controls(_get_high_visibility_alpha())
+		return
+
+	var parsed_alpha := raw.to_float()
+	if parsed_alpha > 1.0:
+		parsed_alpha /= 100.0
+	_set_high_visibility_alpha(parsed_alpha)
 	
 func _on_viewport_size_changed() -> void:
 	_last_viewport_size = get_viewport().size
@@ -321,6 +616,583 @@ func get_tilemap_center_global() -> Vector2:
 		return Vector2i (0,0)
 	
 	return tile_map_layer.to_global(local_pos)
+
+
+func _generate_pending_what_if_plan() -> void:
+	if _pending_what_if_generation_request.is_empty():
+		return
+
+	var request := _pending_what_if_generation_request.duplicate()
+	_pending_what_if_generation_request.clear()
+	_generate_what_if_plan(request)
+
+
+func _generate_what_if_plan(request: Dictionary) -> void:
+	var target_recipe := request.get("target_recipe") as Recipe
+	var target_qty := float(request.get("target_qty", 0.0))
+	if target_recipe == null or target_qty <= 0.0:
+		push_warning("What If generation skipped: missing recipe or quantity.")
+		return
+
+	var enabled_v2_building_ids: Dictionary = {}
+	var enabled_variant = request.get("enabled_v2_building_ids", {})
+	if enabled_variant is Dictionary:
+		enabled_v2_building_ids = enabled_variant
+
+	var graph := _build_what_if_generation_graph(target_recipe, target_qty, enabled_v2_building_ids)
+	var nodes: Array = graph.get("nodes", [])
+	if nodes.is_empty():
+		push_warning("What If generation skipped: no buildable recipe graph was found.")
+		return
+
+	var history_before := _capture_history_state()
+	var generated_buildings := _place_what_if_generation_buildings(graph)
+	if generated_buildings.is_empty():
+		push_warning("What If generation skipped: no buildings could be placed.")
+		return
+
+	_connect_what_if_generation_rails(graph)
+	_refresh_plan_totals_from_scene()
+	_center_camera_on_generated_buildings(generated_buildings)
+	_commit_history_action(HISTORY_ACTION_WHAT_IF_GENERATED, history_before)
+
+
+func _build_what_if_generation_graph(target_recipe: Recipe, target_qty: float, enabled_v2_building_ids: Dictionary) -> Dictionary:
+	var registry := get_node_or_null("/root/RecipeRegistry")
+	if registry == null:
+		push_warning("What If generation skipped: RecipeRegistry is not available.")
+		return {}
+
+	var nodes: Array[Dictionary] = []
+	var nodes_by_key: Dictionary = {}
+	var edges: Array[Dictionary] = []
+	var current_requirements: Dictionary = {}
+	var expanded_building_counts: Dictionary = {}
+	_merge_what_if_generation_requirement(current_requirements, target_recipe, target_qty)
+
+	for level in range(WHAT_IF_GENERATION_MAX_DEPTH):
+		if current_requirements.is_empty():
+			break
+
+		var next_requirements: Dictionary = {}
+		for key_variant in current_requirements.keys():
+			var key := String(key_variant)
+			var requirement: Dictionary = current_requirements[key]
+			var recipe := requirement.get("recipe") as Recipe
+			var required_qty := float(requirement.get("required_qty", 0.0))
+			if recipe == null or required_qty <= 0.0:
+				continue
+
+			var node := _get_or_create_what_if_generation_node(nodes, nodes_by_key, key, recipe, level, registry)
+			node["required_qty"] = float(node.get("required_qty", 0.0)) + required_qty
+			node["level"] = maxi(int(node.get("level", level)), level)
+			_recalculate_what_if_generation_node(node, registry)
+
+		for key_variant in current_requirements.keys():
+			var key := String(key_variant)
+			var node := nodes_by_key.get(key, {}) as Dictionary
+			var recipe := node.get("recipe") as Recipe
+			if recipe == null:
+				continue
+
+			var building_count := int(node.get("building_count", 0))
+			var expanded_count := int(expanded_building_counts.get(key, 0))
+			var new_building_count := building_count - expanded_count
+			if new_building_count <= 0:
+				continue
+			expanded_building_counts[key] = building_count
+
+			for input_index in range(recipe.inputs.size()):
+				var input_stack := recipe.inputs[input_index]
+				if input_stack == null:
+					continue
+
+				var input_id := _get_stack_id(input_stack)
+				var input_recipe := _get_best_what_if_recipe_for_output_id(registry, input_id, enabled_v2_building_ids)
+				if input_recipe == null:
+					continue
+
+				var input_key := _recipe_key(input_recipe)
+				var input_required_qty := float(input_stack.qty) * float(new_building_count)
+				edges.append({
+					"from_key": input_key,
+					"to_key": key,
+					"input_index": input_index,
+					"input_id": input_id,
+					"required_qty": input_required_qty,
+				})
+				_merge_what_if_generation_requirement(next_requirements, input_recipe, input_required_qty)
+
+		current_requirements = next_requirements
+
+	return {
+		"nodes": nodes,
+		"nodes_by_key": nodes_by_key,
+		"edges": edges,
+	}
+
+
+func _get_or_create_what_if_generation_node(
+	nodes: Array[Dictionary],
+	nodes_by_key: Dictionary,
+	key: String,
+	recipe: Recipe,
+	level: int,
+	registry: Node
+) -> Dictionary:
+	if nodes_by_key.has(key):
+		return nodes_by_key[key]
+
+	var output_id := _get_recipe_output_id(recipe)
+	var building_id := StringName("")
+	if registry != null and registry.has_method("get_recipe_building_id"):
+		building_id = registry.call("get_recipe_building_id", recipe)
+
+	var node := {
+		"key": key,
+		"recipe": recipe,
+		"level": level,
+		"required_qty": 0.0,
+		"output_id": output_id,
+		"output_qty": 0.0,
+		"building_id": building_id,
+		"building_count": 0,
+		"total_output": 0.0,
+		"instances": [],
+	}
+	nodes_by_key[key] = node
+	nodes.append(node)
+	return node
+
+
+func _recalculate_what_if_generation_node(node: Dictionary, registry: Node) -> void:
+	var recipe := node.get("recipe") as Recipe
+	var output_qty := _get_recipe_output_qty(recipe, registry)
+	var required_qty := float(node.get("required_qty", 0.0))
+	var building_count := 0
+	if output_qty > 0.0:
+		building_count = int(ceil(required_qty / output_qty))
+
+	node["output_qty"] = output_qty
+	node["building_count"] = building_count
+	node["total_output"] = float(building_count) * output_qty
+
+
+func _merge_what_if_generation_requirement(requirements: Dictionary, recipe: Recipe, required_qty: float) -> void:
+	if recipe == null or required_qty <= 0.0:
+		return
+
+	var key := _recipe_key(recipe)
+	if not requirements.has(key):
+		requirements[key] = {
+			"recipe": recipe,
+			"required_qty": 0.0,
+		}
+
+	var requirement: Dictionary = requirements[key]
+	requirement["required_qty"] = float(requirement.get("required_qty", 0.0)) + required_qty
+
+
+func _place_what_if_generation_buildings(graph: Dictionary) -> Array[Node2D]:
+	var generated_buildings: Array[Node2D] = []
+	var levels := _group_what_if_generation_nodes_by_level(graph.get("nodes", []))
+	if levels.is_empty():
+		return generated_buildings
+
+	var level_keys: Array[int] = []
+	for level_variant in levels.keys():
+		level_keys.append(int(level_variant))
+	level_keys.sort()
+
+	var origin_cell := _get_what_if_generation_origin_cell()
+	var row_y := origin_cell.y
+	for level in level_keys:
+		var level_nodes: Array = levels[level]
+		var row_height := _get_what_if_generation_row_height(level_nodes)
+		var x_cursor := origin_cell.x
+
+		for node_variant in level_nodes:
+			var node: Dictionary = node_variant
+			var building_count := int(node.get("building_count", 0))
+			var footprint := _get_what_if_generation_node_footprint(node)
+			if building_count <= 0 or footprint == Vector2i.ZERO:
+				continue
+
+			var instances: Array = node.get("instances", [])
+			for _i in range(building_count):
+				var building := _create_what_if_generation_building(node, Vector2i(x_cursor, row_y))
+				if building != null:
+					instances.append(building)
+					generated_buildings.append(building)
+				x_cursor += footprint.x + WHAT_IF_GENERATION_COLUMN_SPACING
+			node["instances"] = instances
+			x_cursor += WHAT_IF_GENERATION_COLUMN_SPACING
+
+		row_y += row_height + WHAT_IF_GENERATION_ROW_SPACING
+
+	return generated_buildings
+
+
+func _group_what_if_generation_nodes_by_level(nodes: Array) -> Dictionary:
+	var levels := {}
+	for node_variant in nodes:
+		var node: Dictionary = node_variant
+		if int(node.get("building_count", 0)) <= 0:
+			continue
+		if StringName(node.get("building_id", StringName(""))) == StringName(""):
+			continue
+
+		var level := int(node.get("level", 0))
+		if not levels.has(level):
+			levels[level] = []
+		var level_nodes: Array = levels[level]
+		level_nodes.append(node)
+	return levels
+
+
+func _get_what_if_generation_row_height(level_nodes: Array) -> int:
+	var row_height := 1
+	for node_variant in level_nodes:
+		var node: Dictionary = node_variant
+		var footprint := _get_what_if_generation_node_footprint(node)
+		row_height = maxi(row_height, footprint.y)
+	return row_height
+
+
+func _get_what_if_generation_node_footprint(node: Dictionary) -> Vector2i:
+	var stored_footprint = node.get("footprint", Vector2i.ZERO)
+	if stored_footprint is Vector2i and stored_footprint != Vector2i.ZERO:
+		return stored_footprint
+
+	var building_id := StringName(node.get("building_id", StringName("")))
+	var scene := BuildRegistry.get_scene(building_id)
+	if scene == null:
+		return Vector2i.ZERO
+
+	var instance := scene.instantiate() as Node2D
+	if instance == null:
+		return Vector2i.ZERO
+
+	var footprint := Vector2i.ONE
+	if build_manager != null and build_manager.has_method("get_rotated_footprint"):
+		footprint = build_manager.get_rotated_footprint(instance)
+	instance.free()
+
+	node["footprint"] = footprint
+	return footprint
+
+
+func _get_what_if_generation_origin_cell() -> Vector2i:
+	if build_manager == null or not ("occupied_cells" in build_manager):
+		return WHAT_IF_GENERATION_START_CELL
+
+	var occupied_cells: Dictionary = build_manager.occupied_cells
+	if occupied_cells.is_empty():
+		return WHAT_IF_GENERATION_START_CELL
+
+	var max_x := -2147483648
+	var min_y := 2147483647
+	for cell_variant in occupied_cells.keys():
+		var cell: Vector2i = cell_variant
+		max_x = maxi(max_x, cell.x)
+		min_y = mini(min_y, cell.y)
+
+	return Vector2i(max_x + WHAT_IF_GENERATION_EXISTING_PLAN_MARGIN, min_y)
+
+
+func _create_what_if_generation_building(node: Dictionary, preferred_anchor_cell: Vector2i) -> Node2D:
+	var building_id := StringName(node.get("building_id", StringName("")))
+	var recipe := node.get("recipe") as Recipe
+	var scene := BuildRegistry.get_scene(building_id)
+	if scene == null:
+		push_warning("What If generation skipped building id %s: no registered scene." % building_id)
+		return null
+
+	var building := scene.instantiate() as Node2D
+	if building == null:
+		return null
+
+	var anchor_cell := _find_free_what_if_generation_anchor(building, preferred_anchor_cell)
+	var cells = build_manager.get_building_cells(building, anchor_cell)
+	if not build_manager.can_place_at(cells):
+		building.free()
+		return null
+
+	building.global_position = build_manager._position_from_anchor_cell(building, anchor_cell)
+	buildings_root.add_child(building)
+	_apply_what_if_generated_recipe_selection(building, recipe)
+	build_manager.occupy_cells(cells, building)
+	return building
+
+
+func _find_free_what_if_generation_anchor(building: Node2D, preferred_anchor_cell: Vector2i) -> Vector2i:
+	for y_offset in range(0, 40):
+		for x_offset in range(0, 40):
+			var candidate := preferred_anchor_cell + Vector2i(x_offset, y_offset)
+			var cells = build_manager.get_building_cells(building, candidate)
+			if build_manager.can_place_at(cells):
+				return candidate
+	return preferred_anchor_cell
+
+
+func _apply_what_if_generated_recipe_selection(building: Node2D, recipe: Recipe) -> void:
+	if building == null or recipe == null:
+		return
+
+	var recipe_dropdown := building.get_node_or_null("Recipe") as OptionButton
+	if recipe_dropdown != null:
+		var recipe_index := _find_recipe_option_index(recipe_dropdown, recipe)
+		if recipe_index >= 0:
+			recipe_dropdown.select(recipe_index)
+			_call_option_selection_handler(building, "_on_recipe_item_selected", recipe_dropdown)
+
+	var purity_dropdown := building.get_node_or_null("Purity") as OptionButton
+	if purity_dropdown != null and purity_dropdown.item_count > 0:
+		purity_dropdown.select(0)
+		_call_option_selection_handler(building, "_on_purity_item_selected", purity_dropdown)
+
+
+func _find_recipe_option_index(option_button: OptionButton, recipe: Recipe) -> int:
+	if option_button == null or recipe == null:
+		return -1
+
+	var target_key := _recipe_key(recipe)
+	for index in range(option_button.item_count):
+		var metadata = option_button.get_item_metadata(index)
+		var metadata_recipe := metadata as Recipe
+		if metadata_recipe != null and _recipe_key(metadata_recipe) == target_key:
+			return index
+
+	return -1
+
+
+func _connect_what_if_generation_rails(graph: Dictionary) -> void:
+	if path_manager == null or not path_manager.has_method("_finalize_path"):
+		return
+
+	var nodes_by_key: Dictionary = graph.get("nodes_by_key", {})
+	var connected_paths := {}
+
+	for edge_variant in graph.get("edges", []):
+		var edge: Dictionary = edge_variant
+		var from_key := String(edge.get("from_key", ""))
+		var to_key := String(edge.get("to_key", ""))
+		var from_node := nodes_by_key.get(from_key, {}) as Dictionary
+		var to_node := nodes_by_key.get(to_key, {}) as Dictionary
+		if from_node.is_empty() or to_node.is_empty():
+			continue
+
+		var producers: Array = from_node.get("instances", [])
+		var consumers: Array = to_node.get("instances", [])
+		if producers.is_empty() or consumers.is_empty():
+			continue
+
+		var input_index := int(edge.get("input_index", 0))
+		var bus_groups := _get_what_if_bus_groups_for_node(from_node)
+		for bus_index in range(bus_groups.size()):
+			var bus_group: Dictionary = bus_groups[bus_index]
+			var bus_producers: Array = bus_group.get("producers", [])
+			if bus_producers.is_empty():
+				continue
+
+			var bus_consumers := _get_what_if_bus_consumers(consumers, bus_index, bus_groups.size())
+			var rail_version := _get_what_if_rail_version_for_rate(float(bus_group.get("rate", 0.0)))
+			var connection_count = maxi(bus_producers.size(), bus_consumers.size())
+
+			for index in range(connection_count):
+				var from_building := bus_producers[index % bus_producers.size()] as Node2D
+				var to_building := bus_consumers[index % bus_consumers.size()] as Node2D
+				if from_building == null or to_building == null:
+					continue
+
+				var to_port := _get_what_if_input_port_path(to_building, input_index)
+				var from_port := _get_what_if_output_port_path(from_building)
+				if String(from_port) == "" or String(to_port) == "":
+					continue
+
+				var connection_key := "%s|%s|%s" % [from_building.get_instance_id(), to_building.get_instance_id(), String(to_port)]
+				if connected_paths.has(connection_key):
+					continue
+				connected_paths[connection_key] = true
+
+				_connect_what_if_generation_path(from_building, from_port, to_building, to_port, rail_version)
+
+
+func _connect_what_if_generation_path(from_building: Node2D, from_port: NodePath, to_building: Node2D, to_port: NodePath, rail_version: int) -> void:
+	var from_pos = path_manager._get_port_center(from_building, from_port)
+	var to_pos = path_manager._get_port_center(to_building, to_port)
+	if from_pos == null or to_pos == null:
+		return
+
+	path_manager._finalize_path(from_building, from_port, from_pos, to_building, to_port, to_pos, rail_version, false)
+
+
+func _get_what_if_output_port_path(building: Node2D) -> NodePath:
+	var preferred := NodePath("Ports/Output 1")
+	if building.get_node_or_null(preferred) != null:
+		return preferred
+	return _find_what_if_port_path(building, ["Output"])
+
+
+func _get_what_if_input_port_path(building: Node2D, input_index: int) -> NodePath:
+	var preferred := NodePath("Ports/Input %d" % (input_index + 1))
+	if building.get_node_or_null(preferred) != null:
+		return preferred
+	return _find_what_if_port_path(building, ["Input", "Universal"])
+
+
+func _find_what_if_port_path(building: Node2D, prefixes: Array[String]) -> NodePath:
+	if building == null:
+		return NodePath("")
+
+	var ports := building.get_node_or_null("Ports")
+	if ports == null:
+		return NodePath("")
+
+	for child in ports.get_children():
+		for prefix in prefixes:
+			if child.name.begins_with(prefix):
+				return NodePath("Ports/%s" % child.name)
+	return NodePath("")
+
+
+func _get_what_if_bus_groups_for_node(node: Dictionary) -> Array[Dictionary]:
+	var cached_groups = node.get("bus_groups", [])
+	if cached_groups is Array and not cached_groups.is_empty():
+		return cached_groups
+
+	var producers: Array = node.get("instances", [])
+	var output_qty := float(node.get("output_qty", 0.0))
+	var groups: Array[Dictionary] = []
+	for producer in producers:
+		if output_qty <= 0.0:
+			continue
+
+		var target_group := _find_what_if_bus_group_for_rate(groups, output_qty)
+		if target_group.is_empty():
+			target_group = {
+				"producers": [],
+				"rate": 0.0,
+			}
+			groups.append(target_group)
+
+		var group_producers: Array = target_group.get("producers", [])
+		group_producers.append(producer)
+		target_group["producers"] = group_producers
+		target_group["rate"] = float(target_group.get("rate", 0.0)) + output_qty
+
+	node["bus_groups"] = groups
+	return groups
+
+
+func _find_what_if_bus_group_for_rate(groups: Array[Dictionary], additional_rate: float) -> Dictionary:
+	for group in groups:
+		var current_rate := float(group.get("rate", 0.0))
+		if current_rate + additional_rate <= WHAT_IF_RAIL_V3_CAPACITY:
+			return group
+	return {}
+
+
+func _get_what_if_bus_consumers(consumers: Array, bus_index: int, bus_count: int) -> Array:
+	if bus_count <= 1:
+		return consumers
+
+	var bus_consumers: Array = []
+	for consumer_index in range(consumers.size()):
+		if consumer_index % bus_count == bus_index:
+			bus_consumers.append(consumers[consumer_index])
+
+	if bus_consumers.is_empty():
+		return consumers
+	return bus_consumers
+
+
+func _get_what_if_rail_version_for_rate(rate: float) -> int:
+	if rate <= WHAT_IF_RAIL_V1_CAPACITY:
+		return 0
+	if rate <= WHAT_IF_RAIL_V2_CAPACITY:
+		return 1
+	return 2
+
+
+func _refresh_plan_totals_from_scene() -> void:
+	var scene_buildings := _get_scene_buildings()
+	heat_label.text = str(_sum_building_stat(scene_buildings, "heat"))
+	power_label.text = str(_sum_building_stat(scene_buildings, "power"))
+
+	var cost_totals := _sum_building_costs(scene_buildings)
+	bbm_cost_label.text = str(int(cost_totals.get("bbm", 0)))
+	ibm_cost_label.text = str(int(cost_totals.get("ibm", 0)))
+	meteor_core_cost_label.text = str(int(cost_totals.get("meteor_cores", 0)))
+
+	_reset_prod_ledger()
+	_rebuild_production_ledger(scene_buildings)
+
+
+func _get_scene_buildings() -> Array[Node2D]:
+	var scene_buildings: Array[Node2D] = []
+	if buildings_root == null:
+		return scene_buildings
+
+	for child in buildings_root.get_children():
+		if child is Node2D:
+			scene_buildings.append(child as Node2D)
+	return scene_buildings
+
+
+func _center_camera_on_generated_buildings(generated_buildings: Array[Node2D]) -> void:
+	if generated_buildings.is_empty():
+		return
+
+	var total := Vector2.ZERO
+	var count := 0
+	for building in generated_buildings:
+		if building != null and is_instance_valid(building):
+			total += building.global_position
+			count += 1
+
+	if count > 0:
+		camera.position = total / float(count)
+
+
+func _get_best_what_if_recipe_for_output_id(registry: Node, output_id: StringName, enabled_v2_building_ids: Dictionary) -> Recipe:
+	if registry == null or output_id == StringName(""):
+		return null
+	if not registry.has_method("get_best_recipe_for_output_id"):
+		return null
+	return registry.call("get_best_recipe_for_output_id", output_id, enabled_v2_building_ids) as Recipe
+
+
+func _get_recipe_output_id(recipe: Recipe) -> StringName:
+	if recipe == null or recipe.outputs.is_empty():
+		return StringName("")
+	return _get_stack_id(recipe.outputs[0])
+
+
+func _get_recipe_output_qty(recipe: Recipe, registry: Node) -> float:
+	if registry != null and registry.has_method("get_recipe_output_qty"):
+		return float(registry.call("get_recipe_output_qty", recipe))
+	if recipe == null or recipe.outputs.is_empty() or recipe.outputs[0] == null:
+		return 0.0
+	return float(recipe.outputs[0].qty)
+
+
+func _get_stack_id(stack: ItemStack) -> StringName:
+	if stack == null:
+		return StringName("")
+	if stack.id != StringName(""):
+		return stack.id
+	if stack.item != null:
+		return stack.item.id
+	return StringName("")
+
+
+func _recipe_key(recipe: Recipe) -> String:
+	if recipe == null:
+		return ""
+	if recipe.resource_path != "":
+		return recipe.resource_path
+	return str(recipe.get_instance_id())
 
 func _on_save_pressed() -> void:
 	if OS.has_feature("web") and JavaScriptBridge != null:

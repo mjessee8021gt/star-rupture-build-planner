@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://b0o4ul02ammwi" path="res://Assets/SRBP_Info_Button.png" id="12_1p5hy"]
 [ext_resource type="Script" uid="uid://ctcvj2tgfppa1" path="res://Scripts/patch_notes.gd" id="13_erwvk"]
 [ext_resource type="PackedScene" uid="uid://7jyji8msm5gx" path="res://Scenes/patchNotesPanel.tscn" id="14_erwvk"]
+[ext_resource type="Texture2D" uid="uid://bjsxrfyahtpo4" path="res://Assets/SRBP_Whatif_Button.png" id="16_346fj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_346fj"]
 texture = ExtResource("3_2w5on")
@@ -223,6 +224,14 @@ keep_pressed_outside = true
 icon = ExtResource("12_1p5hy")
 script = ExtResource("13_erwvk")
 panel_scene = ExtResource("14_erwvk")
+
+[node name="WhatIfButton" type="Button" parent="Camera2D/CanvasLayer" unique_id=1096417576]
+offset_left = 14.0
+offset_top = 548.0
+offset_right = 86.0
+offset_bottom = 620.0
+scale = Vector2(0.5, 0.5)
+icon = ExtResource("16_346fj")
 
 [node name="BuildManager" type="Node2D" parent="." unique_id=695504288]
 script = ExtResource("6_v1gob")

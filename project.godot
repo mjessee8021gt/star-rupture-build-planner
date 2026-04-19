@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 BuildingRegistry="*uid://cjymhecftjmou"
 ProdLedger="*uid://idx1af642m64"
 PatchReg="*uid://67mmhrkhsvst"
+RecipeRegistry="*res://Scripts/RecipeRegistry.gd"
 
 [display]
 
