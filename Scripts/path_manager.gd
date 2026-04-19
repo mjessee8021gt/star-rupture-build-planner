@@ -163,6 +163,27 @@ func _can_start_paths() -> bool:
 
 	return true
 
+func _get_history_host() -> Node:
+	var main_scene := get_parent()
+	if main_scene == null:
+		return null
+	if not main_scene.has_method("_capture_history_state") or not main_scene.has_method("_commit_history_action"):
+		return null
+	return main_scene
+
+func _capture_history_state() -> Dictionary:
+	var history_host := _get_history_host()
+	if history_host == null:
+		return {}
+	var captured = history_host.call("_capture_history_state")
+	return captured if captured is Dictionary else {}
+
+func _commit_history_action(label: String, before_state: Dictionary) -> void:
+	var history_host := _get_history_host()
+	if history_host == null:
+		return
+	history_host.call("_commit_history_action", label, before_state)
+
 # Port helpers
 func _is_universal_port_name(port_name: String) -> bool:
 	return port_name.begins_with("Universal")
@@ -1759,8 +1780,10 @@ func try_remove_path_under_mouse() -> bool:
 	if target_path == null:
 		return false
 
-	target_path.queue_free()
-	call_deferred("_refresh_path_overlap_shading")
+	var history_before := _capture_history_state()
+	_detach_and_queue_free_path(target_path)
+	_refresh_path_overlap_shading()
+	_commit_history_action("Rail deleted", history_before)
 	return true
 
 
@@ -1940,7 +1963,8 @@ func _on_port_end(building: Node2D, port_name: String, _mouse_pos: Vector2) -> v
 	_finalize_path(_from_building, _from_port_path, from_pos, building, to_port_path, to_pos)
 
 
-func _finalize_path(from_b: Node2D, from_port: NodePath, from_pos: Vector2, to_b: Node2D, to_port: NodePath, to_pos: Vector2, rail_version: int = -1) -> void:
+func _finalize_path(from_b: Node2D, from_port: NodePath, from_pos: Vector2, to_b: Node2D, to_port: NodePath, to_pos: Vector2, rail_version: int = -1, record_history := true) -> void:
+	var history_before := _capture_history_state() if record_history else {}
 	var path := Path2D.new()
 	var line := Line2D.new()
 	var resolved_rail_version := _selected_rail_version if rail_version < 0 else clampi(rail_version, RAIL_VERSION_V1, RAIL_VERSION_V3)
@@ -1968,6 +1992,8 @@ func _finalize_path(from_b: Node2D, from_port: NodePath, from_pos: Vector2, to_b
 		from_b.cancel_port_drag()
 
 	_cleanup_preview()
+	if record_history:
+		_commit_history_action("Rail created", history_before)
 
 func _cleanup_preview() -> void:
 	if _preview_container != null and is_instance_valid(_preview_container):
@@ -2033,5 +2059,13 @@ func remove_paths_for_building(building: Node2D) -> void:
 			if child.get_meta("from_building") == building or child.get_meta("to_building") == building:
 				to_delete.append(child)
 	for n in to_delete:
-		n.queue_free()
-	call_deferred("_refresh_path_overlap_shading")
+		_detach_and_queue_free_path(n)
+	_refresh_path_overlap_shading()
+
+func _detach_and_queue_free_path(path: Node) -> void:
+	if path == null:
+		return
+	var parent := path.get_parent()
+	if parent != null:
+		parent.remove_child(path)
+	path.queue_free()

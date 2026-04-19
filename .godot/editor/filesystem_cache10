@@ -1,8 +1,7 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1775950631
-export_presets.cfg::TextFile::-1::1775950631::0::1::::<><><>0<>0<><>::
+::res://::1776571648
+export_presets.cfg::TextFile::-1::1775951102::0::1::::<><><>0<>0<><>::
 ::res://Assets/::1775950532
-std_bldg_label_settings.tres::LabelSettings::3944920602944607522::1775950532::0::1::::<><><>0<>0<><>::
 SRBP_1x1_BLDG.png::CompressedTexture2D::144076478421116839::1775950460::1774836848::1::::<><><>0<>0<>eab7077c50006ea9986f091c2088679b<>res://.godot/imported/SRBP_1x1_BLDG.png-4245c35f90595d3a862745c5499bf6ba.ctex::
 SRBP_1x1_Zip.png::CompressedTexture2D::5262675006880472454::1775950460::1774836846::1::::<><><>0<>0<>b78b646aab497185436e11e34a5d04fb<>res://.godot/imported/SRBP_1x1_Zip.png-fea1598144168443bab97e7318e8c54b.ctex::
 SRBP_2x2_BLDG.png::CompressedTexture2D::3150140594509742561::1775950460::1774836842::1::::<><><>0<>0<>bfc15493522d25b9770e0972f83e44de<>res://.godot/imported/SRBP_2x2_BLDG.png-54c4cbbc3811da9e790222ad0004bb09.ctex::
@@ -47,6 +46,7 @@ SRBP_Rail_Support_Plus.png::CompressedTexture2D::4957780527455288731::1775950460
 SRBP_Rail_Support_Straight.png::CompressedTexture2D::8812946971898227199::1775950460::1774836842::1::::<><><>0<>0<>7db8e0705cce0a09bee2ec090a859086<>res://.godot/imported/SRBP_Rail_Support_Straight.png-fd8656cab234040af71921455cf6f9df.ctex::
 SRBP_Stats_icon.png::CompressedTexture2D::2663138468257374288::1775950460::1774836848::1::::<><><>0<>0<>ca9b4ca7405e2d4adcf47292ea3ffdd9<>res://.godot/imported/SRBP_Stats_icon.png-2decb9d9accd1294133f5de21d37c58a.ctex::
 SRBP_TOOLBOX.png::CompressedTexture2D::3452144229740615270::1775950460::1774836848::1::::<><><>0<>0<>924b7f02fc3e0e7b5d41be981db7991b<>res://.godot/imported/SRBP_TOOLBOX.png-6502c178881c562f9f73211939dc022c.ctex::
+std_bldg_label_settings.tres::LabelSettings::3944920602944607522::1775950532::0::1::::<><><>0<>0<><>::
 ::res://Buildings/::1775950532
 Assembler.gd::GDScript::4462589680044390853::1774836544::0::1::::<>Building<><>0<>0<><>::
 Assembler.tscn::PackedScene::4758624750678591304::1775950532::0::1::::<><><>0<>0<><>::uid://b4tyg2ij0eoq4::::res://Buildings/Assembler.gd<>uid://ruttqq3j8kw3::::res://Resources/Recipe.gd<>uid://r0d0exei0uo1::::res://Recipes/Accumulator.tres<>uid://cmjmbv2b7rdfr::::res://Recipes/Condenser.tres<>uid://bov57lnl8s77e::::res://Recipes/Electromagnet.tres<>uid://bwf4d8viv2o0h::::res://Recipes/Generator.tres<>uid://qbdm2k4of01k::::res://Recipes/Laser_emitter.tres<>uid://bw0tp80ndefay::::res://Recipes/pressure_tank.tres<>uid://cryw6iu71sfb0::::res://Recipes/Resonator.tres<>uid://bdbuxc406wwsc::::res://Recipes/Scanner.tres<>uid://cx4lxig6r8tny::::res://Recipes/Uberfilament.tres<>uid://dy4jf651nmiwp::::res://Assets/SRBP_3x6_BLDG.png<>uid://dckm1irx4k8o3::::res://Assets/SRBP_6x6_BLDG.png<>uid://hxl3ygjst65n::::res://Recipes/Onboard_instruments.tres<>uid://dnjc3ur3jdwya::::res://Recipes/Explosive_charge.tres<>uid://3w52s3slrct4::::res://Recipes/Pseudorubber_insulator.tres<>uid://y2o8fhyj1sgy::::res://Recipes/Plastic_dust.tres<>uid://ilmbegsn2c7::::res://Assets/SRBP_Oval.png<>uid://bwg7jbpx2gog5::::res://Assets/std_bldg_label_settings.tres
@@ -149,8 +149,8 @@ Zipline.tscn::PackedScene::8830392455675418320::1775884070::0::1::::<><><>0<>0<>
 0_1_2.tres::Resource/PatchNote::3069388434787068257::1774836544::0::1::::<><><>0<>0<><>::uid://b6tmiam3vo7cr::::res://Resources/PatchNote.gd
 0_1_3.tres::Resource/PatchNote::4349492324889225267::1774836544::0::1::::<><><>0<>0<><>::uid://b6tmiam3vo7cr::::res://Resources/PatchNote.gd
 0_2_0.tres::Resource/PatchNote::2413098364513982148::1774986215::0::1::::<><><>0<>0<><>::uid://b6tmiam3vo7cr::::res://Resources/PatchNote.gd
-Patch_Registry.tres::Resource/PatchRegistry::-1::1774848076::0::1::::<><><>0<>0<><>::
 0_3_0.tres::Resource/PatchNote::6091590074749036032::1775950620::0::1::::<><><>0<>0<><>::uid://b6tmiam3vo7cr::::res://Resources/PatchNote.gd
+Patch_Registry.tres::Resource/PatchRegistry::-1::1774848076::0::1::::<><><>0<>0<><>::
 ::res://Recipes/::1775862528
 Accumulator.tres::Resource/Recipe::1245046827341307470::1774836544::0::1::::<><><>0<>0<><>::uid://fx4756jwfgbl::::res://Resources/ItemStack.gd<>uid://ruttqq3j8kw3::::res://Resources/Recipe.gd<>uid://b2au4suqf156a::::res://Recipes/Item Stacks/Stator_12_def.tres<>uid://cvtli7c3bbfbl::::res://Resources/RecipeVariant.gd<>uid://b04faoo3qu4lb::::res://Recipes/Item Stacks/Electronics_24_def.tres<>uid://wqsid71wn7g::::res://Recipes/Item Stacks/Battery_12_def.tres<>uid://d20cgkbe20xrg::::res://Recipes/Item Stacks/Accumulator_12_def.tres
 Aerogel.tres::Resource/Recipe::57287562746229900::1774986215::0::1::::<><><>0<>0<><>::uid://fx4756jwfgbl::::res://Resources/ItemStack.gd<>uid://ruttqq3j8kw3::::res://Resources/Recipe.gd<>uid://cvtli7c3bbfbl::::res://Resources/RecipeVariant.gd<>uid://g2gxquuri3hq::::res://Recipes/Item Stacks/Geothite_Powder_40_def.tres<>uid://d4cjngilxosma::::res://Recipes/Item Stacks/Calcium_powder_60_def.tres<>uid://dwtos3kc6ubti::::res://Recipes/Item Stacks/Liquid_helium_20_def.tres<>uid://c44fgpq06a81::::res://Recipes/Item Stacks/Aerogel_20_def.tres
@@ -844,10 +844,7 @@ wolfram_normal.tres::Resource/RecipeVariant::5835562486454895429::1774836544::0:
 wolfram_normal_V2.tres::Resource/RecipeVariant::3440083362993503082::1774836544::0::1::::<><><>0<>0<><>::uid://fx4756jwfgbl::::res://Resources/ItemStack.gd<>uid://dmcw7r27py0ar::::res://Recipes/Item Stacks/Wolfram_ore_300_def.tres<>uid://cvtli7c3bbfbl::::res://Resources/RecipeVariant.gd
 wolfram_pure.tres::Resource/RecipeVariant::6173701267112546890::1774836544::0::1::::<><><>0<>0<><>::uid://fx4756jwfgbl::::res://Resources/ItemStack.gd<>uid://dr3gimlp67utq::::res://Recipes/Item Stacks/Wolfram_ore_240_def.tres<>uid://cvtli7c3bbfbl::::res://Resources/RecipeVariant.gd
 wolfram_pure_v2.tres::Resource/RecipeVariant::29072542495058215::1774836544::0::1::::<><><>0<>0<><>::uid://fx4756jwfgbl::::res://Resources/ItemStack.gd<>uid://dw3pjaap5q66h::::res://Recipes/Item Stacks/Wolfram_ore_480_def.tres<>uid://cvtli7c3bbfbl::::res://Resources/RecipeVariant.gd
-::res://Releases/::1775950631
-index.apple-touch-icon.png::CompressedTexture2D::8280055996922420263::1775950631::1775950641::1::::<><><>0<>0<>0344980b465c712cb445f0907e691025<>res://.godot/imported/index.apple-touch-icon.png-3a93fa9a3dcc1166de1e758ae00c1dda.ctex::
-index.icon.png::CompressedTexture2D::5340554003520769173::1775950631::1775950641::1::::<><><>0<>0<>8e0c50c8061bbd89e6a49fbf53639502<>res://.godot/imported/index.icon.png-8972255513758a56c3d84fad0af26c6b.ctex::
-index.png::CompressedTexture2D::4037933331861402450::1775950631::1775950641::1::::<><><>0<>0<>132b341b196a1adbe8bcf61638fd3bf9<>res://.godot/imported/index.png-ecac08375d7bbd42fdb9d46242075d4c.ctex::
+::res://Releases/::1775971035
 ::res://Resources/::1775950532
 building.gd::GDScript::740271632636940848::1775950532::0::1::::Building<>Node2D<><>0<>0<><>::
 ItemDefinition.gd::GDScript::792717381279097699::1774836544::0::1::::ItemDefinition<>Resource<><>0<>0<><>::

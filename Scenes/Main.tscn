@@ -154,7 +154,7 @@ self_modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_left = -268.0
 offset_top = 138.0
-offset_right = 130.0
+offset_right = 237.0
 offset_bottom = 1194.0
 script = ExtResource("9_4kpch")
 

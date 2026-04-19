@@ -38,10 +38,11 @@ shape = SubResource("RectangleShape2D_uf4xf")
 disabled = true
 
 [node name="TitleLabel" type="Label" parent="." unique_id=904579435]
-offset_left = -61.0
+offset_left = -66.0
 offset_top = -58.0
-offset_right = 60.0
-offset_bottom = 1.0
+offset_right = 67.0
+offset_bottom = 27.0
+theme_override_constants/line_spacing = -12
 theme_override_font_sizes/font_size = 20
 text = "ORBITAL
 LAUNCHER"
@@ -53,9 +54,9 @@ horizontal_alignment = 1
 
 [node name="Input2Box" type="ColorRect" parent="." unique_id=887136368]
 offset_left = -15.0
-offset_top = 14.0
+offset_top = 23.0
 offset_right = 15.0
-offset_bottom = 33.0
+offset_bottom = 42.0
 color = Color(0, 0.64705884, 0.25490198, 0.57254905)
 
 [node name="input2Text" type="Label" parent="Input2Box" unique_id=1318114525]

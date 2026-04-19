@@ -11,6 +11,16 @@ const TOOLBAR_BUTTON_WIDTH_EXTRA := 10.0
 const NEW_BUTTON_LEFT_SHIFT := 40.0
 const SAVE_BUTTON_LEFT_SHIFT := 30.0
 const LOAD_BUTTON_LEFT_SHIFT := 20.0
+const HISTORY_LIMIT := 15
+const HISTORY_ACTION_BUILDING_CONSTRUCTED := "Building constructed"
+const HISTORY_ACTION_BUILDING_DELETED := "Building deleted"
+const HISTORY_ACTION_RAIL_CREATED := "Rail created"
+const HISTORY_ACTION_RAIL_DELETED := "Rail deleted"
+const HISTORY_ACTION_BUILDING_MOVED := "Building moved"
+const PROD_PANEL_SCREEN_WIDTH_RATIO := 0.20
+const PROD_PANEL_MIN_SCREEN_WIDTH := 220.0
+const PROD_PANEL_TOP_OFFSET_FROM_MENU := 69.0
+const PROD_PANEL_BOTTOM_MARGIN := 23.0
 
 @onready var camera: Camera2D = $Camera2D
 @onready var tile_map_layer: TileMapLayer = $TileMapLayer
@@ -21,6 +31,7 @@ const LOAD_BUTTON_LEFT_SHIFT := 20.0
 @onready var meteor_core_cost_label: Label = $Camera2D/CanvasLayer/Panel/MeteorCoreCostLabel
 @onready var controls_popup: PopupPanel = $Camera2D/CanvasLayer/PopupPanel
 @onready var patch_notes_button: Node = $"Camera2D/CanvasLayer/Patch Notes"
+@onready var prod_menu: MenuButton = $Camera2D/CanvasLayer/ProdMenu
 @onready var prod_panel: PanelContainer = $Camera2D/CanvasLayer/ProdMenu/ProdPanel
 @onready var build_manager: Node = $BuildManager
 @onready var path_manager: Node = $PathManager
@@ -44,6 +55,9 @@ var _web_load_pending_file_name := ""
 var _web_save_success_callback = null
 var _web_save_error_callback = null
 var _web_save_pending_file_name := ""
+var _undo_stack: Array[Dictionary] = []
+var _redo_stack: Array[Dictionary] = []
+var _is_replaying_history := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -64,6 +78,8 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	_poll_viewport_resize()
 	if is_scene_input_blocked():
+		return
+	if _process_history_input():
 		return
 	if Input.is_action_just_released("Zoom Out") and not _is_controls_menu_open():
 		$Camera2D.zoomOut()
@@ -96,7 +112,8 @@ func _is_file_dialog_open() -> bool:
 	return false
 
 func _on_prod_menu_pressed() -> void:
-	$Camera2D/CanvasLayer/ProdMenu/ProdPanel.visible = not $Camera2D/CanvasLayer/ProdMenu/ProdPanel.visible
+	_layout_prod_panel()
+	prod_panel.visible = not prod_panel.visible
 
 func _setup_save_load_ui() -> void:
 	save_button = Button.new()
@@ -218,7 +235,8 @@ func _configure_toolbar_button_widths() -> void:
 func Adjust_ui_for_resolution() -> void:
 	$Camera2D/CanvasLayer/MenuButton.position = Vector2 (15, 15)
 	$Camera2D/CanvasLayer/Panel.position = Vector2 (get_viewport().size.x - 190, 5)
-	$Camera2D/CanvasLayer/ProdMenu.position = Vector2 (get_viewport().size.x - 75, 100)
+	prod_menu.position = Vector2 (get_viewport().size.x - 120, 100)
+	_layout_prod_panel()
 	$Camera2D/CanvasLayer/ControlMenu.position = Vector2(15, get_viewport().size.y -50)
 	$"Camera2D/CanvasLayer/Patch Notes".position = Vector2(15, get_viewport().size.y -90)
 
@@ -238,6 +256,32 @@ func Adjust_ui_for_resolution() -> void:
 		load_button.position = Vector2(get_viewport().size.x - 370 - LOAD_BUTTON_LEFT_SHIFT, 8)
 	if export_pdf_button != null:
 		export_pdf_button.position = Vector2(get_viewport().size.x - 310, 8)
+
+func _layout_prod_panel() -> void:
+	if prod_menu == null or prod_panel == null:
+		return
+
+	var viewport_size := Vector2(get_viewport().size)
+	var panel_screen_width = max(viewport_size.x * PROD_PANEL_SCREEN_WIDTH_RATIO, PROD_PANEL_MIN_SCREEN_WIDTH)
+	panel_screen_width = min(panel_screen_width, max(viewport_size.x - 24.0, 1.0))
+	var panel_screen_right := viewport_size.x
+	var panel_screen_left = panel_screen_right - panel_screen_width
+	var panel_screen_top = min(prod_menu.position.y + PROD_PANEL_TOP_OFFSET_FROM_MENU, viewport_size.y - 1.0)
+	var panel_screen_bottom = max(panel_screen_top + 1.0, viewport_size.y - PROD_PANEL_BOTTOM_MARGIN)
+	var menu_scale := Vector2(max(abs(prod_menu.scale.x), 0.001), max(abs(prod_menu.scale.y), 0.001))
+
+	prod_panel.position = Vector2(
+		(panel_screen_left - prod_menu.position.x) / menu_scale.x,
+		(panel_screen_top - prod_menu.position.y) / menu_scale.y
+	)
+	prod_panel.size = Vector2(
+		panel_screen_width / menu_scale.x,
+		(panel_screen_bottom - panel_screen_top) / menu_scale.y
+	)
+	prod_panel.custom_minimum_size = prod_panel.size
+
+	if prod_panel.has_method("refresh_row_layout"):
+		prod_panel.call_deferred("refresh_row_layout")
 
 func _sync_rail_version_selector() -> void:
 	if rail_version_dropdown == null or path_manager == null:
@@ -302,6 +346,7 @@ func _on_export_pdf_pressed() -> void:
 
 func _on_new_pressed() -> void:
 	_clear_scene_plan()
+	_clear_history()
 
 func _on_save_file_selected(path: String) -> void:
 	var result := _write_save_file(path)
@@ -328,10 +373,10 @@ func _clear_scene_plan() -> void:
 	if path_manager != null:
 		for child in path_manager.get_children():
 			if child is Path2D:
-				child.queue_free()
+				_detach_and_queue_free(child)
 
 	for child in buildings_root.get_children():
-		child.queue_free()
+		_detach_and_queue_free(child)
 		
 	if build_manager != null and "occupied_cells" in build_manager:
 		build_manager.occupied_cells.clear()
@@ -558,7 +603,91 @@ func _apply_save_text(raw: String) -> bool:
 		return false
 
 	_apply_save_state(parsed)
+	_clear_history()
 	return true
+
+func _process_history_input() -> bool:
+	if build_manager != null and "is_dragging_building" in build_manager and bool(build_manager.is_dragging_building):
+		return false
+	if InputMap.has_action("Undo") and Input.is_action_just_pressed("Undo", true):
+		_undo_history()
+		return true
+	if InputMap.has_action("Redo") and Input.is_action_just_pressed("Redo", true):
+		_redo_history()
+		return true
+	return false
+
+func _capture_history_state() -> Dictionary:
+	var state := _collect_save_state()
+	state.erase("saved_at_unix")
+	state.erase("camera")
+	state.erase("production_panel_visible")
+	return state.duplicate(true)
+
+func _commit_history_action(label: String, before_state: Dictionary) -> void:
+	if _is_replaying_history or before_state.is_empty():
+		return
+
+	var after_state := _capture_history_state()
+	if _history_states_equal(before_state, after_state):
+		return
+
+	_undo_stack.append({
+		"label": label,
+		"before": before_state.duplicate(true),
+		"after": after_state.duplicate(true)
+	})
+	while _undo_stack.size() > HISTORY_LIMIT:
+		_undo_stack.pop_front()
+	_redo_stack.clear()
+
+func _undo_history() -> void:
+	if _undo_stack.is_empty():
+		return
+
+	var entry: Dictionary = _undo_stack.pop_back()
+	var before_state = entry.get("before", {})
+	if not (before_state is Dictionary):
+		return
+
+	_apply_history_state(before_state)
+	_redo_stack.append(entry)
+
+func _redo_history() -> void:
+	if _redo_stack.is_empty():
+		return
+
+	var entry: Dictionary = _redo_stack.pop_back()
+	var after_state = entry.get("after", {})
+	if not (after_state is Dictionary):
+		return
+
+	_apply_history_state(after_state)
+	_undo_stack.append(entry)
+
+func _clear_history() -> void:
+	_undo_stack.clear()
+	_redo_stack.clear()
+
+func _apply_history_state(state: Dictionary) -> void:
+	_is_replaying_history = true
+	if build_manager != null and build_manager.has_method("cancel_build"):
+		build_manager.cancel_build()
+	if path_manager != null and path_manager.has_method("cancel_active_path_drag"):
+		path_manager.cancel_active_path_drag()
+	_apply_save_state(state.duplicate(true), false)
+	_is_replaying_history = false
+
+func _history_states_equal(first: Dictionary, second: Dictionary) -> bool:
+	return var_to_str(first) == var_to_str(second)
+
+func _detach_and_queue_free(node: Node) -> void:
+	if node == null:
+		return
+	var parent := node.get_parent()
+	if parent != null:
+		parent.remove_child(node)
+	node.queue_free()
 
 func _collect_save_state() -> Dictionary:
 	var building_data: Array[Dictionary] = []
@@ -899,7 +1028,8 @@ func _serialize_paths(building_index: Dictionary) -> Array[Dictionary]:
 
 	return out
 
-func _apply_save_state(save_state: Dictionary) -> void:
+func _apply_save_state(save_state: Dictionary, restore_view_state := true) -> void:
+	var keep_prod_panel_visible := prod_panel.visible
 	_clear_existing_plan()
 
 	var loaded_buildings: Array[Node2D] = []
@@ -914,8 +1044,11 @@ func _apply_save_state(save_state: Dictionary) -> void:
 
 	_rebuild_occupancy_from_scene(loaded_buildings)
 	_restore_paths(save_state.get("paths", []), loaded_buildings)
-	_restore_camera(save_state.get("camera", {}))
-	prod_panel.visible = bool(save_state.get("production_panel_visible", false))
+	if restore_view_state:
+		_restore_camera(save_state.get("camera", {}))
+		prod_panel.visible = bool(save_state.get("production_panel_visible", false))
+	else:
+		prod_panel.visible = keep_prod_panel_visible
 
 	if save_state.has("heat"):
 		heat_label.text = str(int(save_state["heat"]))
@@ -942,12 +1075,14 @@ func _apply_save_state(save_state: Dictionary) -> void:
 func _clear_existing_plan() -> void:
 	if build_manager.has_method("cancel_build"):
 		build_manager.cancel_build()
+	if path_manager.has_method("cancel_active_path_drag"):
+		path_manager.cancel_active_path_drag()
 
 	for child in path_manager.get_children():
-		child.queue_free()
+		_detach_and_queue_free(child)
 
 	for child in buildings_root.get_children():
-		child.queue_free()
+		_detach_and_queue_free(child)
 
 	build_manager.occupied_cells.clear()
 	_reset_prod_ledger()
@@ -1079,7 +1214,7 @@ func _restore_paths(path_entries: Array, loaded_buildings: Array[Node2D]) -> voi
 		var to_pos = path_manager._get_port_center(to_b, to_port)
 		if from_pos == null or to_pos == null:
 			continue
-		path_manager._finalize_path(from_b, from_port, from_pos, to_b, to_port, to_pos, rail_version)
+		path_manager._finalize_path(from_b, from_port, from_pos, to_b, to_port, to_pos, rail_version, false)
 
 func _rebuild_occupancy_from_scene(loaded_buildings: Array[Node2D]) -> void:
 	build_manager.occupied_cells.clear()

@@ -2,6 +2,10 @@ extends MenuButton
 
 const Palette = preload("res://Scripts/palette.gd")
 const BINDINGS_CONFIG_SECTION := "input_bindings"
+const BINDINGS_METADATA_SECTION := "input_bindings_metadata"
+const BINDINGS_VERSION_KEY := "version"
+const BINDINGS_CONFIG_VERSION := 2
+const BUILD_CANCEL_ACTION := &"Build Cancel"
 const REBIND_PROMPT := "Press input..."
 const UNBOUND_TEXT := "-"
 
@@ -234,16 +238,7 @@ func _normalize_rebind_event(event: InputEvent) -> InputEvent:
 
 func _apply_rebind(action_name: String, input_event: InputEvent) -> void:
 	var action := StringName(action_name)
-	var rebound_family := _get_input_event_family(input_event)
-	var preserved_events: Array[InputEvent] = []
-	for existing_event in InputMap.action_get_events(action):
-		if rebound_family != "" and _get_input_event_family(existing_event) == rebound_family:
-			continue
-		preserved_events.append(existing_event)
-
 	InputMap.action_erase_events(action)
-	for preserved_event in preserved_events:
-		InputMap.action_add_event(action, preserved_event)
 	InputMap.action_add_event(action, input_event)
 	_save_bindings()
 	_awaiting_action = ""
@@ -251,20 +246,9 @@ func _apply_rebind(action_name: String, input_event: InputEvent) -> void:
 	_hide_capture_overlay()
 	_refresh_list()
 
-
-func _get_input_event_family(event: InputEvent) -> String:
-	if event is InputEventKey:
-		return "key"
-	if event is InputEventMouseButton:
-		return "mouse_button"
-	if event is InputEventJoypadButton:
-		return "joypad_button"
-	if event is InputEventJoypadMotion:
-		return "joypad_motion"
-	return ""
-
 func _save_bindings() -> void:
 	var config := ConfigFile.new()
+	config.set_value(BINDINGS_METADATA_SECTION, BINDINGS_VERSION_KEY, BINDINGS_CONFIG_VERSION)
 	for action_name_variant in InputMap.get_actions():
 		var action_name := String(action_name_variant)
 		var serialized_events: Array[String] = []
@@ -282,6 +266,10 @@ func _load_saved_bindings() -> void:
 	if load_result != OK or not config.has_section(BINDINGS_CONFIG_SECTION):
 		return
 
+	var saved_version := 0
+	if config.has_section_key(BINDINGS_METADATA_SECTION, BINDINGS_VERSION_KEY):
+		saved_version = int(config.get_value(BINDINGS_METADATA_SECTION, BINDINGS_VERSION_KEY, 0))
+
 	for action_name in config.get_section_keys(BINDINGS_CONFIG_SECTION):
 		var action := StringName(action_name)
 		if not InputMap.has_action(action):
@@ -291,10 +279,32 @@ func _load_saved_bindings() -> void:
 		if not (serialized_events is Array):
 			continue
 
-		InputMap.action_erase_events(action)
+		var restored_events: Array[InputEvent] = []
 		for serialized_event in serialized_events:
 			if not (serialized_event is String):
 				continue
 			var restored_event = str_to_var(serialized_event)
 			if restored_event is InputEvent:
-				InputMap.action_add_event(action, restored_event)
+				restored_events.append(restored_event as InputEvent)
+
+		if _should_skip_saved_binding(action, restored_events, saved_version):
+			continue
+
+		InputMap.action_erase_events(action)
+		for restored_event in restored_events:
+			InputMap.action_add_event(action, restored_event)
+
+func _should_skip_saved_binding(action: StringName, restored_events: Array[InputEvent], saved_version: int) -> bool:
+	if saved_version >= BINDINGS_CONFIG_VERSION:
+		return false
+	if action != BUILD_CANCEL_ACTION:
+		return false
+	if not _events_include_mouse_button(restored_events, MOUSE_BUTTON_RIGHT):
+		return false
+	return not _events_include_mouse_button(InputMap.action_get_events(action), MOUSE_BUTTON_RIGHT)
+
+func _events_include_mouse_button(events: Array[InputEvent], mouse_button: MouseButton) -> bool:
+	for input_event in events:
+		if input_event is InputEventMouseButton and (input_event as InputEventMouseButton).button_index == mouse_button:
+			return true
+	return false
