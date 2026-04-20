@@ -7,6 +7,7 @@ signal generate_requested(request: Dictionary)
 
 const RECIPES_ROOT := "res://Recipes"
 const RECIPE_POPUP_MAX_SIZE := Vector2i(360, 420)
+const WHAT_IF_PANEL_SIZE := Vector2(1280, 720)
 const MAX_DEPENDENCY_DEPTH := 48
 const TAB_BY_RECIPE := 0
 const TAB_BY_BUILDING := 1
@@ -53,6 +54,7 @@ const V2_CHOICE_BUILDING_IDS := {
 }
 
 @onready var close_button: Button = _find_close_button()
+@onready var analyzer_panel: Panel = get_node_or_null("Panel") as Panel
 @onready var recipe_button: MenuButton = get_node_or_null("Panel/Interaction Area/Recipe") as MenuButton
 @onready var qty_textbox: LineEdit = get_node_or_null("Panel/Interaction Area/QtyTxtbox") as LineEdit
 @onready var requirements_tree: Tree = _find_requirements_tree()
@@ -73,7 +75,7 @@ var _syncing_quantity_textbox := false
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	focus_mode = Control.FOCUS_ALL
-	set_anchors_preset(Control.PRESET_FULL_RECT)
+	refresh_overlay_layout()
 	_setup_close_button()
 	_setup_recipe_button()
 	_setup_quantity_textbox()
@@ -84,7 +86,46 @@ func _ready() -> void:
 	_setup_generate_confirmation_dialog()
 	_setup_selector()
 	_setup_requirements_tree()
+	call_deferred("refresh_overlay_layout")
 	call_deferred("grab_focus")
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_RESIZED:
+		refresh_overlay_layout()
+
+
+func refresh_overlay_layout() -> void:
+	_fill_overlay_rect()
+	_center_analyzer_panel(_get_visible_layout_size())
+
+
+func _fill_overlay_rect() -> void:
+	set_anchors_preset(Control.PRESET_FULL_RECT)
+	offset_left = 0.0
+	offset_top = 0.0
+	offset_right = 0.0
+	offset_bottom = 0.0
+
+
+func _get_visible_layout_size() -> Vector2:
+	var visible_rect := get_viewport().get_visible_rect()
+	if visible_rect.size.x > 0.0 and visible_rect.size.y > 0.0:
+		return Vector2(float(visible_rect.size.x), float(visible_rect.size.y))
+	return size
+
+
+func _center_analyzer_panel(layout_size: Vector2) -> void:
+	if analyzer_panel == null:
+		return
+
+	analyzer_panel.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	analyzer_panel.custom_minimum_size = WHAT_IF_PANEL_SIZE
+	analyzer_panel.size = WHAT_IF_PANEL_SIZE
+	analyzer_panel.position = Vector2(
+		max((layout_size.x - WHAT_IF_PANEL_SIZE.x) * 0.5, 0.0),
+		max((layout_size.y - WHAT_IF_PANEL_SIZE.y) * 0.5, 0.0)
+	)
 
 
 func _gui_input(event: InputEvent) -> void:

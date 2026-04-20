@@ -4,13 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://dvfbce7bhnsbd" path="res://Scenes/GridMap.tscn" id="1_r150o"]
 [ext_resource type="Texture2D" uid="uid://3o5vaan8nvby" path="res://Assets/SRBP_Grid_1.png" id="3_2w5on"]
 [ext_resource type="Script" uid="uid://cssd864lah4hf" path="res://Scripts/CameraControls.gd" id="3_rgh2o"]
-[ext_resource type="Texture2D" uid="uid://bpgiktvpebx6e" path="res://Assets/SRBP_TOOLBOX.png" id="4_rgh2o"]
+[ext_resource type="Texture2D" uid="uid://nh3oggdr6ebv" path="res://Assets/GridDrawArt_756x756_v2.png" id="5_346fj"]
 [ext_resource type="Script" uid="uid://ddx74ounb8bc7" path="res://Scripts/Toolbox.gd" id="5_frkhe"]
 [ext_resource type="Script" uid="uid://cwao0e766iwdd" path="res://Scripts/buildManager.gd" id="6_v1gob"]
-[ext_resource type="Texture2D" uid="uid://bixocxjthy7cb" path="res://Assets/SRBP_Heat Icon.png" id="6_vy5pj"]
-[ext_resource type="Texture2D" uid="uid://b0q6pkjakr41b" path="res://Assets/SRBP_Power Icon.png" id="7_bmxlf"]
-[ext_resource type="Texture2D" uid="uid://bd7brbyjru5ea" path="res://Assets/SRBP_Stats_icon.png" id="8_bmxlf"]
+[ext_resource type="Texture2D" uid="uid://uh861gacb8w0" path="res://Assets/GridDrawArt_936x936.png" id="7_0sclb"]
+[ext_resource type="Texture2D" uid="uid://cqc50aiyffur5" path="res://Assets/ElectricalSymbol_780x780.png" id="8_sxkr1"]
 [ext_resource type="Script" uid="uid://brffdis28ou82" path="res://Scripts/prod_panel.gd" id="9_4kpch"]
+[ext_resource type="Texture2D" uid="uid://cqbt5pv1wo7t0" path="res://Assets/GridDrawArt_825x825.png" id="9_fq0cl"]
 [ext_resource type="Texture2D" uid="uid://d2y1jxj184hie" path="res://Assets/SRBP_Controls.png" id="10_grg3l"]
 [ext_resource type="Script" uid="uid://c1gaut8hcyg0c" path="res://Scripts/path_manager.gd" id="11_4kpch"]
 [ext_resource type="Script" uid="uid://de7lx8hb5y0o" path="res://Scenes/control_menu.gd" id="11_frkhe"]
@@ -40,11 +40,13 @@ script = ExtResource("3_rgh2o")
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D" unique_id=958093744]
 
 [node name="MenuButton" type="MenuButton" parent="Camera2D/CanvasLayer" unique_id=431646375 node_paths=PackedStringArray("BuildManager")]
+custom_minimum_size = Vector2(64, 64)
 offset_left = 25.0
 offset_top = 25.0
-offset_right = 97.0
-offset_bottom = 97.0
-icon = ExtResource("4_rgh2o")
+offset_right = 89.0
+offset_bottom = 89.0
+icon = ExtResource("5_346fj")
+expand_icon = true
 script = ExtResource("5_frkhe")
 BuildManager = NodePath("../../../BuildManager")
 
@@ -66,13 +68,13 @@ horizontal_alignment = 2
 
 [node name="HeatIcon" type="Sprite2D" parent="Camera2D/CanvasLayer/Panel" unique_id=1228076443]
 position = Vector2(21.5, 17)
-scale = Vector2(0.484375, 0.46875)
-texture = ExtResource("6_vy5pj")
+scale = Vector2(0.032, 0.031)
+texture = ExtResource("7_0sclb")
 
 [node name="PowerIcon" type="Sprite2D" parent="Camera2D/CanvasLayer/Panel" unique_id=1711027906]
 position = Vector2(111, 19)
-scale = Vector2(0.4765623, 0.4375)
-texture = ExtResource("7_bmxlf")
+scale = Vector2(0.038, 0.035)
+texture = ExtResource("8_sxkr1")
 
 [node name="HeatLabel" type="Label" parent="Camera2D/CanvasLayer/Panel" unique_id=197643977]
 layout_mode = 0
@@ -146,8 +148,8 @@ offset_left = 1208.0
 offset_top = 35.0
 offset_right = 1344.0
 offset_bottom = 171.0
-scale = Vector2(0.5, 0.5)
-icon = ExtResource("8_bmxlf")
+scale = Vector2(0.078, 0.078)
+icon = ExtResource("9_fq0cl")
 
 [node name="ProdPanel" type="PanelContainer" parent="Camera2D/CanvasLayer/ProdMenu" unique_id=1865534537]
 visible = false

@@ -29,8 +29,9 @@ func set_display_scale(display_scale: Vector2) -> void:
 	_display_scale = display_scale
 	_apply_display_scale()
 
-func set_display_width(display_width: float, vertical_scale: float) -> void:
-	_display_scale = Vector2(max(display_width / BASE_ROW_SIZE.x, 0.001), max(vertical_scale, 0.001))
+func set_display_width(display_width: float, _display_scale_hint: float) -> void:
+	var uniform_scale = max(display_width / BASE_ROW_SIZE.x, 0.001)
+	_display_scale = Vector2(uniform_scale, uniform_scale)
 	_apply_display_scale()
 
 func _apply_display_scale() -> void:
@@ -38,10 +39,12 @@ func _apply_display_scale() -> void:
 	if texture_rect == null:
 		return
 
-	custom_minimum_size = Vector2(
+	var display_size := Vector2(
 		BASE_ROW_SIZE.x * _display_scale.x,
 		BASE_ROW_SIZE.y * _display_scale.y
 	)
+	custom_minimum_size = display_size
+	size = display_size
 	texture_rect.position = Vector2.ZERO
 	texture_rect.size = BASE_ROW_SIZE
 	texture_rect.scale = _display_scale

@@ -1,17 +1,9 @@
-res://Scripts/path_manager.gd
+res://Scenes/resource_row.gd
 res://Scripts/main.gd
-res://Scenes/Main.tscn
-res://Scenes/WhatIfMachine.tscn
-res://Resources/Whatif_Core.tres
-res://Resources/Whatif_Headerbox.tres
-res://Resources/whatif_raisedSurface.tres
+res://Scripts/prod_panel.gd
+res://Scenes/control_menu.gd
+res://Scripts/patch_notes.gd
+res://Scripts/patch_notes_menu.gd
 res://Scripts/what_if_machine.gd
-res://Scripts/RecipeRegistry.gd
-res://Buildings/defense_turret.tscn
-res://Buildings/defense_turret.gd
-res://Scripts/BuildingRegistry.gd
+res://Scenes/Main.tscn
 res://Scripts/Toolbox.gd
-res://Buildings/defense_tower.tscn
-res://Buildings/defense_tower.gd
-res://Scripts/PatchRegistry.gd
-res://Patch Notes/0_4_0.tres

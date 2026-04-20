@@ -4,7 +4,7 @@ extends PanelContainer
 @onready var rows_parent: VBoxContainer = $ScrollContainer/VBoxContainer
 @onready var _row_scene: PackedScene = preload("res://Scenes/ResourceRow.tscn")
 
-const RESOURCE_ROW_SCALE := Vector2(1.25, 1.25)
+const RESOURCE_ROW_DEFAULT_SCALE := 1.25
 const RESOURCE_ROW_BASE_WIDTH := 398.0
 
 # Resource_key (StringName) -> ResourceRow instance
@@ -118,22 +118,37 @@ func _apply_row_layout(row: Node) -> void:
 		return
 
 	var target_width := _get_row_target_width()
+	var row_scale = max(target_width / RESOURCE_ROW_BASE_WIDTH, 0.001)
 	if row is Control:
 		(row as Control).size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
 	if row.has_method("set_display_width"):
-		row.set_display_width(target_width, RESOURCE_ROW_SCALE.y)
+		row.set_display_width(target_width, row_scale)
 	elif row.has_method("set_display_scale"):
-		row.set_display_scale(Vector2(target_width / RESOURCE_ROW_BASE_WIDTH, RESOURCE_ROW_SCALE.y))
+		row.set_display_scale(Vector2(row_scale, row_scale))
 	else:
-		row.scale = Vector2(target_width / RESOURCE_ROW_BASE_WIDTH, RESOURCE_ROW_SCALE.y)
+		row.scale = Vector2(row_scale, row_scale)
 
 func _get_row_target_width() -> float:
 	var target_width := 0.0
-	if rows_parent != null:
-		target_width = rows_parent.size.x
-	if target_width <= 1.0 and scroll_container != null:
-		target_width = scroll_container.size.x
+
+	if size.x > 1.0:
+		target_width = size.x
+		var panel_style := get_theme_stylebox("panel")
+		if panel_style != null:
+			target_width -= max(panel_style.get_content_margin(SIDE_LEFT), 0.0)
+			target_width -= max(panel_style.get_content_margin(SIDE_RIGHT), 0.0)
+
+	if scroll_container != null:
+		var vertical_scroll_bar := scroll_container.get_v_scroll_bar()
+		if vertical_scroll_bar != null and vertical_scroll_bar.visible:
+			target_width -= vertical_scroll_bar.size.x
+		if target_width <= 1.0:
+			target_width = scroll_container.size.x
+	if target_width <= 1.0 and rows_parent != null:
+		var rows_parent_parent := rows_parent.get_parent() as Control
+		if rows_parent_parent != null:
+			target_width = rows_parent_parent.size.x
 	if target_width <= 1.0:
-		target_width = RESOURCE_ROW_BASE_WIDTH * RESOURCE_ROW_SCALE.x
+		target_width = RESOURCE_ROW_BASE_WIDTH * RESOURCE_ROW_DEFAULT_SCALE
 	return max(target_width, 1.0)

@@ -3,9 +3,9 @@ extends MenuButton
 signal build_requested(scene: PackedScene)
 
 @export var BuildManager : Node2D
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-
 	if BuildManager:
 		build_requested.connect(BuildManager.start_build)
 	else:
@@ -129,6 +129,7 @@ func _ready() -> void:
 	storageMenu.id_pressed.connect(_on_build_selected.bind(storageMenu))
 	
 	var habitatMenu = PopupMenu.new()
+	habitatMenu.name = "Habitat"
 	habitatMenu.add_item("Base Core")
 	habitatMenu.set_item_metadata(habitatMenu.item_count-1, &"base_core")
 	habitatMenu.add_item("Base Core Amplifier V1")

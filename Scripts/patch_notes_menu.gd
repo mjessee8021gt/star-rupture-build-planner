@@ -2,12 +2,15 @@ extends PopupPanel
 
 @export var entry_scene: PackedScene
 
+@onready var panel_container: PanelContainer = $PanelContainer
 @onready var list: VBoxContainer = $PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/List
 
 func _ready() -> void:
 	close_requested.connect(hide)
+	apply_responsive_layout(size)
 	
 func refresh() -> void:
+	apply_responsive_layout(size)
 	_clear_list()
 	
 	var notes := _load_patchnote_resources()
@@ -25,6 +28,8 @@ func _add_entry(patchNote: PatchNote) -> void:
 	if entry == null:
 		push_warning("PatchNotesPanel: Failed to instantiate patch note entry scene.")
 		return
+	entry.custom_minimum_size = Vector2.ZERO
+	entry.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	list.add_child(entry)
 	
 	var version_label := entry.get_node_or_null("MarginContainer/VBoxContainer/Version") as Label
@@ -54,6 +59,24 @@ func _add_entry(patchNote: PatchNote) -> void:
 func _clear_list() -> void:
 	for child in list.get_children():
 		child.queue_free()
+
+func apply_responsive_layout(target_size: Vector2i = Vector2i.ZERO) -> void:
+	var panel_size := target_size
+	if panel_size == Vector2i.ZERO:
+		panel_size = size
+	if panel_size.x <= 0 or panel_size.y <= 0:
+		return
+
+	min_size = Vector2i.ZERO
+	size = panel_size
+	if panel_container != null:
+		panel_container.custom_minimum_size = Vector2.ZERO
+		panel_container.position = Vector2(4.0, 4.0)
+		panel_container.size = Vector2(max(panel_size.x - 8, 1), max(panel_size.y - 8, 1))
+	if list != null:
+		list.custom_minimum_size = Vector2.ZERO
+		list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		list.size_flags_vertical = Control.SIZE_EXPAND_FILL
 
 func _load_patchnote_resources() -> Array[PatchNote]:
 	var out: Array[PatchNote] = []
