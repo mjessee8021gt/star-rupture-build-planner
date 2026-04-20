@@ -8,6 +8,20 @@ const BINDINGS_CONFIG_VERSION := 2
 const BUILD_CANCEL_ACTION := &"Build Cancel"
 const REBIND_PROMPT := "Press input..."
 const UNBOUND_TEXT := "-"
+const POPUP_BASE_SIZE := Vector2i(460, 250)
+const POPUP_MIN_SIZE := Vector2i(300, 190)
+const POPUP_VIEWPORT_MARGIN := 12
+const POPUP_BUTTON_OFFSET := Vector2i(50, 8)
+const POPUP_MAX_WIDTH := 560
+const POPUP_SCREEN_WIDTH_RATIO := 0.36
+const POPUP_SCREEN_HEIGHT_RATIO := 0.45
+const POPUP_CONTENT_MARGIN := 10.0
+const POPUP_SCROLLBAR_RESERVE := 18.0
+const ROW_HEIGHT := 28.0
+const ROW_COLUMN_GAP := 12
+const BINDING_COLUMN_MIN_WIDTH := 130.0
+const BINDING_COLUMN_MAX_WIDTH := 220.0
+const BINDING_COLUMN_WIDTH_RATIO := 0.48
 
 ##------OnReady variables------##
 @onready var popup: PopupPanel = get_node(popup_path)
@@ -29,6 +43,7 @@ func _ready() -> void:
 	pressed.connect(_on_pressed)
 	if popup != null and not popup.popup_hide.is_connected(_on_popup_hidden):
 		popup.popup_hide.connect(_on_popup_hidden)
+	get_viewport().size_changed.connect(_on_viewport_size_changed)
 	_ensure_capture_overlay()
 	_load_saved_bindings()
 	popup.hide()
@@ -39,13 +54,71 @@ func _on_pressed() -> void:
 		popup.hide()
 		return
 
+	_layout_popup()
 	_refresh_list()
-	_position_popup()
 	popup.popup()
 
-func _position_popup() -> void:
+func _on_viewport_size_changed() -> void:
+	if popup != null and popup.visible:
+		call_deferred("_layout_open_popup")
+
+func _layout_open_popup() -> void:
+	_layout_popup()
+	if _awaiting_action == "":
+		_refresh_list()
+
+func _layout_popup() -> void:
+	if popup == null:
+		return
+
+	var popup_size := _get_popup_size()
+	popup.min_size = Vector2i.ZERO
+	popup.size = popup_size
+	_layout_popup_contents(popup_size)
+	_position_popup(popup_size)
+
+func _get_popup_size() -> Vector2i:
+	var viewport_size = get_viewport().size
+	var available_width = max(viewport_size.x - (POPUP_VIEWPORT_MARGIN * 2), 1)
+	var available_height = max(viewport_size.y - (POPUP_VIEWPORT_MARGIN * 2), 1)
+	var target_width = min(min(max(POPUP_BASE_SIZE.x, int(viewport_size.x * POPUP_SCREEN_WIDTH_RATIO)), POPUP_MAX_WIDTH), available_width)
+	var target_height = min(max(POPUP_BASE_SIZE.y, int(viewport_size.y * POPUP_SCREEN_HEIGHT_RATIO)), available_height)
+	target_width = max(min(POPUP_MIN_SIZE.x, available_width), target_width)
+	target_height = max(min(POPUP_MIN_SIZE.y, available_height), target_height)
+	return Vector2i(target_width, target_height)
+
+func _layout_popup_contents(popup_size: Vector2i) -> void:
+	var margin_container := popup.get_node_or_null("MarginContainer") as MarginContainer
+	if margin_container == null:
+		return
+
+	margin_container.custom_minimum_size = Vector2.ZERO
+	margin_container.position = Vector2(POPUP_CONTENT_MARGIN, POPUP_CONTENT_MARGIN)
+	margin_container.size = Vector2(
+		max(popup_size.x - (POPUP_CONTENT_MARGIN * 2.0), 1.0),
+		max(popup_size.y - (POPUP_CONTENT_MARGIN * 2.0), 1.0)
+	)
+
+	var scroll_container := margin_container.get_node_or_null("ScrollContainer") as ScrollContainer
+	if scroll_container != null:
+		scroll_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		scroll_container.size_flags_vertical = Control.SIZE_EXPAND_FILL
+
+	if list_vbox != null:
+		list_vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		list_vbox.add_theme_constant_override("separation", 4)
+		list_vbox.custom_minimum_size.x = _get_current_content_width()
+
+func _position_popup(popup_size: Vector2i) -> void:
 	var rect := get_global_rect()
-	popup.position = Vector2i(rect.position.x + 50, rect.position.y - (4.45 * rect.size.y))
+	var viewport_size = get_viewport().size
+	var preferred_x := int(rect.position.x) + POPUP_BUTTON_OFFSET.x
+	var preferred_y := int(rect.position.y) - popup_size.y - POPUP_BUTTON_OFFSET.y
+	var max_x = max(POPUP_VIEWPORT_MARGIN, viewport_size.x - popup_size.x - POPUP_VIEWPORT_MARGIN)
+	var max_y = max(POPUP_VIEWPORT_MARGIN, viewport_size.y - popup_size.y - POPUP_VIEWPORT_MARGIN)
+	var x = clampi(preferred_x, POPUP_VIEWPORT_MARGIN, max_x)
+	var y = clampi(preferred_y, POPUP_VIEWPORT_MARGIN, max_y)
+	popup.position = Vector2i(x, y)
 
 func _refresh_list() -> void:
 	for child in list_vbox.get_children():
@@ -75,23 +148,27 @@ func _starts_with_any_prefix(value: String, prefixes: Array[String]) -> bool:
 func _make_row(action_name: String, bindings: String) -> Control:
 	var row := HBoxContainer.new()
 	var left := Label.new()
-	var middle_spacer := Control.new()
 	var right := Button.new()
-	var right_padding := Control.new()
+	var row_width := _get_current_content_width()
+	var binding_width := _get_binding_column_width(row_width)
+	var action_width = max(row_width - binding_width - ROW_COLUMN_GAP, 90.0)
 
 	row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	row.add_theme_constant_override("separation", 20)
+	row.custom_minimum_size = Vector2(row_width, ROW_HEIGHT)
+	row.add_theme_constant_override("separation", ROW_COLUMN_GAP)
 
 	left.text = action_name
 	left.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	left.custom_minimum_size = Vector2(action_width, ROW_HEIGHT)
+	left.clip_text = true
+	left.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	left.add_theme_color_override("font_color", Palette.TEXT_PRIMARY)
-
-	middle_spacer.custom_minimum_size.x = 50.0
 
 	right.text = bindings
 	right.alignment = HORIZONTAL_ALIGNMENT_CENTER
 	right.size_flags_horizontal = Control.SIZE_SHRINK_END
-	right.custom_minimum_size.x = 160.0
+	right.clip_text = true
+	right.custom_minimum_size = Vector2(binding_width, ROW_HEIGHT)
 	right.add_theme_color_override("font_color", Palette.TEXT_MUTED)
 	right.add_theme_color_override("font_hover_color", Palette.TEXT_PRIMARY)
 	right.add_theme_color_override("font_pressed_color", Palette.TEXT_PRIMARY)
@@ -102,13 +179,24 @@ func _make_row(action_name: String, bindings: String) -> Control:
 	right.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	right.pressed.connect(_on_binding_button_pressed.bind(action_name, right))
 
-	right_padding.custom_minimum_size.x = 18.0
-
 	row.add_child(left)
-	row.add_child(middle_spacer)
 	row.add_child(right)
-	row.add_child(right_padding)
 	return row
+
+func _get_current_popup_width() -> float:
+	if popup != null and popup.size.x > 0:
+		return float(popup.size.x)
+	return float(POPUP_BASE_SIZE.x)
+
+func _get_current_content_width() -> float:
+	return max(
+		_get_current_popup_width() - (POPUP_CONTENT_MARGIN * 2.0) - POPUP_SCROLLBAR_RESERVE,
+		1.0
+	)
+
+func _get_binding_column_width(row_width: float) -> float:
+	var max_width = min(BINDING_COLUMN_MAX_WIDTH, max(BINDING_COLUMN_MIN_WIDTH, row_width * 0.58))
+	return clampf(row_width * BINDING_COLUMN_WIDTH_RATIO, BINDING_COLUMN_MIN_WIDTH, max_width)
 
 func _events_to_string(events: Array[InputEvent]) -> String:
 	var parts: Array[String] = []

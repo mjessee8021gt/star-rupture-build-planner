@@ -170,14 +170,16 @@ func _on_what_if_button_pressed() -> void:
 		push_warning("WhatIfButton: WhatIfMachine root must be a Control.")
 		return
 
-	_what_if_machine_overlay = overlay
 	_configure_what_if_overlay(overlay)
 	$Camera2D/CanvasLayer.add_child(overlay)
+	_what_if_machine_overlay = overlay
 	if overlay.has_signal("close_requested"):
 		overlay.connect("close_requested", Callable(self, "_close_what_if_machine_overlay"))
 	if overlay.has_signal("generate_requested"):
 		overlay.connect("generate_requested", Callable(self, "_on_what_if_generate_requested"))
 	overlay.tree_exited.connect(_on_what_if_machine_overlay_exited)
+	if overlay.has_method("refresh_overlay_layout"):
+		overlay.call_deferred("refresh_overlay_layout")
 	overlay.call_deferred("grab_focus")
 
 
@@ -188,7 +190,6 @@ func _configure_what_if_overlay(overlay: Control) -> void:
 	overlay.offset_top = 0.0
 	overlay.offset_right = 0.0
 	overlay.offset_bottom = 0.0
-	overlay.size = Vector2(get_viewport().size)
 	overlay.z_index = 4096
 	overlay.mouse_filter = Control.MOUSE_FILTER_STOP
 	overlay.focus_mode = Control.FOCUS_ALL
@@ -399,13 +400,16 @@ func _layout_prod_panel() -> void:
 		(panel_screen_left - prod_menu.position.x) / menu_scale.x,
 		(panel_screen_top - prod_menu.position.y) / menu_scale.y
 	)
-	prod_panel.size = Vector2(
+	var panel_size := Vector2(
 		panel_screen_width / menu_scale.x,
 		(panel_screen_bottom - panel_screen_top) / menu_scale.y
 	)
-	prod_panel.custom_minimum_size = prod_panel.size
+	prod_panel.custom_minimum_size = Vector2.ZERO
+	prod_panel.size = panel_size
+	prod_panel.custom_minimum_size = panel_size
 
 	if prod_panel.has_method("refresh_row_layout"):
+		prod_panel.call("refresh_row_layout")
 		prod_panel.call_deferred("refresh_row_layout")
 
 func _sync_rail_version_selector() -> void:
@@ -587,7 +591,18 @@ func _commit_rail_alpha_input() -> void:
 func _on_viewport_size_changed() -> void:
 	_last_viewport_size = get_viewport().size
 	Adjust_ui_for_resolution()
+	_layout_what_if_machine_overlay()
 	call_deferred("_refresh_grid_visibility")
+
+
+func _layout_what_if_machine_overlay() -> void:
+	if not _is_what_if_machine_open():
+		return
+
+	_configure_what_if_overlay(_what_if_machine_overlay)
+	if _what_if_machine_overlay.has_method("refresh_overlay_layout"):
+		_what_if_machine_overlay.call("refresh_overlay_layout")
+		_what_if_machine_overlay.call_deferred("refresh_overlay_layout")
 	
 func _poll_viewport_resize() -> void:
 	var viewport_size: Vector2i = get_viewport().size
