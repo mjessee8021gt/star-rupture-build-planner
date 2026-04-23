@@ -1,10 +1,14 @@
 extends Node2D
 
 const Palette = preload("res://Scripts/palette.gd")
+const UiScale = preload("res://Scripts/ui_scale.gd")
 const WHAT_IF_MACHINE_SCENE := preload("res://Scenes/WhatIfMachine.tscn")
 
 const SAVE_FILE_EXTENSION := "srbp"
 const SAVE_FORMAT_VERSION := 3
+const BASE_UI_REFERENCE_WIDTH := 1920.0
+const TOP_MENU_BAR_MARGIN := 10.0
+const TOP_MENU_BAR_VIEWPORT_MARGIN := 8.0
 const RAIL_VERSION_OPTIONS := ["V1 Rails", "V2 Rails", "V3 Rails"]
 const RAIL_VERSION_DROPDOWN_SIZE := Vector2(128, 36)
 const RAIL_VERSION_DROPDOWN_MARGIN := 12.0
@@ -17,10 +21,11 @@ const RAIL_VISIBILITY_ALPHA_CONTROL_SIZE := Vector2(220, 36)
 const RAIL_VISIBILITY_ALPHA_CONTROL_TOP_MARGIN := 6.0
 const RAIL_VISIBILITY_ALPHA_TEXT_WIDTH := 54.0
 const RAIL_VISIBILITY_ALPHA_STEP := 0.01
-const TOOLBAR_BUTTON_WIDTH_EXTRA := 10.0
-const NEW_BUTTON_LEFT_SHIFT := 40.0
-const SAVE_BUTTON_LEFT_SHIFT := 30.0
-const LOAD_BUTTON_LEFT_SHIFT := 20.0
+const TOOLBOX_BUTTON_SIZE := Vector2(64, 64)
+const TOOLBOX_LEFT_MARGIN := 15.0
+const TOOLBOX_TOP_OVERLAP := 30.0
+const RESOURCE_PANEL_RIGHT_MARGIN := 1.0
+const LEGACY_BOTTOM_TOOL_SPACING := 40.0
 const HISTORY_LIMIT := 15
 const HISTORY_ACTION_BUILDING_CONSTRUCTED := "Building constructed"
 const HISTORY_ACTION_BUILDING_DELETED := "Building deleted"
@@ -30,7 +35,8 @@ const HISTORY_ACTION_BUILDING_MOVED := "Building moved"
 const HISTORY_ACTION_WHAT_IF_GENERATED := "What If plan generated"
 const PROD_PANEL_SCREEN_WIDTH_RATIO := 0.20
 const PROD_PANEL_MIN_SCREEN_WIDTH := 220.0
-const PROD_PANEL_TOP_OFFSET_FROM_MENU := 69.0
+const PROD_PANEL_WIDTH_EXTRA := 5.0
+const PROD_PANEL_TOP_GAP_FROM_MATH_PANEL := 5.0
 const PROD_PANEL_BOTTOM_MARGIN := 23.0
 const WHAT_IF_GENERATION_MAX_DEPTH := 48
 const WHAT_IF_GENERATION_COLUMN_SPACING := 2
@@ -40,9 +46,24 @@ const WHAT_IF_GENERATION_EXISTING_PLAN_MARGIN := 8
 const WHAT_IF_RAIL_V1_CAPACITY := 120.0
 const WHAT_IF_RAIL_V2_CAPACITY := 240.0
 const WHAT_IF_RAIL_V3_CAPACITY := 480.0
+const COMMAND_NEW := &"file.new"
+const COMMAND_SAVE := &"file.save"
+const COMMAND_LOAD := &"file.load"
+const COMMAND_EXPORT_PDF := &"file.export_pdf"
+const COMMAND_UNDO := &"edit.undo"
+const COMMAND_REDO := &"edit.redo"
+const COMMAND_TOGGLE_PRODUCTION := &"view.production"
+const COMMAND_RAIL_VIEW := &"view.rail_visibility"
+const COMMAND_RAIL_FLOW_RATE := &"view.rail_flow_rate"
+const COMMAND_WHAT_IF := &"tools.what_if"
+const COMMAND_TOGGLE_TOOLBOX := &"tools.toggle_toolbox"
+const COMMAND_CONTROLS := &"tools.controls"
+const COMMAND_PATCH_NOTES := &"help.patch_notes"
 
 @onready var camera: Camera2D = $Camera2D
 @onready var tile_map_layer: TileMapLayer = $TileMapLayer
+@onready var top_menu_bar: TopMenuBar = $Camera2D/CanvasLayer/TopMenuBar
+@onready var toolbox_button: Button = $Camera2D/CanvasLayer/MenuButton
 @onready var heat_label: Label = $Camera2D/CanvasLayer/Panel/HeatLabel
 @onready var power_label: Label = $Camera2D/CanvasLayer/Panel/PowerLabel
 @onready var bbm_cost_label: Label = $Camera2D/CanvasLayer/Panel/BBMCostLabel
@@ -51,16 +72,12 @@ const WHAT_IF_RAIL_V3_CAPACITY := 480.0
 @onready var controls_popup: PopupPanel = $Camera2D/CanvasLayer/PopupPanel
 @onready var patch_notes_button: Node = $"Camera2D/CanvasLayer/Patch Notes"
 @onready var what_if_button: Button = $Camera2D/CanvasLayer/WhatIfButton
-@onready var prod_menu: MenuButton = $Camera2D/CanvasLayer/ProdMenu
+@onready var prod_menu: Button = $Camera2D/CanvasLayer/ProdMenu
 @onready var prod_panel: PanelContainer = $Camera2D/CanvasLayer/ProdMenu/ProdPanel
 @onready var build_manager: Node = $BuildManager
 @onready var path_manager: Node = $PathManager
 @onready var buildings_root: Node2D = $buildings
 
-var save_button: Button
-var new_button: Button
-var load_button: Button
-var export_pdf_button: Button
 var rail_version_dropdown: OptionButton
 var rail_visibility_indicator: PanelContainer
 var rail_visibility_indicator_label: Label
@@ -87,16 +104,23 @@ var _is_replaying_history := false
 var _syncing_rail_alpha_controls := false
 var _what_if_machine_overlay: Control
 var _pending_what_if_generation_request: Dictionary = {}
+var _command_metadata: Dictionary = {}
+var _command_handlers: Dictionary = {}
+var _ui_scale := 1.0
+var _ui_scale_tier := 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	_refresh_ui_scale(true)
 	heat_label.text = "0"
 	power_label.text = "0"
 	bbm_cost_label.text = "0"
 	ibm_cost_label.text = "0"
 	meteor_core_cost_label.text = "0"
 	_setup_save_load_ui()
+	_setup_top_menu_bar()
 	_setup_what_if_button()
+	_apply_ui_scale()
 	_apply_visual_theme()
 	get_viewport().size_changed.connect(_on_viewport_size_changed)
 	_last_viewport_size = get_viewport().size
@@ -108,6 +132,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	_poll_viewport_resize()
+	_sync_command_bar_state()
 	if is_scene_input_blocked():
 		return
 	if _process_history_input():
@@ -149,8 +174,7 @@ func _is_file_dialog_open() -> bool:
 	return false
 
 func _on_prod_menu_pressed() -> void:
-	_layout_prod_panel()
-	prod_panel.visible = not prod_panel.visible
+	_toggle_production_panel()
 
 
 func _setup_what_if_button() -> void:
@@ -193,6 +217,8 @@ func _configure_what_if_overlay(overlay: Control) -> void:
 	overlay.z_index = 4096
 	overlay.mouse_filter = Control.MOUSE_FILTER_STOP
 	overlay.focus_mode = Control.FOCUS_ALL
+	if overlay.has_method("set_ui_scale"):
+		overlay.call("set_ui_scale", _ui_scale)
 
 
 func _close_what_if_machine_overlay() -> void:
@@ -213,37 +239,9 @@ func _on_what_if_generate_requested(request: Dictionary) -> void:
 
 
 func _setup_save_load_ui() -> void:
-	save_button = Button.new()
-	save_button.name = "SaveButton"
-	save_button.text = "Save"
-	save_button.alignment = HORIZONTAL_ALIGNMENT_CENTER
-	save_button.pressed.connect(_on_save_pressed)
-	$Camera2D/CanvasLayer.add_child(save_button)
-
-	new_button = Button.new()
-	new_button.name = "NewButton"
-	new_button.text = "New"
-	new_button.alignment = HORIZONTAL_ALIGNMENT_CENTER
-	new_button.pressed.connect(_on_new_pressed)
-	$Camera2D/CanvasLayer.add_child(new_button)
-
-	load_button = Button.new()
-	load_button.name = "LoadButton"
-	load_button.text = "Load"
-	load_button.alignment = HORIZONTAL_ALIGNMENT_CENTER
-	load_button.pressed.connect(_on_load_pressed)
-	$Camera2D/CanvasLayer.add_child(load_button)
-
-	export_pdf_button = Button.new()
-	export_pdf_button.name = "ExportPdfButton"
-	export_pdf_button.text = "Export PDF"
-	export_pdf_button.alignment = HORIZONTAL_ALIGNMENT_CENTER
-	export_pdf_button.pressed.connect(_on_export_pdf_pressed)
-	$Camera2D/CanvasLayer.add_child(export_pdf_button)
-
 	rail_version_dropdown = OptionButton.new()
 	rail_version_dropdown.name = "RailVersionDropdown"
-	rail_version_dropdown.custom_minimum_size = RAIL_VERSION_DROPDOWN_SIZE
+	rail_version_dropdown.custom_minimum_size = _scaled_vec2(RAIL_VERSION_DROPDOWN_SIZE)
 	rail_version_dropdown.alignment = HORIZONTAL_ALIGNMENT_CENTER
 	for option_name in RAIL_VERSION_OPTIONS:
 		rail_version_dropdown.add_item(option_name)
@@ -280,43 +278,360 @@ func _setup_save_load_ui() -> void:
 	add_child(export_pdf_dialog)
 
 
+func _setup_top_menu_bar() -> void:
+	_promote_prod_panel_to_canvas_layer()
+	_hide_legacy_action_access_buttons()
+	_register_top_menu_commands()
+
+	if top_menu_bar == null:
+		push_error("Main: TopMenuBar node is missing.")
+		return
+
+	top_menu_bar.command_requested.connect(_on_top_menu_command_requested)
+	top_menu_bar.configure_sections(_build_top_menu_sections())
+	_sync_command_bar_state()
+
+
+func _register_top_menu_commands() -> void:
+	_command_metadata.clear()
+	_command_handlers.clear()
+	_register_top_menu_command(COMMAND_NEW, "New", Callable(self, "_on_new_pressed"), "Start a new build plan")
+	_register_top_menu_command(COMMAND_SAVE, "Save", Callable(self, "_on_save_pressed"), "Save the current build plan")
+	_register_top_menu_command(COMMAND_LOAD, "Load", Callable(self, "_on_load_pressed"), "Load a saved build plan")
+	_register_top_menu_command(COMMAND_EXPORT_PDF, "Export PDF", Callable(self, "_on_export_pdf_pressed"), "Export the current build plan as a PDF")
+	_register_top_menu_command(COMMAND_UNDO, "Undo", Callable(self, "_undo_history"), "Undo the last build-plan action")
+	_register_top_menu_command(COMMAND_REDO, "Redo", Callable(self, "_redo_history"), "Redo the last undone action")
+	_register_top_menu_command(COMMAND_TOGGLE_PRODUCTION, "Production", Callable(self, "_toggle_production_panel"), "Show or hide the production panel", true)
+	_register_top_menu_command(COMMAND_RAIL_VIEW, "Rail View", Callable(self, "_cycle_rail_visibility"), "Cycle rail visibility mode")
+	_register_top_menu_command(COMMAND_RAIL_FLOW_RATE, "Rail Flow Rate", Callable(self, "_toggle_rail_flow_rate"), "Show or hide rail flow rate badges", true)
+	_register_top_menu_command(COMMAND_WHAT_IF, "What If", Callable(self, "_on_what_if_button_pressed"), "Open the what-if scenario analyzer")
+	_register_top_menu_command(COMMAND_TOGGLE_TOOLBOX, "Toggle Toolbox", Callable(self, "_toggle_toolbox_persistence"), "Keep the toolbox open after choosing a building", true)
+	_register_top_menu_command(COMMAND_CONTROLS, "Controls", Callable(self, "_toggle_controls_menu"), "Open the controls layout", true)
+	_register_top_menu_command(COMMAND_PATCH_NOTES, "Patch Notes", Callable(self, "_toggle_patch_notes"), "Open the patch notes", true)
+
+
+func _register_top_menu_command(command_id: StringName, label: String, handler: Callable, tooltip := "", toggle := false) -> void:
+	_command_handlers[command_id] = handler
+	_command_metadata[command_id] = {
+		"id": command_id,
+		"label": label,
+		"tooltip": tooltip,
+		"toggle": toggle,
+		"enabled": true,
+	}
+
+
+func _build_top_menu_sections() -> Array:
+	return [
+		{"title": "File", "commands": [
+			_command_item(COMMAND_NEW),
+			_command_item(COMMAND_SAVE),
+			_command_item(COMMAND_LOAD),
+			_command_item(COMMAND_EXPORT_PDF),
+		]},
+		{"title": "Edit", "commands": [
+			_command_item(COMMAND_UNDO),
+			_command_item(COMMAND_REDO),
+			_command_item(COMMAND_CONTROLS),
+		]},
+		{"title": "View", "commands": [
+			_command_item(COMMAND_TOGGLE_PRODUCTION),
+			_command_item(COMMAND_RAIL_VIEW),
+			_command_item(COMMAND_RAIL_FLOW_RATE),
+		]},
+		{"title": "Tools", "commands": [
+			_command_item(COMMAND_TOGGLE_TOOLBOX),
+			_command_item(COMMAND_WHAT_IF),
+		]},
+		{"title": "Help", "commands": [
+			_command_item(COMMAND_PATCH_NOTES),
+		]},
+	]
+
+
+func _command_item(command_id: StringName) -> Dictionary:
+	var item: Dictionary = _command_metadata.get(command_id, {})
+	return item.duplicate()
+
+
+func _on_top_menu_command_requested(command_id: StringName) -> void:
+	if not _is_top_menu_command_enabled(command_id):
+		_sync_command_bar_state()
+		return
+
+	var handler: Callable = _command_handlers.get(command_id, Callable())
+	if handler.is_valid():
+		handler.call()
+	_sync_command_bar_state()
+
+
+func _is_top_menu_command_enabled(command_id: StringName) -> bool:
+	match command_id:
+		COMMAND_UNDO:
+			return not _undo_stack.is_empty()
+		COMMAND_REDO:
+			return not _redo_stack.is_empty()
+		COMMAND_TOGGLE_PRODUCTION:
+			return prod_panel != null
+		COMMAND_RAIL_VIEW:
+			return path_manager != null and path_manager.has_method("cycle_rail_visibility_mode")
+		COMMAND_RAIL_FLOW_RATE:
+			return path_manager != null and path_manager.has_method("toggle_rail_flow_rate_visible")
+		COMMAND_WHAT_IF:
+			return WHAT_IF_MACHINE_SCENE != null
+		COMMAND_TOGGLE_TOOLBOX:
+			return toolbox_button != null and toolbox_button.has_method("toggle_keep_open_after_selection")
+		COMMAND_CONTROLS:
+			return controls_popup != null
+		COMMAND_PATCH_NOTES:
+			return patch_notes_button != null
+	return true
+
+
+func _sync_command_bar_state() -> void:
+	if top_menu_bar == null:
+		return
+
+	for command_id in _command_metadata.keys():
+		top_menu_bar.set_command_enabled(command_id, _is_top_menu_command_enabled(command_id))
+	top_menu_bar.set_command_pressed(COMMAND_TOGGLE_PRODUCTION, prod_panel != null and prod_panel.visible)
+	top_menu_bar.set_command_pressed(COMMAND_RAIL_FLOW_RATE, _is_rail_flow_rate_visible())
+	top_menu_bar.set_command_pressed(COMMAND_WHAT_IF, _is_what_if_machine_open())
+	top_menu_bar.set_command_pressed(COMMAND_TOGGLE_TOOLBOX, _is_toolbox_persistence_enabled())
+	top_menu_bar.set_command_pressed(COMMAND_CONTROLS, _is_controls_menu_open())
+	top_menu_bar.set_command_pressed(COMMAND_PATCH_NOTES, _is_patch_notes_open())
+
+
+func _promote_prod_panel_to_canvas_layer() -> void:
+	if prod_panel == null:
+		return
+
+	var canvas_layer := $Camera2D/CanvasLayer
+	if prod_panel.get_parent() == canvas_layer:
+		return
+
+	var was_visible := prod_panel.visible
+	var current_parent := prod_panel.get_parent()
+	if current_parent != null:
+		current_parent.remove_child(prod_panel)
+	canvas_layer.add_child(prod_panel)
+	prod_panel.visible = was_visible
+
+
+func _hide_legacy_action_access_buttons() -> void:
+	for access_node in [prod_menu, $Camera2D/CanvasLayer/ControlMenu, patch_notes_button, what_if_button]:
+		if access_node is Control:
+			(access_node as Control).visible = false
+			(access_node as Control).mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+
+func _toggle_production_panel() -> void:
+	if prod_panel == null:
+		return
+	_layout_prod_panel()
+	prod_panel.visible = not prod_panel.visible
+
+
+func _toggle_controls_menu() -> void:
+	var controls_menu := $Camera2D/CanvasLayer/ControlMenu
+	var anchor_rect := _get_top_menu_command_rect(COMMAND_CONTROLS)
+	if controls_menu != null and controls_menu.has_method("toggle_panel_at"):
+		controls_menu.call("toggle_panel_at", anchor_rect)
+		return
+	if controls_menu != null and controls_menu.has_method("toggle_panel"):
+		controls_menu.call("toggle_panel")
+
+
+func _toggle_patch_notes() -> void:
+	if patch_notes_button != null and patch_notes_button.has_method("toggle_panel"):
+		patch_notes_button.call("toggle_panel")
+
+
+func _toggle_toolbox_persistence() -> void:
+	if toolbox_button != null and toolbox_button.has_method("toggle_keep_open_after_selection"):
+		toolbox_button.call("toggle_keep_open_after_selection")
+
+
+func _is_toolbox_persistence_enabled() -> bool:
+	if toolbox_button != null and toolbox_button.has_method("get_keep_open_after_selection"):
+		return bool(toolbox_button.call("get_keep_open_after_selection"))
+	return false
+
+
+func preserve_toolbox_popup_for_build_confirm() -> void:
+	if toolbox_button != null and toolbox_button.has_method("preserve_for_build_confirm_click"):
+		toolbox_button.call("preserve_for_build_confirm_click")
+
+
+func _toggle_rail_flow_rate() -> void:
+	if path_manager != null and path_manager.has_method("toggle_rail_flow_rate_visible"):
+		path_manager.call("toggle_rail_flow_rate_visible")
+
+
+func _is_rail_flow_rate_visible() -> bool:
+	if path_manager != null and path_manager.has_method("is_rail_flow_rate_visible"):
+		return bool(path_manager.call("is_rail_flow_rate_visible"))
+	return true
+
+
+func _get_top_menu_command_rect(command_id: StringName) -> Rect2:
+	if top_menu_bar != null and top_menu_bar.has_method("get_command_global_rect"):
+		var rect = top_menu_bar.call("get_command_global_rect", command_id)
+		if rect is Rect2:
+			return rect
+	return Rect2()
+
+
+func get_ui_scale() -> float:
+	return _ui_scale
+
+
+func get_ui_scale_tier() -> int:
+	return _ui_scale_tier
+
+
+func _refresh_ui_scale(force := false) -> bool:
+	var viewport_size = get_viewport().size
+	var next_scale := UiScale.scale_for_viewport(viewport_size)
+	var next_tier := UiScale.tier_for_viewport(viewport_size)
+	var changed := force or not is_equal_approx(_ui_scale, next_scale) or _ui_scale_tier != next_tier
+	_ui_scale = next_scale
+	_ui_scale_tier = next_tier
+	return changed
+
+
+func _apply_ui_scale() -> void:
+	if top_menu_bar != null and top_menu_bar.has_method("set_ui_scale"):
+		top_menu_bar.call("set_ui_scale", _ui_scale)
+
+	_apply_button_visual_scale(toolbox_button, TOOLBOX_BUTTON_SIZE)
+	_apply_button_visual_scale(prod_menu, Vector2(136, 136))
+	_apply_button_visual_scale(what_if_button, Vector2(72, 72))
+
+	var control_menu := $Camera2D/CanvasLayer/ControlMenu
+	if control_menu != null and control_menu.has_method("set_ui_scale"):
+		control_menu.call("set_ui_scale", _ui_scale)
+	_apply_button_visual_scale(control_menu as BaseButton, Vector2(72, 72))
+
+	if patch_notes_button != null and patch_notes_button.has_method("set_ui_scale"):
+		patch_notes_button.call("set_ui_scale", _ui_scale)
+	_apply_button_visual_scale(patch_notes_button as BaseButton, Vector2(72, 72))
+
+	if toolbox_button != null and toolbox_button.has_method("set_ui_scale"):
+		toolbox_button.call("set_ui_scale", _ui_scale)
+
+	if prod_panel != null and prod_panel.has_method("set_ui_scale"):
+		prod_panel.call("set_ui_scale", _ui_scale)
+
+	if rail_version_dropdown != null:
+		rail_version_dropdown.custom_minimum_size = _scaled_vec2(RAIL_VERSION_DROPDOWN_SIZE)
+		rail_version_dropdown.size = _scaled_vec2(RAIL_VERSION_DROPDOWN_SIZE)
+		UiScale.apply_font_size(rail_version_dropdown, &"font_size", 14, _ui_scale, true)
+		var rail_popup := rail_version_dropdown.get_popup()
+		if rail_popup != null:
+			UiScale.apply_font_size(rail_popup, &"font_size", 13, _ui_scale, true)
+			if UiScale.is_small(_ui_scale):
+				rail_popup.remove_theme_constant_override("v_separation")
+			else:
+				rail_popup.add_theme_constant_override("v_separation", _scaled_int(4))
+
+	if rail_visibility_indicator != null:
+		rail_visibility_indicator.custom_minimum_size = _scaled_vec2(RAIL_VISIBILITY_INDICATOR_SIZE)
+		rail_visibility_indicator.size = _scaled_vec2(RAIL_VISIBILITY_INDICATOR_SIZE)
+	if rail_visibility_indicator_label != null:
+		rail_visibility_indicator_label.custom_minimum_size = _scaled_vec2(RAIL_VISIBILITY_INDICATOR_SIZE)
+		rail_visibility_indicator_label.add_theme_font_size_override("font_size", UiScale.font_size(14, _ui_scale))
+
+	if rail_alpha_controls != null:
+		rail_alpha_controls.custom_minimum_size = _scaled_vec2(RAIL_VISIBILITY_ALPHA_CONTROL_SIZE)
+		rail_alpha_controls.size = _scaled_vec2(RAIL_VISIBILITY_ALPHA_CONTROL_SIZE)
+		var alpha_row := rail_alpha_controls.get_node_or_null("AlphaRow") as HBoxContainer
+		if alpha_row != null:
+			alpha_row.add_theme_constant_override("separation", _scaled_int(8))
+	if rail_alpha_input != null:
+		rail_alpha_input.custom_minimum_size = Vector2(_scaled(RAIL_VISIBILITY_ALPHA_TEXT_WIDTH), 0.0)
+		UiScale.apply_font_size(rail_alpha_input, &"font_size", 13, _ui_scale, true)
+
+	_apply_resource_summary_scale()
+	_sync_command_bar_state()
+
+
+func _apply_button_visual_scale(button: BaseButton, base_size: Vector2) -> void:
+	if button == null:
+		return
+	button.scale = Vector2.ONE
+	button.custom_minimum_size = _scaled_vec2(base_size)
+	button.size = _scaled_vec2(base_size)
+	button.add_theme_constant_override("icon_max_width", _scaled_int(base_size.x))
+
+
+func _apply_resource_summary_scale() -> void:
+	var summary_panel := $Camera2D/CanvasLayer/Panel as Control
+	if summary_panel == null:
+		return
+	summary_panel.scale = Vector2(_ui_scale, _ui_scale)
+
+
+func _scaled(value: float) -> float:
+	return UiScale.scaled(value, _ui_scale)
+
+
+func _scaled_int(value: float) -> int:
+	return UiScale.scaled_int(value, _ui_scale)
+
+
+func _scaled_vec2(value: Vector2) -> Vector2:
+	return UiScale.scaled_vec2(value, _ui_scale)
+
+
+func _scaled_vec2i(value: Vector2i) -> Vector2i:
+	return UiScale.scaled_vec2i(value, _ui_scale)
+
+
+func _control_visual_size(control: Control) -> Vector2:
+	if control == null:
+		return Vector2.ZERO
+	var base_size := control.size
+	if base_size.x <= 0.0 or base_size.y <= 0.0:
+		base_size = control.get_combined_minimum_size()
+	return Vector2(base_size.x * abs(control.scale.x), base_size.y * abs(control.scale.y))
+
+
 func _apply_visual_theme() -> void:
 	_style_panel($Camera2D/CanvasLayer/Panel)
 	_style_panel($Camera2D/CanvasLayer/"Debug Panel")
-	_style_panel($Camera2D/CanvasLayer/ProdMenu)
 
 	if prod_panel != null:
 		prod_panel.self_modulate = Color.WHITE
 		_style_panel(prod_panel)
 
-	for button in [save_button, new_button, load_button, export_pdf_button, rail_version_dropdown]:
+	for button in [rail_version_dropdown]:
 		if button != null:
 			_style_button(button)
-	_configure_toolbar_button_widths()
 	if rail_visibility_indicator != null:
-		var indicator_style := Palette.make_panel_style(Palette.BUTTON_PRESSED, Palette.SCENE_PANEL_BORDER, 8, 1)
-		indicator_style.set_content_margin(SIDE_LEFT, 10)
-		indicator_style.set_content_margin(SIDE_RIGHT, 10)
-		indicator_style.set_content_margin(SIDE_TOP, 4)
-		indicator_style.set_content_margin(SIDE_BOTTOM, 4)
+		var indicator_style := Palette.make_panel_style(Palette.BUTTON_PRESSED, Palette.SCENE_PANEL_BORDER, _scaled_int(8), _scaled_int(1))
+		indicator_style.set_content_margin(SIDE_LEFT, _scaled(10))
+		indicator_style.set_content_margin(SIDE_RIGHT, _scaled(10))
+		indicator_style.set_content_margin(SIDE_TOP, _scaled(4))
+		indicator_style.set_content_margin(SIDE_BOTTOM, _scaled(4))
 		rail_visibility_indicator.add_theme_stylebox_override("panel", indicator_style)
 	if rail_visibility_indicator_label != null:
 		rail_visibility_indicator_label.add_theme_color_override("font_color", Palette.TEXT_PRIMARY)
 		rail_visibility_indicator_label.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.35))
-		rail_visibility_indicator_label.add_theme_font_size_override("font_size", 14)
+		rail_visibility_indicator_label.add_theme_font_size_override("font_size", UiScale.font_size(14, _ui_scale))
 	if rail_alpha_controls != null:
-		var alpha_style := Palette.make_panel_style(Palette.BUTTON_PRESSED, Palette.SCENE_PANEL_BORDER, 8, 1)
-		alpha_style.set_content_margin(SIDE_LEFT, 8)
-		alpha_style.set_content_margin(SIDE_RIGHT, 8)
-		alpha_style.set_content_margin(SIDE_TOP, 5)
-		alpha_style.set_content_margin(SIDE_BOTTOM, 5)
+		var alpha_style := Palette.make_panel_style(Palette.BUTTON_PRESSED, Palette.SCENE_PANEL_BORDER, _scaled_int(8), _scaled_int(1))
+		alpha_style.set_content_margin(SIDE_LEFT, _scaled(8))
+		alpha_style.set_content_margin(SIDE_RIGHT, _scaled(8))
+		alpha_style.set_content_margin(SIDE_TOP, _scaled(5))
+		alpha_style.set_content_margin(SIDE_BOTTOM, _scaled(5))
 		rail_alpha_controls.add_theme_stylebox_override("panel", alpha_style)
 	if rail_alpha_input != null:
 		rail_alpha_input.add_theme_color_override("font_color", Palette.TEXT_PRIMARY)
 		rail_alpha_input.add_theme_color_override("font_placeholder_color", Palette.TEXT_MUTED)
-		rail_alpha_input.add_theme_stylebox_override("normal", Palette.make_button_style(Palette.BUTTON_FILL, 6, 1))
-		rail_alpha_input.add_theme_stylebox_override("focus", Palette.make_button_style(Palette.BUTTON_HOVER, 6, 1))
-		rail_alpha_input.add_theme_stylebox_override("read_only", Palette.make_button_style(Palette.BUTTON_PRESSED, 6, 1))
+		rail_alpha_input.add_theme_stylebox_override("normal", Palette.make_button_style(Palette.BUTTON_FILL, _scaled_int(6), _scaled_int(1)))
+		rail_alpha_input.add_theme_stylebox_override("focus", Palette.make_button_style(Palette.BUTTON_HOVER, _scaled_int(6), _scaled_int(1)))
+		rail_alpha_input.add_theme_stylebox_override("read_only", Palette.make_button_style(Palette.BUTTON_PRESSED, _scaled_int(6), _scaled_int(1)))
 
 	for label in [
 		heat_label,
@@ -334,75 +649,86 @@ func _apply_visual_theme() -> void:
 
 
 func _style_panel(panel: Control) -> void:
-	panel.add_theme_stylebox_override("panel", Palette.make_panel_style(Palette.SCENE_PANEL_FILL, Palette.SCENE_PANEL_BORDER))
+	if panel == null:
+		return
+	panel.add_theme_stylebox_override("panel", Palette.make_panel_style(Palette.SCENE_PANEL_FILL, Palette.SCENE_PANEL_BORDER, _scaled_int(10), _scaled_int(2)))
 
 
 func _style_button(button: BaseButton) -> void:
 	button.add_theme_color_override("font_color", Palette.TEXT_PRIMARY)
 	button.add_theme_color_override("font_disabled_color", Palette.TEXT_MUTED)
-	button.add_theme_stylebox_override("normal", Palette.make_button_style(Palette.BUTTON_FILL))
-	button.add_theme_stylebox_override("hover", Palette.make_button_style(Palette.BUTTON_HOVER))
-	button.add_theme_stylebox_override("pressed", Palette.make_button_style(Palette.BUTTON_PRESSED))
-	button.add_theme_stylebox_override("focus", Palette.make_button_style(Palette.BUTTON_HOVER))
-	button.add_theme_stylebox_override("disabled", Palette.make_button_style(Palette.BUTTON_PRESSED))
+	button.add_theme_stylebox_override("normal", Palette.make_button_style(Palette.BUTTON_FILL, _scaled_int(8), _scaled_int(1)))
+	button.add_theme_stylebox_override("hover", Palette.make_button_style(Palette.BUTTON_HOVER, _scaled_int(8), _scaled_int(1)))
+	button.add_theme_stylebox_override("pressed", Palette.make_button_style(Palette.BUTTON_PRESSED, _scaled_int(8), _scaled_int(1)))
+	button.add_theme_stylebox_override("focus", Palette.make_button_style(Palette.BUTTON_HOVER, _scaled_int(8), _scaled_int(1)))
+	button.add_theme_stylebox_override("disabled", Palette.make_button_style(Palette.BUTTON_PRESSED, _scaled_int(8), _scaled_int(1)))
 
 
-func _configure_toolbar_button_widths() -> void:
-	for button in [new_button, save_button, load_button, export_pdf_button]:
-		if button == null:
-			continue
-		button.custom_minimum_size.x = 0.0
-		button.custom_minimum_size.x = button.get_combined_minimum_size().x + TOOLBAR_BUTTON_WIDTH_EXTRA
-	
 func Adjust_ui_for_resolution() -> void:
-	$Camera2D/CanvasLayer/MenuButton.position = Vector2 (15, 15)
-	$Camera2D/CanvasLayer/Panel.position = Vector2 (get_viewport().size.x - 190, 5)
-	prod_menu.position = Vector2 (get_viewport().size.x - 120, 100)
+	_layout_top_menu_bar()
+	var top_menu_bottom := _get_top_menu_bottom()
+	if toolbox_button != null:
+		toolbox_button.position = Vector2(_scaled(TOOLBOX_LEFT_MARGIN), max(top_menu_bottom - _scaled(TOOLBOX_TOP_OVERLAP), 0.0))
+	var resource_panel := $Camera2D/CanvasLayer/Panel as Control
+	if resource_panel != null:
+		var resource_panel_size := _control_visual_size(resource_panel)
+		resource_panel.position = Vector2(
+			get_viewport().size.x - resource_panel_size.x - _scaled(RESOURCE_PANEL_RIGHT_MARGIN),
+			max(top_menu_bottom - _scaled(TOOLBOX_TOP_OVERLAP), 0.0)
+		)
 	_layout_prod_panel()
-	$Camera2D/CanvasLayer/ControlMenu.position = Vector2(15, get_viewport().size.y -50)
-	$"Camera2D/CanvasLayer/Patch Notes".position = Vector2(15, get_viewport().size.y -90)
+	$Camera2D/CanvasLayer/ControlMenu.position = Vector2(_scaled(TOOLBOX_LEFT_MARGIN), get_viewport().size.y - _scaled(50))
+	$"Camera2D/CanvasLayer/Patch Notes".position = Vector2(_scaled(TOOLBOX_LEFT_MARGIN), get_viewport().size.y - _scaled(50 + LEGACY_BOTTOM_TOOL_SPACING))
 	if what_if_button != null:
-		what_if_button.position = Vector2(15, get_viewport().size.y -130)
+		what_if_button.position = Vector2(_scaled(TOOLBOX_LEFT_MARGIN), get_viewport().size.y - _scaled(50 + (LEGACY_BOTTOM_TOOL_SPACING * 2.0)))
 
-	if rail_version_dropdown != null:
-		var menu_button := $Camera2D/CanvasLayer/MenuButton
-		var menu_button_width = menu_button.size.x * menu_button.scale.x
+	if rail_version_dropdown != null and toolbox_button != null:
+		var menu_button_width = _control_visual_size(toolbox_button).x
 		rail_version_dropdown.position = Vector2(
-			menu_button.position.x + menu_button_width + RAIL_VERSION_DROPDOWN_MARGIN,
-			menu_button.position.y
+			toolbox_button.position.x + menu_button_width + _scaled(RAIL_VERSION_DROPDOWN_MARGIN),
+			toolbox_button.position.y
 		)
 		_layout_rail_visibility_indicator()
 		_layout_rail_alpha_controls()
 	
-	if new_button != null:
-		new_button.position = Vector2(get_viewport().size.x - 490 - NEW_BUTTON_LEFT_SHIFT, 8)
-	if save_button != null:
-		save_button.position = Vector2(get_viewport().size.x - 430 - SAVE_BUTTON_LEFT_SHIFT, 8)
-	if load_button != null:
-		load_button.position = Vector2(get_viewport().size.x - 370 - LOAD_BUTTON_LEFT_SHIFT, 8)
-	if export_pdf_button != null:
-		export_pdf_button.position = Vector2(get_viewport().size.x - 310, 8)
+func _layout_top_menu_bar() -> void:
+	if top_menu_bar == null:
+		return
+	var viewport_size := Vector2(get_viewport().size)
+	var preferred_size := top_menu_bar.get_preferred_size() if top_menu_bar.has_method("get_preferred_size") else top_menu_bar.get_combined_minimum_size()
+	var menu_width = min(preferred_size.x, max(viewport_size.x - _scaled(TOP_MENU_BAR_VIEWPORT_MARGIN * 2.0), 1.0))
+	var menu_height = max(preferred_size.y, top_menu_bar.custom_minimum_size.y)
+	top_menu_bar.position = Vector2(max((viewport_size.x - menu_width) * 0.5, 0.0), 0.0)
+	top_menu_bar.size = Vector2(menu_width, menu_height)
+
+
+func _get_top_menu_bottom() -> float:
+	if top_menu_bar == null:
+		return 0.0
+	return top_menu_bar.position.y + max(top_menu_bar.size.y, top_menu_bar.custom_minimum_size.y)
+
 
 func _layout_prod_panel() -> void:
-	if prod_menu == null or prod_panel == null:
+	if prod_panel == null:
 		return
 
 	var viewport_size := Vector2(get_viewport().size)
-	var panel_screen_width = max(viewport_size.x * PROD_PANEL_SCREEN_WIDTH_RATIO, PROD_PANEL_MIN_SCREEN_WIDTH)
-	panel_screen_width = min(panel_screen_width, max(viewport_size.x - 24.0, 1.0))
-	var panel_screen_right := viewport_size.x
+	var reference_width = min(viewport_size.x, BASE_UI_REFERENCE_WIDTH)
+	var base_panel_screen_width = max(reference_width * PROD_PANEL_SCREEN_WIDTH_RATIO, PROD_PANEL_MIN_SCREEN_WIDTH) + PROD_PANEL_WIDTH_EXTRA
+	var panel_screen_width = _scaled(base_panel_screen_width)
+	panel_screen_width = min(panel_screen_width, max(viewport_size.x - _scaled(24.0), 1.0))
+	var panel_screen_right := viewport_size.x - _scaled(8.0)
 	var panel_screen_left = panel_screen_right - panel_screen_width
-	var panel_screen_top = min(prod_menu.position.y + PROD_PANEL_TOP_OFFSET_FROM_MENU, viewport_size.y - 1.0)
-	var panel_screen_bottom = max(panel_screen_top + 1.0, viewport_size.y - PROD_PANEL_BOTTOM_MARGIN)
-	var menu_scale := Vector2(max(abs(prod_menu.scale.x), 0.001), max(abs(prod_menu.scale.y), 0.001))
-
-	prod_panel.position = Vector2(
-		(panel_screen_left - prod_menu.position.x) / menu_scale.x,
-		(panel_screen_top - prod_menu.position.y) / menu_scale.y
-	)
+	var panel_screen_top = _get_top_menu_bottom() + _scaled(TOP_MENU_BAR_MARGIN)
+	var math_panel := $Camera2D/CanvasLayer/Panel as Control
+	if math_panel != null:
+		panel_screen_top = max(panel_screen_top, math_panel.position.y + _control_visual_size(math_panel).y + _scaled(PROD_PANEL_TOP_GAP_FROM_MATH_PANEL))
+	panel_screen_top = min(panel_screen_top, viewport_size.y - 1.0)
+	var panel_screen_bottom = max(panel_screen_top + 1.0, viewport_size.y - _scaled(PROD_PANEL_BOTTOM_MARGIN))
+	prod_panel.position = Vector2(panel_screen_left, panel_screen_top)
 	var panel_size := Vector2(
-		panel_screen_width / menu_scale.x,
-		(panel_screen_bottom - panel_screen_top) / menu_scale.y
+		panel_screen_width,
+		panel_screen_bottom - panel_screen_top
 	)
 	prod_panel.custom_minimum_size = Vector2.ZERO
 	prod_panel.size = panel_size
@@ -421,8 +747,8 @@ func _sync_rail_version_selector() -> void:
 func _setup_rail_visibility_indicator() -> void:
 	rail_visibility_indicator = PanelContainer.new()
 	rail_visibility_indicator.name = "RailVisibilityIndicator"
-	rail_visibility_indicator.custom_minimum_size = RAIL_VISIBILITY_INDICATOR_SIZE
-	rail_visibility_indicator.size = RAIL_VISIBILITY_INDICATOR_SIZE
+	rail_visibility_indicator.custom_minimum_size = _scaled_vec2(RAIL_VISIBILITY_INDICATOR_SIZE)
+	rail_visibility_indicator.size = _scaled_vec2(RAIL_VISIBILITY_INDICATOR_SIZE)
 	rail_visibility_indicator.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	rail_visibility_indicator.visible = false
 
@@ -431,7 +757,7 @@ func _setup_rail_visibility_indicator() -> void:
 	rail_visibility_indicator_label.text = "Standard"
 	rail_visibility_indicator_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	rail_visibility_indicator_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	rail_visibility_indicator_label.custom_minimum_size = RAIL_VISIBILITY_INDICATOR_SIZE
+	rail_visibility_indicator_label.custom_minimum_size = _scaled_vec2(RAIL_VISIBILITY_INDICATOR_SIZE)
 	rail_visibility_indicator.add_child(rail_visibility_indicator_label)
 	$Camera2D/CanvasLayer.add_child(rail_visibility_indicator)
 
@@ -447,23 +773,24 @@ func _layout_rail_visibility_indicator() -> void:
 	if rail_visibility_indicator == null or rail_version_dropdown == null:
 		return
 
-	rail_visibility_indicator.size = RAIL_VISIBILITY_INDICATOR_SIZE
-	var dropdown_width = max(rail_version_dropdown.size.x, RAIL_VERSION_DROPDOWN_SIZE.x) * rail_version_dropdown.scale.x
+	var indicator_size := _scaled_vec2(RAIL_VISIBILITY_INDICATOR_SIZE)
+	rail_visibility_indicator.size = indicator_size
+	var dropdown_width = max(rail_version_dropdown.size.x, _scaled(RAIL_VERSION_DROPDOWN_SIZE.x)) * rail_version_dropdown.scale.x
 	rail_visibility_indicator.position = Vector2(
-		rail_version_dropdown.position.x + dropdown_width + RAIL_VISIBILITY_INDICATOR_MARGIN,
+		rail_version_dropdown.position.x + dropdown_width + _scaled(RAIL_VISIBILITY_INDICATOR_MARGIN),
 		rail_version_dropdown.position.y
 	)
 
 func _setup_rail_alpha_controls() -> void:
 	rail_alpha_controls = PanelContainer.new()
 	rail_alpha_controls.name = "RailAlphaControls"
-	rail_alpha_controls.custom_minimum_size = RAIL_VISIBILITY_ALPHA_CONTROL_SIZE
-	rail_alpha_controls.size = RAIL_VISIBILITY_ALPHA_CONTROL_SIZE
+	rail_alpha_controls.custom_minimum_size = _scaled_vec2(RAIL_VISIBILITY_ALPHA_CONTROL_SIZE)
+	rail_alpha_controls.size = _scaled_vec2(RAIL_VISIBILITY_ALPHA_CONTROL_SIZE)
 	rail_alpha_controls.visible = false
 
 	var alpha_row := HBoxContainer.new()
 	alpha_row.name = "AlphaRow"
-	alpha_row.add_theme_constant_override("separation", 8)
+	alpha_row.add_theme_constant_override("separation", _scaled_int(8))
 	rail_alpha_controls.add_child(alpha_row)
 
 	rail_alpha_slider = HSlider.new()
@@ -480,7 +807,7 @@ func _setup_rail_alpha_controls() -> void:
 
 	rail_alpha_input = LineEdit.new()
 	rail_alpha_input.name = "AlphaInput"
-	rail_alpha_input.custom_minimum_size = Vector2(RAIL_VISIBILITY_ALPHA_TEXT_WIDTH, 0.0)
+	rail_alpha_input.custom_minimum_size = Vector2(_scaled(RAIL_VISIBILITY_ALPHA_TEXT_WIDTH), 0.0)
 	rail_alpha_input.text = _format_rail_alpha(_get_high_visibility_alpha())
 	rail_alpha_input.placeholder_text = "1.00"
 	rail_alpha_input.alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -495,10 +822,10 @@ func _layout_rail_alpha_controls() -> void:
 	if rail_alpha_controls == null or rail_visibility_indicator == null:
 		return
 
-	rail_alpha_controls.size = RAIL_VISIBILITY_ALPHA_CONTROL_SIZE
+	rail_alpha_controls.size = _scaled_vec2(RAIL_VISIBILITY_ALPHA_CONTROL_SIZE)
 	rail_alpha_controls.position = Vector2(
 		rail_visibility_indicator.position.x,
-		rail_visibility_indicator.position.y + RAIL_VISIBILITY_INDICATOR_SIZE.y + RAIL_VISIBILITY_ALPHA_CONTROL_TOP_MARGIN
+		rail_visibility_indicator.position.y + _scaled(RAIL_VISIBILITY_INDICATOR_SIZE.y) + _scaled(RAIL_VISIBILITY_ALPHA_CONTROL_TOP_MARGIN)
 	)
 
 func _process_rail_visibility_input() -> bool:
@@ -506,6 +833,10 @@ func _process_rail_visibility_input() -> bool:
 		return false
 	if not Input.is_action_just_pressed(RAIL_VISIBILITY_ACTION, true):
 		return false
+	return _cycle_rail_visibility()
+
+
+func _cycle_rail_visibility() -> bool:
 	if path_manager == null or not path_manager.has_method("cycle_rail_visibility_mode"):
 		return false
 
@@ -590,6 +921,10 @@ func _commit_rail_alpha_input() -> void:
 	
 func _on_viewport_size_changed() -> void:
 	_last_viewport_size = get_viewport().size
+	var scale_changed := _refresh_ui_scale()
+	if scale_changed:
+		_apply_ui_scale()
+		_apply_visual_theme()
 	Adjust_ui_for_resolution()
 	_layout_what_if_machine_overlay()
 	call_deferred("_refresh_grid_visibility")

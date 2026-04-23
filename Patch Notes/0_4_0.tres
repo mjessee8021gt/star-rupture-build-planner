@@ -6,35 +6,35 @@
 script = ExtResource("1_62m15")
 patch_version = &"v0.4.0"
 patch_notes = "New Features:
-- Consumption numbers have been tweaked on both the Orbital Launcher V1 and V2 for accuracy.
 - A new Undo and Redo feature has been added
-   - The program will keep track of the last 15 actions taken in the program and will allow you to scrub backwards and forwards on all 15 of those as you need.
+   - The program will keep track of the last 15 actions taken in the program and will allow you to scrub either direction.
 - Eyedropper tool has been added with two modes:
-   - Standard mode will begin the build mode for the building your mouse is hovering over. removing the need to go into the build menu in some situations.
-   - Alternate mode will begin the build mode for the building your mouse is hovering over and also copy the recipe assigned to that building.
+   - Standard mode will copy the building the mouse is over.
+   - Alternate mode will copy the building and it's assigned recipe the mouse is over.
 - Mass selection tool is now in place. Users can now click and drag to select multiple buildings in the environment
 	- pressing alt with the buildings selected and your mouse over any one of them will allow you to relocate all of the selected buildings and maintain their spacing
 	- pressing alt and tapping R on any building will now allow you to rotate an already placed building as needed.
-- "What If" Scenario analyzer has been added.
-	- users can identify the target recipe they want to build up to, the desired production per minute of the target recipe and identify any V2 buildings they'd like to use to get there. The planner will tell you the entire chain of recipes or buildings that will be needed to make that recipe and rate happen
+- \"What If\" Scenario analyzer has been added.
+	- users can identify the target recipe, the desired production per minute and identify any V2 buildings they'd like to use. The planner will tell you the entire chain of recipes or buildings that are needed to accomplish the target.
 	- Users can print a PDF copy of the analysis report for easy review.
-	- Users can also ask the build planner to make a rough draft of the buildings needed to accomplish the desired what-if scenario.
-	- **BE AWARE, THE ROUGH DRAFT GENERATION IS INTENDED TO GET YOU 80% OF THE WAY TO A FUNCTIONAL BUILD PLAN. IT WILL NOT CREATE A PERFECTED BUILD PLAN FIRST TRY**
-- New rail visibility options added in. Pressing the V button by default will now allow you to change how the rails are visible:
+	- the build planner can also make a rough draft of the what-if scenario.
+	- **ROUGH DRAFT GENERATION IS INTENDED TO GET YOU 80% OF THE WAY TO A FUNCTIONAL BUILD PLAN.**
+- Pressing the V button by default will now allow you to change how the rails are visible:
 	- Standard - Rails will sit behind buildings as they did in previous versions
 	- High visibility - Rails will sit on top of buildings so shorter runs can be easier to read.
 	- None - Rails will be invisible for the time being but still remain mapped.
-	- High visibility mode also comes with an Alpha slider so you can adjust the transparency of the rails should you want to.
-- Defense turret and Defense Tower are now added to the build planner marking the completion point of ALL buildings being fully integrated.
-- Rails will now have badges on them that show overall throughput possible on the rails so it's easier to read what capacities are at a glance.
+	- High visibility also has an Alpha slider so you can adjust the transparency of the rails.
+- Defense turret and Tower are now added to the build planner.
+- Rails will now have badges on them that show overall throughput. These badges can be turned off in the view menu.
+- MenuBar added to the interface to clean up environment.
+- The grid space is now significantly larger.
 
 Bug Fixes
-- When placing buildings now, the nodes for rails on the buildings will no longer be interactable meaning you don't need to be mindful where you click on a building to place it.
-- The delete building button has been remapped by default to the "Delete" key to prevent accidental deletion. If you would like to remap it to the right mouse button or anything else, you are welcome to change it in the controls menu.
-- the production pane will now properly scale with resolution along with the size being generally increased a little bit for better visibility.
+- When placing buildings, the interaction points will no longer be interactable, meaning it's now easier to place buildings.
+- Scaling of the entire program, has been completely revamped.
+- Interaction in the designer will no longer be prevented when the production panel is open.
+- Consumption numbers have been tweaked on both the Orbital Launcher V1 and V2
 
 "
-known_issues = "-The planner generation from the what if engine leaves things REALLY widely spaced out and does not take advantage of rail support structures.
-
-"
+known_issues = ""
 metadata/_custom_type_script = "uid://b6tmiam3vo7cr"

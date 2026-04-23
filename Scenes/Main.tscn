@@ -18,28 +18,31 @@
 [ext_resource type="Script" uid="uid://ctcvj2tgfppa1" path="res://Scripts/patch_notes.gd" id="13_erwvk"]
 [ext_resource type="PackedScene" uid="uid://7jyji8msm5gx" path="res://Scenes/patchNotesPanel.tscn" id="14_erwvk"]
 [ext_resource type="Texture2D" uid="uid://bjsxrfyahtpo4" path="res://Assets/SRBP_Whatif_Button.png" id="16_346fj"]
+[ext_resource type="PackedScene" path="res://Scenes/TopMenuBar.tscn" id="17_top_menu"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_346fj"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0sclb"]
 texture = ExtResource("3_2w5on")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 
-[sub_resource type="TileSet" id="TileSet_erwvk"]
+[sub_resource type="TileSet" id="TileSet_346fj"]
 tile_size = Vector2i(64, 64)
-sources/0 = SubResource("TileSetAtlasSource_346fj")
+sources/0 = SubResource("TileSetAtlasSource_0sclb")
 
 [node name="Main" type="Node2D" unique_id=1429791362]
 script = ExtResource("1_kln2b")
 
 [node name="TileMapLayer" parent="." unique_id=1244418290 instance=ExtResource("1_r150o")]
-tile_set = SubResource("TileSet_erwvk")
+tile_set = SubResource("TileSet_346fj")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=958064929]
 script = ExtResource("3_rgh2o")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D" unique_id=958093744]
 
-[node name="MenuButton" type="MenuButton" parent="Camera2D/CanvasLayer" unique_id=431646375 node_paths=PackedStringArray("BuildManager")]
+[node name="TopMenuBar" parent="Camera2D/CanvasLayer" unique_id=944994299 instance=ExtResource("17_top_menu")]
+
+[node name="MenuButton" type="Button" parent="Camera2D/CanvasLayer" unique_id=431646375 node_paths=PackedStringArray("BuildManager")]
 custom_minimum_size = Vector2(64, 64)
 offset_left = 25.0
 offset_top = 25.0
@@ -143,7 +146,7 @@ theme_override_font_sizes/font_size = 15
 text = "0"
 horizontal_alignment = 2
 
-[node name="ProdMenu" type="MenuButton" parent="Camera2D/CanvasLayer" unique_id=537098699]
+[node name="ProdMenu" type="Button" parent="Camera2D/CanvasLayer" unique_id=537098699]
 offset_left = 1208.0
 offset_top = 35.0
 offset_right = 1344.0

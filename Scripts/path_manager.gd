@@ -60,6 +60,7 @@ var _rail_version_selector: OptionButton = null
 var _selected_rail_version := RAIL_VERSION_V1
 var _rail_visibility_mode := RAIL_VISIBILITY_STANDARD
 var _high_visibility_alpha := RAIL_HIGH_VISIBILITY_ALPHA_DEFAULT
+var _rail_flow_rate_visible := true
 
 # Cached nodes
 var _build_manager: Node = null
@@ -126,6 +127,19 @@ func set_high_visibility_alpha(alpha: float) -> void:
 
 func get_high_visibility_alpha() -> float:
 	return _high_visibility_alpha
+
+func set_rail_flow_rate_visible(enabled: bool) -> void:
+	if _rail_flow_rate_visible == enabled:
+		return
+	_rail_flow_rate_visible = enabled
+	_refresh_all_rail_capacity_badges()
+
+func is_rail_flow_rate_visible() -> bool:
+	return _rail_flow_rate_visible
+
+func toggle_rail_flow_rate_visible() -> bool:
+	set_rail_flow_rate_visible(not _rail_flow_rate_visible)
+	return _rail_flow_rate_visible
 
 func _apply_rail_visibility_mode() -> void:
 	var next_alpha := RAIL_ALPHA_VISIBLE
@@ -279,8 +293,8 @@ func _is_valid_destination_port_name(port_name: String) -> bool:
 
 
 func _resolve_origin_port_path(start_port_name: String) -> NodePath:
-	# If the user starts dragging from a Universal* port, use that exact port as the origin.
-	
+	if _is_valid_start_port_name(start_port_name):
+		return NodePath("Ports/%s" % start_port_name)
 	if _is_universal_port_name(start_port_name):
 		return NodePath("Ports/%s" % start_port_name)
 	if _is_valid_destination_port_name(start_port_name):
@@ -1634,6 +1648,10 @@ func _refresh_rail_capacity_badge_for_path(path: Path2D, line: Line2D) -> void:
 	if path == null or line == null:
 		return
 
+	if not _rail_flow_rate_visible:
+		_set_rail_capacity_badge_visible(path, false)
+		return
+
 	var badge := _get_rail_capacity_badge(path)
 	if line.points.size() < 2:
 		badge.visible = false
@@ -1656,6 +1674,33 @@ func _refresh_rail_capacity_badge_for_path(path: Path2D, line: Line2D) -> void:
 	badge.size = RAIL_CAPACITY_BADGE_SIZE
 	badge.position = Vector2(sample.get("position", Vector2.ZERO)) - (RAIL_CAPACITY_BADGE_SIZE * 0.5)
 	badge.visible = true
+
+
+func _set_rail_capacity_badge_visible(path: Path2D, visible: bool) -> void:
+	if path == null:
+		return
+	var badge := path.get_node_or_null(RAIL_CAPACITY_BADGE_NAME) as Control
+	if badge != null:
+		badge.visible = visible
+
+
+func _refresh_all_rail_capacity_badges() -> void:
+	for child in get_children():
+		if not (child is Path2D):
+			continue
+
+		var path := child as Path2D
+		if path == _preview_container:
+			continue
+		if not path.has_meta("from_building") or not path.has_meta("to_building"):
+			continue
+
+		var line := _get_path_line(path)
+		if line == null:
+			_set_rail_capacity_badge_visible(path, false)
+			continue
+
+		_refresh_rail_capacity_badge_for_path(path, line)
 
 
 func _get_overlap_segments_for_path(path: Path2D) -> Array:

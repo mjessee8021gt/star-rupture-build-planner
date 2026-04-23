@@ -2,13 +2,28 @@ extends PopupPanel
 
 @export var entry_scene: PackedScene
 
+const Palette = preload("res://Scripts/palette.gd")
+const UiScale = preload("res://Scripts/ui_scale.gd")
+const PANEL_INSET := 4.0
+const TITLE_FONT_SIZE := 16
+const BODY_FONT_SIZE := 16
+const ENTRY_MARGIN := 8
+const ENTRY_SEPARATION := 8
+
 @onready var panel_container: PanelContainer = $PanelContainer
 @onready var list: VBoxContainer = $PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/List
+@onready var title_label: Label = $"PanelContainer/MarginContainer/VBoxContainer/Patch Notes"
+
+var _ui_scale := 1.0
 
 func _ready() -> void:
 	close_requested.connect(hide)
 	apply_responsive_layout(size)
 	
+func set_ui_scale(ui_scale: float) -> void:
+	_ui_scale = maxf(ui_scale, 0.001)
+	_apply_theme_scale()
+
 func refresh() -> void:
 	apply_responsive_layout(size)
 	_clear_list()
@@ -54,6 +69,7 @@ func _add_entry(patchNote: PatchNote) -> void:
 	issues_rtl.bbcode_enabled = false
 	issues_rtl.text = "Known Issues:\n" + (patchNote.known_issues if patchNote.known_issues != null else "")
 	
+	_style_entry(entry)
 	entry.visible = true
 	
 func _clear_list() -> void:
@@ -69,14 +85,56 @@ func apply_responsive_layout(target_size: Vector2i = Vector2i.ZERO) -> void:
 
 	min_size = Vector2i.ZERO
 	size = panel_size
+	_apply_theme_scale()
 	if panel_container != null:
 		panel_container.custom_minimum_size = Vector2.ZERO
-		panel_container.position = Vector2(4.0, 4.0)
-		panel_container.size = Vector2(max(panel_size.x - 8, 1), max(panel_size.y - 8, 1))
+		var inset := _scaled(PANEL_INSET)
+		panel_container.position = Vector2(inset, inset)
+		panel_container.size = Vector2(max(panel_size.x - (inset * 2.0), 1), max(panel_size.y - (inset * 2.0), 1))
 	if list != null:
 		list.custom_minimum_size = Vector2.ZERO
 		list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		list.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		list.add_theme_constant_override("separation", _scaled_int(ENTRY_SEPARATION))
+
+func _apply_theme_scale() -> void:
+	if title_label != null:
+		title_label.add_theme_color_override("font_color", Palette.TEXT_PRIMARY)
+		UiScale.apply_font_size(title_label, &"font_size", TITLE_FONT_SIZE, _ui_scale, true)
+	var margin_container: MarginContainer = null
+	if panel_container != null:
+		margin_container = panel_container.get_node_or_null("MarginContainer") as MarginContainer
+	if margin_container != null:
+		margin_container.add_theme_constant_override("margin_left", _scaled_int(ENTRY_MARGIN))
+		margin_container.add_theme_constant_override("margin_top", _scaled_int(ENTRY_MARGIN))
+		margin_container.add_theme_constant_override("margin_right", _scaled_int(ENTRY_MARGIN))
+		margin_container.add_theme_constant_override("margin_bottom", _scaled_int(ENTRY_MARGIN))
+
+func _style_entry(entry: Control) -> void:
+	if entry == null:
+		return
+	var entry_margin := entry.get_node_or_null("MarginContainer") as MarginContainer
+	if entry_margin != null:
+		entry_margin.add_theme_constant_override("margin_left", _scaled_int(ENTRY_MARGIN))
+		entry_margin.add_theme_constant_override("margin_top", _scaled_int(ENTRY_MARGIN))
+		entry_margin.add_theme_constant_override("margin_right", _scaled_int(ENTRY_MARGIN))
+		entry_margin.add_theme_constant_override("margin_bottom", _scaled_int(ENTRY_MARGIN))
+	var version_label := entry.get_node_or_null("MarginContainer/VBoxContainer/Version") as Label
+	if version_label != null:
+		version_label.add_theme_color_override("font_color", Palette.TEXT_PRIMARY)
+		UiScale.apply_font_size(version_label, &"font_size", TITLE_FONT_SIZE, _ui_scale, true)
+	for rich_path in ["MarginContainer/VBoxContainer/Notes", "MarginContainer/VBoxContainer/Issues"]:
+		var rich_label := entry.get_node_or_null(rich_path) as RichTextLabel
+		if rich_label == null:
+			continue
+		rich_label.add_theme_color_override("default_color", Palette.TEXT_PRIMARY)
+		UiScale.apply_font_size(rich_label, &"normal_font_size", BODY_FONT_SIZE, _ui_scale, true)
+
+func _scaled(value: float) -> float:
+	return UiScale.scaled(value, _ui_scale)
+
+func _scaled_int(value: float) -> int:
+	return UiScale.scaled_int(value, _ui_scale)
 
 func _load_patchnote_resources() -> Array[PatchNote]:
 	var out: Array[PatchNote] = []

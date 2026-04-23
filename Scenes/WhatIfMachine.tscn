@@ -83,6 +83,8 @@ offset_left = 21.0
 offset_top = 114.0
 offset_right = 169.0
 offset_bottom = 145.0
+theme_override_colors/button_checked_color = Color(0.28235295, 0.81960785, 0.8, 1)
+theme_override_colors/button_unchecked_color = Color(0.28235295, 0.81960785, 0.8, 1)
 text = "Excavator V2"
 
 [node name="FabricatorV2" type="CheckButton" parent="Panel/Interaction Area" unique_id=1723407346]
@@ -91,6 +93,8 @@ offset_left = 21.0
 offset_top = 134.0
 offset_right = 169.0
 offset_bottom = 165.0
+theme_override_colors/button_checked_color = Color(0.28235295, 0.81960785, 0.8, 1)
+theme_override_colors/button_unchecked_color = Color(0.28235295, 0.81960785, 0.8, 1)
 text = "Fabricator V2"
 
 [node name="FurnaceV2" type="CheckButton" parent="Panel/Interaction Area" unique_id=249120398]
@@ -99,6 +103,8 @@ offset_left = 21.0
 offset_top = 153.0
 offset_right = 172.0
 offset_bottom = 184.0
+theme_override_colors/button_checked_color = Color(0.28235295, 0.81960785, 0.8, 1)
+theme_override_colors/button_unchecked_color = Color(0.28235295, 0.81960785, 0.8, 1)
 text = "Furnace V2"
 
 [node name="CompounderV2" type="CheckButton" parent="Panel/Interaction Area" unique_id=1805759081]
@@ -107,6 +113,8 @@ offset_left = 21.0
 offset_top = 172.0
 offset_right = 194.0
 offset_bottom = 203.0
+theme_override_colors/button_checked_color = Color(0.28235295, 0.81960785, 0.8, 1)
+theme_override_colors/button_unchecked_color = Color(0.28235295, 0.81960785, 0.8, 1)
 text = "Compounder V2"
 
 [node name="ConstructorizerV2" type="CheckButton" parent="Panel/Interaction Area" unique_id=17070531]
@@ -115,6 +123,8 @@ offset_left = 21.0
 offset_top = 191.0
 offset_right = 194.0
 offset_bottom = 222.0
+theme_override_colors/button_checked_color = Color(0.28235295, 0.81960785, 0.8, 1)
+theme_override_colors/button_unchecked_color = Color(0.28235295, 0.81960785, 0.8, 1)
 text = "Constructorizer V2"
 
 [node name="Output Reading" type="Panel" parent="Panel" unique_id=1595235377]

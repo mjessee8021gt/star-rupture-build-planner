@@ -1,0 +1,9083 @@
+{
+	"buildings": [
+		{
+			"anchor_cell": [
+				15,
+				-8
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "receiver",
+			"is_alternate": false,
+			"position": [
+				1088.0,
+				-384.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Receiver.tscn"
+		},
+		{
+			"anchor_cell": [
+				15,
+				-4
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "receiver",
+			"is_alternate": false,
+			"position": [
+				1088.0,
+				-128.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Receiver.tscn"
+		},
+		{
+			"anchor_cell": [
+				11,
+				-8
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "storage_v2",
+			"is_alternate": true,
+			"position": [
+				832.0,
+				-384.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Storage_v2.tscn"
+		},
+		{
+			"anchor_cell": [
+				11,
+				-4
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "storage_v2",
+			"is_alternate": true,
+			"position": [
+				832.0,
+				-128.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Storage_v2.tscn"
+		},
+		{
+			"anchor_cell": [
+				19,
+				-4
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "storage_v2",
+			"is_alternate": true,
+			"position": [
+				1344.0,
+				-128.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Storage_v2.tscn"
+		},
+		{
+			"anchor_cell": [
+				19,
+				-8
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "storage_v2",
+			"is_alternate": true,
+			"position": [
+				1344.0,
+				-384.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Storage_v2.tscn"
+		},
+		{
+			"anchor_cell": [
+				19,
+				-12
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "storage_v2",
+			"is_alternate": true,
+			"position": [
+				1344.0,
+				-640.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Storage_v2.tscn"
+		},
+		{
+			"anchor_cell": [
+				10,
+				-10
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				672.0,
+				-608.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				10,
+				-2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				672.0,
+				-96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				9,
+				-3
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				608.0,
+				-160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 540.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				8,
+				-3
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				544.0,
+				-160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 540.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				7,
+				-2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				480.0,
+				-96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 809.999877929688,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				9,
+				-1
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				608.0,
+				-32.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 1080.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				8,
+				-1
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				544.0,
+				-32.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 1080.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				10,
+				-6
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				672.0,
+				-352.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 1350.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				7,
+				-6
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				480.0,
+				-352.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 1530.00012207031,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				7,
+				-10
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				480.0,
+				-608.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 1530.00012207031,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				9,
+				-9
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				608.0,
+				-544.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 1800.00024414062,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				8,
+				-9
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				544.0,
+				-544.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 1800.00024414062,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				9,
+				-5
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				608.0,
+				-288.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 1800.00024414062,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				8,
+				-5
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				544.0,
+				-288.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 1800.00024414062,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				9,
+				-11
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				608.0,
+				-672.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 1980.00024414062,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				8,
+				-11
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				544.0,
+				-672.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 1980.00024414062,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				9,
+				-10
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				608.0,
+				-608.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				9,
+				-6
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				608.0,
+				-352.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				8,
+				-6
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				544.0,
+				-352.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				8,
+				-2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				544.0,
+				-96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				9,
+				-2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				608.0,
+				-96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				9,
+				-7
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				608.0,
+				-416.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				8,
+				-7
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				544.0,
+				-416.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				7,
+				-8
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				480.0,
+				-480.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				7,
+				-12
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				480.0,
+				-736.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				7,
+				-4
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				480.0,
+				-224.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				26,
+				-10
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1696.0,
+				-608.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 629.999938964844,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				26,
+				-2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1696.0,
+				-96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 629.999938964844,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				25,
+				-3
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1632.0,
+				-160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 540.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				24,
+				-3
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1568.0,
+				-160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 540.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				23,
+				-2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1504.0,
+				-96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 450.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				25,
+				-1
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1632.0,
+				-32.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 360.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				24,
+				-1
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1568.0,
+				-32.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 360.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				26,
+				-6
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1696.0,
+				-352.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 629.999938964844,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				23,
+				-6
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1504.0,
+				-352.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 450.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				23,
+				-10
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1504.0,
+				-608.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 450.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				25,
+				-9
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1632.0,
+				-544.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 360.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				24,
+				-9
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1568.0,
+				-544.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 360.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				25,
+				-5
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1632.0,
+				-288.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 360.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				24,
+				-5
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1568.0,
+				-288.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 360.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				25,
+				-11
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1632.0,
+				-672.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 540.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				24,
+				-11
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1568.0,
+				-672.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 540.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				24,
+				-10
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				1568.0,
+				-608.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 360.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				25,
+				-10
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				1632.0,
+				-608.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 360.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				25,
+				-6
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				1632.0,
+				-352.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 360.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				24,
+				-6
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				1568.0,
+				-352.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 360.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				24,
+				-2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				1568.0,
+				-96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 360.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				25,
+				-2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				1632.0,
+				-96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 360.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				25,
+				-7
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1632.0,
+				-416.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 540.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				24,
+				-7
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1568.0,
+				-416.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 540.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				26,
+				-12
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				1696.0,
+				-736.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				26,
+				-8
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				1696.0,
+				-480.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				26,
+				-4
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				1696.0,
+				-224.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				15,
+				0
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "receiver",
+			"is_alternate": false,
+			"position": [
+				1088.0,
+				128.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Receiver.tscn"
+		},
+		{
+			"anchor_cell": [
+				11,
+				0
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "storage_v2",
+			"is_alternate": true,
+			"position": [
+				832.0,
+				128.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Storage_v2.tscn"
+		},
+		{
+			"anchor_cell": [
+				19,
+				0
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "storage_v2",
+			"is_alternate": true,
+			"position": [
+				1344.0,
+				128.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Storage_v2.tscn"
+		},
+		{
+			"anchor_cell": [
+				10,
+				2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				672.0,
+				160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				9,
+				1
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				608.0,
+				96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				8,
+				1
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				544.0,
+				96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				7,
+				2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				480.0,
+				160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				9,
+				3
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				608.0,
+				224.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				8,
+				3
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				544.0,
+				224.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				8,
+				2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				544.0,
+				160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				9,
+				2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				608.0,
+				160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				7,
+				0
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				480.0,
+				32.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				26,
+				2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1696.0,
+				160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				25,
+				1
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1632.0,
+				96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				24,
+				1
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1568.0,
+				96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				23,
+				2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1504.0,
+				160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				25,
+				3
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1632.0,
+				224.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				24,
+				3
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				1568.0,
+				224.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				24,
+				2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				1568.0,
+				160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				25,
+				2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				1632.0,
+				160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				26,
+				0
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				1696.0,
+				32.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				3,
+				-12
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "dispatcher",
+			"is_alternate": false,
+			"position": [
+				320.0,
+				-640.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/Dispatcher.tscn"
+		},
+		{
+			"anchor_cell": [
+				3,
+				-8
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "dispatcher",
+			"is_alternate": false,
+			"position": [
+				320.0,
+				-384.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/Dispatcher.tscn"
+		},
+		{
+			"anchor_cell": [
+				3,
+				-4
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "dispatcher",
+			"is_alternate": false,
+			"position": [
+				320.0,
+				-128.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/Dispatcher.tscn"
+		},
+		{
+			"anchor_cell": [
+				3,
+				0
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "dispatcher",
+			"is_alternate": false,
+			"position": [
+				320.0,
+				128.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/Dispatcher.tscn"
+		},
+		{
+			"anchor_cell": [
+				27,
+				-12
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "dispatcher",
+			"is_alternate": false,
+			"position": [
+				1856.0,
+				-640.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 450.0,
+			"scene_path": "res://Buildings/Dispatcher.tscn"
+		},
+		{
+			"anchor_cell": [
+				27,
+				-8
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "dispatcher",
+			"is_alternate": false,
+			"position": [
+				1856.0,
+				-384.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 450.0,
+			"scene_path": "res://Buildings/Dispatcher.tscn"
+		},
+		{
+			"anchor_cell": [
+				27,
+				-4
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "dispatcher",
+			"is_alternate": false,
+			"position": [
+				1856.0,
+				-128.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 450.0,
+			"scene_path": "res://Buildings/Dispatcher.tscn"
+		},
+		{
+			"anchor_cell": [
+				27,
+				0
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "dispatcher",
+			"is_alternate": false,
+			"position": [
+				1856.0,
+				128.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 450.0,
+			"scene_path": "res://Buildings/Dispatcher.tscn"
+		},
+		{
+			"anchor_cell": [
+				8,
+				-10
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				544.0,
+				-608.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				2,
+				-10
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				160.0,
+				-608.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				2,
+				-2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				160.0,
+				-96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				1,
+				-3
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				96.0,
+				-160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				0,
+				-3
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				32.0,
+				-160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				-1,
+				-2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				-32.0,
+				-96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				1,
+				-1
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				96.0,
+				-32.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				0,
+				-1
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				32.0,
+				-32.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				2,
+				-6
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				160.0,
+				-352.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				-1,
+				-6
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				-32.0,
+				-352.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				-1,
+				-10
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				-32.0,
+				-608.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				1,
+				-9
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				96.0,
+				-544.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				0,
+				-9
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				32.0,
+				-544.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				1,
+				-5
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				96.0,
+				-288.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				0,
+				-5
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				32.0,
+				-288.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				1,
+				-11
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				96.0,
+				-672.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				0,
+				-11
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				32.0,
+				-672.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				1,
+				-10
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				96.0,
+				-608.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				1,
+				-6
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				96.0,
+				-352.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				0,
+				-6
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				32.0,
+				-352.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				0,
+				-2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				32.0,
+				-96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				1,
+				-2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				96.0,
+				-96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				1,
+				-7
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				96.0,
+				-416.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				0,
+				-7
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				32.0,
+				-416.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				-1,
+				-8
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				-32.0,
+				-480.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				-1,
+				-12
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				-32.0,
+				-736.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				-1,
+				-4
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				-32.0,
+				-224.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				2,
+				2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				160.0,
+				160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				1,
+				1
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				96.0,
+				96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				0,
+				1
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				32.0,
+				96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				-1,
+				2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				-32.0,
+				160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				1,
+				3
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				96.0,
+				224.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				0,
+				3
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				32.0,
+				224.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				0,
+				2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				32.0,
+				160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				1,
+				2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				96.0,
+				160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				-1,
+				0
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				-32.0,
+				32.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				-5,
+				-12
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "dispatcher",
+			"is_alternate": false,
+			"position": [
+				-192.0,
+				-640.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/Dispatcher.tscn"
+		},
+		{
+			"anchor_cell": [
+				-5,
+				-8
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "dispatcher",
+			"is_alternate": false,
+			"position": [
+				-192.0,
+				-384.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/Dispatcher.tscn"
+		},
+		{
+			"anchor_cell": [
+				-5,
+				-4
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "dispatcher",
+			"is_alternate": false,
+			"position": [
+				-192.0,
+				-128.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/Dispatcher.tscn"
+		},
+		{
+			"anchor_cell": [
+				-5,
+				0
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "dispatcher",
+			"is_alternate": false,
+			"position": [
+				-192.0,
+				128.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/Dispatcher.tscn"
+		},
+		{
+			"anchor_cell": [
+				0,
+				-10
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				32.0,
+				-608.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				-6,
+				-10
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				-352.0,
+				-608.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				-6,
+				-2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				-352.0,
+				-96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				-7,
+				-3
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				-416.0,
+				-160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				-8,
+				-3
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				-480.0,
+				-160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				-9,
+				-2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				-544.0,
+				-96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				-7,
+				-1
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				-416.0,
+				-32.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				-8,
+				-1
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				-480.0,
+				-32.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				-6,
+				-6
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				-352.0,
+				-352.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				-9,
+				-6
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				-544.0,
+				-352.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				-9,
+				-10
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				-544.0,
+				-608.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				-7,
+				-9
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				-416.0,
+				-544.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				-8,
+				-9
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				-480.0,
+				-544.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				-7,
+				-5
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				-416.0,
+				-288.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				-8,
+				-5
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				-480.0,
+				-288.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				-7,
+				-11
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				-416.0,
+				-672.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				-8,
+				-11
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				-480.0,
+				-672.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				-7,
+				-10
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				-416.0,
+				-608.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				-7,
+				-6
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				-416.0,
+				-352.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				-8,
+				-6
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				-480.0,
+				-352.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				-8,
+				-2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				-480.0,
+				-96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				-7,
+				-2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				-416.0,
+				-96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				-7,
+				-7
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				-416.0,
+				-416.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				-8,
+				-7
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				-480.0,
+				-416.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				-6,
+				2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				-352.0,
+				160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				-7,
+				1
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				-416.0,
+				96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				-8,
+				1
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				-480.0,
+				96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				-9,
+				2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				-544.0,
+				160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				-7,
+				3
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				-416.0,
+				224.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				-8,
+				3
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				-480.0,
+				224.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				-8,
+				2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				-480.0,
+				160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				-7,
+				2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				-416.0,
+				160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				-13,
+				-12
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "dispatcher",
+			"is_alternate": false,
+			"position": [
+				-704.0,
+				-640.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/Dispatcher.tscn"
+		},
+		{
+			"anchor_cell": [
+				-13,
+				-8
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "dispatcher",
+			"is_alternate": false,
+			"position": [
+				-704.0,
+				-384.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/Dispatcher.tscn"
+		},
+		{
+			"anchor_cell": [
+				-13,
+				-4
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "dispatcher",
+			"is_alternate": false,
+			"position": [
+				-704.0,
+				-128.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/Dispatcher.tscn"
+		},
+		{
+			"anchor_cell": [
+				-13,
+				0
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "dispatcher",
+			"is_alternate": false,
+			"position": [
+				-704.0,
+				128.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/Dispatcher.tscn"
+		},
+		{
+			"anchor_cell": [
+				-8,
+				-10
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				-480.0,
+				-608.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				7,
+				3
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				480.0,
+				224.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				7,
+				-1
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				480.0,
+				-32.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				7,
+				-5
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				480.0,
+				-288.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				7,
+				-9
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				480.0,
+				-544.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				11,
+				-12
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "storage_v2",
+			"is_alternate": true,
+			"position": [
+				832.0,
+				-640.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Storage_v2.tscn"
+		},
+		{
+			"anchor_cell": [
+				15,
+				-12
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "receiver",
+			"is_alternate": false,
+			"position": [
+				1088.0,
+				-640.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Receiver.tscn"
+		},
+		{
+			"anchor_cell": [
+				26,
+				-9
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				1696.0,
+				-544.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				26,
+				-5
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				1696.0,
+				-288.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				26,
+				-1
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				1696.0,
+				-32.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				26,
+				3
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				1696.0,
+				224.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				34,
+				-10
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2208.0,
+				-608.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				34,
+				-2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2208.0,
+				-96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				33,
+				-3
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2144.0,
+				-160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				32,
+				-3
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2080.0,
+				-160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				31,
+				-2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2016.0,
+				-96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				33,
+				-1
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2144.0,
+				-32.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				32,
+				-1
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2080.0,
+				-32.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				34,
+				-6
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2208.0,
+				-352.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				31,
+				-6
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2016.0,
+				-352.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				31,
+				-10
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2016.0,
+				-608.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				33,
+				-9
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2144.0,
+				-544.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				32,
+				-9
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2080.0,
+				-544.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				33,
+				-5
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2144.0,
+				-288.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				32,
+				-5
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2080.0,
+				-288.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				33,
+				-11
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2144.0,
+				-672.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				32,
+				-11
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2080.0,
+				-672.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				32,
+				-10
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				2080.0,
+				-608.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				33,
+				-10
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				2144.0,
+				-608.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				33,
+				-6
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				2144.0,
+				-352.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				32,
+				-6
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				2080.0,
+				-352.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				32,
+				-2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				2080.0,
+				-96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				33,
+				-2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				2144.0,
+				-96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				33,
+				-7
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2144.0,
+				-416.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				32,
+				-7
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2080.0,
+				-416.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				34,
+				-12
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				2208.0,
+				-736.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				34,
+				-8
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				2208.0,
+				-480.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				34,
+				-4
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				2208.0,
+				-224.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				34,
+				2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2208.0,
+				160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				33,
+				1
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2144.0,
+				96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				32,
+				1
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2080.0,
+				96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				31,
+				2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2016.0,
+				160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				33,
+				3
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2144.0,
+				224.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				32,
+				3
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2080.0,
+				224.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				32,
+				2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				2080.0,
+				160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				33,
+				2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				2144.0,
+				160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				34,
+				0
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				2208.0,
+				32.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				35,
+				-12
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "dispatcher",
+			"is_alternate": false,
+			"position": [
+				2368.0,
+				-640.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/Dispatcher.tscn"
+		},
+		{
+			"anchor_cell": [
+				35,
+				-8
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "dispatcher",
+			"is_alternate": false,
+			"position": [
+				2368.0,
+				-384.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/Dispatcher.tscn"
+		},
+		{
+			"anchor_cell": [
+				35,
+				-4
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "dispatcher",
+			"is_alternate": false,
+			"position": [
+				2368.0,
+				-128.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/Dispatcher.tscn"
+		},
+		{
+			"anchor_cell": [
+				35,
+				0
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "dispatcher",
+			"is_alternate": false,
+			"position": [
+				2368.0,
+				128.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/Dispatcher.tscn"
+		},
+		{
+			"anchor_cell": [
+				42,
+				-10
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2720.0,
+				-608.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				42,
+				-2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2720.0,
+				-96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				41,
+				-3
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2656.0,
+				-160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				40,
+				-3
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2592.0,
+				-160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				39,
+				-2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2528.0,
+				-96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				41,
+				-1
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2656.0,
+				-32.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				40,
+				-1
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2592.0,
+				-32.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				42,
+				-6
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2720.0,
+				-352.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				39,
+				-6
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2528.0,
+				-352.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				39,
+				-10
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2528.0,
+				-608.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				41,
+				-9
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2656.0,
+				-544.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				40,
+				-9
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2592.0,
+				-544.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				41,
+				-5
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2656.0,
+				-288.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				40,
+				-5
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2592.0,
+				-288.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				41,
+				-11
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2656.0,
+				-672.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				40,
+				-11
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2592.0,
+				-672.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				40,
+				-10
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				2592.0,
+				-608.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				41,
+				-10
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				2656.0,
+				-608.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				41,
+				-6
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				2656.0,
+				-352.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				40,
+				-6
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				2592.0,
+				-352.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				40,
+				-2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				2592.0,
+				-96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				41,
+				-2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				2656.0,
+				-96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				41,
+				-7
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2656.0,
+				-416.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				40,
+				-7
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2592.0,
+				-416.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				42,
+				2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2720.0,
+				160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 3,
+			"rotation_degrees": 270.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				41,
+				1
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2656.0,
+				96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				40,
+				1
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2592.0,
+				96.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 2,
+			"rotation_degrees": 180.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				39,
+				2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2528.0,
+				160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				41,
+				3
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2656.0,
+				224.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				40,
+				3
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"position": [
+				2592.0,
+				224.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn"
+		},
+		{
+			"anchor_cell": [
+				40,
+				2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				2592.0,
+				160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				41,
+				2
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"position": [
+				2656.0,
+				160.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_support.tscn"
+		},
+		{
+			"anchor_cell": [
+				43,
+				-12
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "dispatcher",
+			"is_alternate": false,
+			"position": [
+				2880.0,
+				-640.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/Dispatcher.tscn"
+		},
+		{
+			"anchor_cell": [
+				43,
+				-8
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "dispatcher",
+			"is_alternate": false,
+			"position": [
+				2880.0,
+				-384.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/Dispatcher.tscn"
+		},
+		{
+			"anchor_cell": [
+				43,
+				-4
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "dispatcher",
+			"is_alternate": false,
+			"position": [
+				2880.0,
+				-128.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/Dispatcher.tscn"
+		},
+		{
+			"anchor_cell": [
+				43,
+				0
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "dispatcher",
+			"is_alternate": false,
+			"position": [
+				2880.0,
+				128.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 1,
+			"rotation_degrees": 90.0,
+			"scene_path": "res://Buildings/Dispatcher.tscn"
+		},
+		{
+			"anchor_cell": [
+				15,
+				-16
+			],
+			"core_level": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "base_core",
+			"is_alternate": false,
+			"position": [
+				1088.0,
+				-896.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Base Core.tscn"
+		},
+		{
+			"anchor_cell": [
+				15,
+				10
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "receiver",
+			"is_alternate": false,
+			"position": [
+				1088.0,
+				768.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Receiver.tscn"
+		},
+		{
+			"anchor_cell": [
+				15,
+				14
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "receiver",
+			"is_alternate": false,
+			"position": [
+				1088.0,
+				1024.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Receiver.tscn"
+		},
+		{
+			"anchor_cell": [
+				15,
+				18
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "receiver",
+			"is_alternate": false,
+			"position": [
+				1088.0,
+				1280.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Receiver.tscn"
+		},
+		{
+			"anchor_cell": [
+				15,
+				22
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				4,
+				4
+			],
+			"id": "receiver",
+			"is_alternate": false,
+			"position": [
+				1088.0,
+				1536.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+				"metadata_path": "",
+				"selected": -1
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/Receiver.tscn"
+		},
+		{
+			"anchor_cell": [
+				13,
+				25
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_connector",
+			"is_alternate": false,
+			"position": [
+				864.0,
+				1632.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_connector.tscn"
+		},
+		{
+			"anchor_cell": [
+				13,
+				24
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_connector",
+			"is_alternate": false,
+			"position": [
+				864.0,
+				1568.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_connector.tscn"
+		},
+		{
+			"anchor_cell": [
+				13,
+				23
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_connector",
+			"is_alternate": false,
+			"position": [
+				864.0,
+				1504.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_connector.tscn"
+		},
+		{
+			"anchor_cell": [
+				13,
+				22
+			],
+			"core_level": {
+
+			},
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_connector",
+			"is_alternate": false,
+			"position": [
+				864.0,
+				1440.0
+			],
+			"purity": {
+
+			},
+			"recipe": {
+
+			},
+			"rotated_tick": 0,
+			"rotation_degrees": 0.0,
+			"scene_path": "res://Buildings/rail_connector.tscn"
+		}
+	],
+	"camera": {
+		"position": [
+			1000.00134277344,
+			60.9010200500488
+		],
+		"zoom": [
+			0.70707368850708,
+			0.70707368850708
+		]
+	},
+	"cost_bbm": 1840,
+	"cost_ibm": 3040,
+	"cost_meteor_cores": 1,
+	"heat": 600,
+	"occupied_cells": [
+		"15,-8",
+		"16,-8",
+		"17,-8",
+		"18,-8",
+		"15,-7",
+		"16,-7",
+		"17,-7",
+		"18,-7",
+		"15,-6",
+		"16,-6",
+		"17,-6",
+		"18,-6",
+		"15,-5",
+		"16,-5",
+		"17,-5",
+		"18,-5",
+		"15,-4",
+		"16,-4",
+		"17,-4",
+		"18,-4",
+		"15,-3",
+		"16,-3",
+		"17,-3",
+		"18,-3",
+		"15,-2",
+		"16,-2",
+		"17,-2",
+		"18,-2",
+		"15,-1",
+		"16,-1",
+		"17,-1",
+		"18,-1",
+		"11,-8",
+		"12,-8",
+		"13,-8",
+		"14,-8",
+		"11,-7",
+		"12,-7",
+		"13,-7",
+		"14,-7",
+		"11,-6",
+		"12,-6",
+		"13,-6",
+		"14,-6",
+		"11,-5",
+		"12,-5",
+		"13,-5",
+		"14,-5",
+		"11,-4",
+		"12,-4",
+		"13,-4",
+		"14,-4",
+		"11,-3",
+		"12,-3",
+		"13,-3",
+		"14,-3",
+		"11,-2",
+		"12,-2",
+		"13,-2",
+		"14,-2",
+		"11,-1",
+		"12,-1",
+		"13,-1",
+		"14,-1",
+		"19,-4",
+		"20,-4",
+		"21,-4",
+		"22,-4",
+		"19,-3",
+		"20,-3",
+		"21,-3",
+		"22,-3",
+		"19,-2",
+		"20,-2",
+		"21,-2",
+		"22,-2",
+		"19,-1",
+		"20,-1",
+		"21,-1",
+		"22,-1",
+		"19,-8",
+		"20,-8",
+		"21,-8",
+		"22,-8",
+		"19,-7",
+		"20,-7",
+		"21,-7",
+		"22,-7",
+		"19,-6",
+		"20,-6",
+		"21,-6",
+		"22,-6",
+		"19,-5",
+		"20,-5",
+		"21,-5",
+		"22,-5",
+		"19,-12",
+		"20,-12",
+		"21,-12",
+		"22,-12",
+		"19,-11",
+		"20,-11",
+		"21,-11",
+		"22,-11",
+		"19,-10",
+		"20,-10",
+		"21,-10",
+		"22,-10",
+		"19,-9",
+		"20,-9",
+		"21,-9",
+		"22,-9",
+		"10,-10",
+		"10,-2",
+		"9,-3",
+		"8,-3",
+		"7,-2",
+		"9,-1",
+		"8,-1",
+		"10,-6",
+		"7,-6",
+		"7,-10",
+		"9,-9",
+		"8,-9",
+		"9,-5",
+		"8,-5",
+		"9,-11",
+		"8,-11",
+		"9,-10",
+		"9,-6",
+		"8,-6",
+		"8,-2",
+		"9,-2",
+		"9,-7",
+		"8,-7",
+		"7,-8",
+		"7,-12",
+		"7,-4",
+		"26,-10",
+		"26,-2",
+		"25,-3",
+		"24,-3",
+		"23,-2",
+		"25,-1",
+		"24,-1",
+		"26,-6",
+		"23,-6",
+		"23,-10",
+		"25,-9",
+		"24,-9",
+		"25,-5",
+		"24,-5",
+		"25,-11",
+		"24,-11",
+		"24,-10",
+		"25,-10",
+		"25,-6",
+		"24,-6",
+		"24,-2",
+		"25,-2",
+		"25,-7",
+		"24,-7",
+		"26,-12",
+		"26,-8",
+		"26,-4",
+		"15,0",
+		"16,0",
+		"17,0",
+		"18,0",
+		"15,1",
+		"16,1",
+		"17,1",
+		"18,1",
+		"15,2",
+		"16,2",
+		"17,2",
+		"18,2",
+		"15,3",
+		"16,3",
+		"17,3",
+		"18,3",
+		"11,0",
+		"12,0",
+		"13,0",
+		"14,0",
+		"11,1",
+		"12,1",
+		"13,1",
+		"14,1",
+		"11,2",
+		"12,2",
+		"13,2",
+		"14,2",
+		"11,3",
+		"12,3",
+		"13,3",
+		"14,3",
+		"19,0",
+		"20,0",
+		"21,0",
+		"22,0",
+		"19,1",
+		"20,1",
+		"21,1",
+		"22,1",
+		"19,2",
+		"20,2",
+		"21,2",
+		"22,2",
+		"19,3",
+		"20,3",
+		"21,3",
+		"22,3",
+		"10,2",
+		"9,1",
+		"8,1",
+		"7,2",
+		"9,3",
+		"8,3",
+		"8,2",
+		"9,2",
+		"7,0",
+		"26,2",
+		"25,1",
+		"24,1",
+		"23,2",
+		"25,3",
+		"24,3",
+		"24,2",
+		"25,2",
+		"26,0",
+		"3,-12",
+		"4,-12",
+		"5,-12",
+		"6,-12",
+		"3,-11",
+		"4,-11",
+		"5,-11",
+		"6,-11",
+		"3,-10",
+		"4,-10",
+		"5,-10",
+		"6,-10",
+		"3,-9",
+		"4,-9",
+		"5,-9",
+		"6,-9",
+		"3,-8",
+		"4,-8",
+		"5,-8",
+		"6,-8",
+		"3,-7",
+		"4,-7",
+		"5,-7",
+		"6,-7",
+		"3,-6",
+		"4,-6",
+		"5,-6",
+		"6,-6",
+		"3,-5",
+		"4,-5",
+		"5,-5",
+		"6,-5",
+		"3,-4",
+		"4,-4",
+		"5,-4",
+		"6,-4",
+		"3,-3",
+		"4,-3",
+		"5,-3",
+		"6,-3",
+		"3,-2",
+		"4,-2",
+		"5,-2",
+		"6,-2",
+		"3,-1",
+		"4,-1",
+		"5,-1",
+		"6,-1",
+		"3,0",
+		"4,0",
+		"5,0",
+		"6,0",
+		"3,1",
+		"4,1",
+		"5,1",
+		"6,1",
+		"3,2",
+		"4,2",
+		"5,2",
+		"6,2",
+		"3,3",
+		"4,3",
+		"5,3",
+		"6,3",
+		"27,-12",
+		"28,-12",
+		"29,-12",
+		"30,-12",
+		"27,-11",
+		"28,-11",
+		"29,-11",
+		"30,-11",
+		"27,-10",
+		"28,-10",
+		"29,-10",
+		"30,-10",
+		"27,-9",
+		"28,-9",
+		"29,-9",
+		"30,-9",
+		"27,-8",
+		"28,-8",
+		"29,-8",
+		"30,-8",
+		"27,-7",
+		"28,-7",
+		"29,-7",
+		"30,-7",
+		"27,-6",
+		"28,-6",
+		"29,-6",
+		"30,-6",
+		"27,-5",
+		"28,-5",
+		"29,-5",
+		"30,-5",
+		"27,-4",
+		"28,-4",
+		"29,-4",
+		"30,-4",
+		"27,-3",
+		"28,-3",
+		"29,-3",
+		"30,-3",
+		"27,-2",
+		"28,-2",
+		"29,-2",
+		"30,-2",
+		"27,-1",
+		"28,-1",
+		"29,-1",
+		"30,-1",
+		"27,0",
+		"28,0",
+		"29,0",
+		"30,0",
+		"27,1",
+		"28,1",
+		"29,1",
+		"30,1",
+		"27,2",
+		"28,2",
+		"29,2",
+		"30,2",
+		"27,3",
+		"28,3",
+		"29,3",
+		"30,3",
+		"8,-10",
+		"2,-10",
+		"2,-2",
+		"1,-3",
+		"0,-3",
+		"-1,-2",
+		"1,-1",
+		"0,-1",
+		"2,-6",
+		"-1,-6",
+		"-1,-10",
+		"1,-9",
+		"0,-9",
+		"1,-5",
+		"0,-5",
+		"1,-11",
+		"0,-11",
+		"1,-10",
+		"1,-6",
+		"0,-6",
+		"0,-2",
+		"1,-2",
+		"1,-7",
+		"0,-7",
+		"-1,-8",
+		"-1,-12",
+		"-1,-4",
+		"2,2",
+		"1,1",
+		"0,1",
+		"-1,2",
+		"1,3",
+		"0,3",
+		"0,2",
+		"1,2",
+		"-1,0",
+		"-5,-12",
+		"-4,-12",
+		"-3,-12",
+		"-2,-12",
+		"-5,-11",
+		"-4,-11",
+		"-3,-11",
+		"-2,-11",
+		"-5,-10",
+		"-4,-10",
+		"-3,-10",
+		"-2,-10",
+		"-5,-9",
+		"-4,-9",
+		"-3,-9",
+		"-2,-9",
+		"-5,-8",
+		"-4,-8",
+		"-3,-8",
+		"-2,-8",
+		"-5,-7",
+		"-4,-7",
+		"-3,-7",
+		"-2,-7",
+		"-5,-6",
+		"-4,-6",
+		"-3,-6",
+		"-2,-6",
+		"-5,-5",
+		"-4,-5",
+		"-3,-5",
+		"-2,-5",
+		"-5,-4",
+		"-4,-4",
+		"-3,-4",
+		"-2,-4",
+		"-5,-3",
+		"-4,-3",
+		"-3,-3",
+		"-2,-3",
+		"-5,-2",
+		"-4,-2",
+		"-3,-2",
+		"-2,-2",
+		"-5,-1",
+		"-4,-1",
+		"-3,-1",
+		"-2,-1",
+		"-5,0",
+		"-4,0",
+		"-3,0",
+		"-2,0",
+		"-5,1",
+		"-4,1",
+		"-3,1",
+		"-2,1",
+		"-5,2",
+		"-4,2",
+		"-3,2",
+		"-2,2",
+		"-5,3",
+		"-4,3",
+		"-3,3",
+		"-2,3",
+		"0,-10",
+		"-6,-10",
+		"-6,-2",
+		"-7,-3",
+		"-8,-3",
+		"-9,-2",
+		"-7,-1",
+		"-8,-1",
+		"-6,-6",
+		"-9,-6",
+		"-9,-10",
+		"-7,-9",
+		"-8,-9",
+		"-7,-5",
+		"-8,-5",
+		"-7,-11",
+		"-8,-11",
+		"-7,-10",
+		"-7,-6",
+		"-8,-6",
+		"-8,-2",
+		"-7,-2",
+		"-7,-7",
+		"-8,-7",
+		"-6,2",
+		"-7,1",
+		"-8,1",
+		"-9,2",
+		"-7,3",
+		"-8,3",
+		"-8,2",
+		"-7,2",
+		"-13,-12",
+		"-12,-12",
+		"-11,-12",
+		"-10,-12",
+		"-13,-11",
+		"-12,-11",
+		"-11,-11",
+		"-10,-11",
+		"-13,-10",
+		"-12,-10",
+		"-11,-10",
+		"-10,-10",
+		"-13,-9",
+		"-12,-9",
+		"-11,-9",
+		"-10,-9",
+		"-13,-8",
+		"-12,-8",
+		"-11,-8",
+		"-10,-8",
+		"-13,-7",
+		"-12,-7",
+		"-11,-7",
+		"-10,-7",
+		"-13,-6",
+		"-12,-6",
+		"-11,-6",
+		"-10,-6",
+		"-13,-5",
+		"-12,-5",
+		"-11,-5",
+		"-10,-5",
+		"-13,-4",
+		"-12,-4",
+		"-11,-4",
+		"-10,-4",
+		"-13,-3",
+		"-12,-3",
+		"-11,-3",
+		"-10,-3",
+		"-13,-2",
+		"-12,-2",
+		"-11,-2",
+		"-10,-2",
+		"-13,-1",
+		"-12,-1",
+		"-11,-1",
+		"-10,-1",
+		"-13,0",
+		"-12,0",
+		"-11,0",
+		"-10,0",
+		"-13,1",
+		"-12,1",
+		"-11,1",
+		"-10,1",
+		"-13,2",
+		"-12,2",
+		"-11,2",
+		"-10,2",
+		"-13,3",
+		"-12,3",
+		"-11,3",
+		"-10,3",
+		"-8,-10",
+		"7,3",
+		"7,-1",
+		"7,-5",
+		"7,-9",
+		"11,-12",
+		"12,-12",
+		"13,-12",
+		"14,-12",
+		"11,-11",
+		"12,-11",
+		"13,-11",
+		"14,-11",
+		"11,-10",
+		"12,-10",
+		"13,-10",
+		"14,-10",
+		"11,-9",
+		"12,-9",
+		"13,-9",
+		"14,-9",
+		"15,-12",
+		"16,-12",
+		"17,-12",
+		"18,-12",
+		"15,-11",
+		"16,-11",
+		"17,-11",
+		"18,-11",
+		"15,-10",
+		"16,-10",
+		"17,-10",
+		"18,-10",
+		"15,-9",
+		"16,-9",
+		"17,-9",
+		"18,-9",
+		"26,-9",
+		"26,-5",
+		"26,-1",
+		"26,3",
+		"34,-10",
+		"34,-2",
+		"33,-3",
+		"32,-3",
+		"31,-2",
+		"33,-1",
+		"32,-1",
+		"34,-6",
+		"31,-6",
+		"31,-10",
+		"33,-9",
+		"32,-9",
+		"33,-5",
+		"32,-5",
+		"33,-11",
+		"32,-11",
+		"32,-10",
+		"33,-10",
+		"33,-6",
+		"32,-6",
+		"32,-2",
+		"33,-2",
+		"33,-7",
+		"32,-7",
+		"34,-12",
+		"34,-8",
+		"34,-4",
+		"34,2",
+		"33,1",
+		"32,1",
+		"31,2",
+		"33,3",
+		"32,3",
+		"32,2",
+		"33,2",
+		"34,0",
+		"35,-12",
+		"36,-12",
+		"37,-12",
+		"38,-12",
+		"35,-11",
+		"36,-11",
+		"37,-11",
+		"38,-11",
+		"35,-10",
+		"36,-10",
+		"37,-10",
+		"38,-10",
+		"35,-9",
+		"36,-9",
+		"37,-9",
+		"38,-9",
+		"35,-8",
+		"36,-8",
+		"37,-8",
+		"38,-8",
+		"35,-7",
+		"36,-7",
+		"37,-7",
+		"38,-7",
+		"35,-6",
+		"36,-6",
+		"37,-6",
+		"38,-6",
+		"35,-5",
+		"36,-5",
+		"37,-5",
+		"38,-5",
+		"35,-4",
+		"36,-4",
+		"37,-4",
+		"38,-4",
+		"35,-3",
+		"36,-3",
+		"37,-3",
+		"38,-3",
+		"35,-2",
+		"36,-2",
+		"37,-2",
+		"38,-2",
+		"35,-1",
+		"36,-1",
+		"37,-1",
+		"38,-1",
+		"35,0",
+		"36,0",
+		"37,0",
+		"38,0",
+		"35,1",
+		"36,1",
+		"37,1",
+		"38,1",
+		"35,2",
+		"36,2",
+		"37,2",
+		"38,2",
+		"35,3",
+		"36,3",
+		"37,3",
+		"38,3",
+		"42,-10",
+		"42,-2",
+		"41,-3",
+		"40,-3",
+		"39,-2",
+		"41,-1",
+		"40,-1",
+		"42,-6",
+		"39,-6",
+		"39,-10",
+		"41,-9",
+		"40,-9",
+		"41,-5",
+		"40,-5",
+		"41,-11",
+		"40,-11",
+		"40,-10",
+		"41,-10",
+		"41,-6",
+		"40,-6",
+		"40,-2",
+		"41,-2",
+		"41,-7",
+		"40,-7",
+		"42,2",
+		"41,1",
+		"40,1",
+		"39,2",
+		"41,3",
+		"40,3",
+		"40,2",
+		"41,2",
+		"43,-12",
+		"44,-12",
+		"45,-12",
+		"46,-12",
+		"43,-11",
+		"44,-11",
+		"45,-11",
+		"46,-11",
+		"43,-10",
+		"44,-10",
+		"45,-10",
+		"46,-10",
+		"43,-9",
+		"44,-9",
+		"45,-9",
+		"46,-9",
+		"43,-8",
+		"44,-8",
+		"45,-8",
+		"46,-8",
+		"43,-7",
+		"44,-7",
+		"45,-7",
+		"46,-7",
+		"43,-6",
+		"44,-6",
+		"45,-6",
+		"46,-6",
+		"43,-5",
+		"44,-5",
+		"45,-5",
+		"46,-5",
+		"43,-4",
+		"44,-4",
+		"45,-4",
+		"46,-4",
+		"43,-3",
+		"44,-3",
+		"45,-3",
+		"46,-3",
+		"43,-2",
+		"44,-2",
+		"45,-2",
+		"46,-2",
+		"43,-1",
+		"44,-1",
+		"45,-1",
+		"46,-1",
+		"43,0",
+		"44,0",
+		"45,0",
+		"46,0",
+		"43,1",
+		"44,1",
+		"45,1",
+		"46,1",
+		"43,2",
+		"44,2",
+		"45,2",
+		"46,2",
+		"43,3",
+		"44,3",
+		"45,3",
+		"46,3",
+		"15,-16",
+		"16,-16",
+		"17,-16",
+		"18,-16",
+		"15,-15",
+		"16,-15",
+		"17,-15",
+		"18,-15",
+		"15,-14",
+		"16,-14",
+		"17,-14",
+		"18,-14",
+		"15,-13",
+		"16,-13",
+		"17,-13",
+		"18,-13",
+		"15,10",
+		"16,10",
+		"17,10",
+		"18,10",
+		"15,11",
+		"16,11",
+		"17,11",
+		"18,11",
+		"15,12",
+		"16,12",
+		"17,12",
+		"18,12",
+		"15,13",
+		"16,13",
+		"17,13",
+		"18,13",
+		"15,14",
+		"16,14",
+		"17,14",
+		"18,14",
+		"15,15",
+		"16,15",
+		"17,15",
+		"18,15",
+		"15,16",
+		"16,16",
+		"17,16",
+		"18,16",
+		"15,17",
+		"16,17",
+		"17,17",
+		"18,17",
+		"15,18",
+		"16,18",
+		"17,18",
+		"18,18",
+		"15,19",
+		"16,19",
+		"17,19",
+		"18,19",
+		"15,20",
+		"16,20",
+		"17,20",
+		"18,20",
+		"15,21",
+		"16,21",
+		"17,21",
+		"18,21",
+		"15,22",
+		"16,22",
+		"17,22",
+		"18,22",
+		"15,23",
+		"16,23",
+		"17,23",
+		"18,23",
+		"15,24",
+		"16,24",
+		"17,24",
+		"18,24",
+		"15,25",
+		"16,25",
+		"17,25",
+		"18,25",
+		"13,25",
+		"13,24",
+		"13,23",
+		"13,22"
+	],
+	"paths": [
+		{
+			"from_index": 31,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 114,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 114,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 130,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 16,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 1,
+			"to_index": 81,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 99,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 1,
+			"to_index": 125,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 139,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 1,
+			"to_index": 161,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 2,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 1,
+			"to_index": 14,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 3,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 1,
+			"to_index": 8,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 1,
+			"from_port": "Ports/Output 1",
+			"rail_version": 1,
+			"to_index": 3,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 0,
+			"from_port": "Ports/Output 1",
+			"rail_version": 1,
+			"to_index": 2,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 170,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 1,
+			"to_index": 7,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 170,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 1,
+			"to_index": 31,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 171,
+			"from_port": "Ports/Output 1",
+			"rail_version": 1,
+			"to_index": 170,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 15,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 1,
+			"to_index": 82,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 30,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 113,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 113,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 137,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 28,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 1,
+			"to_index": 17,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 29,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 1,
+			"to_index": 18,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 9,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 1,
+			"to_index": 19,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 10,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 1,
+			"to_index": 20,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 64,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 1,
+			"to_index": 12,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 65,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 1,
+			"to_index": 13,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 61,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 1,
+			"to_index": 63,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 66,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 1,
+			"to_index": 84,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 61,
+			"from_port": "Ports/Universal 3",
+			"rail_version": 1,
+			"to_index": 166,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 166,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 116,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 167,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 91,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 168,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 97,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 32,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 115,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 71,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 124,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 115,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 131,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 124,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 153,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 169,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 90,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 170,
+			"from_port": "Ports/Universal 3",
+			"rail_version": 1,
+			"to_index": 169,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 2,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 1,
+			"to_index": 30,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 2,
+			"from_port": "Ports/Universal 3",
+			"rail_version": 1,
+			"to_index": 168,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 3,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 1,
+			"to_index": 32,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 3,
+			"from_port": "Ports/Universal 3",
+			"rail_version": 1,
+			"to_index": 167,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 61,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 1,
+			"to_index": 71,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 138,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 1,
+			"to_index": 162,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 134,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 1,
+			"to_index": 163,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 156,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 1,
+			"to_index": 164,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 7,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 16,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 21,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 1,
+			"to_index": 23,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 21,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 16,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 7,
+			"from_port": "Ports/Universal 3",
+			"rail_version": 1,
+			"to_index": 22,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 21,
+			"from_port": "Ports/Universal 3",
+			"rail_version": 1,
+			"to_index": 22,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 89,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 1,
+			"to_index": 22,
+			"to_port": "Ports/Universal 3"
+		},
+		{
+			"from_index": 23,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 17,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 7,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 1,
+			"to_index": 17,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 18,
+			"from_port": "Ports/Universal 3",
+			"rail_version": 1,
+			"to_index": 89,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 18,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 16,
+			"to_port": "Ports/Universal 3"
+		},
+		{
+			"from_index": 171,
+			"from_port": "Ports/Output 1",
+			"rail_version": 1,
+			"to_index": 6,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 0,
+			"from_port": "Ports/Output 1",
+			"rail_version": 1,
+			"to_index": 5,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 1,
+			"from_port": "Ports/Output 1",
+			"rail_version": 1,
+			"to_index": 4,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 60,
+			"from_port": "Ports/Output 1",
+			"rail_version": 1,
+			"to_index": 62,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 14,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 15,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 20,
+			"from_port": "Ports/Universal 3",
+			"rail_version": 1,
+			"to_index": 25,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 24,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 19,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 14,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 1,
+			"to_index": 19,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 20,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 15,
+			"to_port": "Ports/Universal 3"
+		},
+		{
+			"from_index": 28,
+			"from_port": "Ports/Universal 3",
+			"rail_version": 1,
+			"to_index": 29,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 28,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 1,
+			"to_index": 24,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 25,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 1,
+			"to_index": 29,
+			"to_port": "Ports/Universal 3"
+		},
+		{
+			"from_index": 28,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 15,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 14,
+			"from_port": "Ports/Universal 3",
+			"rail_version": 1,
+			"to_index": 29,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 4,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 1,
+			"to_index": 59,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 59,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 1,
+			"to_index": 202,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 202,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 1,
+			"to_index": 220,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 203,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 1,
+			"to_index": 215,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 211,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 1,
+			"to_index": 243,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 80,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 1,
+			"to_index": 211,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 175,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 1,
+			"to_index": 206,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 174,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 1,
+			"to_index": 180,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 34,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 1,
+			"to_index": 87,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 177,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 1,
+			"to_index": 214,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 217,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 1,
+			"to_index": 250,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 223,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 1,
+			"to_index": 249,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 216,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 1,
+			"to_index": 248,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 200,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 1,
+			"to_index": 225,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 201,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 1,
+			"to_index": 224,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 183,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 1,
+			"to_index": 213,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 176,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 1,
+			"to_index": 212,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 57,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 1,
+			"to_index": 200,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 58,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 1,
+			"to_index": 201,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 6,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 1,
+			"to_index": 57,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 6,
+			"from_port": "Ports/Universal 3",
+			"rail_version": 1,
+			"to_index": 172,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 172,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 1,
+			"to_index": 185,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 173,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 1,
+			"to_index": 184,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 5,
+			"from_port": "Ports/Universal 3",
+			"rail_version": 1,
+			"to_index": 173,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 4,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 37,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 5,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 41,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 6,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 42,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 62,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 1,
+			"to_index": 80,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 4,
+			"from_port": "Ports/Universal 3",
+			"rail_version": 1,
+			"to_index": 174,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 62,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 75,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 62,
+			"from_port": "Ports/Universal 3",
+			"rail_version": 1,
+			"to_index": 175,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 253,
+			"from_port": "Ports/Output 1",
+			"rail_version": 1,
+			"to_index": 260,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 254,
+			"from_port": "Ports/Output 1",
+			"rail_version": 1,
+			"to_index": 259,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 255,
+			"from_port": "Ports/Output 1",
+			"rail_version": 1,
+			"to_index": 258,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 256,
+			"from_port": "Ports/Output 1",
+			"rail_version": 1,
+			"to_index": 257,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 8,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 11,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 63,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 66,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 68,
+			"from_port": "Ports/Universal 3",
+			"rail_version": 1,
+			"to_index": 69,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 70,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 67,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 63,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 1,
+			"to_index": 67,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 68,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 66,
+			"to_port": "Ports/Universal 3"
+		},
+		{
+			"from_index": 69,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 1,
+			"to_index": 65,
+			"to_port": "Ports/Universal 3"
+		},
+		{
+			"from_index": 64,
+			"from_port": "Ports/Universal 3",
+			"rail_version": 1,
+			"to_index": 65,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 64,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 1,
+			"to_index": 70,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 64,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 66,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 63,
+			"from_port": "Ports/Universal 3",
+			"rail_version": 1,
+			"to_index": 65,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 13,
+			"from_port": "Ports/Universal 3",
+			"rail_version": 1,
+			"to_index": 26,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 27,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 12,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 8,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 1,
+			"to_index": 12,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 13,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 11,
+			"to_port": "Ports/Universal 3"
+		},
+		{
+			"from_index": 9,
+			"from_port": "Ports/Universal 3",
+			"rail_version": 1,
+			"to_index": 10,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 9,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 1,
+			"to_index": 27,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 26,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 1,
+			"to_index": 10,
+			"to_port": "Ports/Universal 3"
+		},
+		{
+			"from_index": 8,
+			"from_port": "Ports/Universal 3",
+			"rail_version": 1,
+			"to_index": 10,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 9,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 11,
+			"to_port": "Ports/Universal 1"
+		}
+	],
+	"power": -1320,
+	"production_panel_visible": false,
+	"saved_at_unix": 1776826642.57,
+	"version": 3
+}

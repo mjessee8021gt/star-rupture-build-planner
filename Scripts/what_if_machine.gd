@@ -1,6 +1,7 @@
 extends Control
 
 const Palette = preload("res://Scripts/palette.gd")
+const UiScale = preload("res://Scripts/ui_scale.gd")
 
 signal close_requested
 signal generate_requested(request: Dictionary)
@@ -8,6 +9,7 @@ signal generate_requested(request: Dictionary)
 const RECIPES_ROOT := "res://Recipes"
 const RECIPE_POPUP_MAX_SIZE := Vector2i(360, 420)
 const WHAT_IF_PANEL_SIZE := Vector2(1280, 720)
+const WHAT_IF_PANEL_VIEWPORT_MARGIN := 12.0
 const MAX_DEPENDENCY_DEPTH := 48
 const TAB_BY_RECIPE := 0
 const TAB_BY_BUILDING := 1
@@ -70,6 +72,8 @@ var _requirement_rows: Array[Dictionary] = []
 var _v2_choice_buttons: Dictionary = {}
 var _pending_pdf_bytes := PackedByteArray()
 var _syncing_quantity_textbox := false
+var _ui_scale := 1.0
+var _panel_visual_scale := 1.0
 
 
 func _ready() -> void:
@@ -94,10 +98,19 @@ func _notification(what: int) -> void:
 	if what == NOTIFICATION_RESIZED:
 		refresh_overlay_layout()
 
+func set_ui_scale(ui_scale: float) -> void:
+	_ui_scale = maxf(ui_scale, 0.001)
+	_apply_popup_scale()
+	if is_inside_tree():
+		refresh_overlay_layout()
+
 
 func refresh_overlay_layout() -> void:
+	if is_inside_tree():
+		_ui_scale = UiScale.scale_for_node(self)
 	_fill_overlay_rect()
 	_center_analyzer_panel(_get_visible_layout_size())
+	_apply_popup_scale()
 
 
 func _fill_overlay_rect() -> void:
@@ -122,10 +135,26 @@ func _center_analyzer_panel(layout_size: Vector2) -> void:
 	analyzer_panel.set_anchors_preset(Control.PRESET_TOP_LEFT)
 	analyzer_panel.custom_minimum_size = WHAT_IF_PANEL_SIZE
 	analyzer_panel.size = WHAT_IF_PANEL_SIZE
+	_panel_visual_scale = _get_panel_visual_scale(layout_size)
+	analyzer_panel.scale = Vector2(_panel_visual_scale, _panel_visual_scale)
+	var visual_panel_size := WHAT_IF_PANEL_SIZE * _panel_visual_scale
 	analyzer_panel.position = Vector2(
-		max((layout_size.x - WHAT_IF_PANEL_SIZE.x) * 0.5, 0.0),
-		max((layout_size.y - WHAT_IF_PANEL_SIZE.y) * 0.5, 0.0)
+		max((layout_size.x - visual_panel_size.x) * 0.5, 0.0),
+		max((layout_size.y - visual_panel_size.y) * 0.5, 0.0)
 	)
+
+
+func _get_panel_visual_scale(layout_size: Vector2) -> float:
+	var target_scale := maxf(_ui_scale, 0.001)
+	var target_size := WHAT_IF_PANEL_SIZE * target_scale
+	if target_size.x <= layout_size.x and target_size.y <= layout_size.y:
+		return target_scale
+	var available_size := layout_size
+	if target_scale > UiScale.SMALL_SCALE:
+		var viewport_margin := _scaled(WHAT_IF_PANEL_VIEWPORT_MARGIN) * 2.0
+		available_size = Vector2(max(layout_size.x - viewport_margin, 1.0), max(layout_size.y - viewport_margin, 1.0))
+	var fit_scale := minf(available_size.x / WHAT_IF_PANEL_SIZE.x, available_size.y / WHAT_IF_PANEL_SIZE.y)
+	return maxf(minf(target_scale, fit_scale), 0.5)
 
 
 func _gui_input(event: InputEvent) -> void:
@@ -194,7 +223,8 @@ func _setup_recipe_button() -> void:
 		return
 
 	var popup := recipe_button.get_popup()
-	popup.max_size = RECIPE_POPUP_MAX_SIZE
+	popup.max_size = _scaled_vec2i(RECIPE_POPUP_MAX_SIZE)
+	_style_recipe_popup(popup)
 	if not popup.about_to_popup.is_connected(_populate_recipe_popup):
 		popup.about_to_popup.connect(_populate_recipe_popup)
 	if not popup.index_pressed.is_connected(_on_recipe_popup_index_pressed):
@@ -209,7 +239,8 @@ func _populate_recipe_popup() -> void:
 	_available_recipes = _load_root_recipes()
 	var popup := recipe_button.get_popup()
 	popup.clear()
-	popup.max_size = RECIPE_POPUP_MAX_SIZE
+	popup.max_size = _scaled_vec2i(RECIPE_POPUP_MAX_SIZE)
+	_style_recipe_popup(popup)
 
 	if _available_recipes.is_empty():
 		popup.add_item("No recipes found")
@@ -310,7 +341,9 @@ func _style_generate_confirmation_dialog() -> void:
 
 	generate_confirmation_dialog.add_theme_color_override("font_color", Palette.TEXT_PRIMARY)
 	generate_confirmation_dialog.add_theme_color_override("title_color", Palette.TEXT_PRIMARY)
-	generate_confirmation_dialog.add_theme_stylebox_override("panel", Palette.make_panel_style(Palette.SCENE_PANEL_FILL, Palette.SCENE_PANEL_BORDER, 8, 2))
+	UiScale.apply_font_size(generate_confirmation_dialog, &"font_size", 16, _ui_scale, true)
+	UiScale.apply_font_size(generate_confirmation_dialog, &"title_font_size", 16, _ui_scale, true)
+	generate_confirmation_dialog.add_theme_stylebox_override("panel", Palette.make_panel_style(Palette.SCENE_PANEL_FILL, Palette.SCENE_PANEL_BORDER, _scaled_int(8), _scaled_int(2)))
 	_style_dialog_button(generate_confirmation_dialog.get_ok_button())
 	_style_dialog_button(generate_confirmation_dialog.get_cancel_button())
 
@@ -320,10 +353,62 @@ func _style_dialog_button(button: Button) -> void:
 		return
 	button.add_theme_color_override("font_color", Palette.TEXT_PRIMARY)
 	button.add_theme_color_override("font_disabled_color", Palette.TEXT_MUTED)
-	button.add_theme_stylebox_override("normal", Palette.make_button_style(Palette.BUTTON_FILL, 6, 1))
-	button.add_theme_stylebox_override("hover", Palette.make_button_style(Palette.BUTTON_HOVER, 6, 1))
-	button.add_theme_stylebox_override("pressed", Palette.make_button_style(Palette.BUTTON_PRESSED, 6, 1))
-	button.add_theme_stylebox_override("focus", Palette.make_button_style(Palette.BUTTON_HOVER, 6, 1))
+	UiScale.apply_font_size(button, &"font_size", 15, _ui_scale, true)
+	button.add_theme_stylebox_override("normal", Palette.make_button_style(Palette.BUTTON_FILL, _scaled_int(6), _scaled_int(1)))
+	button.add_theme_stylebox_override("hover", Palette.make_button_style(Palette.BUTTON_HOVER, _scaled_int(6), _scaled_int(1)))
+	button.add_theme_stylebox_override("pressed", Palette.make_button_style(Palette.BUTTON_PRESSED, _scaled_int(6), _scaled_int(1)))
+	button.add_theme_stylebox_override("focus", Palette.make_button_style(Palette.BUTTON_HOVER, _scaled_int(6), _scaled_int(1)))
+
+
+func _apply_popup_scale() -> void:
+	if recipe_button != null:
+		var popup := recipe_button.get_popup()
+		if popup != null:
+			popup.max_size = _scaled_vec2i(RECIPE_POPUP_MAX_SIZE)
+			_style_recipe_popup(popup)
+	if generate_confirmation_dialog != null:
+		_style_generate_confirmation_dialog()
+
+
+func _style_recipe_popup(popup: PopupMenu) -> void:
+	if popup == null:
+		return
+	if UiScale.is_small(_ui_scale):
+		_clear_recipe_popup_theme(popup)
+		return
+	popup.add_theme_stylebox_override("panel", Palette.make_panel_style(Palette.SCENE_PANEL_FILL, Palette.SCENE_PANEL_BORDER, _scaled_int(6), _scaled_int(1)))
+	popup.add_theme_stylebox_override("hover", Palette.make_button_style(Palette.BUTTON_HOVER, _scaled_int(4), _scaled_int(1)))
+	popup.add_theme_color_override("font_color", Palette.TEXT_PRIMARY)
+	popup.add_theme_color_override("font_hover_color", Palette.TEXT_PRIMARY)
+	popup.add_theme_color_override("font_disabled_color", Palette.TEXT_MUTED)
+	UiScale.apply_font_size(popup, &"font_size", 13, _ui_scale, true)
+	popup.add_theme_constant_override("v_separation", _scaled_int(4))
+	popup.add_theme_constant_override("item_start_padding", _scaled_int(12))
+	popup.add_theme_constant_override("item_end_padding", _scaled_int(18))
+
+
+func _clear_recipe_popup_theme(popup: PopupMenu) -> void:
+	popup.remove_theme_stylebox_override("panel")
+	popup.remove_theme_stylebox_override("hover")
+	popup.remove_theme_color_override("font_color")
+	popup.remove_theme_color_override("font_hover_color")
+	popup.remove_theme_color_override("font_disabled_color")
+	popup.remove_theme_font_size_override("font_size")
+	popup.remove_theme_constant_override("v_separation")
+	popup.remove_theme_constant_override("item_start_padding")
+	popup.remove_theme_constant_override("item_end_padding")
+
+
+func _scaled(value: float) -> float:
+	return UiScale.scaled(value, _ui_scale)
+
+
+func _scaled_int(value: float) -> int:
+	return UiScale.scaled_int(value, _ui_scale)
+
+
+func _scaled_vec2i(value: Vector2i) -> Vector2i:
+	return UiScale.scaled_vec2i(value, _ui_scale)
 
 
 func _setup_selector() -> void:
@@ -485,7 +570,7 @@ func _on_generate_button_pressed() -> void:
 		_on_generate_confirmed()
 		return
 
-	generate_confirmation_dialog.popup_centered(Vector2i(470, 150))
+	generate_confirmation_dialog.popup_centered(_scaled_vec2i(Vector2i(470, 150)))
 
 
 func _on_generate_confirmed() -> void:

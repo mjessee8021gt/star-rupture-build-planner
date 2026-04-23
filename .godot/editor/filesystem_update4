@@ -1,9 +1,16 @@
-res://Scenes/resource_row.gd
+res://Scenes/Main.tscn
 res://Scripts/main.gd
-res://Scripts/prod_panel.gd
+res://Scripts/Toolbox.gd
+res://Scripts/buildManager.gd
 res://Scenes/control_menu.gd
 res://Scripts/patch_notes.gd
 res://Scripts/patch_notes_menu.gd
+res://Scripts/prod_panel.gd
+res://Scripts/top_menu_bar.gd
 res://Scripts/what_if_machine.gd
-res://Scenes/Main.tscn
-res://Scripts/Toolbox.gd
+res://Scripts/ui_scale.gd
+res://Buildings/Base Core.gd
+res://Buildings/Base Core.tscn
+res://Scripts/path_manager.gd
+res://Scenes/WhatIfMachine.tscn
+res://Patch Notes/0_4_0.tres

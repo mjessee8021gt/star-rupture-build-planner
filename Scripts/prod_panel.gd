@@ -1,15 +1,19 @@
 extends PanelContainer
 
+const UiScale = preload("res://Scripts/ui_scale.gd")
+
 @onready var scroll_container: ScrollContainer = $ScrollContainer
 @onready var rows_parent: VBoxContainer = $ScrollContainer/VBoxContainer
 @onready var _row_scene: PackedScene = preload("res://Scenes/ResourceRow.tscn")
 
 const RESOURCE_ROW_DEFAULT_SCALE := 1.25
 const RESOURCE_ROW_BASE_WIDTH := 398.0
+const ROW_SEPARATION := 2
 
 # Resource_key (StringName) -> ResourceRow instance
 var rows: Dictionary = {}
 var _row_layout_refresh_queued := false
+var _ui_scale := 1.0
 
 func _ready() -> void:
 	if scroll_container != null:
@@ -17,6 +21,7 @@ func _ready() -> void:
 		scroll_container.resized.connect(_queue_row_layout_refresh)
 	if rows_parent != null:
 		rows_parent.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		rows_parent.add_theme_constant_override("separation", _scaled_int(ROW_SEPARATION))
 		rows_parent.resized.connect(_queue_row_layout_refresh)
 	resized.connect(_queue_row_layout_refresh)
 
@@ -28,6 +33,12 @@ func _ready() -> void:
 	var ledger := get_node("/root/ProdLedger")
 	ledger.totals_changed.connect(_on_totals_changed)
 	_on_totals_changed(ledger.net_totals, ledger.gross_totals, ledger.gross_negative_totals)
+
+func set_ui_scale(ui_scale: float) -> void:
+	_ui_scale = maxf(ui_scale, 0.001)
+	if rows_parent != null:
+		rows_parent.add_theme_constant_override("separation", _scaled_int(ROW_SEPARATION))
+	refresh_row_layout()
 
 func _on_totals_changed(net_totals: Dictionary, gross_totals: Dictionary, gross_negative_totals: Dictionary) -> void:
 	# Remove rows that have a gross production of zero.
@@ -129,6 +140,9 @@ func _apply_row_layout(row: Node) -> void:
 	else:
 		row.scale = Vector2(row_scale, row_scale)
 
+	if row.has_method("set_ui_scale"):
+		row.call("set_ui_scale", _ui_scale)
+
 func _get_row_target_width() -> float:
 	var target_width := 0.0
 
@@ -150,5 +164,8 @@ func _get_row_target_width() -> float:
 		if rows_parent_parent != null:
 			target_width = rows_parent_parent.size.x
 	if target_width <= 1.0:
-		target_width = RESOURCE_ROW_BASE_WIDTH * RESOURCE_ROW_DEFAULT_SCALE
+		target_width = RESOURCE_ROW_BASE_WIDTH * RESOURCE_ROW_DEFAULT_SCALE * _ui_scale
 	return max(target_width, 1.0)
+
+func _scaled_int(value: float) -> int:
+	return UiScale.scaled_int(value, _ui_scale)

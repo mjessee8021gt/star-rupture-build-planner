@@ -118,6 +118,12 @@ func _get_history_host() -> Node:
 		return null
 	return main_scene
 
+func _preserve_toolbox_popup_for_build_confirm() -> void:
+	var main_scene := get_parent()
+	if main_scene == null or not main_scene.has_method("preserve_toolbox_popup_for_build_confirm"):
+		return
+	main_scene.call("preserve_toolbox_popup_for_build_confirm")
+
 func _capture_history_state() -> Dictionary:
 	var history_host := _get_history_host()
 	if history_host == null:
@@ -397,6 +403,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if is_building:
 		if event.is_action_pressed("Build Confirm"):
+			_preserve_toolbox_popup_for_build_confirm()
 			confirm_build(_is_multi_build_active())
 		elif event.is_action_pressed("Build Cancel", true):
 			cancel_build()
