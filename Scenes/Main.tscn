@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://7jyji8msm5gx" path="res://Scenes/patchNotesPanel.tscn" id="14_erwvk"]
 [ext_resource type="Texture2D" uid="uid://bjsxrfyahtpo4" path="res://Assets/SRBP_Whatif_Button.png" id="16_346fj"]
 [ext_resource type="PackedScene" path="res://Scenes/TopMenuBar.tscn" id="17_top_menu"]
+[ext_resource type="Script" uid="uid://d3fjjgw12g2y2" path="res://Scripts/annotation_layer.gd" id="18_annotation"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0sclb"]
 texture = ExtResource("3_2w5on")
@@ -249,5 +250,8 @@ arc_segments = 5
 min_stub_len = 25.0
 
 [node name="buildings" type="Node2D" parent="." unique_id=1655476447]
+
+[node name="AnnotationLayer" type="Node2D" parent="." unique_id=206043194]
+script = ExtResource("18_annotation")
 
 [connection signal="pressed" from="Camera2D/CanvasLayer/ProdMenu" to="." method="_on_prod_menu_pressed"]

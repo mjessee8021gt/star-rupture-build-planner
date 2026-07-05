@@ -67,6 +67,8 @@ const PORT_INPUT := Color8(86, 180, 233, 255)
 const PORT_OUTPUT := Color8(230, 159, 0, 255)
 const PORT_UNIVERSAL := Color8(148, 163, 184, 255)
 
+const ACCESSIBLE_ANNOTATIONS := Color8(204, 121, 167, 255)
+
 const PATH_PREVIEW := Color(0.901961, 0.623529, 0.0, 0.65)
 const PATH_FINAL := Color8(86, 180, 233, 255)
 

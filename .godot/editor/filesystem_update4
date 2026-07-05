@@ -7,3 +7,6 @@ res://Scenes/Main.tscn
 res://Scenes/control_menu.gd
 res://Scripts/ui_scale.gd
 res://Resources/building.gd
+res://Scripts/palette.gd
+res://Scripts/buildManager.gd
+res://Scripts/annotation_layer.gd

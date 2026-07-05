@@ -178,6 +178,10 @@ func start_build(scene: PackedScene) -> void:
 	if scene == null:
 		return
 
+	var annotation_layer := get_node_or_null("../AnnotationLayer")
+	if annotation_layer != null and annotation_layer.has_method("cancel_annotation_interaction"):
+		annotation_layer.call("cancel_annotation_interaction", true)
+
 	var pm := $"../PathManager"
 	if pm != null and pm.has_method("cancel_active_path_drag"):
 		pm.cancel_active_path_drag()
@@ -345,6 +349,13 @@ func _clear_selection() -> void:
 			building.modulate = selected_original_modulates.get(building, Color(1, 1, 1, 1))
 	selected_buildings.clear()
 	selected_original_modulates.clear()
+
+
+func cancel_pointer_interaction() -> void:
+	if is_selecting_buildings:
+		is_selecting_buildings = false
+		selection_current_world = selection_start_world
+		queue_redraw()
 
 func _remove_building_from_selection(building: Node) -> void:
 	if building == null:

@@ -7,7 +7,8 @@ const FLOW_GRAPH_BUILDER := preload("res://Scripts/FlowGraphBuilder.gd")
 const FLOW_SIMULATOR := preload("res://Scripts/FlowSimulator.gd")
 
 const SAVE_FILE_EXTENSION := "srbp"
-const SAVE_FORMAT_VERSION := 3
+const SAVE_FORMAT_VERSION := 4
+const BUILDING_UID_META := &"srbp_building_uid"
 const UI_PREFS_CONFIG_PATH := "user://ui_preferences.cfg"
 const UI_PREFS_SECTION := "ui"
 const ACCESSIBILITY_SCALE_KEY := "accessibility_scale"
@@ -61,6 +62,7 @@ const COMMAND_TOGGLE_PRODUCTION := &"view.production"
 const COMMAND_RAIL_VIEW := &"view.rail_visibility"
 const COMMAND_RAIL_FLOW_RATE := &"view.rail_flow_rate"
 const COMMAND_FLOW_SIMULATION := &"view.flow_simulation"
+const COMMAND_ANNOTATION := &"tools.annotation"
 const COMMAND_WHAT_IF := &"tools.what_if"
 const COMMAND_TOGGLE_TOOLBOX := &"tools.toggle_toolbox"
 const COMMAND_CONTROLS := &"tools.controls"
@@ -84,6 +86,7 @@ const COMMAND_PATCH_NOTES := &"help.patch_notes"
 @onready var build_manager: Node = $BuildManager
 @onready var path_manager: Node = $PathManager
 @onready var buildings_root: Node2D = $buildings
+@onready var annotation_layer: Node = $AnnotationLayer
 
 var rail_version_dropdown: OptionButton
 var rail_visibility_indicator: PanelContainer
@@ -178,8 +181,12 @@ func _is_what_if_machine_open() -> bool:
 	return _what_if_machine_overlay != null and is_instance_valid(_what_if_machine_overlay) and _what_if_machine_overlay.is_inside_tree()
 
 
+func _is_annotation_interaction_active() -> bool:
+	return annotation_layer != null and annotation_layer.has_method("is_interaction_active") and bool(annotation_layer.call("is_interaction_active"))
+
+
 func is_scene_input_blocked() -> bool:
-	return _is_file_dialog_open() or _is_controls_menu_open() or _is_patch_notes_open() or _is_what_if_machine_open()
+	return _is_file_dialog_open() or _is_controls_menu_open() or _is_patch_notes_open() or _is_what_if_machine_open() or _is_annotation_interaction_active()
 
 
 func _is_file_dialog_open() -> bool:
@@ -415,6 +422,7 @@ func _register_top_menu_commands() -> void:
 	_register_top_menu_command(COMMAND_RAIL_VIEW, "Rail View", Callable(self, "_cycle_rail_visibility"), "Cycle rail visibility mode")
 	_register_top_menu_command(COMMAND_RAIL_FLOW_RATE, "Rail Flow Rate", Callable(self, "_toggle_rail_flow_rate"), "Show or hide rail flow rate badges", true)
 	_register_top_menu_command(COMMAND_FLOW_SIMULATION, "Flow Simulation", Callable(self, "_toggle_flow_simulation_view"), "Color rail badges by simulated flow state", true)
+	_register_top_menu_command(COMMAND_ANNOTATION, "Annotation", Callable(self, "_toggle_annotation_tool"), "Place a note on the build plan", true)
 	_register_top_menu_command(COMMAND_WHAT_IF, "What If", Callable(self, "_on_what_if_button_pressed"), "Open the what-if scenario analyzer")
 	_register_top_menu_command(COMMAND_TOGGLE_TOOLBOX, "Toggle Toolbox", Callable(self, "_toggle_toolbox_persistence"), "Keep the toolbox open after choosing a building", true)
 	_register_top_menu_command(COMMAND_CONTROLS, "Controls", Callable(self, "_toggle_controls_menu"), "Open the controls layout", true)
@@ -453,6 +461,7 @@ func _build_top_menu_sections() -> Array:
 		]},
 		{"title": "Tools", "commands": [
 			_command_item(COMMAND_TOGGLE_TOOLBOX),
+			_command_item(COMMAND_ANNOTATION),
 			_command_item(COMMAND_WHAT_IF),
 		]},
 		{"title": "Help", "commands": [
@@ -491,6 +500,8 @@ func _is_top_menu_command_enabled(command_id: StringName) -> bool:
 			return path_manager != null and path_manager.has_method("toggle_rail_flow_rate_visible")
 		COMMAND_FLOW_SIMULATION:
 			return FLOW_GRAPH_BUILDER != null and FLOW_SIMULATOR != null and buildings_root != null and path_manager != null and path_manager.has_method("set_flow_simulation_enabled")
+		COMMAND_ANNOTATION:
+			return annotation_layer != null and annotation_layer.has_method("toggle_annotation_mode")
 		COMMAND_WHAT_IF:
 			return WHAT_IF_MACHINE_SCENE != null
 		COMMAND_TOGGLE_TOOLBOX:
@@ -511,10 +522,23 @@ func _sync_command_bar_state() -> void:
 	top_menu_bar.set_command_pressed(COMMAND_TOGGLE_PRODUCTION, prod_panel != null and prod_panel.visible)
 	top_menu_bar.set_command_pressed(COMMAND_RAIL_FLOW_RATE, _is_rail_flow_rate_visible())
 	top_menu_bar.set_command_pressed(COMMAND_FLOW_SIMULATION, _flow_simulation_enabled)
+	top_menu_bar.set_command_pressed(COMMAND_ANNOTATION, _is_annotation_tool_active())
 	top_menu_bar.set_command_pressed(COMMAND_WHAT_IF, _is_what_if_machine_open())
 	top_menu_bar.set_command_pressed(COMMAND_TOGGLE_TOOLBOX, _is_toolbox_persistence_enabled())
 	top_menu_bar.set_command_pressed(COMMAND_CONTROLS, _is_controls_menu_open())
 	top_menu_bar.set_command_pressed(COMMAND_PATCH_NOTES, _is_patch_notes_open())
+
+
+func _toggle_annotation_tool() -> void:
+	if annotation_layer == null or not annotation_layer.has_method("toggle_annotation_mode"):
+		return
+	annotation_layer.call("toggle_annotation_mode")
+
+
+func _is_annotation_tool_active() -> bool:
+	if annotation_layer == null:
+		return false
+	return bool(annotation_layer.get("annotation_mode_active")) if "annotation_mode_active" in annotation_layer else false
 
 
 func _promote_prod_panel_to_canvas_layer() -> void:
@@ -1880,6 +1904,9 @@ func _clear_scene_plan() -> void:
 
 	if path_manager != null and path_manager.has_method("cancel_active_path_drag"):
 		path_manager.cancel_active_path_drag()
+
+	if annotation_layer != null and annotation_layer.has_method("clear_annotations"):
+		annotation_layer.call("clear_annotations")
 		
 	if path_manager != null:
 		for child in path_manager.get_children():
@@ -2219,6 +2246,13 @@ func _collect_save_state() -> Dictionary:
 		building_data.append(_serialize_building(building))
 
 	var path_data: Array[Dictionary] = _serialize_paths(building_index)
+	var annotation_data: Array[Dictionary] = []
+	if annotation_layer != null and annotation_layer.has_method("serialize_annotations"):
+		var serialized_annotations = annotation_layer.call("serialize_annotations")
+		if serialized_annotations is Array:
+			for annotation in serialized_annotations:
+				if annotation is Dictionary:
+					annotation_data.append(annotation)
 
 	return {
 		"version": SAVE_FORMAT_VERSION,
@@ -2235,7 +2269,8 @@ func _collect_save_state() -> Dictionary:
 		"production_panel_visible": prod_panel.visible,
 		"buildings": building_data,
 		"occupied_cells": occupied,
-		"paths": path_data
+		"paths": path_data,
+		"annotations": annotation_data
 	}
 	
 func _build_pdf_bytes() -> PackedByteArray:
@@ -2477,6 +2512,7 @@ func _serialize_building(building: Node2D) -> Dictionary:
 		saved_footprint = building.get("footprint")
 
 	return {
+		"uid": _ensure_building_uid(building),
 		"id": str(building.get("id")) if building.has_method("get") else "",
 		"scene_path": building.scene_file_path,
 		"position": [building.global_position.x, building.global_position.y],
@@ -2489,6 +2525,19 @@ func _serialize_building(building: Node2D) -> Dictionary:
 		"purity": purity_selection,
 		"core_level": core_level_selection
 	}
+
+
+func _ensure_building_uid(building: Node) -> String:
+	if building == null:
+		return ""
+	if building.has_meta(BUILDING_UID_META):
+		var existing := String(building.get_meta(BUILDING_UID_META))
+		if existing != "":
+			return existing
+	var uid := "bldg_%d_%d" % [Time.get_ticks_usec(), randi()]
+	building.set_meta(BUILDING_UID_META, uid)
+	return uid
+
 
 func _serialize_option_button(node: Node) -> Dictionary:
 	if node == null or not (node is OptionButton):
@@ -2557,6 +2606,8 @@ func _apply_save_state(save_state: Dictionary, restore_view_state := true) -> vo
 
 	_rebuild_occupancy_from_scene(loaded_buildings)
 	_restore_paths(save_state.get("paths", []), loaded_buildings)
+	if annotation_layer != null and annotation_layer.has_method("load_annotations"):
+		annotation_layer.call("load_annotations", save_state.get("annotations", []))
 	if restore_view_state:
 		_restore_camera(save_state.get("camera", {}))
 		prod_panel.visible = bool(save_state.get("production_panel_visible", false))
@@ -2592,6 +2643,8 @@ func _clear_existing_plan() -> void:
 		build_manager.cancel_build()
 	if path_manager.has_method("cancel_active_path_drag"):
 		path_manager.cancel_active_path_drag()
+	if annotation_layer != null and annotation_layer.has_method("clear_annotations"):
+		annotation_layer.call("clear_annotations")
 
 	for child in path_manager.get_children():
 		_detach_and_queue_free(child)
@@ -2631,6 +2684,10 @@ func _instantiate_saved_building(data: Dictionary) -> Node2D:
 	var instance := scene.instantiate() as Node2D
 	if instance == null:
 		return null
+
+	var saved_uid := String(data.get("uid", ""))
+	if saved_uid != "":
+		instance.set_meta(BUILDING_UID_META, saved_uid)
 
 	var position_data = data.get("position", [0.0, 0.0])
 	if position_data is Array and position_data.size() >= 2:
