@@ -1,6 +1,6 @@
-63f7b34db8d8cdea90c76aacccf841ec
-::res://::1776826451
-export_presets.cfg::TextFile::-1::1776826451::0::1::::<><><>0<>0<><>::
+78098b89c88a74ebe8c20117b8754620
+::res://::1783232403
+export_presets.cfg::TextFile::-1::1776841340::0::1::::<><><>0<>0<><>::
 ::res://Assets/::1776663344
 ElectricalSymbol_780x780.png::CompressedTexture2D::5901857789189243560::1776662442::1776663344::1::::<><><>0<>0<>7a8984af0dc3b3423c05b4e79e778d8f<>res://.godot/imported/ElectricalSymbol_780x780.png-c6f2cdfd79bfcb5b194cea99d465d56e.ctex::
 GridDrawArt_756x756.png::CompressedTexture2D::936446386357074134::1776662442::1776663344::1::::<><><>0<>0<>4e38e1b27d4f92c237d851593a0154e2<>res://.godot/imported/GridDrawArt_756x756.png-79a7c2010976becd8049619e474260be.ctex::
@@ -154,14 +154,14 @@ Wind V2.gd::GDScript::1137419287368900942::1774836544::0::1::::<>Building<><>0<>
 Wind V2.tscn::PackedScene::4451655115767055559::1775950532::0::1::::<><><>0<>0<><>::uid://qg8enxibgb7k::::res://Buildings/Wind V2.gd<>uid://grouobxe87tu::::res://Assets/SRBP_4x4_BLDG.png<>uid://bwg7jbpx2gog5::::res://Assets/std_bldg_label_settings.tres
 zipline.gd::GDScript::206885459586338337::1775950532::0::1::::<>Building<><>0<>0<><>::
 Zipline.tscn::PackedScene::8830392455675418320::1775884070::0::1::::<><><>0<>0<><>::uid://c7hmxr56xnf2::::res://Buildings/zipline.gd<>uid://cg8jquxdif0cw::::res://Assets/SRBP_1x1_Zip.png<>uid://n5dpn0rtepho::::res://Assets/SRBP_2x2_ZIP.png<>uid://ilmbegsn2c7::::res://Assets/SRBP_Oval.png
-::res://Patch Notes/::1776625696
+::res://Patch Notes/::1777043204
 0_1_0t.tres::Resource/PatchNote::6638101654490556056::1774836544::0::1::::<><><>0<>0<><>::uid://b6tmiam3vo7cr::::res://Resources/PatchNote.gd
 0_1_1c.tres::Resource/PatchNote::2375032103600644154::1774836544::0::1::::<><><>0<>0<><>::uid://b6tmiam3vo7cr::::res://Resources/PatchNote.gd
 0_1_2.tres::Resource/PatchNote::3069388434787068257::1774836544::0::1::::<><><>0<>0<><>::uid://b6tmiam3vo7cr::::res://Resources/PatchNote.gd
 0_1_3.tres::Resource/PatchNote::4349492324889225267::1774836544::0::1::::<><><>0<>0<><>::uid://b6tmiam3vo7cr::::res://Resources/PatchNote.gd
 0_2_0.tres::Resource/PatchNote::2413098364513982148::1774986215::0::1::::<><><>0<>0<><>::uid://b6tmiam3vo7cr::::res://Resources/PatchNote.gd
 0_3_0.tres::Resource/PatchNote::6091590074749036032::1775950620::0::1::::<><><>0<>0<><>::uid://b6tmiam3vo7cr::::res://Resources/PatchNote.gd
-0_4_0.tres::Resource/PatchNote::1138639287103665009::1776749131::0::1::::<><><>0<>0<><>::uid://b6tmiam3vo7cr::::res://Resources/PatchNote.gd
+0_4_0.tres::Resource/PatchNote::1138639287103665009::1777043204::0::1::::<><><>0<>0<><>::uid://b6tmiam3vo7cr::::res://Resources/PatchNote.gd
 Patch_Registry.tres::Resource/PatchRegistry::737506099473775737::1774848076::0::1::::<><><>0<>0<><>::uid://b0cwm23pcrr11::::res://Scripts/PatchRegistry.gd<>uid://c1tstgpukd065::::res://Patch Notes/0_1_0t.tres<>uid://83qoxdq03x2y::::res://Patch Notes/0_1_1c.tres<>res://Patch Notes/0_1_2.tres<>uid://b276rduyh62od::::res://Patch Notes/0_1_3.tres
 ::res://Recipes/::1775862528
 Accumulator.tres::Resource/Recipe::1245046827341307470::1774836544::0::1::::<><><>0<>0<><>::uid://fx4756jwfgbl::::res://Resources/ItemStack.gd<>uid://ruttqq3j8kw3::::res://Resources/Recipe.gd<>uid://b2au4suqf156a::::res://Recipes/Item Stacks/Stator_12_def.tres<>uid://cvtli7c3bbfbl::::res://Resources/RecipeVariant.gd<>uid://b04faoo3qu4lb::::res://Recipes/Item Stacks/Electronics_24_def.tres<>uid://wqsid71wn7g::::res://Recipes/Item Stacks/Battery_12_def.tres<>uid://d20cgkbe20xrg::::res://Recipes/Item Stacks/Accumulator_12_def.tres
@@ -856,7 +856,7 @@ wolfram_normal.tres::Resource/RecipeVariant::5835562486454895429::1774836544::0:
 wolfram_normal_V2.tres::Resource/RecipeVariant::3440083362993503082::1774836544::0::1::::<><><>0<>0<><>::uid://fx4756jwfgbl::::res://Resources/ItemStack.gd<>uid://dmcw7r27py0ar::::res://Recipes/Item Stacks/Wolfram_ore_300_def.tres<>uid://cvtli7c3bbfbl::::res://Resources/RecipeVariant.gd
 wolfram_pure.tres::Resource/RecipeVariant::6173701267112546890::1774836544::0::1::::<><><>0<>0<><>::uid://fx4756jwfgbl::::res://Resources/ItemStack.gd<>uid://dr3gimlp67utq::::res://Recipes/Item Stacks/Wolfram_ore_240_def.tres<>uid://cvtli7c3bbfbl::::res://Resources/RecipeVariant.gd
 wolfram_pure_v2.tres::Resource/RecipeVariant::29072542495058215::1774836544::0::1::::<><><>0<>0<><>::uid://fx4756jwfgbl::::res://Resources/ItemStack.gd<>uid://dw3pjaap5q66h::::res://Recipes/Item Stacks/Wolfram_ore_480_def.tres<>uid://cvtli7c3bbfbl::::res://Resources/RecipeVariant.gd
-::res://Releases/::1776826451
+::res://Releases/::1776841340
 index.apple-touch-icon.png::CompressedTexture2D::6227245804483828190::1776826451::1776824007::1::::<><><>0<>0<>a147a1b408807923baf0707781632419<>res://.godot/imported/index.apple-touch-icon.png-3a93fa9a3dcc1166de1e758ae00c1dda.ctex::
 index.icon.png::CompressedTexture2D::4935707392112414921::1776826451::1776826487::1::::<><><>0<>0<>dcbf68b66ca377ac02aa9d56f25c5851<>res://.godot/imported/index.icon.png-8972255513758a56c3d84fad0af26c6b.ctex::
 index.png::CompressedTexture2D::1440678262036270992::1776826451::1776824007::1::::<><><>0<>0<>2e21e6e064c09d182ce0c2beb63506a4<>res://.godot/imported/index.png-ecac08375d7bbd42fdb9d46242075d4c.ctex::
@@ -871,21 +871,23 @@ RecipeVariant.gd::GDScript::6286714119494074969::1774836544::0::1::::RecipeVaria
 Whatif_Core.tres::StyleBoxFlat::6589831526989141436::1776618465::0::1::::<><><>0<>0<><>::
 Whatif_Headerbox.tres::StyleBoxFlat::268743794800929172::1776618748::0::1::::<><><>0<>0<><>::
 whatif_raisedSurface.tres::StyleBoxFlat::2878810220879441664::1776618748::0::1::::<><><>0<>0<><>::
-::res://Scenes/::1776826175
+::res://Scenes/::1780462135
 building.tscn::PackedScene::3392377090368923661::1774836544::0::1::::<><><>0<>0<><>::
 control_menu.gd::GDScript::220787888768008032::1776823336::0::1::::<>MenuButton<><>0<>0<><>::
-GridMap.tscn::PackedScene::8643614204411321829::1774836544::0::1::::<><><>0<>0<><>::uid://3o5vaan8nvby::::res://Assets/SRBP_Grid_1.png
-Main.tscn::PackedScene::6710599238512002898::1776780128::0::1::::<><><>0<>0<><>::uid://cmy1thrc38yvq::::res://Scripts/main.gd<>uid://dvfbce7bhnsbd::::res://Scenes/GridMap.tscn<>uid://3o5vaan8nvby::::res://Assets/SRBP_Grid_1.png<>uid://cssd864lah4hf::::res://Scripts/CameraControls.gd<>uid://nh3oggdr6ebv::::res://Assets/GridDrawArt_756x756_v2.png<>uid://ddx74ounb8bc7::::res://Scripts/Toolbox.gd<>uid://cwao0e766iwdd::::res://Scripts/buildManager.gd<>uid://uh861gacb8w0::::res://Assets/GridDrawArt_936x936.png<>uid://cqc50aiyffur5::::res://Assets/ElectricalSymbol_780x780.png<>uid://brffdis28ou82::::res://Scripts/prod_panel.gd<>uid://cqbt5pv1wo7t0::::res://Assets/GridDrawArt_825x825.png<>uid://d2y1jxj184hie::::res://Assets/SRBP_Controls.png<>uid://c1gaut8hcyg0c::::res://Scripts/path_manager.gd<>uid://de7lx8hb5y0o::::res://Scenes/control_menu.gd<>uid://b0o4ul02ammwi::::res://Assets/SRBP_Info_Button.png<>uid://ctcvj2tgfppa1::::res://Scripts/patch_notes.gd<>uid://7jyji8msm5gx::::res://Scenes/patchNotesPanel.tscn<>uid://bjsxrfyahtpo4::::res://Assets/SRBP_Whatif_Button.png<>res://Scenes/TopMenuBar.tscn
+GridMap.tscn::PackedScene::8643614204411321829::1776834998::0::1::::<><><>0<>0<><>::uid://3o5vaan8nvby::::res://Assets/SRBP_Grid_1.png
+Main.tscn::PackedScene::6710599238512002898::1780462135::0::1::::<><><>0<>0<><>::uid://cmy1thrc38yvq::::res://Scripts/main.gd<>uid://dvfbce7bhnsbd::::res://Scenes/GridMap.tscn<>uid://3o5vaan8nvby::::res://Assets/SRBP_Grid_1.png<>uid://cssd864lah4hf::::res://Scripts/CameraControls.gd<>uid://nh3oggdr6ebv::::res://Assets/GridDrawArt_756x756_v2.png<>uid://ddx74ounb8bc7::::res://Scripts/Toolbox.gd<>uid://cwao0e766iwdd::::res://Scripts/buildManager.gd<>uid://uh861gacb8w0::::res://Assets/GridDrawArt_936x936.png<>uid://cqc50aiyffur5::::res://Assets/ElectricalSymbol_780x780.png<>uid://brffdis28ou82::::res://Scripts/prod_panel.gd<>uid://cqbt5pv1wo7t0::::res://Assets/GridDrawArt_825x825.png<>uid://d2y1jxj184hie::::res://Assets/SRBP_Controls.png<>uid://c1gaut8hcyg0c::::res://Scripts/path_manager.gd<>uid://de7lx8hb5y0o::::res://Scenes/control_menu.gd<>uid://b0o4ul02ammwi::::res://Assets/SRBP_Info_Button.png<>uid://ctcvj2tgfppa1::::res://Scripts/patch_notes.gd<>uid://7jyji8msm5gx::::res://Scenes/patchNotesPanel.tscn<>uid://bjsxrfyahtpo4::::res://Assets/SRBP_Whatif_Button.png<>res://Scenes/TopMenuBar.tscn
 patchNotesPanel.tscn::PackedScene::2266096147910246043::1774849386::0::1::::<><><>0<>0<><>::uid://ccwdt1powl6x1::::res://Scripts/patch_notes_menu.gd<>uid://c8t0wuou8x04o::::res://Resources/PatchNotesEntry.tscn
 ResourceRow.tscn::PackedScene::2929728595450852361::1776578942::0::1::::<><><>0<>0<><>::uid://g80qoo0g055j::::res://Scenes/resource_row.gd<>uid://cnn6vxsw63oxw::::res://Assets/SRBP_Production_frame.png
 resource_row.gd::GDScript::490804783332892613::1776662442::0::1::::<>Control<><>0<>0<><>::
 TopMenuBar.tscn::PackedScene::-1::1776742401::0::1::::<><><>0<>0<><>::res://Scripts/top_menu_bar.gd
-WhatIfMachine.tscn::PackedScene::2179822556873708285::1776826175::0::1::::<><><>0<>0<><>::uid://58waq5my4wmf::::res://Scripts/what_if_machine.gd<>uid://c05ftehbwlk1i::::res://Resources/Whatif_Core.tres<>uid://bhart32ix4hvc::::res://Resources/whatif_raisedSurface.tres<>uid://d3gf2yod41ka::::res://Resources/Whatif_Headerbox.tres
-::res://Scripts/::1776823681
+WhatIfMachine.tscn::PackedScene::2179822556873708285::1776826737::0::1::::<><><>0<>0<><>::uid://58waq5my4wmf::::res://Scripts/what_if_machine.gd<>uid://c05ftehbwlk1i::::res://Resources/Whatif_Core.tres<>uid://bhart32ix4hvc::::res://Resources/whatif_raisedSurface.tres<>uid://d3gf2yod41ka::::res://Resources/Whatif_Headerbox.tres
+::res://Scripts/::1780790269
 BuildingRegistry.gd::GDScript::5454827344132405048::1776626904::0::1::::BuildRegistry<>Node<><>0<>0<><>::
 buildManager.gd::GDScript::6317890871146673873::1776783388::0::1::::<>Node2D<><>0<>0<><>::
 CameraControls.gd::GDScript::6073642108144303039::1775927332::0::1::::<>Camera2D<><>0<>0<><>::
-main.gd::GDScript::5666265523090886274::1776825404::0::1::::<>Node2D<><>0<>0<><>::
+FlowGraphBuilder.gd::GDScript::2568214472206699686::1780790347::0::1::::FlowGraphBuilder<>RefCounted<><>0<>0<><>::
+FlowSimulator.gd::GDScript::189457201172761175::1780451272::0::1::::FlowSimulator<>RefCounted<><>0<>0<><>::
+main.gd::GDScript::5666265523090886274::1780790447::0::1::::<>Node2D<><>0<>0<><>::
 palette.gd::GDScript::3694838719101505730::1775890709::0::1::::PlannerPalette<>RefCounted<><>0<>0<><>::
 PatchRegistry.gd::GDScript::2242664668738540107::1776626784::0::1::::PatchRegistry<>Node<><>0<>0<><>::
 patch_notes.gd::GDScript::6111850728771815710::1776823087::0::1::::<>MenuButton<><>0<>0<><>::
@@ -899,4 +901,5 @@ Toolbox.gd::GDScript::7419304768944829472::1776825683::0::1::::<>Button<><>0<>0<
 top_menu_bar.gd::GDScript::8032127211216138523::1776822831::0::1::::TopMenuBar<>PanelContainer<><>0<>0<><>::
 ui_scale.gd::GDScript::7452275656489500346::1776823645::0::1::::PlannerUiScale<>RefCounted<><>0<>0<><>::
 what_if_machine.gd::GDScript::2175126436162003933::1776823402::0::1::::<>Control<><>0<>0<><>::
-::res://Tools/::1776825901
+::res://Tools/::1780789470
+test_flow_simulator.gd::GDScript::4877452490833243643::1780789698::0::1::::<>SceneTree<><>0<>0<><>::

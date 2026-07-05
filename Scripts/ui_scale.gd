@@ -11,6 +11,9 @@ enum Tier {
 const SMALL_SCALE := 1.0
 const MEDIUM_SCALE := 1.3
 const LARGE_SCALE := 1.6
+const ACCESSIBILITY_MIN_SCALE := 0.5
+const ACCESSIBILITY_MAX_SCALE := 2.5
+const ACCESSIBILITY_DEFAULT_SCALE := 1.0
 const MEDIUM_SHORT_EDGE := 1300
 const LARGE_SHORT_EDGE := 2000
 
@@ -37,6 +40,14 @@ static func scale_for_node(node: Node) -> float:
 	if node == null or node.get_viewport() == null:
 		return SMALL_SCALE
 	return scale_for_viewport(node.get_viewport().size)
+
+
+static func clamp_accessibility_scale(accessibility_scale: float) -> float:
+	return clampf(accessibility_scale, ACCESSIBILITY_MIN_SCALE, ACCESSIBILITY_MAX_SCALE)
+
+
+static func combined_scale(viewport_size: Vector2i, accessibility_scale: float) -> float:
+	return scale_for_viewport(viewport_size) * clamp_accessibility_scale(accessibility_scale)
 
 
 static func scaled(value: float, ui_scale: float) -> float:

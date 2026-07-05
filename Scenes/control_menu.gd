@@ -1,5 +1,7 @@
 extends MenuButton
 
+signal accessibility_scale_changed(accessibility_scale: float)
+
 const Palette = preload("res://Scripts/palette.gd")
 const UiScale = preload("res://Scripts/ui_scale.gd")
 const BINDINGS_CONFIG_SECTION := "input_bindings"
@@ -9,8 +11,8 @@ const BINDINGS_CONFIG_VERSION := 2
 const BUILD_CANCEL_ACTION := &"Build Cancel"
 const REBIND_PROMPT := "Press input..."
 const UNBOUND_TEXT := "-"
-const POPUP_BASE_SIZE := Vector2i(460, 250)
-const POPUP_MIN_SIZE := Vector2i(300, 190)
+const POPUP_BASE_SIZE := Vector2i(460, 320)
+const POPUP_MIN_SIZE := Vector2i(300, 250)
 const POPUP_VIEWPORT_MARGIN := 12
 const POPUP_BUTTON_OFFSET := Vector2i(50, 8)
 const POPUP_MAX_WIDTH := 560
@@ -18,6 +20,11 @@ const POPUP_SCREEN_WIDTH_RATIO := 0.36
 const POPUP_SCREEN_HEIGHT_RATIO := 0.45
 const POPUP_CONTENT_MARGIN := 10.0
 const POPUP_SCROLLBAR_RESERVE := 18.0
+const ACCESSIBILITY_CONTROL_MIN_HEIGHT := 76.0
+const ACCESSIBILITY_CONTROL_GAP := 8
+const ACCESSIBILITY_LABEL_GAP := 10
+const ACCESSIBILITY_VALUE_WIDTH := 54.0
+const ACCESSIBILITY_SLIDER_STEP := 0.05
 const ROW_HEIGHT := 28.0
 const ROW_COLUMN_GAP := 12
 const BINDING_COLUMN_MIN_WIDTH := 130.0
@@ -41,23 +48,35 @@ var _awaiting_button: Button = null
 var _capture_overlay: Control = null
 var _popup_anchor_override := Rect2()
 var _ui_scale := 1.0
+var _accessibility_scale := UiScale.ACCESSIBILITY_DEFAULT_SCALE
+var _accessibility_container: PanelContainer = null
+var _accessibility_slider: HSlider = null
+var _accessibility_value_label: Label = null
+var _syncing_accessibility_slider := false
 
 func _ready() -> void:
 	pressed.connect(toggle_panel)
 	if popup != null and not popup.popup_hide.is_connected(_on_popup_hidden):
 		popup.popup_hide.connect(_on_popup_hidden)
 	get_viewport().size_changed.connect(_on_viewport_size_changed)
+	_ensure_accessibility_controls()
 	_ensure_capture_overlay()
 	_load_saved_bindings()
 	popup.hide()
 
 func set_ui_scale(ui_scale: float) -> void:
 	_ui_scale = maxf(ui_scale, 0.001)
+	_style_accessibility_controls()
 	_layout_capture_overlay()
 	if popup != null and popup.visible:
 		_layout_popup()
 		if _awaiting_action == "":
 			_refresh_list()
+
+func set_accessibility_scale(accessibility_scale: float) -> void:
+	_accessibility_scale = UiScale.clamp_accessibility_scale(accessibility_scale)
+	_sync_accessibility_slider()
+	_style_accessibility_controls()
 
 func toggle_panel() -> void:
 	if popup.visible:
@@ -76,6 +95,25 @@ func toggle_panel_at(anchor_rect: Rect2) -> void:
 	toggle_panel()
 
 
+func open_panel_at(anchor_rect: Rect2, focus_accessibility_scale := false) -> void:
+	_popup_anchor_override = anchor_rect
+	if popup.visible:
+		_layout_popup()
+		if _awaiting_action == "":
+			_refresh_list()
+	else:
+		_layout_popup()
+		_refresh_list()
+		popup.popup()
+	if focus_accessibility_scale:
+		call_deferred("focus_accessibility_scale")
+
+
+func focus_accessibility_scale() -> void:
+	if _accessibility_slider != null:
+		_accessibility_slider.grab_focus()
+
+
 func _on_pressed() -> void:
 	toggle_panel()
 
@@ -88,10 +126,148 @@ func _layout_open_popup() -> void:
 	if _awaiting_action == "":
 		_refresh_list()
 
+
+func _ensure_accessibility_controls() -> void:
+	if popup == null:
+		return
+
+	var margin_container := popup.get_node_or_null("MarginContainer") as MarginContainer
+	if margin_container == null:
+		return
+
+	var content := margin_container.get_node_or_null("ControlsContent") as VBoxContainer
+	var scroll_container := margin_container.get_node_or_null("ScrollContainer") as ScrollContainer
+	if scroll_container == null and content != null:
+		scroll_container = content.get_node_or_null("ScrollContainer") as ScrollContainer
+
+	if content == null:
+		content = VBoxContainer.new()
+		content.name = "ControlsContent"
+		content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		content.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		margin_container.add_child(content)
+		if scroll_container != null:
+			margin_container.remove_child(scroll_container)
+			content.add_child(scroll_container)
+
+	_accessibility_container = content.get_node_or_null("AccessibilityScale") as PanelContainer
+	if _accessibility_container == null:
+		_accessibility_container = PanelContainer.new()
+		_accessibility_container.name = "AccessibilityScale"
+		_accessibility_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		content.add_child(_accessibility_container)
+		content.move_child(_accessibility_container, 0)
+
+		var scale_margin := MarginContainer.new()
+		scale_margin.name = "ScaleMargin"
+		_accessibility_container.add_child(scale_margin)
+
+		var scale_stack := VBoxContainer.new()
+		scale_stack.name = "ScaleStack"
+		scale_stack.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		scale_margin.add_child(scale_stack)
+
+		var label_row := HBoxContainer.new()
+		label_row.name = "LabelRow"
+		label_row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		scale_stack.add_child(label_row)
+
+		var title_label := Label.new()
+		title_label.name = "Title"
+		title_label.text = "Accessibility Scale"
+		title_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		title_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		label_row.add_child(title_label)
+
+		_accessibility_value_label = Label.new()
+		_accessibility_value_label.name = "Value"
+		_accessibility_value_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		_accessibility_value_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		label_row.add_child(_accessibility_value_label)
+
+		_accessibility_slider = HSlider.new()
+		_accessibility_slider.name = "Slider"
+		_accessibility_slider.min_value = UiScale.ACCESSIBILITY_MIN_SCALE
+		_accessibility_slider.max_value = UiScale.ACCESSIBILITY_MAX_SCALE
+		_accessibility_slider.step = ACCESSIBILITY_SLIDER_STEP
+		_accessibility_slider.page = ACCESSIBILITY_SLIDER_STEP
+		_accessibility_slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		_accessibility_slider.value_changed.connect(_on_accessibility_slider_changed)
+		scale_stack.add_child(_accessibility_slider)
+	else:
+		_accessibility_slider = _accessibility_container.get_node_or_null("ScaleMargin/ScaleStack/Slider") as HSlider
+		_accessibility_value_label = _accessibility_container.get_node_or_null("ScaleMargin/ScaleStack/LabelRow/Value") as Label
+
+	if scroll_container != null and scroll_container.get_parent() != content:
+		var current_parent := scroll_container.get_parent()
+		if current_parent != null:
+			current_parent.remove_child(scroll_container)
+		content.add_child(scroll_container)
+
+	_sync_accessibility_slider()
+	_style_accessibility_controls()
+
+
+func _style_accessibility_controls() -> void:
+	if _accessibility_container == null:
+		return
+
+	_accessibility_container.custom_minimum_size = Vector2(0.0, _scaled(ACCESSIBILITY_CONTROL_MIN_HEIGHT))
+	_accessibility_container.add_theme_stylebox_override("panel", Palette.make_panel_style(Palette.BUTTON_FILL, Palette.SCENE_PANEL_BORDER, _scaled_int(6), _scaled_int(1)))
+
+	var scale_margin := _accessibility_container.get_node_or_null("ScaleMargin") as MarginContainer
+	if scale_margin != null:
+		scale_margin.add_theme_constant_override("margin_left", _scaled_int(10))
+		scale_margin.add_theme_constant_override("margin_top", _scaled_int(8))
+		scale_margin.add_theme_constant_override("margin_right", _scaled_int(10))
+		scale_margin.add_theme_constant_override("margin_bottom", _scaled_int(8))
+
+	var scale_stack := _accessibility_container.get_node_or_null("ScaleMargin/ScaleStack") as VBoxContainer
+	if scale_stack != null:
+		scale_stack.add_theme_constant_override("separation", _scaled_int(ACCESSIBILITY_CONTROL_GAP))
+
+	var label_row := _accessibility_container.get_node_or_null("ScaleMargin/ScaleStack/LabelRow") as HBoxContainer
+	if label_row != null:
+		label_row.add_theme_constant_override("separation", _scaled_int(ACCESSIBILITY_LABEL_GAP))
+
+	var title_label := _accessibility_container.get_node_or_null("ScaleMargin/ScaleStack/LabelRow/Title") as Label
+	if title_label != null:
+		title_label.add_theme_color_override("font_color", Palette.TEXT_PRIMARY)
+		UiScale.apply_font_size(title_label, &"font_size", 14, _ui_scale, true)
+
+	if _accessibility_value_label != null:
+		_accessibility_value_label.custom_minimum_size = Vector2(_scaled(ACCESSIBILITY_VALUE_WIDTH), 0.0)
+		_accessibility_value_label.add_theme_color_override("font_color", Palette.TEXT_MUTED)
+		UiScale.apply_font_size(_accessibility_value_label, &"font_size", 14, _ui_scale, true)
+
+	if _accessibility_slider != null:
+		_accessibility_slider.custom_minimum_size = Vector2(0.0, _scaled(24.0))
+
+
+func _sync_accessibility_slider() -> void:
+	_syncing_accessibility_slider = true
+	if _accessibility_slider != null:
+		_accessibility_slider.value = _accessibility_scale
+	if _accessibility_value_label != null:
+		_accessibility_value_label.text = "%d%%" % int(round(_accessibility_scale * 100.0))
+	_syncing_accessibility_slider = false
+
+
+func _on_accessibility_slider_changed(value: float) -> void:
+	var next_scale := UiScale.clamp_accessibility_scale(value)
+	_accessibility_scale = next_scale
+	if _accessibility_value_label != null:
+		_accessibility_value_label.text = "%d%%" % int(round(_accessibility_scale * 100.0))
+	if _syncing_accessibility_slider:
+		return
+	accessibility_scale_changed.emit(next_scale)
+
+
 func _layout_popup() -> void:
 	if popup == null:
 		return
 
+	_ensure_accessibility_controls()
 	var popup_size := _get_popup_size()
 	popup.min_size = Vector2i.ZERO
 	popup.size = popup_size
@@ -125,7 +301,15 @@ func _layout_popup_contents(popup_size: Vector2i) -> void:
 		max(popup_size.y - (content_margin * 2.0), 1.0)
 	)
 
+	var content := margin_container.get_node_or_null("ControlsContent") as VBoxContainer
+	if content != null:
+		content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		content.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		content.add_theme_constant_override("separation", _scaled_int(8))
+
 	var scroll_container := margin_container.get_node_or_null("ScrollContainer") as ScrollContainer
+	if scroll_container == null and content != null:
+		scroll_container = content.get_node_or_null("ScrollContainer") as ScrollContainer
 	if scroll_container != null:
 		scroll_container.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		scroll_container.size_flags_vertical = Control.SIZE_EXPAND_FILL

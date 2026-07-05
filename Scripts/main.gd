@@ -3,9 +3,14 @@ extends Node2D
 const Palette = preload("res://Scripts/palette.gd")
 const UiScale = preload("res://Scripts/ui_scale.gd")
 const WHAT_IF_MACHINE_SCENE := preload("res://Scenes/WhatIfMachine.tscn")
+const FLOW_GRAPH_BUILDER := preload("res://Scripts/FlowGraphBuilder.gd")
+const FLOW_SIMULATOR := preload("res://Scripts/FlowSimulator.gd")
 
 const SAVE_FILE_EXTENSION := "srbp"
 const SAVE_FORMAT_VERSION := 3
+const UI_PREFS_CONFIG_PATH := "user://ui_preferences.cfg"
+const UI_PREFS_SECTION := "ui"
+const ACCESSIBILITY_SCALE_KEY := "accessibility_scale"
 const BASE_UI_REFERENCE_WIDTH := 1920.0
 const TOP_MENU_BAR_MARGIN := 10.0
 const TOP_MENU_BAR_VIEWPORT_MARGIN := 8.0
@@ -55,6 +60,7 @@ const COMMAND_REDO := &"edit.redo"
 const COMMAND_TOGGLE_PRODUCTION := &"view.production"
 const COMMAND_RAIL_VIEW := &"view.rail_visibility"
 const COMMAND_RAIL_FLOW_RATE := &"view.rail_flow_rate"
+const COMMAND_FLOW_SIMULATION := &"view.flow_simulation"
 const COMMAND_WHAT_IF := &"tools.what_if"
 const COMMAND_TOGGLE_TOOLBOX := &"tools.toggle_toolbox"
 const COMMAND_CONTROLS := &"tools.controls"
@@ -70,6 +76,7 @@ const COMMAND_PATCH_NOTES := &"help.patch_notes"
 @onready var ibm_cost_label: Label = $Camera2D/CanvasLayer/Panel/IBMCostLabel
 @onready var meteor_core_cost_label: Label = $Camera2D/CanvasLayer/Panel/MeteorCoreCostLabel
 @onready var controls_popup: PopupPanel = $Camera2D/CanvasLayer/PopupPanel
+@onready var control_menu: Node = $Camera2D/CanvasLayer/ControlMenu
 @onready var patch_notes_button: Node = $"Camera2D/CanvasLayer/Patch Notes"
 @onready var what_if_button: Button = $Camera2D/CanvasLayer/WhatIfButton
 @onready var prod_menu: Button = $Camera2D/CanvasLayer/ProdMenu
@@ -106,17 +113,25 @@ var _what_if_machine_overlay: Control
 var _pending_what_if_generation_request: Dictionary = {}
 var _command_metadata: Dictionary = {}
 var _command_handlers: Dictionary = {}
+var _flow_simulation_enabled := false
+var _flow_simulation_refresh_queued := false
+var _flow_simulation_state: Dictionary = {}
+var _last_flow_simulation_result: Dictionary = {}
+var _viewport_ui_scale := 1.0
+var _accessibility_scale := UiScale.ACCESSIBILITY_DEFAULT_SCALE
 var _ui_scale := 1.0
 var _ui_scale_tier := 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	_load_accessibility_preferences()
 	_refresh_ui_scale(true)
 	heat_label.text = "0"
 	power_label.text = "0"
 	bbm_cost_label.text = "0"
 	ibm_cost_label.text = "0"
 	meteor_core_cost_label.text = "0"
+	_setup_flow_simulation_view()
 	_setup_save_load_ui()
 	_setup_top_menu_bar()
 	_setup_what_if_button()
@@ -238,6 +253,100 @@ func _on_what_if_generate_requested(request: Dictionary) -> void:
 	call_deferred("_generate_pending_what_if_plan")
 
 
+func _setup_flow_simulation_view() -> void:
+	if path_manager != null:
+		if path_manager.has_method("set_flow_simulation_enabled"):
+			path_manager.call("set_flow_simulation_enabled", false)
+		if path_manager.has_signal("rail_graph_changed"):
+			var refresh_callable := Callable(self, "_queue_flow_simulation_refresh")
+			if not path_manager.is_connected("rail_graph_changed", refresh_callable):
+				path_manager.connect("rail_graph_changed", refresh_callable)
+
+
+func _run_current_flow_simulation() -> Dictionary:
+	var graph: Dictionary = FLOW_GRAPH_BUILDER.build_from_scene(buildings_root, path_manager)
+	var simulator: RefCounted = FLOW_SIMULATOR.new()
+	var result = simulator.call("simulate", graph, 1.0, _flow_simulation_state)
+	if not (result is Dictionary):
+		return {
+			"ok": false,
+			"graph": graph,
+			"message": "Flow Sim: simulator returned an invalid result.",
+		}
+
+	_last_flow_simulation_result = (result as Dictionary).duplicate(true)
+	var next_state = _last_flow_simulation_result.get("state", {})
+	_flow_simulation_state = next_state.duplicate(true) if next_state is Dictionary else {}
+	if path_manager != null and path_manager.has_method("set_flow_simulation_result"):
+		path_manager.call("set_flow_simulation_result", _last_flow_simulation_result)
+
+	return {
+		"ok": true,
+		"graph": graph,
+		"result": _last_flow_simulation_result,
+	}
+
+
+func _run_flow_simulation_debug() -> void:
+	var simulation := _run_current_flow_simulation()
+	if not bool(simulation.get("ok", false)):
+		var error_lines: Array[String] = [str(simulation.get("message", "Flow Sim failed."))]
+		_show_flow_debug_lines(error_lines)
+		return
+
+	var lines: Array[String] = []
+	var graph: Dictionary = simulation.get("graph", {})
+	var graph_metadata: Dictionary = graph.get("metadata", {})
+	lines.append("Experimental Flow Simulation")
+	lines.append("Graph: %d buildings, %d rails" % [
+		int(graph_metadata.get("node_count", 0)),
+		int(graph_metadata.get("edge_count", 0))
+	])
+
+	var builder_warnings: Array = graph.get("builder_warnings", [])
+	for warning in builder_warnings:
+		if warning is Dictionary:
+			lines.append("Graph warning: %s" % str(warning.get("message", warning.get("type", "Unknown graph warning"))))
+
+	var result: Dictionary = simulation.get("result", {})
+	lines.append_array(FLOW_GRAPH_BUILDER.summarize_result(result))
+	_show_flow_debug_lines(lines)
+
+
+func _queue_flow_simulation_refresh() -> void:
+	if not _flow_simulation_enabled or _flow_simulation_refresh_queued:
+		return
+	_flow_simulation_refresh_queued = true
+	call_deferred("_refresh_flow_simulation_view")
+
+
+func _refresh_flow_simulation_view() -> void:
+	_flow_simulation_refresh_queued = false
+	if not _flow_simulation_enabled:
+		return
+	var simulation := _run_current_flow_simulation()
+	if not bool(simulation.get("ok", false)):
+		push_warning(str(simulation.get("message", "Flow Sim failed.")))
+
+
+func _clear_flow_simulation_cache() -> void:
+	_flow_simulation_state.clear()
+	_last_flow_simulation_result.clear()
+	if path_manager != null and path_manager.has_method("clear_flow_simulation_result"):
+		path_manager.call("clear_flow_simulation_result")
+
+
+func _show_flow_debug_lines(lines: Array[String]) -> void:
+	var debug_panel := $"Camera2D/CanvasLayer/Debug Panel"
+	if debug_panel != null:
+		debug_panel.visible = true
+
+	var debug_feed := $"Camera2D/CanvasLayer/Debug Panel/DebugFeed" as Label
+	if debug_feed == null:
+		return
+	debug_feed.text = "\n".join(lines)
+
+
 func _setup_save_load_ui() -> void:
 	rail_version_dropdown = OptionButton.new()
 	rail_version_dropdown.name = "RailVersionDropdown"
@@ -281,6 +390,7 @@ func _setup_save_load_ui() -> void:
 func _setup_top_menu_bar() -> void:
 	_promote_prod_panel_to_canvas_layer()
 	_hide_legacy_action_access_buttons()
+	_setup_accessibility_controls()
 	_register_top_menu_commands()
 
 	if top_menu_bar == null:
@@ -304,6 +414,7 @@ func _register_top_menu_commands() -> void:
 	_register_top_menu_command(COMMAND_TOGGLE_PRODUCTION, "Production", Callable(self, "_toggle_production_panel"), "Show or hide the production panel", true)
 	_register_top_menu_command(COMMAND_RAIL_VIEW, "Rail View", Callable(self, "_cycle_rail_visibility"), "Cycle rail visibility mode")
 	_register_top_menu_command(COMMAND_RAIL_FLOW_RATE, "Rail Flow Rate", Callable(self, "_toggle_rail_flow_rate"), "Show or hide rail flow rate badges", true)
+	_register_top_menu_command(COMMAND_FLOW_SIMULATION, "Flow Simulation", Callable(self, "_toggle_flow_simulation_view"), "Color rail badges by simulated flow state", true)
 	_register_top_menu_command(COMMAND_WHAT_IF, "What If", Callable(self, "_on_what_if_button_pressed"), "Open the what-if scenario analyzer")
 	_register_top_menu_command(COMMAND_TOGGLE_TOOLBOX, "Toggle Toolbox", Callable(self, "_toggle_toolbox_persistence"), "Keep the toolbox open after choosing a building", true)
 	_register_top_menu_command(COMMAND_CONTROLS, "Controls", Callable(self, "_toggle_controls_menu"), "Open the controls layout", true)
@@ -338,6 +449,7 @@ func _build_top_menu_sections() -> Array:
 			_command_item(COMMAND_TOGGLE_PRODUCTION),
 			_command_item(COMMAND_RAIL_VIEW),
 			_command_item(COMMAND_RAIL_FLOW_RATE),
+			_command_item(COMMAND_FLOW_SIMULATION),
 		]},
 		{"title": "Tools", "commands": [
 			_command_item(COMMAND_TOGGLE_TOOLBOX),
@@ -377,6 +489,8 @@ func _is_top_menu_command_enabled(command_id: StringName) -> bool:
 			return path_manager != null and path_manager.has_method("cycle_rail_visibility_mode")
 		COMMAND_RAIL_FLOW_RATE:
 			return path_manager != null and path_manager.has_method("toggle_rail_flow_rate_visible")
+		COMMAND_FLOW_SIMULATION:
+			return FLOW_GRAPH_BUILDER != null and FLOW_SIMULATOR != null and buildings_root != null and path_manager != null and path_manager.has_method("set_flow_simulation_enabled")
 		COMMAND_WHAT_IF:
 			return WHAT_IF_MACHINE_SCENE != null
 		COMMAND_TOGGLE_TOOLBOX:
@@ -396,6 +510,7 @@ func _sync_command_bar_state() -> void:
 		top_menu_bar.set_command_enabled(command_id, _is_top_menu_command_enabled(command_id))
 	top_menu_bar.set_command_pressed(COMMAND_TOGGLE_PRODUCTION, prod_panel != null and prod_panel.visible)
 	top_menu_bar.set_command_pressed(COMMAND_RAIL_FLOW_RATE, _is_rail_flow_rate_visible())
+	top_menu_bar.set_command_pressed(COMMAND_FLOW_SIMULATION, _flow_simulation_enabled)
 	top_menu_bar.set_command_pressed(COMMAND_WHAT_IF, _is_what_if_machine_open())
 	top_menu_bar.set_command_pressed(COMMAND_TOGGLE_TOOLBOX, _is_toolbox_persistence_enabled())
 	top_menu_bar.set_command_pressed(COMMAND_CONTROLS, _is_controls_menu_open())
@@ -425,6 +540,17 @@ func _hide_legacy_action_access_buttons() -> void:
 			(access_node as Control).mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 
+func _setup_accessibility_controls() -> void:
+	if control_menu == null:
+		return
+	if control_menu.has_signal("accessibility_scale_changed"):
+		var scale_callable := Callable(self, "_on_accessibility_scale_changed")
+		if not control_menu.is_connected("accessibility_scale_changed", scale_callable):
+			control_menu.connect("accessibility_scale_changed", scale_callable)
+	if control_menu.has_method("set_accessibility_scale"):
+		control_menu.call("set_accessibility_scale", _accessibility_scale)
+
+
 func _toggle_production_panel() -> void:
 	if prod_panel == null:
 		return
@@ -433,13 +559,12 @@ func _toggle_production_panel() -> void:
 
 
 func _toggle_controls_menu() -> void:
-	var controls_menu := $Camera2D/CanvasLayer/ControlMenu
 	var anchor_rect := _get_top_menu_command_rect(COMMAND_CONTROLS)
-	if controls_menu != null and controls_menu.has_method("toggle_panel_at"):
-		controls_menu.call("toggle_panel_at", anchor_rect)
+	if control_menu != null and control_menu.has_method("toggle_panel_at"):
+		control_menu.call("toggle_panel_at", anchor_rect)
 		return
-	if controls_menu != null and controls_menu.has_method("toggle_panel"):
-		controls_menu.call("toggle_panel")
+	if control_menu != null and control_menu.has_method("toggle_panel"):
+		control_menu.call("toggle_panel")
 
 
 func _toggle_patch_notes() -> void:
@@ -474,6 +599,17 @@ func _is_rail_flow_rate_visible() -> bool:
 	return true
 
 
+func _toggle_flow_simulation_view() -> void:
+	_flow_simulation_enabled = not _flow_simulation_enabled
+	if path_manager != null and path_manager.has_method("set_flow_simulation_enabled"):
+		path_manager.call("set_flow_simulation_enabled", _flow_simulation_enabled)
+	if _flow_simulation_enabled:
+		_flow_simulation_state.clear()
+		_refresh_flow_simulation_view()
+	elif path_manager != null and path_manager.has_method("clear_flow_simulation_result"):
+		path_manager.call("clear_flow_simulation_result")
+
+
 func _get_top_menu_command_rect(command_id: StringName) -> Rect2:
 	if top_menu_bar != null and top_menu_bar.has_method("get_command_global_rect"):
 		var rect = top_menu_bar.call("get_command_global_rect", command_id)
@@ -486,15 +622,67 @@ func get_ui_scale() -> float:
 	return _ui_scale
 
 
+func get_accessibility_scale() -> float:
+	return _accessibility_scale
+
+
 func get_ui_scale_tier() -> int:
 	return _ui_scale_tier
 
 
+func set_accessibility_scale(accessibility_scale: float, persist := true) -> void:
+	var next_scale := UiScale.clamp_accessibility_scale(accessibility_scale)
+	if is_equal_approx(_accessibility_scale, next_scale):
+		_sync_accessibility_controls()
+		return
+
+	_accessibility_scale = next_scale
+	_refresh_ui_scale(true)
+	_apply_ui_scale()
+	_apply_visual_theme()
+	Adjust_ui_for_resolution()
+	_layout_what_if_machine_overlay()
+	if persist:
+		_save_accessibility_preferences()
+	call_deferred("_refresh_grid_visibility")
+
+
+func _on_accessibility_scale_changed(accessibility_scale: float) -> void:
+	set_accessibility_scale(accessibility_scale)
+
+
+func _sync_accessibility_controls() -> void:
+	if control_menu != null and control_menu.has_method("set_accessibility_scale"):
+		control_menu.call("set_accessibility_scale", _accessibility_scale)
+
+
+func _load_accessibility_preferences() -> void:
+	var config := ConfigFile.new()
+	var load_result := config.load(UI_PREFS_CONFIG_PATH)
+	if load_result != OK:
+		_accessibility_scale = UiScale.ACCESSIBILITY_DEFAULT_SCALE
+		return
+	if not config.has_section_key(UI_PREFS_SECTION, ACCESSIBILITY_SCALE_KEY):
+		_accessibility_scale = UiScale.ACCESSIBILITY_DEFAULT_SCALE
+		return
+	_accessibility_scale = UiScale.clamp_accessibility_scale(float(config.get_value(UI_PREFS_SECTION, ACCESSIBILITY_SCALE_KEY, UiScale.ACCESSIBILITY_DEFAULT_SCALE)))
+
+
+func _save_accessibility_preferences() -> void:
+	var config := ConfigFile.new()
+	config.set_value(UI_PREFS_SECTION, ACCESSIBILITY_SCALE_KEY, _accessibility_scale)
+	var save_result := config.save(UI_PREFS_CONFIG_PATH)
+	if save_result != OK:
+		push_warning("Failed to save UI preferences to %s" % UI_PREFS_CONFIG_PATH)
+
+
 func _refresh_ui_scale(force := false) -> bool:
 	var viewport_size = get_viewport().size
-	var next_scale := UiScale.scale_for_viewport(viewport_size)
+	var next_viewport_scale := UiScale.scale_for_viewport(viewport_size)
+	var next_scale := UiScale.combined_scale(viewport_size, _accessibility_scale)
 	var next_tier := UiScale.tier_for_viewport(viewport_size)
-	var changed := force or not is_equal_approx(_ui_scale, next_scale) or _ui_scale_tier != next_tier
+	var changed := force or not is_equal_approx(_ui_scale, next_scale) or not is_equal_approx(_viewport_ui_scale, next_viewport_scale) or _ui_scale_tier != next_tier
+	_viewport_ui_scale = next_viewport_scale
 	_ui_scale = next_scale
 	_ui_scale_tier = next_tier
 	return changed
@@ -508,9 +696,10 @@ func _apply_ui_scale() -> void:
 	_apply_button_visual_scale(prod_menu, Vector2(136, 136))
 	_apply_button_visual_scale(what_if_button, Vector2(72, 72))
 
-	var control_menu := $Camera2D/CanvasLayer/ControlMenu
 	if control_menu != null and control_menu.has_method("set_ui_scale"):
 		control_menu.call("set_ui_scale", _ui_scale)
+	if control_menu != null and control_menu.has_method("set_accessibility_scale"):
+		control_menu.call("set_accessibility_scale", _accessibility_scale)
 	_apply_button_visual_scale(control_menu as BaseButton, Vector2(72, 72))
 
 	if patch_notes_button != null and patch_notes_button.has_method("set_ui_scale"):
@@ -522,6 +711,11 @@ func _apply_ui_scale() -> void:
 
 	if prod_panel != null and prod_panel.has_method("set_ui_scale"):
 		prod_panel.call("set_ui_scale", _ui_scale)
+
+	if path_manager != null and path_manager.has_method("set_ui_scale"):
+		path_manager.call("set_ui_scale", _ui_scale)
+
+	_apply_building_ui_scale()
 
 	if rail_version_dropdown != null:
 		rail_version_dropdown.custom_minimum_size = _scaled_vec2(RAIL_VERSION_DROPDOWN_SIZE)
@@ -570,6 +764,12 @@ func _apply_resource_summary_scale() -> void:
 	if summary_panel == null:
 		return
 	summary_panel.scale = Vector2(_ui_scale, _ui_scale)
+
+
+func _apply_building_ui_scale() -> void:
+	for building in get_tree().get_nodes_in_group("buildings"):
+		if building != null and is_instance_valid(building) and building.has_method("set_ui_scale"):
+			building.call("set_ui_scale", _ui_scale)
 
 
 func _scaled(value: float) -> float:
@@ -1337,35 +1537,124 @@ func _connect_what_if_generation_rails(graph: Dictionary) -> void:
 		if producers.is_empty() or consumers.is_empty():
 			continue
 
-		var input_index := int(edge.get("input_index", 0))
-		var bus_groups := _get_what_if_bus_groups_for_node(from_node)
-		for bus_index in range(bus_groups.size()):
-			var bus_group: Dictionary = bus_groups[bus_index]
-			var bus_producers: Array = bus_group.get("producers", [])
-			if bus_producers.is_empty():
+		var flow_assignments := _get_what_if_flow_assignments_for_edge(edge, from_node, to_node)
+		for assignment_variant in flow_assignments:
+			var assignment: Dictionary = assignment_variant
+			var from_building := assignment.get("from_building") as Node2D
+			var to_building := assignment.get("to_building") as Node2D
+			if from_building == null or to_building == null:
 				continue
 
-			var bus_consumers := _get_what_if_bus_consumers(consumers, bus_index, bus_groups.size())
-			var rail_version := _get_what_if_rail_version_for_rate(float(bus_group.get("rate", 0.0)))
-			var connection_count = maxi(bus_producers.size(), bus_consumers.size())
+			var input_index := int(edge.get("input_index", 0))
+			var to_port := _get_what_if_input_port_path(to_building, input_index)
+			var from_port := _get_what_if_output_port_path(from_building)
+			if String(from_port) == "" or String(to_port) == "":
+				continue
 
-			for index in range(connection_count):
-				var from_building := bus_producers[index % bus_producers.size()] as Node2D
-				var to_building := bus_consumers[index % bus_consumers.size()] as Node2D
-				if from_building == null or to_building == null:
-					continue
+			var connection_key := "%s|%s|%s" % [from_building.get_instance_id(), to_building.get_instance_id(), String(to_port)]
+			if connected_paths.has(connection_key):
+				continue
+			connected_paths[connection_key] = true
 
-				var to_port := _get_what_if_input_port_path(to_building, input_index)
-				var from_port := _get_what_if_output_port_path(from_building)
-				if String(from_port) == "" or String(to_port) == "":
-					continue
+			var assigned_rate := float(assignment.get("rate", 0.0))
+			var rail_version := _get_what_if_rail_version_for_rate(assigned_rate)
+			_connect_what_if_generation_path(from_building, from_port, to_building, to_port, rail_version)
 
-				var connection_key := "%s|%s|%s" % [from_building.get_instance_id(), to_building.get_instance_id(), String(to_port)]
-				if connected_paths.has(connection_key):
-					continue
-				connected_paths[connection_key] = true
+	_validate_what_if_generation_flow()
 
-				_connect_what_if_generation_path(from_building, from_port, to_building, to_port, rail_version)
+
+func _get_what_if_flow_assignments_for_edge(edge: Dictionary, from_node: Dictionary, to_node: Dictionary) -> Array[Dictionary]:
+	var producers: Array = from_node.get("instances", [])
+	var consumers: Array = to_node.get("instances", [])
+	if producers.is_empty() or consumers.is_empty():
+		return []
+
+	var producer_output := maxf(float(from_node.get("output_qty", 0.0)), 0.0)
+	var consumer_demand := _get_what_if_edge_consumer_demand(edge, consumers.size())
+	if producer_output <= 0.0 or consumer_demand <= 0.0:
+		return []
+
+	var producer_entries: Array[Dictionary] = []
+	for producer in producers:
+		if producer is Node2D:
+			producer_entries.append({
+				"building": producer,
+				"remaining": producer_output,
+			})
+
+	var consumer_entries: Array[Dictionary] = []
+	for consumer in consumers:
+		if consumer is Node2D:
+			consumer_entries.append({
+				"building": consumer,
+				"remaining": consumer_demand,
+			})
+
+	var assignments_by_key := {}
+	var assignment_order: Array[String] = []
+	var producer_index := 0
+	var consumer_index := 0
+	while producer_index < producer_entries.size() and consumer_index < consumer_entries.size():
+		var producer_entry: Dictionary = producer_entries[producer_index]
+		var consumer_entry: Dictionary = consumer_entries[consumer_index]
+		var available := float(producer_entry.get("remaining", 0.0))
+		var needed := float(consumer_entry.get("remaining", 0.0))
+		if available <= 0.001:
+			producer_index += 1
+			continue
+		if needed <= 0.001:
+			consumer_index += 1
+			continue
+
+		var assigned = minf(available, needed)
+		_merge_what_if_flow_assignment(
+			assignments_by_key,
+			assignment_order,
+			producer_entry.get("building") as Node2D,
+			consumer_entry.get("building") as Node2D,
+			assigned
+		)
+
+		producer_entry["remaining"] = available - assigned
+		consumer_entry["remaining"] = needed - assigned
+		producer_entries[producer_index] = producer_entry
+		consumer_entries[consumer_index] = consumer_entry
+
+	var assignments: Array[Dictionary] = []
+	for key in assignment_order:
+		assignments.append(assignments_by_key[key])
+	return assignments
+
+
+func _get_what_if_edge_consumer_demand(edge: Dictionary, consumer_count: int) -> float:
+	if consumer_count <= 0:
+		return 0.0
+	return maxf(float(edge.get("required_qty", 0.0)) / float(consumer_count), 0.0)
+
+
+func _merge_what_if_flow_assignment(assignments_by_key: Dictionary, assignment_order: Array[String], from_building: Node2D, to_building: Node2D, rate: float) -> void:
+	if from_building == null or to_building == null or rate <= 0.0:
+		return
+
+	var key := "%s|%s" % [from_building.get_instance_id(), to_building.get_instance_id()]
+	if not assignments_by_key.has(key):
+		assignments_by_key[key] = {
+			"from_building": from_building,
+			"to_building": to_building,
+			"rate": 0.0,
+		}
+		assignment_order.append(key)
+
+	var assignment: Dictionary = assignments_by_key[key]
+	assignment["rate"] = float(assignment.get("rate", 0.0)) + rate
+	assignments_by_key[key] = assignment
+
+
+func _validate_what_if_generation_flow() -> void:
+	if _flow_simulation_enabled:
+		_refresh_flow_simulation_view()
+	else:
+		_clear_flow_simulation_cache()
 
 
 func _connect_what_if_generation_path(from_building: Node2D, from_port: NodePath, to_building: Node2D, to_port: NodePath, rail_version: int) -> void:
@@ -1618,6 +1907,8 @@ func _clear_scene_plan() -> void:
 		ledger.gross_negative_totals.clear()
 		ledger.by_source.clear()
 		ledger.totals_changed.emit(ledger.net_totals, ledger.gross_totals, ledger.gross_negative_totals)
+	_clear_flow_simulation_cache()
+	_queue_flow_simulation_refresh()
 
 func _download_save_to_browser() -> void:
 	var save_state := _collect_save_state()
@@ -2293,6 +2584,8 @@ func _apply_save_state(save_state: Dictionary, restore_view_state := true) -> vo
 		meteor_core_cost_label.text = str(cost_totals.get("meteor_cores", 0))
 
 	_rebuild_production_ledger(loaded_buildings)
+	_clear_flow_simulation_cache()
+	_queue_flow_simulation_refresh()
 
 func _clear_existing_plan() -> void:
 	if build_manager.has_method("cancel_build"):
@@ -2308,6 +2601,7 @@ func _clear_existing_plan() -> void:
 
 	build_manager.occupied_cells.clear()
 	_reset_prod_ledger()
+	_clear_flow_simulation_cache()
 
 func _reset_prod_ledger() -> void:
 	if not get_tree().root.has_node("ProdLedger"):
@@ -2436,7 +2730,7 @@ func _restore_paths(path_entries: Array, loaded_buildings: Array[Node2D]) -> voi
 		var to_pos = path_manager._get_port_center(to_b, to_port)
 		if from_pos == null or to_pos == null:
 			continue
-		path_manager._finalize_path(from_b, from_port, from_pos, to_b, to_port, to_pos, rail_version, false)
+		path_manager._finalize_path(from_b, from_port, from_pos, to_b, to_port, to_pos, rail_version, false, false)
 
 func _rebuild_occupancy_from_scene(loaded_buildings: Array[Node2D]) -> void:
 	build_manager.occupied_cells.clear()

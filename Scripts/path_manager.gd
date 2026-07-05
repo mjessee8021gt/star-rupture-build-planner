@@ -1,6 +1,9 @@
 extends Node2D
 
 const Palette = preload("res://Scripts/palette.gd")
+const UiScale = preload("res://Scripts/ui_scale.gd")
+
+signal rail_graph_changed
 
 # Styling
 @export var preview_color := Palette.PATH_PREVIEW
@@ -50,6 +53,14 @@ const RAIL_CAPACITY_BADGE_SIZE := Vector2(46.0, 24.0)
 const RAIL_CAPACITY_BADGE_FILL := Color(0.08, 0.10, 0.13, 0.94)
 const RAIL_CAPACITY_BADGE_BORDER := Color(0.92, 0.95, 0.98, 0.72)
 const RAIL_CAPACITY_BADGE_FONT_SIZE := 13
+const RAIL_CAPACITY_BADGE_TEXT := Palette.TEXT_BADGE
+const RAIL_CAPACITY_BADGE_TEXT_OUTLINE := Color(0, 0, 0, 0.78)
+const FLOW_BADGE_TEXT := Color(0.04, 0.06, 0.08, 1.0)
+const FLOW_BADGE_TEXT_OUTLINE := Color(1.0, 1.0, 1.0, 0.42)
+const FLOW_BADGE_TEXT_OUTLINE_SIZE := 1
+const RAIL_CAPACITY_BADGE_MOUSE_FILTER := Control.MOUSE_FILTER_PASS
+const FLOW_BADGE_FILL_ALPHA := 0.86
+const FLOW_EPSILON := 0.001
 
 # Drag state
 var _preview_container: Path2D = null
@@ -61,6 +72,9 @@ var _selected_rail_version := RAIL_VERSION_V1
 var _rail_visibility_mode := RAIL_VISIBILITY_STANDARD
 var _high_visibility_alpha := RAIL_HIGH_VISIBILITY_ALPHA_DEFAULT
 var _rail_flow_rate_visible := true
+var _flow_simulation_enabled := false
+var _flow_simulation_edge_results: Dictionary = {}
+var _ui_scale := 1.0
 
 # Cached nodes
 var _build_manager: Node = null
@@ -79,6 +93,12 @@ func _ready() -> void:
 	if not get_tree().node_removed.is_connected(_on_node_removed):
 		get_tree().node_removed.connect(_on_node_removed)
 	call_deferred("_refresh_path_overlap_shading")
+
+
+func set_ui_scale(ui_scale: float) -> void:
+	_ui_scale = maxf(ui_scale, 0.001)
+	_refresh_all_rail_capacity_badges()
+
 
 func set_rail_version_selector(selector: OptionButton) -> void:
 	if _rail_version_selector != null and is_instance_valid(_rail_version_selector):
@@ -140,6 +160,24 @@ func is_rail_flow_rate_visible() -> bool:
 func toggle_rail_flow_rate_visible() -> bool:
 	set_rail_flow_rate_visible(not _rail_flow_rate_visible)
 	return _rail_flow_rate_visible
+
+func set_flow_simulation_enabled(enabled: bool) -> void:
+	if _flow_simulation_enabled == enabled:
+		return
+	_flow_simulation_enabled = enabled
+	_refresh_all_rail_capacity_badges()
+
+func is_flow_simulation_enabled() -> bool:
+	return _flow_simulation_enabled
+
+func set_flow_simulation_result(result: Dictionary) -> void:
+	var edges = result.get("edges", {})
+	_flow_simulation_edge_results = edges.duplicate(true) if edges is Dictionary else {}
+	_refresh_all_rail_capacity_badges()
+
+func clear_flow_simulation_result() -> void:
+	_flow_simulation_edge_results.clear()
+	_refresh_all_rail_capacity_badges()
 
 func _apply_rail_visibility_mode() -> void:
 	var next_alpha := RAIL_ALPHA_VISIBLE
@@ -1609,39 +1647,57 @@ func _get_rail_capacity_text(rail_version: int) -> String:
 			return "120"
 
 
+func _make_rail_capacity_badge_style(fill: Color, border: Color) -> StyleBoxFlat:
+	var badge_style := Palette.make_panel_style(fill, border, _scaled_int(6), _scaled_int(1))
+	badge_style.set_content_margin(SIDE_LEFT, _scaled(6))
+	badge_style.set_content_margin(SIDE_RIGHT, _scaled(6))
+	badge_style.set_content_margin(SIDE_TOP, _scaled(3))
+	badge_style.set_content_margin(SIDE_BOTTOM, _scaled(3))
+	return badge_style
+
+
+func _apply_rail_capacity_badge_style(badge: PanelContainer, fill: Color, border: Color) -> void:
+	if badge == null:
+		return
+	badge.add_theme_stylebox_override("panel", _make_rail_capacity_badge_style(fill, border))
+
+
 func _get_rail_capacity_badge(path: Path2D) -> PanelContainer:
 	var badge := path.get_node_or_null(RAIL_CAPACITY_BADGE_NAME) as PanelContainer
 	if badge != null:
+		_configure_rail_capacity_badge_hover(badge)
 		return badge
 
 	badge = PanelContainer.new()
 	badge.name = RAIL_CAPACITY_BADGE_NAME
 	badge.z_index = 3
-	badge.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	badge.custom_minimum_size = RAIL_CAPACITY_BADGE_SIZE
-	badge.size = RAIL_CAPACITY_BADGE_SIZE
+	_configure_rail_capacity_badge_hover(badge)
+	var badge_size := _scaled_vec2(RAIL_CAPACITY_BADGE_SIZE)
+	badge.custom_minimum_size = badge_size
+	badge.size = badge_size
 
-	var badge_style := Palette.make_panel_style(RAIL_CAPACITY_BADGE_FILL, RAIL_CAPACITY_BADGE_BORDER, 6, 1)
-	badge_style.set_content_margin(SIDE_LEFT, 6)
-	badge_style.set_content_margin(SIDE_RIGHT, 6)
-	badge_style.set_content_margin(SIDE_TOP, 3)
-	badge_style.set_content_margin(SIDE_BOTTOM, 3)
-	badge.add_theme_stylebox_override("panel", badge_style)
+	_apply_rail_capacity_badge_style(badge, RAIL_CAPACITY_BADGE_FILL, RAIL_CAPACITY_BADGE_BORDER)
 
 	var label := Label.new()
 	label.name = RAIL_CAPACITY_TEXT_NAME
 	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	label.custom_minimum_size = Vector2(RAIL_CAPACITY_BADGE_SIZE.x - 12.0, RAIL_CAPACITY_BADGE_SIZE.y - 6.0)
-	label.add_theme_color_override("font_color", Palette.TEXT_BADGE)
-	label.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.78))
-	label.add_theme_constant_override("outline_size", 2)
-	label.add_theme_font_size_override("font_size", RAIL_CAPACITY_BADGE_FONT_SIZE)
+	label.custom_minimum_size = Vector2(max(badge_size.x - _scaled(12.0), 1.0), max(badge_size.y - _scaled(6.0), 1.0))
+	label.add_theme_color_override("font_color", RAIL_CAPACITY_BADGE_TEXT)
+	label.add_theme_color_override("font_outline_color", RAIL_CAPACITY_BADGE_TEXT_OUTLINE)
+	label.add_theme_constant_override("outline_size", _scaled_int(2))
+	label.add_theme_font_size_override("font_size", UiScale.font_size(RAIL_CAPACITY_BADGE_FONT_SIZE, _ui_scale))
 	badge.add_child(label)
 
 	path.add_child(badge)
 	return badge
+
+
+func _configure_rail_capacity_badge_hover(badge: PanelContainer) -> void:
+	if badge == null:
+		return
+	badge.mouse_filter = RAIL_CAPACITY_BADGE_MOUSE_FILTER
 
 
 func _refresh_rail_capacity_badge_for_path(path: Path2D, line: Line2D) -> void:
@@ -1667,13 +1723,126 @@ func _refresh_rail_capacity_badge_for_path(path: Path2D, line: Line2D) -> void:
 		badge.visible = false
 		return
 
+	var badge_state := _get_rail_capacity_badge_state(path)
+	_apply_rail_capacity_badge_style(
+		badge,
+		badge_state.get("fill", RAIL_CAPACITY_BADGE_FILL),
+		badge_state.get("border", RAIL_CAPACITY_BADGE_BORDER)
+	)
+	badge.tooltip_text = str(badge_state.get("tooltip", ""))
+
 	var label := badge.get_node_or_null(RAIL_CAPACITY_TEXT_NAME) as Label
 	if label != null:
-		label.text = _get_rail_capacity_text(get_path_rail_version(path))
+		label.text = str(badge_state.get("text", _get_rail_capacity_text(get_path_rail_version(path))))
+		label.tooltip_text = badge.tooltip_text
+		label.add_theme_color_override("font_color", badge_state.get("font_color", RAIL_CAPACITY_BADGE_TEXT))
+		label.add_theme_color_override("font_outline_color", badge_state.get("font_outline_color", RAIL_CAPACITY_BADGE_TEXT_OUTLINE))
+		label.add_theme_constant_override("outline_size", _scaled_int(int(badge_state.get("outline_size", 2))))
+		label.add_theme_font_size_override("font_size", UiScale.font_size(RAIL_CAPACITY_BADGE_FONT_SIZE, _ui_scale))
+		var label_size := Vector2(max(_scaled(RAIL_CAPACITY_BADGE_SIZE.x - 12.0), 1.0), max(_scaled(RAIL_CAPACITY_BADGE_SIZE.y - 6.0), 1.0))
+		label.custom_minimum_size = label_size
+		label.size = label_size
 
-	badge.size = RAIL_CAPACITY_BADGE_SIZE
-	badge.position = Vector2(sample.get("position", Vector2.ZERO)) - (RAIL_CAPACITY_BADGE_SIZE * 0.5)
+	var badge_size := _scaled_vec2(RAIL_CAPACITY_BADGE_SIZE)
+	badge.custom_minimum_size = badge_size
+	badge.size = badge_size
+	badge.position = Vector2(sample.get("position", Vector2.ZERO)) - (badge_size * 0.5)
 	badge.visible = true
+
+
+func _get_rail_capacity_badge_state(path: Path2D) -> Dictionary:
+	var capacity_text := _get_rail_capacity_text(get_path_rail_version(path))
+	if not _flow_simulation_enabled:
+		return {
+			"text": capacity_text,
+			"fill": RAIL_CAPACITY_BADGE_FILL,
+			"border": RAIL_CAPACITY_BADGE_BORDER,
+			"tooltip": "Rail capacity: %s upm" % capacity_text,
+			"font_color": RAIL_CAPACITY_BADGE_TEXT,
+			"font_outline_color": RAIL_CAPACITY_BADGE_TEXT_OUTLINE,
+			"outline_size": 2,
+		}
+
+	var edge_result := _get_flow_edge_result_for_path(path)
+	if edge_result.is_empty():
+		return {
+			"text": capacity_text,
+			"fill": RAIL_CAPACITY_BADGE_FILL,
+			"border": RAIL_CAPACITY_BADGE_BORDER,
+			"tooltip": "Flow simulation has no result for this rail.",
+			"font_color": RAIL_CAPACITY_BADGE_TEXT,
+			"font_outline_color": RAIL_CAPACITY_BADGE_TEXT_OUTLINE,
+			"outline_size": 2,
+		}
+
+	var delta := _get_flow_capacity_delta(edge_result)
+	var flow_color := _get_flow_badge_color(delta)
+	return {
+		"text": _format_flow_delta(delta),
+		"fill": Palette.with_alpha(flow_color, FLOW_BADGE_FILL_ALPHA),
+		"border": flow_color,
+		"tooltip": _get_flow_badge_tooltip(edge_result, delta),
+		"font_color": FLOW_BADGE_TEXT,
+		"font_outline_color": FLOW_BADGE_TEXT_OUTLINE,
+		"outline_size": FLOW_BADGE_TEXT_OUTLINE_SIZE,
+	}
+
+
+func _get_flow_edge_result_for_path(path: Path2D) -> Dictionary:
+	var edge_id := _get_flow_edge_id_for_path(path)
+	var edge_result = _flow_simulation_edge_results.get(edge_id, {})
+	return edge_result if edge_result is Dictionary else {}
+
+
+func _get_flow_edge_id_for_path(path: Path2D) -> String:
+	if path == null:
+		return ""
+	return "rail_%d" % path.get_instance_id()
+
+
+func _get_flow_capacity_delta(edge_result: Dictionary) -> float:
+	if bool(edge_result.get("unlimited", false)):
+		return 0.0
+	return float(edge_result.get("requested_upm", 0.0)) - float(edge_result.get("capacity_upm", 0.0))
+
+
+func _get_flow_badge_color(delta: float) -> Color:
+	var rounded := _rounded_flow_delta(delta)
+	if rounded > 0:
+		return Palette.BUILDING_OUTLINE_CRAFTING
+	if rounded < 0:
+		return Palette.BUILDING_OUTLINE_PROCESSING
+	return Palette.BUILDING_OUTLINE_EXTRACTION
+
+
+func _format_flow_delta(delta: float) -> String:
+	var rounded := _rounded_flow_delta(delta)
+	if rounded == 0:
+		return "0"
+	if rounded > 0:
+		return "+%d" % rounded
+	return str(rounded)
+
+
+func _rounded_flow_delta(delta: float) -> int:
+	return int(round(delta))
+
+
+func _get_flow_badge_tooltip(edge_result: Dictionary, delta: float) -> String:
+	var rounded := _rounded_flow_delta(delta)
+	var state_line := "Fully saturated"
+	if rounded > 0:
+		state_line = "Over capacity by %d upm" % rounded
+	elif rounded < 0:
+		state_line = "Spare capacity %d upm" % abs(rounded)
+
+	return "%s\nRequested %.0f / %.0f upm\nUsed %.0f upm\nBlocked %.0f upm" % [
+		state_line,
+		float(edge_result.get("requested_upm", 0.0)),
+		float(edge_result.get("capacity_upm", 0.0)),
+		float(edge_result.get("used_upm", 0.0)),
+		float(edge_result.get("blocked_upm", 0.0)),
+	]
 
 
 func _set_rail_capacity_badge_visible(path: Path2D, visible: bool) -> void:
@@ -1701,6 +1870,18 @@ func _refresh_all_rail_capacity_badges() -> void:
 			continue
 
 		_refresh_rail_capacity_badge_for_path(path, line)
+
+
+func _scaled(value: float) -> float:
+	return UiScale.scaled(value, _ui_scale)
+
+
+func _scaled_int(value: float) -> int:
+	return UiScale.scaled_int(value, _ui_scale)
+
+
+func _scaled_vec2(value: Vector2) -> Vector2:
+	return UiScale.scaled_vec2(value, _ui_scale)
 
 
 func _get_overlap_segments_for_path(path: Path2D) -> Array:
@@ -1960,6 +2141,7 @@ func try_remove_path_under_mouse() -> bool:
 	var history_before := _capture_history_state()
 	_detach_and_queue_free_path(target_path)
 	_refresh_path_overlap_shading()
+	rail_graph_changed.emit()
 	_commit_history_action("Rail deleted", history_before)
 	return true
 
@@ -2140,7 +2322,7 @@ func _on_port_end(building: Node2D, port_name: String, _mouse_pos: Vector2) -> v
 	_finalize_path(_from_building, _from_port_path, from_pos, building, to_port_path, to_pos)
 
 
-func _finalize_path(from_b: Node2D, from_port: NodePath, from_pos: Vector2, to_b: Node2D, to_port: NodePath, to_pos: Vector2, rail_version: int = -1, record_history := true) -> void:
+func _finalize_path(from_b: Node2D, from_port: NodePath, from_pos: Vector2, to_b: Node2D, to_port: NodePath, to_pos: Vector2, rail_version: int = -1, record_history := true, emit_graph_update := true) -> void:
 	var history_before := _capture_history_state() if record_history else {}
 	var path := Path2D.new()
 	var line := Line2D.new()
@@ -2169,6 +2351,8 @@ func _finalize_path(from_b: Node2D, from_port: NodePath, from_pos: Vector2, to_b
 		from_b.cancel_port_drag()
 
 	_cleanup_preview()
+	if emit_graph_update:
+		rail_graph_changed.emit()
 	if record_history:
 		_commit_history_action("Rail created", history_before)
 
@@ -2238,6 +2422,8 @@ func remove_paths_for_building(building: Node2D) -> void:
 	for n in to_delete:
 		_detach_and_queue_free_path(n)
 	_refresh_path_overlap_shading()
+	if not to_delete.is_empty():
+		rail_graph_changed.emit()
 
 func _detach_and_queue_free_path(path: Node) -> void:
 	if path == null:

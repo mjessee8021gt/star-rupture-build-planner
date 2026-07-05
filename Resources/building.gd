@@ -3,6 +3,7 @@ extends Node2D
 class_name Building
 
 const Palette = preload("res://Scripts/palette.gd")
+const UiScale = preload("res://Scripts/ui_scale.gd")
 
 enum BuildCostType {
 	BBM,
@@ -34,8 +35,13 @@ var _dragging_port := ""
 var _dragging := false
 var _themed_port_buttons: Array[Button] = []
 var _port_palette_refresh_queued := false
+var _ui_scale := 1.0
+var _base_control_rects: Dictionary = {}
+var _last_scaled_control_rects: Dictionary = {}
+var _base_font_sizes: Dictionary = {}
 
 func _enter_tree() -> void:
+	call_deferred("_inherit_ui_scale_from_scene")
 	call_deferred("_apply_visual_theme")
 
 func _process(_delta: float):
@@ -73,6 +79,22 @@ func _apply_visual_theme() -> void:
 	_theme_badges(self)
 	_theme_option_buttons(self)
 	_normalize_port_palette()
+	_apply_accessibility_scale(self)
+
+
+func set_ui_scale(ui_scale: float) -> void:
+	_ui_scale = maxf(ui_scale, 0.001)
+	if is_inside_tree():
+		_apply_accessibility_scale(self)
+
+
+func _inherit_ui_scale_from_scene() -> void:
+	var node := get_parent()
+	while node != null:
+		if node.has_method("get_ui_scale"):
+			set_ui_scale(float(node.call("get_ui_scale")))
+			return
+		node = node.get_parent()
 
 
 func _cache_port_buttons() -> void:
@@ -233,6 +255,102 @@ func _theme_option_buttons(node: Node) -> void:
 			option.add_theme_stylebox_override("disabled", Palette.make_button_style(Palette.BUTTON_PRESSED, 6))
 
 		_theme_option_buttons(child)
+
+
+func _apply_accessibility_scale(node: Node) -> void:
+	for child in node.get_children():
+		if child is Control:
+			var control := child as Control
+			if _is_scalable_building_control(control):
+				_scale_building_control(control)
+				if child is Label:
+					_scale_control_font(child as Control, &"font_size")
+				elif child is OptionButton:
+					_scale_option_button(child as OptionButton)
+
+		_apply_accessibility_scale(child)
+
+
+func _is_scalable_building_control(control: Control) -> bool:
+	if control == null:
+		return false
+	if control.is_in_group("port_button"):
+		return false
+	if _is_descendant_of_port_root(control):
+		return false
+	return control is Label or control is ColorRect or control is OptionButton
+
+
+func _is_descendant_of_port_root(node: Node) -> bool:
+	var parent := node.get_parent()
+	while parent != null and parent != self:
+		if parent.name == "Ports":
+			return true
+		parent = parent.get_parent()
+	return false
+
+
+func _scale_building_control(control: Control) -> void:
+	var base_rect := _get_base_control_rect(control)
+	var scaled_size := UiScale.scaled_vec2(base_rect.size, _ui_scale)
+	var scaled_position := base_rect.position + ((base_rect.size - scaled_size) * 0.5)
+	control.scale = Vector2.ONE
+	control.position = scaled_position
+	control.size = scaled_size
+	control.custom_minimum_size = scaled_size
+	_last_scaled_control_rects[control.get_instance_id()] = Rect2(scaled_position, scaled_size)
+
+
+func _get_base_control_rect(control: Control) -> Rect2:
+	var key := control.get_instance_id()
+	var current_rect := Rect2(control.position, control.size)
+	if _base_control_rects.has(key):
+		var last_rect: Rect2 = _last_scaled_control_rects.get(key, Rect2())
+		if not _rects_are_close(current_rect, last_rect):
+			var divisor = maxf(_ui_scale, 0.001)
+			_base_control_rects[key] = Rect2(current_rect.position, current_rect.size / divisor)
+		return _base_control_rects[key]
+
+	_base_control_rects[key] = current_rect
+	return current_rect
+
+
+func _rects_are_close(a: Rect2, b: Rect2) -> bool:
+	return a.position.distance_to(b.position) <= 0.01 and a.size.distance_to(b.size) <= 0.01
+
+
+func _scale_control_font(control: Control, theme_name: StringName) -> void:
+	if control == null:
+		return
+	var key := "%d:%s" % [control.get_instance_id(), String(theme_name)]
+	if not _base_font_sizes.has(key):
+		_base_font_sizes[key] = max(control.get_theme_font_size(theme_name), 1)
+	UiScale.apply_font_size(control, theme_name, int(_base_font_sizes[key]), _ui_scale)
+
+
+func _scale_option_button(option: OptionButton) -> void:
+	_scale_control_font(option, &"font_size")
+	option.add_theme_stylebox_override("normal", Palette.make_button_style(Palette.BUTTON_FILL, _scaled_int(6), _scaled_int(1)))
+	option.add_theme_stylebox_override("hover", Palette.make_button_style(Palette.BUTTON_HOVER, _scaled_int(6), _scaled_int(1)))
+	option.add_theme_stylebox_override("pressed", Palette.make_button_style(Palette.BUTTON_PRESSED, _scaled_int(6), _scaled_int(1)))
+	option.add_theme_stylebox_override("focus", Palette.make_button_style(Palette.BUTTON_HOVER, _scaled_int(6), _scaled_int(1)))
+	option.add_theme_stylebox_override("disabled", Palette.make_button_style(Palette.BUTTON_PRESSED, _scaled_int(6), _scaled_int(1)))
+	var popup := option.get_popup()
+	if popup == null:
+		return
+	UiScale.apply_font_size(popup, &"font_size", int(_base_font_sizes.get("%d:%s" % [option.get_instance_id(), "font_size"], 16)), _ui_scale)
+	popup.add_theme_stylebox_override("panel", Palette.make_panel_style(Palette.SCENE_PANEL_FILL, Palette.SCENE_PANEL_BORDER, _scaled_int(6), _scaled_int(1)))
+	popup.add_theme_stylebox_override("hover", Palette.make_button_style(Palette.BUTTON_HOVER, _scaled_int(4), _scaled_int(1)))
+	popup.add_theme_color_override("font_color", Palette.TEXT_PRIMARY)
+	popup.add_theme_color_override("font_hover_color", Palette.TEXT_PRIMARY)
+	popup.add_theme_color_override("font_disabled_color", Palette.TEXT_MUTED)
+	popup.add_theme_constant_override("v_separation", _scaled_int(4))
+	popup.add_theme_constant_override("item_start_padding", _scaled_int(12))
+	popup.add_theme_constant_override("item_end_padding", _scaled_int(16))
+
+
+func _scaled_int(value: float) -> int:
+	return UiScale.scaled_int(value, _ui_scale)
 
 
 func _normalize_port_palette() -> void:
