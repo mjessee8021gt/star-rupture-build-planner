@@ -1,0 +1,3 @@
+# Obsidian development wiki — local documentation, not tracked in the repository.
+# Ignores the Wiki folder itself and every file and folder contained within it.
+/Wiki/
