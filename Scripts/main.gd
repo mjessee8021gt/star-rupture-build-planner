@@ -5,6 +5,7 @@ const UiScale = preload("res://Scripts/ui_scale.gd")
 const WHAT_IF_MACHINE_SCENE := preload("res://Scenes/WhatIfMachine.tscn")
 const FLOW_GRAPH_BUILDER := preload("res://Scripts/FlowGraphBuilder.gd")
 const FLOW_SIMULATOR := preload("res://Scripts/FlowSimulator.gd")
+const PATHING_INTELLIGENCE := preload("res://Scripts/PathingIntelligence.gd")
 
 const SAVE_FILE_EXTENSION := "srbp"
 const SAVE_FORMAT_VERSION := 4
@@ -120,6 +121,7 @@ var _flow_simulation_enabled := false
 var _flow_simulation_refresh_queued := false
 var _flow_simulation_state: Dictionary = {}
 var _last_flow_simulation_result: Dictionary = {}
+var _pathing_intelligence_refresh_queued := false
 var _viewport_ui_scale := 1.0
 var _accessibility_scale := UiScale.ACCESSIBILITY_DEFAULT_SCALE
 var _ui_scale := 1.0
@@ -135,6 +137,7 @@ func _ready() -> void:
 	ibm_cost_label.text = "0"
 	meteor_core_cost_label.text = "0"
 	_setup_flow_simulation_view()
+	_setup_pathing_intelligence()
 	_setup_save_load_ui()
 	_setup_top_menu_bar()
 	_setup_what_if_button()
@@ -268,6 +271,112 @@ func _setup_flow_simulation_view() -> void:
 			var refresh_callable := Callable(self, "_queue_flow_simulation_refresh")
 			if not path_manager.is_connected("rail_graph_changed", refresh_callable):
 				path_manager.connect("rail_graph_changed", refresh_callable)
+
+
+func _setup_pathing_intelligence() -> void:
+	if path_manager != null and path_manager.has_signal("rail_graph_changed"):
+		var refresh_callable := Callable(self, "_queue_pathing_intelligence_refresh")
+		if not path_manager.is_connected("rail_graph_changed", refresh_callable):
+			path_manager.connect("rail_graph_changed", refresh_callable)
+
+	if not get_tree().node_added.is_connected(_on_pathing_scene_node_added):
+		get_tree().node_added.connect(_on_pathing_scene_node_added)
+	if not get_tree().node_removed.is_connected(_on_pathing_scene_node_removed):
+		get_tree().node_removed.connect(_on_pathing_scene_node_removed)
+
+	_connect_pathing_intelligence_to_existing_buildings()
+	call_deferred("_refresh_pathing_intelligence")
+
+
+func _connect_pathing_intelligence_to_existing_buildings() -> void:
+	for building in get_tree().get_nodes_in_group("buildings"):
+		_connect_pathing_intelligence_to_building(building)
+	if buildings_root == null:
+		return
+	for child in buildings_root.get_children():
+		_connect_pathing_intelligence_to_building(child)
+
+
+func _connect_pathing_intelligence_to_building(building: Node) -> void:
+	if building == null:
+		return
+	for option_name in ["Recipe", "Purity", "CoreLevel"]:
+		var option := building.get_node_or_null(option_name) as OptionButton
+		if option == null:
+			continue
+		if bool(option.get_meta(&"pathing2_refresh_connected", false)):
+			continue
+		option.item_selected.connect(Callable(self, "_on_pathing_recipe_option_changed").bind(building))
+		option.set_meta(&"pathing2_refresh_connected", true)
+
+
+func _on_pathing_scene_node_added(node: Node) -> void:
+	if node == null:
+		return
+	if node.has_signal("port_drag_started") or node.is_in_group("buildings") or node.get_node_or_null("Recipe") != null:
+		call_deferred("_connect_pathing_intelligence_to_building", node)
+		_queue_pathing_intelligence_refresh()
+
+
+func _on_pathing_scene_node_removed(node: Node) -> void:
+	if node == null:
+		return
+	if node.has_signal("port_drag_started") or node.is_in_group("buildings"):
+		_queue_pathing_intelligence_refresh()
+
+
+func _on_pathing_recipe_option_changed(_index: int, _building: Node) -> void:
+	_queue_pathing_intelligence_refresh()
+
+
+func _queue_pathing_intelligence_refresh() -> void:
+	if _pathing_intelligence_refresh_queued:
+		return
+	_pathing_intelligence_refresh_queued = true
+	call_deferred("_refresh_pathing_intelligence")
+
+
+func _refresh_pathing_intelligence() -> void:
+	_pathing_intelligence_refresh_queued = false
+	if buildings_root == null or path_manager == null:
+		return
+
+	var graph: Dictionary = FLOW_GRAPH_BUILDER.build_from_scene(buildings_root, path_manager)
+	# Run the flow simulator so sufficiency reflects actually-delivered rates (bus
+	# contention, rail saturation), not just upstream availability. Skip when there
+	# are no rails, since there is nothing to simulate.
+	var simulation: Dictionary = {}
+	var graph_edges = graph.get("edges", [])
+	if graph_edges is Array and not (graph_edges as Array).is_empty():
+		var simulator: RefCounted = FLOW_SIMULATOR.new()
+		simulation = simulator.simulate(graph)
+	var pathing_options := {
+		"world_units_per_tile": _pathing_world_units_per_tile(),
+		"catalog_lookup": Callable(self, "_pathing_catalog_producer_name"),
+	}
+	var assessment: Dictionary = PATHING_INTELLIGENCE.analyze_graph(graph, simulation, pathing_options)
+	PATHING_INTELLIGENCE.apply_scene_assessment(buildings_root, assessment)
+	if path_manager.has_method("set_pathing_intelligence_assessment"):
+		path_manager.call("set_pathing_intelligence_assessment", assessment)
+
+
+func _pathing_world_units_per_tile() -> float:
+	if build_manager != null and "tile_size" in build_manager:
+		return float(build_manager.tile_size)
+	return 0.0
+
+
+# Names the building that produces a resource, for the "no source in this plan" hint.
+# Returns "" when nothing produces it or the registry is unavailable.
+func _pathing_catalog_producer_name(resource: StringName) -> String:
+	var registry := get_node_or_null("/root/RecipeRegistry")
+	if registry == null or not registry.has_method("get_best_recipe_for_output_id"):
+		return ""
+	var recipe = registry.get_best_recipe_for_output_id(resource)
+	if recipe == null:
+		return ""
+	var building_id = registry.get_recipe_building_id(recipe)
+	return String(registry.get_building_display_name(building_id))
 
 
 func _run_current_flow_simulation() -> Dictionary:

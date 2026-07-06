@@ -61,6 +61,7 @@ const FLOW_BADGE_TEXT_OUTLINE_SIZE := 1
 const RAIL_CAPACITY_BADGE_MOUSE_FILTER := Control.MOUSE_FILTER_PASS
 const FLOW_BADGE_FILL_ALPHA := 0.86
 const FLOW_EPSILON := 0.001
+const PATHING_SUPPLY_TOOLTIP_LIMIT := 5
 
 # Drag state
 var _preview_container: Path2D = null
@@ -74,6 +75,7 @@ var _high_visibility_alpha := RAIL_HIGH_VISIBILITY_ALPHA_DEFAULT
 var _rail_flow_rate_visible := true
 var _flow_simulation_enabled := false
 var _flow_simulation_edge_results: Dictionary = {}
+var _pathing_intelligence_edge_supply: Dictionary = {}
 var _ui_scale := 1.0
 
 # Cached nodes
@@ -177,6 +179,15 @@ func set_flow_simulation_result(result: Dictionary) -> void:
 
 func clear_flow_simulation_result() -> void:
 	_flow_simulation_edge_results.clear()
+	_refresh_all_rail_capacity_badges()
+
+func set_pathing_intelligence_assessment(assessment: Dictionary) -> void:
+	var edge_supply = assessment.get("edge_supply", {})
+	_pathing_intelligence_edge_supply = edge_supply.duplicate(true) if edge_supply is Dictionary else {}
+	_refresh_all_rail_capacity_badges()
+
+func clear_pathing_intelligence_assessment() -> void:
+	_pathing_intelligence_edge_supply.clear()
 	_refresh_all_rail_capacity_badges()
 
 func _apply_rail_visibility_mode() -> void:
@@ -1757,7 +1768,7 @@ func _get_rail_capacity_badge_state(path: Path2D) -> Dictionary:
 			"text": capacity_text,
 			"fill": RAIL_CAPACITY_BADGE_FILL,
 			"border": RAIL_CAPACITY_BADGE_BORDER,
-			"tooltip": "Rail capacity: %s upm" % capacity_text,
+			"tooltip": _append_pathing_supply_tooltip("Rail capacity: %s upm" % capacity_text, path),
 			"font_color": RAIL_CAPACITY_BADGE_TEXT,
 			"font_outline_color": RAIL_CAPACITY_BADGE_TEXT_OUTLINE,
 			"outline_size": 2,
@@ -1781,7 +1792,7 @@ func _get_rail_capacity_badge_state(path: Path2D) -> Dictionary:
 		"text": _format_flow_delta(delta),
 		"fill": Palette.with_alpha(flow_color, FLOW_BADGE_FILL_ALPHA),
 		"border": flow_color,
-		"tooltip": _get_flow_badge_tooltip(edge_result, delta),
+		"tooltip": _append_pathing_supply_tooltip(_get_flow_badge_tooltip(edge_result, delta), path),
 		"font_color": FLOW_BADGE_TEXT,
 		"font_outline_color": FLOW_BADGE_TEXT_OUTLINE,
 		"outline_size": FLOW_BADGE_TEXT_OUTLINE_SIZE,
@@ -1843,6 +1854,83 @@ func _get_flow_badge_tooltip(edge_result: Dictionary, delta: float) -> String:
 		float(edge_result.get("used_upm", 0.0)),
 		float(edge_result.get("blocked_upm", 0.0)),
 	]
+
+
+func _append_pathing_supply_tooltip(base_tooltip: String, path: Path2D) -> String:
+	var supply_tooltip := _get_pathing_supply_tooltip(path)
+	if supply_tooltip == "":
+		return base_tooltip
+	return "%s\n%s" % [base_tooltip, supply_tooltip]
+
+
+func _get_pathing_supply_tooltip(path: Path2D) -> String:
+	if path == null:
+		return ""
+	var edge_id := _get_flow_edge_id_for_path(path)
+	var supply = _pathing_intelligence_edge_supply.get(edge_id, {})
+	if not (supply is Dictionary):
+		return ""
+
+	var supply_data: Dictionary = supply
+	var resources: Array = supply_data.get("resources", [])
+	if resources.is_empty():
+		return "Available resources: none detected"
+
+	var facts: Dictionary = supply_data.get("resource_facts", {})
+	var lines: Array[String] = []
+	lines.append("Available: %s" % _join_supply_resource_names(resources, facts))
+	if bool(supply_data.get("is_shared", false)):
+		lines.append("Shared rail: multiple resources available")
+
+	var unused = supply_data.get("unused_resources", [])
+	if unused is Array and not (unused as Array).is_empty():
+		if bool(supply_data.get("is_dead_end", false)):
+			lines.append("Dead-end rail: nothing downstream uses %s" % _join_supply_resource_names(unused, facts))
+		else:
+			lines.append("No downstream consumer: %s" % _join_supply_resource_names(unused, facts))
+
+	var count = mini(resources.size(), PATHING_SUPPLY_TOOLTIP_LIMIT)
+	for i in range(count):
+		var resource = resources[i]
+		var fact: Dictionary = facts.get(resource, {})
+		var origins := _join_supply_origin_labels(fact.get("origins", []))
+		if origins == "":
+			continue
+		lines.append("%s from %s" % [
+			String(fact.get("display_name", _format_resource_name(str(resource)))),
+			origins
+		])
+
+	if resources.size() > PATHING_SUPPLY_TOOLTIP_LIMIT:
+		lines.append("+%d more resource(s)" % (resources.size() - PATHING_SUPPLY_TOOLTIP_LIMIT))
+
+	return "\n".join(lines)
+
+
+func _join_supply_resource_names(resources: Array, facts: Dictionary) -> String:
+	var names: Array[String] = []
+	for resource in resources:
+		var fact: Dictionary = facts.get(resource, {})
+		names.append(String(fact.get("display_name", _format_resource_name(str(resource)))))
+	return ", ".join(names)
+
+
+func _join_supply_origin_labels(origins_value) -> String:
+	var origins: Array = origins_value if origins_value is Array else []
+	var labels: Array[String] = []
+	for origin_variant in origins:
+		if not (origin_variant is Dictionary):
+			continue
+		var origin: Dictionary = origin_variant
+		var label := String(origin.get("label", ""))
+		if label == "" or labels.has(label):
+			continue
+		labels.append(label)
+	return ", ".join(labels)
+
+
+func _format_resource_name(value: String) -> String:
+	return value.strip_edges().replace("_", " ").replace("-", " ").capitalize()
 
 
 func _set_rail_capacity_badge_visible(path: Path2D, visible: bool) -> void:

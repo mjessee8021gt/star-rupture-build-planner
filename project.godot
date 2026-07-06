@@ -32,6 +32,10 @@ window/size/viewport_height=720
 port_button="container for all connection points in the planner"
 buildings="container for all buildings in the planner"
 
+[gui]
+
+theme/custom="res://Resources/srbp_tooltip_theme.tres"
+
 [input]
 
 "Zoom Out"={

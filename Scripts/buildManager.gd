@@ -2,6 +2,7 @@ extends Node2D
 
 const Palette = preload("res://Scripts/palette.gd")
 
+signal selection_changed(selected_count: int, anchor_building: Node2D)
 
 ##------OnReady variables------##
 @onready var tile_map_layer: TileMapLayer = $"../TileMapLayer"
@@ -15,6 +16,8 @@ var ghost_selection_template: Dictionary = {}
 var group_build_entries: Array[Dictionary] = []
 var selected_buildings: Array[Node2D] = []
 var selected_original_modulates: Dictionary = {}
+var alignment_anchor_building: Node2D = null
+var last_alignment_result: Dictionary = {}
 
 ##------Boolean Variables------##
 var is_building := false
@@ -59,6 +62,21 @@ const SELECTION_DRAG_THRESHOLD := 6.0
 const SELECTION_BOX_FILL := Color(0.337255, 0.705882, 0.823529, 0.18)
 const SELECTION_BOX_OUTLINE := Color(0.337255, 0.705882, 0.823529, 0.9)
 const SELECTED_BUILDING_MODULATE := Color(1.0, 0.88, 0.42, 1.0)
+const ANCHOR_BUILDING_MODULATE := Color(0.50, 1.0, 0.72, 1.0)
+const ALIGN_REF_SELECTION := "selection"
+const ALIGN_REF_FIRST := "first"
+const ALIGN_REF_LAST := "last"
+const ALIGN_REF_ANCHOR := "anchor"
+const ALIGN_REF_GRID := "grid"
+const ALIGN_METRIC_GAP := "gap"
+const ALIGN_METRIC_LEADING := "leading"
+const ALIGN_METRIC_TRAILING := "trailing"
+const ALIGN_METRIC_CENTER := "center"
+const ALIGN_PORT_INPUT := "input"
+const ALIGN_PORT_OUTPUT := "output"
+const ALIGN_PORT_ANY := "any"
+const ALIGN_FLOAT_EPSILON := 0.001
+const ALIGN_PORT_EPSILON := 0.5
 
 func _ready() -> void:
 	if tile_map_layer != null and tile_map_layer.tile_set != null:
@@ -281,7 +299,10 @@ func _finish_selection_box(screen_position: Vector2) -> void:
 	if selection_start_screen.distance_to(screen_position) < SELECTION_DRAG_THRESHOLD:
 		var clicked_building := get_building_under_mouse()
 		if clicked_building != null:
-			_select_buildings([clicked_building])
+			if selected_buildings.size() >= 2 and selected_buildings.has(clicked_building):
+				set_alignment_anchor(clicked_building)
+			else:
+				_select_buildings([clicked_building])
 		else:
 			_clear_selection()
 		queue_redraw()
@@ -341,7 +362,12 @@ func _select_buildings(buildings: Array[Node2D]) -> void:
 		seen[building] = true
 		selected_buildings.append(building)
 		selected_original_modulates[building] = building.modulate
-		building.modulate = SELECTED_BUILDING_MODULATE
+	if selected_buildings.size() >= 2:
+		alignment_anchor_building = selected_buildings[0]
+	else:
+		alignment_anchor_building = null
+	_refresh_selection_visuals()
+	_emit_selection_changed()
 
 func _clear_selection() -> void:
 	for building in selected_buildings:
@@ -349,6 +375,22 @@ func _clear_selection() -> void:
 			building.modulate = selected_original_modulates.get(building, Color(1, 1, 1, 1))
 	selected_buildings.clear()
 	selected_original_modulates.clear()
+	alignment_anchor_building = null
+	_emit_selection_changed()
+
+
+func _refresh_selection_visuals() -> void:
+	for building in selected_buildings:
+		if not is_instance_valid(building):
+			continue
+		if building == alignment_anchor_building and selected_buildings.size() >= 2:
+			building.modulate = ANCHOR_BUILDING_MODULATE
+		else:
+			building.modulate = SELECTED_BUILDING_MODULATE
+
+
+func _emit_selection_changed() -> void:
+	selection_changed.emit(_get_valid_selected_buildings().size(), alignment_anchor_building)
 
 
 func cancel_pointer_interaction() -> void:
@@ -362,15 +404,27 @@ func _remove_building_from_selection(building: Node) -> void:
 		return
 	selected_buildings.erase(building)
 	selected_original_modulates.erase(building)
+	if alignment_anchor_building == building:
+		alignment_anchor_building = selected_buildings[0] if selected_buildings.size() >= 2 else null
+	_refresh_selection_visuals()
+	_emit_selection_changed()
 
 func _is_building_selected(building: Node) -> bool:
 	return building != null and selected_buildings.has(building)
 
 func _prune_selection() -> void:
+	var changed := false
 	for building in selected_buildings.duplicate():
 		if not is_instance_valid(building):
 			selected_buildings.erase(building)
 			selected_original_modulates.erase(building)
+			changed = true
+	if alignment_anchor_building != null and not selected_buildings.has(alignment_anchor_building):
+		alignment_anchor_building = selected_buildings[0] if selected_buildings.size() >= 2 else null
+		changed = true
+	if changed:
+		_refresh_selection_visuals()
+		_emit_selection_changed()
 
 func _get_valid_selected_buildings() -> Array[Node2D]:
 	_prune_selection()
@@ -395,6 +449,783 @@ func _can_place_group_cells(cells: Array[Vector2i]) -> bool:
 		if not is_cell_free(cell):
 			return false
 	return true
+
+
+func get_selected_building_count() -> int:
+	return _get_valid_selected_buildings().size()
+
+
+func has_multi_selection() -> bool:
+	return get_selected_building_count() >= 2
+
+
+func get_alignment_anchor() -> Node2D:
+	_prune_selection()
+	return alignment_anchor_building if alignment_anchor_building != null and selected_buildings.has(alignment_anchor_building) else null
+
+
+func set_alignment_anchor(building: Node2D) -> bool:
+	if building == null or not selected_buildings.has(building):
+		return false
+	alignment_anchor_building = building
+	_refresh_selection_visuals()
+	_emit_selection_changed()
+	return true
+
+
+func set_alignment_anchor_to_hovered_or_first() -> bool:
+	var hovered := get_building_under_mouse()
+	if hovered != null and selected_buildings.has(hovered):
+		return set_alignment_anchor(hovered)
+	if selected_buildings.size() >= 2:
+		return set_alignment_anchor(selected_buildings[0])
+	return false
+
+
+func cycle_alignment_anchor() -> bool:
+	var selected := _get_valid_selected_buildings()
+	if selected.size() < 2:
+		return false
+	var current_index := selected.find(alignment_anchor_building)
+	var next_index := 0 if current_index < 0 else (current_index + 1) % selected.size()
+	return set_alignment_anchor(selected[next_index])
+
+
+func align_selected_buildings(command: String, options: Dictionary = {}) -> Dictionary:
+	var selected := _get_valid_selected_buildings()
+	if selected.size() < 2:
+		return _set_alignment_result(false, "Select at least two buildings.", 0, 0)
+	if is_building or is_dragging_building or is_selecting_buildings:
+		return _set_alignment_result(false, "Finish the current placement or drag before aligning.", 0, 0)
+
+	var entries := _build_alignment_entries(selected)
+	if entries.size() < 2:
+		return _set_alignment_result(false, "No valid selected buildings found.", 0, 0)
+
+	var reference_mode := String(options.get("reference_mode", ALIGN_REF_SELECTION))
+	var metric := String(options.get("metric", ALIGN_METRIC_GAP))
+	var gap := maxi(0, int(options.get("gap", 0)))
+	var strict := bool(options.get("strict", true))
+	var targets := {}
+
+	match command:
+		"align_left":
+			targets = _build_edge_alignment_targets(entries, "x", "start", reference_mode)
+		"align_right":
+			targets = _build_edge_alignment_targets(entries, "x", "end", reference_mode)
+		"align_hcenter":
+			targets = _build_edge_alignment_targets(entries, "x", "center", reference_mode)
+		"align_top":
+			targets = _build_edge_alignment_targets(entries, "y", "start", reference_mode)
+		"align_bottom":
+			targets = _build_edge_alignment_targets(entries, "y", "end", reference_mode)
+		"align_vcenter":
+			targets = _build_edge_alignment_targets(entries, "y", "center", reference_mode)
+		"edge_horizontal", "pack_horizontal":
+			targets = _build_pack_targets(entries, "x", reference_mode, gap)
+		"edge_vertical", "pack_vertical":
+			targets = _build_pack_targets(entries, "y", reference_mode, gap)
+		"distribute_horizontal":
+			targets = _build_distribution_targets(entries, "x", metric)
+		"distribute_vertical":
+			targets = _build_distribution_targets(entries, "y", metric)
+		"arrange_row":
+			targets = _build_arrange_line_targets(entries, "x", reference_mode, gap)
+		"arrange_column":
+			targets = _build_arrange_line_targets(entries, "y", reference_mode, gap)
+		"arrange_grid":
+			targets = _build_arrange_grid_targets(entries, reference_mode, gap)
+		"port_align_x":
+			return _align_selected_ports("x", reference_mode, String(options.get("port_role", ALIGN_PORT_INPUT)), strict)
+		"port_align_y":
+			return _align_selected_ports("y", reference_mode, String(options.get("port_role", ALIGN_PORT_INPUT)), strict)
+		_:
+			return _set_alignment_result(false, "Unknown alignment command: %s" % command, 0, 0)
+
+	if targets.is_empty():
+		return _set_alignment_result(false, "Alignment command produced no movement targets.", 0, 0)
+
+	return _apply_alignment_targets(targets, _alignment_command_label(command), strict)
+
+
+func _build_alignment_entries(buildings: Array[Node2D]) -> Array[Dictionary]:
+	var entries: Array[Dictionary] = []
+	for building in buildings:
+		if building == null or not is_instance_valid(building):
+			continue
+		var anchor_cell := _anchor_cell_from_building_position(building, building.global_position)
+		var footprint := get_rotated_footprint(building)
+		if footprint.x <= 0 or footprint.y <= 0:
+			continue
+		var anchor_offset := _get_building_anchor_offset(building)
+		var top_left := anchor_cell - anchor_offset
+		entries.append({
+			"building": building,
+			"anchor_cell": anchor_cell,
+			"anchor_offset": anchor_offset,
+			"top_left": top_left,
+			"footprint": footprint,
+			"left": top_left.x,
+			"right": top_left.x + footprint.x,
+			"top": top_left.y,
+			"bottom": top_left.y + footprint.y,
+			"center_x": float(top_left.x) + (float(footprint.x) * 0.5),
+			"center_y": float(top_left.y) + (float(footprint.y) * 0.5),
+		})
+	return entries
+
+
+func _get_building_anchor_offset(building: Node) -> Vector2i:
+	if building == null:
+		return Vector2i.ZERO
+	var anchor_value = building.get("anchor")
+	if anchor_value is Vector2i:
+		return anchor_value
+	return Vector2i.ZERO
+
+
+func _build_edge_alignment_targets(entries: Array[Dictionary], axis: String, edge: String, reference_mode: String) -> Dictionary:
+	var target := _get_alignment_reference_metric(entries, axis, edge, reference_mode)
+	var targets := {}
+	for entry in entries:
+		var building := entry.get("building") as Node2D
+		if building == null:
+			continue
+		var top_left: Vector2i = entry.get("top_left", Vector2i.ZERO)
+		var footprint: Vector2i = entry.get("footprint", Vector2i.ONE)
+		var next_top_left := top_left
+		if axis == "x":
+			match edge:
+				"start":
+					next_top_left.x = int(round(target))
+				"end":
+					next_top_left.x = int(round(target - float(footprint.x)))
+				"center":
+					next_top_left.x = int(round(target - (float(footprint.x) * 0.5)))
+		else:
+			match edge:
+				"start":
+					next_top_left.y = int(round(target))
+				"end":
+					next_top_left.y = int(round(target - float(footprint.y)))
+				"center":
+					next_top_left.y = int(round(target - (float(footprint.y) * 0.5)))
+		targets[building] = _anchor_cell_from_top_left(entry, next_top_left)
+	return targets
+
+
+func _get_alignment_reference_metric(entries: Array[Dictionary], axis: String, metric: String, reference_mode: String) -> float:
+	var reference_entry := _resolve_alignment_reference_entry(entries, reference_mode)
+	if not reference_entry.is_empty():
+		return _entry_axis_metric(reference_entry, axis, metric)
+
+	var bounds := _get_alignment_bounds(entries)
+	if reference_mode == ALIGN_REF_GRID:
+		match metric:
+			"center":
+				return float(round(float(bounds.get("center_x" if axis == "x" else "center_y", 0.0))))
+			"end":
+				return float(round(float(bounds.get("right" if axis == "x" else "bottom", 0))))
+			_:
+				return float(round(float(bounds.get("left" if axis == "x" else "top", 0))))
+
+	match metric:
+		"center":
+			return float(bounds.get("center_x" if axis == "x" else "center_y", 0.0))
+		"end":
+			return float(bounds.get("right" if axis == "x" else "bottom", 0))
+		_:
+			return float(bounds.get("left" if axis == "x" else "top", 0))
+
+
+func _resolve_alignment_reference_entry(entries: Array[Dictionary], reference_mode: String) -> Dictionary:
+	if entries.is_empty():
+		return {}
+	match reference_mode:
+		ALIGN_REF_ANCHOR:
+			var anchor := get_alignment_anchor()
+			if anchor != null:
+				for entry in entries:
+					if entry.get("building") == anchor:
+						return entry
+		ALIGN_REF_FIRST:
+			return entries[0]
+		ALIGN_REF_LAST:
+			return entries[entries.size() - 1]
+	return {}
+
+
+func _get_alignment_bounds(entries: Array[Dictionary]) -> Dictionary:
+	if entries.is_empty():
+		return {}
+	var left := int(entries[0].get("left", 0))
+	var right := int(entries[0].get("right", 0))
+	var top := int(entries[0].get("top", 0))
+	var bottom := int(entries[0].get("bottom", 0))
+	for entry in entries:
+		left = mini(left, int(entry.get("left", left)))
+		right = maxi(right, int(entry.get("right", right)))
+		top = mini(top, int(entry.get("top", top)))
+		bottom = maxi(bottom, int(entry.get("bottom", bottom)))
+	return {
+		"left": left,
+		"right": right,
+		"top": top,
+		"bottom": bottom,
+		"center_x": float(left + right) * 0.5,
+		"center_y": float(top + bottom) * 0.5,
+	}
+
+
+func _entry_axis_metric(entry: Dictionary, axis: String, metric: String) -> float:
+	if axis == "x":
+		match metric:
+			"end", ALIGN_METRIC_TRAILING:
+				return float(entry.get("right", 0))
+			"center", ALIGN_METRIC_CENTER:
+				return float(entry.get("center_x", 0.0))
+			_:
+				return float(entry.get("left", 0))
+	match metric:
+		"end", ALIGN_METRIC_TRAILING:
+			return float(entry.get("bottom", 0))
+		"center", ALIGN_METRIC_CENTER:
+			return float(entry.get("center_y", 0.0))
+		_:
+			return float(entry.get("top", 0))
+
+
+func _anchor_cell_from_top_left(entry: Dictionary, top_left: Vector2i) -> Vector2i:
+	var anchor_offset: Vector2i = entry.get("anchor_offset", Vector2i.ZERO)
+	return top_left + anchor_offset
+
+
+func _build_distribution_targets(entries: Array[Dictionary], axis: String, metric: String) -> Dictionary:
+	var sorted := _sort_entries_by_axis(entries, axis)
+	var targets := {}
+	if sorted.size() < 2:
+		return targets
+
+	if metric == ALIGN_METRIC_GAP:
+		var first: Dictionary = sorted[0]
+		var last: Dictionary = sorted[sorted.size() - 1]
+		var start := int(first.get("left" if axis == "x" else "top", 0))
+		var end := int(last.get("right" if axis == "x" else "bottom", 0))
+		var total_size := 0
+		for entry in sorted:
+			var footprint: Vector2i = entry.get("footprint", Vector2i.ONE)
+			total_size += footprint.x if axis == "x" else footprint.y
+		var spacing := 0.0
+		if sorted.size() > 1:
+			spacing = float((end - start) - total_size) / float(sorted.size() - 1)
+		var cursor := float(start)
+		for i in range(sorted.size()):
+			var entry: Dictionary = sorted[i]
+			var building := entry.get("building") as Node2D
+			var top_left: Vector2i = entry.get("top_left", Vector2i.ZERO)
+			var footprint: Vector2i = entry.get("footprint", Vector2i.ONE)
+			var next_top_left := top_left
+			if i == 0 or i == sorted.size() - 1:
+				next_top_left = top_left
+			elif axis == "x":
+				next_top_left.x = int(round(cursor))
+			else:
+				next_top_left.y = int(round(cursor))
+			if building != null:
+				targets[building] = _anchor_cell_from_top_left(entry, next_top_left)
+			cursor += float(footprint.x if axis == "x" else footprint.y) + spacing
+		return targets
+
+	var first_metric := _entry_axis_metric(sorted[0], axis, metric)
+	var last_metric := _entry_axis_metric(sorted[sorted.size() - 1], axis, metric)
+	var step := 0.0
+	if sorted.size() > 1:
+		step = (last_metric - first_metric) / float(sorted.size() - 1)
+
+	for i in range(sorted.size()):
+		var entry: Dictionary = sorted[i]
+		var building := entry.get("building") as Node2D
+		if building == null:
+			continue
+		var top_left: Vector2i = entry.get("top_left", Vector2i.ZERO)
+		var footprint: Vector2i = entry.get("footprint", Vector2i.ONE)
+		var target_metric := first_metric + (step * float(i))
+		var next_top_left := top_left
+		if i != 0 and i != sorted.size() - 1:
+			if axis == "x":
+				next_top_left.x = _top_left_from_axis_metric(target_metric, footprint.x, metric)
+			else:
+				next_top_left.y = _top_left_from_axis_metric(target_metric, footprint.y, metric)
+		targets[building] = _anchor_cell_from_top_left(entry, next_top_left)
+
+	return targets
+
+
+func _top_left_from_axis_metric(target_metric: float, size: int, metric: String) -> int:
+	match metric:
+		ALIGN_METRIC_TRAILING, "end":
+			return int(round(target_metric - float(size)))
+		ALIGN_METRIC_CENTER, "center":
+			return int(round(target_metric - (float(size) * 0.5)))
+		_:
+			return int(round(target_metric))
+
+
+func _build_pack_targets(entries: Array[Dictionary], axis: String, reference_mode: String, gap: int) -> Dictionary:
+	var sorted := _sort_entries_by_axis(entries, axis)
+	var targets := {}
+	if sorted.is_empty():
+		return targets
+
+	var reference_entry := _resolve_alignment_reference_entry(sorted, reference_mode)
+	var reference_index := sorted.find(reference_entry) if not reference_entry.is_empty() else -1
+
+	if reference_index >= 0:
+		var reference_top_left: Vector2i = reference_entry.get("top_left", Vector2i.ZERO)
+		targets[reference_entry.get("building")] = _anchor_cell_from_top_left(reference_entry, reference_top_left)
+
+		var cursor_start := reference_top_left.x if axis == "x" else reference_top_left.y
+		for i in range(reference_index - 1, -1, -1):
+			var entry: Dictionary = sorted[i]
+			var footprint: Vector2i = entry.get("footprint", Vector2i.ONE)
+			var top_left: Vector2i = entry.get("top_left", Vector2i.ZERO)
+			var next_top_left := top_left
+			if axis == "x":
+				next_top_left.x = cursor_start - gap - footprint.x
+				cursor_start = next_top_left.x
+			else:
+				next_top_left.y = cursor_start - gap - footprint.y
+				cursor_start = next_top_left.y
+			targets[entry.get("building")] = _anchor_cell_from_top_left(entry, next_top_left)
+
+		var reference_footprint: Vector2i = reference_entry.get("footprint", Vector2i.ONE)
+		var cursor_end := (reference_top_left.x + reference_footprint.x) if axis == "x" else (reference_top_left.y + reference_footprint.y)
+		for i in range(reference_index + 1, sorted.size()):
+			var entry: Dictionary = sorted[i]
+			var footprint: Vector2i = entry.get("footprint", Vector2i.ONE)
+			var top_left: Vector2i = entry.get("top_left", Vector2i.ZERO)
+			var next_top_left := top_left
+			if axis == "x":
+				next_top_left.x = cursor_end + gap
+				cursor_end = next_top_left.x + footprint.x
+			else:
+				next_top_left.y = cursor_end + gap
+				cursor_end = next_top_left.y + footprint.y
+			targets[entry.get("building")] = _anchor_cell_from_top_left(entry, next_top_left)
+		return targets
+
+	var bounds := _get_alignment_bounds(entries)
+	var cursor := int(bounds.get("left" if axis == "x" else "top", 0))
+	for entry in sorted:
+		var footprint: Vector2i = entry.get("footprint", Vector2i.ONE)
+		var top_left: Vector2i = entry.get("top_left", Vector2i.ZERO)
+		var next_top_left := top_left
+		if axis == "x":
+			next_top_left.x = cursor
+			cursor += footprint.x + gap
+		else:
+			next_top_left.y = cursor
+			cursor += footprint.y + gap
+		targets[entry.get("building")] = _anchor_cell_from_top_left(entry, next_top_left)
+	return targets
+
+
+func _build_arrange_line_targets(entries: Array[Dictionary], axis: String, reference_mode: String, gap: int) -> Dictionary:
+	var targets := _build_pack_targets(entries, axis, reference_mode, gap)
+	var reference_entry := _resolve_alignment_reference_entry(entries, reference_mode)
+	if reference_entry.is_empty():
+		var bounds := _get_alignment_bounds(entries)
+		reference_entry = {
+			"top_left": Vector2i(int(bounds.get("left", 0)), int(bounds.get("top", 0)))
+		}
+	var reference_top_left: Vector2i = reference_entry.get("top_left", Vector2i.ZERO)
+	var entries_by_building := _entries_by_building(entries)
+	for building in targets.keys():
+		var entry: Dictionary = entries_by_building.get(building, {})
+		if entry.is_empty():
+			continue
+		var target_anchor: Vector2i = targets.get(building, entry.get("anchor_cell", Vector2i.ZERO))
+		var target_top_left := target_anchor - _get_building_anchor_offset(building)
+		if axis == "x":
+			target_top_left.y = reference_top_left.y
+		else:
+			target_top_left.x = reference_top_left.x
+		targets[building] = _anchor_cell_from_top_left(entry, target_top_left)
+	return targets
+
+
+func _build_arrange_grid_targets(entries: Array[Dictionary], reference_mode: String, gap: int) -> Dictionary:
+	var sorted := _sort_entries_reading_order(entries)
+	var targets := {}
+	if sorted.is_empty():
+		return targets
+
+	var columns := maxi(1, int(ceil(sqrt(float(sorted.size())))))
+	var rows := int(ceil(float(sorted.size()) / float(columns)))
+	var col_widths: Array[int] = []
+	var row_heights: Array[int] = []
+	for _i in range(columns):
+		col_widths.append(1)
+	for _i in range(rows):
+		row_heights.append(1)
+
+	for i in range(sorted.size()):
+		var entry: Dictionary = sorted[i]
+		var footprint: Vector2i = entry.get("footprint", Vector2i.ONE)
+		var col := i % columns
+		var row := int(floor(float(i) / float(columns)))
+		col_widths[col] = maxi(col_widths[col], footprint.x)
+		row_heights[row] = maxi(row_heights[row], footprint.y)
+
+	var start_top_left := Vector2i.ZERO
+	var reference_entry := _resolve_alignment_reference_entry(entries, reference_mode)
+	if not reference_entry.is_empty():
+		start_top_left = reference_entry.get("top_left", Vector2i.ZERO)
+	else:
+		var bounds := _get_alignment_bounds(entries)
+		start_top_left = Vector2i(int(bounds.get("left", 0)), int(bounds.get("top", 0)))
+
+	var y_cursor := start_top_left.y
+	for row in range(rows):
+		var x_cursor := start_top_left.x
+		for col in range(columns):
+			var index := row * columns + col
+			if index >= sorted.size():
+				break
+			var entry: Dictionary = sorted[index]
+			var building := entry.get("building") as Node2D
+			if building != null:
+				targets[building] = _anchor_cell_from_top_left(entry, Vector2i(x_cursor, y_cursor))
+			x_cursor += col_widths[col] + gap
+		y_cursor += row_heights[row] + gap
+
+	return targets
+
+
+func _sort_entries_by_axis(entries: Array[Dictionary], axis: String) -> Array[Dictionary]:
+	var sorted: Array[Dictionary] = entries.duplicate()
+	sorted.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
+		var a_start := int(a.get("left" if axis == "x" else "top", 0))
+		var b_start := int(b.get("left" if axis == "x" else "top", 0))
+		if a_start == b_start:
+			return int(a.get("top" if axis == "x" else "left", 0)) < int(b.get("top" if axis == "x" else "left", 0))
+		return a_start < b_start
+	)
+	return sorted
+
+
+func _sort_entries_reading_order(entries: Array[Dictionary]) -> Array[Dictionary]:
+	var sorted: Array[Dictionary] = entries.duplicate()
+	sorted.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
+		var a_top := int(a.get("top", 0))
+		var b_top := int(b.get("top", 0))
+		if a_top == b_top:
+			return int(a.get("left", 0)) < int(b.get("left", 0))
+		return a_top < b_top
+	)
+	return sorted
+
+
+func _entries_by_building(entries: Array[Dictionary]) -> Dictionary:
+	var by_building := {}
+	for entry in entries:
+		var building := entry.get("building") as Node2D
+		if building != null:
+			by_building[building] = entry
+	return by_building
+
+
+func _align_selected_ports(axis: String, reference_mode: String, port_role: String, strict: bool) -> Dictionary:
+	var selected := _get_valid_selected_buildings()
+	var entries := _build_alignment_entries(selected)
+	if entries.size() < 2:
+		return _set_alignment_result(false, "Select at least two buildings.", 0, 0)
+
+	var reference_entry := _resolve_alignment_reference_entry(entries, reference_mode)
+	if reference_entry.is_empty():
+		reference_entry = entries[0]
+	var reference_building := reference_entry.get("building") as Node2D
+	var reference_port := _get_alignment_port_button(reference_building, port_role)
+	if reference_port == null:
+		return _set_alignment_result(false, "Anchor building has no matching %s port." % port_role, 0, entries.size())
+
+	var reference_port_center = _get_alignment_node_global_center(reference_port)
+	if reference_port_center == null:
+		return _set_alignment_result(false, "Anchor port position could not be resolved.", 0, entries.size())
+
+	var target_axis := (reference_port_center as Vector2).x if axis == "x" else (reference_port_center as Vector2).y
+	var preferred_port_name := reference_port.name
+	var targets := {}
+	var skipped := 0
+	for entry in entries:
+		var building := entry.get("building") as Node2D
+		if building == null:
+			continue
+		if building == reference_building:
+			targets[building] = entry.get("anchor_cell", Vector2i.ZERO)
+			continue
+
+		var port := _get_alignment_port_button(building, port_role, preferred_port_name)
+		if port == null:
+			if strict:
+				return _set_alignment_result(false, "%s has no matching %s port." % [building.name, port_role], 0, entries.size())
+			skipped += 1
+			continue
+
+		var current_center = _get_alignment_node_global_center(port)
+		if current_center == null:
+			if strict:
+				return _set_alignment_result(false, "%s port position could not be resolved." % building.name, 0, entries.size())
+			skipped += 1
+			continue
+
+		var current_port_center := current_center as Vector2
+		var port_offset := current_port_center - building.global_position
+		var desired_position := building.global_position
+		if axis == "x":
+			desired_position.x += target_axis - current_port_center.x
+		else:
+			desired_position.y += target_axis - current_port_center.y
+
+		var snapped_anchor := _anchor_cell_from_building_position(building, desired_position)
+		var snapped_position := _position_from_anchor_cell(building, snapped_anchor)
+		var snapped_port_center := snapped_position + port_offset
+		var snapped_axis := snapped_port_center.x if axis == "x" else snapped_port_center.y
+		if abs(snapped_axis - target_axis) > ALIGN_PORT_EPSILON:
+			if strict:
+				return _set_alignment_result(false, "%s cannot align its fixed port on the grid." % building.name, 0, entries.size())
+			skipped += 1
+			continue
+
+		targets[building] = snapped_anchor
+
+	if targets.size() < 2:
+		return _set_alignment_result(false, "No matching ports could be aligned.", 0, entries.size())
+
+	var result := _apply_alignment_targets(targets, "Connector ports aligned", true)
+	result["skipped"] = int(result.get("skipped", 0)) + skipped
+	last_alignment_result = result
+	return result
+
+
+func _get_alignment_port_button(building: Node, role: String, preferred_name := "") -> Button:
+	if building == null:
+		return null
+	var ports := building.get_node_or_null("Ports")
+	if ports == null:
+		return null
+
+	var fallback: Button = null
+	for child in ports.get_children():
+		if not (child is Button):
+			continue
+		var button := child as Button
+		if not _port_matches_alignment_role(button.name, role):
+			continue
+		if preferred_name != "" and button.name == preferred_name:
+			return button
+		if fallback == null:
+			fallback = button
+	return fallback
+
+
+func _port_matches_alignment_role(port_name: String, role: String) -> bool:
+	var lower := port_name.to_lower()
+	match role:
+		ALIGN_PORT_INPUT:
+			return lower.begins_with("input") or lower.begins_with("universal")
+		ALIGN_PORT_OUTPUT:
+			return lower.begins_with("output") or lower.begins_with("universal")
+		_:
+			return true
+
+
+func _get_alignment_node_global_center(node: Node) -> Variant:
+	if node == null:
+		return null
+	if node is Control:
+		var control := node as Control
+		return control.get_global_transform() * (control.size * 0.5)
+	if node is Node2D:
+		return (node as Node2D).global_position
+	if "global_position" in node:
+		return node.global_position
+	return null
+
+
+func _apply_alignment_targets(target_anchor_cells: Dictionary, label: String, strict: bool) -> Dictionary:
+	var selected := _get_valid_selected_buildings()
+	if selected.size() < 2:
+		return _set_alignment_result(false, "Select at least two buildings.", 0, 0)
+
+	var path_manager := get_node_or_null("../PathManager")
+	if path_manager != null and path_manager.has_method("cancel_active_path_drag"):
+		path_manager.cancel_active_path_drag()
+
+	var history_before := _capture_history_state()
+	var original_positions := {}
+	var original_cells_by_building := {}
+	var target_cells_by_building := {}
+	for building in selected:
+		var original_anchor := _anchor_cell_from_building_position(building, building.global_position)
+		var target_anchor: Vector2i = target_anchor_cells.get(building, original_anchor)
+		original_positions[building] = building.global_position
+		original_cells_by_building[building] = get_building_cells(building, original_anchor)
+		target_cells_by_building[building] = get_building_cells(building, target_anchor)
+
+	for building in selected:
+		free_cells_for_building(building)
+
+	var result := _apply_alignment_targets_strict(selected, target_anchor_cells, target_cells_by_building, label) if strict else _apply_alignment_targets_best_effort(selected, target_anchor_cells, original_cells_by_building, target_cells_by_building, label)
+	if not bool(result.get("ok", false)):
+		for building in selected:
+			if not is_instance_valid(building):
+				continue
+			building.global_position = original_positions.get(building, building.global_position)
+			occupy_cells(_get_cell_array_from_dictionary(original_cells_by_building, building), building)
+		_refresh_selection_visuals()
+		last_alignment_result = result
+		return result
+
+	for building in selected:
+		if not is_instance_valid(building):
+			continue
+		if path_manager != null and path_manager.has_method("update_paths_for_building"):
+			path_manager.update_paths_for_building(building)
+
+	_refresh_selection_visuals()
+	_commit_history_action(label, history_before)
+	last_alignment_result = result
+	return result
+
+
+func _apply_alignment_targets_strict(selected: Array[Node2D], target_anchor_cells: Dictionary, target_cells_by_building: Dictionary, label: String) -> Dictionary:
+	var all_target_cells: Array[Vector2i] = []
+	var moved := 0
+	for building in selected:
+		var cells := _get_cell_array_from_dictionary(target_cells_by_building, building)
+		for cell in cells:
+			all_target_cells.append(cell)
+
+	if not _can_place_group_cells(all_target_cells):
+		return _set_alignment_result(false, "%s blocked by occupied or overlapping grid cells." % label, 0, selected.size())
+
+	for building in selected:
+		if not is_instance_valid(building):
+			continue
+		var target_anchor = target_anchor_cells.get(building, _anchor_cell_from_building_position(building, building.global_position))
+		var next_position := _position_from_anchor_cell(building, target_anchor)
+		if building.global_position.distance_to(next_position) > 0.01:
+			moved += 1
+		building.global_position = next_position
+		occupy_cells(_get_cell_array_from_dictionary(target_cells_by_building, building), building)
+
+	return _set_alignment_result(true, "%s applied to %d building%s." % [label, moved, "" if moved == 1 else "s"], moved, 0)
+
+
+func _apply_alignment_targets_best_effort(selected: Array[Node2D], target_anchor_cells: Dictionary, original_cells_by_building: Dictionary, target_cells_by_building: Dictionary, label: String) -> Dictionary:
+	var reserved_original_cells := {}
+	for building in selected:
+		for cell in _get_cell_array_from_dictionary(original_cells_by_building, building):
+			reserved_original_cells[cell] = building
+
+	var accepted_cells := {}
+	var accepted_buildings: Array[Node2D] = []
+	var skipped_buildings: Array[Node2D] = []
+
+	for building in selected:
+		if not is_instance_valid(building):
+			continue
+		var target_cells := _get_cell_array_from_dictionary(target_cells_by_building, building)
+		for cell in _get_cell_array_from_dictionary(original_cells_by_building, building):
+			if reserved_original_cells.get(cell) == building:
+				reserved_original_cells.erase(cell)
+
+		if _cells_are_available_for_best_effort(target_cells, accepted_cells, reserved_original_cells):
+			accepted_buildings.append(building)
+			for cell in target_cells:
+				accepted_cells[cell] = building
+		else:
+			skipped_buildings.append(building)
+			for cell in _get_cell_array_from_dictionary(original_cells_by_building, building):
+				reserved_original_cells[cell] = building
+
+	var moved := 0
+	for building in accepted_buildings:
+		var target_anchor = target_anchor_cells.get(building, _anchor_cell_from_building_position(building, building.global_position))
+		var next_position := _position_from_anchor_cell(building, target_anchor)
+		if building.global_position.distance_to(next_position) > 0.01:
+			moved += 1
+		building.global_position = next_position
+		occupy_cells(_get_cell_array_from_dictionary(target_cells_by_building, building), building)
+
+	for building in skipped_buildings:
+		occupy_cells(_get_cell_array_from_dictionary(original_cells_by_building, building), building)
+
+	if accepted_buildings.is_empty():
+		return _set_alignment_result(false, "%s had no valid grid moves." % label, 0, skipped_buildings.size())
+
+	return _set_alignment_result(true, "%s applied to %d building%s; skipped %d." % [label, moved, "" if moved == 1 else "s", skipped_buildings.size()], moved, skipped_buildings.size())
+
+
+func _cells_are_available_for_best_effort(cells: Array[Vector2i], accepted_cells: Dictionary, reserved_original_cells: Dictionary) -> bool:
+	var seen := {}
+	for cell in cells:
+		if seen.has(cell):
+			return false
+		seen[cell] = true
+		if occupied_cells.has(cell):
+			return false
+		if accepted_cells.has(cell):
+			return false
+		if reserved_original_cells.has(cell):
+			return false
+	return true
+
+
+func _alignment_command_label(command: String) -> String:
+	match command:
+		"align_left":
+			return "Aligned left"
+		"align_right":
+			return "Aligned right"
+		"align_hcenter":
+			return "Aligned horizontal centers"
+		"align_top":
+			return "Aligned top"
+		"align_bottom":
+			return "Aligned bottom"
+		"align_vcenter":
+			return "Aligned vertical centers"
+		"edge_horizontal":
+			return "Edge-aligned horizontally"
+		"edge_vertical":
+			return "Edge-aligned vertically"
+		"pack_horizontal":
+			return "Packed horizontally"
+		"pack_vertical":
+			return "Packed vertically"
+		"distribute_horizontal":
+			return "Distributed horizontally"
+		"distribute_vertical":
+			return "Distributed vertically"
+		"arrange_row":
+			return "Arranged row"
+		"arrange_column":
+			return "Arranged column"
+		"arrange_grid":
+			return "Arranged grid"
+	return "Aligned buildings"
+
+
+func _set_alignment_result(ok: bool, message: String, moved: int, skipped: int) -> Dictionary:
+	last_alignment_result = {
+		"ok": ok,
+		"message": message,
+		"moved": moved,
+		"skipped": skipped,
+	}
+	return last_alignment_result
 
 func _unhandled_input(event: InputEvent) -> void:
 	if _is_scene_input_blocked():
@@ -1048,7 +1879,10 @@ func _drag_group_changed() -> bool:
 
 func _restore_drag_visual(building: Node2D) -> void:
 	if _is_building_selected(building):
-		building.modulate = SELECTED_BUILDING_MODULATE
+		if building == alignment_anchor_building and selected_buildings.size() >= 2:
+			building.modulate = ANCHOR_BUILDING_MODULATE
+		else:
+			building.modulate = SELECTED_BUILDING_MODULATE
 	else:
 		building.modulate = drag_original_modulates.get(building, Color(1, 1, 1, 1))
 

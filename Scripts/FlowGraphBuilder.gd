@@ -170,9 +170,12 @@ static func _build_node_for_building(building: Node2D) -> Dictionary:
 		"kind": kind,
 		"building_id": str(building_id),
 		"name": building.name,
+		"label": _building_label(building),
 		"instance_id": building.get_instance_id(),
 		"inputs": inputs,
 		"outputs": outputs,
+		"input_requirements": _get_stack_summaries(selected_item, "inputs"),
+		"output_products": _get_stack_summaries(selected_item, "outputs"),
 		"ports": ports,
 		"position": [building.global_position.x, building.global_position.y],
 	}
@@ -303,6 +306,64 @@ static func _get_selected_option_metadata(option: OptionButton) -> Variant:
 	if option.selected < 0 or option.selected >= option.item_count:
 		return null
 	return option.get_item_metadata(option.selected)
+
+
+static func _get_stack_summaries(selected_item, stack_property: String) -> Array[Dictionary]:
+	var summaries: Array[Dictionary] = []
+	if selected_item == null:
+		return summaries
+	if not (selected_item is Object):
+		return summaries
+
+	var stacks = (selected_item as Object).get(stack_property)
+	if not (stacks is Array):
+		return summaries
+
+	for i in range(stacks.size()):
+		var stack = stacks[i]
+		if stack == null or not (stack is Object):
+			continue
+
+		var resource_id := _get_stack_resource_id(stack)
+		if resource_id == StringName(""):
+			continue
+
+		summaries.append({
+			"resource": resource_id,
+			"display_name": _get_stack_display_name(stack, resource_id),
+			"qty": _get_stack_quantity(stack),
+			"index": i,
+		})
+	return summaries
+
+
+static func _get_stack_resource_id(stack: Object) -> StringName:
+	var raw_id = stack.get("id")
+	if raw_id != null and StringName(str(raw_id)) != StringName(""):
+		return StringName(str(raw_id))
+
+	var item = stack.get("item")
+	if item is Object:
+		var item_id = (item as Object).get("id")
+		if item_id != null:
+			return StringName(str(item_id))
+	return StringName("")
+
+
+static func _get_stack_display_name(stack: Object, resource_id: StringName) -> String:
+	var item = stack.get("item")
+	if item is Object:
+		var display_name = (item as Object).get("display_name")
+		if display_name != null and str(display_name).strip_edges() != "":
+			return str(display_name)
+	return _format_resource_name(str(resource_id))
+
+
+static func _get_stack_quantity(stack: Object) -> float:
+	var qty = stack.get("qty")
+	if qty == null:
+		return 0.0
+	return float(qty)
 
 
 static func _get_deltas_for_selected_item(selected_item) -> Dictionary:
@@ -503,6 +564,10 @@ static func _format_port_label(port_path: String) -> String:
 	if port_text.begins_with("Output"):
 		return "O" + port_text.trim_prefix("Output").strip_edges()
 	return port_text
+
+
+static func _format_resource_name(value: String) -> String:
+	return value.strip_edges().replace("_", " ").replace("-", " ").capitalize()
 
 
 static func _warning(kind: String, message: String) -> Dictionary:
