@@ -63,6 +63,20 @@ const COMMAND_TOGGLE_PRODUCTION := &"view.production"
 const COMMAND_RAIL_VIEW := &"view.rail_visibility"
 const COMMAND_RAIL_FLOW_RATE := &"view.rail_flow_rate"
 const COMMAND_FLOW_SIMULATION := &"view.flow_simulation"
+const COMMAND_FLOW_LAYER_DELTA := &"view.flow_layer.balance"
+const COMMAND_FLOW_LAYER_USED := &"view.flow_layer.used"
+const COMMAND_FLOW_LAYER_REQUESTED := &"view.flow_layer.requested"
+const COMMAND_FLOW_LAYER_BLOCKED := &"view.flow_layer.blocked"
+const COMMAND_FLOW_LAYER_AVAILABLE := &"view.flow_layer.available"
+const COMMAND_FLOW_LAYER_SATURATION := &"view.flow_layer.saturation"
+const FLOW_LAYER_COMMANDS := {
+	COMMAND_FLOW_LAYER_DELTA: 0,
+	COMMAND_FLOW_LAYER_USED: 1,
+	COMMAND_FLOW_LAYER_REQUESTED: 2,
+	COMMAND_FLOW_LAYER_BLOCKED: 3,
+	COMMAND_FLOW_LAYER_AVAILABLE: 4,
+	COMMAND_FLOW_LAYER_SATURATION: 5,
+}
 const COMMAND_ANNOTATION := &"tools.annotation"
 const COMMAND_WHAT_IF := &"tools.what_if"
 const COMMAND_TOGGLE_TOOLBOX := &"tools.toggle_toolbox"
@@ -532,6 +546,12 @@ func _register_top_menu_commands() -> void:
 	_register_top_menu_command(COMMAND_RAIL_VIEW, "Rail View", Callable(self, "_cycle_rail_visibility"), "Cycle rail visibility mode")
 	_register_top_menu_command(COMMAND_RAIL_FLOW_RATE, "Rail Flow Rate", Callable(self, "_toggle_rail_flow_rate"), "Show or hide rail flow rate badges", true)
 	_register_top_menu_command(COMMAND_FLOW_SIMULATION, "Flow Simulation", Callable(self, "_toggle_flow_simulation_view"), "Color rail badges by simulated flow state", true)
+	_register_top_menu_command(COMMAND_FLOW_LAYER_DELTA, "Layer: Balance", Callable(self, "_select_flow_layer").bind(COMMAND_FLOW_LAYER_DELTA), "Show requested-vs-capacity balance on rail badges", true)
+	_register_top_menu_command(COMMAND_FLOW_LAYER_USED, "Layer: Used", Callable(self, "_select_flow_layer").bind(COMMAND_FLOW_LAYER_USED), "Show delivered throughput on rail badges", true)
+	_register_top_menu_command(COMMAND_FLOW_LAYER_REQUESTED, "Layer: Requested", Callable(self, "_select_flow_layer").bind(COMMAND_FLOW_LAYER_REQUESTED), "Show requested throughput on rail badges", true)
+	_register_top_menu_command(COMMAND_FLOW_LAYER_BLOCKED, "Layer: Blocked", Callable(self, "_select_flow_layer").bind(COMMAND_FLOW_LAYER_BLOCKED), "Show undeliverable (blocked) flow on rail badges", true)
+	_register_top_menu_command(COMMAND_FLOW_LAYER_AVAILABLE, "Layer: Available", Callable(self, "_select_flow_layer").bind(COMMAND_FLOW_LAYER_AVAILABLE), "Show spare capacity on rail badges", true)
+	_register_top_menu_command(COMMAND_FLOW_LAYER_SATURATION, "Layer: Saturation", Callable(self, "_select_flow_layer").bind(COMMAND_FLOW_LAYER_SATURATION), "Show rail saturation percentage on rail badges", true)
 	_register_top_menu_command(COMMAND_ANNOTATION, "Annotation", Callable(self, "_toggle_annotation_tool"), "Place a note on the build plan", true)
 	_register_top_menu_command(COMMAND_WHAT_IF, "What If", Callable(self, "_on_what_if_button_pressed"), "Open the what-if scenario analyzer")
 	_register_top_menu_command(COMMAND_TOGGLE_TOOLBOX, "Toggle Toolbox", Callable(self, "_toggle_toolbox_persistence"), "Keep the toolbox open after choosing a building", true)
@@ -568,6 +588,12 @@ func _build_top_menu_sections() -> Array:
 			_command_item(COMMAND_RAIL_VIEW),
 			_command_item(COMMAND_RAIL_FLOW_RATE),
 			_command_item(COMMAND_FLOW_SIMULATION),
+			_command_item(COMMAND_FLOW_LAYER_DELTA),
+			_command_item(COMMAND_FLOW_LAYER_USED),
+			_command_item(COMMAND_FLOW_LAYER_REQUESTED),
+			_command_item(COMMAND_FLOW_LAYER_BLOCKED),
+			_command_item(COMMAND_FLOW_LAYER_AVAILABLE),
+			_command_item(COMMAND_FLOW_LAYER_SATURATION),
 		]},
 		{"title": "Tools", "commands": [
 			_command_item(COMMAND_TOGGLE_TOOLBOX),
@@ -610,6 +636,8 @@ func _is_top_menu_command_enabled(command_id: StringName) -> bool:
 			return path_manager != null and path_manager.has_method("toggle_rail_flow_rate_visible")
 		COMMAND_FLOW_SIMULATION:
 			return FLOW_GRAPH_BUILDER != null and FLOW_SIMULATOR != null and buildings_root != null and path_manager != null and path_manager.has_method("set_flow_simulation_enabled")
+		COMMAND_FLOW_LAYER_DELTA, COMMAND_FLOW_LAYER_USED, COMMAND_FLOW_LAYER_REQUESTED, COMMAND_FLOW_LAYER_BLOCKED, COMMAND_FLOW_LAYER_AVAILABLE, COMMAND_FLOW_LAYER_SATURATION:
+			return _flow_simulation_enabled and path_manager != null and path_manager.has_method("set_flow_layer_mode")
 		COMMAND_ANNOTATION:
 			return annotation_layer != null and annotation_layer.has_method("toggle_annotation_mode")
 		COMMAND_WHAT_IF:
@@ -632,6 +660,9 @@ func _sync_command_bar_state() -> void:
 	top_menu_bar.set_command_pressed(COMMAND_TOGGLE_PRODUCTION, prod_panel != null and prod_panel.visible)
 	top_menu_bar.set_command_pressed(COMMAND_RAIL_FLOW_RATE, _is_rail_flow_rate_visible())
 	top_menu_bar.set_command_pressed(COMMAND_FLOW_SIMULATION, _flow_simulation_enabled)
+	var active_flow_layer := _get_active_flow_layer_mode()
+	for layer_command in FLOW_LAYER_COMMANDS.keys():
+		top_menu_bar.set_command_pressed(layer_command, _flow_simulation_enabled and int(FLOW_LAYER_COMMANDS[layer_command]) == active_flow_layer)
 	top_menu_bar.set_command_pressed(COMMAND_ANNOTATION, _is_annotation_tool_active())
 	top_menu_bar.set_command_pressed(COMMAND_WHAT_IF, _is_what_if_machine_open())
 	top_menu_bar.set_command_pressed(COMMAND_TOGGLE_TOOLBOX, _is_toolbox_persistence_enabled())
@@ -742,6 +773,20 @@ func _toggle_flow_simulation_view() -> void:
 		_refresh_flow_simulation_view()
 	elif path_manager != null and path_manager.has_method("clear_flow_simulation_result"):
 		path_manager.call("clear_flow_simulation_result")
+
+
+func _select_flow_layer(command_id: StringName) -> void:
+	if not _flow_simulation_enabled:
+		return
+	if path_manager == null or not path_manager.has_method("set_flow_layer_mode"):
+		return
+	path_manager.call("set_flow_layer_mode", int(FLOW_LAYER_COMMANDS.get(command_id, 0)))
+
+
+func _get_active_flow_layer_mode() -> int:
+	if path_manager != null and path_manager.has_method("get_flow_layer_mode"):
+		return int(path_manager.call("get_flow_layer_mode"))
+	return 0
 
 
 func _get_top_menu_command_rect(command_id: StringName) -> Rect2:
@@ -1691,8 +1736,11 @@ func _connect_what_if_generation_rails(graph: Dictionary) -> void:
 			connected_paths[connection_key] = true
 
 			var assigned_rate := float(assignment.get("rate", 0.0))
-			var rail_version := _get_what_if_rail_version_for_rate(assigned_rate)
-			_connect_what_if_generation_path(from_building, from_port, to_building, to_port, rail_version)
+			# Oversized assignments (beyond a single V3 rail) are split across parallel
+			# rails so the generated plan can actually carry the flow, instead of placing
+			# one saturated rail and letting the simulation expose the overflow.
+			for rail_version in _get_what_if_rail_segments_for_rate(assigned_rate):
+				_connect_what_if_generation_path(from_building, from_port, to_building, to_port, rail_version)
 
 	_validate_what_if_generation_flow()
 
@@ -1886,6 +1934,21 @@ func _get_what_if_rail_version_for_rate(rate: float) -> int:
 	if rate <= WHAT_IF_RAIL_V2_CAPACITY:
 		return 1
 	return 2
+
+
+# Returns one rail version per parallel rail needed to carry `rate`. A rate within a
+# single V3 rail's capacity yields one rail at the tier that fits; anything larger is
+# split evenly across ceil(rate / V3) rails, each tiered for its share.
+func _get_what_if_rail_segments_for_rate(rate: float) -> Array[int]:
+	if rate <= WHAT_IF_RAIL_V3_CAPACITY:
+		return [_get_what_if_rail_version_for_rate(rate)]
+
+	var rail_count := int(ceil(rate / WHAT_IF_RAIL_V3_CAPACITY))
+	var per_rail_rate := rate / float(rail_count)
+	var segments: Array[int] = []
+	for _i in range(rail_count):
+		segments.append(_get_what_if_rail_version_for_rate(per_rail_rate))
+	return segments
 
 
 func _refresh_plan_totals_from_scene() -> void:

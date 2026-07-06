@@ -486,84 +486,6 @@ func _node_accepts_unbounded_input(node: Dictionary, kind: String) -> bool:
 	return _is_storage_kind(kind) or _node_passes_through(node, kind) or kind == NODE_KIND_SOURCE
 
 
-func _allocate_total_flow_across_edges(requested_total: float, outgoing_edges: Array) -> Dictionary:
-	var requested_by_edge := {}
-	var delivered_by_edge := {}
-	var capacities := {}
-	var active_ids: Array = []
-
-	for edge in outgoing_edges:
-		var edge_id := String(edge.get("id", ""))
-		var capacity := float(edge.get("capacity_upm", UNLIMITED_CAPACITY_UPM))
-		requested_by_edge[edge_id] = 0.0
-		delivered_by_edge[edge_id] = 0.0
-		capacities[edge_id] = capacity
-		active_ids.append(edge_id)
-
-	var remaining_total := maxf(requested_total, 0.0)
-	while remaining_total > RESOURCE_EPSILON and not active_ids.is_empty():
-		var share := remaining_total / float(active_ids.size())
-		var saturated_ids: Array = []
-		var consumed_by_saturated := 0.0
-
-		for edge_id in active_ids:
-			var capacity := float(capacities.get(edge_id, UNLIMITED_CAPACITY_UPM))
-			if _is_unlimited_capacity(capacity):
-				continue
-			if share >= capacity - RESOURCE_EPSILON:
-				delivered_by_edge[edge_id] = capacity
-				consumed_by_saturated += capacity
-				saturated_ids.append(edge_id)
-
-		if saturated_ids.is_empty():
-			for edge_id in active_ids:
-				delivered_by_edge[edge_id] = share
-			remaining_total = 0.0
-			break
-
-		for edge_id in saturated_ids:
-			active_ids.erase(edge_id)
-		remaining_total = maxf(remaining_total - consumed_by_saturated, 0.0)
-
-	var delivered_total := 0.0
-	for edge_id in delivered_by_edge.keys():
-		delivered_total += float(delivered_by_edge[edge_id])
-		requested_by_edge[edge_id] = delivered_by_edge[edge_id]
-
-	var blocked_total := maxf(requested_total - delivered_total, 0.0)
-	if blocked_total > RESOURCE_EPSILON:
-		var pressure_ids := _get_saturated_edge_ids(delivered_by_edge, capacities, outgoing_edges)
-		if pressure_ids.is_empty():
-			pressure_ids = requested_by_edge.keys()
-		var blocked_share := blocked_total / float(maxi(pressure_ids.size(), 1))
-		for edge_id in pressure_ids:
-			requested_by_edge[edge_id] = float(requested_by_edge.get(edge_id, 0.0)) + blocked_share
-
-	return {
-		"requested_by_edge": requested_by_edge,
-		"delivered_by_edge": delivered_by_edge,
-		"blocked_upm": blocked_total,
-	}
-
-
-func _get_saturated_edge_ids(delivered_by_edge: Dictionary, capacities: Dictionary, outgoing_edges: Array) -> Array:
-	var saturated_ids: Array = []
-	for edge in outgoing_edges:
-		var edge_id := String(edge.get("id", ""))
-		var capacity := float(capacities.get(edge_id, UNLIMITED_CAPACITY_UPM))
-		if _is_unlimited_capacity(capacity):
-			continue
-		if float(delivered_by_edge.get(edge_id, 0.0)) >= capacity - RESOURCE_EPSILON:
-			saturated_ids.append(edge_id)
-	return saturated_ids
-
-
-func _rate_map_for_total(source_rates: Dictionary, target_total: float, source_total: float) -> Dictionary:
-	if source_total <= RESOURCE_EPSILON or target_total <= RESOURCE_EPSILON:
-		return {}
-	return _multiply_rates(source_rates, target_total / source_total)
-
-
 func _make_edge_flow_result(requested_by_resource: Dictionary, delivered_by_resource: Dictionary, capacity_upm: float) -> Dictionary:
 	var requested := _positive_rate_map(requested_by_resource)
 	var delivered := _positive_rate_map(delivered_by_resource)
@@ -580,52 +502,6 @@ func _make_edge_flow_result(requested_by_resource: Dictionary, delivered_by_reso
 		"requested_upm": requested_total,
 		"used_upm": used_total,
 		"blocked_upm": blocked_total,
-		"available_upm": maxf(capacity_upm - used_total, 0.0) if not unlimited else UNLIMITED_CAPACITY_UPM,
-		"saturation": clampf(used_total / capacity_upm, 0.0, 1.0) if not unlimited and capacity_upm > RESOURCE_EPSILON else 0.0,
-		"unlimited": unlimited
-	}
-
-
-func _clamp_edge_flow(requested_by_resource: Dictionary, capacity_upm: float) -> Dictionary:
-	var requested := _positive_rate_map(requested_by_resource)
-	var requested_total := _sum_rates(requested)
-	var unlimited := _is_unlimited_capacity(capacity_upm)
-	var delivered := {}
-	var blocked := {}
-
-	if requested_total <= RESOURCE_EPSILON:
-		return {
-			"requested_by_resource": requested,
-			"delivered_by_resource": delivered,
-			"blocked_by_resource": blocked,
-			"requested_upm": 0.0,
-			"used_upm": 0.0,
-			"blocked_upm": 0.0,
-			"available_upm": capacity_upm if not unlimited else UNLIMITED_CAPACITY_UPM,
-			"saturation": 0.0,
-			"unlimited": unlimited
-		}
-
-	var flow_ratio := 1.0
-	if not unlimited and requested_total > capacity_upm:
-		flow_ratio = capacity_upm / requested_total
-
-	for resource in requested.keys():
-		var requested_rate := float(requested[resource])
-		var delivered_rate := requested_rate * flow_ratio
-		delivered[resource] = delivered_rate
-		var blocked_rate := requested_rate - delivered_rate
-		if blocked_rate > RESOURCE_EPSILON:
-			blocked[resource] = blocked_rate
-
-	var used_total := _sum_rates(delivered)
-	return {
-		"requested_by_resource": requested,
-		"delivered_by_resource": delivered,
-		"blocked_by_resource": blocked,
-		"requested_upm": requested_total,
-		"used_upm": used_total,
-		"blocked_upm": requested_total - used_total,
 		"available_upm": maxf(capacity_upm - used_total, 0.0) if not unlimited else UNLIMITED_CAPACITY_UPM,
 		"saturation": clampf(used_total / capacity_upm, 0.0, 1.0) if not unlimited and capacity_upm > RESOURCE_EPSILON else 0.0,
 		"unlimited": unlimited

@@ -63,6 +63,44 @@ const FLOW_BADGE_FILL_ALPHA := 0.86
 const FLOW_EPSILON := 0.001
 const PATHING_SUPPLY_TOOLTIP_LIMIT := 5
 
+# Selectable flow-simulation debug layers. Each renders a different per-rail metric
+# on the capacity badge while flow simulation is active.
+const FLOW_LAYER_DELTA := 0        # signed requested-vs-capacity balance (default)
+const FLOW_LAYER_USED := 1         # delivered throughput
+const FLOW_LAYER_REQUESTED := 2    # requested throughput (incl. blocked pressure)
+const FLOW_LAYER_BLOCKED := 3      # flow that could not be delivered
+const FLOW_LAYER_AVAILABLE := 4    # spare capacity
+const FLOW_LAYER_SATURATION := 5   # used / capacity, as a percentage
+const FLOW_LAYER_MIN := FLOW_LAYER_DELTA
+const FLOW_LAYER_MAX := FLOW_LAYER_SATURATION
+
+const FLOW_STATE_GOOD := Palette.BUILDING_OUTLINE_EXTRACTION    # balanced / spare
+const FLOW_STATE_WARN := Palette.BUILDING_OUTLINE_CRAFTING      # near / over capacity
+const FLOW_STATE_BLOCKED := Color8(214, 108, 96, 255)          # saturated / blocked
+const FLOW_SATURATION_WARN_THRESHOLD := 0.8
+
+const FLOW_LAYER_NAMES := {
+	FLOW_LAYER_DELTA: "Balance",
+	FLOW_LAYER_USED: "Used",
+	FLOW_LAYER_REQUESTED: "Requested",
+	FLOW_LAYER_BLOCKED: "Blocked",
+	FLOW_LAYER_AVAILABLE: "Available",
+	FLOW_LAYER_SATURATION: "Saturation",
+}
+
+const FlowBeadLayerScript := preload("res://Scripts/FlowBeadLayer.gd")
+const FLOW_BEAD_LAYER_NAME := "FlowBeadLayer"
+const FLOW_BEAD_LAYER_Z := 1
+const FLOW_BEAD_REFERENCE_UPM := 480.0
+const FLOW_BEAD_MIN_INTENSITY := 0.15
+
+const STORAGE_BADGE_NAME := "StorageFlowBadge"
+const STORAGE_BADGE_TEXT_NAME := "StorageFlowText"
+const STORAGE_BADGE_SIZE := Vector2(54.0, 24.0)
+const STORAGE_BADGE_OFFSET_Y := -58.0
+const STORAGE_NODE_KIND := "storage"
+const STORAGE_BUILDING_ID_PREFIX := "building_"
+
 # Drag state
 var _preview_container: Path2D = null
 var _preview_line: Line2D = null
@@ -74,7 +112,12 @@ var _rail_visibility_mode := RAIL_VISIBILITY_STANDARD
 var _high_visibility_alpha := RAIL_HIGH_VISIBILITY_ALPHA_DEFAULT
 var _rail_flow_rate_visible := true
 var _flow_simulation_enabled := false
+var _flow_layer_mode := FLOW_LAYER_DELTA
 var _flow_simulation_edge_results: Dictionary = {}
+var _flow_simulation_node_results: Dictionary = {}
+var _flow_simulation_warnings: Array = []
+var _flow_bead_layer: Node2D = null
+var _storage_badge_building_ids: Array = []
 var _pathing_intelligence_edge_supply: Dictionary = {}
 var _ui_scale := 1.0
 
@@ -99,6 +142,8 @@ func _ready() -> void:
 
 func set_ui_scale(ui_scale: float) -> void:
 	_ui_scale = maxf(ui_scale, 0.001)
+	if _flow_bead_layer != null and is_instance_valid(_flow_bead_layer):
+		_flow_bead_layer.call("set_scale_factor", _ui_scale)
 	_refresh_all_rail_capacity_badges()
 
 
@@ -172,13 +217,37 @@ func set_flow_simulation_enabled(enabled: bool) -> void:
 func is_flow_simulation_enabled() -> bool:
 	return _flow_simulation_enabled
 
+func set_flow_layer_mode(mode: int) -> void:
+	var clamped := clampi(mode, FLOW_LAYER_MIN, FLOW_LAYER_MAX)
+	if _flow_layer_mode == clamped:
+		return
+	_flow_layer_mode = clamped
+	if _flow_simulation_enabled:
+		_refresh_all_rail_capacity_badges()
+
+func get_flow_layer_mode() -> int:
+	return _flow_layer_mode
+
+func cycle_flow_layer_mode() -> int:
+	set_flow_layer_mode(FLOW_LAYER_MIN if _flow_layer_mode >= FLOW_LAYER_MAX else _flow_layer_mode + 1)
+	return _flow_layer_mode
+
+func get_flow_layer_name() -> String:
+	return String(FLOW_LAYER_NAMES.get(_flow_layer_mode, "Balance"))
+
 func set_flow_simulation_result(result: Dictionary) -> void:
 	var edges = result.get("edges", {})
 	_flow_simulation_edge_results = edges.duplicate(true) if edges is Dictionary else {}
+	var nodes = result.get("nodes", {})
+	_flow_simulation_node_results = nodes.duplicate(true) if nodes is Dictionary else {}
+	var warnings = result.get("warnings", [])
+	_flow_simulation_warnings = warnings.duplicate(true) if warnings is Array else []
 	_refresh_all_rail_capacity_badges()
 
 func clear_flow_simulation_result() -> void:
 	_flow_simulation_edge_results.clear()
+	_flow_simulation_node_results.clear()
+	_flow_simulation_warnings.clear()
 	_refresh_all_rail_capacity_badges()
 
 func set_pathing_intelligence_assessment(assessment: Dictionary) -> void:
@@ -1786,17 +1855,131 @@ func _get_rail_capacity_badge_state(path: Path2D) -> Dictionary:
 			"outline_size": 2,
 		}
 
-	var delta := _get_flow_capacity_delta(edge_result)
-	var flow_color := _get_flow_badge_color(delta)
+	var layer_state := _get_flow_layer_badge_state(edge_result)
+	var flow_color: Color = layer_state.get("color", FLOW_STATE_GOOD)
 	return {
-		"text": _format_flow_delta(delta),
+		"text": str(layer_state.get("text", "")),
 		"fill": Palette.with_alpha(flow_color, FLOW_BADGE_FILL_ALPHA),
 		"border": flow_color,
-		"tooltip": _append_pathing_supply_tooltip(_get_flow_badge_tooltip(edge_result, delta), path),
+		"tooltip": _append_pathing_supply_tooltip(str(layer_state.get("tooltip", "")), path),
 		"font_color": FLOW_BADGE_TEXT,
 		"font_outline_color": FLOW_BADGE_TEXT_OUTLINE,
 		"outline_size": FLOW_BADGE_TEXT_OUTLINE_SIZE,
 	}
+
+
+# Produces the badge text/color/tooltip for the active flow layer. Each layer reads
+# a different metric from the simulator's per-edge result.
+func _get_flow_layer_badge_state(edge_result: Dictionary) -> Dictionary:
+	match _flow_layer_mode:
+		FLOW_LAYER_USED:
+			return _flow_layer_metric_state("Used flow", float(edge_result.get("used_upm", 0.0)), _flow_saturation_color(edge_result), edge_result)
+		FLOW_LAYER_REQUESTED:
+			return _flow_layer_metric_state("Requested flow", float(edge_result.get("requested_upm", 0.0)), _flow_requested_color(edge_result), edge_result)
+		FLOW_LAYER_BLOCKED:
+			var blocked := float(edge_result.get("blocked_upm", 0.0))
+			var blocked_color := FLOW_STATE_BLOCKED if blocked > FLOW_EPSILON else FLOW_STATE_GOOD
+			return _flow_layer_metric_state("Blocked flow", blocked, blocked_color, edge_result)
+		FLOW_LAYER_AVAILABLE:
+			return _flow_layer_available_state(edge_result)
+		FLOW_LAYER_SATURATION:
+			return _flow_layer_saturation_state(edge_result)
+		_:
+			return _flow_layer_delta_state(edge_result)
+
+
+func _flow_layer_delta_state(edge_result: Dictionary) -> Dictionary:
+	var delta := _get_flow_capacity_delta(edge_result)
+	return {
+		"text": _format_flow_delta(delta),
+		"color": _get_flow_badge_color(delta),
+		"tooltip": _get_flow_badge_tooltip(edge_result, delta),
+	}
+
+
+func _flow_layer_metric_state(header: String, value: float, color: Color, edge_result: Dictionary) -> Dictionary:
+	return {
+		"text": "%d" % int(round(value)),
+		"color": color,
+		"tooltip": _flow_layer_tooltip(header, edge_result),
+	}
+
+
+func _flow_layer_available_state(edge_result: Dictionary) -> Dictionary:
+	if bool(edge_result.get("unlimited", false)):
+		return {
+			"text": "--",
+			"color": FLOW_STATE_GOOD,
+			"tooltip": _flow_layer_tooltip("Spare capacity", edge_result),
+		}
+	var available := float(edge_result.get("available_upm", 0.0))
+	var color := FLOW_STATE_GOOD if available > FLOW_EPSILON else FLOW_STATE_BLOCKED
+	return _flow_layer_metric_state("Spare capacity", available, color, edge_result)
+
+
+func _flow_layer_saturation_state(edge_result: Dictionary) -> Dictionary:
+	if bool(edge_result.get("unlimited", false)):
+		return {
+			"text": "--",
+			"color": FLOW_STATE_GOOD,
+			"tooltip": _flow_layer_tooltip("Saturation", edge_result),
+		}
+	var saturation := _flow_saturation(edge_result)
+	return {
+		"text": "%d%%" % int(round(saturation * 100.0)),
+		"color": _flow_saturation_color(edge_result),
+		"tooltip": _flow_layer_tooltip("Saturation", edge_result),
+	}
+
+
+func _flow_saturation(edge_result: Dictionary) -> float:
+	if bool(edge_result.get("unlimited", false)):
+		return 0.0
+	var capacity := float(edge_result.get("capacity_upm", 0.0))
+	if capacity <= FLOW_EPSILON:
+		return 0.0
+	return clampf(float(edge_result.get("used_upm", 0.0)) / capacity, 0.0, 1.0)
+
+
+func _flow_saturation_color(edge_result: Dictionary) -> Color:
+	if bool(edge_result.get("unlimited", false)):
+		return FLOW_STATE_GOOD
+	var saturation := _flow_saturation(edge_result)
+	if saturation >= 1.0 - FLOW_EPSILON:
+		return FLOW_STATE_BLOCKED
+	if saturation >= FLOW_SATURATION_WARN_THRESHOLD:
+		return FLOW_STATE_WARN
+	return FLOW_STATE_GOOD
+
+
+func _flow_requested_color(edge_result: Dictionary) -> Color:
+	if bool(edge_result.get("unlimited", false)):
+		return FLOW_STATE_GOOD
+	var capacity := float(edge_result.get("capacity_upm", 0.0))
+	var requested := float(edge_result.get("requested_upm", 0.0))
+	if capacity <= FLOW_EPSILON:
+		return FLOW_STATE_GOOD
+	if requested > capacity + FLOW_EPSILON:
+		return FLOW_STATE_BLOCKED
+	if requested >= capacity * FLOW_SATURATION_WARN_THRESHOLD:
+		return FLOW_STATE_WARN
+	return FLOW_STATE_GOOD
+
+
+func _flow_layer_tooltip(header: String, edge_result: Dictionary) -> String:
+	var unlimited := bool(edge_result.get("unlimited", false))
+	var capacity_text := "unlimited" if unlimited else "%.0f" % float(edge_result.get("capacity_upm", 0.0))
+	var spare_text := "unlimited" if unlimited else "%.0f" % float(edge_result.get("available_upm", 0.0))
+	var saturation_text := "n/a" if unlimited else "%d%%" % int(round(_flow_saturation(edge_result) * 100.0))
+	return "%s\nUsed %.0f / %s upm\nRequested %.0f upm\nBlocked %.0f upm\nSpare %s upm\nSaturation %s" % [
+		header,
+		float(edge_result.get("used_upm", 0.0)),
+		capacity_text,
+		float(edge_result.get("requested_upm", 0.0)),
+		float(edge_result.get("blocked_upm", 0.0)),
+		spare_text,
+		saturation_text,
+	]
 
 
 func _get_flow_edge_result_for_path(path: Path2D) -> Dictionary:
@@ -1988,6 +2171,250 @@ func _refresh_all_rail_capacity_badges() -> void:
 			continue
 
 		_refresh_rail_capacity_badge_for_path(path, line)
+
+	_refresh_flow_beads()
+	_refresh_storage_badges()
+
+
+func _get_flow_bead_layer() -> Node2D:
+	if _flow_bead_layer != null and is_instance_valid(_flow_bead_layer):
+		return _flow_bead_layer
+	_flow_bead_layer = FlowBeadLayerScript.new()
+	_flow_bead_layer.name = FLOW_BEAD_LAYER_NAME
+	_flow_bead_layer.z_index = FLOW_BEAD_LAYER_Z
+	add_child(_flow_bead_layer)
+	_flow_bead_layer.call("set_scale_factor", _ui_scale)
+	return _flow_bead_layer
+
+
+func _refresh_flow_beads() -> void:
+	var layer := _get_flow_bead_layer()
+	if layer == null:
+		return
+
+	if not _flow_simulation_enabled:
+		layer.call("set_rails", [])
+		layer.call("set_loop_rails", [])
+		layer.call("set_enabled", false)
+		return
+
+	var loop_pairs := _collect_loop_edge_pairs()
+	var rails: Array = []
+	var loop_rails: Array = []
+	for child in get_children():
+		if not (child is Path2D):
+			continue
+		var path := child as Path2D
+		if path == _preview_container:
+			continue
+		if not path.has_meta("from_building") or not path.has_meta("to_building"):
+			continue
+
+		var line := _get_path_line(path)
+		if line == null:
+			continue
+
+		var global_points := _get_path_global_points(path, line)
+		if global_points.size() < 2:
+			continue
+		var local_points := PackedVector2Array()
+		for global_point in global_points:
+			local_points.append(to_local(global_point))
+
+		var edge_result := _get_flow_edge_result_for_path(path)
+		if not edge_result.is_empty():
+			var intensity := _flow_bead_intensity(edge_result)
+			if intensity > 0.0:
+				rails.append({
+					"points": local_points,
+					"intensity": intensity,
+				})
+
+		if not loop_pairs.is_empty():
+			var pair_key := "%s|%s" % [
+				_node_id_for_path_endpoint(path, "from_building"),
+				_node_id_for_path_endpoint(path, "to_building"),
+			]
+			if loop_pairs.has(pair_key):
+				loop_rails.append({"points": local_points})
+
+	layer.call("set_rails", rails)
+	layer.call("set_loop_rails", loop_rails)
+	layer.call("set_enabled", true)
+
+
+# Builds the set of directed "fromNodeId|toNodeId" pairs that participate in a
+# simulator-detected flow loop, so the overlay can highlight the looping rails.
+func _collect_loop_edge_pairs() -> Dictionary:
+	var pairs := {}
+	for warning_variant in _flow_simulation_warnings:
+		if not (warning_variant is Dictionary):
+			continue
+		if String(warning_variant.get("type", "")) != "loop_detected":
+			continue
+		var nodes = warning_variant.get("nodes", [])
+		if not (nodes is Array):
+			continue
+		for i in range(1, nodes.size()):
+			pairs["%s|%s" % [String(nodes[i - 1]), String(nodes[i])]] = true
+	return pairs
+
+
+func _node_id_for_path_endpoint(path: Path2D, meta_key: String) -> String:
+	if not path.has_meta(meta_key):
+		return ""
+	var building = path.get_meta(meta_key)
+	if building is Node and is_instance_valid(building):
+		return "%s%d" % [STORAGE_BUILDING_ID_PREFIX, (building as Node).get_instance_id()]
+	return ""
+
+
+func _flow_bead_intensity(edge_result: Dictionary) -> float:
+	var used := float(edge_result.get("used_upm", 0.0))
+	if used <= FLOW_EPSILON:
+		return 0.0
+	if bool(edge_result.get("unlimited", false)):
+		return clampf(used / FLOW_BEAD_REFERENCE_UPM, FLOW_BEAD_MIN_INTENSITY, 1.0)
+	return clampf(_flow_saturation(edge_result), FLOW_BEAD_MIN_INTENSITY, 1.0)
+
+
+# Attaches a stored-inventory badge to each storage building while flow simulation is
+# active, surfacing the simulator's storage-as-buffer state (total stored + fill/drain).
+func _refresh_storage_badges() -> void:
+	var previous_ids: Array = _storage_badge_building_ids.duplicate()
+	_storage_badge_building_ids = []
+
+	if _flow_simulation_enabled:
+		for node_id in _flow_simulation_node_results.keys():
+			var node_result = _flow_simulation_node_results[node_id]
+			if not (node_result is Dictionary):
+				continue
+			if String(node_result.get("kind", "")) != STORAGE_NODE_KIND:
+				continue
+			var building := _building_from_node_id(String(node_id))
+			if building == null:
+				continue
+			_apply_storage_badge(building, node_result)
+			_storage_badge_building_ids.append(building.get_instance_id())
+
+	for building_id in previous_ids:
+		if _storage_badge_building_ids.has(building_id):
+			continue
+		var obj = instance_from_id(building_id)
+		if obj is Node2D and is_instance_valid(obj):
+			_set_storage_badge_visible(obj as Node2D, false)
+
+
+func _building_from_node_id(node_id: String) -> Node2D:
+	if not node_id.begins_with(STORAGE_BUILDING_ID_PREFIX):
+		return null
+	var id_text := node_id.trim_prefix(STORAGE_BUILDING_ID_PREFIX)
+	if not id_text.is_valid_int():
+		return null
+	var obj = instance_from_id(int(id_text))
+	if obj is Node2D and is_instance_valid(obj):
+		return obj as Node2D
+	return null
+
+
+func _apply_storage_badge(building: Node2D, node_result: Dictionary) -> void:
+	var badge := _get_storage_badge(building)
+	if badge == null:
+		return
+
+	var inventory: Dictionary = node_result.get("storage_inventory", {})
+	var total_stored := 0.0
+	for resource in inventory.keys():
+		total_stored += maxf(float(inventory[resource]), 0.0)
+
+	var incoming := float(node_result.get("total_incoming_upm", 0.0))
+	var outgoing := float(node_result.get("total_outgoing_upm", 0.0))
+	var net := incoming - outgoing
+
+	var color := RAIL_CAPACITY_BADGE_BORDER
+	if net > FLOW_EPSILON:
+		color = FLOW_STATE_GOOD
+	elif net < -FLOW_EPSILON:
+		color = FLOW_STATE_WARN
+
+	_apply_rail_capacity_badge_style(badge, Palette.with_alpha(color, FLOW_BADGE_FILL_ALPHA), color)
+	badge.tooltip_text = _build_storage_badge_tooltip(inventory, total_stored, net)
+
+	var label := badge.get_node_or_null(STORAGE_BADGE_TEXT_NAME) as Label
+	if label != null:
+		label.text = _format_storage_quantity(total_stored)
+		label.tooltip_text = badge.tooltip_text
+		label.add_theme_color_override("font_color", FLOW_BADGE_TEXT)
+		label.add_theme_color_override("font_outline_color", FLOW_BADGE_TEXT_OUTLINE)
+		label.add_theme_constant_override("outline_size", _scaled_int(FLOW_BADGE_TEXT_OUTLINE_SIZE))
+		label.add_theme_font_size_override("font_size", UiScale.font_size(RAIL_CAPACITY_BADGE_FONT_SIZE, _ui_scale))
+
+	var badge_size := _scaled_vec2(STORAGE_BADGE_SIZE)
+	badge.custom_minimum_size = badge_size
+	badge.size = badge_size
+	badge.position = Vector2(-badge_size.x * 0.5, _scaled(STORAGE_BADGE_OFFSET_Y))
+	badge.visible = true
+
+
+func _get_storage_badge(building: Node2D) -> PanelContainer:
+	if building == null:
+		return null
+	var badge := building.get_node_or_null(STORAGE_BADGE_NAME) as PanelContainer
+	if badge != null:
+		return badge
+
+	badge = PanelContainer.new()
+	badge.name = STORAGE_BADGE_NAME
+	badge.z_index = 4
+	badge.mouse_filter = RAIL_CAPACITY_BADGE_MOUSE_FILTER
+
+	var label := Label.new()
+	label.name = STORAGE_BADGE_TEXT_NAME
+	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.add_theme_color_override("font_color", FLOW_BADGE_TEXT)
+	label.add_theme_font_size_override("font_size", UiScale.font_size(RAIL_CAPACITY_BADGE_FONT_SIZE, _ui_scale))
+	badge.add_child(label)
+
+	building.add_child(badge)
+	return badge
+
+
+func _set_storage_badge_visible(building: Node2D, visible_state: bool) -> void:
+	if building == null or not is_instance_valid(building):
+		return
+	var badge := building.get_node_or_null(STORAGE_BADGE_NAME) as PanelContainer
+	if badge != null:
+		badge.visible = visible_state
+
+
+func _format_storage_quantity(value: float) -> String:
+	if value >= 1000.0:
+		return "%.1fk" % (value / 1000.0)
+	return "%d" % int(round(value))
+
+
+func _build_storage_badge_tooltip(inventory: Dictionary, total_stored: float, net: float) -> String:
+	var lines: Array[String] = []
+	var state := "Stable"
+	if net > FLOW_EPSILON:
+		state = "Filling +%.0f upm" % net
+	elif net < -FLOW_EPSILON:
+		state = "Draining %.0f upm" % net
+	lines.append("Storage buffer: %s" % state)
+	lines.append("Total stored: %.0f" % total_stored)
+
+	if inventory.is_empty():
+		lines.append("Empty")
+	else:
+		for resource in inventory.keys():
+			lines.append("  %s: %.0f" % [_format_resource_display(String(resource)), float(inventory[resource])])
+	return "\n".join(lines)
+
+
+func _format_resource_display(resource: String) -> String:
+	return resource.strip_edges().replace("_", " ").replace("-", " ").capitalize()
 
 
 func _scaled(value: float) -> float:

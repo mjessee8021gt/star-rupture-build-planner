@@ -27,7 +27,10 @@ func _run_all() -> void:
 	_test_machine_input_demand_limits_delivered_flow()
 	_test_merge_chokepoint_blocks_excess_flow()
 	_test_machine_starvation_and_partial_production()
+	_test_gauge_transition_chokepoint_blocks_flow()
 	_test_storage_inventory_updates_over_time()
+	_test_storage_respects_per_resource_capacity()
+	_test_parallel_rails_split_oversized_flow()
 	_test_loop_detection_warns_without_stopping()
 	_test_pathing_bus_assigns_multiple_requirements_to_one_port()
 	_test_pathing_reports_missing_requirements_and_extra_resources()
@@ -201,6 +204,27 @@ func _test_machine_starvation_and_partial_production() -> void:
 	_expect_close(partial["edges"]["parts_out"]["used_upm"], 30.0, "partial ingredients produce scaled output")
 
 
+func _test_gauge_transition_chokepoint_blocks_flow() -> void:
+	# A fast V3 rail (480) feeds a junction that hands off to a slow V1 rail (120).
+	# The slow gauge is the chokepoint: it delivers 120 and blocks the remaining 360.
+	var sim := FlowSimulatorScript.new()
+	var result := sim.simulate({
+		"nodes": [
+			{"id": "source", "kind": "source", "outputs": {&"iron": 480.0}},
+			{"id": "junction", "kind": "junction"},
+			{"id": "sink", "kind": "machine", "inputs": {&"iron": 480.0}}
+		],
+		"edges": [
+			{"id": "fast", "from": "source", "to": "junction", "capacity_upm": 480.0},
+			{"id": "slow", "from": "junction", "to": "sink", "capacity_upm": 120.0}
+		]
+	})
+
+	_expect_close(result["edges"]["fast"]["used_upm"], 480.0, "fast rail carries full upstream flow to the junction")
+	_expect_close(result["edges"]["slow"]["used_upm"], 120.0, "slow gauge clamps flow to its capacity")
+	_expect_close(result["edges"]["slow"]["blocked_upm"], 360.0, "gauge transition blocks the overflow")
+
+
 func _test_storage_inventory_updates_over_time() -> void:
 	var sim := FlowSimulatorScript.new()
 	var result := sim.simulate({
@@ -215,6 +239,53 @@ func _test_storage_inventory_updates_over_time() -> void:
 
 	_expect_close(result["edges"]["out"]["used_upm"], 120.0, "storage can output from inventory")
 	_expect_close(result["state"]["storage_inventory"]["storage"].get(&"iron", 0.0), 0.0, "storage inventory depletes over time")
+
+
+func _test_storage_respects_per_resource_capacity() -> void:
+	# Storage accumulates two resources over a full minute; iron is capped well below
+	# the delivered amount while copper has ample headroom.
+	var sim := FlowSimulatorScript.new()
+	var result := sim.simulate({
+		"nodes": [
+			{"id": "iron", "kind": "source", "outputs": {&"iron": 60.0}},
+			{"id": "copper", "kind": "source", "outputs": {&"copper": 60.0}},
+			{"id": "store", "kind": "storage", "storage_capacity_by_resource": {&"iron": 40.0, &"copper": 100.0}}
+		],
+		"edges": [
+			{"id": "iron_in", "from": "iron", "to": "store", "capacity_upm": 120.0},
+			{"id": "copper_in", "from": "copper", "to": "store", "capacity_upm": 120.0}
+		]
+	}, 60.0)
+
+	var inventory: Dictionary = result["state"]["storage_inventory"]["store"]
+	_expect_close(inventory.get(&"iron", 0.0), 40.0, "iron inventory is clamped to its per-resource capacity")
+	_expect_close(inventory.get(&"copper", 0.0), 60.0, "copper inventory accumulates freely under its capacity")
+
+
+func _test_parallel_rails_split_oversized_flow() -> void:
+	# Mirrors what-if oversized splitting: 1000 upm carried by three parallel V3 rails.
+	# The resource-aware allocator spreads the load so nothing is blocked.
+	var sim := FlowSimulatorScript.new()
+	var result := sim.simulate({
+		"nodes": [
+			{"id": "source", "kind": "source", "outputs": {&"iron": 1000.0}},
+			{"id": "sink", "kind": "machine", "inputs": {&"iron": 1000.0}}
+		],
+		"edges": [
+			{"id": "rail_a", "from": "source", "to": "sink", "capacity_upm": 480.0},
+			{"id": "rail_b", "from": "source", "to": "sink", "capacity_upm": 480.0},
+			{"id": "rail_c", "from": "source", "to": "sink", "capacity_upm": 480.0}
+		]
+	})
+
+	var used_total := 0.0
+	var blocked_total := 0.0
+	for edge_id in ["rail_a", "rail_b", "rail_c"]:
+		used_total += float(result["edges"][edge_id]["used_upm"])
+		blocked_total += float(result["edges"][edge_id]["blocked_upm"])
+	_expect_close(used_total, 1000.0, "parallel rails carry the full oversized flow")
+	_expect_close(blocked_total, 0.0, "splitting across rails leaves nothing blocked")
+	_expect_close(result["nodes"]["sink"]["total_incoming_upm"], 1000.0, "sink receives the full demand across parallel rails")
 
 
 func _test_loop_detection_warns_without_stopping() -> void:
