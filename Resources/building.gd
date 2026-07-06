@@ -37,8 +37,8 @@ var _themed_port_buttons: Array[Button] = []
 var _port_palette_refresh_queued := false
 var _ui_scale := 1.0
 var _base_control_rects: Dictionary = {}
-var _last_scaled_control_rects: Dictionary = {}
 var _base_font_sizes: Dictionary = {}
+var _base_label_settings_sizes: Dictionary = {}
 
 func _enter_tree() -> void:
 	call_deferred("_inherit_ui_scale_from_scene")
@@ -262,11 +262,16 @@ func _apply_accessibility_scale(node: Node) -> void:
 		if child is Control:
 			var control := child as Control
 			if _is_scalable_building_control(control):
-				_scale_building_control(control)
+				# Scale the font/styleboxes BEFORE the geometry. A Control cannot be
+				# sized below its content minimum, so if we set the size while the
+				# font is still at the previous (larger) scale, Godot clamps the size
+				# up and it never shrinks back on downscale. Shrinking the font first
+				# makes the content minimum small enough for the target size to hold.
 				if child is Label:
 					_scale_control_font(child as Control, &"font_size")
 				elif child is OptionButton:
 					_scale_option_button(child as OptionButton)
+				_scale_building_control(control)
 
 		_apply_accessibility_scale(child)
 
@@ -292,40 +297,58 @@ func _is_descendant_of_port_root(node: Node) -> bool:
 
 func _scale_building_control(control: Control) -> void:
 	var base_rect := _get_base_control_rect(control)
+	# Scale both size AND position about the building origin so the overlay group
+	# scales uniformly (a true zoom), preserving the relative layout. Position is
+	# parent-relative, so nested badge/label pairs scale correctly too. Centering
+	# each control on its own center instead would keep inter-element gaps fixed
+	# while growing each box, causing labels/badges/dropdowns to overlap.
+	var scaled_position := UiScale.scaled_vec2(base_rect.position, _ui_scale)
 	var scaled_size := UiScale.scaled_vec2(base_rect.size, _ui_scale)
-	var scaled_position := base_rect.position + ((base_rect.size - scaled_size) * 0.5)
 	control.scale = Vector2.ONE
+	# Lower custom_minimum_size BEFORE setting size. Control.size is clamped to the
+	# current combined minimum, so setting size while custom_minimum_size still holds
+	# the previous (larger) value would clamp the size up and it would never shrink.
+	control.custom_minimum_size = scaled_size
 	control.position = scaled_position
 	control.size = scaled_size
-	control.custom_minimum_size = scaled_size
-	_last_scaled_control_rects[control.get_instance_id()] = Rect2(scaled_position, scaled_size)
 
 
 func _get_base_control_rect(control: Control) -> Rect2:
+	# Capture the unscaled design rect exactly once. The first call for a control
+	# always happens before we've touched its geometry, so this is the true
+	# scale-1.0 rect. We must NOT re-derive the base from a control's later size:
+	# OptionButtons/Labels snap to their content min-size between frames, so the
+	# reported size drifts from what we set. Dividing that drifted (up-scaled)
+	# size by the new (smaller) scale inflates the base and the control never
+	# shrinks back down.
 	var key := control.get_instance_id()
-	var current_rect := Rect2(control.position, control.size)
-	if _base_control_rects.has(key):
-		var last_rect: Rect2 = _last_scaled_control_rects.get(key, Rect2())
-		if not _rects_are_close(current_rect, last_rect):
-			var divisor = maxf(_ui_scale, 0.001)
-			_base_control_rects[key] = Rect2(current_rect.position, current_rect.size / divisor)
-		return _base_control_rects[key]
-
-	_base_control_rects[key] = current_rect
-	return current_rect
-
-
-func _rects_are_close(a: Rect2, b: Rect2) -> bool:
-	return a.position.distance_to(b.position) <= 0.01 and a.size.distance_to(b.size) <= 0.01
+	if not _base_control_rects.has(key):
+		_base_control_rects[key] = Rect2(control.position, control.size)
+	return _base_control_rects[key]
 
 
 func _scale_control_font(control: Control, theme_name: StringName) -> void:
 	if control == null:
 		return
+	# A Label with LabelSettings ignores theme font-size overrides in Godot 4, so
+	# scale the LabelSettings font_size directly (on a per-instance duplicate).
+	if control is Label and (control as Label).label_settings != null:
+		_scale_label_settings_font(control as Label)
+		return
 	var key := "%d:%s" % [control.get_instance_id(), String(theme_name)]
 	if not _base_font_sizes.has(key):
 		_base_font_sizes[key] = max(control.get_theme_font_size(theme_name), 1)
 	UiScale.apply_font_size(control, theme_name, int(_base_font_sizes[key]), _ui_scale)
+
+
+func _scale_label_settings_font(label: Label) -> void:
+	var key := label.get_instance_id()
+	if not _base_label_settings_sizes.has(key):
+		# Duplicate so we never mutate the shared LabelSettings .tres across buildings.
+		var owned: LabelSettings = label.label_settings.duplicate()
+		label.label_settings = owned
+		_base_label_settings_sizes[key] = max(owned.font_size, 1)
+	label.label_settings.font_size = UiScale.font_size(int(_base_label_settings_sizes[key]), _ui_scale)
 
 
 func _scale_option_button(option: OptionButton) -> void:
