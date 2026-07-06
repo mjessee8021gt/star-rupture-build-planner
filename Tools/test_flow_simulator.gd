@@ -44,6 +44,9 @@ func _run_all() -> void:
 	_test_pathing_flags_dead_end_rail()
 	_test_pathing_storage_is_not_a_dead_end()
 	_test_pathing_flags_unconsumed_resource_on_shared_rail()
+	_test_pathing_impact_flags_sole_supply_break()
+	_test_pathing_impact_ignores_redundant_supply()
+	_test_pathing_impact_flags_degrade()
 
 
 func _test_capacity_clamps_multi_resource_flow() -> void:
@@ -552,6 +555,74 @@ func _test_pathing_flags_unconsumed_resource_on_shared_rail() -> void:
 	_expect_true(not bool(rail["is_dead_end"]), "a rail with a consumed resource is not a full dead-end")
 	_expect_true((rail["unused_resources"] as Array).has(&"copper"), "copper has no downstream consumer")
 	_expect_true(not (rail["unused_resources"] as Array).has(&"iron"), "iron is consumed by the smelter")
+
+
+func _test_pathing_impact_flags_sole_supply_break() -> void:
+	# The only rail feeding the smelter its iron: removing it starves the smelter.
+	var graph := {
+		"nodes": [
+			{"id": "iron", "kind": "source", "label": "Iron Mine", "outputs": {&"iron": 120.0}, "output_products": [{"resource": &"iron", "display_name": "Iron Ore", "qty": 120.0}]},
+			{"id": "smelter", "kind": "machine", "label": "Smelter", "inputs": {&"iron": 60.0}, "input_requirements": [{"resource": &"iron", "display_name": "Iron Ore", "qty": 1.0, "index": 0}]},
+		],
+		"edges": [
+			{"id": "iron_to_smelter", "from": "iron", "to": "smelter", "to_port": "Ports/Input 1", "capacity_upm": 480.0},
+		]
+	}
+
+	var assessment := PathingIntelligenceScript.analyze_graph(graph)
+	PathingIntelligenceScript.annotate_downstream_impact(assessment, graph)
+	var impact: Array = assessment["edge_supply"]["iron_to_smelter"]["downstream_impact"]
+	_expect_equal(impact.size(), 1, "removing the sole supply rail impacts one consumer")
+	_expect_equal(String(impact[0]["node_id"]), "smelter", "the impacted consumer is the smelter")
+	_expect_equal(impact[0]["severity"], PathingIntelligenceScript.IMPACT_SEVERITY_BREAK, "losing the only iron supply is a break")
+
+
+func _test_pathing_impact_ignores_redundant_supply() -> void:
+	# Two mines feed iron into a bus; the smelter only needs 60. Removing either feeder
+	# leaves enough, so the counterfactual reports no impact (redundancy-aware).
+	var graph := {
+		"nodes": [
+			{"id": "iron_a", "kind": "source", "label": "Iron Mine A", "outputs": {&"iron": 60.0}, "output_products": [{"resource": &"iron", "display_name": "Iron Ore", "qty": 60.0}]},
+			{"id": "iron_b", "kind": "source", "label": "Iron Mine B", "outputs": {&"iron": 60.0}, "output_products": [{"resource": &"iron", "display_name": "Iron Ore", "qty": 60.0}]},
+			{"id": "bus", "kind": "support", "label": "Iron Bus"},
+			{"id": "smelter", "kind": "machine", "label": "Smelter", "inputs": {&"iron": 60.0}, "input_requirements": [{"resource": &"iron", "display_name": "Iron Ore", "qty": 1.0, "index": 0}]},
+		],
+		"edges": [
+			{"id": "a_to_bus", "from": "iron_a", "to": "bus", "to_port": "Ports/Input 1", "capacity_upm": 480.0},
+			{"id": "b_to_bus", "from": "iron_b", "to": "bus", "to_port": "Ports/Input 2", "capacity_upm": 480.0},
+			{"id": "bus_to_smelter", "from": "bus", "to": "smelter", "to_port": "Ports/Input 1", "capacity_upm": 480.0},
+		]
+	}
+
+	var assessment := PathingIntelligenceScript.analyze_graph(graph)
+	PathingIntelligenceScript.annotate_downstream_impact(assessment, graph)
+	_expect_equal((assessment["edge_supply"]["a_to_bus"]["downstream_impact"] as Array).size(), 0, "removing a redundant feeder has no impact")
+	# The final leg to the smelter is still a sole path, so it should register a break.
+	_expect_equal((assessment["edge_supply"]["bus_to_smelter"]["downstream_impact"] as Array).size(), 1, "removing the sole leg to the smelter still breaks it")
+
+
+func _test_pathing_impact_flags_degrade() -> void:
+	# The smelter needs 120 iron, drawn from two 60 feeders. Removing one drops it to
+	# under-supplied rather than fully missing.
+	var graph := {
+		"nodes": [
+			{"id": "iron_a", "kind": "source", "label": "Iron Mine A", "outputs": {&"iron": 60.0}, "output_products": [{"resource": &"iron", "display_name": "Iron Ore", "qty": 60.0}]},
+			{"id": "iron_b", "kind": "source", "label": "Iron Mine B", "outputs": {&"iron": 60.0}, "output_products": [{"resource": &"iron", "display_name": "Iron Ore", "qty": 60.0}]},
+			{"id": "bus", "kind": "support", "label": "Iron Bus"},
+			{"id": "smelter", "kind": "machine", "label": "Smelter", "inputs": {&"iron": 120.0}, "input_requirements": [{"resource": &"iron", "display_name": "Iron Ore", "qty": 1.0, "index": 0}]},
+		],
+		"edges": [
+			{"id": "a_to_bus", "from": "iron_a", "to": "bus", "to_port": "Ports/Input 1", "capacity_upm": 480.0},
+			{"id": "b_to_bus", "from": "iron_b", "to": "bus", "to_port": "Ports/Input 2", "capacity_upm": 480.0},
+			{"id": "bus_to_smelter", "from": "bus", "to": "smelter", "to_port": "Ports/Input 1", "capacity_upm": 480.0},
+		]
+	}
+
+	var assessment := PathingIntelligenceScript.analyze_graph(graph)
+	PathingIntelligenceScript.annotate_downstream_impact(assessment, graph)
+	var impact: Array = assessment["edge_supply"]["a_to_bus"]["downstream_impact"]
+	_expect_equal(impact.size(), 1, "removing one feeder impacts the smelter")
+	_expect_equal(impact[0]["severity"], PathingIntelligenceScript.IMPACT_SEVERITY_DEGRADE, "losing half the supply is a degrade, not a break")
 
 
 func _expect_close(actual: Variant, expected: float, label: String) -> void:

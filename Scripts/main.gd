@@ -355,6 +355,7 @@ func _refresh_pathing_intelligence() -> void:
 		"catalog_lookup": Callable(self, "_pathing_catalog_producer_name"),
 	}
 	var assessment: Dictionary = PATHING_INTELLIGENCE.analyze_graph(graph, simulation, pathing_options)
+	PATHING_INTELLIGENCE.annotate_downstream_impact(assessment, graph)
 	PATHING_INTELLIGENCE.apply_scene_assessment(buildings_root, assessment)
 	if path_manager.has_method("set_pathing_intelligence_assessment"):
 		path_manager.call("set_pathing_intelligence_assessment", assessment)

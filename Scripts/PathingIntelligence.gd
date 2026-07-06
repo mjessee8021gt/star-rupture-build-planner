@@ -25,6 +25,12 @@ const SUFFICIENCY_EPSILON := 0.01
 const SUPPLY_BASIS_ESTIMATED := "estimated"
 const SUPPLY_BASIS_DELIVERED := "delivered"
 
+# Downstream impact (2.1): what removing a rail would do to consumers downstream.
+const IMPACT_SEVERITY_BREAK := "break"       # a required input goes fully missing
+const IMPACT_SEVERITY_DEGRADE := "degrade"   # a satisfied input drops to under-supplied
+# Skip the per-rail counterfactual on very large plans (it is O(rails) re-analyses).
+const DEFAULT_IMPACT_EDGE_CAP := 150
+
 const META_HOME_POSITION := &"pathing2_home_position"
 const META_HOME_COLOR := &"pathing2_home_color"
 const META_LAYOUT_KEY := &"pathing2_layout_key"
@@ -43,6 +49,8 @@ const COLOR_UNDER_SUPPLIED := Color8(214, 138, 34, 228)
 #   world_units_per_tile: float  -> converts world distance to approximate tile counts for suggestions
 #   catalog_lookup: Callable(StringName) -> String  -> names the building that produces a resource
 #       (used only when nothing in the plan produces a missing resource)
+#   minimal: bool  -> skips suggestions, dead-end, and supplier indexing; used by the
+#       downstream-impact counterfactuals, which only need per-building requirement states
 static func analyze_graph(graph: Dictionary, simulation: Dictionary = {}, options: Dictionary = {}) -> Dictionary:
 	var nodes := _as_array(graph.get("nodes", []))
 	var edges := _normalize_edges(_as_array(graph.get("edges", [])))
@@ -51,6 +59,7 @@ static func analyze_graph(graph: Dictionary, simulation: Dictionary = {}, option
 	var incoming_edges := _build_edge_adjacency(edges, "to")
 	var edge_delivered := _build_edge_delivered(simulation)
 	var has_simulation := not edge_delivered.is_empty()
+	var minimal := bool(options.get("minimal", false))
 	var supply_cache := {}
 	var edge_supply := {}
 
@@ -62,10 +71,12 @@ static func analyze_graph(graph: Dictionary, simulation: Dictionary = {}, option
 		var supply := _collect_supply_for_node(from_id, node_index, incoming_edges, supply_cache, [])
 		edge_supply[edge_id] = _make_edge_supply(edge, supply)
 
-	_annotate_dead_end_edges(edge_supply, node_index, edges)
-	var supplier_index := _build_supplier_index(node_index, node_order, edge_supply)
+	if not minimal:
+		_annotate_dead_end_edges(edge_supply, node_index, edges)
 	var building_assessments := _build_building_assessments(node_index, node_order, incoming_edges, edge_supply, edge_delivered, has_simulation)
-	_attach_missing_supply_suggestions(building_assessments, node_index, supplier_index, options)
+	if not minimal:
+		var supplier_index := _build_supplier_index(node_index, node_order, edge_supply)
+		_attach_missing_supply_suggestions(building_assessments, node_index, supplier_index, options)
 	return {
 		"edge_supply": edge_supply,
 		"building_assessments": building_assessments,
@@ -265,6 +276,104 @@ static func _duplicate_demand(value: Dictionary) -> Dictionary:
 		"accepts_all": bool(value.get("accepts_all", false)),
 		"resources": (value.get("resources", {}) as Dictionary).duplicate(),
 	}
+
+
+# Downstream impact preview: for each rail, counterfactually removes it, re-analyzes, and
+# records which downstream consumers would break (input goes missing) or degrade (drops to
+# under-supplied). Counterfactual diffing is what makes this redundancy-aware: if another rail
+# still supplies the resource, removing this one is correctly reported as no impact.
+# Mutates assessment["edge_supply"][*]["downstream_impact"].
+static func annotate_downstream_impact(assessment: Dictionary, graph: Dictionary, edge_cap: int = DEFAULT_IMPACT_EDGE_CAP) -> void:
+	var edge_supply = assessment.get("edge_supply", {})
+	if not (edge_supply is Dictionary):
+		return
+	var edge_supply_dict: Dictionary = edge_supply
+
+	# Clear any prior impact so stale data never lingers between refreshes.
+	for edge_id in edge_supply_dict.keys():
+		(edge_supply_dict[edge_id] as Dictionary)["downstream_impact"] = []
+
+	var edges := _as_array(graph.get("edges", []))
+	if edges.is_empty() or (edge_cap > 0 and edges.size() > edge_cap):
+		return
+
+	var baseline := analyze_graph(graph, {}, {"minimal": true})
+	var baseline_states := _requirement_states_by_building(baseline)
+
+	for edge_id_variant in edge_supply_dict.keys():
+		var edge_id := String(edge_id_variant)
+		var counterfactual := analyze_graph(_graph_without_edge(graph, edge_id), {}, {"minimal": true})
+		var counterfactual_states := _requirement_states_by_building(counterfactual)
+		(edge_supply_dict[edge_id] as Dictionary)["downstream_impact"] = _diff_impacts(baseline_states, counterfactual_states)
+
+
+static func _graph_without_edge(graph: Dictionary, edge_id: String) -> Dictionary:
+	var kept: Array = []
+	for edge_variant in _as_array(graph.get("edges", [])):
+		if not (edge_variant is Dictionary):
+			continue
+		if String((edge_variant as Dictionary).get("id", "")) == edge_id:
+			continue
+		kept.append(edge_variant)
+	return {"nodes": graph.get("nodes", []), "edges": kept}
+
+
+static func _requirement_states_by_building(assessment: Dictionary) -> Dictionary:
+	var result := {}
+	var building_assessments = assessment.get("building_assessments", {})
+	if not (building_assessments is Dictionary):
+		return result
+	for node_id in building_assessments.keys():
+		var building_assessment: Dictionary = building_assessments[node_id]
+		var per_resource := {}
+		for requirement_variant in _as_array(building_assessment.get("requirements", [])):
+			var requirement: Dictionary = requirement_variant
+			per_resource[StringName(str(requirement.get("resource", "")))] = {
+				"state": String(requirement.get("state", "")),
+				"sufficiency": String(requirement.get("sufficiency", "")),
+				"display_name": String(requirement.get("display_name", "")),
+			}
+		result[String(node_id)] = {
+			"label": String(building_assessment.get("node_label", "")),
+			"requirements": per_resource,
+		}
+	return result
+
+
+static func _diff_impacts(baseline_states: Dictionary, counterfactual_states: Dictionary) -> Array:
+	var impacts: Array = []
+	for node_id in baseline_states.keys():
+		var baseline: Dictionary = baseline_states[node_id]
+		var baseline_requirements: Dictionary = baseline.get("requirements", {})
+		var counterfactual: Dictionary = counterfactual_states.get(node_id, {})
+		var counterfactual_requirements: Dictionary = counterfactual.get("requirements", {})
+		for resource in baseline_requirements.keys():
+			var before: Dictionary = baseline_requirements[resource]
+			if String(before.get("state", "")) != REQUIREMENT_SUPPLIED:
+				continue  # already missing in the baseline; this rail is not what supplies it
+			var after: Dictionary = counterfactual_requirements.get(resource, {})
+			var severity := ""
+			if String(after.get("state", "")) == REQUIREMENT_MISSING:
+				severity = IMPACT_SEVERITY_BREAK
+			elif String(before.get("sufficiency", "")) != SUFFICIENCY_UNDER and String(after.get("sufficiency", "")) == SUFFICIENCY_UNDER:
+				severity = IMPACT_SEVERITY_DEGRADE
+			if severity != "":
+				impacts.append({
+					"node_id": String(node_id),
+					"label": String(baseline.get("label", "")),
+					"display_name": String(before.get("display_name", _format_resource_name(str(resource)))),
+					"resource": resource,
+					"severity": severity,
+				})
+
+	impacts.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
+		if String(a.get("severity", "")) != String(b.get("severity", "")):
+			return String(a.get("severity", "")) < String(b.get("severity", ""))  # "break" sorts before "degrade"
+		if String(a.get("label", "")) != String(b.get("label", "")):
+			return String(a.get("label", "")) < String(b.get("label", ""))
+		return String(a.get("resource", "")) < String(b.get("resource", ""))
+	)
+	return impacts
 
 
 static func _own_supply_for_node(node: Dictionary) -> Dictionary:

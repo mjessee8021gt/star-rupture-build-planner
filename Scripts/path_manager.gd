@@ -1904,7 +1904,37 @@ func _get_pathing_supply_tooltip(path: Path2D) -> String:
 	if resources.size() > PATHING_SUPPLY_TOOLTIP_LIMIT:
 		lines.append("+%d more resource(s)" % (resources.size() - PATHING_SUPPLY_TOOLTIP_LIMIT))
 
+	var impact = supply_data.get("downstream_impact", [])
+	if impact is Array and not (impact as Array).is_empty():
+		var break_text := _join_impact_targets(impact, "break")
+		if break_text != "":
+			lines.append("Removing this rail would starve: %s" % break_text)
+		var degrade_text := _join_impact_targets(impact, "degrade")
+		if degrade_text != "":
+			lines.append("Removing this rail would under-supply: %s" % degrade_text)
+
 	return "\n".join(lines)
+
+
+func _join_impact_targets(impact: Array, severity: String) -> String:
+	var targets: Array[String] = []
+	var overflow := 0
+	for item_variant in impact:
+		if not (item_variant is Dictionary):
+			continue
+		var item: Dictionary = item_variant
+		if String(item.get("severity", "")) != severity:
+			continue
+		if targets.size() >= PATHING_SUPPLY_TOOLTIP_LIMIT:
+			overflow += 1
+			continue
+		targets.append("%s (%s)" % [
+			String(item.get("label", "")),
+			String(item.get("display_name", ""))
+		])
+	if overflow > 0:
+		targets.append("+%d more" % overflow)
+	return ", ".join(targets)
 
 
 func _join_supply_resource_names(resources: Array, facts: Dictionary) -> String:
