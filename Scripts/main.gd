@@ -4,11 +4,18 @@ const Palette = preload("res://Scripts/palette.gd")
 const UiScale = preload("res://Scripts/ui_scale.gd")
 const WHAT_IF_MACHINE_SCENE := preload("res://Scenes/WhatIfMachine.tscn")
 const FLOW_GRAPH_BUILDER := preload("res://Scripts/FlowGraphBuilder.gd")
+const ALIGNMENT_PANEL_SCRIPT := preload("res://Scripts/alignment_panel.gd")
 const FLOW_SIMULATOR := preload("res://Scripts/FlowSimulator.gd")
 const PATHING_INTELLIGENCE := preload("res://Scripts/PathingIntelligence.gd")
+const SaveVersionStore := preload("res://Scripts/save_version_store.gd")
+const VERSION_HISTORY_PANEL_SCRIPT := preload("res://Scripts/save_versions_panel.gd")
 
 const SAVE_FILE_EXTENSION := "srbp"
-const SAVE_FORMAT_VERSION := 4
+# v5 adds an in-file version history block (base snapshot + forward deltas).
+# Files v4 and older load fine and are migrated into a single baseline version.
+const SAVE_FORMAT_VERSION := 5
+const SAVE_VERSION_CAP := 50
+const AUTOSNAPSHOT_INTERVAL_SECONDS := 120.0
 const BUILDING_UID_META := &"srbp_building_uid"
 const UI_PREFS_CONFIG_PATH := "user://ui_preferences.cfg"
 const UI_PREFS_SECTION := "ui"
@@ -56,6 +63,7 @@ const WHAT_IF_RAIL_V3_CAPACITY := 480.0
 const COMMAND_NEW := &"file.new"
 const COMMAND_SAVE := &"file.save"
 const COMMAND_LOAD := &"file.load"
+const COMMAND_VERSION_HISTORY := &"file.version_history"
 const COMMAND_EXPORT_PDF := &"file.export_pdf"
 const COMMAND_UNDO := &"edit.undo"
 const COMMAND_REDO := &"edit.redo"
@@ -100,6 +108,7 @@ const COMMAND_PATCH_NOTES := &"help.patch_notes"
 @onready var prod_panel: PanelContainer = $Camera2D/CanvasLayer/ProdMenu/ProdPanel
 @onready var build_manager: Node = $BuildManager
 @onready var path_manager: Node = $PathManager
+var alignment_panel: Control = null
 @onready var buildings_root: Node2D = $buildings
 @onready var annotation_layer: Node = $AnnotationLayer
 
@@ -126,6 +135,10 @@ var _web_save_pending_file_name := ""
 var _undo_stack: Array[Dictionary] = []
 var _redo_stack: Array[Dictionary] = []
 var _is_replaying_history := false
+# Save Engine V2: persistent, in-file version log for the current document.
+var _save_history: Dictionary = {}
+var _autosnapshot_timer: Timer = null
+var _version_history_overlay: Control = null
 var _syncing_rail_alpha_controls := false
 var _what_if_machine_overlay: Control
 var _pending_what_if_generation_request: Dictionary = {}
@@ -155,6 +168,9 @@ func _ready() -> void:
 	_setup_save_load_ui()
 	_setup_top_menu_bar()
 	_setup_what_if_button()
+	_setup_alignment_panel()
+	_setup_autosnapshot()
+	_setup_version_history_ui()
 	_apply_ui_scale()
 	_apply_visual_theme()
 	get_viewport().size_changed.connect(_on_viewport_size_changed)
@@ -221,6 +237,14 @@ func _setup_what_if_button() -> void:
 		return
 	if not what_if_button.pressed.is_connected(_on_what_if_button_pressed):
 		what_if_button.pressed.connect(_on_what_if_button_pressed)
+
+
+func _setup_alignment_panel() -> void:
+	if build_manager == null or alignment_panel != null:
+		return
+	alignment_panel = ALIGNMENT_PANEL_SCRIPT.new()
+	$Camera2D/CanvasLayer.add_child(alignment_panel)
+	alignment_panel.call("setup", build_manager)
 
 
 func _on_what_if_button_pressed() -> void:
@@ -539,6 +563,7 @@ func _register_top_menu_commands() -> void:
 	_register_top_menu_command(COMMAND_NEW, "New", Callable(self, "_on_new_pressed"), "Start a new build plan")
 	_register_top_menu_command(COMMAND_SAVE, "Save", Callable(self, "_on_save_pressed"), "Save the current build plan")
 	_register_top_menu_command(COMMAND_LOAD, "Load", Callable(self, "_on_load_pressed"), "Load a saved build plan")
+	_register_top_menu_command(COMMAND_VERSION_HISTORY, "Version History", Callable(self, "_on_version_history_pressed"), "View, compare, and restore previous versions of this plan")
 	_register_top_menu_command(COMMAND_EXPORT_PDF, "Export PDF", Callable(self, "_on_export_pdf_pressed"), "Export the current build plan as a PDF")
 	_register_top_menu_command(COMMAND_UNDO, "Undo", Callable(self, "_undo_history"), "Undo the last build-plan action")
 	_register_top_menu_command(COMMAND_REDO, "Redo", Callable(self, "_redo_history"), "Redo the last undone action")
@@ -576,6 +601,7 @@ func _build_top_menu_sections() -> Array:
 			_command_item(COMMAND_NEW),
 			_command_item(COMMAND_SAVE),
 			_command_item(COMMAND_LOAD),
+			_command_item(COMMAND_VERSION_HISTORY),
 			_command_item(COMMAND_EXPORT_PDF),
 		]},
 		{"title": "Edit", "commands": [
@@ -893,6 +919,12 @@ func _apply_ui_scale() -> void:
 
 	if path_manager != null and path_manager.has_method("set_ui_scale"):
 		path_manager.call("set_ui_scale", _ui_scale)
+
+	if alignment_panel != null and alignment_panel.has_method("set_ui_scale"):
+		alignment_panel.call("set_ui_scale", _ui_scale)
+
+	if _version_history_overlay != null and _version_history_overlay.has_method("set_ui_scale"):
+		_version_history_overlay.call("set_ui_scale", _ui_scale)
 
 	_apply_building_ui_scale()
 
@@ -2055,6 +2087,9 @@ func _on_export_pdf_pressed() -> void:
 func _on_new_pressed() -> void:
 	_clear_scene_plan()
 	_clear_history()
+	# A new document starts a fresh version log. Prior work is preserved in the
+	# user's saved .srbp file.
+	_save_history = {}
 
 func _on_save_file_selected(path: String) -> void:
 	var result := _write_save_file(path)
@@ -2111,7 +2146,7 @@ func _clear_scene_plan() -> void:
 	_queue_flow_simulation_refresh()
 
 func _download_save_to_browser() -> void:
-	var save_state := _collect_save_state()
+	var save_state := _collect_save_document()
 	var json_text := JSON.stringify(save_state, "\t")
 	var bytes := json_text.to_utf8_buffer()
 	JavaScriptBridge.download_buffer(bytes, "build_plan.%s" % SAVE_FILE_EXTENSION, "application/json")
@@ -2181,7 +2216,7 @@ if (!window.__srbpSaveTextFile) {
 	JavaScriptBridge.eval(install_script, true)
 
 	var suggested_name := "build_plan.%s" % SAVE_FILE_EXTENSION
-	var save_state := _collect_save_state()
+	var save_state := _collect_save_document()
 	var json_text := JSON.stringify(save_state, "\t")
 	_web_save_pending_file_name = suggested_name
 	_web_save_success_callback = JavaScriptBridge.create_callback(_on_web_save_succeeded)
@@ -2213,7 +2248,7 @@ func _download_pdf_to_browser() -> void:
 	JavaScriptBridge.download_buffer(pdf_bytes, "build_plan.pdf", "application/pdf")
 
 func _write_save_file(path: String) -> bool:
-	var save_state := _collect_save_state()
+	var save_state := _collect_save_document()
 	var json_text := JSON.stringify(save_state, "\t")
 	var file := FileAccess.open(path, FileAccess.WRITE)
 	if file == null:
@@ -2315,8 +2350,93 @@ func _apply_save_text(raw: String) -> bool:
 	if not (parsed is Dictionary):
 		return false
 
-	_apply_save_state(parsed)
+	var applied_state: Dictionary = parsed
+	var loaded_history = parsed.get("history", null)
+	if loaded_history is Dictionary and not (loaded_history as Dictionary).is_empty():
+		# v5+ document: rebuild the head from the version log so the applied
+		# scene is guaranteed consistent with the history (not a stale top-level
+		# cache from a hand-edited file). Fall back to top-level if invalid.
+		_save_history = loaded_history
+		var head_id := int((_save_history.get("head_version_id", 1)))
+		var head_state := SaveVersionStore.state_at(_save_history, head_id)
+		if not head_state.is_empty():
+			applied_state = SaveVersionStore.to_apply_state(head_state)
+	else:
+		# Legacy v4 (or older) save: migrate into a fresh baseline version.
+		_save_history = SaveVersionStore.new_history(
+			parsed, "Imported", Time.get_unix_time_from_system(), SAVE_VERSION_CAP)
+
+	_apply_save_state(applied_state)
 	_clear_history()
+	return true
+
+func _setup_autosnapshot() -> void:
+	_autosnapshot_timer = Timer.new()
+	_autosnapshot_timer.wait_time = AUTOSNAPSHOT_INTERVAL_SECONDS
+	_autosnapshot_timer.one_shot = false
+	_autosnapshot_timer.autostart = true
+	_autosnapshot_timer.timeout.connect(_on_autosnapshot_timer_timeout)
+	add_child(_autosnapshot_timer)
+
+func _on_autosnapshot_timer_timeout() -> void:
+	# Cadence snapshot: append_version is a no-op when nothing changed, so an
+	# idle document never accumulates versions.
+	_record_version("Autosave", SaveVersionStore.KIND_AUTO)
+
+func _record_version(label: String, kind: String, explicit_state: Dictionary = {}) -> void:
+	# Capture a plan as a version in the in-memory log. Defaults to the current
+	# live plan; callers may pass an explicit state (e.g. the pre-delete state).
+	# Persisted into the .srbp on the next file save.
+	var state := explicit_state if not explicit_state.is_empty() else _collect_save_state()
+	if _save_history.is_empty():
+		_save_history = SaveVersionStore.new_history(
+			state, label, Time.get_unix_time_from_system(), SAVE_VERSION_CAP)
+		return
+	var result := SaveVersionStore.append_version(
+		_save_history, state, label, kind, Time.get_unix_time_from_system())
+	_save_history = result["history"]
+
+func _collect_save_document() -> Dictionary:
+	# Live save-state plus the version history, written to disk together. The
+	# current save is recorded as a manual version so opening the file later
+	# always shows the just-saved state as head.
+	_record_version("Saved", SaveVersionStore.KIND_MANUAL)
+	var document := _collect_save_state()
+	document["history"] = _save_history
+	return document
+
+func _setup_version_history_ui() -> void:
+	if _version_history_overlay != null:
+		return
+	_version_history_overlay = VERSION_HISTORY_PANEL_SCRIPT.new()
+	$Camera2D/CanvasLayer.add_child(_version_history_overlay)
+	_version_history_overlay.call("setup", self, _ui_scale)
+
+func _on_version_history_pressed() -> void:
+	_setup_version_history_ui()
+	if _version_history_overlay.visible:
+		_version_history_overlay.call("close")
+	else:
+		_version_history_overlay.call("open")
+
+# --- Version store accessors used by the Version History panel ---------------
+
+func get_save_history() -> Dictionary:
+	return _save_history
+
+func get_current_plan_state() -> Dictionary:
+	return SaveVersionStore.normalize_state(_collect_save_state())
+
+func restore_save_version(version_id: int) -> bool:
+	if _save_history.is_empty():
+		return false
+	var state := SaveVersionStore.state_at(_save_history, version_id)
+	if state.is_empty():
+		return false
+	_apply_save_state(SaveVersionStore.to_apply_state(state), false)
+	_clear_history()
+	# Record the restore itself as a new version so it is reversible.
+	_record_version("Restored v%d" % version_id, SaveVersionStore.KIND_RESTORE)
 	return true
 
 func _process_history_input() -> bool:
@@ -2353,6 +2473,12 @@ func _commit_history_action(label: String, before_state: Dictionary) -> void:
 	while _undo_stack.size() > HISTORY_LIMIT:
 		_undo_stack.pop_front()
 	_redo_stack.clear()
+
+	# Pre-destructive checkpoint: deletions are the classic "nuked my design"
+	# mistake, so persist the pre-delete plan as a recoverable version. The undo
+	# stack only holds the last HISTORY_LIMIT actions; the version log outlives it.
+	if "delete" in label.to_lower():
+		_record_version("Before delete", SaveVersionStore.KIND_PRE_DESTRUCTIVE, before_state)
 
 func _undo_history() -> void:
 	if _undo_stack.is_empty():

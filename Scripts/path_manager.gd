@@ -920,6 +920,44 @@ func _polyline_is_clear(points: Array[Vector2], ignored_buildings: Array) -> boo
 
 	return true
 
+
+func _route_enters_building_body(points: Array[Vector2], endpoint_bodies: Array) -> bool:
+	# True if the route passes through the *body* of an endpoint building. Only
+	# the footprint cells on the port's interior side (opposite the outward
+	# normal) count: a legitimate approach enters from the outward side and stops
+	# at the port, while a pass-through crosses to the far/interior side. This is
+	# robust to exactly where the port sits within the footprint.
+	if points.size() < 2:
+		return false
+	var occupied := _get_occupied_cells()
+	if occupied.is_empty():
+		return false
+
+	var body_cells := {}
+	for meta_variant in endpoint_bodies:
+		var meta: Dictionary = meta_variant
+		var building = meta.get("building")
+		if building == null or not is_instance_valid(building):
+			continue
+		var port_cell := _world_to_cell(meta.get("port", Vector2.ZERO))
+		var interior := -_dominant_axis_normal(meta.get("normal", Vector2.RIGHT))
+		for cell_variant in occupied.keys():
+			var cell: Vector2i = cell_variant
+			if occupied[cell] != building:
+				continue
+			var relative := Vector2(cell - port_cell)
+			if relative.dot(interior) > 0.5:
+				body_cells[cell] = true
+
+	if body_cells.is_empty():
+		return false
+
+	for i in range(1, points.size()):
+		if _segment_hits_blocked_cells(points[i - 1], points[i], body_cells):
+			return true
+	return false
+
+
 func _candidate_score(candidate: Array[Vector2], from_n: Vector2, to_n: Vector2) -> float:
 	var score := _polyline_length(candidate) + float(max(candidate.size() - 2, 0)) * 12.0
 	var preferred_segment_length = max(corner_radius * 1.5, 12.0)
@@ -2741,12 +2779,32 @@ func _build_route_points_local_with_normals(container: Node2D, from_pos_g: Vecto
 	if poly_g[poly_g.size() - 1] != b2:
 		poly_g.append(b2)
 	poly_g.append(b)
+
+	# Pre-compaction route: the mid-route treats the endpoint buildings as
+	# obstacles, so this version routes AROUND them. Kept as a safe fallback in
+	# case a compaction pass shortcuts straight through a footprint.
+	var base_poly_g: Array[Vector2] = []
+	for point in poly_g:
+		base_poly_g.append(point)
+
 	poly_g = _simplify_opposite_vertical_port_link(a, a2, b, poly_g, ignored_buildings, from_n, to_n)
 	poly_g = _simplify_up_origin_departure(poly_g, mid_route_ignored_buildings, from_n, from_building)
 	poly_g = _simplify_up_origin_destination_arrival(poly_g, mid_route_ignored_buildings, from_n, to_n, to_building)
 	poly_g = _simplify_local_wiggles(poly_g, mid_route_ignored_buildings)
 	poly_g = _simplify_compact_full_route(poly_g, mid_route_ignored_buildings, from_n, to_n)
 	poly_g = _sanitize_polyline(poly_g)
+
+	# No rail may cross an endpoint building's body. Vertical-normal compaction
+	# passes can shortcut straight through a footprint; if that happened, fall
+	# back to the pre-compaction route that routed around it. This is a no-op for
+	# the clean routes (they already clear the bodies), so it only reshapes the
+	# rare pass-through cases.
+	var endpoint_bodies := [
+		{"building": from_building, "port": a, "normal": from_n},
+		{"building": to_building, "port": b, "normal": to_n},
+	]
+	if _route_enters_building_body(poly_g, endpoint_bodies):
+		poly_g = _sanitize_polyline(base_poly_g)
 
 	# Convert to local space for the container and round corners in local space
 	var poly_l: Array[Vector2] = []

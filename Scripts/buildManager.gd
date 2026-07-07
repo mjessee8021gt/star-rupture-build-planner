@@ -69,6 +69,7 @@ const ALIGN_REF_LAST := "last"
 const ALIGN_REF_ANCHOR := "anchor"
 const ALIGN_REF_GRID := "grid"
 const ALIGN_METRIC_GAP := "gap"
+const ALIGN_METRIC_FIXED_GAP := "fixed_gap"
 const ALIGN_METRIC_LEADING := "leading"
 const ALIGN_METRIC_TRAILING := "trailing"
 const ALIGN_METRIC_CENTER := "center"
@@ -272,7 +273,7 @@ func _handle_selection_input(event: InputEvent) -> bool:
 			return true
 
 		if is_selecting_buildings:
-			_finish_selection_box(mouse_event.position)
+			_finish_selection_box(mouse_event.position, mouse_event.shift_pressed)
 			return true
 
 	elif event is InputEventMouseMotion and is_selecting_buildings:
@@ -292,18 +293,24 @@ func _update_selection_box() -> void:
 	selection_current_world = get_global_mouse_position()
 	queue_redraw()
 
-func _finish_selection_box(screen_position: Vector2) -> void:
+func _finish_selection_box(screen_position: Vector2, additive := false) -> void:
 	selection_current_world = get_global_mouse_position()
 	is_selecting_buildings = false
 
 	if selection_start_screen.distance_to(screen_position) < SELECTION_DRAG_THRESHOLD:
 		var clicked_building := get_building_under_mouse()
 		if clicked_building != null:
-			if selected_buildings.size() >= 2 and selected_buildings.has(clicked_building):
+			# Shift+click toggles a building in/out of the selection. Without
+			# shift, keep the existing behavior: reclicking a member of a 2+
+			# selection sets it as the anchor, otherwise select just that one.
+			if additive:
+				_toggle_building_in_selection(clicked_building)
+			elif selected_buildings.size() >= 2 and selected_buildings.has(clicked_building):
 				set_alignment_anchor(clicked_building)
 			else:
 				_select_buildings([clicked_building])
-		else:
+		elif not additive:
+			# Shift+click on empty space keeps the current selection.
 			_clear_selection()
 		queue_redraw()
 		return
@@ -315,7 +322,11 @@ func _finish_selection_box(screen_position: Vector2) -> void:
 		if selection_rect.intersects(building_rect, true):
 			buildings_in_rect.append(building)
 
-	_select_buildings(buildings_in_rect)
+	# Shift+box adds the enclosed buildings to the current selection.
+	if additive:
+		_add_buildings_to_selection(buildings_in_rect)
+	else:
+		_select_buildings(buildings_in_rect)
 	queue_redraw()
 
 func _get_all_placed_buildings() -> Array[Node2D]:
@@ -368,6 +379,41 @@ func _select_buildings(buildings: Array[Node2D]) -> void:
 		alignment_anchor_building = null
 	_refresh_selection_visuals()
 	_emit_selection_changed()
+
+
+func _add_buildings_to_selection(buildings: Array[Node2D]) -> void:
+	var seen := {}
+	for building in buildings:
+		if building == null or not is_instance_valid(building):
+			continue
+		if selected_buildings.has(building) or seen.has(building):
+			continue
+		seen[building] = true
+		selected_buildings.append(building)
+		# Capture the true original tint only for newly added buildings so we
+		# never overwrite a stored original with an already-selected tint.
+		selected_original_modulates[building] = building.modulate
+	if alignment_anchor_building == null and selected_buildings.size() >= 2:
+		alignment_anchor_building = selected_buildings[0]
+	_refresh_selection_visuals()
+	_emit_selection_changed()
+
+
+func _toggle_building_in_selection(building: Node2D) -> void:
+	if building == null or not is_instance_valid(building):
+		return
+	if selected_buildings.has(building):
+		# Restore the building's original tint before dropping it.
+		building.modulate = selected_original_modulates.get(building, Color(1, 1, 1, 1))
+		selected_buildings.erase(building)
+		selected_original_modulates.erase(building)
+		if alignment_anchor_building == building or not selected_buildings.has(alignment_anchor_building):
+			alignment_anchor_building = selected_buildings[0] if selected_buildings.size() >= 2 else null
+		_refresh_selection_visuals()
+		_emit_selection_changed()
+	else:
+		var single: Array[Node2D] = [building]
+		_add_buildings_to_selection(single)
 
 func _clear_selection() -> void:
 	for building in selected_buildings:
@@ -526,9 +572,9 @@ func align_selected_buildings(command: String, options: Dictionary = {}) -> Dict
 		"edge_vertical", "pack_vertical":
 			targets = _build_pack_targets(entries, "y", reference_mode, gap)
 		"distribute_horizontal":
-			targets = _build_distribution_targets(entries, "x", metric)
+			targets = _build_distribution_targets(entries, "x", metric, gap)
 		"distribute_vertical":
-			targets = _build_distribution_targets(entries, "y", metric)
+			targets = _build_distribution_targets(entries, "y", metric, gap)
 		"arrange_row":
 			targets = _build_arrange_line_targets(entries, "x", reference_mode, gap)
 		"arrange_column":
@@ -700,10 +746,34 @@ func _anchor_cell_from_top_left(entry: Dictionary, top_left: Vector2i) -> Vector
 	return top_left + anchor_offset
 
 
-func _build_distribution_targets(entries: Array[Dictionary], axis: String, metric: String) -> Dictionary:
+func _build_distribution_targets(entries: Array[Dictionary], axis: String, metric: String, gap: int = 0) -> Dictionary:
 	var sorted := _sort_entries_by_axis(entries, axis)
 	var targets := {}
 	if sorted.size() < 2:
+		return targets
+
+	if metric == ALIGN_METRIC_FIXED_GAP:
+		# Keep the first building (in axis order) fixed and respace the rest so
+		# exactly `gap` tiles separate each pair of facing surfaces.
+		var first: Dictionary = sorted[0]
+		var first_top_left: Vector2i = first.get("top_left", Vector2i.ZERO)
+		targets[first.get("building")] = _anchor_cell_from_top_left(first, first_top_left)
+		var first_footprint: Vector2i = first.get("footprint", Vector2i.ONE)
+		var cursor := (first_top_left.x + first_footprint.x) if axis == "x" else (first_top_left.y + first_footprint.y)
+		for i in range(1, sorted.size()):
+			var entry: Dictionary = sorted[i]
+			var building := entry.get("building") as Node2D
+			var top_left: Vector2i = entry.get("top_left", Vector2i.ZERO)
+			var footprint: Vector2i = entry.get("footprint", Vector2i.ONE)
+			var next_top_left := top_left
+			if axis == "x":
+				next_top_left.x = cursor + gap
+				cursor = next_top_left.x + footprint.x
+			else:
+				next_top_left.y = cursor + gap
+				cursor = next_top_left.y + footprint.y
+			if building != null:
+				targets[building] = _anchor_cell_from_top_left(entry, next_top_left)
 		return targets
 
 	if metric == ALIGN_METRIC_GAP:

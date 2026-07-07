@@ -11,3 +11,7 @@ res://Scripts/palette.gd
 res://Scripts/buildManager.gd
 res://Scripts/annotation_layer.gd
 res://Scripts/PathingIntelligence.gd
+res://Tools/test_building_scale.gd
+res://Tools/test_alignment.gd
+res://Scripts/alignment_panel.gd
+res://Scripts/save_versions_panel.gd

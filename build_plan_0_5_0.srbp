@@ -1303,7 +1303,7 @@
 			],
 			"core_level": {
 				"metadata_path": "",
-				"selected": 0
+				"selected": 1
 			},
 			"footprint": [
 				4,
@@ -1607,18 +1607,2219 @@
 	],
 	"camera": {
 		"position": [
-			1232.0,
-			-1178.0
+			635.0,
+			-830.0
 		],
 		"zoom": [
-			0.800000011920929,
-			0.800000011920929
+			0.560219287872314,
+			0.560219287872314
 		]
 	},
 	"cost_bbm": 2890,
 	"cost_ibm": 220,
 	"cost_meteor_cores": 1,
-	"heat": -774,
+	"heat": -2274,
+	"history": {
+		"base": {
+			"annotations": [
+				{
+					"anchor_cell": [
+						0.0,
+						-8.0
+					],
+					"created_at_unix": 1783270956.646,
+					"format": "bbcode",
+					"id": "ann_23620719_442107989",
+					"target_building_uid": "",
+					"target_type": "cell",
+					"text": "This is a known chokepoint for this factory.",
+					"updated_at_unix": 1783271015.425
+				},
+				{
+					"anchor_cell": [
+						2.0,
+						-19.0
+					],
+					"created_at_unix": 1783270974.377,
+					"format": "bbcode",
+					"id": "ann_41352353_3229442197",
+					"target_building_uid": "",
+					"target_type": "cell",
+					"text": "Total output for this factory is:\n90 Titanium Rods\n180 Titanium Sheets\n180 Titanium Beams",
+					"updated_at_unix": 1783271003.933
+				}
+			],
+			"buildings": [
+				{
+					"anchor_cell": [
+						7.0,
+						-6.0
+					],
+					"core_level": {},
+					"footprint": [
+						3.0,
+						4.0
+					],
+					"id": "ore_excavator",
+					"is_alternate": false,
+					"position": [
+						544.0,
+						-256.0
+					],
+					"purity": {
+						"metadata_path": "res://Recipes/Recipe Variants/titanium_pure.tres",
+						"selected": 2.0
+					},
+					"recipe": {
+						"metadata_path": "res://Recipes/mine_Titanium.tres",
+						"selected": 1.0
+					},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 0.0,
+					"scene_path": "res://Buildings/OreExcavator.tscn",
+					"uid": "bldg_23619382_3811684284"
+				},
+				{
+					"anchor_cell": [
+						10.0,
+						-6.0
+					],
+					"core_level": {},
+					"footprint": [
+						3.0,
+						4.0
+					],
+					"id": "ore_excavator",
+					"is_alternate": false,
+					"position": [
+						736.0,
+						-256.0
+					],
+					"purity": {
+						"metadata_path": "res://Recipes/Recipe Variants/titanium_pure.tres",
+						"selected": 2.0
+					},
+					"recipe": {
+						"metadata_path": "res://Recipes/mine_Titanium.tres",
+						"selected": 1.0
+					},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 0.0,
+					"scene_path": "res://Buildings/OreExcavator.tscn",
+					"uid": "bldg_23619420_2569287889"
+				},
+				{
+					"anchor_cell": [
+						13.0,
+						-6.0
+					],
+					"core_level": {},
+					"footprint": [
+						3.0,
+						4.0
+					],
+					"id": "ore_excavator",
+					"is_alternate": false,
+					"position": [
+						928.0,
+						-256.0
+					],
+					"purity": {
+						"metadata_path": "res://Recipes/Recipe Variants/titanium_pure.tres",
+						"selected": 2.0
+					},
+					"recipe": {
+						"metadata_path": "res://Recipes/mine_Titanium.tres",
+						"selected": 1.0
+					},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 0.0,
+					"scene_path": "res://Buildings/OreExcavator.tscn",
+					"uid": "bldg_23619440_3029426608"
+				},
+				{
+					"anchor_cell": [
+						16.0,
+						-6.0
+					],
+					"core_level": {},
+					"footprint": [
+						3.0,
+						4.0
+					],
+					"id": "ore_excavator",
+					"is_alternate": false,
+					"position": [
+						1120.0,
+						-256.0
+					],
+					"purity": {
+						"metadata_path": "res://Recipes/Recipe Variants/titanium_pure.tres",
+						"selected": 2.0
+					},
+					"recipe": {
+						"metadata_path": "res://Recipes/mine_Titanium.tres",
+						"selected": 1.0
+					},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 0.0,
+					"scene_path": "res://Buildings/OreExcavator.tscn",
+					"uid": "bldg_23619458_54906917"
+				},
+				{
+					"anchor_cell": [
+						16.0,
+						-7.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_support",
+					"is_alternate": false,
+					"position": [
+						1056.0,
+						-416.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 90.0,
+					"scene_path": "res://Buildings/rail_support.tscn",
+					"uid": "bldg_23619472_3978298947"
+				},
+				{
+					"anchor_cell": [
+						13.0,
+						-7.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						864.0,
+						-416.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 90.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_23619487_934926918"
+				},
+				{
+					"anchor_cell": [
+						10.0,
+						-7.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						672.0,
+						-416.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 90.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_23619501_44147628"
+				},
+				{
+					"anchor_cell": [
+						7.0,
+						-7.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						480.0,
+						-416.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 90.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_23619513_207557453"
+				},
+				{
+					"anchor_cell": [
+						7.0,
+						-12.0
+					],
+					"core_level": {},
+					"footprint": [
+						3.0,
+						4.0
+					],
+					"id": "smelter",
+					"is_alternate": false,
+					"position": [
+						544.0,
+						-640.0
+					],
+					"purity": {},
+					"recipe": {
+						"metadata_path": "res://Recipes/Titanium_bar.tres",
+						"selected": 1.0
+					},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 0.0,
+					"scene_path": "res://Buildings/Smelter.tscn",
+					"uid": "bldg_23619529_2415627546"
+				},
+				{
+					"anchor_cell": [
+						10.0,
+						-12.0
+					],
+					"core_level": {},
+					"footprint": [
+						3.0,
+						4.0
+					],
+					"id": "smelter",
+					"is_alternate": false,
+					"position": [
+						736.0,
+						-640.0
+					],
+					"purity": {},
+					"recipe": {
+						"metadata_path": "res://Recipes/Titanium_bar.tres",
+						"selected": 1.0
+					},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 0.0,
+					"scene_path": "res://Buildings/Smelter.tscn",
+					"uid": "bldg_23619545_2502940871"
+				},
+				{
+					"anchor_cell": [
+						13.0,
+						-12.0
+					],
+					"core_level": {},
+					"footprint": [
+						3.0,
+						4.0
+					],
+					"id": "smelter",
+					"is_alternate": false,
+					"position": [
+						928.0,
+						-640.0
+					],
+					"purity": {},
+					"recipe": {
+						"metadata_path": "res://Recipes/Titanium_bar.tres",
+						"selected": 1.0
+					},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 0.0,
+					"scene_path": "res://Buildings/Smelter.tscn",
+					"uid": "bldg_23619560_2897943986"
+				},
+				{
+					"anchor_cell": [
+						16.0,
+						-12.0
+					],
+					"core_level": {},
+					"footprint": [
+						3.0,
+						4.0
+					],
+					"id": "smelter",
+					"is_alternate": false,
+					"position": [
+						1120.0,
+						-640.0
+					],
+					"purity": {},
+					"recipe": {
+						"metadata_path": "res://Recipes/Titanium_bar.tres",
+						"selected": 1.0
+					},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 0.0,
+					"scene_path": "res://Buildings/Smelter.tscn",
+					"uid": "bldg_23619575_2113336328"
+				},
+				{
+					"anchor_cell": [
+						4.0,
+						-12.0
+					],
+					"core_level": {},
+					"footprint": [
+						3.0,
+						4.0
+					],
+					"id": "smelter",
+					"is_alternate": false,
+					"position": [
+						352.0,
+						-640.0
+					],
+					"purity": {},
+					"recipe": {
+						"metadata_path": "res://Recipes/Titanium_bar.tres",
+						"selected": 1.0
+					},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 0.0,
+					"scene_path": "res://Buildings/Smelter.tscn",
+					"uid": "bldg_23619589_1220049812"
+				},
+				{
+					"anchor_cell": [
+						1.0,
+						-12.0
+					],
+					"core_level": {},
+					"footprint": [
+						3.0,
+						4.0
+					],
+					"id": "smelter",
+					"is_alternate": false,
+					"position": [
+						160.0,
+						-640.0
+					],
+					"purity": {},
+					"recipe": {
+						"metadata_path": "res://Recipes/Titanium_bar.tres",
+						"selected": 1.0
+					},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 0.0,
+					"scene_path": "res://Buildings/Smelter.tscn",
+					"uid": "bldg_23619605_1684883349"
+				},
+				{
+					"anchor_cell": [
+						19.0,
+						-12.0
+					],
+					"core_level": {},
+					"footprint": [
+						3.0,
+						4.0
+					],
+					"id": "smelter",
+					"is_alternate": false,
+					"position": [
+						1312.0,
+						-640.0
+					],
+					"purity": {},
+					"recipe": {
+						"metadata_path": "res://Recipes/Titanium_bar.tres",
+						"selected": 1.0
+					},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 0.0,
+					"scene_path": "res://Buildings/Smelter.tscn",
+					"uid": "bldg_23619620_2172924165"
+				},
+				{
+					"anchor_cell": [
+						22.0,
+						-12.0
+					],
+					"core_level": {},
+					"footprint": [
+						3.0,
+						4.0
+					],
+					"id": "smelter",
+					"is_alternate": false,
+					"position": [
+						1504.0,
+						-640.0
+					],
+					"purity": {},
+					"recipe": {
+						"metadata_path": "res://Recipes/Titanium_bar.tres",
+						"selected": 1.0
+					},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 0.0,
+					"scene_path": "res://Buildings/Smelter.tscn",
+					"uid": "bldg_23619635_3305481085"
+				},
+				{
+					"anchor_cell": [
+						1.0,
+						-7.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_support",
+					"is_alternate": false,
+					"position": [
+						96.0,
+						-416.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 90.0,
+					"scene_path": "res://Buildings/rail_support.tscn",
+					"uid": "bldg_23619648_2189020412"
+				},
+				{
+					"anchor_cell": [
+						1.0,
+						-8.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						96.0,
+						-480.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 90.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_23619662_139575237"
+				},
+				{
+					"anchor_cell": [
+						4.0,
+						-8.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						288.0,
+						-480.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 90.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_23619674_4025366760"
+				},
+				{
+					"anchor_cell": [
+						7.0,
+						-8.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						480.0,
+						-480.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 90.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_23619686_737095568"
+				},
+				{
+					"anchor_cell": [
+						10.0,
+						-8.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						672.0,
+						-480.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 90.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_23619699_2182714823"
+				},
+				{
+					"anchor_cell": [
+						13.0,
+						-8.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						864.0,
+						-480.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 90.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_23619711_1691826567"
+				},
+				{
+					"anchor_cell": [
+						16.0,
+						-8.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						1056.0,
+						-480.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 90.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_23619724_1334231752"
+				},
+				{
+					"anchor_cell": [
+						19.0,
+						-8.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						1248.0,
+						-480.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 90.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_23619738_696694687"
+				},
+				{
+					"anchor_cell": [
+						25.0,
+						-11.0
+					],
+					"core_level": {},
+					"footprint": [
+						3.0,
+						3.0
+					],
+					"id": "storage_v2",
+					"is_alternate": false,
+					"position": [
+						1696.0,
+						-608.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 0.0,
+					"scene_path": "res://Buildings/Storage_v2.tscn",
+					"uid": "bldg_23619752_3846782179"
+				},
+				{
+					"anchor_cell": [
+						22.0,
+						-8.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						1440.0,
+						-480.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 90.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_23619765_930002673"
+				},
+				{
+					"anchor_cell": [
+						25.0,
+						-8.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_support",
+					"is_alternate": false,
+					"position": [
+						1632.0,
+						-480.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 90.0,
+					"scene_path": "res://Buildings/rail_support.tscn",
+					"uid": "bldg_23619777_1302578330"
+				},
+				{
+					"anchor_cell": [
+						1.0,
+						-17.0
+					],
+					"core_level": {},
+					"footprint": [
+						3.0,
+						3.0
+					],
+					"id": "fabricator",
+					"is_alternate": false,
+					"position": [
+						160.0,
+						-992.0
+					],
+					"purity": {},
+					"recipe": {
+						"metadata_path": "res://Recipes/Titanium_rod.tres",
+						"selected": 0.0
+					},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 0.0,
+					"scene_path": "res://Buildings/Fabricator.tscn",
+					"uid": "bldg_23619793_3357401182"
+				},
+				{
+					"anchor_cell": [
+						4.0,
+						-17.0
+					],
+					"core_level": {},
+					"footprint": [
+						3.0,
+						3.0
+					],
+					"id": "fabricator",
+					"is_alternate": false,
+					"position": [
+						352.0,
+						-992.0
+					],
+					"purity": {},
+					"recipe": {
+						"metadata_path": "res://Recipes/Titanium_sheet.tres",
+						"selected": 1.0
+					},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 0.0,
+					"scene_path": "res://Buildings/Fabricator.tscn",
+					"uid": "bldg_23619809_1617576531"
+				},
+				{
+					"anchor_cell": [
+						7.0,
+						-17.0
+					],
+					"core_level": {},
+					"footprint": [
+						3.0,
+						3.0
+					],
+					"id": "fabricator",
+					"is_alternate": false,
+					"position": [
+						544.0,
+						-992.0
+					],
+					"purity": {},
+					"recipe": {
+						"metadata_path": "res://Recipes/Titanium_rod.tres",
+						"selected": 0.0
+					},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 0.0,
+					"scene_path": "res://Buildings/Fabricator.tscn",
+					"uid": "bldg_23619824_2137151351"
+				},
+				{
+					"anchor_cell": [
+						10.0,
+						-17.0
+					],
+					"core_level": {},
+					"footprint": [
+						3.0,
+						3.0
+					],
+					"id": "fabricator",
+					"is_alternate": false,
+					"position": [
+						736.0,
+						-992.0
+					],
+					"purity": {},
+					"recipe": {
+						"metadata_path": "res://Recipes/Titanium_sheet.tres",
+						"selected": 1.0
+					},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 0.0,
+					"scene_path": "res://Buildings/Fabricator.tscn",
+					"uid": "bldg_23619838_1038362130"
+				},
+				{
+					"anchor_cell": [
+						13.0,
+						-17.0
+					],
+					"core_level": {},
+					"footprint": [
+						3.0,
+						3.0
+					],
+					"id": "fabricator",
+					"is_alternate": false,
+					"position": [
+						928.0,
+						-992.0
+					],
+					"purity": {},
+					"recipe": {
+						"metadata_path": "res://Recipes/Titanium_beam.tres",
+						"selected": 2.0
+					},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 0.0,
+					"scene_path": "res://Buildings/Fabricator.tscn",
+					"uid": "bldg_23619852_4277285716"
+				},
+				{
+					"anchor_cell": [
+						16.0,
+						-17.0
+					],
+					"core_level": {},
+					"footprint": [
+						3.0,
+						3.0
+					],
+					"id": "fabricator",
+					"is_alternate": false,
+					"position": [
+						1120.0,
+						-992.0
+					],
+					"purity": {},
+					"recipe": {
+						"metadata_path": "res://Recipes/Titanium_beam.tres",
+						"selected": 2.0
+					},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 0.0,
+					"scene_path": "res://Buildings/Fabricator.tscn",
+					"uid": "bldg_23619866_3721274914"
+				},
+				{
+					"anchor_cell": [
+						19.0,
+						-17.0
+					],
+					"core_level": {},
+					"footprint": [
+						3.0,
+						3.0
+					],
+					"id": "fabricator",
+					"is_alternate": false,
+					"position": [
+						1312.0,
+						-992.0
+					],
+					"purity": {},
+					"recipe": {
+						"metadata_path": "res://Recipes/Titanium_rod.tres",
+						"selected": 0.0
+					},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 0.0,
+					"scene_path": "res://Buildings/Fabricator.tscn",
+					"uid": "bldg_23619879_1826237381"
+				},
+				{
+					"anchor_cell": [
+						22.0,
+						-17.0
+					],
+					"core_level": {},
+					"footprint": [
+						3.0,
+						3.0
+					],
+					"id": "fabricator",
+					"is_alternate": false,
+					"position": [
+						1504.0,
+						-992.0
+					],
+					"purity": {},
+					"recipe": {
+						"metadata_path": "res://Recipes/Titanium_sheet.tres",
+						"selected": 1.0
+					},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 0.0,
+					"scene_path": "res://Buildings/Fabricator.tscn",
+					"uid": "bldg_23619894_1521155489"
+				},
+				{
+					"anchor_cell": [
+						3.0,
+						-13.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_support",
+					"is_alternate": false,
+					"position": [
+						224.0,
+						-800.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 90.0,
+					"scene_path": "res://Buildings/rail_support.tscn",
+					"uid": "bldg_23619907_4121436354"
+				},
+				{
+					"anchor_cell": [
+						3.0,
+						-14.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_support",
+					"is_alternate": false,
+					"position": [
+						224.0,
+						-864.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 90.0,
+					"scene_path": "res://Buildings/rail_support.tscn",
+					"uid": "bldg_23619918_2053075683"
+				},
+				{
+					"anchor_cell": [
+						6.0,
+						-13.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						416.0,
+						-800.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 270.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_23619932_15275838"
+				},
+				{
+					"anchor_cell": [
+						6.0,
+						-14.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						416.0,
+						-864.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 270.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_23619945_1146322918"
+				},
+				{
+					"anchor_cell": [
+						9.0,
+						-14.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						608.0,
+						-864.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 270.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_23619956_683412387"
+				},
+				{
+					"anchor_cell": [
+						9.0,
+						-13.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						608.0,
+						-800.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 270.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_23619970_1458919144"
+				},
+				{
+					"anchor_cell": [
+						12.0,
+						-13.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						800.0,
+						-800.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 270.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_23619983_2570646246"
+				},
+				{
+					"anchor_cell": [
+						12.0,
+						-14.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						800.0,
+						-864.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 270.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_23619995_858570798"
+				},
+				{
+					"anchor_cell": [
+						15.0,
+						-13.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						992.0,
+						-800.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 270.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_23620006_3549269454"
+				},
+				{
+					"anchor_cell": [
+						15.0,
+						-14.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						992.0,
+						-864.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 270.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_23620018_3877135351"
+				},
+				{
+					"anchor_cell": [
+						18.0,
+						-13.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						1184.0,
+						-800.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 270.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_23620030_350924325"
+				},
+				{
+					"anchor_cell": [
+						18.0,
+						-14.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						1184.0,
+						-864.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 270.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_23620042_3832557836"
+				},
+				{
+					"anchor_cell": [
+						21.0,
+						-13.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						1376.0,
+						-800.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 270.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_23620053_4011121305"
+				},
+				{
+					"anchor_cell": [
+						21.0,
+						-14.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						1376.0,
+						-864.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 270.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_23620067_2770369729"
+				},
+				{
+					"anchor_cell": [
+						24.0,
+						-13.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						1568.0,
+						-800.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 270.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_23620081_2295935612"
+				},
+				{
+					"anchor_cell": [
+						24.0,
+						-14.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						1568.0,
+						-864.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 270.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_23620093_185038201"
+				},
+				{
+					"anchor_cell": [
+						19.0,
+						-6.0
+					],
+					"core_level": {},
+					"footprint": [
+						4.0,
+						4.0
+					],
+					"id": "wind_v1",
+					"is_alternate": false,
+					"position": [
+						1344.0,
+						-256.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 0.0,
+					"scene_path": "res://Buildings/Wind V1.tscn",
+					"uid": "bldg_23620105_2415693207"
+				},
+				{
+					"anchor_cell": [
+						-6.0,
+						-12.0
+					],
+					"core_level": {
+						"metadata_path": "",
+						"selected": 0.0
+					},
+					"footprint": [
+						4.0,
+						4.0
+					],
+					"id": "base_core",
+					"is_alternate": false,
+					"position": [
+						-256.0,
+						-640.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 0.0,
+					"scene_path": "res://Buildings/Base Core.tscn",
+					"uid": "bldg_23620123_2401918454"
+				},
+				{
+					"anchor_cell": [
+						3.0,
+						-18.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_support",
+					"is_alternate": false,
+					"position": [
+						224.0,
+						-1120.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 1.0,
+					"rotation_degrees": 90.0,
+					"scene_path": "res://Buildings/rail_support.tscn",
+					"uid": "bldg_50734518_3546652284"
+				},
+				{
+					"anchor_cell": [
+						6.0,
+						-18.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						416.0,
+						-1120.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 3.0,
+					"rotation_degrees": 270.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_71717920_2077927605"
+				},
+				{
+					"anchor_cell": [
+						9.0,
+						-18.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						608.0,
+						-1120.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 3.0,
+					"rotation_degrees": 270.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_72652449_1562337978"
+				},
+				{
+					"anchor_cell": [
+						12.0,
+						-18.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						800.0,
+						-1120.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 3.0,
+					"rotation_degrees": 270.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_73403040_1785575004"
+				},
+				{
+					"anchor_cell": [
+						15.0,
+						-18.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						992.0,
+						-1120.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 3.0,
+					"rotation_degrees": 270.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_74337034_1147198946"
+				},
+				{
+					"anchor_cell": [
+						18.0,
+						-18.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						1184.0,
+						-1120.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 3.0,
+					"rotation_degrees": 270.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_75104336_1619659545"
+				},
+				{
+					"anchor_cell": [
+						21.0,
+						-18.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						1376.0,
+						-1120.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 3.0,
+					"rotation_degrees": 270.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_75921748_1591013196"
+				},
+				{
+					"anchor_cell": [
+						24.0,
+						-18.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						1568.0,
+						-1120.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 3.0,
+					"rotation_degrees": 270.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_76672460_2916213898"
+				},
+				{
+					"anchor_cell": [
+						22.0,
+						-22.0
+					],
+					"core_level": {},
+					"footprint": [
+						3.0,
+						3.0
+					],
+					"id": "fabricator",
+					"is_alternate": false,
+					"position": [
+						1504.0,
+						-1312.0
+					],
+					"purity": {},
+					"recipe": {
+						"metadata_path": "res://Recipes/Tube.tres",
+						"selected": 5.0
+					},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 0.0,
+					"scene_path": "res://Buildings/Fabricator.tscn",
+					"uid": "bldg_85130919_2006147342"
+				},
+				{
+					"anchor_cell": [
+						19.0,
+						-22.0
+					],
+					"core_level": {},
+					"footprint": [
+						3.0,
+						3.0
+					],
+					"id": "fabricator",
+					"is_alternate": false,
+					"position": [
+						1312.0,
+						-1312.0
+					],
+					"purity": {},
+					"recipe": {
+						"metadata_path": "res://Recipes/Titanium_sheet.tres",
+						"selected": 1.0
+					},
+					"rotated_tick": 0.0,
+					"rotation_degrees": 0.0,
+					"scene_path": "res://Buildings/Fabricator.tscn",
+					"uid": "bldg_25560800_2040188258"
+				},
+				{
+					"anchor_cell": [
+						24.0,
+						-19.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						1568.0,
+						-1184.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 3.0,
+					"rotation_degrees": 270.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_40091454_3125075217"
+				},
+				{
+					"anchor_cell": [
+						21.0,
+						-19.0
+					],
+					"core_level": {},
+					"footprint": [
+						1.0,
+						1.0
+					],
+					"id": "rail_mod_3",
+					"is_alternate": false,
+					"position": [
+						1376.0,
+						-1184.0
+					],
+					"purity": {},
+					"recipe": {},
+					"rotated_tick": 3.0,
+					"rotation_degrees": 270.0,
+					"scene_path": "res://Buildings/rail_modulator_3.tscn",
+					"uid": "bldg_41472106_1418902455"
+				}
+			],
+			"cost_bbm": 2890,
+			"cost_ibm": 220,
+			"cost_meteor_cores": 1,
+			"heat": -774,
+			"paths": [
+				{
+					"from_port": "Ports/Output 1",
+					"from_uid": "bldg_23619458_54906917",
+					"rail_version": 1,
+					"to_port": "Ports/Universal 1",
+					"to_uid": "bldg_23619472_3978298947"
+				},
+				{
+					"from_port": "Ports/Universal 2",
+					"from_uid": "bldg_23619472_3978298947",
+					"rail_version": 1,
+					"to_port": "Ports/Universal 2",
+					"to_uid": "bldg_23619487_934926918"
+				},
+				{
+					"from_port": "Ports/Output 1",
+					"from_uid": "bldg_23619440_3029426608",
+					"rail_version": 1,
+					"to_port": "Ports/Universal 3",
+					"to_uid": "bldg_23619487_934926918"
+				},
+				{
+					"from_port": "Ports/Universal 4",
+					"from_uid": "bldg_23619487_934926918",
+					"rail_version": 2,
+					"to_port": "Ports/Universal 2",
+					"to_uid": "bldg_23619501_44147628"
+				},
+				{
+					"from_port": "Ports/Universal 4",
+					"from_uid": "bldg_23619501_44147628",
+					"rail_version": 2,
+					"to_port": "Ports/Universal 2",
+					"to_uid": "bldg_23619513_207557453"
+				},
+				{
+					"from_port": "Ports/Universal 4",
+					"from_uid": "bldg_23619513_207557453",
+					"rail_version": 2,
+					"to_port": "Ports/Universal 1",
+					"to_uid": "bldg_23619648_2189020412"
+				},
+				{
+					"from_port": "Ports/Universal 2",
+					"from_uid": "bldg_23619648_2189020412",
+					"rail_version": 2,
+					"to_port": "Ports/Universal 4",
+					"to_uid": "bldg_23619662_139575237"
+				},
+				{
+					"from_port": "Ports/Output 1",
+					"from_uid": "bldg_23619420_2569287889",
+					"rail_version": 1,
+					"to_port": "Ports/Universal 3",
+					"to_uid": "bldg_23619501_44147628"
+				},
+				{
+					"from_port": "Ports/Output 1",
+					"from_uid": "bldg_23619382_3811684284",
+					"rail_version": 1,
+					"to_port": "Ports/Universal 3",
+					"to_uid": "bldg_23619513_207557453"
+				},
+				{
+					"from_port": "Ports/Universal 1",
+					"from_uid": "bldg_23619662_139575237",
+					"rail_version": 0,
+					"to_port": "Ports/Input 1",
+					"to_uid": "bldg_23619605_1684883349"
+				},
+				{
+					"from_port": "Ports/Universal 2",
+					"from_uid": "bldg_23619662_139575237",
+					"rail_version": 2,
+					"to_port": "Ports/Universal 4",
+					"to_uid": "bldg_23619674_4025366760"
+				},
+				{
+					"from_port": "Ports/Universal 2",
+					"from_uid": "bldg_23619674_4025366760",
+					"rail_version": 2,
+					"to_port": "Ports/Universal 4",
+					"to_uid": "bldg_23619686_737095568"
+				},
+				{
+					"from_port": "Ports/Universal 2",
+					"from_uid": "bldg_23619686_737095568",
+					"rail_version": 2,
+					"to_port": "Ports/Universal 4",
+					"to_uid": "bldg_23619699_2182714823"
+				},
+				{
+					"from_port": "Ports/Universal 2",
+					"from_uid": "bldg_23619699_2182714823",
+					"rail_version": 2,
+					"to_port": "Ports/Universal 4",
+					"to_uid": "bldg_23619711_1691826567"
+				},
+				{
+					"from_port": "Ports/Universal 2",
+					"from_uid": "bldg_23619711_1691826567",
+					"rail_version": 2,
+					"to_port": "Ports/Universal 4",
+					"to_uid": "bldg_23619724_1334231752"
+				},
+				{
+					"from_port": "Ports/Universal 2",
+					"from_uid": "bldg_23619724_1334231752",
+					"rail_version": 2,
+					"to_port": "Ports/Universal 4",
+					"to_uid": "bldg_23619738_696694687"
+				},
+				{
+					"from_port": "Ports/Universal 2",
+					"from_uid": "bldg_23619738_696694687",
+					"rail_version": 2,
+					"to_port": "Ports/Universal 4",
+					"to_uid": "bldg_23619765_930002673"
+				},
+				{
+					"from_port": "Ports/Universal 2",
+					"from_uid": "bldg_23619765_930002673",
+					"rail_version": 2,
+					"to_port": "Ports/Universal 2",
+					"to_uid": "bldg_23619777_1302578330"
+				},
+				{
+					"from_port": "Ports/Universal 1",
+					"from_uid": "bldg_23619777_1302578330",
+					"rail_version": 2,
+					"to_port": "Ports/Universal 3",
+					"to_uid": "bldg_23619752_3846782179"
+				},
+				{
+					"from_port": "Ports/Universal 1",
+					"from_uid": "bldg_23619674_4025366760",
+					"rail_version": 0,
+					"to_port": "Ports/Input 1",
+					"to_uid": "bldg_23619589_1220049812"
+				},
+				{
+					"from_port": "Ports/Universal 1",
+					"from_uid": "bldg_23619686_737095568",
+					"rail_version": 0,
+					"to_port": "Ports/Input 1",
+					"to_uid": "bldg_23619529_2415627546"
+				},
+				{
+					"from_port": "Ports/Universal 1",
+					"from_uid": "bldg_23619699_2182714823",
+					"rail_version": 0,
+					"to_port": "Ports/Input 1",
+					"to_uid": "bldg_23619545_2502940871"
+				},
+				{
+					"from_port": "Ports/Universal 1",
+					"from_uid": "bldg_23619711_1691826567",
+					"rail_version": 0,
+					"to_port": "Ports/Input 1",
+					"to_uid": "bldg_23619560_2897943986"
+				},
+				{
+					"from_port": "Ports/Universal 1",
+					"from_uid": "bldg_23619724_1334231752",
+					"rail_version": 0,
+					"to_port": "Ports/Input 1",
+					"to_uid": "bldg_23619575_2113336328"
+				},
+				{
+					"from_port": "Ports/Universal 1",
+					"from_uid": "bldg_23619738_696694687",
+					"rail_version": 0,
+					"to_port": "Ports/Input 1",
+					"to_uid": "bldg_23619620_2172924165"
+				},
+				{
+					"from_port": "Ports/Universal 1",
+					"from_uid": "bldg_23619765_930002673",
+					"rail_version": 0,
+					"to_port": "Ports/Input 1",
+					"to_uid": "bldg_23619635_3305481085"
+				},
+				{
+					"from_port": "Ports/Output 1",
+					"from_uid": "bldg_23619605_1684883349",
+					"rail_version": 0,
+					"to_port": "Ports/Universal 2",
+					"to_uid": "bldg_23619907_4121436354"
+				},
+				{
+					"from_port": "Ports/Universal 1",
+					"from_uid": "bldg_23619907_4121436354",
+					"rail_version": 0,
+					"to_port": "Ports/Universal 2",
+					"to_uid": "bldg_23619932_15275838"
+				},
+				{
+					"from_port": "Ports/Output 1",
+					"from_uid": "bldg_23619589_1220049812",
+					"rail_version": 0,
+					"to_port": "Ports/Universal 1",
+					"to_uid": "bldg_23619932_15275838"
+				},
+				{
+					"from_port": "Ports/Universal 4",
+					"from_uid": "bldg_23619932_15275838",
+					"rail_version": 0,
+					"to_port": "Ports/Universal 2",
+					"to_uid": "bldg_23619970_1458919144"
+				},
+				{
+					"from_port": "Ports/Output 1",
+					"from_uid": "bldg_23619529_2415627546",
+					"rail_version": 0,
+					"to_port": "Ports/Universal 1",
+					"to_uid": "bldg_23619970_1458919144"
+				},
+				{
+					"from_port": "Ports/Universal 4",
+					"from_uid": "bldg_23619970_1458919144",
+					"rail_version": 1,
+					"to_port": "Ports/Universal 2",
+					"to_uid": "bldg_23619983_2570646246"
+				},
+				{
+					"from_port": "Ports/Output 1",
+					"from_uid": "bldg_23619545_2502940871",
+					"rail_version": 0,
+					"to_port": "Ports/Universal 1",
+					"to_uid": "bldg_23619983_2570646246"
+				},
+				{
+					"from_port": "Ports/Output 1",
+					"from_uid": "bldg_23619560_2897943986",
+					"rail_version": 0,
+					"to_port": "Ports/Universal 1",
+					"to_uid": "bldg_23620006_3549269454"
+				},
+				{
+					"from_port": "Ports/Output 1",
+					"from_uid": "bldg_23619575_2113336328",
+					"rail_version": 0,
+					"to_port": "Ports/Universal 1",
+					"to_uid": "bldg_23620030_350924325"
+				},
+				{
+					"from_port": "Ports/Output 1",
+					"from_uid": "bldg_23619620_2172924165",
+					"rail_version": 0,
+					"to_port": "Ports/Universal 1",
+					"to_uid": "bldg_23620053_4011121305"
+				},
+				{
+					"from_port": "Ports/Output 1",
+					"from_uid": "bldg_23619635_3305481085",
+					"rail_version": 0,
+					"to_port": "Ports/Universal 1",
+					"to_uid": "bldg_23620081_2295935612"
+				},
+				{
+					"from_port": "Ports/Universal 4",
+					"from_uid": "bldg_23619983_2570646246",
+					"rail_version": 1,
+					"to_port": "Ports/Universal 2",
+					"to_uid": "bldg_23620006_3549269454"
+				},
+				{
+					"from_port": "Ports/Universal 4",
+					"from_uid": "bldg_23620006_3549269454",
+					"rail_version": 1,
+					"to_port": "Ports/Universal 2",
+					"to_uid": "bldg_23620030_350924325"
+				},
+				{
+					"from_port": "Ports/Universal 4",
+					"from_uid": "bldg_23620030_350924325",
+					"rail_version": 2,
+					"to_port": "Ports/Universal 2",
+					"to_uid": "bldg_23620053_4011121305"
+				},
+				{
+					"from_port": "Ports/Universal 4",
+					"from_uid": "bldg_23620053_4011121305",
+					"rail_version": 2,
+					"to_port": "Ports/Universal 2",
+					"to_uid": "bldg_23620081_2295935612"
+				},
+				{
+					"from_port": "Ports/Universal 4",
+					"from_uid": "bldg_23620081_2295935612",
+					"rail_version": 2,
+					"to_port": "Ports/Universal 4",
+					"to_uid": "bldg_23620093_185038201"
+				},
+				{
+					"from_port": "Ports/Universal 2",
+					"from_uid": "bldg_23620093_185038201",
+					"rail_version": 2,
+					"to_port": "Ports/Universal 4",
+					"to_uid": "bldg_23620067_2770369729"
+				},
+				{
+					"from_port": "Ports/Universal 2",
+					"from_uid": "bldg_23620067_2770369729",
+					"rail_version": 2,
+					"to_port": "Ports/Universal 4",
+					"to_uid": "bldg_23620042_3832557836"
+				},
+				{
+					"from_port": "Ports/Universal 2",
+					"from_uid": "bldg_23620042_3832557836",
+					"rail_version": 1,
+					"to_port": "Ports/Universal 4",
+					"to_uid": "bldg_23620018_3877135351"
+				},
+				{
+					"from_port": "Ports/Universal 2",
+					"from_uid": "bldg_23620018_3877135351",
+					"rail_version": 1,
+					"to_port": "Ports/Universal 4",
+					"to_uid": "bldg_23619995_858570798"
+				},
+				{
+					"from_port": "Ports/Universal 2",
+					"from_uid": "bldg_23619995_858570798",
+					"rail_version": 1,
+					"to_port": "Ports/Universal 4",
+					"to_uid": "bldg_23619956_683412387"
+				},
+				{
+					"from_port": "Ports/Universal 2",
+					"from_uid": "bldg_23619956_683412387",
+					"rail_version": 0,
+					"to_port": "Ports/Universal 4",
+					"to_uid": "bldg_23619945_1146322918"
+				},
+				{
+					"from_port": "Ports/Universal 2",
+					"from_uid": "bldg_23619945_1146322918",
+					"rail_version": 0,
+					"to_port": "Ports/Universal 1",
+					"to_uid": "bldg_23619918_2053075683"
+				},
+				{
+					"from_port": "Ports/Universal 3",
+					"from_uid": "bldg_23620093_185038201",
+					"rail_version": 0,
+					"to_port": "Ports/Input 2",
+					"to_uid": "bldg_23619894_1521155489"
+				},
+				{
+					"from_port": "Ports/Universal 3",
+					"from_uid": "bldg_23620067_2770369729",
+					"rail_version": 0,
+					"to_port": "Ports/Input 2",
+					"to_uid": "bldg_23619879_1826237381"
+				},
+				{
+					"from_port": "Ports/Universal 3",
+					"from_uid": "bldg_23620042_3832557836",
+					"rail_version": 0,
+					"to_port": "Ports/Input 1",
+					"to_uid": "bldg_23619866_3721274914"
+				},
+				{
+					"from_port": "Ports/Universal 3",
+					"from_uid": "bldg_23620018_3877135351",
+					"rail_version": 0,
+					"to_port": "Ports/Input 1",
+					"to_uid": "bldg_23619852_4277285716"
+				},
+				{
+					"from_port": "Ports/Universal 3",
+					"from_uid": "bldg_23619995_858570798",
+					"rail_version": 0,
+					"to_port": "Ports/Input 1",
+					"to_uid": "bldg_23619838_1038362130"
+				},
+				{
+					"from_port": "Ports/Universal 3",
+					"from_uid": "bldg_23619956_683412387",
+					"rail_version": 0,
+					"to_port": "Ports/Input 1",
+					"to_uid": "bldg_23619824_2137151351"
+				},
+				{
+					"from_port": "Ports/Universal 3",
+					"from_uid": "bldg_23619945_1146322918",
+					"rail_version": 0,
+					"to_port": "Ports/Input 1",
+					"to_uid": "bldg_23619809_1617576531"
+				},
+				{
+					"from_port": "Ports/Universal 2",
+					"from_uid": "bldg_23619918_2053075683",
+					"rail_version": 0,
+					"to_port": "Ports/Input 1",
+					"to_uid": "bldg_23619793_3357401182"
+				},
+				{
+					"from_port": "Ports/Output 1",
+					"from_uid": "bldg_23619793_3357401182",
+					"rail_version": 0,
+					"to_port": "Ports/Universal 2",
+					"to_uid": "bldg_50734518_3546652284"
+				},
+				{
+					"from_port": "Ports/Universal 1",
+					"from_uid": "bldg_50734518_3546652284",
+					"rail_version": 0,
+					"to_port": "Ports/Universal 2",
+					"to_uid": "bldg_71717920_2077927605"
+				},
+				{
+					"from_port": "Ports/Output 1",
+					"from_uid": "bldg_23619809_1617576531",
+					"rail_version": 0,
+					"to_port": "Ports/Universal 1",
+					"to_uid": "bldg_71717920_2077927605"
+				},
+				{
+					"from_port": "Ports/Universal 4",
+					"from_uid": "bldg_71717920_2077927605",
+					"rail_version": 0,
+					"to_port": "Ports/Universal 2",
+					"to_uid": "bldg_72652449_1562337978"
+				},
+				{
+					"from_port": "Ports/Output 1",
+					"from_uid": "bldg_23619824_2137151351",
+					"rail_version": 0,
+					"to_port": "Ports/Universal 1",
+					"to_uid": "bldg_72652449_1562337978"
+				},
+				{
+					"from_port": "Ports/Universal 4",
+					"from_uid": "bldg_72652449_1562337978",
+					"rail_version": 1,
+					"to_port": "Ports/Universal 2",
+					"to_uid": "bldg_73403040_1785575004"
+				},
+				{
+					"from_port": "Ports/Universal 4",
+					"from_uid": "bldg_73403040_1785575004",
+					"rail_version": 1,
+					"to_port": "Ports/Universal 2",
+					"to_uid": "bldg_74337034_1147198946"
+				},
+				{
+					"from_port": "Ports/Universal 4",
+					"from_uid": "bldg_74337034_1147198946",
+					"rail_version": 2,
+					"to_port": "Ports/Universal 2",
+					"to_uid": "bldg_75104336_1619659545"
+				},
+				{
+					"from_port": "Ports/Universal 4",
+					"from_uid": "bldg_75104336_1619659545",
+					"rail_version": 2,
+					"to_port": "Ports/Universal 2",
+					"to_uid": "bldg_75921748_1591013196"
+				},
+				{
+					"from_port": "Ports/Universal 4",
+					"from_uid": "bldg_75921748_1591013196",
+					"rail_version": 2,
+					"to_port": "Ports/Universal 2",
+					"to_uid": "bldg_76672460_2916213898"
+				},
+				{
+					"from_port": "Ports/Output 1",
+					"from_uid": "bldg_23619838_1038362130",
+					"rail_version": 0,
+					"to_port": "Ports/Universal 1",
+					"to_uid": "bldg_73403040_1785575004"
+				},
+				{
+					"from_port": "Ports/Output 1",
+					"from_uid": "bldg_23619852_4277285716",
+					"rail_version": 0,
+					"to_port": "Ports/Universal 1",
+					"to_uid": "bldg_74337034_1147198946"
+				},
+				{
+					"from_port": "Ports/Output 1",
+					"from_uid": "bldg_23619866_3721274914",
+					"rail_version": 0,
+					"to_port": "Ports/Universal 1",
+					"to_uid": "bldg_75104336_1619659545"
+				},
+				{
+					"from_port": "Ports/Output 1",
+					"from_uid": "bldg_23619879_1826237381",
+					"rail_version": 0,
+					"to_port": "Ports/Universal 1",
+					"to_uid": "bldg_75921748_1591013196"
+				},
+				{
+					"from_port": "Ports/Output 1",
+					"from_uid": "bldg_23619894_1521155489",
+					"rail_version": 0,
+					"to_port": "Ports/Universal 1",
+					"to_uid": "bldg_76672460_2916213898"
+				},
+				{
+					"from_port": "Ports/Universal 4",
+					"from_uid": "bldg_76672460_2916213898",
+					"rail_version": 2,
+					"to_port": "Ports/Universal 4",
+					"to_uid": "bldg_40091454_3125075217"
+				},
+				{
+					"from_port": "Ports/Universal 2",
+					"from_uid": "bldg_40091454_3125075217",
+					"rail_version": 2,
+					"to_port": "Ports/Universal 4",
+					"to_uid": "bldg_41472106_1418902455"
+				},
+				{
+					"from_port": "Ports/Universal 3",
+					"from_uid": "bldg_41472106_1418902455",
+					"rail_version": 0,
+					"to_port": "Ports/Input 2",
+					"to_uid": "bldg_25560800_2040188258"
+				},
+				{
+					"from_port": "Ports/Universal 3",
+					"from_uid": "bldg_40091454_3125075217",
+					"rail_version": 0,
+					"to_port": "Ports/Input 2",
+					"to_uid": "bldg_85130919_2006147342"
+				}
+			],
+			"power": 1035
+		},
+		"base_meta": {
+			"created_unix": 1783387274.299,
+			"kind": "base",
+			"label": "Imported",
+			"version_id": 1
+		},
+		"cap": 50,
+		"deltas": [
+			{
+				"created_unix": 1783387302.556,
+				"kind": "manual",
+				"label": "Saved",
+				"ops": {
+					"buildings": {
+						"changed": {
+							"bldg_23620123_2401918454": {
+								"anchor_cell": [
+									-6,
+									-12
+								],
+								"core_level": {
+									"metadata_path": "",
+									"selected": 1
+								},
+								"footprint": [
+									4,
+									4
+								],
+								"id": "base_core",
+								"is_alternate": false,
+								"position": [
+									-256.0,
+									-640.0
+								],
+								"purity": {},
+								"recipe": {},
+								"rotated_tick": 0,
+								"rotation_degrees": 0.0,
+								"scene_path": "res://Buildings/Base Core.tscn",
+								"uid": "bldg_23620123_2401918454"
+							}
+						}
+					},
+					"scalars": {
+						"heat": -2274
+					}
+				},
+				"version_id": 2
+			}
+		],
+		"head_version_id": 2,
+		"next_version_id": 3
+	},
 	"occupied_cells": [
 		"7,-6",
 		"8,-6",
@@ -2472,6 +4673,6 @@
 	],
 	"power": 1035,
 	"production_panel_visible": false,
-	"saved_at_unix": 1783324292.94,
-	"version": 4
+	"saved_at_unix": 1783387302.562,
+	"version": 5
 }
