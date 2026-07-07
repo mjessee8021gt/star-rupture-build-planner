@@ -3012,6 +3012,85 @@ func update_paths_for_building(building: Node2D, refresh_overlap := true) -> voi
 	else:
 		_refresh_path_markers(updated_paths)
 
+# --- Eyedropper / blueprint support -----------------------------------------
+# The group eyedropper (and, later, the stamp/blueprint tool) needs to copy the
+# rails that live *inside* a grabbed selection. These helpers keep all path
+# iteration and routing inside PathManager so the BuildManager only deals with
+# building references and port paths.
+
+# Return the rails whose BOTH endpoints are among `buildings`. Each entry is
+# {from_building, from_port, to_building, to_port, rail_version}. Rails that
+# leave the selection are intentionally skipped -- a copied block only owns its
+# internal connections.
+func get_internal_rails(buildings: Array) -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
+	if buildings.is_empty():
+		return result
+
+	var member := {}
+	for b in buildings:
+		if b != null:
+			member[b] = true
+
+	for child in get_children():
+		if not (child is Path2D):
+			continue
+		var path := child as Path2D
+		if not path.has_meta("from_building") or not path.has_meta("to_building"):
+			continue
+		var from_building = path.get_meta("from_building")
+		var to_building = path.get_meta("to_building")
+		if not member.has(from_building) or not member.has(to_building):
+			continue
+		result.append({
+			"from_building": from_building,
+			"from_port": path.get_meta("from_port"),
+			"to_building": to_building,
+			"to_port": path.get_meta("to_port"),
+			"rail_version": get_path_rail_version(path),
+		})
+	return result
+
+
+# Create a rail between two existing buildings using their named ports. Routing
+# is recomputed from the ports, so callers that reposition/mirror the buildings
+# get correct geometry for free. Defaults are tuned for batch recreation:
+# history and graph-change notifications are suppressed so the caller can wrap
+# many rails in a single undo step and emit one graph update at the end.
+func create_rail_between(from_b: Node2D, from_port: NodePath, to_b: Node2D, to_port: NodePath, rail_version := -1, record_history := false, emit_graph_update := false) -> bool:
+	if from_b == null or to_b == null or not is_instance_valid(from_b) or not is_instance_valid(to_b):
+		return false
+	var from_pos = _get_port_center(from_b, from_port)
+	var to_pos = _get_port_center(to_b, to_port)
+	if from_pos == null or to_pos == null:
+		return false
+	_finalize_path(from_b, from_port, from_pos, to_b, to_port, to_pos, rail_version, record_history, emit_graph_update)
+	return true
+
+
+func notify_rail_graph_changed() -> void:
+	rail_graph_changed.emit()
+
+
+func get_rail_color_for_version(rail_version: int) -> Color:
+	return _get_final_path_color_for_version(rail_version)
+
+
+# Rounded route polyline (local to `container`) for a would-be rail between two
+# buildings' ports. Used to preview the copied rails while the eyedropper ghost
+# follows the cursor. Returns empty if either port can't be resolved.
+func build_route_preview_points_local(container: Node2D, from_b: Node2D, from_port: NodePath, to_b: Node2D, to_port: NodePath) -> PackedVector2Array:
+	if container == null or from_b == null or to_b == null:
+		return PackedVector2Array()
+	if not is_instance_valid(from_b) or not is_instance_valid(to_b):
+		return PackedVector2Array()
+	var from_pos = _get_port_center(from_b, from_port)
+	var to_pos = _get_port_center(to_b, to_port)
+	if from_pos == null or to_pos == null:
+		return PackedVector2Array()
+	return _route_points_local(container, from_b, from_port, from_pos, to_b, to_port, to_pos)
+
+
 #Upon deletion of a building, clean up the paths stemming from or to it.
 func remove_paths_for_building(building: Node2D) -> void:
 	if building == _from_building:

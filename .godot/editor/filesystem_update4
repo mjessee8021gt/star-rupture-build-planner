@@ -15,3 +15,5 @@ res://Tools/test_building_scale.gd
 res://Tools/test_alignment.gd
 res://Scripts/alignment_panel.gd
 res://Scripts/save_versions_panel.gd
+res://Tools/test_mirror.gd
+res://Scripts/mirror_panel.gd

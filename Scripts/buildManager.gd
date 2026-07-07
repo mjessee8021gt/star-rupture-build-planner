@@ -3,6 +3,9 @@ extends Node2D
 const Palette = preload("res://Scripts/palette.gd")
 
 signal selection_changed(selected_count: int, anchor_building: Node2D)
+# Emitted when a multi-building (group) eyedropper build begins or ends, so the
+# contextual mirror toolbar can show/hide itself.
+signal group_build_changed(active: bool)
 
 ##------OnReady variables------##
 @onready var tile_map_layer: TileMapLayer = $"../TileMapLayer"
@@ -14,6 +17,20 @@ var dragged_building : Node2D = null
 var ghost_area: Area2D
 var ghost_selection_template: Dictionary = {}
 var group_build_entries: Array[Dictionary] = []
+# Rails whose both endpoints are inside the grabbed group, captured on pickup and
+# reproduced on confirm. Each entry: {from_index, from_port, to_index, to_port,
+# rail_version} where the indices point into group_build_entries.
+var group_build_rails: Array[Dictionary] = []
+# Live Line2D previews of group_build_rails that follow the ghosts each frame.
+var group_build_rail_previews: Array[Dictionary] = []
+var _rail_preview_root: Node2D = null
+# Rail routing is expensive, so preview polylines are recomputed only when the
+# layout actually changes (pickup / mirror / rotate / flip); every other frame
+# the whole preview container is translated rigidly to follow the cursor. This
+# keeps a 65-building, 65-rail eyedrop at full framerate instead of re-routing
+# every rail every frame.
+var _rail_preview_routes_dirty := false
+var _rail_preview_anchor_cell := Vector2i.ZERO
 var selected_buildings: Array[Node2D] = []
 var selected_original_modulates: Dictionary = {}
 var alignment_anchor_building: Node2D = null
@@ -1434,7 +1451,10 @@ func _start_group_eyedropper_build(source_buildings: Array[Node2D], anchor_build
 	if ghost_instance != null:
 		ghost_area = ghost_instance.get_node_or_null("PlacementArea") as Area2D
 	_set_port_buttons_passthrough_for_build_mode(true)
+	_capture_group_rails_from_entries()
+	_build_group_rail_previews()
 	_update_group_ghost_placement()
+	group_build_changed.emit(true)
 
 func _get_scene_for_building(building: Node) -> PackedScene:
 	if building == null:
@@ -1642,6 +1662,8 @@ func _update_group_ghost_placement() -> bool:
 		if ghost != null:
 			ghost.modulate = ghost_color
 
+	_position_group_rail_previews(anchor_cell)
+
 	return valid_placement
 
 func _flip_group_ghosts() -> void:
@@ -1649,12 +1671,270 @@ func _flip_group_ghosts() -> void:
 		var ghost := entry.get("ghost") as Node2D
 		if ghost != null and ghost.has_method("flip_footprint"):
 			ghost.flip_footprint()
+	_rail_preview_routes_dirty = true
 
 func _rotate_group_ghosts_90_degrees() -> void:
 	for entry in group_build_entries:
 		var ghost := entry.get("ghost") as Node2D
 		if ghost != null:
 			_rotate_building_90_degrees(ghost)
+	_rail_preview_routes_dirty = true
+
+# Rotate 180 degrees (2 ticks) only the group ghosts whose current rotatedTick
+# matches the given parity: parity 1 -> ticks 1/3, parity 0 -> ticks 0/2.
+# Buildings of the other parity are left untouched. Used by the mirror so only
+# buildings whose facing crosses the mirror axis get spun.
+func _rotate_group_ghosts_180_for_tick_parity(parity: int) -> void:
+	var target_parity := parity & 1
+	for entry in group_build_entries:
+		var ghost := entry.get("ghost") as Node2D
+		if ghost == null:
+			continue
+		var tick := 0
+		if "rotatedTick" in ghost:
+			tick = posmod(int(ghost.rotatedTick), 4)
+		if (tick & 1) != target_parity:
+			continue
+		_rotate_building_90_degrees(ghost)
+		_rotate_building_90_degrees(ghost)
+	_rail_preview_routes_dirty = true
+
+# Mirror the whole group ghost layout in place. "horizontal" reflects the block
+# left<->right, "vertical" top<->bottom. We reflect each building's grid position
+# about the group's bounding box (so the block stays under the cursor), and spin
+# 180 degrees only the buildings whose facing actually crosses the mirror axis:
+# a horizontal mirror rotates buildings on ticks 1/3, a vertical mirror rotates
+# buildings on ticks 0/2. Buildings already parallel to the mirror axis keep
+# their orientation. Captured rails follow automatically because they reconnect
+# to the same named ports on the ghosts.
+func mirror_group_layout(axis: String) -> void:
+	if not _apply_group_mirror(axis):
+		return
+	if axis == "horizontal":
+		_rotate_group_ghosts_180_for_tick_parity(1)
+	elif axis == "vertical":
+		_rotate_group_ghosts_180_for_tick_parity(0)
+	_rail_preview_routes_dirty = true
+	_update_group_ghost_placement()
+
+# Recompute each entry's anchor_offset for the mirrored layout. Kept separate
+# from the ghost repositioning (which needs the cursor/viewport) so the pure
+# grid math is unit-testable headlessly. Returns true if offsets changed.
+func _apply_group_mirror(axis: String) -> bool:
+	if not _is_group_build_active():
+		return false
+	if axis != "horizontal" and axis != "vertical":
+		return false
+
+	var rects: Array = []
+	for entry in group_build_entries:
+		rects.append(_group_entry_local_rect(entry))
+
+	var mirrored_top_lefts := _mirror_top_left_cells(rects, axis)
+	if mirrored_top_lefts.size() != group_build_entries.size():
+		return false
+
+	for i in group_build_entries.size():
+		var entry = group_build_entries[i]
+		entry["anchor_offset"] = (mirrored_top_lefts[i] as Vector2i) + _group_entry_anchor(entry)
+
+	return true
+
+func _group_entry_anchor(entry: Dictionary) -> Vector2i:
+	var ghost := entry.get("ghost") as Node2D
+	if ghost != null and "anchor" in ghost and ghost.get("anchor") is Vector2i:
+		return ghost.get("anchor")
+	return Vector2i.ZERO
+
+# The entry's footprint in group-local cell space: {top_left, size}. top_left
+# matches get_building_cells' math (anchor cell minus the raw building anchor),
+# and size is the rotation-aware footprint.
+func _group_entry_local_rect(entry: Dictionary) -> Dictionary:
+	var ghost := entry.get("ghost") as Node2D
+	var offset := _get_group_entry_anchor_offset(entry)
+	var anchor := _group_entry_anchor(entry)
+	var size := Vector2i.ONE
+	if ghost != null:
+		var footprint := get_rotated_footprint(ghost)
+		if footprint != Vector2i.ZERO:
+			size = footprint
+	return {"top_left": offset - anchor, "size": size}
+
+# Pure reflection math (static so it can be unit tested without building nodes).
+# Given a list of {top_left, size} cell rects, reflect each rect about the shared
+# bounding box across the requested axis and return the new top-left cells in the
+# same order. Reflection about the (inclusive) bounds keeps the group's overall
+# footprint fixed, so mirroring feels like an in-place flip.
+static func _mirror_top_left_cells(rects: Array, axis: String) -> Array:
+	var result: Array = []
+	if rects.is_empty():
+		return result
+
+	var first_tl: Vector2i = rects[0]["top_left"]
+	var first_size: Vector2i = rects[0]["size"]
+	var min_x := first_tl.x
+	var min_y := first_tl.y
+	var max_x := first_tl.x + first_size.x - 1
+	var max_y := first_tl.y + first_size.y - 1
+	for r in rects:
+		var tl: Vector2i = r["top_left"]
+		var size: Vector2i = r["size"]
+		min_x = mini(min_x, tl.x)
+		min_y = mini(min_y, tl.y)
+		max_x = maxi(max_x, tl.x + size.x - 1)
+		max_y = maxi(max_y, tl.y + size.y - 1)
+
+	for r in rects:
+		var tl: Vector2i = r["top_left"]
+		var size: Vector2i = r["size"]
+		var new_x := tl.x
+		var new_y := tl.y
+		if axis == "horizontal":
+			new_x = (min_x + max_x) - (tl.x + size.x - 1)
+		elif axis == "vertical":
+			new_y = (min_y + max_y) - (tl.y + size.y - 1)
+		result.append(Vector2i(new_x, new_y))
+
+	return result
+
+# --- Group rail capture / preview / reproduction -----------------------------
+
+func _capture_group_rails_from_entries() -> void:
+	group_build_rails.clear()
+	var pm := $"../PathManager"
+	if pm == null or not pm.has_method("get_internal_rails"):
+		return
+
+	var index_by_building := {}
+	var sources: Array = []
+	for i in group_build_entries.size():
+		var source = group_build_entries[i].get("source")
+		if source != null:
+			index_by_building[source] = i
+			sources.append(source)
+
+	if sources.size() < 2:
+		return
+
+	var rails: Array = pm.get_internal_rails(sources)
+	for rail in rails:
+		var from_building = rail.get("from_building")
+		var to_building = rail.get("to_building")
+		if not index_by_building.has(from_building) or not index_by_building.has(to_building):
+			continue
+		group_build_rails.append({
+			"from_index": int(index_by_building[from_building]),
+			"from_port": rail.get("from_port"),
+			"to_index": int(index_by_building[to_building]),
+			"to_port": rail.get("to_port"),
+			"rail_version": int(rail.get("rail_version", 0)),
+		})
+
+func _build_group_rail_previews() -> void:
+	_clear_group_rail_previews()
+	if group_build_rails.is_empty():
+		return
+
+	var pm := $"../PathManager"
+	if pm == null:
+		return
+
+	if _rail_preview_root == null or not is_instance_valid(_rail_preview_root):
+		_rail_preview_root = Node2D.new()
+		_rail_preview_root.name = "GroupRailPreviews"
+		_rail_preview_root.z_index = -1
+		add_child(_rail_preview_root)
+	_rail_preview_root.position = Vector2.ZERO
+
+	var preview_width := 5.0
+	if "line_width" in pm:
+		preview_width = float(pm.line_width)
+
+	for rail in group_build_rails:
+		var line := Line2D.new()
+		line.width = preview_width
+		line.antialiased = true
+		line.begin_cap_mode = Line2D.LINE_CAP_ROUND
+		line.end_cap_mode = Line2D.LINE_CAP_ROUND
+		line.joint_mode = Line2D.LINE_JOINT_ROUND
+		if pm.has_method("get_rail_color_for_version"):
+			line.default_color = pm.get_rail_color_for_version(int(rail.get("rail_version", 0)))
+		line.modulate.a = 0.55
+		_rail_preview_root.add_child(line)
+		group_build_rail_previews.append({
+			"line": line,
+			"from_index": int(rail.get("from_index", -1)),
+			"from_port": rail.get("from_port"),
+			"to_index": int(rail.get("to_index", -1)),
+			"to_port": rail.get("to_port"),
+		})
+
+	_rail_preview_routes_dirty = true
+
+# Per-frame preview upkeep. The expensive rail routing only reruns when the
+# layout changed (dirty); otherwise the preview container is translated rigidly
+# with the group -- the rail shapes are invariant under a pure translation, so
+# following the cursor is a single Vector2 assignment regardless of rail count.
+func _position_group_rail_previews(anchor_cell: Vector2i) -> void:
+	if group_build_rail_previews.is_empty():
+		return
+	if _rail_preview_root == null or not is_instance_valid(_rail_preview_root):
+		return
+
+	if _rail_preview_routes_dirty:
+		_rail_preview_root.position = Vector2.ZERO
+		_recompute_group_rail_preview_points()
+		_rail_preview_anchor_cell = anchor_cell
+		_rail_preview_routes_dirty = false
+	else:
+		_rail_preview_root.position = cell_to_world(anchor_cell) - cell_to_world(_rail_preview_anchor_cell)
+
+func _recompute_group_rail_preview_points() -> void:
+	var pm := $"../PathManager"
+	if pm == null or not pm.has_method("build_route_preview_points_local"):
+		return
+
+	for preview in group_build_rail_previews:
+		var line := preview.get("line") as Line2D
+		if line == null or not is_instance_valid(line):
+			continue
+		var from_ghost := _group_ghost_at(int(preview.get("from_index", -1)))
+		var to_ghost := _group_ghost_at(int(preview.get("to_index", -1)))
+		if from_ghost == null or to_ghost == null:
+			line.points = PackedVector2Array()
+			continue
+		line.points = pm.build_route_preview_points_local(_rail_preview_root, from_ghost, preview.get("from_port"), to_ghost, preview.get("to_port"))
+
+func _group_ghost_at(index: int) -> Node2D:
+	if index < 0 or index >= group_build_entries.size():
+		return null
+	return group_build_entries[index].get("ghost") as Node2D
+
+func _clear_group_rail_previews() -> void:
+	for preview in group_build_rail_previews:
+		var line = preview.get("line")
+		if line != null and is_instance_valid(line):
+			line.queue_free()
+	group_build_rail_previews.clear()
+
+func _reproduce_group_rails(real_by_index: Dictionary) -> void:
+	if group_build_rails.is_empty():
+		return
+	var pm := $"../PathManager"
+	if pm == null or not pm.has_method("create_rail_between"):
+		return
+
+	var created_any := false
+	for rail in group_build_rails:
+		var from_building = real_by_index.get(int(rail.get("from_index", -1)))
+		var to_building = real_by_index.get(int(rail.get("to_index", -1)))
+		if from_building == null or to_building == null:
+			continue
+		if pm.create_rail_between(from_building, rail.get("from_port"), to_building, rail.get("to_port"), int(rail.get("rail_version", 0)), false, false):
+			created_any = true
+
+	if created_any and pm.has_method("notify_rail_graph_changed"):
+		pm.notify_rail_graph_changed()
 
 func _configure_real_building_from_ghost(real_building: Node2D, source_ghost: Node2D) -> void:
 	if real_building == null or source_ghost == null:
@@ -1680,7 +1960,9 @@ func _confirm_group_build(_multi_build_held: bool = false) -> void:
 		return
 
 	var history_before := _capture_history_state()
-	for entry in group_build_entries:
+	var real_by_index := {}
+	for i in group_build_entries.size():
+		var entry = group_build_entries[i]
 		var scene := entry.get("scene") as PackedScene
 		var ghost := entry.get("ghost") as Node2D
 		if scene == null or ghost == null:
@@ -1695,7 +1977,9 @@ func _confirm_group_build(_multi_build_held: bool = false) -> void:
 		_apply_confirmed_selection_template(real_building, entry.get("selection_template", {}))
 		occupy_cells(_get_cell_array_from_dictionary(entry, "last_cells"), real_building)
 		_apply_constructed_building_effects(real_building)
+		real_by_index[i] = real_building
 
+	_reproduce_group_rails(real_by_index)
 	_commit_history_action("Buildings constructed", history_before)
 	if not _multi_build_held:
 		cancel_build()
@@ -1747,21 +2031,27 @@ func free_cells_for_building(building: Node) -> void:
 			occupied_cells.erase(cell)
 
 func cancel_build() -> void:
-	if _is_group_build_active():
+	var was_group_build := _is_group_build_active()
+	if was_group_build:
 		for entry in group_build_entries:
 			var ghost := entry.get("ghost") as Node2D
 			if ghost != null:
 				ghost.queue_free()
 	elif ghost_instance:
 		ghost_instance.queue_free()
-		
+
+	_clear_group_rail_previews()
+	_rail_preview_routes_dirty = false
 	current_scene = null
 	ghost_instance = null
 	ghost_area = null
 	ghost_selection_template = {}
 	group_build_entries.clear()
+	group_build_rails.clear()
 	is_building = false
 	_set_port_buttons_passthrough_for_build_mode(false)
+	if was_group_build:
+		group_build_changed.emit(false)
 	
 func try_remove_building_under_mouse() -> bool:
 	var mouse_pos := get_global_mouse_position()
@@ -2168,6 +2458,11 @@ func _process(_delta: float) -> void:
 			_rotate_group_ghosts_90_degrees()
 		elif ghost_instance != null:
 			_rotate_building_90_degrees(ghost_instance)
+	if is_building and _is_group_build_active():
+		if InputMap.has_action("Mirror Horizontal") and Input.is_action_just_pressed("Mirror Horizontal"):
+			mirror_group_layout("horizontal")
+		if InputMap.has_action("Mirror Vertical") and Input.is_action_just_pressed("Mirror Vertical"):
+			mirror_group_layout("vertical")
 	if Input.is_action_just_pressed("Build Cancel", true):
 		if is_building:
 			cancel_build()

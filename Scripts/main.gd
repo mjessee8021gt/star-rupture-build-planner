@@ -5,6 +5,7 @@ const UiScale = preload("res://Scripts/ui_scale.gd")
 const WHAT_IF_MACHINE_SCENE := preload("res://Scenes/WhatIfMachine.tscn")
 const FLOW_GRAPH_BUILDER := preload("res://Scripts/FlowGraphBuilder.gd")
 const ALIGNMENT_PANEL_SCRIPT := preload("res://Scripts/alignment_panel.gd")
+const MIRROR_PANEL_SCRIPT := preload("res://Scripts/mirror_panel.gd")
 const FLOW_SIMULATOR := preload("res://Scripts/FlowSimulator.gd")
 const PATHING_INTELLIGENCE := preload("res://Scripts/PathingIntelligence.gd")
 const SaveVersionStore := preload("res://Scripts/save_version_store.gd")
@@ -109,6 +110,7 @@ const COMMAND_PATCH_NOTES := &"help.patch_notes"
 @onready var build_manager: Node = $BuildManager
 @onready var path_manager: Node = $PathManager
 var alignment_panel: Control = null
+var mirror_panel: Control = null
 @onready var buildings_root: Node2D = $buildings
 @onready var annotation_layer: Node = $AnnotationLayer
 
@@ -169,6 +171,7 @@ func _ready() -> void:
 	_setup_top_menu_bar()
 	_setup_what_if_button()
 	_setup_alignment_panel()
+	_setup_mirror_panel()
 	_setup_autosnapshot()
 	_setup_version_history_ui()
 	_apply_ui_scale()
@@ -245,6 +248,14 @@ func _setup_alignment_panel() -> void:
 	alignment_panel = ALIGNMENT_PANEL_SCRIPT.new()
 	$Camera2D/CanvasLayer.add_child(alignment_panel)
 	alignment_panel.call("setup", build_manager)
+
+
+func _setup_mirror_panel() -> void:
+	if build_manager == null or mirror_panel != null:
+		return
+	mirror_panel = MIRROR_PANEL_SCRIPT.new()
+	$Camera2D/CanvasLayer.add_child(mirror_panel)
+	mirror_panel.call("setup", build_manager)
 
 
 func _on_what_if_button_pressed() -> void:
@@ -922,6 +933,8 @@ func _apply_ui_scale() -> void:
 
 	if alignment_panel != null and alignment_panel.has_method("set_ui_scale"):
 		alignment_panel.call("set_ui_scale", _ui_scale)
+	if mirror_panel != null and mirror_panel.has_method("set_ui_scale"):
+		mirror_panel.call("set_ui_scale", _ui_scale)
 
 	if _version_history_overlay != null and _version_history_overlay.has_method("set_ui_scale"):
 		_version_history_overlay.call("set_ui_scale", _ui_scale)
