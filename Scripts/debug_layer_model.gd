@@ -12,6 +12,12 @@ const HEALTH_UNDER := "under"
 const HEALTH_MISSING := "missing"
 const HEALTH_DISCONNECTED := "disconnected"
 
+const SATURATION_SPARE := "spare"
+const SATURATION_NEAR := "near"
+const SATURATION_OVER := "over"
+const SATURATION_NEAR_THRESHOLD := 0.85
+const SATURATION_EPSILON := 0.001
+
 
 # Classify one building's supply health from its PathingIntelligence building assessment.
 # Returns "" for buildings with no input requirements (nothing to assess).
@@ -92,6 +98,95 @@ static func orphans(graph: Dictionary) -> Dictionary:
 		if not free_ports.is_empty():
 			unconnected_ports[node_id] = free_ports
 	return {"disconnected": disconnected, "unconnected_ports": unconnected_ports}
+
+
+# Production-stage depth per node: how many production steps upstream sit on the
+# longest supply chain feeding it. Sources = tier 0; a machine fed by a source = tier 1;
+# supports/junctions/routers are transparent (they pass depth through without adding a
+# stage). Cycle-guarded so flow loops don't recurse forever.
+static func production_tiers(graph: Dictionary) -> Dictionary:
+	var nodes = graph.get("nodes", [])
+	var edges = graph.get("edges", [])
+	var kind_by_id := {}
+	var incoming := {}     # node_id -> [from_id]
+	for node_variant in (nodes if nodes is Array else []):
+		if not (node_variant is Dictionary):
+			continue
+		var node: Dictionary = node_variant
+		var node_id := String(node.get("id", ""))
+		if node_id == "":
+			continue
+		kind_by_id[node_id] = String(node.get("kind", "machine")).to_lower()
+		if not incoming.has(node_id):
+			incoming[node_id] = []
+	for edge_variant in (edges if edges is Array else []):
+		if not (edge_variant is Dictionary):
+			continue
+		var edge: Dictionary = edge_variant
+		var from_id := String(edge.get("from", ""))
+		var to_id := String(edge.get("to", ""))
+		if from_id == "" or to_id == "" or not incoming.has(to_id):
+			continue
+		(incoming[to_id] as Array).append(from_id)
+
+	var depth := {}
+	for node_id in kind_by_id.keys():
+		_tier_depth(node_id, incoming, kind_by_id, depth, {})
+	var max_tier := 0
+	for node_id in depth.keys():
+		max_tier = maxi(max_tier, int(depth[node_id]))
+	return {"tiers": depth, "max_tier": max_tier}
+
+
+static func _tier_depth(node_id: String, incoming: Dictionary, kind_by_id: Dictionary, depth: Dictionary, stack: Dictionary) -> int:
+	if depth.has(node_id):
+		return int(depth[node_id])
+	if stack.has(node_id):
+		return 0      # cycle: break without recursing
+	stack[node_id] = true
+	var best := 0
+	var from_ids = incoming.get(node_id, [])
+	for from_id in (from_ids if from_ids is Array else []):
+		var from_depth := _tier_depth(String(from_id), incoming, kind_by_id, depth, stack)
+		var step := 0 if _is_transparent(String(kind_by_id.get(from_id, "machine"))) else 1
+		best = maxi(best, from_depth + step)
+	stack.erase(node_id)
+	depth[node_id] = best
+	return best
+
+
+static func _is_transparent(kind: String) -> bool:
+	return kind == "support" or kind == "junction" or kind == "router"
+
+
+# Per-rail saturation classification from a FlowSimulator result. spare (headroom),
+# near (>= 85% of capacity), over (blocked or above capacity). Unlimited/uncapped rails
+# report spare. Used for the static choropleth complement to the animated flow beads.
+static func rail_saturations(sim_result: Dictionary) -> Dictionary:
+	var out := {}
+	var edges = sim_result.get("edges", {})
+	if not (edges is Dictionary):
+		return out
+	for edge_id in edges.keys():
+		var edge_result = edges[edge_id]
+		if not (edge_result is Dictionary):
+			continue
+		var used := float((edge_result as Dictionary).get("used_upm", 0.0))
+		var blocked := float((edge_result as Dictionary).get("blocked_upm", 0.0))
+		var capacity := float((edge_result as Dictionary).get("capacity_upm", 0.0))
+		var unlimited := bool((edge_result as Dictionary).get("unlimited", false))
+		var ratio := 0.0
+		if not unlimited and capacity > 0.0:
+			ratio = used / capacity
+		# At-capacity (zero headroom) reads as "over": a 120/120 rail is fully saturated
+		# and can't take more, which is exactly what a saturation hunt wants flagged.
+		var state := SATURATION_SPARE
+		if blocked > SATURATION_EPSILON or ratio >= 1.0 - SATURATION_EPSILON:
+			state = SATURATION_OVER
+		elif ratio >= SATURATION_NEAR_THRESHOLD:
+			state = SATURATION_NEAR
+		out[String(edge_id)] = {"ratio": ratio, "state": state, "unlimited": unlimited}
+	return out
 
 
 # Normalize a list of magnitudes to 0..1 against the largest absolute value.

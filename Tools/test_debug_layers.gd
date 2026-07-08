@@ -15,7 +15,7 @@ const Model = preload("res://Scripts/debug_layer_model.gd")
 var _failures: Array[String] = []
 var _checks := 0
 
-const EXPECTED_CHECKS := 27
+const EXPECTED_CHECKS := 37
 
 
 func _initialize() -> void:
@@ -24,6 +24,8 @@ func _initialize() -> void:
 	_test_orphans()
 	_test_normalize()
 	_test_port_leaf()
+	_test_production_tiers()
+	_test_rail_saturations()
 	_finish()
 
 
@@ -142,6 +144,60 @@ func _test_normalize() -> void:
 func _test_port_leaf() -> void:
 	_eq(Model.port_leaf("Ports/Output 1"), "Output 1", "path leaf extracted")
 	_eq(Model.port_leaf("Input 2"), "Input 2", "bare name preserved")
+
+
+# --- production_tiers --------------------------------------------------------
+
+func _test_production_tiers() -> void:
+	# S(source) -> M1(machine) -> SUP(support, transparent) -> M2(machine)
+	var graph := {
+		"nodes": [
+			{"id": "s", "kind": "source"},
+			{"id": "m1", "kind": "machine"},
+			{"id": "sup", "kind": "support"},
+			{"id": "m2", "kind": "machine"},
+		],
+		"edges": [
+			{"from": "s", "to": "m1"},
+			{"from": "m1", "to": "sup"},
+			{"from": "sup", "to": "m2"},
+		],
+	}
+	var result := Model.production_tiers(graph)
+	var tiers: Dictionary = result.get("tiers", {})
+	_eq(int(tiers.get("s", -1)), 0, "source is tier 0")
+	_eq(int(tiers.get("m1", -1)), 1, "machine fed by source is tier 1")
+	# Support is transparent: M2 counts producers S and M1 (2), not the support in between.
+	_eq(int(tiers.get("m2", -1)), 2, "support is transparent to the chain depth")
+	_eq(int(result.get("max_tier", -1)), 2, "max tier reported")
+
+	# A cycle must not recurse forever; the call should return finite tiers.
+	var cyclic := {
+		"nodes": [{"id": "a", "kind": "machine"}, {"id": "b", "kind": "machine"}],
+		"edges": [{"from": "a", "to": "b"}, {"from": "b", "to": "a"}],
+	}
+	var cyclic_result := Model.production_tiers(cyclic)
+	_truth(cyclic_result.get("tiers", null) is Dictionary, "cyclic graph returns tiers without hanging")
+
+
+# --- rail_saturations --------------------------------------------------------
+
+func _test_rail_saturations() -> void:
+	var sim := {
+		"edges": {
+			"rail_1": {"used_upm": 60.0, "capacity_upm": 120.0, "blocked_upm": 0.0, "unlimited": false},
+			"rail_2": {"used_upm": 110.0, "capacity_upm": 120.0, "blocked_upm": 0.0, "unlimited": false},
+			"rail_3": {"used_upm": 120.0, "capacity_upm": 120.0, "blocked_upm": 0.0, "unlimited": false},
+			"rail_4": {"used_upm": 500.0, "capacity_upm": 0.0, "blocked_upm": 0.0, "unlimited": true},
+			"rail_5": {"used_upm": 120.0, "capacity_upm": 120.0, "blocked_upm": 30.0, "unlimited": false},
+		},
+	}
+	var result := Model.rail_saturations(sim)
+	_eq(String((result.get("rail_1", {}) as Dictionary).get("state", "")), Model.SATURATION_SPARE, "half-loaded rail is spare")
+	_eq(String((result.get("rail_2", {}) as Dictionary).get("state", "")), Model.SATURATION_NEAR, "92%-loaded rail is near")
+	_eq(String((result.get("rail_3", {}) as Dictionary).get("state", "")), Model.SATURATION_OVER, "at-capacity (100%) rail is over")
+	_eq(String((result.get("rail_4", {}) as Dictionary).get("state", "")), Model.SATURATION_SPARE, "unlimited rail is spare")
+	_eq(String((result.get("rail_5", {}) as Dictionary).get("state", "")), Model.SATURATION_OVER, "blocked rail is over")
 
 
 # --- harness -----------------------------------------------------------------

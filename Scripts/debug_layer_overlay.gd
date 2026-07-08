@@ -17,6 +17,8 @@ const LAYER_HEALTH := "health"
 const LAYER_HEATMAP := "heatmap"
 const LAYER_WASTE := "waste"
 const LAYER_ORPHAN := "orphan"
+const LAYER_TIERING := "tiering"
+const LAYER_SATURATION := "saturation"
 
 # Supply-health palette, reused from Pathing 2.0 so the grid overlay matches the chips.
 const HEALTH_SUPPLIED := PathingIntel.COLOR_SUPPLIED
@@ -34,6 +36,18 @@ const HEAT_COOL := Color8(58, 108, 138, 255)
 const HEAT_HOT := Color8(214, 104, 58, 255)
 const HEAT_ALPHA_MIN := 0.14
 const HEAT_ALPHA_MAX := 0.58
+
+# Production-stage ramp (raw -> final). Deliberately teal->violet, distinct from the
+# heatmap ramp so the two "fill" layers never read as the same thing. Also labelled "T{n}".
+const TIER_LOW := Color8(88, 168, 150, 255)
+const TIER_HIGH := Color8(150, 112, 190, 255)
+const TIER_BAND_HEIGHT := 7.0
+
+# Rail saturation states. Reinforced by line thickness + an over-capacity marker so the
+# spare/near/over reading does not rely on the green/amber/red hue axis alone.
+const SATURATION_SPARE := Color8(90, 162, 122, 235)
+const SATURATION_NEAR := Color8(214, 170, 60, 240)
+const SATURATION_OVER := Color8(202, 82, 92, 245)
 
 const RING_INSET := 3.0        # world px the ring sits outside the footprint
 const RING_WIDTH := 3.0        # base ring width (scaled by _scale)
@@ -86,9 +100,14 @@ func is_layer_active(layer_id: String) -> bool:
 func _draw() -> void:
 	if not _enabled or _opacity <= 0.001:
 		return
-	# Draw magnitude fills first (under), then diagnostic marks, then health rings on top.
+	# Rail-space fills first (under everything), then building fills, then diagnostic
+	# marks, then health rings on top so the most safety-critical read wins.
+	if is_layer_active(LAYER_SATURATION):
+		_draw_saturation()
 	if is_layer_active(LAYER_HEATMAP):
 		_draw_heatmap()
+	if is_layer_active(LAYER_TIERING):
+		_draw_tiering()
 	if is_layer_active(LAYER_WASTE):
 		_draw_waste()
 	if is_layer_active(LAYER_ORPHAN):
@@ -148,6 +167,71 @@ func _draw_heatmap() -> void:
 			var text_size := _label_font.get_string_size(text, HORIZONTAL_ALIGNMENT_CENTER, -1, font_size)
 			var pos := rect.get_center() - text_size * 0.5 + Vector2(0, text_size.y * 0.5)
 			draw_string(_label_font, pos, text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, _tint(PlannerPaletteText(), 1.0))
+
+
+# --- Production-stage tiering -------------------------------------------------
+
+func _draw_tiering() -> void:
+	var data = _payload.get(LAYER_TIERING, {})
+	if not (data is Dictionary):
+		return
+	var entries = (data as Dictionary).get("entries", [])
+	if not (entries is Array):
+		return
+	for entry_variant in entries:
+		if not (entry_variant is Dictionary):
+			continue
+		var entry: Dictionary = entry_variant
+		var rect := _entry_rect(entry, 0.0)
+		var t := clampf(float(entry.get("t", 0.0)), 0.0, 1.0)
+		var color := TIER_LOW.lerp(TIER_HIGH, t)
+		# A band along the top edge of the footprint reads distinctly from the heatmap's
+		# full fill even when both layers are on at once.
+		var band_height := minf(rect.size.y, TIER_BAND_HEIGHT * _scale)
+		draw_rect(Rect2(rect.position, Vector2(rect.size.x, band_height)), _tint(color, 0.92), true)
+		if _label_font != null:
+			var text := "T%d" % int(entry.get("tier", 0))
+			var font_size := int(round(12.0 * _scale))
+			var pos := rect.position + Vector2(3.0 * _scale, band_height + font_size)
+			draw_string(_label_font, pos, text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, _tint(color, 1.0))
+
+
+# --- Rail saturation choropleth ----------------------------------------------
+
+func _draw_saturation() -> void:
+	var data = _payload.get(LAYER_SATURATION, {})
+	if not (data is Dictionary):
+		return
+	for rail_variant in _as_array((data as Dictionary).get("rails", [])):
+		if not (rail_variant is Dictionary):
+			continue
+		var points := _local_points(rail_variant.get("points", PackedVector2Array()))
+		if points.size() < 2:
+			continue
+		var state := String(rail_variant.get("state", "spare"))
+		var color := SATURATION_SPARE
+		var width := 3.0 * _scale
+		if state == "near":
+			color = SATURATION_NEAR
+			width = 4.5 * _scale
+		elif state == "over":
+			color = SATURATION_OVER
+			width = 6.0 * _scale
+		draw_polyline(points, _tint(color), width, true)
+		if state == "over":
+			# Redundant shape cue: a diamond at the rail midpoint marks over-capacity so
+			# the alert does not depend on the red hue.
+			_draw_diamond(points[int(points.size() / 2)], 6.0 * _scale, _tint(color))
+
+
+func _draw_diamond(center: Vector2, radius: float, color: Color) -> void:
+	var diamond := PackedVector2Array([
+		center + Vector2(0, -radius),
+		center + Vector2(radius, 0),
+		center + Vector2(0, radius),
+		center + Vector2(-radius, 0),
+	])
+	draw_colored_polygon(diamond, color)
 
 
 # --- Overproduction / waste --------------------------------------------------

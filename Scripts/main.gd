@@ -106,12 +106,16 @@ const COMMAND_DEBUG_LAYER_HEATMAP := &"debug.layer.heatmap"
 const COMMAND_DEBUG_HEATMAP_METRIC := &"debug.heatmap_metric"
 const COMMAND_DEBUG_LAYER_WASTE := &"debug.layer.waste"
 const COMMAND_DEBUG_LAYER_ORPHAN := &"debug.layer.orphan"
+const COMMAND_DEBUG_LAYER_TIERING := &"debug.layer.tiering"
+const COMMAND_DEBUG_LAYER_SATURATION := &"debug.layer.saturation"
 # Command id -> overlay layer id (must match DebugLayerOverlay LAYER_* constants).
 const DEBUG_LAYER_IDS := {
 	COMMAND_DEBUG_LAYER_HEALTH: "health",
 	COMMAND_DEBUG_LAYER_HEATMAP: "heatmap",
 	COMMAND_DEBUG_LAYER_WASTE: "waste",
 	COMMAND_DEBUG_LAYER_ORPHAN: "orphan",
+	COMMAND_DEBUG_LAYER_TIERING: "tiering",
+	COMMAND_DEBUG_LAYER_SATURATION: "saturation",
 }
 const DEBUG_HEATMAP_METRICS := ["heat", "power", "cost"]
 const DEBUG_HEATMAP_METRIC_LABELS := {
@@ -955,12 +959,12 @@ func _refresh_debug_layers() -> void:
 
 	overlay.call("set_scale_factor", _ui_scale)
 	overlay.call("set_active_layers", _debug_layer_active)
-	overlay.call("set_payload", _build_debug_layer_payload(graph, assessment))
+	overlay.call("set_payload", _build_debug_layer_payload(graph, assessment, simulation))
 	overlay.call("set_enabled", true)
 	_update_debug_legend()
 
 
-func _build_debug_layer_payload(graph: Dictionary, assessment: Dictionary) -> Dictionary:
+func _build_debug_layer_payload(graph: Dictionary, assessment: Dictionary, simulation: Dictionary) -> Dictionary:
 	var nodes := _debug_as_array(graph.get("nodes", []))
 	var building_assessments: Dictionary = assessment.get("building_assessments", {}) if assessment.get("building_assessments", {}) is Dictionary else {}
 	var edge_supply: Dictionary = assessment.get("edge_supply", {}) if assessment.get("edge_supply", {}) is Dictionary else {}
@@ -988,7 +992,47 @@ func _build_debug_layer_payload(graph: Dictionary, assessment: Dictionary) -> Di
 		"heatmap": _build_debug_heatmap_payload(nodes, geo),
 		"waste": _build_debug_waste_payload(edge_supply, geo),
 		"orphan": _build_debug_orphan_payload(graph, node_by_id, geo),
+		"tiering": _build_debug_tiering_payload(graph, nodes, geo),
+		"saturation": _build_debug_saturation_payload(simulation),
 	}
+
+
+func _build_debug_tiering_payload(graph: Dictionary, nodes: Array, geo: Dictionary) -> Dictionary:
+	var result: Dictionary = DEBUG_LAYER_MODEL.production_tiers(graph)
+	var tiers: Dictionary = result.get("tiers", {}) if result.get("tiers", {}) is Dictionary else {}
+	var max_tier := int(result.get("max_tier", 0))
+	var entries: Array = []
+	for node_variant in nodes:
+		if not (node_variant is Dictionary):
+			continue
+		var node: Dictionary = node_variant
+		# Supports/junctions are transparent to the chain, so don't clutter the map with them.
+		var kind := String(node.get("kind", "")).to_lower()
+		if kind == "support" or kind == "junction" or kind == "router":
+			continue
+		var node_id := String(node.get("id", ""))
+		if not tiers.has(node_id):
+			continue
+		var g = geo.get(node_id, {})
+		if not (g is Dictionary) or (g as Dictionary).is_empty():
+			continue
+		var tier := int(tiers[node_id])
+		var t := (float(tier) / float(max_tier)) if max_tier > 0 else 0.0
+		entries.append({"center": g["center"], "size": g["size"], "tier": tier, "t": t})
+	return {"entries": entries, "max_tier": max_tier}
+
+
+func _build_debug_saturation_payload(simulation: Dictionary) -> Dictionary:
+	var saturations: Dictionary = DEBUG_LAYER_MODEL.rail_saturations(simulation)
+	var rails: Array = []
+	for edge_id in saturations.keys():
+		var info = saturations[edge_id]
+		if not (info is Dictionary):
+			continue
+		var points := _debug_rail_global_points(String(edge_id))
+		if points.size() >= 2:
+			rails.append({"points": points, "state": String((info as Dictionary).get("state", "spare"))})
+	return {"rails": rails}
 
 
 func _build_debug_health_payload(building_assessments: Dictionary, geo: Dictionary) -> Array:
@@ -1139,10 +1183,23 @@ func _debug_rail_global_points(edge_id: String) -> PackedVector2Array:
 	if not (obj is Path2D) or not is_instance_valid(obj):
 		return points
 	var path := obj as Path2D
-	if path.curve == null:
+	# The routed geometry lives on the "route_polyline_local" meta (falling back to the
+	# Line2D child's points), not on Path2D.curve — mirror PathManager._get_path_global_points.
+	var source_points = path.get_meta("route_polyline_local") if path.has_meta("route_polyline_local") else null
+	if source_points == null:
+		var line := path.get_node_or_null("Line") as Line2D
+		if line == null:
+			for child in path.get_children():
+				if child is Line2D:
+					line = child as Line2D
+					break
+		if line != null:
+			source_points = line.points
+	if source_points == null:
 		return points
-	for local_point in path.curve.get_baked_points():
-		points.append(path.to_global(local_point))
+	for local_point in source_points:
+		if local_point is Vector2:
+			points.append(path.to_global(local_point))
 	return points
 
 
@@ -1174,6 +1231,12 @@ func _update_debug_legend() -> void:
 		vbox.add_child(_debug_legend_row(DEBUG_LAYER_OVERLAY_SCRIPT.WASTE_COLOR, "Wasted output", false))
 	if bool(_debug_layer_active.get("orphan", false)):
 		vbox.add_child(_debug_legend_row(DEBUG_LAYER_OVERLAY_SCRIPT.ORPHAN_COLOR, "Disconnected / unused port", true))
+	if bool(_debug_layer_active.get("tiering", false)):
+		vbox.add_child(_debug_legend_row(DEBUG_LAYER_OVERLAY_SCRIPT.TIER_HIGH, "Production stage (raw → final)", false))
+	if bool(_debug_layer_active.get("saturation", false)):
+		vbox.add_child(_debug_legend_row(DEBUG_LAYER_OVERLAY_SCRIPT.SATURATION_SPARE, "Rail: spare capacity", false))
+		vbox.add_child(_debug_legend_row(DEBUG_LAYER_OVERLAY_SCRIPT.SATURATION_NEAR, "Rail: near capacity (≥85%)", false))
+		vbox.add_child(_debug_legend_row(DEBUG_LAYER_OVERLAY_SCRIPT.SATURATION_OVER, "Rail: at / over capacity", false))
 
 	panel.visible = true
 	panel.reset_size()
@@ -1312,6 +1375,8 @@ func _register_top_menu_commands() -> void:
 	_register_top_menu_command(COMMAND_DEBUG_HEATMAP_METRIC, "Heatmap Metric", Callable(self, "_cycle_debug_heatmap_metric"), "Switch the heatmap between heat, power, and build cost")
 	_register_top_menu_command(COMMAND_DEBUG_LAYER_WASTE, "Layer: Wasted Output", Callable(self, "_toggle_debug_layer").bind(COMMAND_DEBUG_LAYER_WASTE), "Flag producers whose output has no consumer", true)
 	_register_top_menu_command(COMMAND_DEBUG_LAYER_ORPHAN, "Layer: Disconnected", Callable(self, "_toggle_debug_layer").bind(COMMAND_DEBUG_LAYER_ORPHAN), "Flag buildings and ports with no rail connection", true)
+	_register_top_menu_command(COMMAND_DEBUG_LAYER_TIERING, "Layer: Production Stage", Callable(self, "_toggle_debug_layer").bind(COMMAND_DEBUG_LAYER_TIERING), "Color buildings by their depth in the production chain", true)
+	_register_top_menu_command(COMMAND_DEBUG_LAYER_SATURATION, "Layer: Rail Saturation", Callable(self, "_toggle_debug_layer").bind(COMMAND_DEBUG_LAYER_SATURATION), "Color rails by how close they are to capacity", true)
 	_register_top_menu_command(COMMAND_ANNOTATION, "Annotation", Callable(self, "_toggle_annotation_tool"), "Place a note on the build plan", true)
 	_register_top_menu_command(COMMAND_WHAT_IF, "What If", Callable(self, "_on_what_if_button_pressed"), "Open the what-if scenario analyzer")
 	_register_top_menu_command(COMMAND_BLUEPRINTS, "Blueprints", Callable(self, "_on_blueprints_pressed"), "Save selections as reusable blueprints and stamp them into the plan")
@@ -1364,6 +1429,8 @@ func _build_top_menu_sections() -> Array:
 			_command_item(COMMAND_DEBUG_HEATMAP_METRIC),
 			_command_item(COMMAND_DEBUG_LAYER_WASTE),
 			_command_item(COMMAND_DEBUG_LAYER_ORPHAN),
+			_command_item(COMMAND_DEBUG_LAYER_TIERING),
+			_command_item(COMMAND_DEBUG_LAYER_SATURATION),
 		]},
 		{"title": "Tools", "commands": [
 			_command_item(COMMAND_TOGGLE_TOOLBOX),
@@ -1411,7 +1478,7 @@ func _is_top_menu_command_enabled(command_id: StringName) -> bool:
 			return _flow_simulation_enabled and path_manager != null and path_manager.has_method("set_flow_layer_mode")
 		COMMAND_DEBUG_LAYERS:
 			return FLOW_GRAPH_BUILDER != null and PATHING_INTELLIGENCE != null and buildings_root != null and path_manager != null
-		COMMAND_DEBUG_LAYER_HEALTH, COMMAND_DEBUG_LAYER_HEATMAP, COMMAND_DEBUG_LAYER_WASTE, COMMAND_DEBUG_LAYER_ORPHAN:
+		COMMAND_DEBUG_LAYER_HEALTH, COMMAND_DEBUG_LAYER_HEATMAP, COMMAND_DEBUG_LAYER_WASTE, COMMAND_DEBUG_LAYER_ORPHAN, COMMAND_DEBUG_LAYER_TIERING, COMMAND_DEBUG_LAYER_SATURATION:
 			return _debug_layers_enabled
 		COMMAND_DEBUG_HEATMAP_METRIC:
 			return _debug_layers_enabled and bool(_debug_layer_active.get("heatmap", false))

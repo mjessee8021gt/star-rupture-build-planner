@@ -1,1 +1,4 @@
 res://Scripts/main.gd
+res://Scripts/debug_layer_model.gd
+res://Scripts/debug_layer_overlay.gd
+res://Tools/test_debug_layers.gd
