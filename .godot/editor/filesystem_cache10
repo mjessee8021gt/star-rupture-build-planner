@@ -1,4 +1,4 @@
-78098b89c88a74ebe8c20117b8754620
+63f7b34db8d8cdea90c76aacccf841ec
 ::res://::1783494589
 export_presets.cfg::TextFile::-1::1776841340::0::1::::<><><>0<>0<><>::
 Pathing_2_0_conversation_branch_export.md::TextFile::-1::1783309948::0::1::::<><><>0<>0<><>::
@@ -890,20 +890,21 @@ ResourceRow.tscn::PackedScene::2929728595450852361::1776578942::0::1::::<><><>0<
 resource_row.gd::GDScript::490804783332892613::1776662442::0::1::::<>Control<><>0<>0<><>::
 TopMenuBar.tscn::PackedScene::-1::1776742401::0::1::::<><><>0<>0<><>::res://Scripts/top_menu_bar.gd
 WhatIfMachine.tscn::PackedScene::2179822556873708285::1776826737::0::1::::<><><>0<>0<><>::uid://58waq5my4wmf::::res://Scripts/what_if_machine.gd<>uid://c05ftehbwlk1i::::res://Resources/Whatif_Core.tres<>uid://bhart32ix4hvc::::res://Resources/whatif_raisedSurface.tres<>uid://d3gf2yod41ka::::res://Resources/Whatif_Headerbox.tres
-::res://Scripts/::1783494560
+::res://Scripts/::1783550842
 alignment_panel.gd::GDScript::8167222022037252466::1783377224::0::1::::<>PanelContainer<><>0<>0<><>::
 annotation_layer.gd::GDScript::9135434437138019031::1783271209::0::1::::<>Node2D<><>0<>0<><>::
 blueprint_library.gd::GDScript::1678950806981023256::1783436767::0::1::::<>RefCounted<><>0<>0<><>::
 blueprint_panel.gd::GDScript::1266730954933823440::1783449923::0::1::::<>Control<><>0<>0<><>::
 blueprint_store.gd::GDScript::1265338533420883624::1783449474::0::1::::<>RefCounted<><>0<>0<><>::
 BuildingRegistry.gd::GDScript::5454827344132405048::1776626904::0::1::::BuildRegistry<>Node<><>0<>0<><>::
-buildManager.gd::GDScript::6317890871146673873::1783449841::0::1::::<>Node2D<><>0<>0<><>::
-CameraControls.gd::GDScript::6073642108144303039::1775927332::0::1::::<>Camera2D<><>0<>0<><>::
-debug_layer_overlay.gd::GDScript::3429745604575850487::1783494414::0::1::::DebugLayerOverlay<>Node2D<><>0<>0<><>::
+buildManager.gd::GDScript::6317890871146673873::1783542108::0::1::::<>Node2D<><>0<>0<><>::
+CameraControls.gd::GDScript::6073642108144303039::1783544369::0::1::::<>Camera2D<><>0<>0<><>::
+debug_layer_model.gd::GDScript::2130924869472717854::1783496489::0::1::::DebugLayerModel<>RefCounted<><>0<>0<><>::
+debug_layer_overlay.gd::GDScript::3429745604575850487::1783495758::0::1::::DebugLayerOverlay<>Node2D<><>0<>0<><>::
 FlowBeadLayer.gd::GDScript::1021691014074581548::1783358195::0::1::::FlowBeadLayer<>Node2D<><>0<>0<><>::
 FlowGraphBuilder.gd::GDScript::2568214472206699686::1783273584::0::1::::FlowGraphBuilder<>RefCounted<><>0<>0<><>::
 FlowSimulator.gd::GDScript::189457201172761175::1783351823::0::1::::FlowSimulator<>RefCounted<><>0<>0<><>::
-main.gd::GDScript::5666265523090886274::1783494560::0::1::::<>Node2D<><>0<>0<><>::
+main.gd::GDScript::5666265523090886274::1783550842::0::1::::<>Node2D<><>0<>0<><>::
 mirror_panel.gd::GDScript::2606604895667491955::1783409506::0::1::::<>PanelContainer<><>0<>0<><>::
 palette.gd::GDScript::3694838719101505730::1783325344::0::1::::PlannerPalette<>RefCounted<><>0<>0<><>::
 PatchRegistry.gd::GDScript::2242664668738540107::1776626784::0::1::::PatchRegistry<>Node<><>0<>0<><>::
@@ -917,12 +918,13 @@ RecipeRegistry.gd::GDScript::8938528565435247832::1776626904::0::1::::<>Node<><>
 save_versions_panel.gd::GDScript::8426501749624219968::1783387375::0::1::::<>Control<><>0<>0<><>::
 save_version_store.gd::GDScript::6454095534937322196::1783384033::0::1::::<>RefCounted<><>0<>0<><>::
 Smelter.gd::GDScript::2369926565615354894::1774836544::0::1::::<>Building<><>0<>0<><>::
-Toolbox.gd::GDScript::7419304768944829472::1776825683::0::1::::<>Button<><>0<>0<><>::
+Toolbox.gd::GDScript::7419304768944829472::1783544533::0::1::::<>Button<><>0<>0<><>::
 top_menu_bar.gd::GDScript::8032127211216138523::1776822831::0::1::::TopMenuBar<>PanelContainer<><>0<>0<><>::
 ui_scale.gd::GDScript::7452275656489500346::1783239614::0::1::::PlannerUiScale<>RefCounted<><>0<>0<><>::
 what_if_machine.gd::GDScript::2175126436162003933::1776823402::0::1::::<>Control<><>0<>0<><>::
-::res://Tools/::1783465800
+::res://Tools/::1783496545
 alignment_test_result.txt::TextFile::-1::1783379346::0::1::::<><><>0<>0<><>::
+debug_layer_test_result.txt::TextFile::-1::1783496545::0::1::::<><><>0<>0<><>::
 flow_simulator_test_result.txt::TextFile::-1::1783400586::0::1::::<><><>0<>0<><>::
 mirror_test_result.txt::TextFile::-1::1783448874::0::1::::<><><>0<>0<><>::
 pathing_test_result.txt::TextFile::-1::1783379349::0::1::::<><><>0<>0<><>::
@@ -930,44 +932,46 @@ save_versioning_test_result.txt::TextFile::-1::1783387143::0::1::::<><><>0<>0<><
 test_alignment.gd::GDScript::3855183614420807344::1783377260::0::1::::<>SceneTree<><>0<>0<><>::
 test_blueprint.gd::GDScript::5611899755831807607::1783449078::0::1::::<>SceneTree<><>0<>0<><>::
 test_building_scale.gd::GDScript::4339097437432764546::1783371325::0::1::::<>SceneTree<><>0<>0<><>::
+test_debug_layers.gd::GDScript::7546700502372488975::1783496517::0::1::::<>SceneTree<><>0<>0<><>::
 test_flow_simulator.gd::GDScript::4877452490833243643::1783358299::0::1::::<>SceneTree<><>0<>0<><>::
 test_mirror.gd::GDScript::720703368129583828::1783410155::0::1::::<>SceneTree<><>0<>0<><>::
 test_pathing.gd::GDScript::6127980034258893031::1783379298::0::1::::<>SceneTree<><>0<>0<><>::
 test_save_versioning.gd::GDScript::6971953589390761189::1783384821::0::1::::<>SceneTree<><>0<>0<><>::
-::res://Wiki/::1783492139
+::res://Wiki/::1783496855
 Codex Northstar.md::TextFile::-1::1783306921::0::1::::<><><>0<>0<><>::
-Index.md::TextFile::-1::1783492139::0::1::::<><><>0<>0<><>::
+Index.md::TextFile::-1::1783496855::0::1::::<><><>0<>0<><>::
 ::res://Wiki/Art Direction/::1783306861
 Design Language.md::TextFile::-1::1783306861::0::1::::<><><>0<>0<><>::
 ::res://Wiki/Buildings/::1783306865
 Building Authoring Guide.md::TextFile::-1::1783306865::0::1::::<><><>0<>0<><>::
 Building Registry.md::TextFile::-1::1783306863::0::1::::<><><>0<>0<><>::
-::res://Wiki/Decisions/::1783492132
-Decision Log.md::TextFile::-1::1783492132::0::1::::<><><>0<>0<><>::
-::res://Wiki/Devlogs/::1783493087
+::res://Wiki/Decisions/::1783496889
+Decision Log.md::TextFile::-1::1783496889::0::1::::<><><>0<>0<><>::
+::res://Wiki/Devlogs/::1783496955
 2026-07-06 - Accessibility Scaling and Palette Cleanup Conversation Export.md::TextFile::-1::1783363766::0::1::::<><><>0<>0<><>::
 2026-07-06 - Building Alignment Tools Conversation Export.md::TextFile::-1::1783373058::0::1::::<><><>0<>0<><>::
 Project Timeline.md::TextFile::-1::1783306872::0::1::::<><><>0<>0<><>::
-Session Dev Log.md::TextFile::-1::1783492157::0::1::::<><><>0<>0<><>::
+Session Dev Log.md::TextFile::-1::1783496833::0::1::::<><><>0<>0<><>::
 V0.5.0 - Building Alignment Tools Feature Placement.md::TextFile::-1::1783375799::0::1::::<><><>0<>0<><>::
 V0.5.0 - Eyedropper Mirroring Feature Placement.md::TextFile::-1::1783410724::0::1::::<><><>0<>0<><>::
 V0.5.0 - Flow Simulation Feature placement.md::TextFile::-1::1783358444::0::1::::<><><>0<>0<><>::
 V0.5.0 - Pathing Engine 2.0 Feature Placement.md::TextFile::-1::1783493087::0::1::::<><><>0<>0<><>::
 V0.5.0 - Save Engine 2.0 Feature Placement.md::TextFile::-1::1783387737::0::1::::<><><>0<>0<><>::
 V0.5.0 - Stamp and Blueprint System Feature Placement.md::TextFile::-1::1783463896::0::1::::<><><>0<>0<><>::
-V0.5.0 - Visual Debug Layers Feature Placement.md::TextFile::-1::1783493000::0::1::::<><><>0<>0<><>::
-::res://Wiki/Outstanding tasks/::1783492114
-Backlog.md::TextFile::-1::1783492114::0::1::::<><><>0<>0<><>::
+V0.5.0 - Visual Debug Layers Feature Placement.md::TextFile::-1::1783496955::0::1::::<><><>0<>0<><>::
+::res://Wiki/Outstanding tasks/::1783496848
+Backlog.md::TextFile::-1::1783496848::0::1::::<><><>0<>0<><>::
 ::res://Wiki/Recipes/::1783306866
 Recipe System.md::TextFile::-1::1783306866::0::1::::<><><>0<>0<><>::
 ::res://Wiki/Release Notes/::1783321481
 Release History.md::TextFile::-1::1783306877::0::1::::<><><>0<>0<><>::
-::res://Wiki/Release Notes/Feature Blogspots/::1783494365
+::res://Wiki/Release Notes/Feature Blogspots/::1783543891
+V0.5.0 Runup - Annotations & Save Engine 2.0.md::TextFile::-1::1783543891::0::1::::<><><>0<>0<><>::
 V0.5.0 Runup - Flow Simulation Blogspot.md::TextFile::-1::1783398989::0::1::::<><><>0<>0<><>::
 V0.5.0 Runup - Pathing Engine 2.0.md::TextFile::-1::1783494365::0::1::::<><><>0<>0<><>::
 ::res://Wiki/Resources/::1783306868
 Resource Model.md::TextFile::-1::1783306868::0::1::::<><><>0<>0<><>::
-::res://Wiki/System Definitions/::1783492103
+::res://Wiki/System Definitions/::1783496922
 Annotations.md::TextFile::-1::1783306858::0::1::::<><><>0<>0<><>::
 Architecture.md::TextFile::-1::1783306848::0::1::::<><><>0<>0<><>::
 Blueprints.md::TextFile::-1::1783463936::0::1::::<><><>0<>0<><>::
@@ -976,8 +980,9 @@ Map Overlay.md::TextFile::-1::1783492103::0::1::::<><><>0<>0<><>::
 Production Ledger and Totals.md::TextFile::-1::1783306925::0::1::::<><><>0<>0<><>::
 Rails Pathing and Flow.md::TextFile::-1::1783306851::0::1::::<><><>0<>0<><>::
 Save Format and History.md::TextFile::-1::1783387801::0::1::::<><><>0<>0<><>::
-Testing and Tooling.md::TextFile::-1::1783464011::0::1::::<><><>0<>0<><>::
+Testing and Tooling.md::TextFile::-1::1783496922::0::1::::<><><>0<>0<><>::
 UI Input and Accessibility.md::TextFile::-1::1783306855::0::1::::<><><>0<>0<><>::
+Visual Debug Layers.md::TextFile::-1::1783496805::0::1::::<><><>0<>0<><>::
 What If Machine.md::TextFile::-1::1783306856::0::1::::<><><>0<>0<><>::
 ::res://Wiki/Templates/::1783306880
 Codex Handoff Checklist.md::TextFile::-1::1783306880::0::1::::<><><>0<>0<><>::

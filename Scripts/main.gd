@@ -3282,11 +3282,13 @@ func _process_history_input() -> bool:
 	return false
 
 func _capture_history_state() -> Dictionary:
+	# _collect_save_state() builds a fresh, pure-data dictionary every call, so
+	# the result is already independent of live state — no deep copy needed.
 	var state := _collect_save_state()
 	state.erase("saved_at_unix")
 	state.erase("camera")
 	state.erase("production_panel_visible")
-	return state.duplicate(true)
+	return state
 
 func _commit_history_action(label: String, before_state: Dictionary) -> void:
 	if _is_replaying_history or before_state.is_empty():
@@ -3296,10 +3298,13 @@ func _commit_history_action(label: String, before_state: Dictionary) -> void:
 	if _history_states_equal(before_state, after_state):
 		return
 
+	# Both snapshots are already independent pure-data dicts, and the apply path
+	# duplicates before restoring, so they can be stored directly without a
+	# further deep copy.
 	_undo_stack.append({
 		"label": label,
-		"before": before_state.duplicate(true),
-		"after": after_state.duplicate(true)
+		"before": before_state,
+		"after": after_state
 	})
 	while _undo_stack.size() > HISTORY_LIMIT:
 		_undo_stack.pop_front()
@@ -3308,8 +3313,9 @@ func _commit_history_action(label: String, before_state: Dictionary) -> void:
 	# Pre-destructive checkpoint: deletions are the classic "nuked my design"
 	# mistake, so persist the pre-delete plan as a recoverable version. The undo
 	# stack only holds the last HISTORY_LIMIT actions; the version log outlives it.
+	# Hand the version store its own copy so it never shares the undo snapshot.
 	if "delete" in label.to_lower():
-		_record_version("Before delete", SaveVersionStore.KIND_PRE_DESTRUCTIVE, before_state)
+		_record_version("Before delete", SaveVersionStore.KIND_PRE_DESTRUCTIVE, before_state.duplicate(true))
 
 func _undo_history() -> void:
 	if _undo_stack.is_empty():
@@ -3349,6 +3355,12 @@ func _apply_history_state(state: Dictionary) -> void:
 	_is_replaying_history = false
 
 func _history_states_equal(first: Dictionary, second: Dictionary) -> bool:
+	# Fast path: differing hashes mean the states differ — the common case,
+	# since almost every committed action changes the plan. Only fall back to
+	# the exact (but costly) deep compare on a hash match, which guards against
+	# the astronomically rare hash collision.
+	if first.hash() != second.hash():
+		return false
 	return var_to_str(first) == var_to_str(second)
 
 func _detach_and_queue_free(node: Node) -> void:

@@ -1349,22 +1349,47 @@ func _unhandled_input(event: InputEvent) -> void:
 			cancel_build()
 		return
 
+	# While relocating, the Move Build key no longer needs to be held: a
+	# left-click confirms the new placement and a right-click reverts it.
+	# Confirming over an invalid (red) spot is ignored so the player keeps
+	# relocating instead of losing the move.
+	if is_dragging_building:
+		if event.is_action_pressed("Build Confirm"):
+			if drag_last_valid:
+				_finish_drag_building()
+		elif event.is_action_pressed("Build Cancel", true):
+			_cancel_drag_building()
+		return
+
 	if _handle_selection_input(event):
 		return
-		
-	if is_dragging_building and event.is_action_released("Move Build"):
-		_finish_drag_building()
-		return
-	if is_dragging_building:
-		return
-		
+
 	if not event.is_action_pressed("Move Build"):
 		return
 	if _mouse_is_over_control():
 		return
-		
-	if building != null:
-		_start_drag_building(building)
+
+	_begin_move_build(building)
+
+func _begin_move_build(building_under_mouse: Node2D) -> void:
+	# Selection-first relocation: if the player has buildings selected, tapping
+	# Move Build starts relocating the whole selection. When nothing is
+	# selected we fall back to the building under the cursor for a quick move.
+	var selected := _get_valid_selected_buildings()
+	if not selected.is_empty():
+		_start_drag_building(_get_move_anchor(selected, building_under_mouse))
+	elif building_under_mouse != null:
+		_start_drag_building(building_under_mouse)
+
+func _get_move_anchor(selected: Array[Node2D], building_under_mouse: Node2D) -> Node2D:
+	# Prefer the building under the cursor (when it belongs to the selection)
+	# so the group tracks the mouse from where the player grabbed it, then the
+	# alignment anchor, then the first selected building.
+	if building_under_mouse != null and selected.has(building_under_mouse):
+		return building_under_mouse
+	if alignment_anchor_building != null and selected.has(alignment_anchor_building):
+		return alignment_anchor_building
+	return selected[0]
 	
 func _start_eyedropper_build(building: Node2D, copy_selection_state := false) -> void:
 	var source_buildings := _get_eyedropper_source_buildings(building)
@@ -2367,7 +2392,28 @@ func _finish_drag_building() -> void:
 
 	if should_record_move:
 		_commit_history_action("Building moved", drag_history_before)
-	
+
+	_reset_drag_state()
+
+func _cancel_drag_building() -> void:
+	# Abort an in-progress relocation, snapping every dragged building back to
+	# its starting position/rotation regardless of the current drag validity.
+	var path_manager := $"../PathManager"
+	if not is_dragging_building or dragged_building == null:
+		return
+
+	for drag_target in drag_buildings:
+		if not is_instance_valid(drag_target):
+			continue
+		drag_target.global_position = drag_original_positions.get(drag_target, drag_target.global_position)
+		drag_target.rotation = float(drag_original_rotations.get(drag_target, drag_target.rotation))
+		if "rotatedTick" in drag_target:
+			drag_target.rotatedTick = int(drag_original_rotated_ticks.get(drag_target, 0))
+		occupy_cells(_get_cell_array_from_dictionary(drag_original_cells_by_building, drag_target), drag_target)
+		_restore_drag_visual(drag_target)
+		if path_manager != null and path_manager.has_method("update_paths_for_building"):
+			path_manager.update_paths_for_building(drag_target)
+
 	_reset_drag_state()
 
 func _get_cell_array_from_dictionary(source: Dictionary, key) -> Array[Vector2i]:
@@ -2556,9 +2602,6 @@ func _process(_delta: float) -> void:
 	var valid_placement
 	
 	if is_dragging_building and dragged_building != null:
-		if not Input.is_action_pressed("Move Build"):
-			_finish_drag_building()
-			return
 		var rotated_during_drag := false
 		if Input.is_action_just_pressed("Rotate"):
 			rotated_during_drag = _rotate_drag_buildings_90_degrees()
