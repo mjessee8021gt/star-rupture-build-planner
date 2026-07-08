@@ -10,6 +10,10 @@ const FLOW_SIMULATOR := preload("res://Scripts/FlowSimulator.gd")
 const PATHING_INTELLIGENCE := preload("res://Scripts/PathingIntelligence.gd")
 const SaveVersionStore := preload("res://Scripts/save_version_store.gd")
 const VERSION_HISTORY_PANEL_SCRIPT := preload("res://Scripts/save_versions_panel.gd")
+const BlueprintStore := preload("res://Scripts/blueprint_store.gd")
+const BlueprintLibrary := preload("res://Scripts/blueprint_library.gd")
+const BLUEPRINT_PANEL_SCRIPT := preload("res://Scripts/blueprint_panel.gd")
+const BLUEPRINT_FILE_EXTENSION := "srbpb"
 
 const SAVE_FILE_EXTENSION := "srbp"
 # v5 adds an in-file version history block (base snapshot + forward deltas).
@@ -88,9 +92,33 @@ const FLOW_LAYER_COMMANDS := {
 }
 const COMMAND_ANNOTATION := &"tools.annotation"
 const COMMAND_WHAT_IF := &"tools.what_if"
+const COMMAND_BLUEPRINTS := &"tools.blueprints"
 const COMMAND_TOGGLE_TOOLBOX := &"tools.toggle_toolbox"
 const COMMAND_CONTROLS := &"tools.controls"
 const COMMAND_PATCH_NOTES := &"help.patch_notes"
+# Visual Debug Layers: a master toggle plus independent, stackable diagnostic layers.
+const DEBUG_LAYER_OVERLAY_SCRIPT := preload("res://Scripts/debug_layer_overlay.gd")
+const DEBUG_LAYER_MODEL := preload("res://Scripts/debug_layer_model.gd")
+const DEBUG_LAYER_OVERLAY_Z := 120     # above high-visibility rails (RAIL_Z_HIGH_VISIBILITY = 100)
+const COMMAND_DEBUG_LAYERS := &"debug.layers"
+const COMMAND_DEBUG_LAYER_HEALTH := &"debug.layer.health"
+const COMMAND_DEBUG_LAYER_HEATMAP := &"debug.layer.heatmap"
+const COMMAND_DEBUG_HEATMAP_METRIC := &"debug.heatmap_metric"
+const COMMAND_DEBUG_LAYER_WASTE := &"debug.layer.waste"
+const COMMAND_DEBUG_LAYER_ORPHAN := &"debug.layer.orphan"
+# Command id -> overlay layer id (must match DebugLayerOverlay LAYER_* constants).
+const DEBUG_LAYER_IDS := {
+	COMMAND_DEBUG_LAYER_HEALTH: "health",
+	COMMAND_DEBUG_LAYER_HEATMAP: "heatmap",
+	COMMAND_DEBUG_LAYER_WASTE: "waste",
+	COMMAND_DEBUG_LAYER_ORPHAN: "orphan",
+}
+const DEBUG_HEATMAP_METRICS := ["heat", "power", "cost"]
+const DEBUG_HEATMAP_METRIC_LABELS := {
+	"heat": "Heat",
+	"power": "Power",
+	"cost": "Build Cost",
+}
 
 @onready var camera: Camera2D = $Camera2D
 @onready var tile_map_layer: TileMapLayer = $TileMapLayer
@@ -111,6 +139,20 @@ const COMMAND_PATCH_NOTES := &"help.patch_notes"
 @onready var path_manager: Node = $PathManager
 var alignment_panel: Control = null
 var mirror_panel: Control = null
+# The user's persistent blueprint library (user://blueprints). The blueprint
+# currently being repeat-stamped is held here so its annotations can be
+# reproduced on each placement; cleared when the stamp ends.
+var blueprint_library = null
+var _active_stamp_blueprint: Dictionary = {}
+var _blueprint_overlay: Control = null
+var blueprint_save_dialog: FileDialog = null
+var blueprint_load_dialog: FileDialog = null
+var _blueprint_export_pending_id := ""
+var _web_blueprint_input = null
+var _web_blueprint_reader = null
+var _web_blueprint_input_callback = null
+var _web_blueprint_read_callback = null
+var _web_blueprint_error_callback = null
 @onready var buildings_root: Node2D = $buildings
 @onready var annotation_layer: Node = $AnnotationLayer
 
@@ -151,6 +193,12 @@ var _flow_simulation_refresh_queued := false
 var _flow_simulation_state: Dictionary = {}
 var _last_flow_simulation_result: Dictionary = {}
 var _pathing_intelligence_refresh_queued := false
+var _debug_layers_enabled := false
+var _debug_layer_active: Dictionary = {}       # layer id (String) -> bool
+var _debug_heatmap_metric := 0                  # index into DEBUG_HEATMAP_METRICS
+var _debug_layer_overlay: Node2D = null
+var _debug_layers_refresh_queued := false
+var _debug_layers_legend: PanelContainer = null
 var _viewport_ui_scale := 1.0
 var _accessibility_scale := UiScale.ACCESSIBILITY_DEFAULT_SCALE
 var _ui_scale := 1.0
@@ -167,11 +215,13 @@ func _ready() -> void:
 	meteor_core_cost_label.text = "0"
 	_setup_flow_simulation_view()
 	_setup_pathing_intelligence()
+	_setup_debug_layers()
 	_setup_save_load_ui()
 	_setup_top_menu_bar()
 	_setup_what_if_button()
 	_setup_alignment_panel()
 	_setup_mirror_panel()
+	_setup_blueprint_engine()
 	_setup_autosnapshot()
 	_setup_version_history_ui()
 	_apply_ui_scale()
@@ -222,11 +272,15 @@ func _is_annotation_interaction_active() -> bool:
 
 
 func is_scene_input_blocked() -> bool:
-	return _is_file_dialog_open() or _is_controls_menu_open() or _is_patch_notes_open() or _is_what_if_machine_open() or _is_annotation_interaction_active()
+	return _is_file_dialog_open() or _is_controls_menu_open() or _is_patch_notes_open() or _is_what_if_machine_open() or _is_annotation_interaction_active() or _is_blueprint_overlay_open()
+
+
+func _is_blueprint_overlay_open() -> bool:
+	return _blueprint_overlay != null and _blueprint_overlay.visible
 
 
 func _is_file_dialog_open() -> bool:
-	for dialog in [save_dialog, load_dialog, export_pdf_dialog]:
+	for dialog in [save_dialog, load_dialog, export_pdf_dialog, blueprint_save_dialog, blueprint_load_dialog]:
 		if dialog != null and dialog.visible:
 			return true
 	return false
@@ -256,6 +310,297 @@ func _setup_mirror_panel() -> void:
 	mirror_panel = MIRROR_PANEL_SCRIPT.new()
 	$Camera2D/CanvasLayer.add_child(mirror_panel)
 	mirror_panel.call("setup", build_manager)
+
+
+func _setup_blueprint_engine() -> void:
+	if blueprint_library == null:
+		blueprint_library = BlueprintLibrary.new()
+	if build_manager != null:
+		if build_manager.has_signal("blueprint_stamp_placed") and not build_manager.blueprint_stamp_placed.is_connected(_on_blueprint_stamp_placed):
+			build_manager.blueprint_stamp_placed.connect(_on_blueprint_stamp_placed)
+		if build_manager.has_signal("group_build_changed") and not build_manager.group_build_changed.is_connected(_on_blueprint_group_build_changed):
+			build_manager.group_build_changed.connect(_on_blueprint_group_build_changed)
+
+	# Desktop export/import dialogs (web uses the browser bridge instead).
+	if blueprint_save_dialog == null:
+		blueprint_save_dialog = FileDialog.new()
+		blueprint_save_dialog.name = "BlueprintSaveDialog"
+		blueprint_save_dialog.file_mode = FileDialog.FILE_MODE_SAVE_FILE
+		blueprint_save_dialog.access = FileDialog.ACCESS_FILESYSTEM
+		blueprint_save_dialog.title = "Export Blueprint"
+		blueprint_save_dialog.filters = PackedStringArray(["*.%s ; SRBP Blueprint" % BLUEPRINT_FILE_EXTENSION])
+		blueprint_save_dialog.file_selected.connect(_on_blueprint_export_file_selected)
+		add_child(blueprint_save_dialog)
+	if blueprint_load_dialog == null:
+		blueprint_load_dialog = FileDialog.new()
+		blueprint_load_dialog.name = "BlueprintLoadDialog"
+		blueprint_load_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
+		blueprint_load_dialog.access = FileDialog.ACCESS_FILESYSTEM
+		blueprint_load_dialog.title = "Import Blueprint"
+		blueprint_load_dialog.filters = PackedStringArray(["*.%s ; SRBP Blueprint" % BLUEPRINT_FILE_EXTENSION, "*.json ; JSON"])
+		blueprint_load_dialog.file_selected.connect(_on_blueprint_import_file_selected)
+		add_child(blueprint_load_dialog)
+
+
+func _setup_blueprint_overlay() -> void:
+	if _blueprint_overlay != null:
+		return
+	_blueprint_overlay = BLUEPRINT_PANEL_SCRIPT.new()
+	$Camera2D/CanvasLayer.add_child(_blueprint_overlay)
+	_blueprint_overlay.call("setup", self, _ui_scale)
+
+
+func _on_blueprints_pressed() -> void:
+	_setup_blueprint_overlay()
+	if _blueprint_overlay.visible:
+		_blueprint_overlay.call("close")
+	else:
+		_blueprint_overlay.call("open")
+
+
+# --- Blueprint accessors / actions used by the library panel -----------------
+
+func list_blueprints() -> Array:
+	if blueprint_library == null:
+		return []
+	return blueprint_library.list_entries()
+
+
+func load_blueprint(blueprint_id: String) -> Dictionary:
+	if blueprint_library == null:
+		return {}
+	return blueprint_library.load(blueprint_id)
+
+
+func blueprint_selection_available() -> bool:
+	return build_manager != null and build_manager.has_method("has_blueprintable_selection") and bool(build_manager.call("has_blueprintable_selection"))
+
+
+func stamp_blueprint(blueprint_id: String) -> bool:
+	return begin_blueprint_stamp(blueprint_id)
+
+
+func rename_blueprint(blueprint_id: String, new_name: String) -> bool:
+	if blueprint_library == null:
+		return false
+	return blueprint_library.rename(blueprint_id, new_name)
+
+
+func delete_blueprint(blueprint_id: String) -> bool:
+	if blueprint_library == null:
+		return false
+	return blueprint_library.delete(blueprint_id)
+
+
+func export_blueprint(blueprint_id: String) -> void:
+	if blueprint_library == null:
+		return
+	if OS.has_feature("web") and JavaScriptBridge != null:
+		var text: String = blueprint_library.export_text(blueprint_id)
+		if text != "":
+			JavaScriptBridge.download_buffer(text.to_utf8_buffer(), "%s.%s" % [blueprint_id, BLUEPRINT_FILE_EXTENSION], "application/json")
+		return
+	_blueprint_export_pending_id = blueprint_id
+	blueprint_save_dialog.current_file = "%s.%s" % [blueprint_id, BLUEPRINT_FILE_EXTENSION]
+	blueprint_save_dialog.popup_centered_ratio(0.7)
+
+
+func import_blueprint() -> void:
+	if OS.has_feature("web") and JavaScriptBridge != null:
+		_request_blueprint_import_from_browser()
+		return
+	blueprint_load_dialog.popup_centered_ratio(0.7)
+
+
+func _on_blueprint_export_file_selected(path: String) -> void:
+	if blueprint_library == null or _blueprint_export_pending_id == "":
+		return
+	if not blueprint_library.export_to(_blueprint_export_pending_id, path):
+		push_warning("Failed to export blueprint to %s" % path)
+	_blueprint_export_pending_id = ""
+
+
+func _on_blueprint_import_file_selected(path: String) -> void:
+	if blueprint_library == null:
+		return
+	var new_id: String = blueprint_library.import_from(path)
+	if new_id == "":
+		push_warning("Failed to import blueprint from %s" % path)
+	_notify_blueprint_library_changed()
+
+
+func _notify_blueprint_library_changed() -> void:
+	if _blueprint_overlay != null and _blueprint_overlay.has_method("notify_library_changed"):
+		_blueprint_overlay.call("notify_library_changed")
+
+
+# --- Web blueprint import (browser file picker) ------------------------------
+
+func _request_blueprint_import_from_browser() -> void:
+	_cleanup_web_blueprint_picker()
+	var document = JavaScriptBridge.get_interface("document")
+	if document == null or document.body == null:
+		push_warning("Browser file picker is unavailable in this web build.")
+		return
+	_web_blueprint_input = document.createElement("input")
+	if _web_blueprint_input == null:
+		return
+	_web_blueprint_input.setAttribute("type", "file")
+	_web_blueprint_input.setAttribute("accept", ".%s,.json,application/json" % BLUEPRINT_FILE_EXTENSION)
+	_web_blueprint_input.setAttribute("style", "display:none")
+	_web_blueprint_input_callback = JavaScriptBridge.create_callback(_on_web_blueprint_input_changed)
+	_web_blueprint_input.onchange = _web_blueprint_input_callback
+	document.body.appendChild(_web_blueprint_input)
+	_web_blueprint_input.click()
+
+
+func _cleanup_web_blueprint_picker() -> void:
+	if _web_blueprint_input != null and _web_blueprint_input.parentNode != null:
+		_web_blueprint_input.parentNode.removeChild(_web_blueprint_input)
+	_web_blueprint_input = null
+	_web_blueprint_reader = null
+	_web_blueprint_input_callback = null
+	_web_blueprint_read_callback = null
+	_web_blueprint_error_callback = null
+
+
+func _on_web_blueprint_input_changed(args: Array) -> void:
+	if args.is_empty():
+		_cleanup_web_blueprint_picker()
+		return
+	var event = args[0]
+	if event == null or event.target == null or event.target.files == null or int(event.target.files.length) < 1:
+		_cleanup_web_blueprint_picker()
+		return
+	_web_blueprint_reader = JavaScriptBridge.create_object("FileReader")
+	if _web_blueprint_reader == null:
+		_cleanup_web_blueprint_picker()
+		return
+	_web_blueprint_read_callback = JavaScriptBridge.create_callback(_on_web_blueprint_reader_loaded)
+	_web_blueprint_error_callback = JavaScriptBridge.create_callback(_on_web_blueprint_reader_failed)
+	_web_blueprint_reader.onload = _web_blueprint_read_callback
+	_web_blueprint_reader.onerror = _web_blueprint_error_callback
+	_web_blueprint_reader.readAsText(event.target.files[0])
+
+
+func _on_web_blueprint_reader_loaded(args: Array) -> void:
+	var raw_text := ""
+	if not args.is_empty() and args[0] != null and args[0].target != null:
+		raw_text = str(args[0].target.result)
+	if raw_text != "" and blueprint_library != null:
+		if blueprint_library.import_text(raw_text) == "":
+			push_warning("Imported file was not a valid blueprint.")
+		_notify_blueprint_library_changed()
+	_cleanup_web_blueprint_picker()
+
+
+func _on_web_blueprint_reader_failed(_args: Array) -> void:
+	push_warning("Failed to read the selected blueprint file.")
+	_cleanup_web_blueprint_picker()
+
+
+# Capture the current multi-building selection as a blueprint and save it to the
+# library. Returns the new blueprint id, or "" if nothing valid was selected.
+func create_blueprint_from_selection(blueprint_name: String, description := "") -> String:
+	if build_manager == null or blueprint_library == null:
+		return ""
+	var data: Dictionary = build_manager.get_blueprint_capture_data()
+	if data.is_empty():
+		return ""
+	var buildings: Array = data.get("buildings", [])
+	if buildings.is_empty():
+		return ""
+
+	var origin_arr = data.get("origin_cell", [0, 0])
+	var origin_cell := Vector2i(int(origin_arr[0]), int(origin_arr[1]))
+	var sources: Array = data.get("source_buildings", [])
+	var uid_to_index := {}
+	for i in sources.size():
+		if is_instance_valid(sources[i]):
+			uid_to_index[_ensure_building_uid(sources[i])] = i
+
+	var bounds: Vector2i = BlueprintStore.compute_bounds(buildings)
+	var annotations := _capture_blueprint_annotations(origin_cell, bounds, uid_to_index)
+	var thumbnail: String = BlueprintStore.render_thumbnail_b64(buildings)
+	var blueprint: Dictionary = BlueprintStore.make_blueprint(blueprint_name, description, buildings, data.get("rails", []), annotations, thumbnail)
+	return blueprint_library.save_new(blueprint)
+
+
+# Gather the annotations that belong with a selection: notes pinned to a captured
+# building, plus free (cell) notes whose anchor falls inside the stamp's bounds.
+func _capture_blueprint_annotations(origin_cell: Vector2i, bounds: Vector2i, uid_to_index: Dictionary) -> Array:
+	var out: Array = []
+	if annotation_layer == null or not annotation_layer.has_method("serialize_annotations"):
+		return out
+	for saved in annotation_layer.serialize_annotations():
+		if not (saved is Dictionary):
+			continue
+		if String(saved.get("target_type", "cell")) == "building":
+			var uid := String(saved.get("target_building_uid", ""))
+			if uid == "" or not uid_to_index.has(uid):
+				continue  # pinned to a building outside the selection
+		else:
+			var anchor = saved.get("anchor_cell", [0, 0])
+			if not _cell_within_bounds(Vector2i(int(anchor[0]), int(anchor[1])), origin_cell, bounds):
+				continue
+		out.append(BlueprintStore.annotation_to_blueprint(saved, origin_cell, uid_to_index))
+	return out
+
+
+func _cell_within_bounds(cell: Vector2i, origin: Vector2i, bounds: Vector2i) -> bool:
+	return cell.x >= origin.x and cell.y >= origin.y \
+		and cell.x < origin.x + max(1, bounds.x) and cell.y < origin.y + max(1, bounds.y)
+
+
+# Arm the repeat-stamp tool from a library blueprint id.
+func begin_blueprint_stamp(blueprint_id: String) -> bool:
+	if build_manager == null or blueprint_library == null:
+		return false
+	var blueprint: Dictionary = blueprint_library.load(blueprint_id)
+	if blueprint.is_empty():
+		return false
+	# Set the active stamp AFTER begin_blueprint_stamp: that call runs
+	# cancel_build() internally, whose group_build_changed(false) would otherwise
+	# clear a blueprint set beforehand.
+	var started: bool = build_manager.begin_blueprint_stamp(blueprint.get("buildings", []), blueprint.get("rails", []))
+	_active_stamp_blueprint = blueprint if started else {}
+	return started
+
+
+# Reproduce the active blueprint's annotations against the buildings just placed
+# by a stamp, re-binding building-pinned notes to their fresh uids.
+func _on_blueprint_stamp_placed(real_by_index: Dictionary, origin_cell: Vector2i) -> void:
+	if _active_stamp_blueprint.is_empty():
+		return
+	var annotations: Array = _active_stamp_blueprint.get("annotations", [])
+	if annotations.is_empty() or annotation_layer == null or not annotation_layer.has_method("load_annotations"):
+		return
+
+	var index_to_uid := {}
+	for idx in real_by_index.keys():
+		var building = real_by_index[idx]
+		if is_instance_valid(building):
+			index_to_uid[int(idx)] = _ensure_building_uid(building)
+
+	var reproduced: Array = []
+	for bp_ann in annotations:
+		var new_id := "ann_%d_%d" % [Time.get_ticks_usec(), randi()]
+		reproduced.append(BlueprintStore.annotation_from_blueprint(bp_ann, origin_cell, index_to_uid, new_id))
+	if reproduced.is_empty():
+		return
+
+	# load_annotations replaces the set, so merge the new notes onto the existing.
+	var merged: Array = []
+	for existing in annotation_layer.serialize_annotations():
+		merged.append(existing)
+	for added in reproduced:
+		merged.append(added)
+	annotation_layer.load_annotations(merged)
+
+
+func _on_blueprint_group_build_changed(active: bool) -> void:
+	if not active:
+		_active_stamp_blueprint = {}
 
 
 func _on_what_if_button_pressed() -> void:
@@ -365,6 +710,7 @@ func _on_pathing_scene_node_added(node: Node) -> void:
 	if node.has_signal("port_drag_started") or node.is_in_group("buildings") or node.get_node_or_null("Recipe") != null:
 		call_deferred("_connect_pathing_intelligence_to_building", node)
 		_queue_pathing_intelligence_refresh()
+		_queue_debug_layers_refresh()
 
 
 func _on_pathing_scene_node_removed(node: Node) -> void:
@@ -372,10 +718,12 @@ func _on_pathing_scene_node_removed(node: Node) -> void:
 		return
 	if node.has_signal("port_drag_started") or node.is_in_group("buildings"):
 		_queue_pathing_intelligence_refresh()
+		_queue_debug_layers_refresh()
 
 
 func _on_pathing_recipe_option_changed(_index: int, _building: Node) -> void:
 	_queue_pathing_intelligence_refresh()
+	_queue_debug_layers_refresh()
 
 
 func _queue_pathing_intelligence_refresh() -> void:
@@ -513,6 +861,376 @@ func _show_flow_debug_lines(lines: Array[String]) -> void:
 	debug_feed.text = "\n".join(lines)
 
 
+# --- Visual Debug Layers ------------------------------------------------------
+# A single grid overlay renders every enabled diagnostic layer. Each layer is a
+# view over analysis the planner already computes: supply health and rail waste come
+# from PathingIntelligence, the heatmap from per-building stats, orphans from graph
+# adjacency. One refresh builds the graph + assessment once and feeds all layers.
+
+func _setup_debug_layers() -> void:
+	if path_manager != null and path_manager.has_signal("rail_graph_changed"):
+		var refresh_callable := Callable(self, "_queue_debug_layers_refresh")
+		if not path_manager.is_connected("rail_graph_changed", refresh_callable):
+			path_manager.connect("rail_graph_changed", refresh_callable)
+
+
+func _toggle_debug_layers() -> void:
+	_debug_layers_enabled = not _debug_layers_enabled
+	if _debug_layers_enabled:
+		if not _any_debug_layer_active():
+			_debug_layer_active["health"] = true   # sensible default so the toggle shows something
+		_refresh_debug_layers()
+	else:
+		var overlay := _get_debug_layer_overlay()
+		if overlay != null:
+			overlay.call("set_enabled", false)
+		_update_debug_legend()
+
+
+func _toggle_debug_layer(command_id: StringName) -> void:
+	if not _debug_layers_enabled:
+		return
+	var layer_id := String(DEBUG_LAYER_IDS.get(command_id, ""))
+	if layer_id == "":
+		return
+	_debug_layer_active[layer_id] = not bool(_debug_layer_active.get(layer_id, false))
+	_refresh_debug_layers()
+
+
+func _cycle_debug_heatmap_metric() -> void:
+	if not _debug_layers_enabled or not bool(_debug_layer_active.get("heatmap", false)):
+		return
+	_debug_heatmap_metric = (_debug_heatmap_metric + 1) % DEBUG_HEATMAP_METRICS.size()
+	_refresh_debug_layers()
+
+
+func _any_debug_layer_active() -> bool:
+	for layer_id in _debug_layer_active.keys():
+		if bool(_debug_layer_active[layer_id]):
+			return true
+	return false
+
+
+func _get_debug_layer_overlay() -> Node2D:
+	if _debug_layer_overlay != null and is_instance_valid(_debug_layer_overlay):
+		return _debug_layer_overlay
+	if path_manager == null:
+		return null
+	_debug_layer_overlay = DEBUG_LAYER_OVERLAY_SCRIPT.new()
+	_debug_layer_overlay.name = "DebugLayerOverlay"
+	_debug_layer_overlay.z_index = DEBUG_LAYER_OVERLAY_Z
+	path_manager.add_child(_debug_layer_overlay)
+	_debug_layer_overlay.call("set_scale_factor", _ui_scale)
+	return _debug_layer_overlay
+
+
+func _queue_debug_layers_refresh() -> void:
+	if not _debug_layers_enabled or _debug_layers_refresh_queued:
+		return
+	_debug_layers_refresh_queued = true
+	call_deferred("_refresh_debug_layers")
+
+
+func _refresh_debug_layers() -> void:
+	_debug_layers_refresh_queued = false
+	var overlay := _get_debug_layer_overlay()
+	if overlay == null:
+		return
+	if not _debug_layers_enabled:
+		overlay.call("set_enabled", false)
+		_update_debug_legend()
+		return
+	if buildings_root == null:
+		overlay.call("set_enabled", false)
+		return
+
+	var graph: Dictionary = FLOW_GRAPH_BUILDER.build_from_scene(buildings_root, path_manager)
+	var simulation: Dictionary = {}
+	var graph_edges = graph.get("edges", [])
+	if graph_edges is Array and not (graph_edges as Array).is_empty():
+		var simulator: RefCounted = FLOW_SIMULATOR.new()
+		simulation = simulator.simulate(graph)
+	var options := {"world_units_per_tile": _pathing_world_units_per_tile()}
+	var assessment: Dictionary = PATHING_INTELLIGENCE.analyze_graph(graph, simulation, options)
+
+	overlay.call("set_scale_factor", _ui_scale)
+	overlay.call("set_active_layers", _debug_layer_active)
+	overlay.call("set_payload", _build_debug_layer_payload(graph, assessment))
+	overlay.call("set_enabled", true)
+	_update_debug_legend()
+
+
+func _build_debug_layer_payload(graph: Dictionary, assessment: Dictionary) -> Dictionary:
+	var nodes := _debug_as_array(graph.get("nodes", []))
+	var building_assessments: Dictionary = assessment.get("building_assessments", {}) if assessment.get("building_assessments", {}) is Dictionary else {}
+	var edge_supply: Dictionary = assessment.get("edge_supply", {}) if assessment.get("edge_supply", {}) is Dictionary else {}
+	var tile := _pathing_world_units_per_tile()
+	if tile <= 0.0:
+		tile = 64.0
+
+	var geo := {}          # node_id -> {center: Vector2, size: Vector2}
+	var node_by_id := {}
+	for node_variant in nodes:
+		if not (node_variant is Dictionary):
+			continue
+		var node: Dictionary = node_variant
+		var node_id := String(node.get("id", ""))
+		if node_id == "":
+			continue
+		node_by_id[node_id] = node
+		geo[node_id] = {
+			"center": _debug_node_center(node),
+			"size": _debug_node_size(node, tile),
+		}
+
+	return {
+		"health": _build_debug_health_payload(building_assessments, geo),
+		"heatmap": _build_debug_heatmap_payload(nodes, geo),
+		"waste": _build_debug_waste_payload(edge_supply, geo),
+		"orphan": _build_debug_orphan_payload(graph, node_by_id, geo),
+	}
+
+
+func _build_debug_health_payload(building_assessments: Dictionary, geo: Dictionary) -> Array:
+	var entries: Array = []
+	for node_id in building_assessments.keys():
+		var ba = building_assessments[node_id]
+		if not (ba is Dictionary):
+			continue
+		var state := String(DEBUG_LAYER_MODEL.health_state(ba))
+		if state == "":
+			continue
+		var g = geo.get(String(node_id), {})
+		if not (g is Dictionary) or (g as Dictionary).is_empty():
+			continue
+		entries.append({
+			"center": g["center"],
+			"size": g["size"],
+			"state": state,
+			"label": String((ba as Dictionary).get("node_label", "")),
+		})
+	return entries
+
+
+func _build_debug_heatmap_payload(nodes: Array, geo: Dictionary) -> Dictionary:
+	var metric := String(DEBUG_HEATMAP_METRICS[_debug_heatmap_metric])
+	var raw: Array = []
+	var values: Array = []
+	for node_variant in nodes:
+		if not (node_variant is Dictionary):
+			continue
+		var node: Dictionary = node_variant
+		var building := _debug_building_for_node(node)
+		if building == null:
+			continue
+		var value := _debug_building_metric(building, metric)
+		if value <= 0.0:
+			continue
+		var g = geo.get(String(node.get("id", "")), {})
+		if not (g is Dictionary) or (g as Dictionary).is_empty():
+			continue
+		raw.append({"center": g["center"], "size": g["size"], "value": value})
+		values.append(value)
+
+	var ts := DEBUG_LAYER_MODEL.normalize(values)
+	var entries: Array = []
+	for i in range(raw.size()):
+		var item: Dictionary = raw[i]
+		entries.append({"center": item["center"], "size": item["size"], "t": float(ts[i]), "value": item["value"]})
+	return {"metric": metric, "entries": entries}
+
+
+func _debug_building_metric(building: Node, metric: String) -> float:
+	match metric:
+		"heat":
+			return absf(float(building.get("heat"))) if "heat" in building else 0.0
+		"power":
+			return absf(float(building.get("power"))) if "power" in building else 0.0
+		"cost":
+			return absf(float(building.get("build_cost_amount"))) if "build_cost_amount" in building else 0.0
+	return 0.0
+
+
+func _build_debug_waste_payload(edge_supply: Dictionary, geo: Dictionary) -> Dictionary:
+	var waste: Dictionary = DEBUG_LAYER_MODEL.waste_sources(edge_supply)
+	var buildings: Array = []
+	for from_id in _debug_as_array(waste.get("from_ids", [])):
+		var g = geo.get(String(from_id), {})
+		if g is Dictionary and not (g as Dictionary).is_empty():
+			buildings.append({"center": g["center"], "size": g["size"]})
+	var rails: Array = []
+	for edge_id in _debug_as_array(waste.get("edge_ids", [])):
+		var points := _debug_rail_global_points(String(edge_id))
+		if points.size() >= 2:
+			rails.append({"points": points})
+	return {"buildings": buildings, "rails": rails}
+
+
+func _build_debug_orphan_payload(graph: Dictionary, node_by_id: Dictionary, geo: Dictionary) -> Dictionary:
+	var result: Dictionary = DEBUG_LAYER_MODEL.orphans(graph)
+	var buildings: Array = []
+	for node_id in _debug_as_array(result.get("disconnected", [])):
+		var g = geo.get(String(node_id), {})
+		if g is Dictionary and not (g as Dictionary).is_empty():
+			buildings.append({"center": g["center"], "size": g["size"]})
+
+	var ports: Array = []
+	var unconnected: Dictionary = result.get("unconnected_ports", {}) if result.get("unconnected_ports", {}) is Dictionary else {}
+	for node_id in unconnected.keys():
+		var node = node_by_id.get(String(node_id), {})
+		if not (node is Dictionary):
+			continue
+		var building := _debug_building_for_node(node)
+		if building == null:
+			continue
+		for port_name in _debug_as_array(unconnected[node_id]):
+			var port_pos = _debug_port_global_position(building, String(port_name))
+			if port_pos is Vector2:
+				ports.append({"pos": port_pos})
+	return {"buildings": buildings, "ports": ports}
+
+
+func _debug_port_global_position(building: Node, port_name: String):
+	var ports_root = building.get_node_or_null("Ports")
+	if ports_root == null:
+		return null
+	var port_node = ports_root.get_node_or_null(port_name)
+	if port_node is Node2D:
+		return (port_node as Node2D).global_position
+	return null
+
+
+func _debug_node_center(node: Dictionary) -> Vector2:
+	var position = node.get("position", null)
+	if position is Array and (position as Array).size() >= 2:
+		return Vector2(float(position[0]), float(position[1]))
+	if position is Vector2:
+		return position
+	return Vector2.ZERO
+
+
+func _debug_node_size(node: Dictionary, tile: float) -> Vector2:
+	var building := _debug_building_for_node(node)
+	if building != null and build_manager != null and build_manager.has_method("get_rotated_footprint"):
+		var footprint = build_manager.call("get_rotated_footprint", building)
+		if footprint is Vector2i and footprint != Vector2i.ZERO:
+			return Vector2(footprint) * tile
+	return Vector2(tile, tile)
+
+
+func _debug_building_for_node(node: Dictionary) -> Node:
+	var instance_id = node.get("instance_id", 0)
+	if typeof(instance_id) == TYPE_INT and int(instance_id) != 0:
+		var obj = instance_from_id(int(instance_id))
+		if obj is Node and is_instance_valid(obj):
+			return obj as Node
+	return null
+
+
+func _debug_rail_global_points(edge_id: String) -> PackedVector2Array:
+	var points := PackedVector2Array()
+	var prefix := "rail_"
+	if not edge_id.begins_with(prefix):
+		return points
+	var instance_id := int(edge_id.trim_prefix(prefix))
+	if instance_id == 0:
+		return points
+	var obj = instance_from_id(instance_id)
+	if not (obj is Path2D) or not is_instance_valid(obj):
+		return points
+	var path := obj as Path2D
+	if path.curve == null:
+		return points
+	for local_point in path.curve.get_baked_points():
+		points.append(path.to_global(local_point))
+	return points
+
+
+func _debug_as_array(value) -> Array:
+	return value if value is Array else []
+
+
+func _update_debug_legend() -> void:
+	if not _debug_layers_enabled or not _any_debug_layer_active():
+		if _debug_layers_legend != null and is_instance_valid(_debug_layers_legend):
+			_debug_layers_legend.visible = false
+		return
+	var panel := _get_debug_legend()
+	var vbox := panel.get_node("Margin/Rows") as VBoxContainer
+	for child in vbox.get_children():
+		child.queue_free()
+
+	vbox.add_child(_debug_legend_title("Debug Layers"))
+	if bool(_debug_layer_active.get("health", false)):
+		vbox.add_child(_debug_legend_row(DEBUG_LAYER_OVERLAY_SCRIPT.HEALTH_SUPPLIED, "Supplied", false))
+		vbox.add_child(_debug_legend_row(DEBUG_LAYER_OVERLAY_SCRIPT.HEALTH_UNDER, "Under-supplied", false))
+		vbox.add_child(_debug_legend_row(DEBUG_LAYER_OVERLAY_SCRIPT.HEALTH_MISSING, "Missing input", false))
+		vbox.add_child(_debug_legend_row(DEBUG_LAYER_OVERLAY_SCRIPT.HEALTH_DISCONNECTED, "Disconnected", true))
+	if bool(_debug_layer_active.get("heatmap", false)):
+		var metric := String(DEBUG_HEATMAP_METRICS[_debug_heatmap_metric])
+		var metric_label := String(DEBUG_HEATMAP_METRIC_LABELS.get(metric, metric))
+		vbox.add_child(_debug_legend_row(DEBUG_LAYER_OVERLAY_SCRIPT.HEAT_HOT, "%s (low → high)" % metric_label, false))
+	if bool(_debug_layer_active.get("waste", false)):
+		vbox.add_child(_debug_legend_row(DEBUG_LAYER_OVERLAY_SCRIPT.WASTE_COLOR, "Wasted output", false))
+	if bool(_debug_layer_active.get("orphan", false)):
+		vbox.add_child(_debug_legend_row(DEBUG_LAYER_OVERLAY_SCRIPT.ORPHAN_COLOR, "Disconnected / unused port", true))
+
+	panel.visible = true
+	panel.reset_size()
+	_position_debug_legend(panel)
+
+
+func _get_debug_legend() -> PanelContainer:
+	if _debug_layers_legend != null and is_instance_valid(_debug_layers_legend):
+		return _debug_layers_legend
+	var panel := PanelContainer.new()
+	panel.name = "DebugLayerLegend"
+	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	panel.add_theme_stylebox_override("panel", Palette.make_panel_style(Palette.SCENE_PANEL_FILL, Palette.SCENE_PANEL_BORDER))
+	var margin := MarginContainer.new()
+	margin.name = "Margin"
+	for side in ["left", "right", "top", "bottom"]:
+		margin.add_theme_constant_override("margin_" + side, 8)
+	panel.add_child(margin)
+	var vbox := VBoxContainer.new()
+	vbox.name = "Rows"
+	vbox.add_theme_constant_override("separation", 4)
+	margin.add_child(vbox)
+	var canvas := $Camera2D/CanvasLayer
+	canvas.add_child(panel)
+	_debug_layers_legend = panel
+	return panel
+
+
+func _debug_legend_title(text: String) -> Label:
+	var label := Label.new()
+	label.text = text
+	label.add_theme_color_override("font_color", Palette.TEXT_MUTED)
+	label.add_theme_font_size_override("font_size", int(round(12 * _ui_scale)))
+	return label
+
+
+func _debug_legend_row(color: Color, text: String, dashed: bool) -> HBoxContainer:
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 6)
+	var swatch := ColorRect.new()
+	swatch.custom_minimum_size = _scaled_vec2(Vector2(16, 12))
+	swatch.color = Palette.with_alpha(color, 1.0)
+	row.add_child(swatch)
+	var label := Label.new()
+	label.text = text + (" (dashed)" if dashed else "")
+	label.add_theme_color_override("font_color", Palette.TEXT_PRIMARY)
+	label.add_theme_font_size_override("font_size", int(round(13 * _ui_scale)))
+	row.add_child(label)
+	return row
+
+
+func _position_debug_legend(panel: PanelContainer) -> void:
+	var viewport_size := get_viewport().get_visible_rect().size
+	var margin := 12.0 * _ui_scale
+	panel.position = Vector2(margin, viewport_size.y - panel.size.y - margin)
+
+
 func _setup_save_load_ui() -> void:
 	rail_version_dropdown = OptionButton.new()
 	rail_version_dropdown.name = "RailVersionDropdown"
@@ -588,8 +1306,15 @@ func _register_top_menu_commands() -> void:
 	_register_top_menu_command(COMMAND_FLOW_LAYER_BLOCKED, "Layer: Blocked", Callable(self, "_select_flow_layer").bind(COMMAND_FLOW_LAYER_BLOCKED), "Show undeliverable (blocked) flow on rail badges", true)
 	_register_top_menu_command(COMMAND_FLOW_LAYER_AVAILABLE, "Layer: Available", Callable(self, "_select_flow_layer").bind(COMMAND_FLOW_LAYER_AVAILABLE), "Show spare capacity on rail badges", true)
 	_register_top_menu_command(COMMAND_FLOW_LAYER_SATURATION, "Layer: Saturation", Callable(self, "_select_flow_layer").bind(COMMAND_FLOW_LAYER_SATURATION), "Show rail saturation percentage on rail badges", true)
+	_register_top_menu_command(COMMAND_DEBUG_LAYERS, "Debug Layers", Callable(self, "_toggle_debug_layers"), "Draw diagnostic overlays directly on the build grid", true)
+	_register_top_menu_command(COMMAND_DEBUG_LAYER_HEALTH, "Layer: Building Health", Callable(self, "_toggle_debug_layer").bind(COMMAND_DEBUG_LAYER_HEALTH), "Ring each production building by supply state", true)
+	_register_top_menu_command(COMMAND_DEBUG_LAYER_HEATMAP, "Layer: Heat / Power / Cost", Callable(self, "_toggle_debug_layer").bind(COMMAND_DEBUG_LAYER_HEATMAP), "Shade buildings by heat, power, or build cost", true)
+	_register_top_menu_command(COMMAND_DEBUG_HEATMAP_METRIC, "Heatmap Metric", Callable(self, "_cycle_debug_heatmap_metric"), "Switch the heatmap between heat, power, and build cost")
+	_register_top_menu_command(COMMAND_DEBUG_LAYER_WASTE, "Layer: Wasted Output", Callable(self, "_toggle_debug_layer").bind(COMMAND_DEBUG_LAYER_WASTE), "Flag producers whose output has no consumer", true)
+	_register_top_menu_command(COMMAND_DEBUG_LAYER_ORPHAN, "Layer: Disconnected", Callable(self, "_toggle_debug_layer").bind(COMMAND_DEBUG_LAYER_ORPHAN), "Flag buildings and ports with no rail connection", true)
 	_register_top_menu_command(COMMAND_ANNOTATION, "Annotation", Callable(self, "_toggle_annotation_tool"), "Place a note on the build plan", true)
 	_register_top_menu_command(COMMAND_WHAT_IF, "What If", Callable(self, "_on_what_if_button_pressed"), "Open the what-if scenario analyzer")
+	_register_top_menu_command(COMMAND_BLUEPRINTS, "Blueprints", Callable(self, "_on_blueprints_pressed"), "Save selections as reusable blueprints and stamp them into the plan")
 	_register_top_menu_command(COMMAND_TOGGLE_TOOLBOX, "Toggle Toolbox", Callable(self, "_toggle_toolbox_persistence"), "Keep the toolbox open after choosing a building", true)
 	_register_top_menu_command(COMMAND_CONTROLS, "Controls", Callable(self, "_toggle_controls_menu"), "Open the controls layout", true)
 	_register_top_menu_command(COMMAND_PATCH_NOTES, "Patch Notes", Callable(self, "_toggle_patch_notes"), "Open the patch notes", true)
@@ -632,10 +1357,19 @@ func _build_top_menu_sections() -> Array:
 			_command_item(COMMAND_FLOW_LAYER_AVAILABLE),
 			_command_item(COMMAND_FLOW_LAYER_SATURATION),
 		]},
+		{"title": "Debug", "commands": [
+			_command_item(COMMAND_DEBUG_LAYERS),
+			_command_item(COMMAND_DEBUG_LAYER_HEALTH),
+			_command_item(COMMAND_DEBUG_LAYER_HEATMAP),
+			_command_item(COMMAND_DEBUG_HEATMAP_METRIC),
+			_command_item(COMMAND_DEBUG_LAYER_WASTE),
+			_command_item(COMMAND_DEBUG_LAYER_ORPHAN),
+		]},
 		{"title": "Tools", "commands": [
 			_command_item(COMMAND_TOGGLE_TOOLBOX),
 			_command_item(COMMAND_ANNOTATION),
 			_command_item(COMMAND_WHAT_IF),
+			_command_item(COMMAND_BLUEPRINTS),
 		]},
 		{"title": "Help", "commands": [
 			_command_item(COMMAND_PATCH_NOTES),
@@ -675,6 +1409,12 @@ func _is_top_menu_command_enabled(command_id: StringName) -> bool:
 			return FLOW_GRAPH_BUILDER != null and FLOW_SIMULATOR != null and buildings_root != null and path_manager != null and path_manager.has_method("set_flow_simulation_enabled")
 		COMMAND_FLOW_LAYER_DELTA, COMMAND_FLOW_LAYER_USED, COMMAND_FLOW_LAYER_REQUESTED, COMMAND_FLOW_LAYER_BLOCKED, COMMAND_FLOW_LAYER_AVAILABLE, COMMAND_FLOW_LAYER_SATURATION:
 			return _flow_simulation_enabled and path_manager != null and path_manager.has_method("set_flow_layer_mode")
+		COMMAND_DEBUG_LAYERS:
+			return FLOW_GRAPH_BUILDER != null and PATHING_INTELLIGENCE != null and buildings_root != null and path_manager != null
+		COMMAND_DEBUG_LAYER_HEALTH, COMMAND_DEBUG_LAYER_HEATMAP, COMMAND_DEBUG_LAYER_WASTE, COMMAND_DEBUG_LAYER_ORPHAN:
+			return _debug_layers_enabled
+		COMMAND_DEBUG_HEATMAP_METRIC:
+			return _debug_layers_enabled and bool(_debug_layer_active.get("heatmap", false))
 		COMMAND_ANNOTATION:
 			return annotation_layer != null and annotation_layer.has_method("toggle_annotation_mode")
 		COMMAND_WHAT_IF:
@@ -700,6 +1440,10 @@ func _sync_command_bar_state() -> void:
 	var active_flow_layer := _get_active_flow_layer_mode()
 	for layer_command in FLOW_LAYER_COMMANDS.keys():
 		top_menu_bar.set_command_pressed(layer_command, _flow_simulation_enabled and int(FLOW_LAYER_COMMANDS[layer_command]) == active_flow_layer)
+	top_menu_bar.set_command_pressed(COMMAND_DEBUG_LAYERS, _debug_layers_enabled)
+	for debug_command in DEBUG_LAYER_IDS.keys():
+		var debug_layer_id := String(DEBUG_LAYER_IDS[debug_command])
+		top_menu_bar.set_command_pressed(debug_command, _debug_layers_enabled and bool(_debug_layer_active.get(debug_layer_id, false)))
 	top_menu_bar.set_command_pressed(COMMAND_ANNOTATION, _is_annotation_tool_active())
 	top_menu_bar.set_command_pressed(COMMAND_WHAT_IF, _is_what_if_machine_open())
 	top_menu_bar.set_command_pressed(COMMAND_TOGGLE_TOOLBOX, _is_toolbox_persistence_enabled())
@@ -938,6 +1682,13 @@ func _apply_ui_scale() -> void:
 
 	if _version_history_overlay != null and _version_history_overlay.has_method("set_ui_scale"):
 		_version_history_overlay.call("set_ui_scale", _ui_scale)
+	if _blueprint_overlay != null and _blueprint_overlay.has_method("set_ui_scale"):
+		_blueprint_overlay.call("set_ui_scale", _ui_scale)
+
+	if _debug_layer_overlay != null and is_instance_valid(_debug_layer_overlay):
+		_debug_layer_overlay.call("set_scale_factor", _ui_scale)
+	if _debug_layers_enabled:
+		_update_debug_legend()
 
 	_apply_building_ui_scale()
 

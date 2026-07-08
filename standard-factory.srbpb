@@ -1,0 +1,1313 @@
+{
+	"annotations": [],
+	"bounds": [
+		27,
+		15
+	],
+	"buildings": [
+		{
+			"anchor_offset": [
+				0,
+				0
+			],
+			"footprint": [
+				3,
+				4
+			],
+			"id": "ore_excavator",
+			"is_alternate": false,
+			"rotated_tick": 0,
+			"scene_path": "res://Buildings/OreExcavator.tscn",
+			"selection_template": {
+				"Purity": {
+					"metadata_path": "res://Recipes/Recipe Variants/titanium_pure.tres",
+					"selected": 2
+				},
+				"Recipe": {
+					"metadata_path": "res://Recipes/mine_Titanium.tres",
+					"selected": 1
+				}
+			}
+		},
+		{
+			"anchor_offset": [
+				3,
+				0
+			],
+			"footprint": [
+				3,
+				4
+			],
+			"id": "ore_excavator",
+			"is_alternate": false,
+			"rotated_tick": 0,
+			"scene_path": "res://Buildings/OreExcavator.tscn",
+			"selection_template": {
+				"Purity": {
+					"metadata_path": "res://Recipes/Recipe Variants/titanium_pure.tres",
+					"selected": 2
+				},
+				"Recipe": {
+					"metadata_path": "res://Recipes/mine_Titanium.tres",
+					"selected": 1
+				}
+			}
+		},
+		{
+			"anchor_offset": [
+				6,
+				0
+			],
+			"footprint": [
+				3,
+				4
+			],
+			"id": "ore_excavator",
+			"is_alternate": false,
+			"rotated_tick": 0,
+			"scene_path": "res://Buildings/OreExcavator.tscn",
+			"selection_template": {
+				"Purity": {
+					"metadata_path": "res://Recipes/Recipe Variants/titanium_pure.tres",
+					"selected": 2
+				},
+				"Recipe": {
+					"metadata_path": "res://Recipes/mine_Titanium.tres",
+					"selected": 1
+				}
+			}
+		},
+		{
+			"anchor_offset": [
+				9,
+				0
+			],
+			"footprint": [
+				3,
+				4
+			],
+			"id": "ore_excavator",
+			"is_alternate": false,
+			"rotated_tick": 0,
+			"scene_path": "res://Buildings/OreExcavator.tscn",
+			"selection_template": {
+				"Purity": {
+					"metadata_path": "res://Recipes/Recipe Variants/titanium_pure.tres",
+					"selected": 2
+				},
+				"Recipe": {
+					"metadata_path": "res://Recipes/mine_Titanium.tres",
+					"selected": 1
+				}
+			}
+		},
+		{
+			"anchor_offset": [
+				9,
+				-1
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"rotated_tick": 1,
+			"scene_path": "res://Buildings/rail_support.tscn",
+			"selection_template": {}
+		},
+		{
+			"anchor_offset": [
+				6,
+				-1
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"rotated_tick": 1,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn",
+			"selection_template": {}
+		},
+		{
+			"anchor_offset": [
+				3,
+				-1
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"rotated_tick": 1,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn",
+			"selection_template": {}
+		},
+		{
+			"anchor_offset": [
+				0,
+				-1
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"rotated_tick": 1,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn",
+			"selection_template": {}
+		},
+		{
+			"anchor_offset": [
+				0,
+				-6
+			],
+			"footprint": [
+				3,
+				4
+			],
+			"id": "smelter",
+			"is_alternate": false,
+			"rotated_tick": 0,
+			"scene_path": "res://Buildings/Smelter.tscn",
+			"selection_template": {
+				"Recipe": {
+					"metadata_path": "res://Recipes/Titanium_bar.tres",
+					"selected": 1
+				}
+			}
+		},
+		{
+			"anchor_offset": [
+				3,
+				-6
+			],
+			"footprint": [
+				3,
+				4
+			],
+			"id": "smelter",
+			"is_alternate": false,
+			"rotated_tick": 0,
+			"scene_path": "res://Buildings/Smelter.tscn",
+			"selection_template": {
+				"Recipe": {
+					"metadata_path": "res://Recipes/Titanium_bar.tres",
+					"selected": 1
+				}
+			}
+		},
+		{
+			"anchor_offset": [
+				6,
+				-6
+			],
+			"footprint": [
+				3,
+				4
+			],
+			"id": "smelter",
+			"is_alternate": false,
+			"rotated_tick": 0,
+			"scene_path": "res://Buildings/Smelter.tscn",
+			"selection_template": {
+				"Recipe": {
+					"metadata_path": "res://Recipes/Titanium_bar.tres",
+					"selected": 1
+				}
+			}
+		},
+		{
+			"anchor_offset": [
+				9,
+				-6
+			],
+			"footprint": [
+				3,
+				4
+			],
+			"id": "smelter",
+			"is_alternate": false,
+			"rotated_tick": 0,
+			"scene_path": "res://Buildings/Smelter.tscn",
+			"selection_template": {
+				"Recipe": {
+					"metadata_path": "res://Recipes/Titanium_bar.tres",
+					"selected": 1
+				}
+			}
+		},
+		{
+			"anchor_offset": [
+				-3,
+				-6
+			],
+			"footprint": [
+				3,
+				4
+			],
+			"id": "smelter",
+			"is_alternate": false,
+			"rotated_tick": 0,
+			"scene_path": "res://Buildings/Smelter.tscn",
+			"selection_template": {
+				"Recipe": {
+					"metadata_path": "res://Recipes/Titanium_bar.tres",
+					"selected": 1
+				}
+			}
+		},
+		{
+			"anchor_offset": [
+				-6,
+				-6
+			],
+			"footprint": [
+				3,
+				4
+			],
+			"id": "smelter",
+			"is_alternate": false,
+			"rotated_tick": 0,
+			"scene_path": "res://Buildings/Smelter.tscn",
+			"selection_template": {
+				"Recipe": {
+					"metadata_path": "res://Recipes/Titanium_bar.tres",
+					"selected": 1
+				}
+			}
+		},
+		{
+			"anchor_offset": [
+				12,
+				-6
+			],
+			"footprint": [
+				3,
+				4
+			],
+			"id": "smelter",
+			"is_alternate": false,
+			"rotated_tick": 0,
+			"scene_path": "res://Buildings/Smelter.tscn",
+			"selection_template": {
+				"Recipe": {
+					"metadata_path": "res://Recipes/Titanium_bar.tres",
+					"selected": 1
+				}
+			}
+		},
+		{
+			"anchor_offset": [
+				15,
+				-6
+			],
+			"footprint": [
+				3,
+				4
+			],
+			"id": "smelter",
+			"is_alternate": false,
+			"rotated_tick": 0,
+			"scene_path": "res://Buildings/Smelter.tscn",
+			"selection_template": {
+				"Recipe": {
+					"metadata_path": "res://Recipes/Titanium_bar.tres",
+					"selected": 1
+				}
+			}
+		},
+		{
+			"anchor_offset": [
+				-6,
+				-1
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"rotated_tick": 1,
+			"scene_path": "res://Buildings/rail_support.tscn",
+			"selection_template": {}
+		},
+		{
+			"anchor_offset": [
+				-6,
+				-2
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"rotated_tick": 1,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn",
+			"selection_template": {}
+		},
+		{
+			"anchor_offset": [
+				-3,
+				-2
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"rotated_tick": 1,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn",
+			"selection_template": {}
+		},
+		{
+			"anchor_offset": [
+				0,
+				-2
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"rotated_tick": 1,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn",
+			"selection_template": {}
+		},
+		{
+			"anchor_offset": [
+				3,
+				-2
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"rotated_tick": 1,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn",
+			"selection_template": {}
+		},
+		{
+			"anchor_offset": [
+				6,
+				-2
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"rotated_tick": 1,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn",
+			"selection_template": {}
+		},
+		{
+			"anchor_offset": [
+				9,
+				-2
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"rotated_tick": 1,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn",
+			"selection_template": {}
+		},
+		{
+			"anchor_offset": [
+				12,
+				-2
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"rotated_tick": 1,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn",
+			"selection_template": {}
+		},
+		{
+			"anchor_offset": [
+				18,
+				-5
+			],
+			"footprint": [
+				3,
+				3
+			],
+			"id": "storage_v2",
+			"is_alternate": false,
+			"rotated_tick": 0,
+			"scene_path": "res://Buildings/Storage_v2.tscn",
+			"selection_template": {}
+		},
+		{
+			"anchor_offset": [
+				15,
+				-2
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"rotated_tick": 1,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn",
+			"selection_template": {}
+		},
+		{
+			"anchor_offset": [
+				18,
+				-2
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"rotated_tick": 1,
+			"scene_path": "res://Buildings/rail_support.tscn",
+			"selection_template": {}
+		},
+		{
+			"anchor_offset": [
+				-6,
+				-11
+			],
+			"footprint": [
+				3,
+				3
+			],
+			"id": "fabricator",
+			"is_alternate": false,
+			"rotated_tick": 0,
+			"scene_path": "res://Buildings/Fabricator.tscn",
+			"selection_template": {
+				"Recipe": {
+					"metadata_path": "res://Recipes/Titanium_rod.tres",
+					"selected": 0
+				}
+			}
+		},
+		{
+			"anchor_offset": [
+				-3,
+				-11
+			],
+			"footprint": [
+				3,
+				3
+			],
+			"id": "fabricator",
+			"is_alternate": false,
+			"rotated_tick": 0,
+			"scene_path": "res://Buildings/Fabricator.tscn",
+			"selection_template": {
+				"Recipe": {
+					"metadata_path": "res://Recipes/Titanium_sheet.tres",
+					"selected": 1
+				}
+			}
+		},
+		{
+			"anchor_offset": [
+				0,
+				-11
+			],
+			"footprint": [
+				3,
+				3
+			],
+			"id": "fabricator",
+			"is_alternate": false,
+			"rotated_tick": 0,
+			"scene_path": "res://Buildings/Fabricator.tscn",
+			"selection_template": {
+				"Recipe": {
+					"metadata_path": "res://Recipes/Titanium_rod.tres",
+					"selected": 0
+				}
+			}
+		},
+		{
+			"anchor_offset": [
+				3,
+				-11
+			],
+			"footprint": [
+				3,
+				3
+			],
+			"id": "fabricator",
+			"is_alternate": false,
+			"rotated_tick": 0,
+			"scene_path": "res://Buildings/Fabricator.tscn",
+			"selection_template": {
+				"Recipe": {
+					"metadata_path": "res://Recipes/Titanium_sheet.tres",
+					"selected": 1
+				}
+			}
+		},
+		{
+			"anchor_offset": [
+				6,
+				-11
+			],
+			"footprint": [
+				3,
+				3
+			],
+			"id": "fabricator",
+			"is_alternate": false,
+			"rotated_tick": 0,
+			"scene_path": "res://Buildings/Fabricator.tscn",
+			"selection_template": {
+				"Recipe": {
+					"metadata_path": "res://Recipes/Titanium_beam.tres",
+					"selected": 2
+				}
+			}
+		},
+		{
+			"anchor_offset": [
+				9,
+				-11
+			],
+			"footprint": [
+				3,
+				3
+			],
+			"id": "fabricator",
+			"is_alternate": false,
+			"rotated_tick": 0,
+			"scene_path": "res://Buildings/Fabricator.tscn",
+			"selection_template": {
+				"Recipe": {
+					"metadata_path": "res://Recipes/Titanium_beam.tres",
+					"selected": 2
+				}
+			}
+		},
+		{
+			"anchor_offset": [
+				12,
+				-11
+			],
+			"footprint": [
+				3,
+				3
+			],
+			"id": "fabricator",
+			"is_alternate": false,
+			"rotated_tick": 0,
+			"scene_path": "res://Buildings/Fabricator.tscn",
+			"selection_template": {
+				"Recipe": {
+					"metadata_path": "res://Recipes/Titanium_rod.tres",
+					"selected": 0
+				}
+			}
+		},
+		{
+			"anchor_offset": [
+				15,
+				-11
+			],
+			"footprint": [
+				3,
+				3
+			],
+			"id": "fabricator",
+			"is_alternate": false,
+			"rotated_tick": 0,
+			"scene_path": "res://Buildings/Fabricator.tscn",
+			"selection_template": {
+				"Recipe": {
+					"metadata_path": "res://Recipes/Titanium_sheet.tres",
+					"selected": 1
+				}
+			}
+		},
+		{
+			"anchor_offset": [
+				-4,
+				-7
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"rotated_tick": 1,
+			"scene_path": "res://Buildings/rail_support.tscn",
+			"selection_template": {}
+		},
+		{
+			"anchor_offset": [
+				-4,
+				-8
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_support",
+			"is_alternate": false,
+			"rotated_tick": 1,
+			"scene_path": "res://Buildings/rail_support.tscn",
+			"selection_template": {}
+		},
+		{
+			"anchor_offset": [
+				-1,
+				-7
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"rotated_tick": 3,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn",
+			"selection_template": {}
+		},
+		{
+			"anchor_offset": [
+				-1,
+				-8
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"rotated_tick": 3,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn",
+			"selection_template": {}
+		},
+		{
+			"anchor_offset": [
+				2,
+				-8
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"rotated_tick": 3,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn",
+			"selection_template": {}
+		},
+		{
+			"anchor_offset": [
+				2,
+				-7
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"rotated_tick": 3,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn",
+			"selection_template": {}
+		},
+		{
+			"anchor_offset": [
+				5,
+				-7
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"rotated_tick": 3,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn",
+			"selection_template": {}
+		},
+		{
+			"anchor_offset": [
+				5,
+				-8
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"rotated_tick": 3,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn",
+			"selection_template": {}
+		},
+		{
+			"anchor_offset": [
+				8,
+				-7
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"rotated_tick": 3,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn",
+			"selection_template": {}
+		},
+		{
+			"anchor_offset": [
+				8,
+				-8
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"rotated_tick": 3,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn",
+			"selection_template": {}
+		},
+		{
+			"anchor_offset": [
+				11,
+				-7
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"rotated_tick": 3,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn",
+			"selection_template": {}
+		},
+		{
+			"anchor_offset": [
+				11,
+				-8
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"rotated_tick": 3,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn",
+			"selection_template": {}
+		},
+		{
+			"anchor_offset": [
+				14,
+				-7
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"rotated_tick": 3,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn",
+			"selection_template": {}
+		},
+		{
+			"anchor_offset": [
+				14,
+				-8
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"rotated_tick": 3,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn",
+			"selection_template": {}
+		},
+		{
+			"anchor_offset": [
+				17,
+				-7
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"rotated_tick": 3,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn",
+			"selection_template": {}
+		},
+		{
+			"anchor_offset": [
+				17,
+				-8
+			],
+			"footprint": [
+				1,
+				1
+			],
+			"id": "rail_mod_3",
+			"is_alternate": false,
+			"rotated_tick": 3,
+			"scene_path": "res://Buildings/rail_modulator_3.tscn",
+			"selection_template": {}
+		},
+		{
+			"anchor_offset": [
+				12,
+				0
+			],
+			"footprint": [
+				4,
+				4
+			],
+			"id": "wind_v1",
+			"is_alternate": false,
+			"rotated_tick": 0,
+			"scene_path": "res://Buildings/Wind V1.tscn",
+			"selection_template": {}
+		}
+	],
+	"created_at_unix": 1783463671.538,
+	"description": "",
+	"format": "srbp-blueprint",
+	"name": "Standard Factory",
+	"rails": [
+		{
+			"from_index": 3,
+			"from_port": "Ports/Output 1",
+			"rail_version": 1,
+			"to_index": 4,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 4,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 5,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 2,
+			"from_port": "Ports/Output 1",
+			"rail_version": 1,
+			"to_index": 5,
+			"to_port": "Ports/Universal 3"
+		},
+		{
+			"from_index": 5,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 2,
+			"to_index": 6,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 6,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 2,
+			"to_index": 7,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 7,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 2,
+			"to_index": 16,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 16,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 2,
+			"to_index": 17,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 1,
+			"from_port": "Ports/Output 1",
+			"rail_version": 1,
+			"to_index": 6,
+			"to_port": "Ports/Universal 3"
+		},
+		{
+			"from_index": 0,
+			"from_port": "Ports/Output 1",
+			"rail_version": 1,
+			"to_index": 7,
+			"to_port": "Ports/Universal 3"
+		},
+		{
+			"from_index": 17,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 0,
+			"to_index": 13,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 17,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 2,
+			"to_index": 18,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 18,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 2,
+			"to_index": 19,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 19,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 2,
+			"to_index": 20,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 20,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 2,
+			"to_index": 21,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 21,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 2,
+			"to_index": 22,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 22,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 2,
+			"to_index": 23,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 23,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 2,
+			"to_index": 25,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 25,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 2,
+			"to_index": 26,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 26,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 2,
+			"to_index": 24,
+			"to_port": "Ports/Universal 3"
+		},
+		{
+			"from_index": 18,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 0,
+			"to_index": 12,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 19,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 0,
+			"to_index": 8,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 20,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 0,
+			"to_index": 9,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 21,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 0,
+			"to_index": 10,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 22,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 0,
+			"to_index": 11,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 23,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 0,
+			"to_index": 14,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 25,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 0,
+			"to_index": 15,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 13,
+			"from_port": "Ports/Output 1",
+			"rail_version": 0,
+			"to_index": 35,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 35,
+			"from_port": "Ports/Universal 1",
+			"rail_version": 0,
+			"to_index": 37,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 12,
+			"from_port": "Ports/Output 1",
+			"rail_version": 0,
+			"to_index": 37,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 37,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 0,
+			"to_index": 40,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 8,
+			"from_port": "Ports/Output 1",
+			"rail_version": 0,
+			"to_index": 40,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 40,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 1,
+			"to_index": 41,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 9,
+			"from_port": "Ports/Output 1",
+			"rail_version": 0,
+			"to_index": 41,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 10,
+			"from_port": "Ports/Output 1",
+			"rail_version": 0,
+			"to_index": 43,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 11,
+			"from_port": "Ports/Output 1",
+			"rail_version": 0,
+			"to_index": 45,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 14,
+			"from_port": "Ports/Output 1",
+			"rail_version": 0,
+			"to_index": 47,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 15,
+			"from_port": "Ports/Output 1",
+			"rail_version": 0,
+			"to_index": 49,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 41,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 1,
+			"to_index": 43,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 43,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 1,
+			"to_index": 45,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 45,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 2,
+			"to_index": 47,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 47,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 2,
+			"to_index": 49,
+			"to_port": "Ports/Universal 2"
+		},
+		{
+			"from_index": 49,
+			"from_port": "Ports/Universal 4",
+			"rail_version": 2,
+			"to_index": 50,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 50,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 2,
+			"to_index": 48,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 48,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 2,
+			"to_index": 46,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 46,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 44,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 44,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 42,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 42,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 1,
+			"to_index": 39,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 39,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 0,
+			"to_index": 38,
+			"to_port": "Ports/Universal 4"
+		},
+		{
+			"from_index": 38,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 0,
+			"to_index": 36,
+			"to_port": "Ports/Universal 1"
+		},
+		{
+			"from_index": 50,
+			"from_port": "Ports/Universal 3",
+			"rail_version": 0,
+			"to_index": 34,
+			"to_port": "Ports/Input 2"
+		},
+		{
+			"from_index": 48,
+			"from_port": "Ports/Universal 3",
+			"rail_version": 0,
+			"to_index": 33,
+			"to_port": "Ports/Input 2"
+		},
+		{
+			"from_index": 46,
+			"from_port": "Ports/Universal 3",
+			"rail_version": 0,
+			"to_index": 32,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 44,
+			"from_port": "Ports/Universal 3",
+			"rail_version": 0,
+			"to_index": 31,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 42,
+			"from_port": "Ports/Universal 3",
+			"rail_version": 0,
+			"to_index": 30,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 39,
+			"from_port": "Ports/Universal 3",
+			"rail_version": 0,
+			"to_index": 29,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 38,
+			"from_port": "Ports/Universal 3",
+			"rail_version": 0,
+			"to_index": 28,
+			"to_port": "Ports/Input 1"
+		},
+		{
+			"from_index": 36,
+			"from_port": "Ports/Universal 2",
+			"rail_version": 0,
+			"to_index": 27,
+			"to_port": "Ports/Input 1"
+		}
+	],
+	"thumbnail_png_b64": "iVBORw0KGgoAAAANSUhEUgAAAOAAAACACAYAAAAS2WW7AAAAAXNSR0IArs4c6QAAAhtJREFUeJzt3aFNZFEAhlHYrEaOWE0BSEqgAmhgDRKDhbVrkBgagAooAUkBqxFIKkCSMLzZTB6Pb4Z3jkT8g/nCTW7msrMDAADAXOy+/8HL/eXzVB+2d3S5sG9/k/en2h7y46s/EHgjQAgJEEIChJAAISRACAkQQgKEkAAhJEAICRBCAoSQACEkQAgJEEIChJAAISRACAkQQgKEkAAhJEAA5mnpXdCxjn+fD77beHfzd/S7i/btb/L+uhxBISRACAkQQgKEkAAhJEAA5sk9oH37n7i/LkdQCAkQQgKEkAAhJEAICRCAeVq6B7y6+zd4TzLW2fH+wr79Td6fanuIIyiEBAghAUJIgBASIIQECCEBQuhn/QvAJln1fcGxPvq+ob+AEBIghAQIIQFCSIAQEiCEBAghAUJIgBASIIQECCEBQkiAEBIghAQIIQFCSIAQEiCEBAghAUJIgBASIADztPT/AVe9i/jRu4brsm9/zvvvOYJCSIAQEiCEBAghAUJIgADM05ffA05t2++Jtn2f9TiCQkiAEBIghAQIIQFCSIAAzNPSPeC2u3i4HbznGuvP4cnC/ur9p8fryfb/59fB6dbdYzqCQkiAEBIghAQIIQFCSIAQEiCEBAghAUJIgBASIIQECCEBQkiAEBIghAQIIQFCSIAQEiCEBAghAUJIgBASIIQECCEBQkiAEBIghAQIIQFCSIAAAAAAwPf2Cnaa0N4qhmAcAAAAAElFTkSuQmCC",
+	"updated_at_unix": 1783463671.538,
+	"version": 1
+}

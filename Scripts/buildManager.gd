@@ -6,6 +6,10 @@ signal selection_changed(selected_count: int, anchor_building: Node2D)
 # Emitted when a multi-building (group) eyedropper build begins or ends, so the
 # contextual mirror toolbar can show/hide itself.
 signal group_build_changed(active: bool)
+# Emitted after a blueprint stamp places its buildings, so main.gd can reproduce
+# the blueprint's annotations bound to the freshly created buildings (the stamp
+# owns buildings + rails; annotations/uids live on the main scene).
+signal blueprint_stamp_placed(real_by_index: Dictionary, origin_cell: Vector2i)
 
 ##------OnReady variables------##
 @onready var tile_map_layer: TileMapLayer = $"../TileMapLayer"
@@ -21,6 +25,10 @@ var group_build_entries: Array[Dictionary] = []
 # reproduced on confirm. Each entry: {from_index, from_port, to_index, to_port,
 # rail_version} where the indices point into group_build_entries.
 var group_build_rails: Array[Dictionary] = []
+# True while the active group build is a blueprint stamp: it re-arms after each
+# placement (repeat-stamp until cancel) instead of ending like an eyedropper
+# group build, and emits blueprint_stamp_placed so annotations get reproduced.
+var is_blueprint_stamp := false
 # Live Line2D previews of group_build_rails that follow the ghosts each frame.
 var group_build_rail_previews: Array[Dictionary] = []
 var _rail_preview_root: Node2D = null
@@ -496,6 +504,9 @@ func _get_valid_selected_buildings() -> Array[Node2D]:
 		if is_instance_valid(building):
 			valid_buildings.append(building)
 	return valid_buildings
+
+func has_blueprintable_selection() -> bool:
+	return not _get_valid_selected_buildings().is_empty()
 
 func _get_single_selected_building() -> Node2D:
 	var valid_buildings := _get_valid_selected_buildings()
@@ -1800,35 +1811,45 @@ static func _mirror_top_left_cells(rects: Array, axis: String) -> Array:
 # --- Group rail capture / preview / reproduction -----------------------------
 
 func _capture_group_rails_from_entries() -> void:
-	group_build_rails.clear()
+	var sources: Array = []
+	for entry in group_build_entries:
+		sources.append(entry.get("source"))
+	group_build_rails.assign(_capture_rails_for_sources(sources))
+
+# Collect the internal rails among a set of source buildings as index pairs into
+# that array (both endpoints must be in the set). `sources[i]` corresponds to
+# index i in the result; null entries are ignored. Shared by the group
+# eyedropper (from ghost entries) and blueprint capture (from selected sources).
+func _capture_rails_for_sources(sources: Array) -> Array:
+	var rails_out: Array = []
 	var pm := $"../PathManager"
 	if pm == null or not pm.has_method("get_internal_rails"):
-		return
+		return rails_out
 
 	var index_by_building := {}
-	var sources: Array = []
-	for i in group_build_entries.size():
-		var source = group_build_entries[i].get("source")
+	var non_null: Array = []
+	for i in sources.size():
+		var source = sources[i]
 		if source != null:
 			index_by_building[source] = i
-			sources.append(source)
+			non_null.append(source)
 
-	if sources.size() < 2:
-		return
+	if non_null.size() < 2:
+		return rails_out
 
-	var rails: Array = pm.get_internal_rails(sources)
-	for rail in rails:
+	for rail in pm.get_internal_rails(non_null):
 		var from_building = rail.get("from_building")
 		var to_building = rail.get("to_building")
 		if not index_by_building.has(from_building) or not index_by_building.has(to_building):
 			continue
-		group_build_rails.append({
+		rails_out.append({
 			"from_index": int(index_by_building[from_building]),
 			"from_port": rail.get("from_port"),
 			"to_index": int(index_by_building[to_building]),
 			"to_port": rail.get("to_port"),
 			"rail_version": int(rail.get("rail_version", 0)),
 		})
+	return rails_out
 
 func _build_group_rail_previews() -> void:
 	_clear_group_rail_previews()
@@ -1936,6 +1957,132 @@ func _reproduce_group_rails(real_by_index: Dictionary) -> void:
 	if created_any and pm.has_method("notify_rail_graph_changed"):
 		pm.notify_rail_graph_changed()
 
+# --- Blueprint capture / stamp -----------------------------------------------
+
+# Snapshot the current multi-building selection into plain, plan-independent data
+# for the blueprint store. Offsets are relative to the first selected building's
+# anchor cell (the stamp origin). Returns {} when fewer than one building is
+# selected. Annotations and thumbnails are layered on by main.gd, which owns the
+# annotation layer and building uids.
+func get_blueprint_capture_data() -> Dictionary:
+	var sources := _get_valid_selected_buildings()
+	if sources.is_empty():
+		return {}
+
+	var origin_cell := _anchor_cell_from_building_position(sources[0], sources[0].global_position)
+	var buildings: Array = []
+	for source in sources:
+		var scene := _get_scene_for_building(source)
+		var scene_path := scene.resource_path if scene != null else source.scene_file_path
+		var anchor_cell := _anchor_cell_from_building_position(source, source.global_position)
+		var footprint := get_rotated_footprint(source)
+		buildings.append({
+			"id": str(source.get("id")) if "id" in source else "",
+			"scene_path": scene_path,
+			"anchor_offset": [anchor_cell.x - origin_cell.x, anchor_cell.y - origin_cell.y],
+			"footprint": [max(1, footprint.x), max(1, footprint.y)],
+			"rotated_tick": _get_rotation_tick_for_building(source),
+			"is_alternate": bool(source.get("is_alternate")) if "is_alternate" in source else false,
+			"selection_template": _capture_building_selection_template(source),
+		})
+
+	return {
+		"buildings": buildings,
+		"rails": _capture_rails_for_sources(sources),
+		"origin_cell": [origin_cell.x, origin_cell.y],
+		"source_buildings": sources,
+	}
+
+# Enter a repeat-stamp group build built from blueprint data (not live sources).
+# Rebuilds the ghost set + rail previews and reuses the whole group-build
+# placement pipeline, so mirror / rotate / flip work on a stamp for free.
+func begin_blueprint_stamp(buildings: Array, rails: Array) -> bool:
+	if buildings.is_empty():
+		return false
+
+	var pm := $"../PathManager"
+	if pm != null and pm.has_method("cancel_active_path_drag"):
+		pm.cancel_active_path_drag()
+	cancel_build()
+	_clear_selection()
+
+	is_building = true
+	is_blueprint_stamp = true
+	group_build_entries.clear()
+	for entry_data in buildings:
+		if not (entry_data is Dictionary):
+			continue
+		var scene := _resolve_blueprint_scene(entry_data)
+		if scene == null:
+			continue
+		var ghost := scene.instantiate() as Node2D
+		if ghost == null:
+			continue
+		add_child(ghost)
+
+		var want_alternate := bool(entry_data.get("is_alternate", false))
+		if "is_alternate" in ghost and want_alternate != bool(ghost.get("is_alternate")) and ghost.has_method("flip_footprint"):
+			ghost.flip_footprint()
+		var tick := posmod(int(entry_data.get("rotated_tick", 0)), 4)
+		if "rotatedTick" in ghost:
+			ghost.rotatedTick = tick
+		ghost.rotation = deg_to_rad(90.0 * tick)
+
+		var selection_template = entry_data.get("selection_template", {})
+		_apply_building_selection_template(ghost, selection_template, false)
+		ghost.modulate.a = 0.5
+
+		var offset = entry_data.get("anchor_offset", [0, 0])
+		group_build_entries.append({
+			"source": null,
+			"scene": scene,
+			"anchor_offset": Vector2i(int(offset[0]), int(offset[1])),
+			"selection_template": selection_template,
+			"ghost": ghost,
+		})
+
+	if group_build_entries.is_empty():
+		cancel_build()
+		return false
+
+	group_build_rails.clear()
+	var entry_count := group_build_entries.size()
+	for rail in rails:
+		if not (rail is Dictionary):
+			continue
+		var from_index := int(rail.get("from_index", -1))
+		var to_index := int(rail.get("to_index", -1))
+		if from_index < 0 or from_index >= entry_count or to_index < 0 or to_index >= entry_count:
+			continue
+		group_build_rails.append({
+			"from_index": from_index,
+			"from_port": rail.get("from_port"),
+			"to_index": to_index,
+			"to_port": rail.get("to_port"),
+			"rail_version": int(rail.get("rail_version", 0)),
+		})
+
+	ghost_instance = group_build_entries[0].get("ghost") as Node2D
+	ghost_area = null
+	if ghost_instance != null:
+		ghost_area = ghost_instance.get_node_or_null("PlacementArea") as Area2D
+	_set_port_buttons_passthrough_for_build_mode(true)
+	_build_group_rail_previews()
+	_update_group_ghost_placement()
+	group_build_changed.emit(true)
+	return true
+
+func _resolve_blueprint_scene(entry_data: Dictionary) -> PackedScene:
+	var building_id := StringName(entry_data.get("id", ""))
+	if building_id != StringName(""):
+		var registered_scene := BuildRegistry.get_scene(building_id)
+		if registered_scene != null:
+			return registered_scene
+	var scene_path := String(entry_data.get("scene_path", ""))
+	if scene_path != "" and ResourceLoader.exists(scene_path):
+		return load(scene_path) as PackedScene
+	return null
+
 func _configure_real_building_from_ghost(real_building: Node2D, source_ghost: Node2D) -> void:
 	if real_building == null or source_ghost == null:
 		return
@@ -1980,8 +2127,16 @@ func _confirm_group_build(_multi_build_held: bool = false) -> void:
 		real_by_index[i] = real_building
 
 	_reproduce_group_rails(real_by_index)
-	_commit_history_action("Buildings constructed", history_before)
-	if not _multi_build_held:
+	# Emit before committing history so any annotations main reproduces are part
+	# of this action's snapshot (one undo step covers buildings + rails + notes).
+	if is_blueprint_stamp:
+		blueprint_stamp_placed.emit(real_by_index, world_to_cell(get_global_mouse_position()))
+	var action_label := "Blueprint stamped" if is_blueprint_stamp else "Buildings constructed"
+	_commit_history_action(action_label, history_before)
+	# A blueprint stamp stays armed so copies can be dropped repeatedly until the
+	# user cancels (Esc / right-click); a plain group build ends unless the
+	# multi-build modifier is held.
+	if not is_blueprint_stamp and not _multi_build_held:
 		cancel_build()
 
 func confirm_build(_multi_build_held : bool = false) -> void:
@@ -2048,6 +2203,7 @@ func cancel_build() -> void:
 	ghost_selection_template = {}
 	group_build_entries.clear()
 	group_build_rails.clear()
+	is_blueprint_stamp = false
 	is_building = false
 	_set_port_buttons_passthrough_for_build_mode(false)
 	if was_group_build:
