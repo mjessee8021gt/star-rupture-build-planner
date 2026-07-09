@@ -21,7 +21,6 @@ const SAVE_FILE_EXTENSION := "srbp"
 const SAVE_FORMAT_VERSION := 5
 const SAVE_VERSION_CAP := 50
 const AUTOSNAPSHOT_INTERVAL_SECONDS := 120.0
-const BUILDING_UID_META := &"srbp_building_uid"
 const UI_PREFS_CONFIG_PATH := "user://ui_preferences.cfg"
 const UI_PREFS_SECTION := "ui"
 const ACCESSIBILITY_SCALE_KEY := "accessibility_scale"
@@ -45,7 +44,6 @@ const TOOLBOX_LEFT_MARGIN := 15.0
 const TOOLBOX_TOP_OVERLAP := 30.0
 const RESOURCE_PANEL_RIGHT_MARGIN := 1.0
 const LEGACY_BOTTOM_TOOL_SPACING := 40.0
-const HISTORY_LIMIT := 15
 const HISTORY_ACTION_BUILDING_CONSTRUCTED := "Building constructed"
 const HISTORY_ACTION_BUILDING_DELETED := "Building deleted"
 const HISTORY_ACTION_RAIL_CREATED := "Rail created"
@@ -152,11 +150,7 @@ var _blueprint_overlay: Control = null
 var blueprint_save_dialog: FileDialog = null
 var blueprint_load_dialog: FileDialog = null
 var _blueprint_export_pending_id := ""
-var _web_blueprint_input = null
-var _web_blueprint_reader = null
-var _web_blueprint_input_callback = null
-var _web_blueprint_read_callback = null
-var _web_blueprint_error_callback = null
+var _web_blueprint_picker: WebFileBridge = null
 @onready var buildings_root: Node2D = $buildings
 @onready var annotation_layer: Node = $AnnotationLayer
 
@@ -171,18 +165,11 @@ var save_dialog: FileDialog
 var load_dialog: FileDialog
 var export_pdf_dialog: FileDialog
 var _last_viewport_size: Vector2i = Vector2i.ZERO
-var _web_load_input = null
-var _web_load_reader = null
-var _web_load_input_callback = null
-var _web_load_read_callback = null
-var _web_load_error_callback = null
-var _web_load_pending_file_name := ""
+var _web_load_picker: WebFileBridge = null
 var _web_save_success_callback = null
 var _web_save_error_callback = null
 var _web_save_pending_file_name := ""
-var _undo_stack: Array[Dictionary] = []
-var _redo_stack: Array[Dictionary] = []
-var _is_replaying_history := false
+var _history := HistoryController.new()
 # Save Engine V2: persistent, in-file version log for the current document.
 var _save_history: Dictionary = {}
 var _autosnapshot_timer: Timer = null
@@ -212,6 +199,7 @@ var _ui_scale_tier := 0
 func _ready() -> void:
 	_load_accessibility_preferences()
 	_refresh_ui_scale(true)
+	_history.setup(_capture_history_state, _apply_history_state, _on_history_pre_destructive_checkpoint)
 	heat_label.text = "0"
 	power_label.text = "0"
 	bbm_cost_label.text = "0"
@@ -240,7 +228,6 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	_poll_viewport_resize()
-	_sync_command_bar_state()
 	if is_scene_input_blocked():
 		return
 	if _process_history_input():
@@ -399,10 +386,10 @@ func delete_blueprint(blueprint_id: String) -> bool:
 func export_blueprint(blueprint_id: String) -> void:
 	if blueprint_library == null:
 		return
-	if OS.has_feature("web") and JavaScriptBridge != null:
+	if WebFileBridge.is_available():
 		var text: String = blueprint_library.export_text(blueprint_id)
 		if text != "":
-			JavaScriptBridge.download_buffer(text.to_utf8_buffer(), "%s.%s" % [blueprint_id, BLUEPRINT_FILE_EXTENSION], "application/json")
+			WebFileBridge.download_text(text, "%s.%s" % [blueprint_id, BLUEPRINT_FILE_EXTENSION])
 		return
 	_blueprint_export_pending_id = blueprint_id
 	blueprint_save_dialog.current_file = "%s.%s" % [blueprint_id, BLUEPRINT_FILE_EXTENSION]
@@ -410,7 +397,7 @@ func export_blueprint(blueprint_id: String) -> void:
 
 
 func import_blueprint() -> void:
-	if OS.has_feature("web") and JavaScriptBridge != null:
+	if WebFileBridge.is_available():
 		_request_blueprint_import_from_browser()
 		return
 	blueprint_load_dialog.popup_centered_ratio(0.7)
@@ -441,66 +428,19 @@ func _notify_blueprint_library_changed() -> void:
 # --- Web blueprint import (browser file picker) ------------------------------
 
 func _request_blueprint_import_from_browser() -> void:
-	_cleanup_web_blueprint_picker()
-	var document = JavaScriptBridge.get_interface("document")
-	if document == null or document.body == null:
-		push_warning("Browser file picker is unavailable in this web build.")
-		return
-	_web_blueprint_input = document.createElement("input")
-	if _web_blueprint_input == null:
-		return
-	_web_blueprint_input.setAttribute("type", "file")
-	_web_blueprint_input.setAttribute("accept", ".%s,.json,application/json" % BLUEPRINT_FILE_EXTENSION)
-	_web_blueprint_input.setAttribute("style", "display:none")
-	_web_blueprint_input_callback = JavaScriptBridge.create_callback(_on_web_blueprint_input_changed)
-	_web_blueprint_input.onchange = _web_blueprint_input_callback
-	document.body.appendChild(_web_blueprint_input)
-	_web_blueprint_input.click()
+	if _web_blueprint_picker == null:
+		_web_blueprint_picker = WebFileBridge.new()
+	_web_blueprint_picker.pick_text_file(
+		".%s,.json,application/json" % BLUEPRINT_FILE_EXTENSION,
+		_on_web_blueprint_text_loaded,
+		func() -> void: push_warning("Failed to read the selected blueprint file."))
 
 
-func _cleanup_web_blueprint_picker() -> void:
-	if _web_blueprint_input != null and _web_blueprint_input.parentNode != null:
-		_web_blueprint_input.parentNode.removeChild(_web_blueprint_input)
-	_web_blueprint_input = null
-	_web_blueprint_reader = null
-	_web_blueprint_input_callback = null
-	_web_blueprint_read_callback = null
-	_web_blueprint_error_callback = null
-
-
-func _on_web_blueprint_input_changed(args: Array) -> void:
-	if args.is_empty():
-		_cleanup_web_blueprint_picker()
-		return
-	var event = args[0]
-	if event == null or event.target == null or event.target.files == null or int(event.target.files.length) < 1:
-		_cleanup_web_blueprint_picker()
-		return
-	_web_blueprint_reader = JavaScriptBridge.create_object("FileReader")
-	if _web_blueprint_reader == null:
-		_cleanup_web_blueprint_picker()
-		return
-	_web_blueprint_read_callback = JavaScriptBridge.create_callback(_on_web_blueprint_reader_loaded)
-	_web_blueprint_error_callback = JavaScriptBridge.create_callback(_on_web_blueprint_reader_failed)
-	_web_blueprint_reader.onload = _web_blueprint_read_callback
-	_web_blueprint_reader.onerror = _web_blueprint_error_callback
-	_web_blueprint_reader.readAsText(event.target.files[0])
-
-
-func _on_web_blueprint_reader_loaded(args: Array) -> void:
-	var raw_text := ""
-	if not args.is_empty() and args[0] != null and args[0].target != null:
-		raw_text = str(args[0].target.result)
+func _on_web_blueprint_text_loaded(raw_text: String) -> void:
 	if raw_text != "" and blueprint_library != null:
 		if blueprint_library.import_text(raw_text) == "":
 			push_warning("Imported file was not a valid blueprint.")
 		_notify_blueprint_library_changed()
-	_cleanup_web_blueprint_picker()
-
-
-func _on_web_blueprint_reader_failed(_args: Array) -> void:
-	push_warning("Failed to read the selected blueprint file.")
-	_cleanup_web_blueprint_picker()
 
 
 # Capture the current multi-building selection as a blueprint and save it to the
@@ -521,7 +461,7 @@ func create_blueprint_from_selection(blueprint_name: String, description := "") 
 	var uid_to_index := {}
 	for i in sources.size():
 		if is_instance_valid(sources[i]):
-			uid_to_index[_ensure_building_uid(sources[i])] = i
+			uid_to_index[PlanSerializer.ensure_building_uid(sources[i])] = i
 
 	var bounds: Vector2i = BlueprintStore.compute_bounds(buildings)
 	var annotations := _capture_blueprint_annotations(origin_cell, bounds, uid_to_index)
@@ -584,7 +524,7 @@ func _on_blueprint_stamp_placed(real_by_index: Dictionary, origin_cell: Vector2i
 	for idx in real_by_index.keys():
 		var building = real_by_index[idx]
 		if is_instance_valid(building):
-			index_to_uid[int(idx)] = _ensure_building_uid(building)
+			index_to_uid[int(idx)] = PlanSerializer.ensure_building_uid(building)
 
 	var reproduced: Array = []
 	for bp_ann in annotations:
@@ -1345,6 +1285,9 @@ func _setup_top_menu_bar() -> void:
 		return
 
 	top_menu_bar.command_requested.connect(_on_top_menu_command_requested)
+	# Refresh item enabled/checked state on demand when a menu opens, rather
+	# than polling every frame in _process.
+	top_menu_bar.menu_about_to_open.connect(_sync_command_bar_state)
 	top_menu_bar.configure_sections(_build_top_menu_sections())
 	_sync_command_bar_state()
 
@@ -1463,9 +1406,9 @@ func _on_top_menu_command_requested(command_id: StringName) -> void:
 func _is_top_menu_command_enabled(command_id: StringName) -> bool:
 	match command_id:
 		COMMAND_UNDO:
-			return not _undo_stack.is_empty()
+			return _history.can_undo()
 		COMMAND_REDO:
-			return not _redo_stack.is_empty()
+			return _history.can_redo()
 		COMMAND_TOGGLE_PRODUCTION:
 			return prod_panel != null
 		COMMAND_RAIL_VIEW:
@@ -2816,10 +2759,10 @@ func _get_what_if_rail_segments_for_rate(rate: float) -> Array[int]:
 
 func _refresh_plan_totals_from_scene() -> void:
 	var scene_buildings := _get_scene_buildings()
-	heat_label.text = str(_sum_building_stat(scene_buildings, "heat"))
-	power_label.text = str(_sum_building_stat(scene_buildings, "power"))
+	heat_label.text = str(PlanSerializer.sum_building_stat(scene_buildings, "heat"))
+	power_label.text = str(PlanSerializer.sum_building_stat(scene_buildings, "power"))
 
-	var cost_totals := _sum_building_costs(scene_buildings)
+	var cost_totals := PlanSerializer.sum_building_costs(scene_buildings)
 	bbm_cost_label.text = str(int(cost_totals.get("bbm", 0)))
 	ibm_cost_label.text = str(int(cost_totals.get("ibm", 0)))
 	meteor_core_cost_label.text = str(int(cost_totals.get("meteor_cores", 0)))
@@ -2894,7 +2837,7 @@ func _recipe_key(recipe: Recipe) -> String:
 	return str(recipe.get_instance_id())
 
 func _on_save_pressed() -> void:
-	if OS.has_feature("web") and JavaScriptBridge != null:
+	if WebFileBridge.is_available():
 		_request_save_to_browser()
 		return
 
@@ -2902,13 +2845,13 @@ func _on_save_pressed() -> void:
 	save_dialog.popup_centered_ratio(0.7)
 
 func _on_load_pressed() -> void:
-	if OS.has_feature("web") and JavaScriptBridge != null:
+	if WebFileBridge.is_available():
 		_request_load_from_browser()
 		return
 	load_dialog.popup_centered_ratio(0.7)
 	
 func _on_export_pdf_pressed() -> void:
-	if OS.has_feature("web") and JavaScriptBridge != null:
+	if WebFileBridge.is_available():
 		_download_pdf_to_browser()
 		return
 
@@ -2980,7 +2923,7 @@ func _download_save_to_browser() -> void:
 	var save_state := _collect_save_document()
 	var json_text := JSON.stringify(save_state, "\t")
 	var bytes := json_text.to_utf8_buffer()
-	JavaScriptBridge.download_buffer(bytes, "build_plan.%s" % SAVE_FILE_EXTENSION, "application/json")
+	WebFileBridge.download_bytes(bytes, "build_plan.%s" % SAVE_FILE_EXTENSION, "application/json")
 
 func _request_save_to_browser() -> void:
 	var window = JavaScriptBridge.get_interface("window")
@@ -3076,7 +3019,7 @@ func _on_web_save_failed(args: Array) -> void:
 	
 func _download_pdf_to_browser() -> void:
 	var pdf_bytes := _build_pdf_bytes()
-	JavaScriptBridge.download_buffer(pdf_bytes, "build_plan.pdf", "application/pdf")
+	WebFileBridge.download_bytes(pdf_bytes, "build_plan.pdf", "application/pdf")
 
 func _write_save_file(path: String) -> bool:
 	var save_state := _collect_save_document()
@@ -3095,75 +3038,17 @@ func _write_pdf_file(path: String) -> bool:
 	return true
 
 func _request_load_from_browser() -> void:
-	_cleanup_web_load_picker()
+	if _web_load_picker == null:
+		_web_load_picker = WebFileBridge.new()
+	_web_load_picker.pick_text_file(
+		".%s,.json,application/json" % SAVE_FILE_EXTENSION,
+		_on_web_load_text_loaded,
+		func() -> void: push_warning("Failed to read the browser-selected save file."))
 
-	var document = JavaScriptBridge.get_interface("document")
-	if document == null or document.body == null:
-		push_warning("Browser file picker is unavailable in this web build.")
-		return
-
-	_web_load_input = document.createElement("input")
-	if _web_load_input == null:
-		push_warning("Failed to create browser file input for loading saves.")
-		return
-
-	_web_load_input.setAttribute("type", "file")
-	_web_load_input.setAttribute("accept", ".%s,.json,application/json" % SAVE_FILE_EXTENSION)
-	_web_load_input.setAttribute("style", "display:none")
-	_web_load_input_callback = JavaScriptBridge.create_callback(_on_web_load_input_changed)
-	_web_load_input.onchange = _web_load_input_callback
-	document.body.appendChild(_web_load_input)
-	_web_load_input.click()
-
-func _cleanup_web_load_picker() -> void:
-	if _web_load_input != null:
-		if _web_load_input.parentNode != null:
-			_web_load_input.parentNode.removeChild(_web_load_input)
-		_web_load_input = null
-	_web_load_reader = null
-	_web_load_input_callback = null
-	_web_load_read_callback = null
-	_web_load_error_callback = null
-	_web_load_pending_file_name = ""
-
-func _on_web_load_input_changed(args: Array) -> void:
-	if args.is_empty():
-		_cleanup_web_load_picker()
-		return
-
-	var event = args[0]
-	if event == null or event.target == null or event.target.files == null or int(event.target.files.length) < 1:
-		_cleanup_web_load_picker()
-		return
-
-	var selected_file = event.target.files[0]
-	_web_load_pending_file_name = str(selected_file.name)
-	_web_load_reader = JavaScriptBridge.create_object("FileReader")
-	if _web_load_reader == null:
-		push_warning("Failed to create browser file reader for %s." % _web_load_pending_file_name)
-		_cleanup_web_load_picker()
-		return
-
-	_web_load_read_callback = JavaScriptBridge.create_callback(_on_web_load_reader_loaded)
-	_web_load_error_callback = JavaScriptBridge.create_callback(_on_web_load_reader_failed)
-	_web_load_reader.onload = _web_load_read_callback
-	_web_load_reader.onerror = _web_load_error_callback
-	_web_load_reader.readAsText(selected_file)
-
-func _on_web_load_reader_loaded(args: Array) -> void:
-	var raw_text := ""
-	if not args.is_empty() and args[0] != null and args[0].target != null:
-		raw_text = str(args[0].target.result)
-
+func _on_web_load_text_loaded(raw_text: String) -> void:
 	var loaded := raw_text != "" and _apply_save_text(raw_text)
 	if not loaded:
-		push_warning("Failed to load save file from browser-selected file %s" % _web_load_pending_file_name)
-
-	_cleanup_web_load_picker()
-
-func _on_web_load_reader_failed(_args: Array) -> void:
-	push_warning("Failed to read save file from browser-selected file %s" % _web_load_pending_file_name)
-	_cleanup_web_load_picker()
+		push_warning("Failed to load the browser-selected save file.")
 
 func _load_save_file(path: String) -> bool:
 	if not FileAccess.file_exists(path):
@@ -3290,78 +3175,35 @@ func _capture_history_state() -> Dictionary:
 	state.erase("production_panel_visible")
 	return state
 
+# Called by name from buildManager / annotation_layer / path_manager via the
+# history-host pattern; delegates stack management to HistoryController.
 func _commit_history_action(label: String, before_state: Dictionary) -> void:
-	if _is_replaying_history or before_state.is_empty():
-		return
-
-	var after_state := _capture_history_state()
-	if _history_states_equal(before_state, after_state):
-		return
-
-	# Both snapshots are already independent pure-data dicts, and the apply path
-	# duplicates before restoring, so they can be stored directly without a
-	# further deep copy.
-	_undo_stack.append({
-		"label": label,
-		"before": before_state,
-		"after": after_state
-	})
-	while _undo_stack.size() > HISTORY_LIMIT:
-		_undo_stack.pop_front()
-	_redo_stack.clear()
-
-	# Pre-destructive checkpoint: deletions are the classic "nuked my design"
-	# mistake, so persist the pre-delete plan as a recoverable version. The undo
-	# stack only holds the last HISTORY_LIMIT actions; the version log outlives it.
-	# Hand the version store its own copy so it never shares the undo snapshot.
-	if "delete" in label.to_lower():
-		_record_version("Before delete", SaveVersionStore.KIND_PRE_DESTRUCTIVE, before_state.duplicate(true))
+	_history.commit(label, before_state)
 
 func _undo_history() -> void:
-	if _undo_stack.is_empty():
-		return
-
-	var entry: Dictionary = _undo_stack.pop_back()
-	var before_state = entry.get("before", {})
-	if not (before_state is Dictionary):
-		return
-
-	_apply_history_state(before_state)
-	_redo_stack.append(entry)
+	_history.undo()
 
 func _redo_history() -> void:
-	if _redo_stack.is_empty():
-		return
-
-	var entry: Dictionary = _redo_stack.pop_back()
-	var after_state = entry.get("after", {})
-	if not (after_state is Dictionary):
-		return
-
-	_apply_history_state(after_state)
-	_undo_stack.append(entry)
+	_history.redo()
 
 func _clear_history() -> void:
-	_undo_stack.clear()
-	_redo_stack.clear()
+	_history.clear()
 
+# Injected into HistoryController as the replay hook: rebuild the live plan from
+# a stored snapshot. The controller manages the "replaying" flag around this.
 func _apply_history_state(state: Dictionary) -> void:
-	_is_replaying_history = true
 	if build_manager != null and build_manager.has_method("cancel_build"):
 		build_manager.cancel_build()
 	if path_manager != null and path_manager.has_method("cancel_active_path_drag"):
 		path_manager.cancel_active_path_drag()
 	_apply_save_state(state.duplicate(true), false)
-	_is_replaying_history = false
 
-func _history_states_equal(first: Dictionary, second: Dictionary) -> bool:
-	# Fast path: differing hashes mean the states differ — the common case,
-	# since almost every committed action changes the plan. Only fall back to
-	# the exact (but costly) deep compare on a hash match, which guards against
-	# the astronomically rare hash collision.
-	if first.hash() != second.hash():
-		return false
-	return var_to_str(first) == var_to_str(second)
+# Injected pre-commit hook. Deletions are the classic "nuked my design" mistake,
+# so persist the pre-delete plan as a recoverable version that outlives the undo
+# stack. Hand the version store its own copy so it never shares the undo snapshot.
+func _on_history_pre_destructive_checkpoint(label: String, before_state: Dictionary) -> void:
+	if "delete" in label.to_lower():
+		_record_version("Before delete", SaveVersionStore.KIND_PRE_DESTRUCTIVE, before_state.duplicate(true))
 
 func _detach_and_queue_free(node: Node) -> void:
 	if node == null:
@@ -3385,9 +3227,9 @@ func _collect_save_state() -> Dictionary:
 			continue
 
 		building_index[building] = building_data.size()
-		building_data.append(_serialize_building(building))
+		building_data.append(PlanSerializer.serialize_building(building, build_manager))
 
-	var path_data: Array[Dictionary] = _serialize_paths(building_index)
+	var path_data: Array[Dictionary] = PlanSerializer.serialize_paths(path_manager, building_index)
 	var annotation_data: Array[Dictionary] = []
 	if annotation_layer != null and annotation_layer.has_method("serialize_annotations"):
 		var serialized_annotations = annotation_layer.call("serialize_annotations")
@@ -3449,9 +3291,9 @@ func _build_pdf_bytes() -> PackedByteArray:
 	lines.append_array(_build_production_ledger_lines())
 
 	var content_lines: Array[String] = [
-		"BT /F1 20 Tf 50 760 Td (%s) Tj ET" % _pdf_escape_text(lines[0]),
-		"BT /F1 14 Tf 50 736 Td (%s) Tj ET" % _pdf_escape_text(lines[1]),
-		"BT /F1 10 Tf 50 716 Td (%s) Tj ET" % _pdf_escape_text(lines[2])
+		"BT /F1 20 Tf 50 760 Td (%s) Tj ET" % PdfWriter.escape_text(lines[0]),
+		"BT /F1 14 Tf 50 736 Td (%s) Tj ET" % PdfWriter.escape_text(lines[1]),
+		"BT /F1 10 Tf 50 716 Td (%s) Tj ET" % PdfWriter.escape_text(lines[2])
 	]
 
 	var grid_origin := Vector2(50, 430)
@@ -3461,7 +3303,7 @@ func _build_pdf_bytes() -> PackedByteArray:
 
 	var y := 390
 	for i in range(4, lines.size()):
-		content_lines.append("BT /F1 11 Tf 50 %d Td (%s) Tj ET" % [y, _pdf_escape_text(lines[i])])
+		content_lines.append("BT /F1 11 Tf 50 %d Td (%s) Tj ET" % [y, PdfWriter.escape_text(lines[i])])
 		y -= 15
 		if y < 40:
 			break
@@ -3474,25 +3316,8 @@ func _build_pdf_bytes() -> PackedByteArray:
 	objects.append("4 0 obj << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> endobj")
 	objects.append("5 0 obj << /Length %d >> stream\n%s\nendstream endobj" % [content.to_utf8_buffer().size(), content])
 
-	var pdf := "%PDF-1.4\n"
-	var offsets: Array[int] = [0]
-	for object in objects:
-		offsets.append(pdf.to_utf8_buffer().size())
-		pdf += object + "\n"
+	return PdfWriter.assemble(objects)
 
-	var xref_offset := pdf.to_utf8_buffer().size()
-	pdf += "xref\n0 %d\n" % offsets.size()
-	pdf += "0000000000 65535 f \n"
-	for i in range(1, offsets.size()):
-		pdf += "%010d 00000 n \n" % offsets[i]
-
-	pdf += "trailer << /Size %d /Root 1 0 R >>\n" % offsets.size()
-	pdf += "startxref\n%d\n%%%%EOF" % xref_offset
-	return pdf.to_utf8_buffer()
-
-func _pdf_escape_text(value: String) -> String:
-	return value.replace("\\", "\\\\").replace("(", "\\(").replace(")", "\\)")
-	
 func _build_pdf_grid_commands(building_entries: Variant, grid_origin: Vector2, grid_size: Vector2) -> Array[String]:
 	var commands: Array[String] = []
 
@@ -3572,7 +3397,7 @@ func _build_pdf_grid_commands(building_entries: Variant, grid_origin: Vector2, g
 		var gh = float(fh) * cell_size
 		var gy = y_offset + drawn_height - (((float(ay) - min_cell_y) * cell_size) + gh)
 		commands.append("0 G 1.1 w %f %f %f %f re S" % [gx, gy, gw, gh])
-		commands.append("0 g BT /F1 7 Tf %f %f Td (%s) Tj ET" % [gx + 2.0, gy + gh - 8.0, _pdf_escape_text(id_text)])
+		commands.append("0 g BT /F1 7 Tf %f %f Td (%s) Tj ET" % [gx + 2.0, gy + gh - 8.0, PdfWriter.escape_text(id_text)])
 
 	return commands
 
@@ -3637,101 +3462,6 @@ func _format_resource_name(value: String) -> String:
 	return value.strip_edges().replace("_", " ").replace("-", " ")
 
 
-func _serialize_building(building: Node2D) -> Dictionary:
-	var recipe_selection := _serialize_option_button(building.get_node_or_null("Recipe"))
-	var purity_selection := _serialize_option_button(building.get_node_or_null("Purity"))
-	var core_level_selection := _serialize_option_button(building.get_node_or_null("CoreLevel"))
-	var saved_anchor_cell := Vector2i.ZERO
-	if build_manager != null and build_manager.has_method("_anchor_cell_from_building_position"):
-		saved_anchor_cell = build_manager._anchor_cell_from_building_position(building, building.global_position)
-	elif build_manager != null and build_manager.has_method("world_to_cell"):
-		saved_anchor_cell = build_manager.world_to_cell(building.global_position)
-
-	var saved_footprint := Vector2i.ONE
-	if build_manager != null and build_manager.has_method("get_rotated_footprint"):
-		saved_footprint = build_manager.get_rotated_footprint(building)
-	elif "footprint" in building and building.get("footprint") is Vector2i:
-		saved_footprint = building.get("footprint")
-
-	return {
-		"uid": _ensure_building_uid(building),
-		"id": str(building.get("id")) if building.has_method("get") else "",
-		"scene_path": building.scene_file_path,
-		"position": [building.global_position.x, building.global_position.y],
-		"rotation_degrees": building.rotation_degrees,
-		"rotated_tick": int(building.get("rotatedTick")) if "rotatedTick" in building else 0,
-		"is_alternate": bool(building.get("is_alternate")) if "is_alternate" in building else false,
-		"anchor_cell": [int(saved_anchor_cell.x), int(saved_anchor_cell.y)],
-		"footprint": [max(1, int(saved_footprint.x)), max(1, int(saved_footprint.y))],
-		"recipe": recipe_selection,
-		"purity": purity_selection,
-		"core_level": core_level_selection
-	}
-
-
-func _ensure_building_uid(building: Node) -> String:
-	if building == null:
-		return ""
-	if building.has_meta(BUILDING_UID_META):
-		var existing := String(building.get_meta(BUILDING_UID_META))
-		if existing != "":
-			return existing
-	var uid := "bldg_%d_%d" % [Time.get_ticks_usec(), randi()]
-	building.set_meta(BUILDING_UID_META, uid)
-	return uid
-
-
-func _serialize_option_button(node: Node) -> Dictionary:
-	if node == null or not (node is OptionButton):
-		return {}
-
-	var ob := node as OptionButton
-	var selected := ob.selected
-	var metadata_path := ""
-
-	if selected >= 0 and selected < ob.item_count:
-		var metadata = ob.get_item_metadata(selected)
-		if metadata is Resource:
-			metadata_path = (metadata as Resource).resource_path
-		elif metadata != null:
-			metadata_path = str(metadata)
-
-	return {
-		"selected": selected,
-		"metadata_path": metadata_path
-	}
-
-func _serialize_paths(building_index: Dictionary) -> Array[Dictionary]:
-	var out: Array[Dictionary] = []
-
-	for child in path_manager.get_children():
-		if not (child is Path2D):
-			continue
-		if not child.has_meta("from_building") or not child.has_meta("to_building"):
-			continue
-
-		var from_building: Node = child.get_meta("from_building")
-		var to_building: Node = child.get_meta("to_building")
-
-		if not building_index.has(from_building) or not building_index.has(to_building):
-			continue
-
-		var rail_version := -1
-		if path_manager != null and path_manager.has_method("get_path_rail_version"):
-			rail_version = int(path_manager.get_path_rail_version(child))
-		elif child.has_meta("rail_version"):
-			rail_version = int(child.get_meta("rail_version"))
-
-		out.append({
-			"from_index": int(building_index[from_building]),
-			"to_index": int(building_index[to_building]),
-			"from_port": str(child.get_meta("from_port")),
-			"to_port": str(child.get_meta("to_port")),
-			"rail_version": rail_version
-		})
-
-	return out
-
 func _apply_save_state(save_state: Dictionary, restore_view_state := true) -> void:
 	var keep_prod_panel_visible := prod_panel.visible
 	_clear_existing_plan()
@@ -3759,19 +3489,19 @@ func _apply_save_state(save_state: Dictionary, restore_view_state := true) -> vo
 	if save_state.has("heat"):
 		heat_label.text = str(int(save_state["heat"]))
 	else:
-		heat_label.text = str(_sum_building_stat(loaded_buildings, "heat"))
+		heat_label.text = str(PlanSerializer.sum_building_stat(loaded_buildings, "heat"))
 
 	if save_state.has("power"):
 		power_label.text = str(int(save_state["power"]))
 	else:
-		power_label.text = str(_sum_building_stat(loaded_buildings, "power"))
+		power_label.text = str(PlanSerializer.sum_building_stat(loaded_buildings, "power"))
 
 	if save_state.has("cost_bbm") and save_state.has("cost_ibm") and save_state.has("cost_meteor_cores"):
 		bbm_cost_label.text = str(int(save_state["cost_bbm"]))
 		ibm_cost_label.text = str(int(save_state["cost_ibm"]))
 		meteor_core_cost_label.text = str(int(save_state["cost_meteor_cores"]))
 	else:
-		var cost_totals := _sum_building_costs(loaded_buildings)
+		var cost_totals := PlanSerializer.sum_building_costs(loaded_buildings)
 		bbm_cost_label.text = str(cost_totals.get("bbm", 0))
 		ibm_cost_label.text = str(cost_totals.get("ibm", 0))
 		meteor_core_cost_label.text = str(cost_totals.get("meteor_cores", 0))
@@ -3829,7 +3559,7 @@ func _instantiate_saved_building(data: Dictionary) -> Node2D:
 
 	var saved_uid := String(data.get("uid", ""))
 	if saved_uid != "":
-		instance.set_meta(BUILDING_UID_META, saved_uid)
+		instance.set_meta(PlanSerializer.BUILDING_UID_META, saved_uid)
 
 	var position_data = data.get("position", [0.0, 0.0])
 	if position_data is Array and position_data.size() >= 2:
@@ -3981,35 +3711,3 @@ func _restore_camera(camera_data: Dictionary) -> void:
 	var zoom_data = camera_data.get("zoom", [])
 	if zoom_data is Array and zoom_data.size() >= 2:
 		camera.zoom = Vector2(float(zoom_data[0]), float(zoom_data[1]))
-
-func _sum_building_stat(loaded_buildings: Array[Node2D], stat_name: String) -> int:
-	var total := 0
-	for building in loaded_buildings:
-		if stat_name in building:
-			total += int(building.get(stat_name))
-	return total
-	
-func _sum_building_costs(loaded_buildings: Array[Node2D]) -> Dictionary:
-	var totals := {
-		"bbm": 0,
-		"ibm": 0,
-		"meteor_cores": 0
-	}
-
-	for building in loaded_buildings:
-		if not ("build_cost_amount" in building):
-			continue
-
-		var amount := int(building.get("build_cost_amount"))
-		var cost_type := int(building.get("build_cost_type")) if "build_cost_type" in building else 0
-
-		match cost_type:
-			Building.BuildCostType.BBM:
-				totals["bbm"] += amount
-			Building.BuildCostType.IBM:
-				totals["ibm"] += amount
-			Building.BuildCostType.METEOR_CORE:
-				totals["meteor_cores"] += amount
-
-	return totals
-	

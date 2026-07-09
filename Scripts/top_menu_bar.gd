@@ -3,6 +3,9 @@ extends PanelContainer
 class_name TopMenuBar
 
 signal command_requested(command_id: StringName)
+# Emitted right before any section menu opens, so the owner can refresh the
+# enabled/checked state of the items on demand instead of polling every frame.
+signal menu_about_to_open
 
 const Palette = preload("res://Scripts/palette.gd")
 const UiScale = preload("res://Scripts/ui_scale.gd")
@@ -129,6 +132,8 @@ func _configure_section_popup(button: MenuButton, commands) -> void:
 	var popup := button.get_popup()
 	popup.clear()
 	popup.id_pressed.connect(_on_popup_id_pressed.bind(popup))
+	if not popup.about_to_popup.is_connected(_on_section_popup_about_to_open):
+		popup.about_to_popup.connect(_on_section_popup_about_to_open)
 	_style_popup(popup)
 
 	if not (commands is Array):
@@ -148,6 +153,10 @@ func _configure_section_popup(button: MenuButton, commands) -> void:
 			"index": index,
 			"section_button": button,
 		}
+
+
+func _on_section_popup_about_to_open() -> void:
+	menu_about_to_open.emit()
 
 
 func _on_popup_id_pressed(id: int, popup: PopupMenu) -> void:

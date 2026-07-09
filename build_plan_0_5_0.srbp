@@ -630,7 +630,7 @@
 		},
 		{
 			"anchor_cell": [
-				25,
+				27,
 				-11
 			],
 			"core_level": {},
@@ -641,7 +641,7 @@
 			"id": "storage_v2",
 			"is_alternate": false,
 			"position": [
-				1696.0,
+				1824.0,
 				-608.0
 			],
 			"purity": {},
@@ -1607,12 +1607,12 @@
 	],
 	"camera": {
 		"position": [
-			635.0,
-			-830.0
+			1183.0,
+			-715.0
 		],
 		"zoom": [
-			0.560219287872314,
-			0.560219287872314
+			0.583199918270111,
+			0.583199918270111
 		]
 	},
 	"cost_bbm": 2890,
@@ -3227,553 +3227,553 @@
 					"uid": "bldg_41472106_1418902455"
 				}
 			],
-			"cost_bbm": 2890,
-			"cost_ibm": 220,
-			"cost_meteor_cores": 1,
-			"heat": -774,
+			"cost_bbm": 2890.0,
+			"cost_ibm": 220.0,
+			"cost_meteor_cores": 1.0,
+			"heat": -774.0,
 			"paths": [
 				{
 					"from_port": "Ports/Output 1",
 					"from_uid": "bldg_23619458_54906917",
-					"rail_version": 1,
+					"rail_version": 1.0,
 					"to_port": "Ports/Universal 1",
 					"to_uid": "bldg_23619472_3978298947"
 				},
 				{
 					"from_port": "Ports/Universal 2",
 					"from_uid": "bldg_23619472_3978298947",
-					"rail_version": 1,
+					"rail_version": 1.0,
 					"to_port": "Ports/Universal 2",
 					"to_uid": "bldg_23619487_934926918"
 				},
 				{
 					"from_port": "Ports/Output 1",
 					"from_uid": "bldg_23619440_3029426608",
-					"rail_version": 1,
+					"rail_version": 1.0,
 					"to_port": "Ports/Universal 3",
 					"to_uid": "bldg_23619487_934926918"
 				},
 				{
 					"from_port": "Ports/Universal 4",
 					"from_uid": "bldg_23619487_934926918",
-					"rail_version": 2,
+					"rail_version": 2.0,
 					"to_port": "Ports/Universal 2",
 					"to_uid": "bldg_23619501_44147628"
 				},
 				{
 					"from_port": "Ports/Universal 4",
 					"from_uid": "bldg_23619501_44147628",
-					"rail_version": 2,
+					"rail_version": 2.0,
 					"to_port": "Ports/Universal 2",
 					"to_uid": "bldg_23619513_207557453"
 				},
 				{
 					"from_port": "Ports/Universal 4",
 					"from_uid": "bldg_23619513_207557453",
-					"rail_version": 2,
+					"rail_version": 2.0,
 					"to_port": "Ports/Universal 1",
 					"to_uid": "bldg_23619648_2189020412"
 				},
 				{
 					"from_port": "Ports/Universal 2",
 					"from_uid": "bldg_23619648_2189020412",
-					"rail_version": 2,
+					"rail_version": 2.0,
 					"to_port": "Ports/Universal 4",
 					"to_uid": "bldg_23619662_139575237"
 				},
 				{
 					"from_port": "Ports/Output 1",
 					"from_uid": "bldg_23619420_2569287889",
-					"rail_version": 1,
+					"rail_version": 1.0,
 					"to_port": "Ports/Universal 3",
 					"to_uid": "bldg_23619501_44147628"
 				},
 				{
 					"from_port": "Ports/Output 1",
 					"from_uid": "bldg_23619382_3811684284",
-					"rail_version": 1,
+					"rail_version": 1.0,
 					"to_port": "Ports/Universal 3",
 					"to_uid": "bldg_23619513_207557453"
 				},
 				{
 					"from_port": "Ports/Universal 1",
 					"from_uid": "bldg_23619662_139575237",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Input 1",
 					"to_uid": "bldg_23619605_1684883349"
 				},
 				{
 					"from_port": "Ports/Universal 2",
 					"from_uid": "bldg_23619662_139575237",
-					"rail_version": 2,
+					"rail_version": 2.0,
 					"to_port": "Ports/Universal 4",
 					"to_uid": "bldg_23619674_4025366760"
 				},
 				{
 					"from_port": "Ports/Universal 2",
 					"from_uid": "bldg_23619674_4025366760",
-					"rail_version": 2,
+					"rail_version": 2.0,
 					"to_port": "Ports/Universal 4",
 					"to_uid": "bldg_23619686_737095568"
 				},
 				{
 					"from_port": "Ports/Universal 2",
 					"from_uid": "bldg_23619686_737095568",
-					"rail_version": 2,
+					"rail_version": 2.0,
 					"to_port": "Ports/Universal 4",
 					"to_uid": "bldg_23619699_2182714823"
 				},
 				{
 					"from_port": "Ports/Universal 2",
 					"from_uid": "bldg_23619699_2182714823",
-					"rail_version": 2,
+					"rail_version": 2.0,
 					"to_port": "Ports/Universal 4",
 					"to_uid": "bldg_23619711_1691826567"
 				},
 				{
 					"from_port": "Ports/Universal 2",
 					"from_uid": "bldg_23619711_1691826567",
-					"rail_version": 2,
+					"rail_version": 2.0,
 					"to_port": "Ports/Universal 4",
 					"to_uid": "bldg_23619724_1334231752"
 				},
 				{
 					"from_port": "Ports/Universal 2",
 					"from_uid": "bldg_23619724_1334231752",
-					"rail_version": 2,
+					"rail_version": 2.0,
 					"to_port": "Ports/Universal 4",
 					"to_uid": "bldg_23619738_696694687"
 				},
 				{
 					"from_port": "Ports/Universal 2",
 					"from_uid": "bldg_23619738_696694687",
-					"rail_version": 2,
+					"rail_version": 2.0,
 					"to_port": "Ports/Universal 4",
 					"to_uid": "bldg_23619765_930002673"
 				},
 				{
 					"from_port": "Ports/Universal 2",
 					"from_uid": "bldg_23619765_930002673",
-					"rail_version": 2,
+					"rail_version": 2.0,
 					"to_port": "Ports/Universal 2",
 					"to_uid": "bldg_23619777_1302578330"
 				},
 				{
 					"from_port": "Ports/Universal 1",
 					"from_uid": "bldg_23619777_1302578330",
-					"rail_version": 2,
+					"rail_version": 2.0,
 					"to_port": "Ports/Universal 3",
 					"to_uid": "bldg_23619752_3846782179"
 				},
 				{
 					"from_port": "Ports/Universal 1",
 					"from_uid": "bldg_23619674_4025366760",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Input 1",
 					"to_uid": "bldg_23619589_1220049812"
 				},
 				{
 					"from_port": "Ports/Universal 1",
 					"from_uid": "bldg_23619686_737095568",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Input 1",
 					"to_uid": "bldg_23619529_2415627546"
 				},
 				{
 					"from_port": "Ports/Universal 1",
 					"from_uid": "bldg_23619699_2182714823",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Input 1",
 					"to_uid": "bldg_23619545_2502940871"
 				},
 				{
 					"from_port": "Ports/Universal 1",
 					"from_uid": "bldg_23619711_1691826567",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Input 1",
 					"to_uid": "bldg_23619560_2897943986"
 				},
 				{
 					"from_port": "Ports/Universal 1",
 					"from_uid": "bldg_23619724_1334231752",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Input 1",
 					"to_uid": "bldg_23619575_2113336328"
 				},
 				{
 					"from_port": "Ports/Universal 1",
 					"from_uid": "bldg_23619738_696694687",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Input 1",
 					"to_uid": "bldg_23619620_2172924165"
 				},
 				{
 					"from_port": "Ports/Universal 1",
 					"from_uid": "bldg_23619765_930002673",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Input 1",
 					"to_uid": "bldg_23619635_3305481085"
 				},
 				{
 					"from_port": "Ports/Output 1",
 					"from_uid": "bldg_23619605_1684883349",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Universal 2",
 					"to_uid": "bldg_23619907_4121436354"
 				},
 				{
 					"from_port": "Ports/Universal 1",
 					"from_uid": "bldg_23619907_4121436354",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Universal 2",
 					"to_uid": "bldg_23619932_15275838"
 				},
 				{
 					"from_port": "Ports/Output 1",
 					"from_uid": "bldg_23619589_1220049812",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Universal 1",
 					"to_uid": "bldg_23619932_15275838"
 				},
 				{
 					"from_port": "Ports/Universal 4",
 					"from_uid": "bldg_23619932_15275838",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Universal 2",
 					"to_uid": "bldg_23619970_1458919144"
 				},
 				{
 					"from_port": "Ports/Output 1",
 					"from_uid": "bldg_23619529_2415627546",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Universal 1",
 					"to_uid": "bldg_23619970_1458919144"
 				},
 				{
 					"from_port": "Ports/Universal 4",
 					"from_uid": "bldg_23619970_1458919144",
-					"rail_version": 1,
+					"rail_version": 1.0,
 					"to_port": "Ports/Universal 2",
 					"to_uid": "bldg_23619983_2570646246"
 				},
 				{
 					"from_port": "Ports/Output 1",
 					"from_uid": "bldg_23619545_2502940871",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Universal 1",
 					"to_uid": "bldg_23619983_2570646246"
 				},
 				{
 					"from_port": "Ports/Output 1",
 					"from_uid": "bldg_23619560_2897943986",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Universal 1",
 					"to_uid": "bldg_23620006_3549269454"
 				},
 				{
 					"from_port": "Ports/Output 1",
 					"from_uid": "bldg_23619575_2113336328",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Universal 1",
 					"to_uid": "bldg_23620030_350924325"
 				},
 				{
 					"from_port": "Ports/Output 1",
 					"from_uid": "bldg_23619620_2172924165",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Universal 1",
 					"to_uid": "bldg_23620053_4011121305"
 				},
 				{
 					"from_port": "Ports/Output 1",
 					"from_uid": "bldg_23619635_3305481085",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Universal 1",
 					"to_uid": "bldg_23620081_2295935612"
 				},
 				{
 					"from_port": "Ports/Universal 4",
 					"from_uid": "bldg_23619983_2570646246",
-					"rail_version": 1,
+					"rail_version": 1.0,
 					"to_port": "Ports/Universal 2",
 					"to_uid": "bldg_23620006_3549269454"
 				},
 				{
 					"from_port": "Ports/Universal 4",
 					"from_uid": "bldg_23620006_3549269454",
-					"rail_version": 1,
+					"rail_version": 1.0,
 					"to_port": "Ports/Universal 2",
 					"to_uid": "bldg_23620030_350924325"
 				},
 				{
 					"from_port": "Ports/Universal 4",
 					"from_uid": "bldg_23620030_350924325",
-					"rail_version": 2,
+					"rail_version": 2.0,
 					"to_port": "Ports/Universal 2",
 					"to_uid": "bldg_23620053_4011121305"
 				},
 				{
 					"from_port": "Ports/Universal 4",
 					"from_uid": "bldg_23620053_4011121305",
-					"rail_version": 2,
+					"rail_version": 2.0,
 					"to_port": "Ports/Universal 2",
 					"to_uid": "bldg_23620081_2295935612"
 				},
 				{
 					"from_port": "Ports/Universal 4",
 					"from_uid": "bldg_23620081_2295935612",
-					"rail_version": 2,
+					"rail_version": 2.0,
 					"to_port": "Ports/Universal 4",
 					"to_uid": "bldg_23620093_185038201"
 				},
 				{
 					"from_port": "Ports/Universal 2",
 					"from_uid": "bldg_23620093_185038201",
-					"rail_version": 2,
+					"rail_version": 2.0,
 					"to_port": "Ports/Universal 4",
 					"to_uid": "bldg_23620067_2770369729"
 				},
 				{
 					"from_port": "Ports/Universal 2",
 					"from_uid": "bldg_23620067_2770369729",
-					"rail_version": 2,
+					"rail_version": 2.0,
 					"to_port": "Ports/Universal 4",
 					"to_uid": "bldg_23620042_3832557836"
 				},
 				{
 					"from_port": "Ports/Universal 2",
 					"from_uid": "bldg_23620042_3832557836",
-					"rail_version": 1,
+					"rail_version": 1.0,
 					"to_port": "Ports/Universal 4",
 					"to_uid": "bldg_23620018_3877135351"
 				},
 				{
 					"from_port": "Ports/Universal 2",
 					"from_uid": "bldg_23620018_3877135351",
-					"rail_version": 1,
+					"rail_version": 1.0,
 					"to_port": "Ports/Universal 4",
 					"to_uid": "bldg_23619995_858570798"
 				},
 				{
 					"from_port": "Ports/Universal 2",
 					"from_uid": "bldg_23619995_858570798",
-					"rail_version": 1,
+					"rail_version": 1.0,
 					"to_port": "Ports/Universal 4",
 					"to_uid": "bldg_23619956_683412387"
 				},
 				{
 					"from_port": "Ports/Universal 2",
 					"from_uid": "bldg_23619956_683412387",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Universal 4",
 					"to_uid": "bldg_23619945_1146322918"
 				},
 				{
 					"from_port": "Ports/Universal 2",
 					"from_uid": "bldg_23619945_1146322918",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Universal 1",
 					"to_uid": "bldg_23619918_2053075683"
 				},
 				{
 					"from_port": "Ports/Universal 3",
 					"from_uid": "bldg_23620093_185038201",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Input 2",
 					"to_uid": "bldg_23619894_1521155489"
 				},
 				{
 					"from_port": "Ports/Universal 3",
 					"from_uid": "bldg_23620067_2770369729",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Input 2",
 					"to_uid": "bldg_23619879_1826237381"
 				},
 				{
 					"from_port": "Ports/Universal 3",
 					"from_uid": "bldg_23620042_3832557836",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Input 1",
 					"to_uid": "bldg_23619866_3721274914"
 				},
 				{
 					"from_port": "Ports/Universal 3",
 					"from_uid": "bldg_23620018_3877135351",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Input 1",
 					"to_uid": "bldg_23619852_4277285716"
 				},
 				{
 					"from_port": "Ports/Universal 3",
 					"from_uid": "bldg_23619995_858570798",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Input 1",
 					"to_uid": "bldg_23619838_1038362130"
 				},
 				{
 					"from_port": "Ports/Universal 3",
 					"from_uid": "bldg_23619956_683412387",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Input 1",
 					"to_uid": "bldg_23619824_2137151351"
 				},
 				{
 					"from_port": "Ports/Universal 3",
 					"from_uid": "bldg_23619945_1146322918",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Input 1",
 					"to_uid": "bldg_23619809_1617576531"
 				},
 				{
 					"from_port": "Ports/Universal 2",
 					"from_uid": "bldg_23619918_2053075683",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Input 1",
 					"to_uid": "bldg_23619793_3357401182"
 				},
 				{
 					"from_port": "Ports/Output 1",
 					"from_uid": "bldg_23619793_3357401182",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Universal 2",
 					"to_uid": "bldg_50734518_3546652284"
 				},
 				{
 					"from_port": "Ports/Universal 1",
 					"from_uid": "bldg_50734518_3546652284",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Universal 2",
 					"to_uid": "bldg_71717920_2077927605"
 				},
 				{
 					"from_port": "Ports/Output 1",
 					"from_uid": "bldg_23619809_1617576531",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Universal 1",
 					"to_uid": "bldg_71717920_2077927605"
 				},
 				{
 					"from_port": "Ports/Universal 4",
 					"from_uid": "bldg_71717920_2077927605",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Universal 2",
 					"to_uid": "bldg_72652449_1562337978"
 				},
 				{
 					"from_port": "Ports/Output 1",
 					"from_uid": "bldg_23619824_2137151351",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Universal 1",
 					"to_uid": "bldg_72652449_1562337978"
 				},
 				{
 					"from_port": "Ports/Universal 4",
 					"from_uid": "bldg_72652449_1562337978",
-					"rail_version": 1,
+					"rail_version": 1.0,
 					"to_port": "Ports/Universal 2",
 					"to_uid": "bldg_73403040_1785575004"
 				},
 				{
 					"from_port": "Ports/Universal 4",
 					"from_uid": "bldg_73403040_1785575004",
-					"rail_version": 1,
+					"rail_version": 1.0,
 					"to_port": "Ports/Universal 2",
 					"to_uid": "bldg_74337034_1147198946"
 				},
 				{
 					"from_port": "Ports/Universal 4",
 					"from_uid": "bldg_74337034_1147198946",
-					"rail_version": 2,
+					"rail_version": 2.0,
 					"to_port": "Ports/Universal 2",
 					"to_uid": "bldg_75104336_1619659545"
 				},
 				{
 					"from_port": "Ports/Universal 4",
 					"from_uid": "bldg_75104336_1619659545",
-					"rail_version": 2,
+					"rail_version": 2.0,
 					"to_port": "Ports/Universal 2",
 					"to_uid": "bldg_75921748_1591013196"
 				},
 				{
 					"from_port": "Ports/Universal 4",
 					"from_uid": "bldg_75921748_1591013196",
-					"rail_version": 2,
+					"rail_version": 2.0,
 					"to_port": "Ports/Universal 2",
 					"to_uid": "bldg_76672460_2916213898"
 				},
 				{
 					"from_port": "Ports/Output 1",
 					"from_uid": "bldg_23619838_1038362130",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Universal 1",
 					"to_uid": "bldg_73403040_1785575004"
 				},
 				{
 					"from_port": "Ports/Output 1",
 					"from_uid": "bldg_23619852_4277285716",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Universal 1",
 					"to_uid": "bldg_74337034_1147198946"
 				},
 				{
 					"from_port": "Ports/Output 1",
 					"from_uid": "bldg_23619866_3721274914",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Universal 1",
 					"to_uid": "bldg_75104336_1619659545"
 				},
 				{
 					"from_port": "Ports/Output 1",
 					"from_uid": "bldg_23619879_1826237381",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Universal 1",
 					"to_uid": "bldg_75921748_1591013196"
 				},
 				{
 					"from_port": "Ports/Output 1",
 					"from_uid": "bldg_23619894_1521155489",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Universal 1",
 					"to_uid": "bldg_76672460_2916213898"
 				},
 				{
 					"from_port": "Ports/Universal 4",
 					"from_uid": "bldg_76672460_2916213898",
-					"rail_version": 2,
+					"rail_version": 2.0,
 					"to_port": "Ports/Universal 4",
 					"to_uid": "bldg_40091454_3125075217"
 				},
 				{
 					"from_port": "Ports/Universal 2",
 					"from_uid": "bldg_40091454_3125075217",
-					"rail_version": 2,
+					"rail_version": 2.0,
 					"to_port": "Ports/Universal 4",
 					"to_uid": "bldg_41472106_1418902455"
 				},
 				{
 					"from_port": "Ports/Universal 3",
 					"from_uid": "bldg_41472106_1418902455",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Input 2",
 					"to_uid": "bldg_25560800_2040188258"
 				},
 				{
 					"from_port": "Ports/Universal 3",
 					"from_uid": "bldg_40091454_3125075217",
-					"rail_version": 0,
+					"rail_version": 0.0,
 					"to_port": "Ports/Input 2",
 					"to_uid": "bldg_85130919_2006147342"
 				}
 			],
-			"power": 1035
+			"power": 1035.0
 		},
 		"base_meta": {
 			"created_unix": 1783387274.299,
 			"kind": "base",
 			"label": "Imported",
-			"version_id": 1
+			"version_id": 1.0
 		},
-		"cap": 50,
+		"cap": 50.0,
 		"deltas": [
 			{
 				"created_unix": 1783387302.556,
@@ -3784,16 +3784,16 @@
 						"changed": {
 							"bldg_23620123_2401918454": {
 								"anchor_cell": [
-									-6,
-									-12
+									-6.0,
+									-12.0
 								],
 								"core_level": {
 									"metadata_path": "",
-									"selected": 1
+									"selected": 1.0
 								},
 								"footprint": [
-									4,
-									4
+									4.0,
+									4.0
 								],
 								"id": "base_core",
 								"is_alternate": false,
@@ -3803,7 +3803,7 @@
 								],
 								"purity": {},
 								"recipe": {},
-								"rotated_tick": 0,
+								"rotated_tick": 0.0,
 								"rotation_degrees": 0.0,
 								"scene_path": "res://Buildings/Base Core.tscn",
 								"uid": "bldg_23620123_2401918454"
@@ -3811,14 +3811,119 @@
 						}
 					},
 					"scalars": {
-						"heat": -2274
+						"heat": -2274.0
 					}
 				},
-				"version_id": 2
+				"version_id": 2.0
+			},
+			{
+				"created_unix": 1783613797.697,
+				"kind": "manual",
+				"label": "Saved",
+				"ops": {
+					"buildings": {
+						"changed": {
+							"bldg_23619752_3846782179": {
+								"anchor_cell": [
+									27.0,
+									-11.0
+								],
+								"core_level": {},
+								"footprint": [
+									3.0,
+									3.0
+								],
+								"id": "storage_v2",
+								"is_alternate": false,
+								"position": [
+									1824.0,
+									-608.0
+								],
+								"purity": {},
+								"recipe": {},
+								"rotated_tick": 0.0,
+								"rotation_degrees": 0.0,
+								"scene_path": "res://Buildings/Storage_v2.tscn",
+								"uid": "bldg_23619752_3846782179"
+							}
+						}
+					}
+				},
+				"version_id": 3.0
+			},
+			{
+				"created_unix": 1783614797.038,
+				"kind": "manual",
+				"label": "Saved",
+				"ops": {
+					"buildings": {
+						"changed": {
+							"bldg_23619752_3846782179": {
+								"anchor_cell": [
+									25.0,
+									-11.0
+								],
+								"core_level": {},
+								"footprint": [
+									3.0,
+									3.0
+								],
+								"id": "storage_v2",
+								"is_alternate": false,
+								"position": [
+									1696.0,
+									-608.0
+								],
+								"purity": {},
+								"recipe": {},
+								"rotated_tick": 0.0,
+								"rotation_degrees": 0.0,
+								"scene_path": "res://Buildings/Storage_v2.tscn",
+								"uid": "bldg_23619752_3846782179"
+							}
+						}
+					}
+				},
+				"version_id": 4.0
+			},
+			{
+				"created_unix": 1783632040.373,
+				"kind": "manual",
+				"label": "Saved",
+				"ops": {
+					"buildings": {
+						"changed": {
+							"bldg_23619752_3846782179": {
+								"anchor_cell": [
+									27,
+									-11
+								],
+								"core_level": {},
+								"footprint": [
+									3,
+									3
+								],
+								"id": "storage_v2",
+								"is_alternate": false,
+								"position": [
+									1824.0,
+									-608.0
+								],
+								"purity": {},
+								"recipe": {},
+								"rotated_tick": 0,
+								"rotation_degrees": 0.0,
+								"scene_path": "res://Buildings/Storage_v2.tscn",
+								"uid": "bldg_23619752_3846782179"
+							}
+						}
+					}
+				},
+				"version_id": 5
 			}
 		],
-		"head_version_id": 2,
-		"next_version_id": 3
+		"head_version_id": 5,
+		"next_version_id": 6
 	},
 	"occupied_cells": [
 		"7,-6",
@@ -3977,15 +4082,15 @@
 		"13,-8",
 		"16,-8",
 		"19,-8",
-		"25,-11",
-		"26,-11",
 		"27,-11",
-		"25,-10",
-		"26,-10",
+		"28,-11",
+		"29,-11",
 		"27,-10",
-		"25,-9",
-		"26,-9",
+		"28,-10",
+		"29,-10",
 		"27,-9",
+		"28,-9",
+		"29,-9",
 		"22,-8",
 		"25,-8",
 		"1,-17",
@@ -4673,6 +4778,6 @@
 	],
 	"power": 1035,
 	"production_panel_visible": false,
-	"saved_at_unix": 1783387302.562,
+	"saved_at_unix": 1783632040.38,
 	"version": 5
 }

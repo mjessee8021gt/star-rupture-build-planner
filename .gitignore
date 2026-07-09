@@ -1,3 +1,24 @@
+# Godot 4+ engine cache and generated data — regenerated on project open,
+# should never be tracked.
+.godot/
+
+# Godot editor crash/save temp artifacts.
+*.tmp
+
+# Mono / C# (not used here, kept for safety).
+.mono/
+data_*/
+mono_crash.*.json
+
+# OS / editor cruft.
+.DS_Store
+Thumbs.db
+
 # Obsidian development wiki — local documentation, not tracked in the repository.
 # Ignores the Wiki folder itself and every file and folder contained within it.
 /Wiki/
+
+# NOTE: the tracked web build under Releases/ (index.pck, index.wasm, .zip, …)
+# and export_presets.cfg / per-asset *.import files are intentionally kept —
+# they are the deployed build + are required to reproduce exports. Do NOT add
+# broad *.pck / *.zip / export ignores here; they would hide Releases/.

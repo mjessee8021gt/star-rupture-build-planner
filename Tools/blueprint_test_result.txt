@@ -1,0 +1,1 @@
+Blueprint store smoke tests passed (62 checks).

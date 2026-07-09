@@ -7,7 +7,6 @@ const ANNOTATION_ACTION := &"Annotation"
 const FORMAT_BBCODE := "bbcode"
 const TARGET_CELL := "cell"
 const TARGET_BUILDING := "building"
-const BUILDING_UID_META := &"srbp_building_uid"
 const TICK_CLICK_TARGET_SIZE := Vector2(32.0, 32.0)
 const TICK_CLICK_TARGET_CENTER := Vector2(48.0, 16.0)
 const EDITOR_SIZE := Vector2(340.0, 220.0)
@@ -153,7 +152,7 @@ func _make_annotation(anchor_cell: Vector2i) -> Dictionary:
 	var target_building_uid := ""
 	if occupant != null:
 		target_type = TARGET_BUILDING
-		target_building_uid = _ensure_building_uid(occupant)
+		target_building_uid = PlanSerializer.ensure_building_uid(occupant)
 
 	var now := Time.get_unix_time_from_system()
 	return {
@@ -573,7 +572,7 @@ func _get_building_by_uid(uid: String) -> Node2D:
 		if seen.has(building):
 			continue
 		seen[building] = true
-		if (building as Node2D).has_meta(BUILDING_UID_META) and String((building as Node2D).get_meta(BUILDING_UID_META)) == uid:
+		if (building as Node2D).has_meta(PlanSerializer.BUILDING_UID_META) and String((building as Node2D).get_meta(PlanSerializer.BUILDING_UID_META)) == uid:
 			return building as Node2D
 	return null
 
@@ -600,16 +599,6 @@ func _cell_from_variant(value: Variant) -> Vector2i:
 	return Vector2i.ZERO
 
 
-func _ensure_building_uid(building: Node) -> String:
-	if building == null:
-		return ""
-	if building.has_meta(BUILDING_UID_META):
-		var existing := String(building.get_meta(BUILDING_UID_META))
-		if existing != "":
-			return existing
-	var uid := "bldg_%d_%d" % [Time.get_ticks_usec(), randi()]
-	building.set_meta(BUILDING_UID_META, uid)
-	return uid
 
 
 func _generate_annotation_id() -> String:

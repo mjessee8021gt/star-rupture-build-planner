@@ -6,7 +6,6 @@ const UiScale = preload("res://Scripts/ui_scale.gd")
 signal close_requested
 signal generate_requested(request: Dictionary)
 
-const RECIPES_ROOT := "res://Recipes"
 const RECIPE_POPUP_MAX_SIZE := Vector2i(360, 420)
 const WHAT_IF_PANEL_SIZE := Vector2(1280, 720)
 const WHAT_IF_PANEL_VIEWPORT_MARGIN := 12.0
@@ -425,30 +424,13 @@ func _setup_selector() -> void:
 
 
 func _load_root_recipes() -> Array[Recipe]:
-	var registry_recipes := _load_root_recipes_from_registry()
-	if not registry_recipes.is_empty():
-		return registry_recipes
-
-	var recipes: Array[Recipe] = []
-	var dir := DirAccess.open(RECIPES_ROOT)
-	if dir == null:
-		push_warning("WhatIfMachine: Could not open %s." % RECIPES_ROOT)
-		return recipes
-
-	var file_names := dir.get_files()
-	file_names.sort()
-	for file_name in file_names:
-		if file_name.get_extension().to_lower() != "tres":
-			continue
-
-		var recipe := load(RECIPES_ROOT.path_join(file_name)) as Recipe
-		if recipe == null:
-			continue
-		recipes.append(recipe)
-
-	recipes.sort_custom(func(a: Recipe, b: Recipe) -> bool:
-		return _get_recipe_display_name(a).nocasecmp_to(_get_recipe_display_name(b)) < 0
-	)
+	# Recipes come exclusively from the preloaded RecipeRegistry, which is
+	# web-safe. The old res://Recipes DirAccess scan was removed: runtime res://
+	# directory enumeration is unreliable in exported/HTML5 builds and only
+	# duplicated the registry as the source of truth.
+	var recipes := _load_root_recipes_from_registry()
+	if recipes.is_empty():
+		push_warning("WhatIfMachine: RecipeRegistry returned no root recipes.")
 	return recipes
 
 
@@ -998,20 +980,7 @@ func _build_pdf_bytes_from_lines(lines: Array[Dictionary]) -> PackedByteArray:
 			content,
 		])
 
-	var pdf := "%PDF-1.4\n"
-	var offsets: Array[int] = [0]
-	for object in objects:
-		offsets.append(pdf.to_utf8_buffer().size())
-		pdf += object + "\n"
-
-	var xref_offset := pdf.to_utf8_buffer().size()
-	pdf += "xref\n0 %d\n" % offsets.size()
-	pdf += "0000000000 65535 f \n"
-	for i in range(1, offsets.size()):
-		pdf += "%010d 00000 n \n" % offsets[i]
-	pdf += "trailer << /Size %d /Root 1 0 R >>\n" % offsets.size()
-	pdf += "startxref\n%d\n%%%%EOF" % xref_offset
-	return pdf.to_utf8_buffer()
+	return PdfWriter.assemble(objects)
 
 
 func _paginate_pdf_lines(lines: Array[Dictionary]) -> Array:
@@ -1044,7 +1013,7 @@ func _build_pdf_page_content(page_lines: Array) -> String:
 		var font_name := String(line.get("font", "F1"))
 		var font_size := int(line.get("font_size", PDF_DEFAULT_FONT_SIZE))
 		var y := int(line.get("y", PDF_TOP_Y))
-		var text := _pdf_escape_text(String(line.get("text", "")))
+		var text := PdfWriter.escape_text(String(line.get("text", "")))
 		commands.append("BT /%s %d Tf %d %d Td (%s) Tj ET" % [
 			font_name,
 			font_size,
@@ -1053,10 +1022,6 @@ func _build_pdf_page_content(page_lines: Array) -> String:
 			text,
 		])
 	return "\n".join(commands)
-
-
-func _pdf_escape_text(value: String) -> String:
-	return value.replace("\\", "\\\\").replace("(", "\\(").replace(")", "\\)")
 
 
 func _format_quantity(value: float) -> String:
