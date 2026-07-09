@@ -1,4 +1,4 @@
-extends Node2D
+﻿extends Node2D
 
 const Palette = preload("res://Scripts/palette.gd")
 const UiScale = preload("res://Scripts/ui_scale.gd")
@@ -95,9 +95,8 @@ const COMMAND_TOGGLE_TOOLBOX := &"tools.toggle_toolbox"
 const COMMAND_CONTROLS := &"tools.controls"
 const COMMAND_PATCH_NOTES := &"help.patch_notes"
 # Visual Debug Layers: a master toggle plus independent, stackable diagnostic layers.
-const DEBUG_LAYER_OVERLAY_SCRIPT := preload("res://Scripts/debug_layer_overlay.gd")
-const DEBUG_LAYER_MODEL := preload("res://Scripts/debug_layer_model.gd")
-const DEBUG_LAYER_OVERLAY_Z := 120     # above high-visibility rails (RAIL_Z_HIGH_VISIBILITY = 100)
+# The overlay subsystem itself lives in DebugLayersController (_debug_layers); main only
+# owns the command ids and the command id -> layer id bridge below.
 const COMMAND_DEBUG_LAYERS := &"debug.layers"
 const COMMAND_DEBUG_LAYER_HEALTH := &"debug.layer.health"
 const COMMAND_DEBUG_LAYER_HEATMAP := &"debug.layer.heatmap"
@@ -114,12 +113,6 @@ const DEBUG_LAYER_IDS := {
 	COMMAND_DEBUG_LAYER_ORPHAN: "orphan",
 	COMMAND_DEBUG_LAYER_TIERING: "tiering",
 	COMMAND_DEBUG_LAYER_SATURATION: "saturation",
-}
-const DEBUG_HEATMAP_METRICS := ["heat", "power", "cost"]
-const DEBUG_HEATMAP_METRIC_LABELS := {
-	"heat": "Heat",
-	"power": "Power",
-	"cost": "Build Cost",
 }
 
 @onready var camera: Camera2D = $Camera2D
@@ -184,12 +177,7 @@ var _flow_simulation_refresh_queued := false
 var _flow_simulation_state: Dictionary = {}
 var _last_flow_simulation_result: Dictionary = {}
 var _pathing_intelligence_refresh_queued := false
-var _debug_layers_enabled := false
-var _debug_layer_active: Dictionary = {}       # layer id (String) -> bool
-var _debug_heatmap_metric := 0                  # index into DEBUG_HEATMAP_METRICS
-var _debug_layer_overlay: Node2D = null
-var _debug_layers_refresh_queued := false
-var _debug_layers_legend: PanelContainer = null
+var _debug_layers: DebugLayersController = null
 var _viewport_ui_scale := 1.0
 var _accessibility_scale := UiScale.ACCESSIBILITY_DEFAULT_SCALE
 var _ui_scale := 1.0
@@ -207,6 +195,7 @@ func _ready() -> void:
 	meteor_core_cost_label.text = "0"
 	_setup_flow_simulation_view()
 	_setup_pathing_intelligence()
+	_debug_layers = DebugLayersController.new(self)
 	_setup_debug_layers()
 	_setup_save_load_ui()
 	_setup_top_menu_bar()
@@ -812,426 +801,23 @@ func _show_flow_debug_lines(lines: Array[String]) -> void:
 # adjacency. One refresh builds the graph + assessment once and feeds all layers.
 
 func _setup_debug_layers() -> void:
-	if path_manager != null and path_manager.has_signal("rail_graph_changed"):
-		var refresh_callable := Callable(self, "_queue_debug_layers_refresh")
-		if not path_manager.is_connected("rail_graph_changed", refresh_callable):
-			path_manager.connect("rail_graph_changed", refresh_callable)
+	_debug_layers.setup()
 
 
 func _toggle_debug_layers() -> void:
-	_debug_layers_enabled = not _debug_layers_enabled
-	if _debug_layers_enabled:
-		if not _any_debug_layer_active():
-			_debug_layer_active["health"] = true   # sensible default so the toggle shows something
-		_refresh_debug_layers()
-	else:
-		var overlay := _get_debug_layer_overlay()
-		if overlay != null:
-			overlay.call("set_enabled", false)
-		_update_debug_legend()
+	_debug_layers.toggle_enabled()
 
 
 func _toggle_debug_layer(command_id: StringName) -> void:
-	if not _debug_layers_enabled:
-		return
-	var layer_id := String(DEBUG_LAYER_IDS.get(command_id, ""))
-	if layer_id == "":
-		return
-	_debug_layer_active[layer_id] = not bool(_debug_layer_active.get(layer_id, false))
-	_refresh_debug_layers()
+	_debug_layers.toggle_layer(String(DEBUG_LAYER_IDS.get(command_id, "")))
 
 
 func _cycle_debug_heatmap_metric() -> void:
-	if not _debug_layers_enabled or not bool(_debug_layer_active.get("heatmap", false)):
-		return
-	_debug_heatmap_metric = (_debug_heatmap_metric + 1) % DEBUG_HEATMAP_METRICS.size()
-	_refresh_debug_layers()
-
-
-func _any_debug_layer_active() -> bool:
-	for layer_id in _debug_layer_active.keys():
-		if bool(_debug_layer_active[layer_id]):
-			return true
-	return false
-
-
-func _get_debug_layer_overlay() -> Node2D:
-	if _debug_layer_overlay != null and is_instance_valid(_debug_layer_overlay):
-		return _debug_layer_overlay
-	if path_manager == null:
-		return null
-	_debug_layer_overlay = DEBUG_LAYER_OVERLAY_SCRIPT.new()
-	_debug_layer_overlay.name = "DebugLayerOverlay"
-	_debug_layer_overlay.z_index = DEBUG_LAYER_OVERLAY_Z
-	path_manager.add_child(_debug_layer_overlay)
-	_debug_layer_overlay.call("set_scale_factor", _ui_scale)
-	return _debug_layer_overlay
+	_debug_layers.cycle_heatmap_metric()
 
 
 func _queue_debug_layers_refresh() -> void:
-	if not _debug_layers_enabled or _debug_layers_refresh_queued:
-		return
-	_debug_layers_refresh_queued = true
-	call_deferred("_refresh_debug_layers")
-
-
-func _refresh_debug_layers() -> void:
-	_debug_layers_refresh_queued = false
-	var overlay := _get_debug_layer_overlay()
-	if overlay == null:
-		return
-	if not _debug_layers_enabled:
-		overlay.call("set_enabled", false)
-		_update_debug_legend()
-		return
-	if buildings_root == null:
-		overlay.call("set_enabled", false)
-		return
-
-	var graph: Dictionary = FLOW_GRAPH_BUILDER.build_from_scene(buildings_root, path_manager)
-	var simulation: Dictionary = {}
-	var graph_edges = graph.get("edges", [])
-	if graph_edges is Array and not (graph_edges as Array).is_empty():
-		var simulator: RefCounted = FLOW_SIMULATOR.new()
-		simulation = simulator.simulate(graph)
-	var options := {"world_units_per_tile": _pathing_world_units_per_tile()}
-	var assessment: Dictionary = PATHING_INTELLIGENCE.analyze_graph(graph, simulation, options)
-
-	overlay.call("set_scale_factor", _ui_scale)
-	overlay.call("set_active_layers", _debug_layer_active)
-	overlay.call("set_payload", _build_debug_layer_payload(graph, assessment, simulation))
-	overlay.call("set_enabled", true)
-	_update_debug_legend()
-
-
-func _build_debug_layer_payload(graph: Dictionary, assessment: Dictionary, simulation: Dictionary) -> Dictionary:
-	var nodes := _debug_as_array(graph.get("nodes", []))
-	var building_assessments: Dictionary = assessment.get("building_assessments", {}) if assessment.get("building_assessments", {}) is Dictionary else {}
-	var edge_supply: Dictionary = assessment.get("edge_supply", {}) if assessment.get("edge_supply", {}) is Dictionary else {}
-	var tile := _pathing_world_units_per_tile()
-	if tile <= 0.0:
-		tile = 64.0
-
-	var geo := {}          # node_id -> {center: Vector2, size: Vector2}
-	var node_by_id := {}
-	for node_variant in nodes:
-		if not (node_variant is Dictionary):
-			continue
-		var node: Dictionary = node_variant
-		var node_id := String(node.get("id", ""))
-		if node_id == "":
-			continue
-		node_by_id[node_id] = node
-		geo[node_id] = {
-			"center": _debug_node_center(node),
-			"size": _debug_node_size(node, tile),
-		}
-
-	return {
-		"health": _build_debug_health_payload(building_assessments, geo),
-		"heatmap": _build_debug_heatmap_payload(nodes, geo),
-		"waste": _build_debug_waste_payload(edge_supply, geo),
-		"orphan": _build_debug_orphan_payload(graph, node_by_id, geo),
-		"tiering": _build_debug_tiering_payload(graph, nodes, geo),
-		"saturation": _build_debug_saturation_payload(simulation),
-	}
-
-
-func _build_debug_tiering_payload(graph: Dictionary, nodes: Array, geo: Dictionary) -> Dictionary:
-	var result: Dictionary = DEBUG_LAYER_MODEL.production_tiers(graph)
-	var tiers: Dictionary = result.get("tiers", {}) if result.get("tiers", {}) is Dictionary else {}
-	var max_tier := int(result.get("max_tier", 0))
-	var entries: Array = []
-	for node_variant in nodes:
-		if not (node_variant is Dictionary):
-			continue
-		var node: Dictionary = node_variant
-		# Supports/junctions are transparent to the chain, so don't clutter the map with them.
-		var kind := String(node.get("kind", "")).to_lower()
-		if kind == "support" or kind == "junction" or kind == "router":
-			continue
-		var node_id := String(node.get("id", ""))
-		if not tiers.has(node_id):
-			continue
-		var g = geo.get(node_id, {})
-		if not (g is Dictionary) or (g as Dictionary).is_empty():
-			continue
-		var tier := int(tiers[node_id])
-		var t := (float(tier) / float(max_tier)) if max_tier > 0 else 0.0
-		entries.append({"center": g["center"], "size": g["size"], "tier": tier, "t": t})
-	return {"entries": entries, "max_tier": max_tier}
-
-
-func _build_debug_saturation_payload(simulation: Dictionary) -> Dictionary:
-	var saturations: Dictionary = DEBUG_LAYER_MODEL.rail_saturations(simulation)
-	var rails: Array = []
-	for edge_id in saturations.keys():
-		var info = saturations[edge_id]
-		if not (info is Dictionary):
-			continue
-		var points := _debug_rail_global_points(String(edge_id))
-		if points.size() >= 2:
-			rails.append({"points": points, "state": String((info as Dictionary).get("state", "spare"))})
-	return {"rails": rails}
-
-
-func _build_debug_health_payload(building_assessments: Dictionary, geo: Dictionary) -> Array:
-	var entries: Array = []
-	for node_id in building_assessments.keys():
-		var ba = building_assessments[node_id]
-		if not (ba is Dictionary):
-			continue
-		var state := String(DEBUG_LAYER_MODEL.health_state(ba))
-		if state == "":
-			continue
-		var g = geo.get(String(node_id), {})
-		if not (g is Dictionary) or (g as Dictionary).is_empty():
-			continue
-		entries.append({
-			"center": g["center"],
-			"size": g["size"],
-			"state": state,
-			"label": String((ba as Dictionary).get("node_label", "")),
-		})
-	return entries
-
-
-func _build_debug_heatmap_payload(nodes: Array, geo: Dictionary) -> Dictionary:
-	var metric := String(DEBUG_HEATMAP_METRICS[_debug_heatmap_metric])
-	var raw: Array = []
-	var values: Array = []
-	for node_variant in nodes:
-		if not (node_variant is Dictionary):
-			continue
-		var node: Dictionary = node_variant
-		var building := _debug_building_for_node(node)
-		if building == null:
-			continue
-		var value := _debug_building_metric(building, metric)
-		if value <= 0.0:
-			continue
-		var g = geo.get(String(node.get("id", "")), {})
-		if not (g is Dictionary) or (g as Dictionary).is_empty():
-			continue
-		raw.append({"center": g["center"], "size": g["size"], "value": value})
-		values.append(value)
-
-	var ts := DEBUG_LAYER_MODEL.normalize(values)
-	var entries: Array = []
-	for i in range(raw.size()):
-		var item: Dictionary = raw[i]
-		entries.append({"center": item["center"], "size": item["size"], "t": float(ts[i]), "value": item["value"]})
-	return {"metric": metric, "entries": entries}
-
-
-func _debug_building_metric(building: Node, metric: String) -> float:
-	match metric:
-		"heat":
-			return absf(float(building.get("heat"))) if "heat" in building else 0.0
-		"power":
-			return absf(float(building.get("power"))) if "power" in building else 0.0
-		"cost":
-			return absf(float(building.get("build_cost_amount"))) if "build_cost_amount" in building else 0.0
-	return 0.0
-
-
-func _build_debug_waste_payload(edge_supply: Dictionary, geo: Dictionary) -> Dictionary:
-	var waste: Dictionary = DEBUG_LAYER_MODEL.waste_sources(edge_supply)
-	var buildings: Array = []
-	for from_id in _debug_as_array(waste.get("from_ids", [])):
-		var g = geo.get(String(from_id), {})
-		if g is Dictionary and not (g as Dictionary).is_empty():
-			buildings.append({"center": g["center"], "size": g["size"]})
-	var rails: Array = []
-	for edge_id in _debug_as_array(waste.get("edge_ids", [])):
-		var points := _debug_rail_global_points(String(edge_id))
-		if points.size() >= 2:
-			rails.append({"points": points})
-	return {"buildings": buildings, "rails": rails}
-
-
-func _build_debug_orphan_payload(graph: Dictionary, node_by_id: Dictionary, geo: Dictionary) -> Dictionary:
-	var result: Dictionary = DEBUG_LAYER_MODEL.orphans(graph)
-	var buildings: Array = []
-	for node_id in _debug_as_array(result.get("disconnected", [])):
-		var g = geo.get(String(node_id), {})
-		if g is Dictionary and not (g as Dictionary).is_empty():
-			buildings.append({"center": g["center"], "size": g["size"]})
-
-	var ports: Array = []
-	var unconnected: Dictionary = result.get("unconnected_ports", {}) if result.get("unconnected_ports", {}) is Dictionary else {}
-	for node_id in unconnected.keys():
-		var node = node_by_id.get(String(node_id), {})
-		if not (node is Dictionary):
-			continue
-		var building := _debug_building_for_node(node)
-		if building == null:
-			continue
-		for port_name in _debug_as_array(unconnected[node_id]):
-			var port_pos = _debug_port_global_position(building, String(port_name))
-			if port_pos is Vector2:
-				ports.append({"pos": port_pos})
-	return {"buildings": buildings, "ports": ports}
-
-
-func _debug_port_global_position(building: Node, port_name: String):
-	var ports_root = building.get_node_or_null("Ports")
-	if ports_root == null:
-		return null
-	var port_node = ports_root.get_node_or_null(port_name)
-	if port_node is Node2D:
-		return (port_node as Node2D).global_position
-	return null
-
-
-func _debug_node_center(node: Dictionary) -> Vector2:
-	var position = node.get("position", null)
-	if position is Array and (position as Array).size() >= 2:
-		return Vector2(float(position[0]), float(position[1]))
-	if position is Vector2:
-		return position
-	return Vector2.ZERO
-
-
-func _debug_node_size(node: Dictionary, tile: float) -> Vector2:
-	var building := _debug_building_for_node(node)
-	if building != null and build_manager != null and build_manager.has_method("get_rotated_footprint"):
-		var footprint = build_manager.call("get_rotated_footprint", building)
-		if footprint is Vector2i and footprint != Vector2i.ZERO:
-			return Vector2(footprint) * tile
-	return Vector2(tile, tile)
-
-
-func _debug_building_for_node(node: Dictionary) -> Node:
-	var instance_id = node.get("instance_id", 0)
-	if typeof(instance_id) == TYPE_INT and int(instance_id) != 0:
-		var obj = instance_from_id(int(instance_id))
-		if obj is Node and is_instance_valid(obj):
-			return obj as Node
-	return null
-
-
-func _debug_rail_global_points(edge_id: String) -> PackedVector2Array:
-	var points := PackedVector2Array()
-	var prefix := "rail_"
-	if not edge_id.begins_with(prefix):
-		return points
-	var instance_id := int(edge_id.trim_prefix(prefix))
-	if instance_id == 0:
-		return points
-	var obj = instance_from_id(instance_id)
-	if not (obj is Path2D) or not is_instance_valid(obj):
-		return points
-	var path := obj as Path2D
-	# The routed geometry lives on the "route_polyline_local" meta (falling back to the
-	# Line2D child's points), not on Path2D.curve — mirror PathManager._get_path_global_points.
-	var source_points = path.get_meta("route_polyline_local") if path.has_meta("route_polyline_local") else null
-	if source_points == null:
-		var line := path.get_node_or_null("Line") as Line2D
-		if line == null:
-			for child in path.get_children():
-				if child is Line2D:
-					line = child as Line2D
-					break
-		if line != null:
-			source_points = line.points
-	if source_points == null:
-		return points
-	for local_point in source_points:
-		if local_point is Vector2:
-			points.append(path.to_global(local_point))
-	return points
-
-
-func _debug_as_array(value) -> Array:
-	return value if value is Array else []
-
-
-func _update_debug_legend() -> void:
-	if not _debug_layers_enabled or not _any_debug_layer_active():
-		if _debug_layers_legend != null and is_instance_valid(_debug_layers_legend):
-			_debug_layers_legend.visible = false
-		return
-	var panel := _get_debug_legend()
-	var vbox := panel.get_node("Margin/Rows") as VBoxContainer
-	for child in vbox.get_children():
-		child.queue_free()
-
-	vbox.add_child(_debug_legend_title("Debug Layers"))
-	if bool(_debug_layer_active.get("health", false)):
-		vbox.add_child(_debug_legend_row(DEBUG_LAYER_OVERLAY_SCRIPT.HEALTH_SUPPLIED, "Supplied", false))
-		vbox.add_child(_debug_legend_row(DEBUG_LAYER_OVERLAY_SCRIPT.HEALTH_UNDER, "Under-supplied", false))
-		vbox.add_child(_debug_legend_row(DEBUG_LAYER_OVERLAY_SCRIPT.HEALTH_MISSING, "Missing input", false))
-		vbox.add_child(_debug_legend_row(DEBUG_LAYER_OVERLAY_SCRIPT.HEALTH_DISCONNECTED, "Disconnected", true))
-	if bool(_debug_layer_active.get("heatmap", false)):
-		var metric := String(DEBUG_HEATMAP_METRICS[_debug_heatmap_metric])
-		var metric_label := String(DEBUG_HEATMAP_METRIC_LABELS.get(metric, metric))
-		vbox.add_child(_debug_legend_row(DEBUG_LAYER_OVERLAY_SCRIPT.HEAT_HOT, "%s (low → high)" % metric_label, false))
-	if bool(_debug_layer_active.get("waste", false)):
-		vbox.add_child(_debug_legend_row(DEBUG_LAYER_OVERLAY_SCRIPT.WASTE_COLOR, "Wasted output", false))
-	if bool(_debug_layer_active.get("orphan", false)):
-		vbox.add_child(_debug_legend_row(DEBUG_LAYER_OVERLAY_SCRIPT.ORPHAN_COLOR, "Disconnected / unused port", true))
-	if bool(_debug_layer_active.get("tiering", false)):
-		vbox.add_child(_debug_legend_row(DEBUG_LAYER_OVERLAY_SCRIPT.TIER_HIGH, "Production stage (raw → final)", false))
-	if bool(_debug_layer_active.get("saturation", false)):
-		vbox.add_child(_debug_legend_row(DEBUG_LAYER_OVERLAY_SCRIPT.SATURATION_SPARE, "Rail: spare capacity", false))
-		vbox.add_child(_debug_legend_row(DEBUG_LAYER_OVERLAY_SCRIPT.SATURATION_NEAR, "Rail: near capacity (≥85%)", false))
-		vbox.add_child(_debug_legend_row(DEBUG_LAYER_OVERLAY_SCRIPT.SATURATION_OVER, "Rail: at / over capacity", false))
-
-	panel.visible = true
-	panel.reset_size()
-	_position_debug_legend(panel)
-
-
-func _get_debug_legend() -> PanelContainer:
-	if _debug_layers_legend != null and is_instance_valid(_debug_layers_legend):
-		return _debug_layers_legend
-	var panel := PanelContainer.new()
-	panel.name = "DebugLayerLegend"
-	panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	panel.add_theme_stylebox_override("panel", Palette.make_panel_style(Palette.SCENE_PANEL_FILL, Palette.SCENE_PANEL_BORDER))
-	var margin := MarginContainer.new()
-	margin.name = "Margin"
-	for side in ["left", "right", "top", "bottom"]:
-		margin.add_theme_constant_override("margin_" + side, 8)
-	panel.add_child(margin)
-	var vbox := VBoxContainer.new()
-	vbox.name = "Rows"
-	vbox.add_theme_constant_override("separation", 4)
-	margin.add_child(vbox)
-	var canvas := $Camera2D/CanvasLayer
-	canvas.add_child(panel)
-	_debug_layers_legend = panel
-	return panel
-
-
-func _debug_legend_title(text: String) -> Label:
-	var label := Label.new()
-	label.text = text
-	label.add_theme_color_override("font_color", Palette.TEXT_MUTED)
-	label.add_theme_font_size_override("font_size", int(round(12 * _ui_scale)))
-	return label
-
-
-func _debug_legend_row(color: Color, text: String, dashed: bool) -> HBoxContainer:
-	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 6)
-	var swatch := ColorRect.new()
-	swatch.custom_minimum_size = _scaled_vec2(Vector2(16, 12))
-	swatch.color = Palette.with_alpha(color, 1.0)
-	row.add_child(swatch)
-	var label := Label.new()
-	label.text = text + (" (dashed)" if dashed else "")
-	label.add_theme_color_override("font_color", Palette.TEXT_PRIMARY)
-	label.add_theme_font_size_override("font_size", int(round(13 * _ui_scale)))
-	row.add_child(label)
-	return row
-
-
-func _position_debug_legend(panel: PanelContainer) -> void:
-	var viewport_size := get_viewport().get_visible_rect().size
-	var margin := 12.0 * _ui_scale
-	panel.position = Vector2(margin, viewport_size.y - panel.size.y - margin)
+	_debug_layers.queue_refresh()
 
 
 func _setup_save_load_ui() -> void:
@@ -1422,9 +1008,9 @@ func _is_top_menu_command_enabled(command_id: StringName) -> bool:
 		COMMAND_DEBUG_LAYERS:
 			return FLOW_GRAPH_BUILDER != null and PATHING_INTELLIGENCE != null and buildings_root != null and path_manager != null
 		COMMAND_DEBUG_LAYER_HEALTH, COMMAND_DEBUG_LAYER_HEATMAP, COMMAND_DEBUG_LAYER_WASTE, COMMAND_DEBUG_LAYER_ORPHAN, COMMAND_DEBUG_LAYER_TIERING, COMMAND_DEBUG_LAYER_SATURATION:
-			return _debug_layers_enabled
+			return _debug_layers.is_enabled()
 		COMMAND_DEBUG_HEATMAP_METRIC:
-			return _debug_layers_enabled and bool(_debug_layer_active.get("heatmap", false))
+			return _debug_layers.is_heatmap_active()
 		COMMAND_ANNOTATION:
 			return annotation_layer != null and annotation_layer.has_method("toggle_annotation_mode")
 		COMMAND_WHAT_IF:
@@ -1450,10 +1036,10 @@ func _sync_command_bar_state() -> void:
 	var active_flow_layer := _get_active_flow_layer_mode()
 	for layer_command in FLOW_LAYER_COMMANDS.keys():
 		top_menu_bar.set_command_pressed(layer_command, _flow_simulation_enabled and int(FLOW_LAYER_COMMANDS[layer_command]) == active_flow_layer)
-	top_menu_bar.set_command_pressed(COMMAND_DEBUG_LAYERS, _debug_layers_enabled)
+	top_menu_bar.set_command_pressed(COMMAND_DEBUG_LAYERS, _debug_layers.is_enabled())
 	for debug_command in DEBUG_LAYER_IDS.keys():
 		var debug_layer_id := String(DEBUG_LAYER_IDS[debug_command])
-		top_menu_bar.set_command_pressed(debug_command, _debug_layers_enabled and bool(_debug_layer_active.get(debug_layer_id, false)))
+		top_menu_bar.set_command_pressed(debug_command, _debug_layers.is_enabled() and _debug_layers.is_layer_active(debug_layer_id))
 	top_menu_bar.set_command_pressed(COMMAND_ANNOTATION, _is_annotation_tool_active())
 	top_menu_bar.set_command_pressed(COMMAND_WHAT_IF, _is_what_if_machine_open())
 	top_menu_bar.set_command_pressed(COMMAND_TOGGLE_TOOLBOX, _is_toolbox_persistence_enabled())
@@ -1695,10 +1281,7 @@ func _apply_ui_scale() -> void:
 	if _blueprint_overlay != null and _blueprint_overlay.has_method("set_ui_scale"):
 		_blueprint_overlay.call("set_ui_scale", _ui_scale)
 
-	if _debug_layer_overlay != null and is_instance_valid(_debug_layer_overlay):
-		_debug_layer_overlay.call("set_scale_factor", _ui_scale)
-	if _debug_layers_enabled:
-		_update_debug_legend()
+	_debug_layers.on_ui_scale_changed()
 
 	_apply_building_ui_scale()
 
@@ -3168,7 +2751,7 @@ func _process_history_input() -> bool:
 
 func _capture_history_state() -> Dictionary:
 	# _collect_save_state() builds a fresh, pure-data dictionary every call, so
-	# the result is already independent of live state — no deep copy needed.
+	# the result is already independent of live state â€” no deep copy needed.
 	var state := _collect_save_state()
 	state.erase("saved_at_unix")
 	state.erase("camera")
