@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b2uvvinlesok3"]
+
+[ext_resource type="Script" path="res://Tools/test_save_load_roundtrip.gd" id="1"]
+
+[node name="TestSaveLoadRoundtrip" type="Node"]
+script = ExtResource("1")
