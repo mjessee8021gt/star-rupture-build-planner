@@ -168,10 +168,7 @@ var _what_if_machine_overlay: Control
 var _pending_what_if_generation_request: Dictionary = {}
 var _command_metadata: Dictionary = {}
 var _command_handlers: Dictionary = {}
-var _flow_simulation_enabled := false
-var _flow_simulation_refresh_queued := false
-var _flow_simulation_state: Dictionary = {}
-var _last_flow_simulation_result: Dictionary = {}
+var _flow_sim: FlowSimulationController = null
 var _pathing_intelligence_refresh_queued := false
 var _debug_layers: DebugLayersController = null
 var _viewport_ui_scale := 1.0
@@ -189,6 +186,7 @@ func _ready() -> void:
 	bbm_cost_label.text = "0"
 	ibm_cost_label.text = "0"
 	meteor_core_cost_label.text = "0"
+	_flow_sim = FlowSimulationController.new(self)
 	_setup_flow_simulation_view()
 	_setup_pathing_intelligence()
 	_debug_layers = DebugLayersController.new(self)
@@ -590,13 +588,7 @@ func _on_what_if_generate_requested(request: Dictionary) -> void:
 
 
 func _setup_flow_simulation_view() -> void:
-	if path_manager != null:
-		if path_manager.has_method("set_flow_simulation_enabled"):
-			path_manager.call("set_flow_simulation_enabled", false)
-		if path_manager.has_signal("rail_graph_changed"):
-			var refresh_callable := Callable(self, "_queue_flow_simulation_refresh")
-			if not path_manager.is_connected("rail_graph_changed", refresh_callable):
-				path_manager.connect("rail_graph_changed", refresh_callable)
+	_flow_sim.setup()
 
 
 func _setup_pathing_intelligence() -> void:
@@ -709,88 +701,12 @@ func _pathing_catalog_producer_name(resource: StringName) -> String:
 	return String(registry.get_building_display_name(building_id))
 
 
-func _run_current_flow_simulation() -> Dictionary:
-	var graph: Dictionary = FLOW_GRAPH_BUILDER.build_from_scene(buildings_root, path_manager)
-	var simulator: RefCounted = FLOW_SIMULATOR.new()
-	var result = simulator.call("simulate", graph, 1.0, _flow_simulation_state)
-	if not (result is Dictionary):
-		return {
-			"ok": false,
-			"graph": graph,
-			"message": "Flow Sim: simulator returned an invalid result.",
-		}
-
-	_last_flow_simulation_result = (result as Dictionary).duplicate(true)
-	var next_state = _last_flow_simulation_result.get("state", {})
-	_flow_simulation_state = next_state.duplicate(true) if next_state is Dictionary else {}
-	if path_manager != null and path_manager.has_method("set_flow_simulation_result"):
-		path_manager.call("set_flow_simulation_result", _last_flow_simulation_result)
-
-	return {
-		"ok": true,
-		"graph": graph,
-		"result": _last_flow_simulation_result,
-	}
-
-
-func _run_flow_simulation_debug() -> void:
-	var simulation := _run_current_flow_simulation()
-	if not bool(simulation.get("ok", false)):
-		var error_lines: Array[String] = [str(simulation.get("message", "Flow Sim failed."))]
-		_show_flow_debug_lines(error_lines)
-		return
-
-	var lines: Array[String] = []
-	var graph: Dictionary = simulation.get("graph", {})
-	var graph_metadata: Dictionary = graph.get("metadata", {})
-	lines.append("Experimental Flow Simulation")
-	lines.append("Graph: %d buildings, %d rails" % [
-		int(graph_metadata.get("node_count", 0)),
-		int(graph_metadata.get("edge_count", 0))
-	])
-
-	var builder_warnings: Array = graph.get("builder_warnings", [])
-	for warning in builder_warnings:
-		if warning is Dictionary:
-			lines.append("Graph warning: %s" % str(warning.get("message", warning.get("type", "Unknown graph warning"))))
-
-	var result: Dictionary = simulation.get("result", {})
-	lines.append_array(FLOW_GRAPH_BUILDER.summarize_result(result))
-	_show_flow_debug_lines(lines)
-
-
 func _queue_flow_simulation_refresh() -> void:
-	if not _flow_simulation_enabled or _flow_simulation_refresh_queued:
-		return
-	_flow_simulation_refresh_queued = true
-	call_deferred("_refresh_flow_simulation_view")
-
-
-func _refresh_flow_simulation_view() -> void:
-	_flow_simulation_refresh_queued = false
-	if not _flow_simulation_enabled:
-		return
-	var simulation := _run_current_flow_simulation()
-	if not bool(simulation.get("ok", false)):
-		push_warning(str(simulation.get("message", "Flow Sim failed.")))
+	_flow_sim.queue_refresh()
 
 
 func _clear_flow_simulation_cache() -> void:
-	_flow_simulation_state.clear()
-	_last_flow_simulation_result.clear()
-	if path_manager != null and path_manager.has_method("clear_flow_simulation_result"):
-		path_manager.call("clear_flow_simulation_result")
-
-
-func _show_flow_debug_lines(lines: Array[String]) -> void:
-	var debug_panel := $"Camera2D/CanvasLayer/Debug Panel"
-	if debug_panel != null:
-		debug_panel.visible = true
-
-	var debug_feed := $"Camera2D/CanvasLayer/Debug Panel/DebugFeed" as Label
-	if debug_feed == null:
-		return
-	debug_feed.text = "\n".join(lines)
+	_flow_sim.clear_cache()
 
 
 # --- Visual Debug Layers ------------------------------------------------------
@@ -978,7 +894,7 @@ func _is_top_menu_command_enabled(command_id: StringName) -> bool:
 		COMMAND_FLOW_SIMULATION:
 			return FLOW_GRAPH_BUILDER != null and FLOW_SIMULATOR != null and buildings_root != null and path_manager != null and path_manager.has_method("set_flow_simulation_enabled")
 		COMMAND_FLOW_LAYER_DELTA, COMMAND_FLOW_LAYER_USED, COMMAND_FLOW_LAYER_REQUESTED, COMMAND_FLOW_LAYER_BLOCKED, COMMAND_FLOW_LAYER_AVAILABLE, COMMAND_FLOW_LAYER_SATURATION:
-			return _flow_simulation_enabled and path_manager != null and path_manager.has_method("set_flow_layer_mode")
+			return _flow_sim.is_enabled() and path_manager != null and path_manager.has_method("set_flow_layer_mode")
 		COMMAND_DEBUG_LAYERS:
 			return FLOW_GRAPH_BUILDER != null and PATHING_INTELLIGENCE != null and buildings_root != null and path_manager != null
 		COMMAND_DEBUG_LAYER_HEALTH, COMMAND_DEBUG_LAYER_HEATMAP, COMMAND_DEBUG_LAYER_WASTE, COMMAND_DEBUG_LAYER_ORPHAN, COMMAND_DEBUG_LAYER_TIERING, COMMAND_DEBUG_LAYER_SATURATION:
@@ -1006,10 +922,10 @@ func _sync_command_bar_state() -> void:
 		top_menu_bar.set_command_enabled(command_id, _is_top_menu_command_enabled(command_id))
 	top_menu_bar.set_command_pressed(COMMAND_TOGGLE_PRODUCTION, prod_panel != null and prod_panel.visible)
 	top_menu_bar.set_command_pressed(COMMAND_RAIL_FLOW_RATE, _is_rail_flow_rate_visible())
-	top_menu_bar.set_command_pressed(COMMAND_FLOW_SIMULATION, _flow_simulation_enabled)
-	var active_flow_layer := _get_active_flow_layer_mode()
+	top_menu_bar.set_command_pressed(COMMAND_FLOW_SIMULATION, _flow_sim.is_enabled())
+	var active_flow_layer := _flow_sim.get_active_layer_mode()
 	for layer_command in FLOW_LAYER_COMMANDS.keys():
-		top_menu_bar.set_command_pressed(layer_command, _flow_simulation_enabled and int(FLOW_LAYER_COMMANDS[layer_command]) == active_flow_layer)
+		top_menu_bar.set_command_pressed(layer_command, _flow_sim.is_enabled() and int(FLOW_LAYER_COMMANDS[layer_command]) == active_flow_layer)
 	top_menu_bar.set_command_pressed(COMMAND_DEBUG_LAYERS, _debug_layers.is_enabled())
 	for debug_command in DEBUG_LAYER_IDS.keys():
 		var debug_layer_id := String(DEBUG_LAYER_IDS[debug_command])
@@ -1116,28 +1032,11 @@ func _is_rail_flow_rate_visible() -> bool:
 
 
 func _toggle_flow_simulation_view() -> void:
-	_flow_simulation_enabled = not _flow_simulation_enabled
-	if path_manager != null and path_manager.has_method("set_flow_simulation_enabled"):
-		path_manager.call("set_flow_simulation_enabled", _flow_simulation_enabled)
-	if _flow_simulation_enabled:
-		_flow_simulation_state.clear()
-		_refresh_flow_simulation_view()
-	elif path_manager != null and path_manager.has_method("clear_flow_simulation_result"):
-		path_manager.call("clear_flow_simulation_result")
+	_flow_sim.toggle()
 
 
 func _select_flow_layer(command_id: StringName) -> void:
-	if not _flow_simulation_enabled:
-		return
-	if path_manager == null or not path_manager.has_method("set_flow_layer_mode"):
-		return
-	path_manager.call("set_flow_layer_mode", int(FLOW_LAYER_COMMANDS.get(command_id, 0)))
-
-
-func _get_active_flow_layer_mode() -> int:
-	if path_manager != null and path_manager.has_method("get_flow_layer_mode"):
-		return int(path_manager.call("get_flow_layer_mode"))
-	return 0
+	_flow_sim.select_layer(int(FLOW_LAYER_COMMANDS.get(command_id, 0)))
 
 
 func _get_top_menu_command_rect(command_id: StringName) -> Rect2:
@@ -2196,10 +2095,10 @@ func _merge_what_if_flow_assignment(assignments_by_key: Dictionary, assignment_o
 
 
 func _validate_what_if_generation_flow() -> void:
-	if _flow_simulation_enabled:
-		_refresh_flow_simulation_view()
+	if _flow_sim.is_enabled():
+		_flow_sim.refresh_view()
 	else:
-		_clear_flow_simulation_cache()
+		_flow_sim.clear_cache()
 
 
 func _connect_what_if_generation_path(from_building: Node2D, from_port: NodePath, to_building: Node2D, to_port: NodePath, rail_version: int) -> void:
