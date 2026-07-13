@@ -71,6 +71,7 @@ var drag_anchor_offsets: Dictionary = {}
 var drag_original_positions: Dictionary = {}
 var drag_original_rotations: Dictionary = {}
 var drag_original_rotated_ticks: Dictionary = {}
+var drag_original_alternates: Dictionary = {}
 var drag_original_modulates: Dictionary = {}
 var drag_original_cells_by_building: Dictionary = {}
 var drag_last_cells_by_building: Dictionary = {}
@@ -2333,6 +2334,7 @@ func _start_drag_building(building: Node2D) -> void:
 	drag_original_positions.clear()
 	drag_original_rotations.clear()
 	drag_original_rotated_ticks.clear()
+	drag_original_alternates.clear()
 	drag_original_modulates.clear()
 	drag_original_cells_by_building.clear()
 	drag_last_cells_by_building.clear()
@@ -2348,6 +2350,7 @@ func _start_drag_building(building: Node2D) -> void:
 		drag_original_positions[drag_target] = drag_target.global_position
 		drag_original_rotations[drag_target] = drag_target.rotation
 		drag_original_rotated_ticks[drag_target] = int(drag_target.rotatedTick) if "rotatedTick" in drag_target else 0
+		drag_original_alternates[drag_target] = bool(drag_target.is_alternate) if "is_alternate" in drag_target else false
 		drag_original_modulates[drag_target] = drag_target.modulate
 		drag_original_cells_by_building[drag_target] = target_cells.duplicate()
 		drag_last_cells_by_building[drag_target] = target_cells.duplicate()
@@ -2381,8 +2384,9 @@ func _finish_drag_building() -> void:
 			drag_target.rotation = float(drag_original_rotations.get(drag_target, drag_target.rotation))
 			if "rotatedTick" in drag_target:
 				drag_target.rotatedTick = int(drag_original_rotated_ticks.get(drag_target, 0))
+			_restore_drag_alternate(drag_target)
 			occupy_cells(_get_cell_array_from_dictionary(drag_original_cells_by_building, drag_target), drag_target)
-	
+
 	for drag_target in drag_buildings:
 		if not is_instance_valid(drag_target):
 			continue
@@ -2409,6 +2413,7 @@ func _cancel_drag_building() -> void:
 		drag_target.rotation = float(drag_original_rotations.get(drag_target, drag_target.rotation))
 		if "rotatedTick" in drag_target:
 			drag_target.rotatedTick = int(drag_original_rotated_ticks.get(drag_target, 0))
+		_restore_drag_alternate(drag_target)
 		occupy_cells(_get_cell_array_from_dictionary(drag_original_cells_by_building, drag_target), drag_target)
 		_restore_drag_visual(drag_target)
 		if path_manager != null and path_manager.has_method("update_paths_for_building"):
@@ -2433,9 +2438,13 @@ func _drag_group_changed() -> bool:
 		var original_rotation := float(drag_original_rotations.get(drag_target, drag_target.rotation))
 		var original_rotated_tick := int(drag_original_rotated_ticks.get(drag_target, 0))
 		var final_rotated_tick := int(drag_target.rotatedTick) if "rotatedTick" in drag_target else original_rotated_tick
+		var original_alternate := bool(drag_original_alternates.get(drag_target, false))
+		var final_alternate := bool(drag_target.is_alternate) if "is_alternate" in drag_target else original_alternate
 		if drag_target.global_position.distance_to(original_position) > 0.01:
 			return true
 		if not is_equal_approx(drag_target.rotation, original_rotation) or final_rotated_tick != original_rotated_tick:
+			return true
+		if final_alternate != original_alternate:
 			return true
 	return false
 
@@ -2461,6 +2470,7 @@ func _reset_drag_state() -> void:
 	drag_original_positions.clear()
 	drag_original_rotations.clear()
 	drag_original_rotated_ticks.clear()
+	drag_original_alternates.clear()
 	drag_original_modulates.clear()
 	drag_original_cells_by_building.clear()
 	drag_last_cells_by_building.clear()
@@ -2535,6 +2545,27 @@ func _rotate_drag_buildings_90_degrees() -> bool:
 			rotated = _rotate_building_90_degrees(building) or rotated
 	return rotated
 
+# Toggle the alternate footprint on every dragged building that has one. Cells
+# were freed at drag start and revalidated each frame, so like rotation this only
+# needs to flip the layout; the _process drag branch recomputes footprint/validity.
+func _flip_drag_buildings() -> bool:
+	var flipped := false
+	for building in drag_buildings:
+		if is_instance_valid(building) and building.has_method("flip_footprint"):
+			building.flip_footprint()
+			flipped = true
+	return flipped
+
+# Return a dragged building to its pre-drag footprint (used on abort / invalid
+# drop). flip_footprint is a plain toggle, so flip once iff the state diverged.
+func _restore_drag_alternate(building: Node2D) -> void:
+	if not is_instance_valid(building) or not building.has_method("flip_footprint"):
+		return
+	if not ("is_alternate" in building):
+		return
+	if bool(building.is_alternate) != bool(drag_original_alternates.get(building, false)):
+		building.flip_footprint()
+
 func _rotate_selected_buildings_90_degrees() -> bool:
 	var buildings_to_rotate := _get_valid_selected_buildings()
 	if buildings_to_rotate.is_empty():
@@ -2605,6 +2636,8 @@ func _process(_delta: float) -> void:
 		var rotated_during_drag := false
 		if Input.is_action_just_pressed("Rotate"):
 			rotated_during_drag = _rotate_drag_buildings_90_degrees()
+		if Input.is_action_just_pressed("Alternate"):
+			rotated_during_drag = _flip_drag_buildings() or rotated_during_drag
 		mouse_pos = get_global_mouse_position() + drag_mouse_offset
 		anchor_cell = world_to_cell(mouse_pos)
 		var position_changed := false

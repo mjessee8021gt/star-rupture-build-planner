@@ -13,6 +13,7 @@ const VERSION_HISTORY_PANEL_SCRIPT := preload("res://Scripts/save_versions_panel
 const BlueprintStore := preload("res://Scripts/blueprint_store.gd")
 const BlueprintLibrary := preload("res://Scripts/blueprint_library.gd")
 const BLUEPRINT_PANEL_SCRIPT := preload("res://Scripts/blueprint_panel.gd")
+const ONBOARDING_HINT_SCRIPT := preload("res://Scripts/onboarding_hint.gd")
 const BLUEPRINT_FILE_EXTENSION := "srbpb"
 
 const SAVE_FILE_EXTENSION := "srbp"
@@ -144,6 +145,7 @@ var blueprint_save_dialog: FileDialog = null
 var blueprint_load_dialog: FileDialog = null
 var _blueprint_export_pending_id := ""
 var _web_blueprint_picker: WebFileBridge = null
+var _onboarding_hint: PanelContainer = null
 @onready var buildings_root: Node2D = $buildings
 @onready var annotation_layer: Node = $AnnotationLayer
 
@@ -200,6 +202,7 @@ func _ready() -> void:
 	_setup_blueprint_engine()
 	_setup_autosnapshot()
 	_setup_version_history_ui()
+	_setup_onboarding_hint()
 	_apply_ui_scale()
 	_apply_visual_theme()
 	get_viewport().size_changed.connect(_on_viewport_size_changed)
@@ -208,6 +211,7 @@ func _ready() -> void:
 	_sync_rail_alpha_controls_visibility()
 	call_deferred("_refresh_grid_visibility")
 	recenter_camera()
+	call_deferred("_maybe_show_onboarding_hint")
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -332,7 +336,18 @@ func _on_blueprints_pressed() -> void:
 	if _blueprint_overlay.visible:
 		_blueprint_overlay.call("close")
 	else:
+		_end_build_before_blueprint_ui()
 		_blueprint_overlay.call("open")
+
+
+# The Blueprints library and an armed stamp/group-build are mutually exclusive:
+# operating the library (export/import/stamp) while a stamp is still armed drives
+# an unrecoverable state that hard-freezes the single-threaded web build (UAT-01).
+# Ending any in-progress build before showing the library removes that state.
+func _end_build_before_blueprint_ui() -> void:
+	if build_manager != null and build_manager.has_method("is_build_mode_active") and bool(build_manager.call("is_build_mode_active")):
+		build_manager.call("cancel_build")
+	_active_stamp_blueprint = {}
 
 
 # --- Blueprint accessors / actions used by the library panel -----------------
@@ -372,6 +387,7 @@ func delete_blueprint(blueprint_id: String) -> bool:
 func export_blueprint(blueprint_id: String) -> void:
 	if blueprint_library == null:
 		return
+	_end_build_before_blueprint_ui()
 	if WebFileBridge.is_available():
 		var text: String = blueprint_library.export_text(blueprint_id)
 		if text != "":
@@ -383,6 +399,7 @@ func export_blueprint(blueprint_id: String) -> void:
 
 
 func import_blueprint() -> void:
+	_end_build_before_blueprint_ui()
 	if WebFileBridge.is_available():
 		_request_blueprint_import_from_browser()
 		return
@@ -999,6 +1016,35 @@ func _toggle_controls_menu() -> void:
 		control_menu.call("toggle_panel")
 
 
+func _setup_onboarding_hint() -> void:
+	_onboarding_hint = ONBOARDING_HINT_SCRIPT.new()
+	$Camera2D/CanvasLayer.add_child(_onboarding_hint)
+	_onboarding_hint.setup(self, _ui_scale)
+	_onboarding_hint.view_all_controls_requested.connect(_on_onboarding_view_all_controls)
+
+
+func _maybe_show_onboarding_hint() -> void:
+	if _onboarding_hint == null:
+		return
+	if _onboarding_hint.maybe_show_first_run():
+		_position_onboarding_hint()
+
+
+# The card tucks under the heat/power/cost box, tracking it across resolution and
+# UI-scale changes.
+func _position_onboarding_hint() -> void:
+	if _onboarding_hint == null or not _onboarding_hint.visible:
+		return
+	var resource_panel := $Camera2D/CanvasLayer/Panel as Control
+	if resource_panel == null:
+		return
+	_onboarding_hint.set_anchor_rect(Rect2(resource_panel.position, _control_visual_size(resource_panel)))
+
+
+func _on_onboarding_view_all_controls() -> void:
+	_toggle_controls_menu()
+
+
 func _toggle_patch_notes() -> void:
 	if patch_notes_button != null and patch_notes_button.has_method("toggle_panel"):
 		patch_notes_button.call("toggle_panel")
@@ -1153,6 +1199,8 @@ func _apply_ui_scale() -> void:
 		_version_history_overlay.call("set_ui_scale", _ui_scale)
 	if _blueprint_overlay != null and _blueprint_overlay.has_method("set_ui_scale"):
 		_blueprint_overlay.call("set_ui_scale", _ui_scale)
+	if _onboarding_hint != null and _onboarding_hint.has_method("set_ui_scale"):
+		_onboarding_hint.call("set_ui_scale", _ui_scale)
 
 	_debug_layers.on_ui_scale_changed()
 
@@ -1317,6 +1365,7 @@ func Adjust_ui_for_resolution() -> void:
 			get_viewport().size.x - resource_panel_size.x - _scaled(RESOURCE_PANEL_RIGHT_MARGIN),
 			max(top_menu_bottom - _scaled(TOOLBOX_TOP_OVERLAP), 0.0)
 		)
+		_position_onboarding_hint()
 	_layout_prod_panel()
 	$Camera2D/CanvasLayer/ControlMenu.position = Vector2(_scaled(TOOLBOX_LEFT_MARGIN), get_viewport().size.y - _scaled(50))
 	$"Camera2D/CanvasLayer/Patch Notes".position = Vector2(_scaled(TOOLBOX_LEFT_MARGIN), get_viewport().size.y - _scaled(50 + LEGACY_BOTTOM_TOOL_SPACING))

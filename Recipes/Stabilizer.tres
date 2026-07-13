@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_uhnxv"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_ouxvq"]
-[ext_resource type="Resource" uid="uid://cljavq2bjbcs8" path="res://Recipes/Item Stacks/Titanium_rod_20_def.tres" id="2_rcmau"]
-[ext_resource type="Resource" uid="uid://bp3us067jlnnw" path="res://Recipes/Item Stacks/Rotor_10_def.tres" id="3_1qd3v"]
+[ext_resource type="Resource" uid="uid://dbb4ixp7xr0qh" path="res://Recipes/Item Stacks/Rotor_20_def.tres" id="2_rcmau"]
+[ext_resource type="Resource" uid="uid://dx18ls4sej7mb" path="res://Recipes/Item Stacks/Titanium_rod_40_def.tres" id="3_1qd3v"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_q2nhx"]
-[ext_resource type="Resource" uid="uid://dmajke4rpvyt7" path="res://Recipes/Item Stacks/Stabilizer_10_def.tres" id="4_8rvqp"]
+[ext_resource type="Resource" uid="uid://b1trm2jfl5c3f" path="res://Recipes/Item Stacks/Stabilizer_20_def.tres" id="4_8rvqp"]
 
 [resource]
 script = ExtResource("2_ouxvq")
