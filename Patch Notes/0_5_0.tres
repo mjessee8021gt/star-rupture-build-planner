@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="PatchNote" format=3]
+
+[ext_resource type="Script" uid="uid://b6tmiam3vo7cr" path="res://Resources/PatchNote.gd" id="1_62m15"]
+
+[resource]
+script = ExtResource("1_62m15")
+patch_version = &"v0.5.0"
+patch_notes = "New Features:
+- Flow simulation: See how your factories will perform in real time as you build them outside of the game with the new extensive flow simulation tools.
+- Pathing Engine 2.0: Further refinement on rail pathing to make things look much cleaner as well as further intelligence baked into the rails as well as lineage and supplies.
+- Accessibility Scaling Slider: Adjust the UI scale between 50% and 250% of the native size to get the builder looking the best for your own display.
+- Selection Alignment Tools: with more than one building selected, be presented with tools like horizontal and vertical alignment, Compression, dispersion, and canned formations to quickly manipulate your factory designs and get them looking clean.
+- Blueprint System & Stamp Tool: Build small reusable segments of your factories, save them off as blueprints and recall them as needed from the blueprint menu to stamp into your designs to your hearts content.
+- Save Engine 2.0: Saves now support version history, version comparison, and version restoration. never live in fear that a simple mistake has ruined your entire build save for good. Rest easy in knowing that recovering your hard work is a version rollback away.
+- Eyedropper Enhancements: Due to popular demand the eyedropper tool now supports Mirroring on the Horizontal and Vertical axes when multiple buildings are selected as well as the ability to copy the rail pathing for all buildings copied.
+- Visual Debugging Layers for Factories: distinct and separate from the flow simulation, these debugging layers can help you to identify valuable information like under-fed factory buildings, dead ends, disconnects and Stages of development throughout the factory.
+- On-Grid annotations: A nice quality of life improvement for many, especially those sharing their builds in the Discord community. You can now leave annotations on grid squares or buildings to provide context about the factory or pieces of it.
+
+Improvements:
+- Move Build is now selection-first. Select what you want to move, tap Move Build, then left-click to confirm the new spot or right-click to cancel.
+- You can now flip a building's alternate layout while relocating it, not only when first placing it.
+- Rails routed between buildings will no longer cut straight through other buildings.
+- Large plans feel much smoother: the brief stall that could occur after each action has been eliminated.
+- New welcome window that provides new users with the basic, essential controls to help in removing some of that initial learning curve has been added.
+- Many of the new systems and functionality have been patched into the What If machine to improve the overall quality of it's output generated factories.
+
+Bug Fixes:
+- Fixed a freeze that could occur when exporting or importing a blueprint while the stamp tool was still active.
+- Corrected the Stabilizer recipe in the Fabricator.
+"
+known_issues = "- What-If rough-draft generation places the factory buildings needed for a target, but does not yet add Base Cores or power buildings. Treat a generated plan as a production starting point, not a complete, buildable base.
+- In the browser (itch.io) version, saving or overwriting named plans from inside the embedded player can be restricted by the browser. Use Export / Download to keep permanent copies of your work. Save versioning is still accessible in this state but it will generate a new file each time which is inconvenient.
+"
+metadata/_custom_type_script = "uid://b6tmiam3vo7cr"

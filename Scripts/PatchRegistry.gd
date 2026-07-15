@@ -8,7 +8,8 @@ const PATCHES := {
 	&"v0_1_3": preload("res://Patch Notes/0_1_3.tres"),
 	&"v0_2_0": preload("res://Patch Notes/0_2_0.tres"),
 	&"v_0_3_0": preload("res://Patch Notes/0_3_0.tres"),
-	&"v_0_4_0": preload("res://Patch Notes/0_4_0.tres")
+	&"v_0_4_0": preload("res://Patch Notes/0_4_0.tres"),
+	&"v_0_5_0": preload("res://Patch Notes/0_5_0.tres")
 }
 
 static func get_scene(key: StringName) -> Resource:

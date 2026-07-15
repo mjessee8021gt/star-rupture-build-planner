@@ -93,8 +93,8 @@ func _build_ui() -> void:
 	header.add_child(_title_label)
 
 	var button_row := HBoxContainer.new()
-	button_row.add_child(_make_button("Mirror ⇄  (H)", "horizontal"))
-	button_row.add_child(_make_button("Mirror ⇅  (G)", "vertical"))
+	button_row.add_child(_make_button("Mirror horizontal (H)", "horizontal"))
+	button_row.add_child(_make_button("Mirror vertical (G)", "vertical"))
 	_content.add_child(button_row)
 
 	# Deliberately NOT autowrapped: an autowrap Label that carries text while the

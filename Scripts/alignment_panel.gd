@@ -95,7 +95,7 @@ func on_selection_changed(selected_count: int, anchor_building: Node) -> void:
 	else:
 		_anchor_label.visible = false
 	_status_label.text = ""
-	call_deferred("_reposition")
+	call_deferred("_snap_to_content")
 
 
 # --- UI construction ---------------------------------------------------------
@@ -117,7 +117,7 @@ func _build_ui() -> void:
 	_anchor_label.visible = false
 	header.add_child(_anchor_label)
 
-	_options_button = _make_button("Options ▾", "")
+	_options_button = _make_button("Options +", "")
 	_options_button.pressed.connect(_toggle_advanced)
 	header.add_child(_options_button)
 
@@ -175,8 +175,8 @@ func _build_advanced_section() -> VBoxContainer:
 	_port_role_option = _make_option(PORT_ROLE_LABELS)
 	_port_role_option.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	port_row.add_child(_port_role_option)
-	var port_x := _make_button("Align ↕→X", "port_align_x")
-	var port_y := _make_button("Align ↔→Y", "port_align_y")
+	var port_x := _make_button("Align X", "port_align_x")
+	var port_y := _make_button("Align Y", "port_align_y")
 	port_row.add_child(port_x)
 	port_row.add_child(port_y)
 	box.add_child(_make_labeled_row("Ports", port_row))
@@ -264,7 +264,11 @@ func _show_result(result) -> void:
 func _toggle_advanced() -> void:
 	_advanced_open = not _advanced_open
 	_advanced_box.visible = _advanced_open
-	_options_button.text = "Options ▴" if _advanced_open else "Options ▾"
+	_options_button.text = "Options -" if _advanced_open else "Options +"
+	# Hiding the advanced box shrinks the content, but a Control's size only auto-
+	# grows and never shrinks, so the panel would stay oversized. Snap back to
+	# content (deferred so the container re-sorts to its new minimum first).
+	call_deferred("_snap_to_content")
 
 
 func _on_set_anchor() -> void:
@@ -284,6 +288,15 @@ func _anchor_display_name(building: Node) -> String:
 
 
 # --- Layout / styling --------------------------------------------------------
+
+func _snap_to_content() -> void:
+	# Shrink the panel back to its content's minimum size before repositioning, so a
+	# collapsed Options section (or hidden anchor label) can't leave it oversized.
+	if not is_inside_tree():
+		return
+	reset_size()
+	_reposition()
+
 
 func _reposition() -> void:
 	if get_viewport() == null:
