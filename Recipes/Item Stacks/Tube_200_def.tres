@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_p8if6")
 item = ExtResource("1_y7ply")
-qty = 200
+qty = 200.0
 id = &"Tube"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

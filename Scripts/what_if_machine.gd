@@ -494,7 +494,7 @@ func _update_quantity_textbox(recipe: Recipe) -> void:
 		_syncing_quantity_textbox = false
 		return
 
-	qty_textbox.text = str(recipe.outputs[0].qty)
+	qty_textbox.text = ItemStack.format_qty(recipe.outputs[0].qty)
 	_syncing_quantity_textbox = false
 
 

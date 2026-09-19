@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_6mh6w")
 item = ExtResource("1_7bcio")
-qty = 5
+qty = 5.0
 id = &"Ion Injector"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

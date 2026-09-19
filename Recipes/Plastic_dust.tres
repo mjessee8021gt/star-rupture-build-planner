@@ -3,15 +3,15 @@
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_rrmyd"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_eic0x"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_ev0cp"]
-[ext_resource type="Resource" uid="uid://cjm42lkbm6go8" path="res://Recipes/Item Stacks/Organic_Compound_12_def.tres" id="3_qskmo"]
-[ext_resource type="Resource" path="res://Recipes/Item Stacks/Basic_fuel_6_def.tres" id="4_n6fx3"]
-[ext_resource type="Resource" uid="uid://byyrcikcky3b7" path="res://Recipes/Item Stacks/Plastic_Dust_12_def.tres" id="5_2efhf"]
-[ext_resource type="Resource" uid="uid://d3sok5h1q0nmy" path="res://Recipes/Item Stacks/Plastic_12_def.tres" id="5_rt8dv"]
+[ext_resource type="Resource" uid="uid://fs8hwisp213" path="res://Recipes/Item Stacks/Organic_Compound_20_def.tres" id="s0_gen"]
+[ext_resource type="Resource" uid="uid://yptntde7gily" path="res://Recipes/Item Stacks/Basic_fuel_10_def.tres" id="s1_gen"]
+[ext_resource type="Resource" path="res://Recipes/Item Stacks/Plastic_10_def.tres" id="s2_gen"]
+[ext_resource type="Resource" uid="uid://cx2q83pa05d7u" path="res://Recipes/Item Stacks/Plastic_Dust_20_def.tres" id="s3_gen"]
 
 [resource]
 script = ExtResource("2_eic0x")
 id = &"Plastic Dust"
 display_name = "Plastic Dust"
-inputs = Array[ExtResource("1_rrmyd")]([ExtResource("3_qskmo"), ExtResource("4_n6fx3"), ExtResource("5_rt8dv")])
-outputs = Array[ExtResource("1_rrmyd")]([ExtResource("5_2efhf")])
+inputs = Array[ExtResource("1_rrmyd")]([ExtResource("s0_gen"), ExtResource("s1_gen"), ExtResource("s2_gen")])
+outputs = Array[ExtResource("1_rrmyd")]([ExtResource("s3_gen")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

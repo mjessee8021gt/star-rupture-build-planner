@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_2k27j")
 item = ExtResource("1_mqtrj")
-qty = 60
+qty = 60.0
 id = &"Calcite Sheet"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

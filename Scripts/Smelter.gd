@@ -130,9 +130,9 @@ func populate_recipe_dropdown() -> void:
 func _on_recipe_item_selected(index: int) -> void:
 	var recipe := recipe_dropdown.get_item_metadata(index) as Recipe
 	if recipe:
-		output_text.text = str(recipe.outputs[0].qty)
+		output_text.text = ItemStack.format_qty(recipe.outputs[0].qty)
 		output_box.tooltip_text = str(recipe.outputs[0].item.display_name)
-		input_text.text = str(recipe.inputs[0].qty)
+		input_text.text = ItemStack.format_qty(recipe.inputs[0].qty)
 		input_box.tooltip_text = str(recipe.inputs[0].item.display_name)
 		ProdLedger.add_source(get_instance_id(), self,get_production_deltas(recipe))
 		

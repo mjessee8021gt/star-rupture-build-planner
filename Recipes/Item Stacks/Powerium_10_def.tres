@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("1_f5v8h")
 item = ExtResource("1_vu7yr")
-qty = 10
+qty = 10.0
 id = &"Powerium"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

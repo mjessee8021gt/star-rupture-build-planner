@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_yujnl")
 item = ExtResource("1_o012t")
-qty = 3
+qty = 3.0
 id = &"RNA Stabilizer"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

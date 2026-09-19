@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_4bx87"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_cupqk"]
-[ext_resource type="Resource" uid="uid://d25xb4ei54vap" path="res://Recipes/Item Stacks/Tube_48_def.tres" id="2_xqhew"]
-[ext_resource type="Resource" uid="uid://ba1e7pk0lwtda" path="res://Recipes/Item Stacks/Titanoferrite_Ingot_48_Def.tres" id="3_efxfe"]
+[ext_resource type="Resource" uid="uid://bp1cbbqar0f2w" path="res://Recipes/Item Stacks/Tube_40_def.tres" id="2_xqhew"]
+[ext_resource type="Resource" uid="uid://cn5br531ax7e2" path="res://Recipes/Item Stacks/Titanoferrite_Ingot_20_Def.tres" id="3_efxfe"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_qfxew"]
-[ext_resource type="Resource" uid="uid://bd7gn5qebclmj" path="res://Recipes/Item Stacks/Titanium_beam_24_def.tres" id="4_d7sd1"]
-[ext_resource type="Resource" uid="uid://bwto7wwrajylv" path="res://Recipes/Item Stacks/Reinforced_Frame_12_def.tres" id="5_tr8io"]
+[ext_resource type="Resource" uid="uid://dspkhw71weab2" path="res://Recipes/Item Stacks/Titanium_beam_20_def.tres" id="4_d7sd1"]
+[ext_resource type="Resource" uid="uid://dv0ji8caercxh" path="res://Recipes/Item Stacks/Reinforced_Frame_20_def.tres" id="5_tr8io"]
 
 [resource]
 script = ExtResource("2_cupqk")

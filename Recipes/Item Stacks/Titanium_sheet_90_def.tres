@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://cb28sya67bqmo"]
+
+[ext_resource type="Resource" uid="uid://bbfjclub8pauv" path="res://Recipes/Item Definitions/Titanium_sheet_def.tres" id="1_je806"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_b2j1g"]
+
+[resource]
+script = ExtResource("2_b2j1g")
+item = ExtResource("1_je806")
+qty = 90.0
+id = &"Titanium Sheet"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("1_f0abe")
 item = ExtResource("1_ulnwu")
-qty = 3
+qty = 3.0
 id = &"Mars Habitat Base"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

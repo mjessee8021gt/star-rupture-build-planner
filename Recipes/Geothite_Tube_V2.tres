@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://ccrny5wnyh3m0"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_3uae2"]
+[ext_resource type="Resource" uid="uid://5butspmf2e78" path="res://Recipes/Item Stacks/Geothite_Ingot_30.tres" id="2_e3qis"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_fw1l7"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_e3qis"]
+[ext_resource type="Resource" uid="uid://cb28sya67bqmo" path="res://Recipes/Item Stacks/Titanium_sheet_90_def.tres" id="3_edpch"]
+[ext_resource type="Resource" uid="uid://yaf2pnl2xlbh" path="res://Recipes/Item Stacks/Tube_480_def.tres" id="4_edpch"]
+
+[resource]
+script = ExtResource("2_fw1l7")
+id = &"geothite_tube"
+display_name = "Tube (Geothite)"
+inputs = Array[ExtResource("1_3uae2")]([ExtResource("2_e3qis"), ExtResource("3_edpch")])
+outputs = Array[ExtResource("1_3uae2")]([ExtResource("4_edpch")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

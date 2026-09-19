@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_mcryq")
 item = ExtResource("1_ohlf8")
-qty = 30
+qty = 30.0
 id = &"Titanium Bar"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

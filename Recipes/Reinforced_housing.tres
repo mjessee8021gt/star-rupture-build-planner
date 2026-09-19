@@ -4,14 +4,14 @@
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_9yeng"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_8u474"]
 [ext_resource type="Resource" uid="uid://bs75ohv43ai2q" path="res://Recipes/Item Stacks/Titanium_housing_15_def.tres" id="3_j4uu5"]
-[ext_resource type="Resource" path="res://Recipes/Item Stacks/Wolfram_steel_ingot_60_def.tres" id="4_z1bvt"]
+[ext_resource type="Resource" uid="uid://dhix0vxqcr7ti" path="res://Recipes/Item Stacks/Wolfram_steel_ingot_30_def.tres" id="4_aooy4"]
+[ext_resource type="Resource" uid="uid://b2f3greijphno" path="res://Recipes/Item Stacks/Reinforced_Housing_45_def.tres" id="5_8qaso"]
 [ext_resource type="Resource" uid="uid://co4omxbr25fik" path="res://Recipes/Item Stacks/Wolfram_plate_45_def.tres" id="5_i4v5v"]
-[ext_resource type="Resource" uid="uid://ib8lnr58v5s6" path="res://Recipes/Item Stacks/Reinforced_Housing_15_def.tres" id="6_pwyic"]
 
 [resource]
 script = ExtResource("2_9yeng")
 id = &"Reinforced Housing"
 display_name = "Reinforced Housing"
-inputs = Array[ExtResource("1_bhv7r")]([ExtResource("3_j4uu5"), ExtResource("4_z1bvt"), ExtResource("5_i4v5v")])
-outputs = Array[ExtResource("1_bhv7r")]([ExtResource("6_pwyic")])
+inputs = Array[ExtResource("1_bhv7r")]([ExtResource("3_j4uu5"), ExtResource("5_i4v5v"), ExtResource("4_aooy4")])
+outputs = Array[ExtResource("1_bhv7r")]([ExtResource("5_8qaso")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

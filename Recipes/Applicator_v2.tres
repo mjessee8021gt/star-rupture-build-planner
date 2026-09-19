@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://cwsq7hfceltc0"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_jeu5x"]
+[ext_resource type="Resource" uid="uid://b8geom0h3uot7" path="res://Recipes/Item Stacks/Tube_150_def.tres" id="2_cp8f3"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_qmwh7"]
+[ext_resource type="Resource" uid="uid://dbecn2aqp2ytb" path="res://Recipes/Item Stacks/Glass_45_def.tres" id="3_bdium"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_cp8f3"]
+[ext_resource type="Resource" uid="uid://d2kurutdet27w" path="res://Recipes/Item Stacks/Applicator_60_def.tres" id="4_bdium"]
+
+[resource]
+script = ExtResource("2_qmwh7")
+id = &"applicator_v2"
+display_name = "Applicator"
+inputs = Array[ExtResource("1_jeu5x")]([ExtResource("2_cp8f3"), ExtResource("3_bdium")])
+outputs = Array[ExtResource("1_jeu5x")]([ExtResource("4_bdium")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

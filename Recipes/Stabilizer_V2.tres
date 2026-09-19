@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://d4bnjv0fnrrig"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_fpkkr"]
+[ext_resource type="Resource" uid="uid://dbb4ixp7xr0qh" path="res://Recipes/Item Stacks/Rotor_20_def.tres" id="2_n3o7h"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_v2tv6"]
+[ext_resource type="Resource" uid="uid://cgbegcaa86172" path="res://Recipes/Item Stacks/Titanium_rod_60_def.tres" id="3_6n3sh"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_yhrtk"]
+[ext_resource type="Resource" uid="uid://b7nyti7mwn2vs" path="res://Recipes/Item Stacks/Stabilizer_60_def.tres" id="4_df48v"]
+
+[resource]
+script = ExtResource("2_v2tv6")
+id = &"stabilizer_v2"
+display_name = "Stabilizer"
+inputs = Array[ExtResource("1_fpkkr")]([ExtResource("2_n3o7h"), ExtResource("3_6n3sh")])
+outputs = Array[ExtResource("1_fpkkr")]([ExtResource("4_df48v")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_bfnde")
 item = ExtResource("1_n7lo7")
-qty = 5
+qty = 5.0
 id = &"Carbon Sonar"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

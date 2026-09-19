@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://dl8uhy64u20yb"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_uu3v4"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_oailr"]
+[ext_resource type="Resource" uid="uid://g5tpj4x8jkf2" path="res://Recipes/Item Stacks/Liquid_helium_40_def.tres" id="2_xnigg"]
+[ext_resource type="Resource" uid="uid://g2gxquuri3hq" path="res://Recipes/Item Stacks/Geothite_Powder_40_def.tres" id="3_2qqf1"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_8gxaa"]
+[ext_resource type="Resource" path="res://Recipes/Item Stacks/Synthetic_Resin_40_def.tres" id="4_7ih2p"]
+[ext_resource type="Resource" path="res://Recipes/Item Stacks/Epoxy_120_def.tres" id="5_km77p"]
+
+[resource]
+script = ExtResource("2_oailr")
+id = &"Epoxy"
+display_name = "Epoxy"
+inputs = Array[ExtResource("1_uu3v4")]([ExtResource("2_xnigg"), ExtResource("3_2qqf1"), ExtResource("4_7ih2p")])
+outputs = Array[ExtResource("1_uu3v4")]([ExtResource("5_km77p")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

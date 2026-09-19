@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://c3l25q8aqemu7"]
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_3tyr7"]
-[ext_resource type="Resource" uid="uid://ccl3gmfgcc3j6" path="res://Recipes/Item Stacks/Liquid_helium_18_def.tres" id="2_afsmh"]
+[ext_resource type="Resource" uid="uid://ckprk276q7w8t" path="res://Recipes/Item Stacks/Epoxy_7.5_def.tres" id="2_afsmh"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_m1ygh"]
-[ext_resource type="Resource" uid="uid://cmle4fsjyu5ay" path="res://Recipes/Item Stacks/Onboard_Instruments_6_def.tres" id="3_8revb"]
+[ext_resource type="Resource" uid="uid://xwc2f38cjips" path="res://Recipes/Item Stacks/Liquid_helium_22.5_def.tres" id="3_8revb"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_j5cy5"]
-[ext_resource type="Resource" uid="uid://vmu5vhkrikhk" path="res://Recipes/Item Stacks/Epoxy_6_def.tres" id="4_tkghu"]
-[ext_resource type="Resource" uid="uid://cigbs2ugwut6y" path="res://Recipes/Item Stacks/Explosive_charge_6_def.tres" id="5_5it8q"]
-[ext_resource type="Resource" uid="uid://bynpsyigkyrr7" path="res://Recipes/Item Stacks/Ion_Stabilizer_6_def.tres" id="6_x5r7b"]
+[ext_resource type="Resource" uid="uid://bhspwdhkfexh" path="res://Recipes/Item Stacks/Onboard_Instruments_7.5_def.tres" id="4_tkghu"]
+[ext_resource type="Resource" uid="uid://c78ecfcbccmt" path="res://Recipes/Item Stacks/Explosive_charge_7.5_def.tres" id="5_5it8q"]
+[ext_resource type="Resource" uid="uid://cwnfn610omgou" path="res://Recipes/Item Stacks/Ion_Stabilizer_7.5_def.tres" id="6_x5r7b"]
 
 [resource]
 script = ExtResource("2_m1ygh")

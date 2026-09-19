@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_o1qjk")
 item = ExtResource("1_u85k7")
-qty = 30
+qty = 30.0
 id = &"Calcium Block"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

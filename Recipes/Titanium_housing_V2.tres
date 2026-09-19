@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://bngvh5hqfetu"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_fxoeb"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_5ntlk"]
+[ext_resource type="Resource" uid="uid://dpmjaqrnlnrwh" path="res://Recipes/Item Stacks/Titanium_beam_90_def.tres" id="2_545is"]
+[ext_resource type="Resource" uid="uid://bm7p243wemwmh" path="res://Recipes/Item Stacks/Titanium_sheet_60_def.tres" id="3_e3olo"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_ekh0l"]
+[ext_resource type="Resource" uid="uid://pv0oyrbfpb7" path="res://Recipes/Item Stacks/Titanium_housing_60_def.tres" id="4_c7r66"]
+
+[resource]
+script = ExtResource("2_5ntlk")
+id = &"Titanium Housing"
+display_name = "Titanium Housing"
+inputs = Array[ExtResource("1_fxoeb")]([ExtResource("2_545is"), ExtResource("3_e3olo")])
+outputs = Array[ExtResource("1_fxoeb")]([ExtResource("4_c7r66")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

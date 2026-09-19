@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_kma12")
 item = ExtResource("1_2j5r2")
-qty = 30
+qty = 30.0
 id = &"Sulfur Ore"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

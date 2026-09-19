@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_0mm3m")
 item = ExtResource("1_tiivd")
-qty = 12
+qty = 12.0
 id = &"Reinforced Frame"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

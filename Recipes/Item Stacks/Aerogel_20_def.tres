@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_e002p")
 item = ExtResource("1_uz1b9")
-qty = 20
+qty = 20.0
 id = &"Aerogel"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

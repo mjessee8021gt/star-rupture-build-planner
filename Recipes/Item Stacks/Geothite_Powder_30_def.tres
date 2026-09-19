@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_c2cfi")
 item = ExtResource("1_dh3s6")
-qty = 30
+qty = 30.0
 id = &"Geothite Powder"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

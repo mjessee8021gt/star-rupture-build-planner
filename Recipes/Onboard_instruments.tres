@@ -2,16 +2,16 @@
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_yqk40"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_hpwas"]
-[ext_resource type="Resource" uid="uid://c2in04m2kw4k1" path="res://Recipes/Item Stacks/Electronics_12_def.tres" id="2_urp5x"]
-[ext_resource type="Resource" uid="uid://botm1ajy2m5vl" path="res://Recipes/Item Stacks/Reinforced_Housing_12_def.tres" id="3_8630o"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_luaev"]
-[ext_resource type="Resource" uid="uid://cah24h885x33r" path="res://Recipes/Item Stacks/Stabilizer_24_def.tres" id="4_urp5x"]
-[ext_resource type="Resource" uid="uid://cbnlf304lrcr" path="res://Recipes/Item Stacks/Onboard_Instruments_12_def.tres" id="5_vwhh7"]
+[ext_resource type="Resource" uid="uid://clsyjbk5hok31" path="res://Recipes/Item Stacks/Electronics_10_def.tres" id="s0_gen"]
+[ext_resource type="Resource" uid="uid://b1trm2jfl5c3f" path="res://Recipes/Item Stacks/Stabilizer_20_def.tres" id="s1_gen"]
+[ext_resource type="Resource" path="res://Recipes/Item Stacks/Reinforced_Housing_10_def.tres" id="s2_gen"]
+[ext_resource type="Resource" path="res://Recipes/Item Stacks/Onboard_Instruments_20_def.tres" id="s3_gen"]
 
 [resource]
 script = ExtResource("2_hpwas")
 id = &"Onboard Instruments"
 display_name = "Onboard Instruments"
-inputs = Array[ExtResource("1_yqk40")]([ExtResource("2_urp5x"), ExtResource("3_8630o"), ExtResource("4_urp5x")])
-outputs = Array[ExtResource("1_yqk40")]([ExtResource("5_vwhh7")])
+inputs = Array[ExtResource("1_yqk40")]([ExtResource("s0_gen"), ExtResource("s1_gen"), ExtResource("s2_gen")])
+outputs = Array[ExtResource("1_yqk40")]([ExtResource("s3_gen")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

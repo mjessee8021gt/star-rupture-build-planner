@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_dpufx")
 item = ExtResource("1_6jhy5")
-qty = 40
+qty = 40.0
 id = &"Wolfram Steel Ingot"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

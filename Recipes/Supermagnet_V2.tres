@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://dul3i4cir6vxt"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_phihk"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_eubod"]
+[ext_resource type="Resource" uid="uid://s28sr15ww6ia" path="res://Recipes/Item Stacks/Sulpheric_acid_80_def.tres" id="2_w23ut"]
+[ext_resource type="Resource" uid="uid://dmwfn3bt24uh5" path="res://Recipes/Item Stacks/Wolfram_plate_80_def.tres" id="3_6ch56"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_mamyc"]
+[ext_resource type="Resource" uid="uid://d1ubtj2ls7c4e" path="res://Recipes/Item Stacks/Chemicals_40_def.tres" id="4_26jbs"]
+[ext_resource type="Resource" uid="uid://dsps88m1kd8e4" path="res://Recipes/Item Stacks/Supermagnet_40_def.tres" id="5_bir8g"]
+
+[resource]
+script = ExtResource("2_eubod")
+id = &"Supermagnet"
+display_name = "Supermagnet"
+inputs = Array[ExtResource("1_phihk")]([ExtResource("2_w23ut"), ExtResource("3_6ch56"), ExtResource("4_26jbs")])
+outputs = Array[ExtResource("1_phihk")]([ExtResource("5_bir8g")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

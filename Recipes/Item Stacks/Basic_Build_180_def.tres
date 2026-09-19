@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_s3cql")
 item = ExtResource("1_t272s")
-qty = 180
+qty = 180.0
 id = &"Basic Build Mats"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

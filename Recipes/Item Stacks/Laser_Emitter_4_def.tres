@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_quiqa")
 item = ExtResource("1_t2d0o")
-qty = 4
+qty = 4.0
 id = &"Laser Emitter"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

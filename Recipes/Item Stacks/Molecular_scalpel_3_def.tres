@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("1_4dwht")
 item = ExtResource("1_63j2u")
-qty = 3
+qty = 3.0
 id = &"Molecular Scalpel"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

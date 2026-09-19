@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://hy0wwadqqt8b"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_t5orp"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_o50j8"]
+[ext_resource type="Resource" uid="uid://osnioklqggqr" path="res://Recipes/Item Stacks/Synthetic_silicon_20_def.tres" id="2_viabg"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_hlaw1"]
+[ext_resource type="Resource" uid="uid://depywb6ba776v" path="res://Recipes/Item Stacks/Inductor_20_def.tres" id="3_qtahf"]
+[ext_resource type="Resource" uid="uid://cvtf0cjtqc7u1" path="res://Recipes/Item Stacks/Stator_10_def.tres" id="4_tiiq4"]
+[ext_resource type="Resource" uid="uid://cdggsroikh8mn" path="res://Recipes/Item Stacks/Electronics_30_def.tres" id="5_ufsur"]
+
+[resource]
+script = ExtResource("2_o50j8")
+id = &"Electronics"
+display_name = "Electronics"
+inputs = Array[ExtResource("1_t5orp")]([ExtResource("2_viabg"), ExtResource("3_qtahf"), ExtResource("4_tiiq4")])
+outputs = Array[ExtResource("1_t5orp")]([ExtResource("5_ufsur")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

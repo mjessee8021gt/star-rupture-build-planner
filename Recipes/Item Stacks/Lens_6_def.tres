@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_smpg8")
 item = ExtResource("1_6tktp")
-qty = 6
+qty = 6.0
 id = &"Lens"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

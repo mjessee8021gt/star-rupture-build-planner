@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://bhspwdhkfexh"]
+
+[ext_resource type="Resource" uid="uid://de2twnn37yfp3" path="res://Recipes/Item Definitions/Onboard_instruments_def.tres" id="1_aygkw"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_gng0r"]
+
+[resource]
+script = ExtResource("2_gng0r")
+item = ExtResource("1_aygkw")
+qty = 7.5
+id = &"Onboard Instruments"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

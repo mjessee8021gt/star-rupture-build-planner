@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_82myd")
 item = ExtResource("1_qufg4")
-qty = 6
+qty = 6.0
 id = &"Biofilament"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

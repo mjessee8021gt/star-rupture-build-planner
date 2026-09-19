@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_jos6f")
 item = ExtResource("1_ujhp1")
-qty = 15
+qty = 15.0
 id = &"Onboard Instruments"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_5iysk")
 item = ExtResource("1_55tlj")
-qty = 3
+qty = 3.0
 id = &"Cyclotrone"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

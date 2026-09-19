@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("1_g5rip")
 item = ExtResource("1_hmdsx")
-qty = 3
+qty = 3.0
 id = &"Tracking Device"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

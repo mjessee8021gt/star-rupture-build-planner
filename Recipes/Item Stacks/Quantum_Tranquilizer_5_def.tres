@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_gktmo")
 item = ExtResource("1_jurlu")
-qty = 5
+qty = 5.0
 id = &"Quantum Tranquilizer"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

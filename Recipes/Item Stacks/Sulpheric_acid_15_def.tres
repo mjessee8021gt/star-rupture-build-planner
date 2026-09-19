@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_rii3x")
 item = ExtResource("1_xso1o")
-qty = 15
+qty = 15.0
 id = &"Sulferic Acid"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

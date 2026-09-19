@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://bv6vjqoc1fvx5"]
+
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_7ejsx"]
+[ext_resource type="Resource" uid="uid://g2lhxnntsoqm" path="res://Recipes/Item Stacks/Helium-3_45_def.tres" id="2_1gehj"]
+[ext_resource type="Resource" uid="uid://c2igyl44bji71" path="res://Recipes/Item Stacks/Titanoferrite_Ingot_15_Def.tres" id="3_k8iv0"]
+[ext_resource type="Resource" uid="uid://cmaer4a4sel4g" path="res://Recipes/Item Stacks/Wolfram_steel_ingot_15_def.tres" id="4_gdooo"]
+[ext_resource type="Resource" uid="uid://dn7gxdohickun" path="res://Recipes/Item Stacks/Heat_resistant_sheet_180_def.tres" id="5_bu7lx"]
+[ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="6_eqjbc"]
+[ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="7_alske"]
+
+[resource]
+script = ExtResource("6_eqjbc")
+id = &"Heat Resistant Sheet (Geothite)"
+display_name = "Heat Resistant Sheet (Geothite)"
+inputs = Array[ExtResource("1_7ejsx")]([ExtResource("2_1gehj"), ExtResource("3_k8iv0"), ExtResource("4_gdooo")])
+outputs = Array[ExtResource("1_7ejsx")]([ExtResource("5_bu7lx")])
+metadata/_custom_type_script = "uid://ruttqq3j8kw3"

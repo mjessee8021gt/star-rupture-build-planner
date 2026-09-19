@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_hit4p")
 item = ExtResource("1_gwd01")
-qty = 10
+qty = 10.0
 id = &"Rocket Fuel"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

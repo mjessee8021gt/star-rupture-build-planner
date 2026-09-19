@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("1_x1ome")
 item = ExtResource("1_dauoi")
-qty = 3
+qty = 3.0
 id = &"Bioprinter"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

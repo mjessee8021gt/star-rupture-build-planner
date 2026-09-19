@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://b2f3greijphno"]
+
+[ext_resource type="Resource" uid="uid://bi2idj5ky0k48" path="res://Recipes/Item Definitions/Reinforced_housing_Def.tres" id="1_yt0nf"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_y1cdt"]
+
+[resource]
+script = ExtResource("2_y1cdt")
+item = ExtResource("1_yt0nf")
+qty = 45.0
+id = &"Reinforced Housing"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"

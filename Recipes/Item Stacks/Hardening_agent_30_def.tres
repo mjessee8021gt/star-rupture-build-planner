@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_sfe4u")
 item = ExtResource("1_x77pi")
-qty = 30
+qty = 30.0
 id = &"Hardening Agent"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

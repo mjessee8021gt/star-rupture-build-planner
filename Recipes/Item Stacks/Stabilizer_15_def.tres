@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_d6tik")
 item = ExtResource("1_pb77l")
-qty = 15
+qty = 15.0
 id = &"Stabilizer"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

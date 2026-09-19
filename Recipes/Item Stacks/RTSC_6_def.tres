@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_ahba7")
 item = ExtResource("1_stpca")
-qty = 6
+qty = 6.0
 id = &"RTSC"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_dvcnw")
 item = ExtResource("1_6elem")
-qty = 80
+qty = 80.0
 id = &"Wolfram Plate"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://ofj320xbtcjl"]
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_becpp"]
-[ext_resource type="Resource" uid="uid://bjitisjd8youe" path="res://Recipes/Item Stacks/Titanium_housing_6_def.tres" id="2_j02hs"]
+[ext_resource type="Resource" uid="uid://hlh3roy2l4xk" path="res://Recipes/Item Stacks/Titanium_housing_10_def.tres" id="2_j02hs"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_xci6t"]
-[ext_resource type="Resource" uid="uid://n5y11bbbf86d" path="res://Recipes/Item Stacks/Titanium_beam_18_def.tres" id="3_f5iux"]
+[ext_resource type="Resource" uid="uid://cxwe0qkpxlr83" path="res://Recipes/Item Stacks/Titanium_beam_30_def.tres" id="3_f5iux"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_ou1l1"]
-[ext_resource type="Resource" uid="uid://6jxv8tw5sqf2" path="res://Recipes/Item Stacks/Titanium_rod_12_def.tres" id="4_wtcn0"]
-[ext_resource type="Resource" uid="uid://d2yy3g6n37tln" path="res://Recipes/Item Stacks/Nozzle_6_def.tres" id="5_0lw5m"]
-[ext_resource type="Resource" uid="uid://hgma1g1rt2kl" path="res://Recipes/Item Stacks/Valve_6_def.tres" id="6_t6ywc"]
+[ext_resource type="Resource" uid="uid://cljavq2bjbcs8" path="res://Recipes/Item Stacks/Titanium_rod_20_def.tres" id="4_wtcn0"]
+[ext_resource type="Resource" uid="uid://beh570c80rava" path="res://Recipes/Item Stacks/Nozzle_10_def.tres" id="5_0lw5m"]
+[ext_resource type="Resource" uid="uid://b26a12bvqp01o" path="res://Recipes/Item Stacks/Valve_10_def.tres" id="6_t6ywc"]
 
 [resource]
 script = ExtResource("2_xci6t")

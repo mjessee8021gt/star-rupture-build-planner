@@ -1,19 +1,19 @@
 [gd_resource type="Resource" script_class="Recipe" format=3 uid="uid://d02lha7n5n0hx"]
 
 [ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="1_fi2eo"]
-[ext_resource type="Resource" uid="uid://2biau65j33sk" path="res://Recipes/Item Stacks/Nano_Fibre_32_def.tres" id="2_cooe1"]
 [ext_resource type="Script" uid="uid://ruttqq3j8kw3" path="res://Resources/Recipe.gd" id="2_pwhkn"]
-[ext_resource type="Resource" uid="uid://blgbxsim1tno8" path="res://Recipes/Item Stacks/RNA_Stabilizer_4_def.tres" id="3_cuta5"]
 [ext_resource type="Script" uid="uid://cvtli7c3bbfbl" path="res://Resources/RecipeVariant.gd" id="3_xostm"]
-[ext_resource type="Resource" uid="uid://2pbrmyhayqbd" path="res://Recipes/Item Stacks/Substance_FHS-135-493_16_def.tres" id="4_npn7m"]
-[ext_resource type="Resource" uid="uid://2foqpb0ki3xp" path="res://Recipes/Item Stacks/Synthetic_Protein_8_def.tres" id="5_fxa3i"]
-[ext_resource type="Resource" uid="uid://s1vnae0ynxcs" path="res://Recipes/Item Stacks/Superconductor_8_def.tres" id="6_jm5ph"]
-[ext_resource type="Resource" uid="uid://cee4oxklb288f" path="res://Recipes/Item Stacks/Biofilament_4_def.tres" id="7_3kyjc"]
+[ext_resource type="Resource" path="res://Recipes/Item Stacks/Synthetic_Protein_3.75_def.tres" id="s0_gen"]
+[ext_resource type="Resource" path="res://Recipes/Item Stacks/RNA_Stabilizer_3.75_def.tres" id="s1_gen"]
+[ext_resource type="Resource" path="res://Recipes/Item Stacks/Substance_FHS_135_493_7.5_def.tres" id="s2_gen"]
+[ext_resource type="Resource" path="res://Recipes/Item Stacks/Nanofiber_15_def.tres" id="s3_gen"]
+[ext_resource type="Resource" path="res://Recipes/Item Stacks/Superconductor_3.75_def.tres" id="s4_gen"]
+[ext_resource type="Resource" path="res://Recipes/Item Stacks/Biofilament_3.75_def.tres" id="s5_gen"]
 
 [resource]
 script = ExtResource("2_pwhkn")
 id = &"Biofilament"
 display_name = "Biofilament"
-inputs = Array[ExtResource("1_fi2eo")]([ExtResource("2_cooe1"), ExtResource("3_cuta5"), ExtResource("4_npn7m"), ExtResource("5_fxa3i"), ExtResource("6_jm5ph")])
-outputs = Array[ExtResource("1_fi2eo")]([ExtResource("7_3kyjc")])
+inputs = Array[ExtResource("1_fi2eo")]([ExtResource("s0_gen"), ExtResource("s1_gen"), ExtResource("s2_gen"), ExtResource("s3_gen"), ExtResource("s4_gen")])
+outputs = Array[ExtResource("1_fi2eo")]([ExtResource("s5_gen")])
 metadata/_custom_type_script = "uid://ruttqq3j8kw3"

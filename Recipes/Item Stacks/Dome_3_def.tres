@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_cjdqh")
 item = ExtResource("1_3orlf")
-qty = 3
+qty = 3.0
 id = &"Dome"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

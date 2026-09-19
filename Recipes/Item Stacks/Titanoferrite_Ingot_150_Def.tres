@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_svnh5")
 item = ExtResource("1_sgh0a")
-qty = 150
+qty = 150.0
 id = &"Titanoferrite Ingot"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

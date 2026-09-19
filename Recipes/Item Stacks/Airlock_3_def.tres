@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_2dbxe")
 item = ExtResource("1_v80w3")
-qty = 3
+qty = 3.0
 id = &"Airlock"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

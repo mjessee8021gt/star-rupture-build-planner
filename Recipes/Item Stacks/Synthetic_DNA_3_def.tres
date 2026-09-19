@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_xycay")
 item = ExtResource("1_jbulu")
-qty = 3
+qty = 3.0
 id = &"Synthetic DNA"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

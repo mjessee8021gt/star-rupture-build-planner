@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_2hc27")
 item = ExtResource("1_hwxq4")
-qty = 150
+qty = 150.0
 id = &"Shotgun Ammo"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

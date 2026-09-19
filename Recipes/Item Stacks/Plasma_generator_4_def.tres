@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("1_8e4kt")
 item = ExtResource("1_8hvxc")
-qty = 4
+qty = 4.0
 id = &"Plasma Generator"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

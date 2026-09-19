@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_tuipr")
 item = ExtResource("1_f2w5s")
-qty = 60
+qty = 60.0
 id = &"Synthetic Resin"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

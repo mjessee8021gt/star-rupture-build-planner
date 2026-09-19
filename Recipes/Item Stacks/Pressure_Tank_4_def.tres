@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_cv1nc")
 item = ExtResource("1_vlbog")
-qty = 4
+qty = 4.0
 id = &"Presure Tank"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

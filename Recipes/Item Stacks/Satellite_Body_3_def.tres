@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_h8xps")
 item = ExtResource("1_aukv7")
-qty = 3
+qty = 3.0
 id = &"Satellite Body"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

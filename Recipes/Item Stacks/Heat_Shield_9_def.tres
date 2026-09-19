@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("2_mqb6o")
 item = ExtResource("1_g7emx")
-qty = 9
+qty = 9.0
 id = &"Heat Shield"
 metadata/_custom_type_script = "uid://fx4756jwfgbl"

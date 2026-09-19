@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemStack" format=3 uid="uid://cn5br531ax7e2"]
+
+[ext_resource type="Resource" uid="uid://lm8abmhlgyk5" path="res://Recipes/Item Definitions/Titanoferrite_ingot_Def.tres" id="1_46pfb"]
+[ext_resource type="Script" uid="uid://fx4756jwfgbl" path="res://Resources/ItemStack.gd" id="2_v6x43"]
+
+[resource]
+script = ExtResource("2_v6x43")
+item = ExtResource("1_46pfb")
+qty = 20.0
+id = &"Titanoferrite Ingot"
+metadata/_custom_type_script = "uid://fx4756jwfgbl"
